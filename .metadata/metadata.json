@@ -1,0 +1,22 @@
+{
+  "name": "2050 Firefall — Personal Preferences Adapter",
+  "id": "com.wyb.2050-firefall-personal-adapter",
+  "version": "1.0.0",
+  "supported_game_version": "1.13.*",
+  "short_description": "Personal balance preferences for 2050: The Fire Falls: fixed Union War infamy, expanded trade capacity, postwar population recovery, and doubled innovation cap.",
+  "tags": [
+    "Gameplay",
+    "Economy",
+    "Balance",
+    "Utilities"
+  ],
+  "relationships": [
+    {
+      "rel_type": "dependency",
+      "id": "alter_time_2050_fire_falls",
+      "display_name": "2050: The Fire Falls",
+      "resource_type": "mod",
+      "version": "0.1.*"
+    }
+  ]
+}

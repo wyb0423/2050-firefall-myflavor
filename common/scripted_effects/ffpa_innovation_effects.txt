@@ -1,0 +1,17 @@
+# Remove the previous mirror first so it cannot be included in the value used
+# to calculate the replacement modifier's multiplier.
+ffpa_refresh_innovation_cap = {
+	if = {
+		limit = {
+			has_modifier = ffpa_double_innovation_cap
+		}
+		remove_modifier = ffpa_double_innovation_cap
+	}
+
+	add_modifier = {
+		name = ffpa_double_innovation_cap
+		multiplier = {
+			value = modifier:country_weekly_innovation_max_add
+		}
+	}
+}

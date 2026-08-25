@@ -1,0 +1,11 @@
+ffpa_postwar_population_recovery = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	state_birth_rate_mult = 2.0
+}
+
+# Applied with a dynamic multiplier equal to the country's unmodified
+# Maximum Innovation Investment. This mirrors the full current cap.
+ffpa_double_innovation_cap = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds
+	country_weekly_innovation_max_add = 1
+}

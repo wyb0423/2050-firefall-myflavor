@@ -1,0 +1,17 @@
+﻿l_simp_chinese:
+ ffpa_postwar_population_recovery: "战后人口恢复"
+ ffpa_postwar_population_recovery_desc: "核战后的社会正在恢复。出生率加成将在五十年内逐渐衰减。"
+ ffpa_double_innovation_cap: "创新力上限翻倍"
+ ffpa_double_innovation_cap_desc: "最大创新力投入提高至未应用此修正时的两倍。"
+ ffpa_union_war_annex_country_tenth: "统一战争吞并"
+ FFPA_UNION_WAR_INFAMY_SCALE: "个人偏好：统一战争恶名固定为10%"
+
+ rule_uw_infamy_cost: "恶名消耗（统一战争；固定10%）"
+ setting_uw_infamy_none: "#tooltippable #tooltip:[GetPlayer.GetTooltipTag],setting_uw_infamy_none_desc #high 固定10%恶名#!#!#!"
+ setting_uw_infamy_none_desc: "个人偏好适配器会忽略此项的原始数值；统一战争固定产生正常吞并恶名的#v 10%#!。"
+ setting_uw_infamy_quarter: "#tooltippable #tooltip:[GetPlayer.GetTooltipTag],setting_uw_infamy_quarter_desc #high 固定10%恶名#!#!#!"
+ setting_uw_infamy_quarter_desc: "个人偏好适配器会忽略此项的原始数值；统一战争固定产生正常吞并恶名的#v 10%#!。"
+ setting_uw_infamy_half: "#tooltippable #tooltip:[GetPlayer.GetTooltipTag],setting_uw_infamy_half_desc #high 固定10%恶名#!#!#!"
+ setting_uw_infamy_half_desc: "个人偏好适配器会忽略此项的原始数值；统一战争固定产生正常吞并恶名的#v 10%#!。"
+ setting_uw_infamy_full: "#tooltippable #tooltip:[GetPlayer.GetTooltipTag],setting_uw_infamy_full_desc #high 固定10%恶名#!#!#!"
+ setting_uw_infamy_full_desc: "个人偏好适配器会忽略此项的原始数值；统一战争固定产生正常吞并恶名的#v 10%#!。"

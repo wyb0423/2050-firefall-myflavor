@@ -1,0 +1,7 @@
+# Firefall's AI uses this value to decide whether a Union War would cross the
+# dangerous-infamy threshold. Keep its estimate synchronized with the forced
+# 10% war-goal cost, regardless of the selected Firefall game rule.
+REPLACE:uw_estimated_union_war_infamy = {
+	value = uw_estimated_annex_infamy_base
+	multiply = 0.10
+}
