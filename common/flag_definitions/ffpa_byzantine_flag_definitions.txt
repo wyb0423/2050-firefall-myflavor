@@ -1,0 +1,50 @@
+@ffpa_canton_scale_cross_x = @[ ( 333 / 768 ) + 0.001 ]
+@ffpa_canton_scale_cross_y = @[ ( 205 / 512 ) + 0.001 ]
+
+REPLACE_OR_CREATE:BYZ = {
+	flag_definition = {
+		coa = BYZ
+		allow_overlord_canton = yes
+		subject_canton = BYZ
+		overlord_canton_scale = { @ffpa_canton_scale_cross_x @ffpa_canton_scale_cross_y }
+		priority = 0
+	}
+	flag_definition = {
+		coa = BYZ_ffpa_republic
+		allow_overlord_canton = yes
+		subject_canton = BYZ_ffpa_republic
+		priority = 100
+		trigger = { coa_def_republic_flag_trigger = yes }
+	}
+	flag_definition = {
+		coa = BYZ_ffpa_theocracy
+		allow_overlord_canton = yes
+		subject_canton = BYZ_ffpa_theocracy
+		priority = 200
+		trigger = { coa_def_theocracy_flag_trigger = yes }
+	}
+	flag_definition = {
+		coa = BYZ_ffpa_authoritarian
+		allow_overlord_canton = yes
+		subject_canton = BYZ_ffpa_authoritarian
+		priority = 500
+		trigger = {
+			OR = {
+				coa_def_military_junta_flag_trigger = yes
+				coa_def_fascist_flag_trigger = yes
+			}
+		}
+	}
+	flag_definition = {
+		coa = BYZ_ffpa_council
+		allow_overlord_canton = yes
+		subject_canton = BYZ_ffpa_council
+		priority = 2000
+		trigger = {
+			OR = {
+				coa_def_communist_flag_trigger = yes
+				coa_def_anarchy_flag_trigger = yes
+			}
+		}
+	}
+}

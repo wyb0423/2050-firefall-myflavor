@@ -1,0 +1,134 @@
+# Country-specific definitions are loaded before generic government types so BYZ receives readable
+# imperial and consular titles without changing any law or succession mechanics.
+
+gov_ffpa_byzantine_autocracy = {
+	transfer_of_power = hereditary
+
+	male_ruler = "RULER_TITLE_FFPA_BASILEUS"
+	female_ruler = "RULER_TITLE_FFPA_BASILISSA"
+	male_heir = "RULER_TITLE_PRINCE"
+	female_heir = "RULER_TITLE_PRINCESS"
+
+	possible = {
+		c:BYZ ?= this
+		has_law_or_variant = law_type:law_monarchy
+		has_law_or_variant = law_type:law_autocracy
+		has_gov_regency = no
+		is_domain_alliance_gov = no
+	}
+
+	on_government_type_change = { change_to_hereditary = yes }
+	on_post_government_type_change = { post_change_to_hereditary = yes }
+}
+
+gov_ffpa_byzantine_empire = {
+	transfer_of_power = hereditary
+
+	male_ruler = "RULER_TITLE_FFPA_BASILEUS"
+	female_ruler = "RULER_TITLE_FFPA_BASILISSA"
+	male_heir = "RULER_TITLE_PRINCE"
+	female_heir = "RULER_TITLE_PRINCESS"
+
+	possible = {
+		c:BYZ ?= this
+		has_law_or_variant = law_type:law_monarchy
+		country_has_voting_franchise = no
+		NOT = { has_law_or_variant = law_type:law_autocracy }
+		has_gov_regency = no
+		is_domain_alliance_gov = no
+	}
+
+	on_government_type_change = { change_to_hereditary = yes }
+	on_post_government_type_change = { post_change_to_hereditary = yes }
+}
+
+gov_ffpa_byzantine_constitutional_empire = {
+	transfer_of_power = hereditary
+
+	male_ruler = "RULER_TITLE_FFPA_BASILEUS"
+	female_ruler = "RULER_TITLE_FFPA_BASILISSA"
+	male_heir = "RULER_TITLE_PRINCE"
+	female_heir = "RULER_TITLE_PRINCESS"
+
+	possible = {
+		c:BYZ ?= this
+		has_law_or_variant = law_type:law_monarchy
+		country_has_voting_franchise = yes
+		has_gov_regency = no
+		is_domain_alliance_gov = no
+	}
+
+	on_government_type_change = { change_to_hereditary = yes }
+	on_post_government_type_change = { post_change_to_hereditary = yes }
+}
+
+gov_ffpa_byzantine_presidential_consulate = {
+	transfer_of_power = presidential_elective
+	new_leader_on_reform_government = no
+
+	male_ruler = "RULER_TITLE_FFPA_CONSUL"
+	female_ruler = "RULER_TITLE_FFPA_CONSUL"
+
+	possible = {
+		c:BYZ ?= this
+		has_law_or_variant = law_type:law_presidential_republic
+		country_has_voting_franchise = yes
+		NOR = {
+			has_law_or_variant = law_type:law_single_party_state
+			has_law_or_variant = law_type:law_technocracy
+		}
+	}
+
+	on_government_type_change = { change_to_presidential_elective = yes }
+	on_post_government_type_change = { post_change_to_presidential_elective = yes }
+}
+
+gov_ffpa_byzantine_presidential_oligarchy = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_FFPA_CONSUL"
+	female_ruler = "RULER_TITLE_FFPA_CONSUL"
+
+	possible = {
+		c:BYZ ?= this
+		has_law_or_variant = law_type:law_presidential_republic
+		country_has_voting_franchise = no
+	}
+
+	on_government_type_change = { change_to_dictatorial = yes }
+	on_post_government_type_change = { post_change_to_dictatorial = yes }
+}
+
+gov_ffpa_byzantine_parliamentary_consulate = {
+	transfer_of_power = parliamentary_elective
+	new_leader_on_reform_government = yes
+
+	male_ruler = "RULER_TITLE_FFPA_CONSUL"
+	female_ruler = "RULER_TITLE_FFPA_CONSUL"
+
+	possible = {
+		c:BYZ ?= this
+		has_law_or_variant = law_type:law_parliamentary_republic
+		country_has_voting_franchise = yes
+		NOT = { has_law_or_variant = law_type:law_single_party_state }
+	}
+
+	on_government_type_change = { change_to_parliamentary_elective = yes }
+	on_post_government_type_change = { post_change_to_parliamentary_elective = yes }
+}
+
+gov_ffpa_byzantine_parliamentary_oligarchy = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_FFPA_CONSUL"
+	female_ruler = "RULER_TITLE_FFPA_CONSUL"
+
+	possible = {
+		c:BYZ ?= this
+		has_law_or_variant = law_type:law_parliamentary_republic
+		country_has_voting_franchise = no
+	}
+
+	on_government_type_change = { change_to_dictatorial = yes }
+	on_post_government_type_change = { post_change_to_dictatorial = yes }
+}

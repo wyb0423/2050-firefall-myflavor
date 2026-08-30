@@ -1,0 +1,13 @@
+ffpa_private_buildings_pruned_notification = {
+	type = country
+	group = "journal_entry_completed_notification_group"
+	texture = "gfx/interface/icons/notification_icons/technology.dds"
+	notification_type = toast
+}
+
+ffpa_government_buildings_pruned_notification = {
+	type = country
+	group = "journal_entry_completed_notification_group"
+	texture = "gfx/interface/icons/notification_icons/technology.dds"
+	notification_type = toast
+}

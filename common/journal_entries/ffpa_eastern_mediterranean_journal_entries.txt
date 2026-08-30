@@ -1,0 +1,659 @@
+je_ffpa_tur_rebuild_anatolia = {
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		c:TUR ?= this
+		NOT = { has_variable = ffpa_tur_rebuild_anatolia_complete }
+	}
+
+	possible = {
+		c:TUR ?= this
+		NOT = { has_variable = ffpa_tur_rebuild_anatolia_complete }
+	}
+
+	immediate = {
+		set_variable = {
+			name = ffpa_tur_rebuild_anatolia_start_gdp
+			value = root.gdp
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { has_variable = ffpa_tur_industrial_congress_fired_v2 }
+					gdp > {
+						value = var:ffpa_tur_rebuild_anatolia_start_gdp
+						multiply = 1.10
+					}
+				}
+				set_variable = ffpa_tur_industrial_congress_fired_v2
+				trigger_event = { id = ffpa_flavor.10 days = 14 }
+			}
+		}
+	}
+
+	complete = {
+		calc_true_if = {
+			amount >= 10
+			owns_entire_state_region = STATE_EASTERN_THRACE
+			owns_entire_state_region = STATE_HUDAVENDIGAR
+			owns_entire_state_region = STATE_AYDIN
+			owns_entire_state_region = STATE_ANKARA
+			owns_entire_state_region = STATE_KONYA
+			owns_entire_state_region = STATE_ADANA
+			owns_entire_state_region = STATE_KASTAMONU
+			owns_entire_state_region = STATE_TRABZON
+			owns_entire_state_region = STATE_ERZURUM
+			owns_entire_state_region = STATE_DIYARBAKIR
+			owns_entire_state_region = STATE_KARS
+		}
+		gdp > {
+			value = var:ffpa_tur_rebuild_anatolia_start_gdp
+			multiply = 1.25
+		}
+		government_legitimacy >= 50
+		bureaucracy >= 0
+		ffpa_has_no_insurrectionary_movement = yes
+		any_scope_state = {
+			count >= 8
+			OR = {
+				state_region = s:STATE_EASTERN_THRACE
+				state_region = s:STATE_HUDAVENDIGAR
+				state_region = s:STATE_AYDIN
+				state_region = s:STATE_ANKARA
+				state_region = s:STATE_KONYA
+				state_region = s:STATE_ADANA
+				state_region = s:STATE_KASTAMONU
+				state_region = s:STATE_TRABZON
+				state_region = s:STATE_ERZURUM
+				state_region = s:STATE_DIYARBAKIR
+				state_region = s:STATE_KARS
+			}
+			market_access >= 0.70
+			turmoil < 0.20
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_tur_rebuild_anatolia_complete
+		remove_variable = ffpa_tur_rebuild_anatolia_start_gdp
+		trigger_event = { id = ffpa_flavor.2 }
+	}
+
+	invalid = { NOT = { c:TUR ?= this } }
+	on_invalid = { remove_variable = ffpa_tur_rebuild_anatolia_start_gdp }
+
+	weight = 120
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_ottoman_commonwealth = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	group = je_group_historical_content
+	scripted_progress_bar = ffpa_tur_commonwealth_administration_bar
+	scripted_progress_bar = ffpa_tur_commonwealth_civic_bar
+	scripted_progress_bar = ffpa_tur_commonwealth_stability_bar
+
+	immediate = {
+		ffpa_ensure_tur_commonwealth_progress_v3 = yes
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ffpa_ensure_tur_commonwealth_progress_v3 = yes
+
+			if = {
+				limit = { ffpa_tur_commonwealth_administration_conditions = yes }
+				change_variable = { name = ffpa_tur_commonwealth_administration_v2 add = 1 }
+			}
+			else = {
+				change_variable = { name = ffpa_tur_commonwealth_administration_v2 subtract = 1 }
+			}
+			clamp_variable = { name = ffpa_tur_commonwealth_administration_v2 min = 0 max = 60 }
+
+			if = {
+				limit = { ffpa_tur_commonwealth_civic_conditions = yes }
+				change_variable = { name = ffpa_tur_commonwealth_civic_v2 add = 1 }
+			}
+			else = { change_variable = { name = ffpa_tur_commonwealth_civic_v2 subtract = 1 } }
+			clamp_variable = { name = ffpa_tur_commonwealth_civic_v2 min = 0 max = 60 }
+
+			if = {
+				limit = { ffpa_tur_commonwealth_stability_conditions = yes }
+				change_variable = { name = ffpa_tur_commonwealth_stability_v2 add = 1 }
+			}
+			else = { change_variable = { name = ffpa_tur_commonwealth_stability_v2 subtract = 1 } }
+			clamp_variable = { name = ffpa_tur_commonwealth_stability_v2 min = 0 max = 60 }
+
+			if = {
+				limit = { NOT = { has_variable = ffpa_tur_commonwealth_event_cooldown_v2 } }
+				if = {
+					limit = {
+						var:ffpa_tur_commonwealth_administration_v2 >= 18
+						NOT = { has_variable = ffpa_tur_language_event_fired_v2 }
+						NOT = { has_variable = ffpa_tur_language_event_scheduled_v3 }
+					}
+					set_variable = ffpa_tur_language_event_scheduled_v3
+					set_variable = { name = ffpa_tur_commonwealth_event_cooldown_v2 months = 6 }
+					trigger_event = { id = ffpa_flavor.13 days = 7 }
+				}
+				else_if = {
+					limit = {
+						var:ffpa_tur_commonwealth_civic_v2 >= 30
+						NOT = { has_variable = ffpa_tur_representation_event_fired_v2 }
+						NOT = { has_variable = ffpa_tur_representation_event_scheduled_v3 }
+					}
+					set_variable = ffpa_tur_representation_event_scheduled_v3
+					set_variable = { name = ffpa_tur_commonwealth_event_cooldown_v2 months = 6 }
+					trigger_event = { id = ffpa_flavor.14 days = 7 }
+				}
+				else_if = {
+					limit = {
+						var:ffpa_tur_commonwealth_stability_v2 >= 42
+						NOT = { has_variable = ffpa_tur_military_oath_event_fired_v2 }
+						NOT = { has_variable = ffpa_tur_military_oath_event_scheduled_v3 }
+					}
+					set_variable = ffpa_tur_military_oath_event_scheduled_v3
+					set_variable = { name = ffpa_tur_commonwealth_event_cooldown_v2 months = 6 }
+					trigger_event = { id = ffpa_flavor.15 days = 7 }
+				}
+			}
+
+			ffpa_sync_tur_commonwealth_progress_bars = yes
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = ffpa_tur_commonwealth_administration_complete_tt
+			var:ffpa_tur_commonwealth_administration_v2 >= 60
+		}
+		custom_tooltip = {
+			text = ffpa_tur_commonwealth_civic_complete_tt
+			var:ffpa_tur_commonwealth_civic_v2 >= 60
+		}
+		custom_tooltip = {
+			text = ffpa_tur_commonwealth_stability_complete_tt
+			var:ffpa_tur_commonwealth_stability_v2 >= 60
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_tur_ottoman_commonwealth_complete
+		remove_variable = ffpa_tur_commonwealth_administration_v2
+		remove_variable = ffpa_tur_commonwealth_civic_v2
+		remove_variable = ffpa_tur_commonwealth_stability_v2
+		remove_variable = ffpa_tur_commonwealth_event_cooldown_v2
+		remove_variable = ffpa_tur_commonwealth_progress_migrated_v3
+		remove_variable = ffpa_tur_language_event_scheduled_v3
+		remove_variable = ffpa_tur_representation_event_scheduled_v3
+		remove_variable = ffpa_tur_military_oath_event_scheduled_v3
+		trigger_event = { id = ffpa_flavor.3 }
+	}
+
+	invalid = { NOT = { c:TUR ?= this } }
+	on_invalid = {
+		remove_variable = ffpa_tur_commonwealth_administration_v2
+		remove_variable = ffpa_tur_commonwealth_civic_v2
+		remove_variable = ffpa_tur_commonwealth_stability_v2
+		remove_variable = ffpa_tur_commonwealth_event_cooldown_v2
+		remove_variable = ffpa_tur_commonwealth_progress_migrated_v3
+		remove_variable = ffpa_tur_language_event_scheduled_v3
+		remove_variable = ffpa_tur_representation_event_scheduled_v3
+		remove_variable = ffpa_tur_military_oath_event_scheduled_v3
+	}
+
+	status_desc = { triggered_desc = { desc = je_ffpa_tur_ottoman_commonwealth_status } }
+	progressbar = no
+
+	weight = 125
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_gate_of_two_continents = {
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_rebuild_anatolia_complete
+		NOT = { has_variable = ffpa_tur_gate_of_two_continents_complete }
+	}
+
+	possible = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_rebuild_anatolia_complete
+		owns_entire_state_region = STATE_EASTERN_THRACE
+		NOT = { has_variable = ffpa_tur_gate_of_two_continents_complete }
+	}
+
+	immediate = {
+		every_scope_state = {
+			limit = { state_region = s:STATE_EASTERN_THRACE }
+			add_modifier = ffpa_tur_straits_construction_drive
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			s:STATE_EASTERN_THRACE = {
+				every_scope_state = {
+					if = {
+						limit = {
+							owner = ROOT
+							NOT = { has_modifier = ffpa_tur_straits_construction_drive }
+						}
+						add_modifier = ffpa_tur_straits_construction_drive
+					}
+					else_if = {
+						limit = {
+							NOT = { owner = ROOT }
+							has_modifier = ffpa_tur_straits_construction_drive
+						}
+						remove_modifier = ffpa_tur_straits_construction_drive
+					}
+				}
+			}
+		}
+	}
+
+	complete = {
+		any_scope_state = {
+			state_region = s:STATE_EASTERN_THRACE
+			market_access >= 0.90
+			turmoil < 0.15
+			devastation < 0.10
+			any_scope_building = {
+				is_building_type = building_port
+				level >= 5
+			}
+			any_scope_building = {
+				is_building_type = building_railway
+				level >= 5
+			}
+			any_scope_building = {
+				is_building_type = building_government_administration
+				level >= 5
+			}
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_tur_gate_of_two_continents_complete
+		every_scope_state = {
+			limit = {
+				state_region = s:STATE_EASTERN_THRACE
+				has_modifier = ffpa_tur_straits_construction_drive
+			}
+			remove_modifier = ffpa_tur_straits_construction_drive
+		}
+		trigger_event = { id = ffpa_flavor.4 }
+	}
+
+	invalid = { NOT = { c:TUR ?= this } }
+	on_invalid = {
+		every_scope_state = {
+			limit = {
+				state_region = s:STATE_EASTERN_THRACE
+				has_modifier = ffpa_tur_straits_construction_drive
+			}
+			remove_modifier = ffpa_tur_straits_construction_drive
+		}
+	}
+	weight = 115
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_gre_islands_and_mainland = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		c:GRE ?= this
+		NOT = { has_variable = ffpa_gre_islands_and_mainland_complete }
+	}
+
+	possible = {
+		c:GRE ?= this
+		NOT = { has_variable = ffpa_gre_islands_and_mainland_complete }
+	}
+
+	immediate = {
+		set_variable = {
+			name = ffpa_gre_islands_and_mainland_start_gdp
+			value = root.gdp
+		}
+	}
+
+	complete = {
+		owns_entire_state_region = STATE_ATTICA
+		owns_entire_state_region = STATE_CRETE
+		owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS
+		owns_entire_state_region = STATE_IONIAN_ISLANDS
+		owns_entire_state_region = STATE_MACEDONIA
+		owns_entire_state_region = STATE_PELOPONNESE
+		owns_entire_state_region = STATE_THESSALIA
+		owns_entire_state_region = STATE_WESTERN_THRACE
+		owns_entire_state_region = STATE_WEST_AEGEAN_ISLANDS
+		gdp > {
+			value = var:ffpa_gre_islands_and_mainland_start_gdp
+			multiply = 1.20
+		}
+		bureaucracy >= 0
+		any_scope_state = {
+			state_region = s:STATE_ATTICA
+			any_scope_building = {
+				is_building_type = building_government_administration
+				level >= 5
+			}
+			any_scope_building = {
+				is_building_type = building_university
+				level >= 3
+			}
+		}
+		any_scope_state = {
+			count >= 7
+			OR = {
+				state_region = s:STATE_ATTICA
+				state_region = s:STATE_CRETE
+				state_region = s:STATE_EAST_AEGEAN_ISLANDS
+				state_region = s:STATE_IONIAN_ISLANDS
+				state_region = s:STATE_MACEDONIA
+				state_region = s:STATE_PELOPONNESE
+				state_region = s:STATE_THESSALIA
+				state_region = s:STATE_WESTERN_THRACE
+				state_region = s:STATE_WEST_AEGEAN_ISLANDS
+			}
+			market_access >= 0.70
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_gre_islands_and_mainland_complete
+		remove_variable = ffpa_gre_islands_and_mainland_start_gdp
+		trigger_event = { id = ffpa_flavor.5 }
+	}
+
+	invalid = { NOT = { c:GRE ?= this } }
+	on_invalid = { remove_variable = ffpa_gre_islands_and_mainland_start_gdp }
+
+	weight = 115
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_byz_new_rome = {
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		c:BYZ ?= this
+		NOT = { has_variable = ffpa_byz_new_rome_complete }
+	}
+
+	possible = {
+		c:BYZ ?= this
+		NOT = { has_variable = ffpa_byz_new_rome_complete }
+	}
+
+	complete = {
+		owns_entire_state_region = STATE_EASTERN_THRACE
+		owns_entire_state_region = STATE_ATTICA
+		owns_entire_state_region = STATE_THESSALIA
+		owns_entire_state_region = STATE_MACEDONIA
+		owns_entire_state_region = STATE_SKOPIA
+		owns_entire_state_region = STATE_WESTERN_THRACE
+		owns_entire_state_region = STATE_NORTHERN_THRACE
+		owns_entire_state_region = STATE_HUDAVENDIGAR
+		owns_entire_state_region = STATE_AYDIN
+		owns_entire_state_region = STATE_WEST_AEGEAN_ISLANDS
+		owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS
+		owns_entire_state_region = STATE_ALBANIA
+		capital = { state_region = s:STATE_EASTERN_THRACE }
+		government_legitimacy >= 60
+		bureaucracy >= 0
+		gold_reserves > 0
+		ffpa_has_no_insurrectionary_movement = yes
+		any_scope_state = {
+			count >= 9
+			OR = {
+				state_region = s:STATE_EASTERN_THRACE
+				state_region = s:STATE_ATTICA
+				state_region = s:STATE_THESSALIA
+				state_region = s:STATE_MACEDONIA
+				state_region = s:STATE_SKOPIA
+				state_region = s:STATE_WESTERN_THRACE
+				state_region = s:STATE_NORTHERN_THRACE
+				state_region = s:STATE_HUDAVENDIGAR
+				state_region = s:STATE_AYDIN
+				state_region = s:STATE_WEST_AEGEAN_ISLANDS
+				state_region = s:STATE_EAST_AEGEAN_ISLANDS
+				state_region = s:STATE_ALBANIA
+			}
+			market_access >= 0.75
+			turmoil < 0.20
+			devastation < 0.10
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_byz_new_rome_complete
+		add_journal_entry = { type = je_ffpa_byz_restore_new_rome }
+		trigger_event = { id = ffpa_flavor.6 }
+	}
+
+	invalid = { NOT = { c:BYZ ?= this } }
+	weight = 130
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_byz_rhomaic_commonwealth = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	group = je_group_historical_content
+	scripted_progress_bar = ffpa_byz_commonwealth_administration_bar
+	scripted_progress_bar = ffpa_byz_commonwealth_civic_bar
+	scripted_progress_bar = ffpa_byz_commonwealth_stability_bar
+
+	immediate = {
+		ffpa_ensure_byz_commonwealth_progress_v3 = yes
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			ffpa_ensure_byz_commonwealth_progress_v3 = yes
+
+			if = {
+				limit = { ffpa_byz_commonwealth_administration_conditions = yes }
+				change_variable = { name = ffpa_byz_commonwealth_administration_v2 add = 1 }
+			}
+			else = { change_variable = { name = ffpa_byz_commonwealth_administration_v2 subtract = 1 } }
+			clamp_variable = { name = ffpa_byz_commonwealth_administration_v2 min = 0 max = 60 }
+
+			if = {
+				limit = { ffpa_byz_commonwealth_civic_conditions = yes }
+				change_variable = { name = ffpa_byz_commonwealth_civic_v2 add = 1 }
+			}
+			else = { change_variable = { name = ffpa_byz_commonwealth_civic_v2 subtract = 1 } }
+			clamp_variable = { name = ffpa_byz_commonwealth_civic_v2 min = 0 max = 60 }
+
+			if = {
+				limit = { ffpa_byz_commonwealth_stability_conditions = yes }
+				change_variable = { name = ffpa_byz_commonwealth_stability_v2 add = 1 }
+			}
+			else = { change_variable = { name = ffpa_byz_commonwealth_stability_v2 subtract = 1 } }
+			clamp_variable = { name = ffpa_byz_commonwealth_stability_v2 min = 0 max = 60 }
+
+			if = {
+				limit = { NOT = { has_variable = ffpa_byz_commonwealth_event_cooldown_v2 } }
+				if = {
+					limit = {
+						var:ffpa_byz_commonwealth_administration_v2 >= 18
+						NOT = { has_variable = ffpa_byz_language_event_fired_v2 }
+						NOT = { has_variable = ffpa_byz_language_event_scheduled_v3 }
+					}
+					set_variable = ffpa_byz_language_event_scheduled_v3
+					set_variable = { name = ffpa_byz_commonwealth_event_cooldown_v2 months = 6 }
+					trigger_event = { id = ffpa_flavor.23 days = 7 }
+				}
+				else_if = {
+					limit = {
+						var:ffpa_byz_commonwealth_civic_v2 >= 30
+						NOT = { has_variable = ffpa_byz_representation_event_fired_v2 }
+						NOT = { has_variable = ffpa_byz_representation_event_scheduled_v3 }
+					}
+					set_variable = ffpa_byz_representation_event_scheduled_v3
+					set_variable = { name = ffpa_byz_commonwealth_event_cooldown_v2 months = 6 }
+					trigger_event = { id = ffpa_flavor.24 days = 7 }
+				}
+				else_if = {
+					limit = {
+						var:ffpa_byz_commonwealth_stability_v2 >= 42
+						NOT = { has_variable = ffpa_byz_military_oath_event_fired_v2 }
+						NOT = { has_variable = ffpa_byz_military_oath_event_scheduled_v3 }
+					}
+					set_variable = ffpa_byz_military_oath_event_scheduled_v3
+					set_variable = { name = ffpa_byz_commonwealth_event_cooldown_v2 months = 6 }
+					trigger_event = { id = ffpa_flavor.25 days = 7 }
+				}
+			}
+
+			ffpa_sync_byz_commonwealth_progress_bars = yes
+		}
+	}
+
+	complete = {
+		custom_tooltip = {
+			text = ffpa_byz_commonwealth_administration_complete_tt
+			var:ffpa_byz_commonwealth_administration_v2 >= 60
+		}
+		custom_tooltip = {
+			text = ffpa_byz_commonwealth_civic_complete_tt
+			var:ffpa_byz_commonwealth_civic_v2 >= 60
+		}
+		custom_tooltip = {
+			text = ffpa_byz_commonwealth_stability_complete_tt
+			var:ffpa_byz_commonwealth_stability_v2 >= 60
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_byz_rhomaic_commonwealth_complete
+		remove_variable = ffpa_byz_commonwealth_administration_v2
+		remove_variable = ffpa_byz_commonwealth_civic_v2
+		remove_variable = ffpa_byz_commonwealth_stability_v2
+		remove_variable = ffpa_byz_commonwealth_event_cooldown_v2
+		remove_variable = ffpa_byz_commonwealth_progress_migrated_v3
+		remove_variable = ffpa_byz_language_event_scheduled_v3
+		remove_variable = ffpa_byz_representation_event_scheduled_v3
+		remove_variable = ffpa_byz_military_oath_event_scheduled_v3
+		trigger_event = { id = ffpa_flavor.7 }
+	}
+
+	invalid = { NOT = { c:BYZ ?= this } }
+	on_invalid = {
+		remove_variable = ffpa_byz_commonwealth_administration_v2
+		remove_variable = ffpa_byz_commonwealth_civic_v2
+		remove_variable = ffpa_byz_commonwealth_stability_v2
+		remove_variable = ffpa_byz_commonwealth_event_cooldown_v2
+		remove_variable = ffpa_byz_commonwealth_progress_migrated_v3
+		remove_variable = ffpa_byz_language_event_scheduled_v3
+		remove_variable = ffpa_byz_representation_event_scheduled_v3
+		remove_variable = ffpa_byz_military_oath_event_scheduled_v3
+	}
+
+	status_desc = { triggered_desc = { desc = je_ffpa_byz_rhomaic_commonwealth_status } }
+	progressbar = no
+
+	weight = 135
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_byz_restore_new_rome = {
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	group = je_group_historical_content
+
+	is_shown_when_inactive = {
+		c:BYZ ?= this
+		has_variable = ffpa_byz_new_rome_complete
+		NOT = { has_variable = ffpa_byz_restore_new_rome_complete }
+	}
+
+	possible = {
+		c:BYZ ?= this
+		has_variable = ffpa_byz_new_rome_complete
+		owns_entire_state_region = STATE_EASTERN_THRACE
+		NOT = { has_variable = ffpa_byz_restore_new_rome_complete }
+	}
+
+	immediate = {
+		every_scope_state = {
+			limit = { state_region = s:STATE_EASTERN_THRACE }
+			add_modifier = ffpa_byz_new_rome_construction_drive
+		}
+	}
+
+	on_monthly_pulse = {
+		effect = {
+			s:STATE_EASTERN_THRACE = {
+				every_scope_state = {
+					if = {
+						limit = {
+							owner = ROOT
+							NOT = { has_modifier = ffpa_byz_new_rome_construction_drive }
+						}
+						add_modifier = ffpa_byz_new_rome_construction_drive
+					}
+					else_if = {
+						limit = {
+							NOT = { owner = ROOT }
+							has_modifier = ffpa_byz_new_rome_construction_drive
+						}
+						remove_modifier = ffpa_byz_new_rome_construction_drive
+					}
+				}
+			}
+		}
+	}
+
+	complete = {
+		any_scope_state = {
+			state_region = s:STATE_EASTERN_THRACE
+			market_access >= 0.95
+			turmoil < 0.10
+			devastation < 0.05
+			any_scope_building = { is_building_type = building_port level >= 8 }
+			any_scope_building = { is_building_type = building_railway level >= 8 }
+			any_scope_building = { is_building_type = building_government_administration level >= 8 }
+			any_scope_building = { is_building_type = building_university level >= 5 }
+			any_scope_building = { is_building_type = building_power_plant level >= 5 }
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_byz_restore_new_rome_complete
+		every_scope_state = {
+			limit = {
+				state_region = s:STATE_EASTERN_THRACE
+				has_modifier = ffpa_byz_new_rome_construction_drive
+			}
+			remove_modifier = ffpa_byz_new_rome_construction_drive
+		}
+		trigger_event = { id = ffpa_flavor.20 }
+	}
+
+	invalid = { NOT = { c:BYZ ?= this } }
+	on_invalid = {
+		every_scope_state = {
+			limit = {
+				state_region = s:STATE_EASTERN_THRACE
+				has_modifier = ffpa_byz_new_rome_construction_drive
+			}
+			remove_modifier = ffpa_byz_new_rome_construction_drive
+		}
+	}
+
+	weight = 125
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

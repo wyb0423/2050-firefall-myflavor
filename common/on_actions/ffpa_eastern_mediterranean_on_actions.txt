@@ -1,0 +1,91 @@
+on_country_formed = {
+	on_actions = {
+		ffpa_on_eastern_mediterranean_country_formed
+	}
+}
+
+ffpa_on_eastern_mediterranean_country_formed = {
+	effect = {
+		if = {
+			limit = { c:TUR ?= ROOT }
+			ffpa_apply_tur_formation_ideologies_v1 = yes
+		}
+		if = {
+			limit = { c:GRE ?= ROOT }
+			ffpa_ensure_greek_formation_religion_v1 = yes
+		}
+		if = {
+			limit = { c:BYZ ?= ROOT }
+			ffpa_ensure_byzantine_formation_effects = yes
+			ffpa_apply_byz_formation_ideologies_v1 = yes
+		}
+	}
+}
+
+# One guarded country check provides versioned migration for GRE, TUR, and BYZ saves
+# created before this adapter version. It performs no repeated ideology write,
+# world traversal, or building traversal.
+on_monthly_pulse_country = {
+	on_actions = {
+		ffpa_monthly_ensure_byzantine_formation_effects
+	}
+}
+
+ffpa_monthly_ensure_byzantine_formation_effects = {
+	effect = {
+		if = {
+			limit = {
+				OR = {
+					c:BYZ ?= ROOT
+					c:GRE ?= ROOT
+					c:TUR ?= ROOT
+				}
+			}
+			ffpa_ensure_eastern_mediterranean_v2 = yes
+		}
+	}
+}
+
+on_election_campaign_start = {
+	on_actions = {
+		ffpa_on_eastern_mediterranean_first_election
+	}
+}
+
+ffpa_on_eastern_mediterranean_first_election = {
+	effect = {
+		if = {
+			limit = {
+				c:TUR ?= ROOT
+				has_variable = ffpa_tur_rebuild_anatolia_complete
+				NOT = { has_variable = ffpa_tur_first_imperial_election_fired_v2 }
+				NOT = { has_variable = ffpa_tur_first_imperial_election_scheduled_v3 }
+			}
+			set_variable = ffpa_tur_first_imperial_election_scheduled_v3
+			trigger_event = { id = ffpa_flavor.12 days = 7 }
+		}
+
+		if = {
+			limit = {
+				c:BYZ ?= ROOT
+				has_variable = ffpa_byz_new_rome_complete
+				NOT = { has_variable = ffpa_byz_first_election_fired_v2 }
+				NOT = { has_variable = ffpa_byz_first_election_scheduled_v3 }
+			}
+			set_variable = ffpa_byz_first_election_scheduled_v3
+			trigger_event = { id = ffpa_flavor.22 days = 7 }
+		}
+
+		if = {
+			limit = {
+				c:BYZ ?= ROOT
+				country_has_voting_franchise = yes
+				ffpa_has_two_western_development_projects = yes
+				NOT = { has_variable = ffpa_byz_western_representation_scheduled_v1 }
+				NOT = { has_variable = ffpa_byz_western_representation_fired_v1 }
+			}
+			set_variable = ffpa_byz_western_representation_scheduled_v1
+			trigger_event = { id = ffpa_flavor.33 days = 21 }
+		}
+	}
+}

@@ -1,0 +1,73 @@
+# A deliberately restrained republican variant: the tetragrammatic cross remains the visual anchor,
+# while the four imperial betas are omitted to make the constitutional break immediately legible.
+BYZ_ffpa_republic = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_cross_england.dds"
+		color1 = color2
+		color2 = color2
+	}
+}
+
+# The Chi-Rho is placed over the familiar cross for a clerical state without abandoning the base flag.
+BYZ_ffpa_theocracy = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_cross_england.dds"
+		color1 = color2
+		color2 = color2
+	}
+	colored_emblem = {
+		texture = "ce_chi_rho.dds"
+		color1 = color1
+		color2 = color1
+		instance = { position = { 0.5 0.5 } scale = { 0.32 0.32 } }
+	}
+}
+
+# A council republic retains the cross but replaces the dynastic betas with four civic stars.
+BYZ_ffpa_council = {
+	pattern = "pattern_solid.tga"
+	color1 = "red"
+	color2 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_cross_england.dds"
+		color1 = color2
+		color2 = color2
+	}
+	colored_emblem = {
+		texture = "ce_star_05.dds"
+		color1 = color2
+		color2 = color2
+		instance = { position = { 0.22 0.20 } scale = { 0.13 0.13 } }
+		instance = { position = { 0.78 0.20 } scale = { 0.13 0.13 } }
+		instance = { position = { 0.22 0.80 } scale = { 0.13 0.13 } }
+		instance = { position = { 0.78 0.80 } scale = { 0.13 0.13 } }
+	}
+}
+
+# Militarist and fascist governments use the late Byzantine double-headed eagle over the native cross.
+BYZ_ffpa_authoritarian = {
+	pattern = "pattern_solid.tga"
+	color1 = "purple"
+	color2 = "yellow"
+
+	colored_emblem = {
+		texture = "ce_cross_england.dds"
+		color1 = color2
+		color2 = color2
+	}
+	colored_emblem = {
+		texture = "ce_eagle_double_headed.dds"
+		color1 = color1
+		color2 = color1
+		instance = { position = { 0.5 0.5 } scale = { 0.40 0.40 } }
+	}
+}

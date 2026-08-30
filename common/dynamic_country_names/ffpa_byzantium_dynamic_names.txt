@@ -1,0 +1,81 @@
+BYZ = {
+	dynamic_country_name = {
+		name = dyn_c_ffpa_byzantine_empire
+		adjective = dyn_c_ffpa_byzantine_empire_adj
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { country_has_monarchy_law = yes }
+		}
+	}
+
+	dynamic_country_name = {
+		name = dyn_c_ffpa_eastern_roman_republic
+		adjective = dyn_c_ffpa_eastern_roman_republic_adj
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				OR = {
+					has_law_or_variant = law_type:law_parliamentary_republic
+					has_law_or_variant = law_type:law_presidential_republic
+				}
+			}
+		}
+	}
+
+	dynamic_country_name = {
+		name = dyn_c_ffpa_roman_peoples_commonwealth
+		adjective = dyn_c_ffpa_roman_peoples_commonwealth_adj
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law_or_variant = law_type:law_council_republic }
+		}
+	}
+
+	dynamic_country_name = {
+		name = dyn_c_ffpa_free_roman_communes
+		adjective = dyn_c_ffpa_free_roman_communes_adj
+		is_main_tag_only = yes
+		priority = 20
+
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= {
+				has_law_or_variant = law_type:law_council_republic
+				has_law_or_variant = law_type:law_anarchy
+			}
+		}
+	}
+
+	dynamic_country_name = {
+		name = dyn_c_ffpa_ecumenical_roman_state
+		adjective = dyn_c_ffpa_ecumenical_roman_state_adj
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law_or_variant = law_type:law_theocracy }
+		}
+	}
+
+	dynamic_country_name = {
+		name = dyn_c_ffpa_roman_corporate_state
+		adjective = dyn_c_ffpa_roman_corporate_state_adj
+		is_main_tag_only = yes
+		priority = 10
+
+		trigger = {
+			exists = scope:actor
+			scope:actor ?= { has_law_or_variant = law_type:law_corporate_state }
+		}
+	}
+}

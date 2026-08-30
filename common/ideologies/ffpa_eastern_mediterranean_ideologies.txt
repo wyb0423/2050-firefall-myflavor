@@ -1,0 +1,362 @@
+# Country-specific interest-group ideologies for the postwar Turkish and
+# Byzantine reconstruction projects. Assignment is handled once at formation
+# or by explicit flavor events; these definitions contain no dynamic logic.
+
+ideology_ffpa_anatolian_reconstructionism = {
+	icon = "gfx/interface/icons/ideology_icons/jingoist.dds"
+
+	lawgroup_army_model = {
+		law_professional_army = strongly_approve
+		law_mass_conscription = approve
+		law_national_militia = neutral
+		law_peasant_levies = disapprove
+	}
+
+	lawgroup_colonization = {
+		law_colonial_resettlement = approve
+		law_colonial_exploitation = disapprove
+		law_frontier_colonization = strongly_approve
+		law_no_colonial_affairs = neutral
+	}
+
+	lawgroup_national_electric_system = {
+		law_no_national_electric_system = disapprove
+		law_national_electric_system = approve
+		law_modern_national_electric_system = strongly_approve
+	}
+}
+
+ideology_ffpa_tur_state_developmentalism = {
+	icon = "gfx/interface/icons/ideology_icons/laissez_faire.dds"
+
+	lawgroup_economic_system = {
+		law_laissez_faire = approve
+		law_interventionism = strongly_approve
+		law_agrarianism = neutral
+		law_traditionalism = disapprove
+		law_cooperative_ownership = strongly_disapprove
+		law_command_economy = neutral
+		law_industry_banned = strongly_disapprove
+		law_extraction_economy = disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_free_trade = neutral
+		law_mercantilism = approve
+		law_protectionism = approve
+		law_isolationism = strongly_disapprove
+	}
+
+	lawgroup_labor_rights = {
+		law_no_workers_rights = neutral
+		law_regulatory_bodies = approve
+		law_worker_protections = disapprove
+	}
+
+	lawgroup_national_electric_system = {
+		law_no_national_electric_system = strongly_disapprove
+		law_national_electric_system = approve
+		law_modern_national_electric_system = strongly_approve
+	}
+}
+
+ideology_ffpa_anatolian_civic_statism = {
+	icon = "gfx/interface/icons/ideology_icons/reactionary.dds"
+
+	lawgroup_governance_principles = {
+		law_monarchy = approve
+		law_theocracy = neutral
+		law_presidential_republic = neutral
+		law_parliamentary_republic = neutral
+		law_corporate_state = neutral
+		law_social_monarchy = approve
+		law_council_republic = disapprove
+	}
+
+	lawgroup_citizenship = {
+		law_ethnostate = strongly_disapprove
+		law_national_supremacy = neutral
+		law_subjecthood = neutral
+		law_racial_segregation = disapprove
+		law_cultural_exclusion = approve
+		law_multicultural = neutral
+	}
+
+	lawgroup_migration = {
+		law_closed_borders = disapprove
+		law_migration_controls = approve
+		law_no_migration_controls = neutral
+	}
+
+	lawgroup_trade_policy = {
+		law_free_trade = neutral
+		law_mercantilism = approve
+		law_protectionism = approve
+		law_isolationism = disapprove
+	}
+
+	lawgroup_national_electric_system = {
+		law_no_national_electric_system = disapprove
+		law_national_electric_system = strongly_approve
+		law_modern_national_electric_system = approve
+	}
+}
+
+ideology_ffpa_provincial_compact = {
+	icon = "gfx/interface/icons/ideology_icons/paternalistic.dds"
+
+	lawgroup_governance_principles = {
+		law_monarchy = strongly_approve
+		law_theocracy = neutral
+		law_presidential_republic = disapprove
+		law_parliamentary_republic = neutral
+		law_corporate_state = neutral
+		law_social_monarchy = approve
+		law_council_republic = strongly_disapprove
+	}
+
+	lawgroup_distribution_of_power = {
+		law_single_party_state = neutral
+		law_landed_voting = approve
+		law_autocracy = neutral
+		law_oligarchy = approve
+		law_wealth_voting = neutral
+		law_census_voting = neutral
+		law_universal_suffrage = disapprove
+		law_anarchy = strongly_disapprove
+		law_technocracy = disapprove
+	}
+
+	lawgroup_bureaucracy = {
+		law_hereditary_bureaucrats = neutral
+		law_appointed_bureaucrats = approve
+		law_elected_bureaucrats = disapprove
+	}
+
+	lawgroup_economic_system = {
+		law_traditionalism = neutral
+		law_agrarianism = approve
+		law_interventionism = neutral
+		law_industry_banned = disapprove
+		law_laissez_faire = disapprove
+		law_cooperative_ownership = strongly_disapprove
+		law_command_economy = disapprove
+		law_extraction_economy = disapprove
+	}
+}
+
+ideology_ffpa_ottoman_constitutionalism = {
+	icon = "gfx/interface/icons/ideology_icons/republican.dds"
+
+	lawgroup_governance_principles = {
+		law_presidential_republic = disapprove
+		law_parliamentary_republic = neutral
+		law_corporate_state = disapprove
+		law_social_monarchy = strongly_approve
+		law_monarchy = approve
+		law_theocracy = disapprove
+		law_council_republic = disapprove
+	}
+
+	lawgroup_distribution_of_power = {
+		law_universal_suffrage = approve
+		law_census_voting = strongly_approve
+		law_wealth_voting = approve
+		law_landed_voting = neutral
+		law_single_party_state = disapprove
+		law_technocracy = neutral
+		law_oligarchy = disapprove
+		law_autocracy = strongly_disapprove
+		law_anarchy = strongly_disapprove
+	}
+
+	lawgroup_citizenship = {
+		law_ethnostate = strongly_disapprove
+		law_national_supremacy = strongly_disapprove
+		law_subjecthood = disapprove
+		law_racial_segregation = disapprove
+		law_cultural_exclusion = neutral
+		law_multicultural = approve
+	}
+
+	lawgroup_advanced_education = {
+		law_no_compulsory_secondary_school = disapprove
+		law_compulsory_secondary_school = approve
+		law_public_universities = strongly_approve
+	}
+}
+
+ideology_ffpa_roman_restorationism = {
+	icon = "gfx/interface/icons/ideology_icons/jingoist.dds"
+
+	lawgroup_army_model = {
+		law_professional_army = strongly_approve
+		law_mass_conscription = approve
+		law_national_militia = neutral
+		law_peasant_levies = strongly_disapprove
+	}
+
+	lawgroup_colonization = {
+		law_colonial_resettlement = approve
+		law_colonial_exploitation = disapprove
+		law_frontier_colonization = strongly_approve
+		law_no_colonial_affairs = neutral
+	}
+
+	lawgroup_national_electric_system = {
+		law_no_national_electric_system = disapprove
+		law_national_electric_system = approve
+		law_modern_national_electric_system = strongly_approve
+	}
+}
+
+ideology_ffpa_mediterranean_developmentalism = {
+	icon = "gfx/interface/icons/ideology_icons/laissez_faire.dds"
+
+	lawgroup_economic_system = {
+		law_laissez_faire = approve
+		law_interventionism = strongly_approve
+		law_agrarianism = neutral
+		law_traditionalism = disapprove
+		law_cooperative_ownership = strongly_disapprove
+		law_command_economy = neutral
+		law_industry_banned = strongly_disapprove
+		law_extraction_economy = disapprove
+	}
+
+	lawgroup_trade_policy = {
+		law_free_trade = approve
+		law_mercantilism = approve
+		law_protectionism = neutral
+		law_isolationism = strongly_disapprove
+	}
+
+	lawgroup_navy_model = {
+		law_merchant_navy = strongly_approve
+		law_jeune_ecole = neutral
+		law_professional_navy = neutral
+		law_diplomatic_navy = approve
+	}
+
+	lawgroup_national_electric_system = {
+		law_no_national_electric_system = strongly_disapprove
+		law_national_electric_system = strongly_approve
+		law_modern_national_electric_system = strongly_approve
+	}
+}
+
+ideology_ffpa_new_rome_civicism = {
+	icon = "gfx/interface/icons/ideology_icons/reactionary.dds"
+
+	lawgroup_governance_principles = {
+		law_monarchy = neutral
+		law_theocracy = disapprove
+		law_presidential_republic = neutral
+		law_parliamentary_republic = neutral
+		law_corporate_state = neutral
+		law_social_monarchy = approve
+		law_council_republic = disapprove
+	}
+
+	lawgroup_citizenship = {
+		law_ethnostate = strongly_disapprove
+		law_national_supremacy = disapprove
+		law_subjecthood = neutral
+		law_racial_segregation = disapprove
+		law_cultural_exclusion = approve
+		law_multicultural = neutral
+	}
+
+	lawgroup_migration = {
+		law_closed_borders = disapprove
+		law_migration_controls = approve
+		law_no_migration_controls = neutral
+	}
+
+	lawgroup_trade_policy = {
+		law_free_trade = approve
+		law_mercantilism = approve
+		law_protectionism = neutral
+		law_isolationism = strongly_disapprove
+	}
+
+	lawgroup_national_electric_system = {
+		law_no_national_electric_system = disapprove
+		law_national_electric_system = strongly_approve
+		law_modern_national_electric_system = approve
+	}
+}
+
+ideology_ffpa_imperial_symphonia = {
+	icon = "gfx/interface/icons/ideology_icons/moralist.dds"
+
+	lawgroup_governance_principles = {
+		law_monarchy = strongly_approve
+		law_theocracy = neutral
+		law_presidential_republic = disapprove
+		law_parliamentary_republic = neutral
+		law_corporate_state = neutral
+		law_social_monarchy = approve
+		law_council_republic = strongly_disapprove
+	}
+
+	lawgroup_church_and_state = {
+		law_state_religion = approve
+		law_freedom_of_conscience = approve
+		law_total_separation = disapprove
+		law_state_atheism = strongly_disapprove
+	}
+
+	lawgroup_advanced_education = {
+		law_no_compulsory_secondary_school = neutral
+		law_compulsory_secondary_school = approve
+		law_public_universities = disapprove
+	}
+}
+
+ideology_ffpa_rhomaic_civic_universalism = {
+	icon = "gfx/interface/icons/ideology_icons/republican.dds"
+
+	lawgroup_governance_principles = {
+		law_presidential_republic = neutral
+		law_parliamentary_republic = approve
+		law_corporate_state = disapprove
+		law_social_monarchy = approve
+		law_monarchy = neutral
+		law_theocracy = disapprove
+		law_council_republic = neutral
+	}
+
+	lawgroup_distribution_of_power = {
+		law_universal_suffrage = strongly_approve
+		law_census_voting = approve
+		law_wealth_voting = neutral
+		law_landed_voting = disapprove
+		law_single_party_state = strongly_disapprove
+		law_technocracy = neutral
+		law_oligarchy = strongly_disapprove
+		law_autocracy = strongly_disapprove
+		law_anarchy = disapprove
+	}
+
+	lawgroup_citizenship = {
+		law_ethnostate = strongly_disapprove
+		law_national_supremacy = strongly_disapprove
+		law_subjecthood = strongly_disapprove
+		law_racial_segregation = strongly_disapprove
+		law_cultural_exclusion = neutral
+		law_multicultural = strongly_approve
+	}
+
+	lawgroup_migration = {
+		law_closed_borders = strongly_disapprove
+		law_migration_controls = neutral
+		law_no_migration_controls = approve
+	}
+
+	lawgroup_advanced_education = {
+		law_no_compulsory_secondary_school = strongly_disapprove
+		law_compulsory_secondary_school = approve
+		law_public_universities = strongly_approve
+	}
+}

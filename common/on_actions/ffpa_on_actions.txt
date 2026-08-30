@@ -1,4 +1,5 @@
-# Refresh immediately after country selection or save loading.
+# Refresh immediately when a campaign is started for the first time.
+# Existing saves are repaired by the monthly country pulse below.
 on_game_started_after_lobby = {
 	on_actions = {
 		ffpa_initialize_innovation_cap
@@ -9,12 +10,13 @@ ffpa_initialize_innovation_cap = {
 	effect = {
 		every_country = {
 			ffpa_refresh_innovation_cap = yes
+			ffpa_ensure_auto_pm_compat_journal = yes
 		}
 	}
 }
 
 # Literacy, companies, principles and special buildings can change the cap.
-# Re-mirror it monthly so the final value remains twice the current total.
+# Re-mirror it monthly so the final value remains twice the unmodified total.
 on_monthly_pulse_country = {
 	on_actions = {
 		ffpa_monthly_refresh_innovation_cap
@@ -24,5 +26,33 @@ on_monthly_pulse_country = {
 ffpa_monthly_refresh_innovation_cap = {
 	effect = {
 		ffpa_refresh_innovation_cap = yes
+		ffpa_ensure_auto_pm_compat_journal = yes
+	}
+}
+
+# Native country pulse: runs exactly twice per year and avoids a monthly timer
+# check on every AI country.
+on_half_yearly_pulse_country = {
+	on_actions = {
+		ffpa_half_yearly_building_pruning
+	}
+}
+
+ffpa_half_yearly_building_pruning = {
+	effect = {
+		if = {
+			limit = {
+				is_at_war = no
+				has_variable = ffpa_private_building_pruning_active
+			}
+			ffpa_prune_private_buildings = yes
+		}
+		if = {
+			limit = {
+				is_at_war = no
+				has_variable = ffpa_government_building_pruning_active
+			}
+			ffpa_prune_government_buildings = yes
+		}
 	}
 }

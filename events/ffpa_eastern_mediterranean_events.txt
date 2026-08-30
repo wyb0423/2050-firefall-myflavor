@@ -1,0 +1,1198 @@
+namespace = ffpa_flavor
+
+# Rebuilding Anatolia: a monarchy may choose the Ottoman civic project, while
+# a republic receives a narrower Anatolian citizenship settlement.
+ffpa_flavor.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = ffpa_flavor.2.t
+	desc = ffpa_flavor.2.d
+	flavor = ffpa_flavor.2.f
+
+	event_image = { video = "unspecific_gears_pistons" }
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = { c:TUR ?= this }
+
+	option = {
+		name = ffpa_flavor.2.a
+		default_option = yes
+		trigger = { has_law_or_variant = law_type:law_monarchy }
+		add_modifier = {
+			name = ffpa_tur_reconstruction_monarchical_compromise
+			years = 10
+		}
+		ffpa_apply_tur_provincial_compact_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_ottoman_commonwealth }
+		ai_chance = { factor = 2 }
+	}
+
+	option = {
+		name = ffpa_flavor.2.b
+		default_option = yes
+		trigger = { NOT = { has_law_or_variant = law_type:law_monarchy } }
+		add_modifier = { name = ffpa_tur_anatolian_citizenship }
+		ai_chance = { factor = 1 }
+	}
+
+	option = {
+		name = ffpa_flavor.2.c
+		trigger = { has_law_or_variant = law_type:law_monarchy }
+		add_modifier = {
+			name = ffpa_tur_reconstruction_pragmatism
+			years = 10
+		}
+		ai_chance = { factor = 1 }
+	}
+}
+
+# Sustained progress in administration, citizenship, and political stability
+# creates an imperial civic identity without changing existing cultures or homelands.
+ffpa_flavor.3 = {
+	type = country_event
+	placement = ROOT
+
+	title = ffpa_flavor.3.t
+	desc = ffpa_flavor.3.d
+	flavor = ffpa_flavor.3.f
+
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:TUR ?= this
+		has_law_or_variant = law_type:law_monarchy
+	}
+
+	option = {
+		name = ffpa_flavor.3.a
+		default_option = yes
+		add_primary_culture = cu:ffpa_ottoman
+		add_modifier = { name = ffpa_ottoman_civic_compact }
+		ffpa_apply_ottoman_interest_group_names = yes
+		ffpa_apply_tur_ottoman_constitutionalism_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_flavor.4 = {
+	type = country_event
+	placement = ROOT
+
+	title = ffpa_flavor.4.t
+	desc = ffpa_flavor.4.d
+	flavor = ffpa_flavor.4.f
+
+	event_image = { video = "unspecific_trains" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:TUR ?= this
+		owns_entire_state_region = STATE_EASTERN_THRACE
+	}
+
+	option = {
+		name = ffpa_flavor.4.a
+		default_option = yes
+		set_capital = STATE_EASTERN_THRACE
+		every_scope_state = {
+			limit = { state_region = s:STATE_EASTERN_THRACE }
+			add_modifier = ffpa_tur_straits_imperial_metropolis
+		}
+		ai_chance = { factor = 2 }
+	}
+
+	option = {
+		name = ffpa_flavor.4.b
+		every_scope_state = {
+			limit = { state_region = s:STATE_EASTERN_THRACE }
+			add_modifier = ffpa_tur_straits_world_port
+		}
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_flavor.5 = {
+	type = country_event
+	placement = ROOT
+
+	title = ffpa_flavor.5.t
+	desc = ffpa_flavor.5.d
+	flavor = ffpa_flavor.5.f
+
+	event_image = { video = "unspecific_world_fair" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = { c:GRE ?= this }
+
+	option = {
+		name = ffpa_flavor.5.a
+		default_option = yes
+		add_modifier = {
+			name = ffpa_gre_islands_and_mainland
+			years = 10
+		}
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_flavor.6 = {
+	type = country_event
+	placement = ROOT
+
+	title = ffpa_flavor.6.t
+	desc = ffpa_flavor.6.d
+	flavor = ffpa_flavor.6.f
+
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = { c:BYZ ?= this }
+
+	option = {
+		name = ffpa_flavor.6.a
+		default_option = yes
+		add_modifier = {
+			name = ffpa_byz_civic_settlement
+			years = 10
+		}
+		add_journal_entry = { type = je_ffpa_byz_rhomaic_commonwealth }
+		ai_chance = { factor = 2 }
+	}
+
+	option = {
+		name = ffpa_flavor.6.b
+		set_variable = ffpa_byz_church_and_crown_chosen_v1
+		ffpa_apply_byz_imperial_symphonia_v1 = yes
+		add_modifier = {
+			name = ffpa_byz_church_and_crown
+			years = 10
+		}
+		ai_chance = { factor = 1 }
+	}
+
+	option = {
+		name = ffpa_flavor.6.c
+		every_scope_state = {
+			limit = { state_region = s:STATE_EASTERN_THRACE }
+			add_modifier = {
+				name = ffpa_byz_living_new_rome
+				years = 10
+			}
+		}
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_flavor.7 = {
+	type = country_event
+	placement = ROOT
+
+	title = ffpa_flavor.7.t
+	desc = ffpa_flavor.7.d
+	flavor = ffpa_flavor.7.f
+
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = { c:BYZ ?= this }
+
+	option = {
+		name = ffpa_flavor.7.a
+		default_option = yes
+		add_primary_culture = cu:ffpa_rhomaic
+		add_modifier = { name = ffpa_rhomaic_civic_compact }
+		ffpa_ensure_byzantine_formation_effects = yes
+		ffpa_apply_byz_rhomaic_civic_universalism_v1 = yes
+		ffpa_check_western_integration_events = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+# Replacement for vanilla greece.2. It keeps the original effects, removes the
+# plausible-formables rule gate, and supports a decision-based recovery entry
+# after the Greek Nationalism journal has already completed.
+ffpa_flavor.8 = {
+	type = country_event
+	placement = ROOT
+
+	title = greece.2.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.8.recovery.d
+				trigger = { has_variable = je_greek_nationalism_complete }
+			}
+			triggered_desc = {
+				desc = greece.2.d
+				trigger = { always = yes }
+			}
+		}
+	}
+	flavor = greece.2.f
+
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:GRE ?= this
+		NOT = { has_variable = byzantium_event_fired }
+		has_variable = embrace_megali_idea_var
+		any_scope_state = { state_region = s:STATE_IONIAN_ISLANDS }
+		has_law_or_variant = law_type:law_monarchy
+		government_legitimacy >= 75
+	}
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	immediate = {
+		if = {
+			limit = {
+				s:STATE_EASTERN_THRACE = {
+					any_scope_state = { NOT = { owner = ROOT } }
+				}
+			}
+			s:STATE_EASTERN_THRACE = {
+				random_scope_state = {
+					limit = { NOT = { owner = ROOT } }
+					owner = { save_scope_as = thrace_owner }
+				}
+			}
+		}
+		s:STATE_EASTERN_THRACE = {
+			random_scope_state = { save_scope_as = thrace_scope }
+		}
+		if = {
+			limit = {
+				s:STATE_AYDIN = {
+					any_scope_state = { NOT = { owner = ROOT } }
+				}
+			}
+			s:STATE_AYDIN = {
+				random_scope_state = {
+					limit = { NOT = { owner = ROOT } }
+					owner = { save_scope_as = aydin_owner }
+				}
+			}
+		}
+		s:STATE_AYDIN = {
+			random_scope_state = { save_scope_as = aydin_scope }
+		}
+		set_variable = byzantium_event_fired
+	}
+
+	option = {
+		name = greece.2.a
+		if = {
+			limit = {
+				exists = c:TUR
+				c:TUR ?= {
+					OR = {
+						owns_entire_state_region = STATE_MACEDONIA
+						owns_entire_state_region = STATE_WESTERN_THRACE
+						owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS
+						owns_entire_state_region = STATE_CRETE
+					}
+				}
+			}
+			change_relations = { country = c:TUR value = -20 }
+		}
+		if = {
+			limit = { NOT = { owns_entire_state_region = STATE_EASTERN_THRACE } }
+			s:STATE_EASTERN_THRACE = { add_claim = ROOT }
+		}
+		if = {
+			limit = { NOT = { owns_entire_state_region = STATE_AYDIN } }
+			s:STATE_AYDIN = { add_claim = ROOT }
+		}
+		if = {
+			limit = {
+				AND = {
+					exists = scope:thrace_owner
+					scope:thrace_owner = { NOT = { c:TUR ?= this } }
+				}
+			}
+			create_incident = { country = scope:thrace_owner value = -10 }
+		}
+		if = {
+			limit = {
+				AND = {
+					exists = scope:aydin_owner
+					scope:aydin_owner = { NOT = { c:TUR ?= this } }
+				}
+			}
+			create_incident = { country = scope:aydin_owner value = -10 }
+		}
+		if = {
+			limit = {
+				exists = c:RUS
+				any_scope_state = {
+					region = sr:region_balkans
+					has_claim_by = c:RUS
+				}
+			}
+			change_relations = { country = c:RUS value = 10 }
+		}
+		change_infamy = 20
+		if = {
+			limit = { has_variable = je_greek_nationalism_complete }
+			custom_tooltip = {
+				text = ffpa_embrace_ambitious_agenda_recovery_tt
+				set_variable = embrace_ambitious_agenda_var
+				remove_variable = embrace_megali_idea_var
+			}
+		}
+		else = {
+			custom_tooltip = {
+				text = embrace_ambitious_agenda_tt
+				set_variable = embrace_ambitious_agenda_var
+				remove_variable = embrace_megali_idea_var
+			}
+		}
+		ai_chance = { factor = 1 }
+	}
+
+	option = {
+		name = greece.2.b
+		default_option = yes
+		if = {
+			limit = {
+				exists = c:RUS
+				any_scope_state = {
+					region = sr:region_balkans
+					has_claim_by = c:RUS
+				}
+			}
+			change_relations = { country = c:RUS value = -15 }
+		}
+		if = {
+			limit = {
+				AND = {
+					exists = scope:aydin_owner
+					exists = scope:thrace_owner
+					scope:aydin_owner = scope:thrace_owner
+				}
+			}
+			change_relations = { country = scope:aydin_owner value = 30 }
+		}
+		else_if = {
+			limit = { exists = scope:thrace_owner }
+			change_relations = { country = scope:thrace_owner value = 15 }
+		}
+		else_if = {
+			limit = { exists = scope:aydin_owner }
+			change_relations = { country = scope:aydin_owner value = 15 }
+		}
+		custom_tooltip = { text = not_embrace_ambitious_agenda_tt }
+		ai_chance = { factor = 2 }
+	}
+}
+
+# --- Finite Turkish political-economy events ---
+
+ffpa_flavor.10 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.10.t
+	desc = ffpa_flavor.10.d
+	flavor = ffpa_flavor.10.f
+	event_image = { video = "unspecific_trains" }
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:TUR ?= this }
+	immediate = { set_variable = ffpa_tur_industrial_congress_fired_v2 }
+
+	option = {
+		name = ffpa_flavor.10.a
+		default_option = yes
+		add_modifier = { name = ffpa_tur_anatolian_railway_program years = 8 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_industrialists }
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.10.b
+		add_modifier = { name = ffpa_tur_anatolian_industry_program years = 8 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_flavor.11 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.11.t
+	desc = ffpa_flavor.11.d
+	flavor = ffpa_flavor.11.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:TUR ?= this has_variable = ffpa_tur_rebuild_anatolia_complete }
+	immediate = {
+		set_variable = ffpa_tur_tax_register_event_fired_v2
+		remove_variable = ffpa_tur_tax_register_event_scheduled_v2
+	}
+
+	option = {
+		name = ffpa_flavor.11.a
+		default_option = yes
+		add_modifier = { name = ffpa_tur_central_tax_register years = 8 }
+		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+			custom_tooltip = ffpa_commonwealth_progress_administration_plus_8_tt
+			hidden_effect = {
+				change_variable = { name = ffpa_tur_commonwealth_administration_v2 add = 8 }
+				clamp_variable = { name = ffpa_tur_commonwealth_administration_v2 min = 0 max = 60 }
+			}
+		}
+		ai_chance = {
+			factor = 1.3
+			modifier = {
+				trigger = { bureaucracy < 0 }
+				add = -0.5
+			}
+		}
+	}
+	option = {
+		name = ffpa_flavor.11.b
+		add_modifier = { name = ffpa_tur_provincial_tax_bargain years = 8 }
+		add_loyalists = { value = 0.04 interest_group = ig:ig_landowners }
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+			custom_tooltip = ffpa_commonwealth_progress_stability_plus_8_tt
+			hidden_effect = {
+				change_variable = { name = ffpa_tur_commonwealth_stability_v2 add = 8 }
+				clamp_variable = { name = ffpa_tur_commonwealth_stability_v2 min = 0 max = 60 }
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { bureaucracy < 0 }
+				add = 0.5
+			}
+		}
+	}
+
+	after = {
+		ffpa_sync_tur_commonwealth_progress_bars = yes
+	}
+}
+
+ffpa_flavor.12 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.12.t
+	desc = ffpa_flavor.12.d
+	flavor = ffpa_flavor.12.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		OR = {
+			has_variable = ffpa_tur_first_imperial_election_scheduled_v3
+			has_variable = ffpa_tur_first_imperial_election_fired_v2
+		}
+	}
+	immediate = {
+		set_variable = ffpa_tur_first_imperial_election_fired_v2
+		remove_variable = ffpa_tur_first_imperial_election_scheduled_v3
+	}
+
+	option = {
+		name = ffpa_flavor.12.a
+		default_option = yes
+		add_modifier = { name = ffpa_tur_common_electoral_roll years = 8 }
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+			custom_tooltip = ffpa_commonwealth_progress_civic_plus_8_tt
+			hidden_effect = {
+				change_variable = { name = ffpa_tur_commonwealth_civic_v2 add = 8 }
+				clamp_variable = { name = ffpa_tur_commonwealth_civic_v2 min = 0 max = 60 }
+			}
+		}
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.12.b
+		add_modifier = { name = ffpa_tur_communal_electoral_colleges years = 8 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_devout }
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+			custom_tooltip = ffpa_commonwealth_progress_civic_plus_4_stability_plus_6_tt
+			hidden_effect = {
+				change_variable = { name = ffpa_tur_commonwealth_civic_v2 add = 4 }
+				change_variable = { name = ffpa_tur_commonwealth_stability_v2 add = 6 }
+				clamp_variable = { name = ffpa_tur_commonwealth_civic_v2 min = 0 max = 60 }
+				clamp_variable = { name = ffpa_tur_commonwealth_stability_v2 min = 0 max = 60 }
+			}
+		}
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_flavor.12.c
+		trigger = { country_has_monarchy_law = yes }
+		add_modifier = { name = ffpa_tur_appointed_upper_chamber years = 8 }
+		add_radicals = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+			custom_tooltip = ffpa_commonwealth_progress_administration_plus_6_stability_plus_6_tt
+			hidden_effect = {
+				change_variable = { name = ffpa_tur_commonwealth_administration_v2 add = 6 }
+				change_variable = { name = ffpa_tur_commonwealth_stability_v2 add = 6 }
+				clamp_variable = { name = ffpa_tur_commonwealth_administration_v2 min = 0 max = 60 }
+				clamp_variable = { name = ffpa_tur_commonwealth_stability_v2 min = 0 max = 60 }
+			}
+		}
+		ai_chance = { factor = 0.8 }
+	}
+
+	after = {
+		ffpa_sync_tur_commonwealth_progress_bars = yes
+	}
+}
+
+ffpa_flavor.13 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.13.t
+	desc = ffpa_flavor.13.d
+	flavor = ffpa_flavor.13.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:TUR ?= this has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+	immediate = {
+		set_variable = ffpa_tur_language_event_fired_v2
+		remove_variable = ffpa_tur_language_event_scheduled_v3
+	}
+	option = {
+		name = ffpa_flavor.13.a
+		default_option = yes
+		add_modifier = { name = ffpa_imperial_multilingual_chancery years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_administration_plus_6_civic_plus_8_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_tur_commonwealth_administration_v2 add = 6 }
+			change_variable = { name = ffpa_tur_commonwealth_civic_v2 add = 8 }
+			clamp_variable = { name = ffpa_tur_commonwealth_administration_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_tur_commonwealth_civic_v2 min = 0 max = 60 }
+		}
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		ai_chance = { factor = 1.3 }
+	}
+	option = {
+		name = ffpa_flavor.13.b
+		add_modifier = { name = ffpa_imperial_central_chancery years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_administration_plus_10_civic_minus_3_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_tur_commonwealth_administration_v2 add = 10 }
+			change_variable = { name = ffpa_tur_commonwealth_civic_v2 subtract = 3 }
+			clamp_variable = { name = ffpa_tur_commonwealth_administration_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_tur_commonwealth_civic_v2 min = 0 max = 60 }
+		}
+		ai_chance = { factor = 1 }
+	}
+
+	after = {
+		ffpa_sync_tur_commonwealth_progress_bars = yes
+	}
+}
+
+ffpa_flavor.14 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.14.t
+	desc = ffpa_flavor.14.d
+	flavor = ffpa_flavor.14.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:TUR ?= this has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+	immediate = {
+		set_variable = ffpa_tur_representation_event_fired_v2
+		remove_variable = ffpa_tur_representation_event_scheduled_v3
+	}
+	option = {
+		name = ffpa_flavor.14.a
+		default_option = yes
+		add_modifier = { name = ffpa_imperial_provincial_representation years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_civic_plus_8_stability_plus_4_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_tur_commonwealth_civic_v2 add = 8 }
+			change_variable = { name = ffpa_tur_commonwealth_stability_v2 add = 4 }
+			clamp_variable = { name = ffpa_tur_commonwealth_civic_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_tur_commonwealth_stability_v2 min = 0 max = 60 }
+		}
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.14.b
+		add_modifier = { name = ffpa_imperial_notables_compromise years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_administration_plus_6_stability_plus_8_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_tur_commonwealth_administration_v2 add = 6 }
+			change_variable = { name = ffpa_tur_commonwealth_stability_v2 add = 8 }
+			clamp_variable = { name = ffpa_tur_commonwealth_administration_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_tur_commonwealth_stability_v2 min = 0 max = 60 }
+		}
+		ai_chance = { factor = 1 }
+	}
+
+	after = {
+		ffpa_sync_tur_commonwealth_progress_bars = yes
+	}
+}
+
+ffpa_flavor.15 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.15.t
+	desc = ffpa_flavor.15.d
+	flavor = ffpa_flavor.15.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:TUR ?= this has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+	immediate = {
+		set_variable = ffpa_tur_military_oath_event_fired_v2
+		remove_variable = ffpa_tur_military_oath_event_scheduled_v3
+	}
+	option = {
+		name = ffpa_flavor.15.a
+		default_option = yes
+		add_modifier = { name = ffpa_imperial_common_oath years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_civic_plus_8_stability_plus_6_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_tur_commonwealth_civic_v2 add = 8 }
+			change_variable = { name = ffpa_tur_commonwealth_stability_v2 add = 6 }
+			clamp_variable = { name = ffpa_tur_commonwealth_civic_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_tur_commonwealth_stability_v2 min = 0 max = 60 }
+		}
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.15.b
+		add_modifier = { name = ffpa_imperial_separate_regiments years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_administration_plus_4_stability_plus_10_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_tur_commonwealth_administration_v2 add = 4 }
+			change_variable = { name = ffpa_tur_commonwealth_stability_v2 add = 10 }
+			clamp_variable = { name = ffpa_tur_commonwealth_administration_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_tur_commonwealth_stability_v2 min = 0 max = 60 }
+		}
+		ai_chance = { factor = 1 }
+	}
+
+	after = {
+		ffpa_sync_tur_commonwealth_progress_bars = yes
+	}
+}
+
+# --- Byzantine metropolis and political-economy events ---
+
+ffpa_flavor.20 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.20.t
+	desc = ffpa_flavor.20.d
+	flavor = ffpa_flavor.20.f
+	event_image = { video = "unspecific_world_fair" }
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this owns_entire_state_region = STATE_EASTERN_THRACE }
+	option = {
+		name = ffpa_flavor.20.a
+		default_option = yes
+		every_scope_state = {
+			limit = { state_region = s:STATE_EASTERN_THRACE }
+			add_modifier = ffpa_byz_new_rome_world_harbor
+		}
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.20.b
+		every_scope_state = {
+			limit = { state_region = s:STATE_EASTERN_THRACE }
+			add_modifier = ffpa_byz_new_rome_industrial_metropolis
+		}
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_flavor.20.c
+		every_scope_state = {
+			limit = { state_region = s:STATE_EASTERN_THRACE }
+			add_modifier = ffpa_byz_new_rome_civic_capital
+		}
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_flavor.21 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.21.t
+	desc = ffpa_flavor.21.d
+	flavor = ffpa_flavor.21.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this has_variable = ffpa_byz_new_rome_complete }
+	immediate = {
+		set_variable = ffpa_byz_land_register_event_fired_v2
+		remove_variable = ffpa_byz_land_register_event_scheduled_v2
+	}
+	option = {
+		name = ffpa_flavor.21.a
+		default_option = yes
+		add_modifier = { name = ffpa_byz_uniform_land_register years = 8 }
+		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			custom_tooltip = ffpa_commonwealth_progress_administration_plus_8_tt
+			hidden_effect = {
+				change_variable = { name = ffpa_byz_commonwealth_administration_v2 add = 8 }
+				clamp_variable = { name = ffpa_byz_commonwealth_administration_v2 min = 0 max = 60 }
+			}
+		}
+		ai_chance = {
+			factor = 1.3
+			modifier = {
+				trigger = { bureaucracy < 0 }
+				add = -0.5
+			}
+		}
+	}
+	option = {
+		name = ffpa_flavor.21.b
+		add_modifier = { name = ffpa_byz_provincial_tax_privileges years = 8 }
+		add_loyalists = { value = 0.04 interest_group = ig:ig_landowners }
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			custom_tooltip = ffpa_commonwealth_progress_stability_plus_8_tt
+			hidden_effect = {
+				change_variable = { name = ffpa_byz_commonwealth_stability_v2 add = 8 }
+				clamp_variable = { name = ffpa_byz_commonwealth_stability_v2 min = 0 max = 60 }
+			}
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { bureaucracy < 0 }
+				add = 0.5
+			}
+		}
+	}
+
+	after = {
+		ffpa_sync_byz_commonwealth_progress_bars = yes
+	}
+}
+
+ffpa_flavor.22 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.22.t
+	desc = ffpa_flavor.22.d
+	flavor = ffpa_flavor.22.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:BYZ ?= this
+		OR = {
+			has_variable = ffpa_byz_first_election_scheduled_v3
+			has_variable = ffpa_byz_first_election_fired_v2
+		}
+	}
+	immediate = {
+		set_variable = ffpa_byz_first_election_fired_v2
+		remove_variable = ffpa_byz_first_election_scheduled_v3
+	}
+	option = {
+		name = ffpa_flavor.22.a
+		default_option = yes
+		add_modifier = { name = ffpa_byz_common_civic_roll years = 8 }
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			custom_tooltip = ffpa_commonwealth_progress_civic_plus_8_tt
+			hidden_effect = {
+				change_variable = { name = ffpa_byz_commonwealth_civic_v2 add = 8 }
+				clamp_variable = { name = ffpa_byz_commonwealth_civic_v2 min = 0 max = 60 }
+			}
+		}
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.22.b
+		add_modifier = { name = ffpa_byz_provincial_delegations years = 8 }
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			custom_tooltip = ffpa_commonwealth_progress_civic_plus_4_stability_plus_6_tt
+			hidden_effect = {
+				change_variable = { name = ffpa_byz_commonwealth_civic_v2 add = 4 }
+				change_variable = { name = ffpa_byz_commonwealth_stability_v2 add = 6 }
+				clamp_variable = { name = ffpa_byz_commonwealth_civic_v2 min = 0 max = 60 }
+				clamp_variable = { name = ffpa_byz_commonwealth_stability_v2 min = 0 max = 60 }
+			}
+		}
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_flavor.22.c
+		trigger = { country_has_monarchy_law = yes }
+		add_modifier = { name = ffpa_byz_crown_senate years = 8 }
+		add_radicals = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			custom_tooltip = ffpa_commonwealth_progress_administration_plus_6_stability_plus_6_tt
+			hidden_effect = {
+				change_variable = { name = ffpa_byz_commonwealth_administration_v2 add = 6 }
+				change_variable = { name = ffpa_byz_commonwealth_stability_v2 add = 6 }
+				clamp_variable = { name = ffpa_byz_commonwealth_administration_v2 min = 0 max = 60 }
+				clamp_variable = { name = ffpa_byz_commonwealth_stability_v2 min = 0 max = 60 }
+			}
+		}
+		ai_chance = { factor = 0.8 }
+	}
+
+	after = {
+		ffpa_sync_byz_commonwealth_progress_bars = yes
+	}
+}
+
+ffpa_flavor.23 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.23.t
+	desc = ffpa_flavor.23.d
+	flavor = ffpa_flavor.23.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+	immediate = {
+		set_variable = ffpa_byz_language_event_fired_v2
+		remove_variable = ffpa_byz_language_event_scheduled_v3
+	}
+	option = {
+		name = ffpa_flavor.23.a
+		default_option = yes
+		add_modifier = { name = ffpa_imperial_multilingual_chancery years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_administration_plus_6_civic_plus_8_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_byz_commonwealth_administration_v2 add = 6 }
+			change_variable = { name = ffpa_byz_commonwealth_civic_v2 add = 8 }
+			clamp_variable = { name = ffpa_byz_commonwealth_administration_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_byz_commonwealth_civic_v2 min = 0 max = 60 }
+		}
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		ai_chance = { factor = 1.3 }
+	}
+	option = {
+		name = ffpa_flavor.23.b
+		add_modifier = { name = ffpa_imperial_central_chancery years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_administration_plus_10_civic_minus_3_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_byz_commonwealth_administration_v2 add = 10 }
+			change_variable = { name = ffpa_byz_commonwealth_civic_v2 subtract = 3 }
+			clamp_variable = { name = ffpa_byz_commonwealth_administration_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_byz_commonwealth_civic_v2 min = 0 max = 60 }
+		}
+		ai_chance = { factor = 1 }
+	}
+
+	after = {
+		ffpa_sync_byz_commonwealth_progress_bars = yes
+	}
+}
+
+ffpa_flavor.24 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.24.t
+	desc = ffpa_flavor.24.d
+	flavor = ffpa_flavor.24.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+	immediate = {
+		set_variable = ffpa_byz_representation_event_fired_v2
+		remove_variable = ffpa_byz_representation_event_scheduled_v3
+	}
+	option = {
+		name = ffpa_flavor.24.a
+		default_option = yes
+		add_modifier = { name = ffpa_imperial_provincial_representation years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_civic_plus_8_stability_plus_4_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_byz_commonwealth_civic_v2 add = 8 }
+			change_variable = { name = ffpa_byz_commonwealth_stability_v2 add = 4 }
+			clamp_variable = { name = ffpa_byz_commonwealth_civic_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_byz_commonwealth_stability_v2 min = 0 max = 60 }
+		}
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.24.b
+		add_modifier = { name = ffpa_imperial_notables_compromise years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_administration_plus_6_stability_plus_8_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_byz_commonwealth_administration_v2 add = 6 }
+			change_variable = { name = ffpa_byz_commonwealth_stability_v2 add = 8 }
+			clamp_variable = { name = ffpa_byz_commonwealth_administration_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_byz_commonwealth_stability_v2 min = 0 max = 60 }
+		}
+		ai_chance = { factor = 1 }
+	}
+
+	after = {
+		ffpa_sync_byz_commonwealth_progress_bars = yes
+	}
+}
+
+ffpa_flavor.25 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.25.t
+	desc = ffpa_flavor.25.d
+	flavor = ffpa_flavor.25.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+	immediate = {
+		set_variable = ffpa_byz_military_oath_event_fired_v2
+		remove_variable = ffpa_byz_military_oath_event_scheduled_v3
+	}
+	option = {
+		name = ffpa_flavor.25.a
+		default_option = yes
+		add_modifier = { name = ffpa_imperial_common_oath years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_civic_plus_8_stability_plus_6_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_byz_commonwealth_civic_v2 add = 8 }
+			change_variable = { name = ffpa_byz_commonwealth_stability_v2 add = 6 }
+			clamp_variable = { name = ffpa_byz_commonwealth_civic_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_byz_commonwealth_stability_v2 min = 0 max = 60 }
+		}
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.25.b
+		add_modifier = { name = ffpa_imperial_separate_regiments years = 6 }
+		custom_tooltip = ffpa_commonwealth_progress_administration_plus_4_stability_plus_10_tt
+		hidden_effect = {
+			change_variable = { name = ffpa_byz_commonwealth_administration_v2 add = 4 }
+			change_variable = { name = ffpa_byz_commonwealth_stability_v2 add = 10 }
+			clamp_variable = { name = ffpa_byz_commonwealth_administration_v2 min = 0 max = 60 }
+			clamp_variable = { name = ffpa_byz_commonwealth_stability_v2 min = 0 max = 60 }
+		}
+		ai_chance = { factor = 1 }
+	}
+
+	after = {
+		ffpa_sync_byz_commonwealth_progress_bars = yes
+	}
+}
+
+# --- Finite Byzantine western-integration events ---
+
+ffpa_flavor.30 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.30.t
+	desc = ffpa_flavor.30.d
+	flavor = ffpa_flavor.30.f
+	event_image = { video = "unspecific_trains" }
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:BYZ ?= this
+		has_variable = ffpa_byz_mediterranean_congress_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_byz_mediterranean_congress_scheduled_v1
+		set_variable = ffpa_byz_mediterranean_congress_fired_v1
+	}
+
+	option = {
+		name = ffpa_flavor.30.a
+		default_option = yes
+		add_modifier = { name = ffpa_byz_mediterranean_industrial_credit years = 10 }
+		add_loyalists = { value = 0.04 interest_group = ig:ig_industrialists }
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.30.b
+		add_modifier = { name = ffpa_byz_mediterranean_port_rail_fund years = 10 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = { factor = 1.1 }
+	}
+	option = {
+		name = ffpa_flavor.30.c
+		add_modifier = { name = ffpa_byz_mediterranean_development_banks years = 10 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_flavor.31 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.31.t
+	desc = ffpa_flavor.31.d
+	flavor = ffpa_flavor.31.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:BYZ ?= this
+		has_variable = ffpa_byz_western_cadastre_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_byz_western_cadastre_scheduled_v1
+		set_variable = ffpa_byz_western_cadastre_fired_v1
+	}
+
+	option = {
+		name = ffpa_flavor.31.a
+		default_option = yes
+		every_scope_state = {
+			limit = { ffpa_is_byzantine_western_integration_state = yes }
+			add_modifier = { name = ffpa_byz_western_uniform_cadastre_state years = 10 }
+		}
+		add_modifier = { name = ffpa_byz_western_uniform_cadastre_cost years = 10 }
+		add_radicals = { value = 0.04 interest_group = ig:ig_landowners }
+		ai_chance = {
+			factor = 1.3
+			modifier = {
+				trigger = { bureaucracy < 0 }
+				add = -0.8
+			}
+		}
+	}
+	option = {
+		name = ffpa_flavor.31.b
+		every_scope_state = {
+			limit = { ffpa_is_byzantine_western_integration_state = yes }
+			add_modifier = { name = ffpa_byz_western_provincial_tax_state years = 10 }
+		}
+		add_modifier = { name = ffpa_byz_western_provincial_tax_compact years = 10 }
+		add_loyalists = { value = 0.04 interest_group = ig:ig_landowners }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { bureaucracy < 0 }
+				add = 0.6
+			}
+		}
+	}
+}
+
+ffpa_flavor.32 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.32.t
+	desc = ffpa_flavor.32.d
+	flavor = ffpa_flavor.32.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:BYZ ?= this
+		has_variable = ffpa_byz_western_civic_extension_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_byz_western_civic_extension_scheduled_v1
+		set_variable = ffpa_byz_western_civic_extension_fired_v1
+	}
+
+	option = {
+		name = ffpa_flavor.32.a
+		default_option = yes
+		add_modifier = { name = ffpa_byz_western_universal_citizenship }
+		add_loyalists = { value = 0.04 interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.32.b
+		add_modifier = { name = ffpa_byz_western_provincial_civic_compact }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_landowners }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_devout }
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_flavor.33 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.33.t
+	desc = ffpa_flavor.33.d
+	flavor = ffpa_flavor.33.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:BYZ ?= this
+		has_variable = ffpa_byz_western_representation_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_byz_western_representation_scheduled_v1
+		set_variable = ffpa_byz_western_representation_fired_v1
+	}
+
+	option = {
+		name = ffpa_flavor.33.a
+		default_option = yes
+		add_modifier = { name = ffpa_byz_western_common_electoral_roll years = 8 }
+		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_flavor.33.b
+		add_modifier = { name = ffpa_byz_western_provincial_delegations years = 8 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_flavor.33.c
+		trigger = { country_has_monarchy_law = yes }
+		add_modifier = { name = ffpa_byz_western_crown_senate years = 8 }
+		add_radicals = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		ai_chance = { factor = 0.8 }
+	}
+}

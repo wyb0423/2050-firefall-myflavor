@@ -1,0 +1,31 @@
+# Visible manual entry for the vanilla Eastern Roman title proposal. The
+# Greek Nationalism journal remains its automatic scheduler while active;
+# this decision also keeps the political choice reachable after that journal
+# has completed in an existing save.
+ffpa_request_eastern_roman_title = {
+	is_shown = {
+		c:GRE ?= this
+		has_variable = embrace_megali_idea_var
+		NOT = { has_variable = embrace_ambitious_agenda_var }
+		NOT = { has_variable = byzantium_event_fired }
+	}
+
+	possible = {
+		country_has_monarchy_law = yes
+		custom_tooltip = {
+			text = ffpa_eastern_roman_title_ionian_tt
+			any_scope_state = {
+				state_region = s:STATE_IONIAN_ISLANDS
+			}
+		}
+		government_legitimacy >= 75
+	}
+
+	when_taken = {
+		trigger_event = { id = ffpa_flavor.8 popup = yes }
+	}
+
+	ai_chance = {
+		value = 10
+	}
+}

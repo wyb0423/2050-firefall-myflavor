@@ -1,0 +1,386 @@
+ffpa_has_no_insurrectionary_movement = {
+	NOT = {
+		any_political_movement = {
+			is_insurrectionary = yes
+		}
+	}
+}
+
+ffpa_tur_ottoman_commonwealth_month_conditions = {
+	c:TUR ?= this
+	country_has_monarchy_law = yes
+	OR = {
+		has_law_or_variant = law_type:law_cultural_exclusion
+		has_law_or_variant = law_type:law_multicultural
+	}
+	OR = {
+		has_law_or_variant = law_type:law_freedom_of_conscience
+		has_law_or_variant = law_type:law_total_separation
+	}
+	government_legitimacy >= 60
+	is_at_war = no
+	ffpa_has_no_insurrectionary_movement = yes
+
+	calc_true_if = {
+		amount >= 4
+		OR = {
+			cultural_acceptance_base = { target = cu:greek value >= acceptance_status_3 }
+			cultural_acceptance_base = { target = cu:bulgarian value >= acceptance_status_3 }
+			cultural_acceptance_base = { target = cu:serb value >= acceptance_status_3 }
+			cultural_acceptance_base = { target = cu:romanian value >= acceptance_status_3 }
+		}
+		OR = {
+			cultural_acceptance_base = { target = cu:albanian value >= acceptance_status_3 }
+			cultural_acceptance_base = { target = cu:bosniak value >= acceptance_status_3 }
+		}
+		cultural_acceptance_base = { target = cu:armenian value >= acceptance_status_3 }
+		cultural_acceptance_base = { target = cu:kurdish value >= acceptance_status_3 }
+		OR = {
+			cultural_acceptance_base = { target = cu:arab value >= acceptance_status_3 }
+			cultural_acceptance_base = { target = cu:egyptian value >= acceptance_status_3 }
+		}
+	}
+
+	any_scope_state = {
+		count >= 6
+		OR = {
+			state_region = s:STATE_EASTERN_THRACE
+			state_region = s:STATE_HUDAVENDIGAR
+			state_region = s:STATE_AYDIN
+			state_region = s:STATE_ANKARA
+			state_region = s:STATE_KONYA
+			state_region = s:STATE_ADANA
+			state_region = s:STATE_KASTAMONU
+			state_region = s:STATE_TRABZON
+			state_region = s:STATE_ERZURUM
+			state_region = s:STATE_DIYARBAKIR
+			state_region = s:STATE_KARS
+		}
+		turmoil < 0.20
+	}
+}
+
+ffpa_byz_rhomaic_commonwealth_month_conditions = {
+	c:BYZ ?= this
+	OR = {
+		has_law_or_variant = law_type:law_cultural_exclusion
+		has_law_or_variant = law_type:law_multicultural
+	}
+	OR = {
+		has_law_or_variant = law_type:law_freedom_of_conscience
+		has_law_or_variant = law_type:law_total_separation
+	}
+	government_legitimacy >= 60
+	is_at_war = no
+	ffpa_has_no_insurrectionary_movement = yes
+
+	calc_true_if = {
+		amount >= 4
+		cultural_acceptance_base = { target = cu:turkish value >= acceptance_status_3 }
+		cultural_acceptance_base = { target = cu:albanian value >= acceptance_status_3 }
+		cultural_acceptance_base = { target = cu:bulgarian value >= acceptance_status_3 }
+		cultural_acceptance_base = { target = cu:serb value >= acceptance_status_3 }
+		cultural_acceptance_base = { target = cu:armenian value >= acceptance_status_3 }
+	}
+
+	any_scope_state = {
+		count >= 7
+		OR = {
+			state_region = s:STATE_EASTERN_THRACE
+			state_region = s:STATE_ATTICA
+			state_region = s:STATE_THESSALIA
+			state_region = s:STATE_MACEDONIA
+			state_region = s:STATE_SKOPIA
+			state_region = s:STATE_WESTERN_THRACE
+			state_region = s:STATE_NORTHERN_THRACE
+			state_region = s:STATE_HUDAVENDIGAR
+			state_region = s:STATE_AYDIN
+			state_region = s:STATE_WEST_AEGEAN_ISLANDS
+			state_region = s:STATE_EAST_AEGEAN_ISLANDS
+			state_region = s:STATE_ALBANIA
+		}
+		turmoil < 0.20
+	}
+}
+
+# Recoverable v2 integration axes. Each axis advances or decays independently;
+# the old all-or-nothing triggers above remain available for save/script
+# compatibility but are no longer journal schedulers.
+# State scope. Shared by the Ottoman administration/stability axes and their
+# player-facing counters so the two views cannot drift apart.
+ffpa_is_tur_commonwealth_core_state = {
+	OR = {
+		state_region = s:STATE_EASTERN_THRACE
+		state_region = s:STATE_HUDAVENDIGAR
+		state_region = s:STATE_AYDIN
+		state_region = s:STATE_ANKARA
+		state_region = s:STATE_KONYA
+		state_region = s:STATE_ADANA
+		state_region = s:STATE_KASTAMONU
+		state_region = s:STATE_TRABZON
+		state_region = s:STATE_ERZURUM
+		state_region = s:STATE_DIYARBAKIR
+		state_region = s:STATE_KARS
+	}
+}
+
+ffpa_tur_commonwealth_administration_conditions = {
+	c:TUR ?= this
+	country_has_monarchy_law = yes
+	government_legitimacy >= 55
+	bureaucracy >= 0
+	any_scope_state = {
+		count >= 8
+		ffpa_is_tur_commonwealth_core_state = yes
+		market_access >= 0.75
+	}
+}
+
+ffpa_tur_commonwealth_civic_conditions = {
+	c:TUR ?= this
+	country_has_monarchy_law = yes
+	OR = {
+		has_law_or_variant = law_type:law_cultural_exclusion
+		has_law_or_variant = law_type:law_multicultural
+	}
+	OR = {
+		has_law_or_variant = law_type:law_freedom_of_conscience
+		has_law_or_variant = law_type:law_total_separation
+	}
+	calc_true_if = {
+		amount >= 4
+		OR = {
+			cultural_acceptance_base = { target = cu:greek value >= acceptance_status_3 }
+			cultural_acceptance_base = { target = cu:bulgarian value >= acceptance_status_3 }
+			cultural_acceptance_base = { target = cu:serb value >= acceptance_status_3 }
+			cultural_acceptance_base = { target = cu:romanian value >= acceptance_status_3 }
+		}
+		OR = {
+			cultural_acceptance_base = { target = cu:albanian value >= acceptance_status_3 }
+			cultural_acceptance_base = { target = cu:bosniak value >= acceptance_status_3 }
+		}
+		cultural_acceptance_base = { target = cu:armenian value >= acceptance_status_3 }
+		cultural_acceptance_base = { target = cu:kurdish value >= acceptance_status_3 }
+		OR = {
+			cultural_acceptance_base = { target = cu:arab value >= acceptance_status_3 }
+			cultural_acceptance_base = { target = cu:egyptian value >= acceptance_status_3 }
+		}
+	}
+}
+
+ffpa_tur_commonwealth_stability_conditions = {
+	c:TUR ?= this
+	country_has_monarchy_law = yes
+	is_at_war = no
+	ffpa_has_no_insurrectionary_movement = yes
+	any_scope_state = {
+		count >= 6
+		ffpa_is_tur_commonwealth_core_state = yes
+		turmoil < 0.18
+	}
+}
+
+# State scope. Shared by the Byzantine administration/stability axes and their
+# player-facing counters so the two views cannot drift apart.
+ffpa_is_byz_commonwealth_core_state = {
+	OR = {
+		state_region = s:STATE_EASTERN_THRACE
+		state_region = s:STATE_ATTICA
+		state_region = s:STATE_THESSALIA
+		state_region = s:STATE_MACEDONIA
+		state_region = s:STATE_SKOPIA
+		state_region = s:STATE_WESTERN_THRACE
+		state_region = s:STATE_NORTHERN_THRACE
+		state_region = s:STATE_HUDAVENDIGAR
+		state_region = s:STATE_AYDIN
+		state_region = s:STATE_WEST_AEGEAN_ISLANDS
+		state_region = s:STATE_EAST_AEGEAN_ISLANDS
+		state_region = s:STATE_ALBANIA
+	}
+}
+
+ffpa_byz_commonwealth_administration_conditions = {
+	c:BYZ ?= this
+	government_legitimacy >= 55
+	bureaucracy >= 0
+	any_scope_state = {
+		count >= 9
+		ffpa_is_byz_commonwealth_core_state = yes
+		market_access >= 0.80
+	}
+}
+
+ffpa_byz_commonwealth_civic_conditions = {
+	c:BYZ ?= this
+	OR = {
+		has_law_or_variant = law_type:law_cultural_exclusion
+		has_law_or_variant = law_type:law_multicultural
+	}
+	OR = {
+		has_law_or_variant = law_type:law_freedom_of_conscience
+		has_law_or_variant = law_type:law_total_separation
+	}
+	calc_true_if = {
+		amount >= 4
+		cultural_acceptance_base = { target = cu:turkish value >= acceptance_status_3 }
+		cultural_acceptance_base = { target = cu:albanian value >= acceptance_status_3 }
+		cultural_acceptance_base = { target = cu:bulgarian value >= acceptance_status_3 }
+		cultural_acceptance_base = { target = cu:serb value >= acceptance_status_3 }
+		cultural_acceptance_base = { target = cu:armenian value >= acceptance_status_3 }
+	}
+}
+
+ffpa_byz_commonwealth_stability_conditions = {
+	c:BYZ ?= this
+	is_at_war = no
+	ffpa_has_no_insurrectionary_movement = yes
+	any_scope_state = {
+		count >= 7
+		ffpa_is_byz_commonwealth_core_state = yes
+		turmoil < 0.18
+	}
+}
+
+ffpa_imperial_regional_development_unlocked = {
+	OR = {
+		AND = {
+			c:TUR ?= this
+			has_variable = ffpa_tur_rebuild_anatolia_complete
+		}
+		AND = {
+			c:BYZ ?= this
+			has_variable = ffpa_byz_new_rome_complete
+		}
+	}
+}
+
+# Country scope. These seven construction projects make up the late
+# Byzantine western-integration event gate. The staggered form avoids a
+# variable counter and remains stable for old saves.
+ffpa_has_two_western_development_projects = {
+	OR = {
+		AND = {
+			has_variable = ffpa_southern_italian_harbors_complete
+			OR = {
+				has_variable = ffpa_italian_urban_axis_complete
+				has_variable = ffpa_adriatic_arsenals_complete
+				has_variable = ffpa_western_mediterranean_sea_lanes_complete
+				has_variable = ffpa_spanian_littoral_complete
+				has_variable = ffpa_mauretanian_coastal_road_complete
+				has_variable = ffpa_alexandria_sinai_axis_complete
+			}
+		}
+		AND = {
+			has_variable = ffpa_italian_urban_axis_complete
+			OR = {
+				has_variable = ffpa_adriatic_arsenals_complete
+				has_variable = ffpa_western_mediterranean_sea_lanes_complete
+				has_variable = ffpa_spanian_littoral_complete
+				has_variable = ffpa_mauretanian_coastal_road_complete
+				has_variable = ffpa_alexandria_sinai_axis_complete
+			}
+		}
+		AND = {
+			has_variable = ffpa_adriatic_arsenals_complete
+			OR = {
+				has_variable = ffpa_western_mediterranean_sea_lanes_complete
+				has_variable = ffpa_spanian_littoral_complete
+				has_variable = ffpa_mauretanian_coastal_road_complete
+				has_variable = ffpa_alexandria_sinai_axis_complete
+			}
+		}
+		AND = {
+			has_variable = ffpa_western_mediterranean_sea_lanes_complete
+			OR = {
+				has_variable = ffpa_spanian_littoral_complete
+				has_variable = ffpa_mauretanian_coastal_road_complete
+				has_variable = ffpa_alexandria_sinai_axis_complete
+			}
+		}
+		AND = {
+			has_variable = ffpa_spanian_littoral_complete
+			OR = {
+				has_variable = ffpa_mauretanian_coastal_road_complete
+				has_variable = ffpa_alexandria_sinai_axis_complete
+			}
+		}
+		AND = {
+			has_variable = ffpa_mauretanian_coastal_road_complete
+			has_variable = ffpa_alexandria_sinai_axis_complete
+		}
+	}
+}
+
+ffpa_has_italian_development_project = {
+	OR = {
+		has_variable = ffpa_southern_italian_harbors_complete
+		has_variable = ffpa_italian_urban_axis_complete
+		has_variable = ffpa_adriatic_arsenals_complete
+	}
+}
+
+ffpa_has_outer_western_development_project = {
+	OR = {
+		has_variable = ffpa_western_mediterranean_sea_lanes_complete
+		has_variable = ffpa_spanian_littoral_complete
+		has_variable = ffpa_mauretanian_coastal_road_complete
+		has_variable = ffpa_alexandria_sinai_axis_complete
+	}
+}
+
+ffpa_western_tax_settlement_ready = {
+	has_variable = ffpa_italian_urban_axis_complete
+	OR = {
+		has_variable = ffpa_spanian_littoral_complete
+		has_variable = ffpa_mauretanian_coastal_road_complete
+		has_variable = ffpa_alexandria_sinai_axis_complete
+	}
+}
+
+ffpa_western_civic_extension_ready = {
+	country_has_primary_culture = cu:ffpa_rhomaic
+	ffpa_has_italian_development_project = yes
+	ffpa_has_outer_western_development_project = yes
+}
+
+# State scope. This is the complete supplemental Justinianic claim pool plus
+# Dalmatia, which belongs to the Adriatic construction project.
+ffpa_is_byzantine_western_integration_state = {
+	OR = {
+		state_region = s:STATE_LOWER_EGYPT
+		state_region = s:STATE_MIDDLE_EGYPT
+		state_region = s:STATE_UPPER_EGYPT
+		state_region = s:STATE_MATRUH
+		state_region = s:STATE_SINAI
+		state_region = s:STATE_EGYPTIAN_DESERT
+		state_region = s:STATE_LIBYA
+		state_region = s:STATE_TRIPOLI
+		state_region = s:STATE_TUNISIA
+		state_region = s:STATE_CONSTANTINE
+		state_region = s:STATE_ALGIERS
+		state_region = s:STATE_AL_RIF
+		state_region = s:STATE_ISTRIA
+		state_region = s:STATE_DALMATIA
+		state_region = s:STATE_PIEDMONT
+		state_region = s:STATE_LOMBARDY
+		state_region = s:STATE_VENETIA
+		state_region = s:STATE_EMILIA
+		state_region = s:STATE_ROMAGNA
+		state_region = s:STATE_TUSCANY
+		state_region = s:STATE_UMBRIA
+		state_region = s:STATE_LAZIO
+		state_region = s:STATE_ABRUZZO
+		state_region = s:STATE_CAMPANIA
+		state_region = s:STATE_APULIA
+		state_region = s:STATE_CALABRIA
+		state_region = s:STATE_SICILY
+		state_region = s:STATE_SARDINIA
+		state_region = s:STATE_CORSICA
+		state_region = s:STATE_MALTA
+		state_region = s:STATE_BALEARIC_ISLANDS
+		state_region = s:STATE_LOWER_ANDALUSIA
+		state_region = s:STATE_UPPER_ANDALUSIA
+		state_region = s:STATE_VALENCIA
+		state_region = s:STATE_MURCIA
+	}
+}

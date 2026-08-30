@@ -1,0 +1,18 @@
+# Building-pruning predicates adapted from Cold War Era.
+# Buildings below 20% occupancy must also be unprofitable. Subsidies remain
+# an explicit opt-out; failed hiring is no longer required.
+ffpa_is_prunable_private_building = {
+	level > 0
+	occupancy < 0.20
+	weekly_profit <= 0
+	is_subsidized = no
+	private_ownership_fraction > 0.50
+}
+
+ffpa_is_prunable_government_building = {
+	level > 0
+	occupancy < 0.20
+	weekly_profit <= 0
+	is_subsidized = no
+	private_ownership_fraction <= 0.50
+}

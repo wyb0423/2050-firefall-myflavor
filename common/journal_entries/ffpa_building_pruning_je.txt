@@ -1,0 +1,9 @@
+je_ffpa_building_pruning = {
+	icon = "gfx/interface/icons/map_mode_icons/production.dds"
+	group = je_group_internal_affairs
+
+	scripted_button = ffpa_toggle_private_building_pruning_button
+	scripted_button = ffpa_toggle_government_building_pruning_button
+
+	weight = 99997
+}

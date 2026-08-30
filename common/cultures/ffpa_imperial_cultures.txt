@@ -1,0 +1,98 @@
+# These are civic imperial identities earned through long journal chains. They
+# are deliberately created without changing the traits of any Firefall culture.
+ffpa_ottoman = {
+	color = hsv{ 0.98 0.55 0.62 }
+	religion = sunni
+	heritage = heritage_anatolian
+	language = language_oghuz
+
+	obsessions = {
+		coffee
+		tea
+	}
+
+	traditions = {
+		tradition_rumelian
+	}
+
+	male_common_first_names = {
+		Abdulhamid Ahmet Ali Arif Cemal Cevdet Enver Fevzi Halil Hasan
+		Ibrahim Iskender Ismet Kemal Mahmut Mehmet Mithat Murat Mustafa Osman
+		Rauf Selim Suleyman Tevfik Yusuf Ziya
+	}
+	female_common_first_names = {
+		Ayse Emina Fatma Hatice Mihrengiz Nurefsun Sadika Samiye Saffet Sefika Seniye Zeliha
+	}
+	male_regal_first_names = {
+		Abdulaziz Abdulmejid Abdulhamid Ahmet Bayezid Celaleddin Kemaleddin Murad Mehmet
+		Nizameddin Nureddin Osman Reshad Suleyman Vahideddin
+	}
+	female_regal_first_names = {
+		Atiye Cemile Edadil Emine Fatma Mihrimah Pertevniyal Saliha
+	}
+	noble_last_names = {
+		Arpazli Balyan Benderli Cengic Karaosmanoglu Koprulu Osmanoglu Shakir
+	}
+	common_last_names = {
+		Akbas Burhan Cakin Eczacibashi Engineri Ercman Hasagasi Koc Kosalay Manas
+		Mulos Oezal Sabanci Taymur Yalaz Bey Pasha
+	}
+	regal_last_names = {
+		Osmanoglu
+	}
+
+	ethnicities = {
+		1 = arab
+		2 = north_caucasian
+		1 = slavic
+	}
+	graphics = arabic
+}
+
+ffpa_rhomaic = {
+	color = hsv{ 0.82 0.50 0.62 }
+	religion = orthodox
+	heritage = heritage_greek
+	language = language_greek
+
+	obsessions = {
+		groceries
+		wine
+	}
+
+	# Latin preserves the inherited Greek cultural sphere; Rumelian makes the
+	# civic identity a modest natural bridge to Turkish and Albanian cultures.
+	traditions = {
+		latin_cultural_sphere
+		tradition_rumelian
+	}
+
+	male_common_first_names = {
+		Alexandros Alexios Andreas Antonios Charilaos Christos Dimitrios Eleftherios
+		Evangelos Georgios Ioannis Konstantinos Leonidas Markos Nikolaos Odysseas
+		Panagiotis Pavlos Spyridon Stephanos Theodoros Vasilios
+	}
+	female_common_first_names = {
+		Aikaterini Angeliki Anna Anastasia Alexandra Despina Eleni Eleftheria Eirini
+		Kalliope Konstantina Maria Photini Sofia Theodora Vassiliki
+	}
+	male_regal_first_names = {
+		Alexandros Alexios Basileios Georgios Ioannis Konstantinos Nikolaos Pavlos Theodoros
+	}
+	female_regal_first_names = {
+		Alexandra Alexia Eleni Eirini Konstantina Maria Olympia Sofia Theodora
+	}
+	noble_last_names = {
+		Angelos Argyropoulos Botsaris Kapodistrias Kolokotronis Komnenos Laskaris
+		Mavrokordatos Palaiologos Soutsos Theotokis Ypsilantis
+	}
+	common_last_names = {
+		Andreou Athanasiou Dimitriou Georgiadis Ioannidis Karagiannis Konstantinou
+		Nikolaidis Papadopoulos Rallis Theodoropoulos Vasilakos Xenakis
+	}
+
+	ethnicities = {
+		1 = slavic
+	}
+	graphics = balkan
+}

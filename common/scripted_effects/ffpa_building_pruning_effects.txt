@@ -1,0 +1,220 @@
+# Cold War Era uses one state/removal statement per building type because
+# remove_building is a state effect and requires a concrete building type.
+# Parameterizing that repeated statement keeps the compatibility list auditable.
+ffpa_prune_private_building_type = {
+	every_scope_state = {
+		if = {
+			limit = {
+				any_scope_building = {
+					is_building_type = $BUILDING$
+					ffpa_is_prunable_private_building = yes
+				}
+			}
+			ROOT = { set_variable = ffpa_private_building_pruned_this_run }
+			remove_building = $BUILDING$
+		}
+	}
+}
+
+ffpa_prune_government_building_type = {
+	every_scope_state = {
+		if = {
+			limit = {
+				any_scope_building = {
+					is_building_type = $BUILDING$
+					ffpa_is_prunable_government_building = yes
+				}
+			}
+			ROOT = { set_variable = ffpa_government_building_pruned_this_run }
+			remove_building = $BUILDING$
+		}
+	}
+}
+
+# Eligible vanilla economic buildings. Automatic/special buildings and critical
+# local infrastructure are intentionally absent; see BUILDING_PRUNING_PORT.md.
+ffpa_prune_private_buildings = {
+	remove_variable = ffpa_private_building_pruned_this_run
+
+	# Manufacturing
+	ffpa_prune_private_building_type = { BUILDING = building_food_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_textile_mill }
+	ffpa_prune_private_building_type = { BUILDING = building_furniture_manufactory }
+	ffpa_prune_private_building_type = { BUILDING = building_glassworks }
+	ffpa_prune_private_building_type = { BUILDING = building_tooling_workshop }
+	ffpa_prune_private_building_type = { BUILDING = building_paper_mill }
+	ffpa_prune_private_building_type = { BUILDING = building_chemical_plant }
+	ffpa_prune_private_building_type = { BUILDING = building_explosives_factory }
+	ffpa_prune_private_building_type = { BUILDING = building_synthetics_plant }
+	ffpa_prune_private_building_type = { BUILDING = building_steel_mill }
+	ffpa_prune_private_building_type = { BUILDING = building_motor_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_shipyard }
+	ffpa_prune_private_building_type = { BUILDING = building_automotive_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_electrics_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_arms_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_artillery_foundry }
+	ffpa_prune_private_building_type = { BUILDING = building_munition_plant }
+
+	# Agriculture and plantations
+	ffpa_prune_private_building_type = { BUILDING = building_rye_farm }
+	ffpa_prune_private_building_type = { BUILDING = building_wheat_farm }
+	ffpa_prune_private_building_type = { BUILDING = building_rice_farm }
+	ffpa_prune_private_building_type = { BUILDING = building_maize_farm }
+	ffpa_prune_private_building_type = { BUILDING = building_millet_farm }
+	ffpa_prune_private_building_type = { BUILDING = building_livestock_ranch }
+	ffpa_prune_private_building_type = { BUILDING = building_vineyard }
+	ffpa_prune_private_building_type = { BUILDING = building_coffee_plantation }
+	ffpa_prune_private_building_type = { BUILDING = building_cotton_plantation }
+	ffpa_prune_private_building_type = { BUILDING = building_dye_plantation }
+	ffpa_prune_private_building_type = { BUILDING = building_opium_plantation }
+	ffpa_prune_private_building_type = { BUILDING = building_tea_plantation }
+	ffpa_prune_private_building_type = { BUILDING = building_tobacco_plantation }
+	ffpa_prune_private_building_type = { BUILDING = building_sugar_plantation }
+	ffpa_prune_private_building_type = { BUILDING = building_banana_plantation }
+	ffpa_prune_private_building_type = { BUILDING = building_silk_plantation }
+
+	# Extraction and other ordinary economic buildings
+	ffpa_prune_private_building_type = { BUILDING = building_coal_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_iron_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_lead_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_sulfur_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_gold_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_logging_camp }
+	ffpa_prune_private_building_type = { BUILDING = building_rubber_plantation }
+	ffpa_prune_private_building_type = { BUILDING = building_fishing_wharf }
+	ffpa_prune_private_building_type = { BUILDING = building_whaling_station }
+	ffpa_prune_private_building_type = { BUILDING = building_oil_rig }
+	ffpa_prune_private_building_type = { BUILDING = building_art_academy }
+
+	# Tech & Res: digital and industrial buildings
+	ffpa_prune_private_building_type = { BUILDING = building_office }
+	ffpa_prune_private_building_type = { BUILDING = building_software_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_interactive_media_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_datacenter_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_ecommerce_logistics }
+	ffpa_prune_private_building_type = { BUILDING = building_alloys_plant }
+	ffpa_prune_private_building_type = { BUILDING = building_electronics_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_battery_plant }
+	ffpa_prune_private_building_type = { BUILDING = building_processors_foundry }
+	ffpa_prune_private_building_type = { BUILDING = building_computer_assembly_plant }
+	ffpa_prune_private_building_type = { BUILDING = building_robotics_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_aircraft_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_pharmaceuticals_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_consumer_electronics_industry }
+
+	# Tech & Res: resources, agriculture and optional Morgenroete integrations
+	ffpa_prune_private_building_type = { BUILDING = building_water_plant }
+	ffpa_prune_private_building_type = { BUILDING = building_bauxite_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_copper_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_commonores_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_advancedores_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_natural_gas_rig }
+	ffpa_prune_private_building_type = { BUILDING = building_rare_earths_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_hydroponic }
+	ffpa_prune_private_building_type = { BUILDING = building_uranium_mine }
+	ffpa_prune_private_building_type = { BUILDING = building_elgar_opera }
+	ffpa_prune_private_building_type = { BUILDING = building_manzoni_publishing_industry }
+	ffpa_prune_private_building_type = { BUILDING = building_instrument_workshops }
+	ffpa_prune_private_building_type = { BUILDING = building_mendelejew_hydrogenation_plants }
+	ffpa_prune_private_building_type = { BUILDING = building_mendelejew_synthetic_rubber_factory }
+
+	if = {
+		limit = { has_variable = ffpa_private_building_pruned_this_run }
+		post_notification = ffpa_private_buildings_pruned_notification
+		remove_variable = ffpa_private_building_pruned_this_run
+	}
+}
+
+# The government pass deliberately shares the exact same coverage list. Only
+# the ownership predicate changes, preventing list drift between both switches.
+ffpa_prune_government_buildings = {
+	remove_variable = ffpa_government_building_pruned_this_run
+
+	# Manufacturing
+	ffpa_prune_government_building_type = { BUILDING = building_food_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_textile_mill }
+	ffpa_prune_government_building_type = { BUILDING = building_furniture_manufactory }
+	ffpa_prune_government_building_type = { BUILDING = building_glassworks }
+	ffpa_prune_government_building_type = { BUILDING = building_tooling_workshop }
+	ffpa_prune_government_building_type = { BUILDING = building_paper_mill }
+	ffpa_prune_government_building_type = { BUILDING = building_chemical_plant }
+	ffpa_prune_government_building_type = { BUILDING = building_explosives_factory }
+	ffpa_prune_government_building_type = { BUILDING = building_synthetics_plant }
+	ffpa_prune_government_building_type = { BUILDING = building_steel_mill }
+	ffpa_prune_government_building_type = { BUILDING = building_motor_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_shipyard }
+	ffpa_prune_government_building_type = { BUILDING = building_automotive_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_electrics_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_arms_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_artillery_foundry }
+	ffpa_prune_government_building_type = { BUILDING = building_munition_plant }
+
+	# Agriculture and plantations
+	ffpa_prune_government_building_type = { BUILDING = building_rye_farm }
+	ffpa_prune_government_building_type = { BUILDING = building_wheat_farm }
+	ffpa_prune_government_building_type = { BUILDING = building_rice_farm }
+	ffpa_prune_government_building_type = { BUILDING = building_maize_farm }
+	ffpa_prune_government_building_type = { BUILDING = building_millet_farm }
+	ffpa_prune_government_building_type = { BUILDING = building_livestock_ranch }
+	ffpa_prune_government_building_type = { BUILDING = building_vineyard }
+	ffpa_prune_government_building_type = { BUILDING = building_coffee_plantation }
+	ffpa_prune_government_building_type = { BUILDING = building_cotton_plantation }
+	ffpa_prune_government_building_type = { BUILDING = building_dye_plantation }
+	ffpa_prune_government_building_type = { BUILDING = building_opium_plantation }
+	ffpa_prune_government_building_type = { BUILDING = building_tea_plantation }
+	ffpa_prune_government_building_type = { BUILDING = building_tobacco_plantation }
+	ffpa_prune_government_building_type = { BUILDING = building_sugar_plantation }
+	ffpa_prune_government_building_type = { BUILDING = building_banana_plantation }
+	ffpa_prune_government_building_type = { BUILDING = building_silk_plantation }
+
+	# Extraction and other ordinary economic buildings
+	ffpa_prune_government_building_type = { BUILDING = building_coal_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_iron_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_lead_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_sulfur_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_gold_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_logging_camp }
+	ffpa_prune_government_building_type = { BUILDING = building_rubber_plantation }
+	ffpa_prune_government_building_type = { BUILDING = building_fishing_wharf }
+	ffpa_prune_government_building_type = { BUILDING = building_whaling_station }
+	ffpa_prune_government_building_type = { BUILDING = building_oil_rig }
+	ffpa_prune_government_building_type = { BUILDING = building_art_academy }
+
+	# Tech & Res: digital and industrial buildings
+	ffpa_prune_government_building_type = { BUILDING = building_office }
+	ffpa_prune_government_building_type = { BUILDING = building_software_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_interactive_media_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_datacenter_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_ecommerce_logistics }
+	ffpa_prune_government_building_type = { BUILDING = building_alloys_plant }
+	ffpa_prune_government_building_type = { BUILDING = building_electronics_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_battery_plant }
+	ffpa_prune_government_building_type = { BUILDING = building_processors_foundry }
+	ffpa_prune_government_building_type = { BUILDING = building_computer_assembly_plant }
+	ffpa_prune_government_building_type = { BUILDING = building_robotics_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_aircraft_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_pharmaceuticals_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_consumer_electronics_industry }
+
+	# Tech & Res: resources, agriculture and optional Morgenroete integrations
+	ffpa_prune_government_building_type = { BUILDING = building_water_plant }
+	ffpa_prune_government_building_type = { BUILDING = building_bauxite_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_copper_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_commonores_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_advancedores_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_natural_gas_rig }
+	ffpa_prune_government_building_type = { BUILDING = building_rare_earths_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_hydroponic }
+	ffpa_prune_government_building_type = { BUILDING = building_uranium_mine }
+	ffpa_prune_government_building_type = { BUILDING = building_elgar_opera }
+	ffpa_prune_government_building_type = { BUILDING = building_manzoni_publishing_industry }
+	ffpa_prune_government_building_type = { BUILDING = building_instrument_workshops }
+	ffpa_prune_government_building_type = { BUILDING = building_mendelejew_hydrogenation_plants }
+	ffpa_prune_government_building_type = { BUILDING = building_mendelejew_synthetic_rubber_factory }
+
+	if = {
+		limit = { has_variable = ffpa_government_building_pruned_this_run }
+		post_notification = ffpa_government_buildings_pruned_notification
+		remove_variable = ffpa_government_building_pruned_this_run
+	}
+}

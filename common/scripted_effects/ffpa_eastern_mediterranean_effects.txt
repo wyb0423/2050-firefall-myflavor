@@ -1,0 +1,733 @@
+# Root = BYZ. Adds the Justinianic territories outside the vanilla
+# Balkans/Near East claim pool. The whitelist is intentionally additive:
+# no existing claim is removed, including claims inherited from GRE.
+ffpa_grant_byzantine_justinianic_supplemental_claims = {
+	every_state_region = {
+		limit = {
+			OR = {
+				# Egypt and the African coast
+				this = s:STATE_LOWER_EGYPT
+				this = s:STATE_MIDDLE_EGYPT
+				this = s:STATE_UPPER_EGYPT
+				this = s:STATE_MATRUH
+				this = s:STATE_SINAI
+				this = s:STATE_EGYPTIAN_DESERT
+				this = s:STATE_LIBYA
+				this = s:STATE_TRIPOLI
+				this = s:STATE_TUNISIA
+				this = s:STATE_CONSTANTINE
+				this = s:STATE_ALGIERS
+				this = s:STATE_AL_RIF
+
+				# Reconquered Italy and the western Mediterranean islands
+				this = s:STATE_ISTRIA
+				this = s:STATE_PIEDMONT
+				this = s:STATE_LOMBARDY
+				this = s:STATE_VENETIA
+				this = s:STATE_EMILIA
+				this = s:STATE_ROMAGNA
+				this = s:STATE_TUSCANY
+				this = s:STATE_UMBRIA
+				this = s:STATE_LAZIO
+				this = s:STATE_ABRUZZO
+				this = s:STATE_CAMPANIA
+				this = s:STATE_APULIA
+				this = s:STATE_CALABRIA
+				this = s:STATE_SICILY
+				this = s:STATE_SARDINIA
+				this = s:STATE_CORSICA
+				this = s:STATE_MALTA
+
+				# Justinianic Spania; whole state regions stand in for coastal rule
+				this = s:STATE_BALEARIC_ISLANDS
+				this = s:STATE_LOWER_ANDALUSIA
+				this = s:STATE_UPPER_ANDALUSIA
+				this = s:STATE_VALENCIA
+				this = s:STATE_MURCIA
+			}
+			any_scope_state = {
+				NOT = { owner = ROOT }
+				NOT = { has_claim_by = ROOT }
+			}
+		}
+		add_claim = ROOT
+	}
+}
+
+# Root = BYZ. Explicit replacement for the over-broad vanilla strategic-region
+# claim filters. These are the defensible Balkan and eastern territories in the
+# Justinianic restoration set; Central Europe and lower Mesopotamia are omitted.
+ffpa_grant_byzantine_justinianic_core_claims_v2 = {
+	every_state_region = {
+		limit = {
+			OR = {
+				# Balkans south of the Danube and the western Illyrian coast
+				this = s:STATE_SLOVENIA
+				this = s:STATE_CROATIA
+				this = s:STATE_SLAVONIA
+				this = s:STATE_DALMATIA
+				this = s:STATE_BOSNIA
+				this = s:STATE_MONTENEGRO
+				this = s:STATE_ALBANIA
+				this = s:STATE_SKOPIA
+				this = s:STATE_KOSOVO
+				this = s:STATE_NORTHERN_THRACE
+				this = s:STATE_BULGARIA
+				this = s:STATE_EASTERN_SERBIA
+				this = s:STATE_WESTERN_SERBIA
+				this = s:STATE_PELOPONNESE
+				this = s:STATE_IONIAN_ISLANDS
+				this = s:STATE_ATTICA
+				this = s:STATE_THESSALIA
+				this = s:STATE_MACEDONIA
+				this = s:STATE_WESTERN_THRACE
+				this = s:STATE_CRETE
+				this = s:STATE_WEST_AEGEAN_ISLANDS
+				this = s:STATE_DOBRUDJA
+				this = s:STATE_EASTERN_THRACE
+
+				# Anatolia, the Levant, Cyprus, and the Roman Euphrates frontier
+				this = s:STATE_HUDAVENDIGAR
+				this = s:STATE_AYDIN
+				this = s:STATE_KONYA
+				this = s:STATE_ANKARA
+				this = s:STATE_ADANA
+				this = s:STATE_KASTAMONU
+				this = s:STATE_CYPRUS
+				this = s:STATE_DIYARBAKIR
+				this = s:STATE_TRABZON
+				this = s:STATE_EAST_AEGEAN_ISLANDS
+				this = s:STATE_ERZURUM
+				this = s:STATE_KARS
+				this = s:STATE_TRANSJORDAN
+				this = s:STATE_PALESTINE
+				this = s:STATE_LEBANON
+				this = s:STATE_SYRIA
+				this = s:STATE_ALEPPO
+				this = s:STATE_DEIR_EZ_ZOR
+			}
+			any_scope_state = {
+				NOT = { owner = ROOT }
+				NOT = { has_claim_by = ROOT }
+			}
+		}
+		add_claim = ROOT
+	}
+}
+
+# Root = BYZ. Single interface used by formation.3, formation-time ensure, and
+# old-save migration so the three entry paths cannot drift apart again.
+ffpa_grant_byzantine_justinianic_claims_v2 = {
+	ffpa_grant_byzantine_justinianic_core_claims_v2 = yes
+	ffpa_grant_byzantine_justinianic_supplemental_claims = yes
+}
+
+# Country scope. These packages replace only a known vanilla or Tech & Res
+# ideology. If another mod has already replaced that slot, its result wins and
+# the adapter records the package as handled without appending another one.
+ffpa_apply_tur_formation_ideologies_v1 = {
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			NOT = { has_variable = ffpa_tur_formation_ideologies_v1 }
+		}
+
+		ig:ig_armed_forces = {
+			if = {
+				limit = { has_ideology = ideology:ideology_jingoist }
+				remove_ideology = ideology_jingoist
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_ffpa_anatolian_reconstructionism } }
+					add_ideology = ideology_ffpa_anatolian_reconstructionism
+				}
+			}
+		}
+
+		ig:ig_industrialists = {
+			if = {
+				limit = {
+					OR = {
+						has_ideology = ideology:ideology_laissez_faire
+						has_ideology = ideology:ideology_neoliberism
+					}
+				}
+				if = {
+					limit = { has_ideology = ideology:ideology_laissez_faire }
+					remove_ideology = ideology_laissez_faire
+				}
+				if = {
+					limit = { has_ideology = ideology:ideology_neoliberism }
+					remove_ideology = ideology_neoliberism
+				}
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_ffpa_tur_state_developmentalism } }
+					add_ideology = ideology_ffpa_tur_state_developmentalism
+				}
+			}
+		}
+
+		ig:ig_petty_bourgeoisie = {
+			if = {
+				limit = { has_ideology = ideology:ideology_reactionary }
+				remove_ideology = ideology_reactionary
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_ffpa_anatolian_civic_statism } }
+					add_ideology = ideology_ffpa_anatolian_civic_statism
+				}
+			}
+		}
+
+		set_variable = ffpa_tur_formation_ideologies_v1
+	}
+}
+
+ffpa_apply_byz_formation_ideologies_v1 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_byz_formation_ideologies_v1 }
+		}
+
+		ig:ig_armed_forces = {
+			if = {
+				limit = { has_ideology = ideology:ideology_jingoist }
+				remove_ideology = ideology_jingoist
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_ffpa_roman_restorationism } }
+					add_ideology = ideology_ffpa_roman_restorationism
+				}
+			}
+		}
+
+		ig:ig_industrialists = {
+			if = {
+				limit = {
+					OR = {
+						has_ideology = ideology:ideology_laissez_faire
+						has_ideology = ideology:ideology_neoliberism
+					}
+				}
+				if = {
+					limit = { has_ideology = ideology:ideology_laissez_faire }
+					remove_ideology = ideology_laissez_faire
+				}
+				if = {
+					limit = { has_ideology = ideology:ideology_neoliberism }
+					remove_ideology = ideology_neoliberism
+				}
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_ffpa_mediterranean_developmentalism } }
+					add_ideology = ideology_ffpa_mediterranean_developmentalism
+				}
+			}
+		}
+
+		ig:ig_petty_bourgeoisie = {
+			if = {
+				limit = { has_ideology = ideology:ideology_reactionary }
+				remove_ideology = ideology_reactionary
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_ffpa_new_rome_civicism } }
+					add_ideology = ideology_ffpa_new_rome_civicism
+				}
+			}
+		}
+
+		set_variable = ffpa_byz_formation_ideologies_v1
+	}
+}
+
+# Route-specific replacements. These are called by the choice/completion
+# events and by a guarded old-save migration when the route can be proven.
+ffpa_apply_tur_provincial_compact_v1 = {
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			NOT = { has_variable = ffpa_tur_provincial_compact_ideology_v1 }
+		}
+		ig:ig_landowners = {
+			if = {
+				limit = { has_ideology = ideology:ideology_paternalistic }
+				remove_ideology = ideology_paternalistic
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_ffpa_provincial_compact } }
+					add_ideology = ideology_ffpa_provincial_compact
+				}
+			}
+		}
+		set_variable = ffpa_tur_provincial_compact_ideology_v1
+	}
+}
+
+ffpa_apply_tur_ottoman_constitutionalism_v1 = {
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			NOT = { has_variable = ffpa_tur_ottoman_constitutionalism_v1 }
+		}
+		ig:ig_intelligentsia = {
+			if = {
+				limit = { has_ideology = ideology:ideology_republican }
+				remove_ideology = ideology_republican
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_ffpa_ottoman_constitutionalism } }
+					add_ideology = ideology_ffpa_ottoman_constitutionalism
+				}
+			}
+		}
+		set_variable = ffpa_tur_ottoman_constitutionalism_v1
+	}
+}
+
+ffpa_apply_byz_imperial_symphonia_v1 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_byz_imperial_symphonia_v1 }
+		}
+		ig:ig_devout = {
+			if = {
+				limit = { has_ideology = ideology:ideology_moralist }
+				remove_ideology = ideology_moralist
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_ffpa_imperial_symphonia } }
+					add_ideology = ideology_ffpa_imperial_symphonia
+				}
+			}
+		}
+		set_variable = ffpa_byz_imperial_symphonia_v1
+	}
+}
+
+ffpa_apply_byz_rhomaic_civic_universalism_v1 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_byz_rhomaic_civic_universalism_v1 }
+		}
+		ig:ig_intelligentsia = {
+			if = {
+				limit = { has_ideology = ideology:ideology_republican }
+				remove_ideology = ideology_republican
+				if = {
+					limit = { NOT = { has_ideology = ideology:ideology_ffpa_rhomaic_civic_universalism } }
+					add_ideology = ideology_ffpa_rhomaic_civic_universalism
+				}
+			}
+		}
+		set_variable = ffpa_byz_rhomaic_civic_universalism_v1
+	}
+}
+
+# Root = GRE. Firefall successor countries can form Greece while retaining a
+# Sunni runtime state religion. Normalize the Greek identity once, without
+# overriding State Atheism; leaving State Atheism later restores the Orthodox
+# religion declared by GRE's country definition.
+ffpa_ensure_greek_formation_religion_v1 = {
+	if = {
+		limit = {
+			c:GRE ?= ROOT
+			NOT = { has_variable = ffpa_greek_state_religion_normalized_v1 }
+		}
+
+		if = {
+			limit = {
+				NOT = { has_law_or_variant = law_type:law_state_atheism }
+				NOT = { country_has_state_religion = rel:orthodox }
+			}
+			set_state_religion = rel:orthodox
+			state_religion_switch_effect = yes
+		}
+
+		set_variable = ffpa_greek_state_religion_normalized_v1
+	}
+}
+
+# Root = BYZ. Safe for both formation-time execution and old-save repair.
+ffpa_ensure_byzantine_formation_effects = {
+	# BYZ's static country definition does not replace the runtime religion
+	# inherited through GRE. Keep this migration separate from the older
+	# formation-effects key so existing BYZ saves receive the repair once.
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_byzantine_state_religion_normalized_v1 }
+		}
+
+		if = {
+			limit = {
+				NOT = { has_law_or_variant = law_type:law_state_atheism }
+				NOT = { country_has_state_religion = rel:orthodox }
+			}
+			set_state_religion = rel:orthodox
+			state_religion_switch_effect = yes
+		}
+
+		set_variable = ffpa_byzantine_state_religion_normalized_v1
+	}
+
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_byzantine_formation_incorporation_v2 }
+		}
+
+		every_owned_state = {
+			limit = {
+				is_incorporated = no
+				OR = {
+					state_region = s:STATE_EASTERN_THRACE
+					state_region = s:STATE_ATTICA
+					state_region = s:STATE_THESSALIA
+					state_region = s:STATE_MACEDONIA
+					state_region = s:STATE_SKOPIA
+					state_region = s:STATE_WESTERN_THRACE
+					state_region = s:STATE_NORTHERN_THRACE
+					state_region = s:STATE_HUDAVENDIGAR
+					state_region = s:STATE_AYDIN
+					state_region = s:STATE_WEST_AEGEAN_ISLANDS
+					state_region = s:STATE_EAST_AEGEAN_ISLANDS
+					state_region = s:STATE_ALBANIA
+				}
+			}
+			set_state_type = incorporated
+		}
+
+		set_variable = ffpa_byzantine_formation_effects_v1
+		set_variable = ffpa_byzantine_formation_incorporation_v2
+	}
+
+	# v2 supersedes the former supplemental-only marker. Existing claims are
+	# preserved; this migration only grants missing states from the new whitelist.
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_byzantine_justinianic_claims_v2 }
+		}
+		ffpa_grant_byzantine_justinianic_claims_v2 = yes
+		set_variable = ffpa_byzantine_justinianic_claims_v1
+		set_variable = ffpa_byzantine_justinianic_claims_v2
+	}
+
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_byzantine_flavor_names_v2 }
+		}
+		ig:ig_devout = { set_interest_group_name = ffpa_ig_byz_holy_synod }
+		ig:ig_armed_forces = { set_interest_group_name = ffpa_ig_byz_roman_army }
+		ig:ig_intelligentsia = { set_interest_group_name = ffpa_ig_byz_new_rome_society }
+		set_variable = ffpa_byzantine_flavor_names_v2
+	}
+}
+
+# Root = TUR. Applied when the inclusive Ottoman political identity is earned;
+# vanilla Ottoman landowner and devout names remain untouched.
+ffpa_apply_ottoman_interest_group_names = {
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			country_has_primary_culture = cu:ffpa_ottoman
+			NOT = { has_variable = ffpa_ottoman_flavor_names_v2 }
+		}
+		ig:ig_armed_forces = { set_interest_group_name = ffpa_ig_tur_imperial_general_staff }
+		ig:ig_intelligentsia = { set_interest_group_name = ffpa_ig_tur_ottoman_reformers }
+		set_variable = ffpa_ottoman_flavor_names_v2
+	}
+}
+
+# Country scope. Called only when a relevant construction journal completes,
+# when Rhomaic identity is adopted, or by the one-shot old-save migration.
+# Events are staggered to avoid presenting several popups on the same day.
+ffpa_check_western_integration_events = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			ffpa_has_two_western_development_projects = yes
+			NOT = { has_variable = ffpa_byz_mediterranean_congress_scheduled_v1 }
+			NOT = { has_variable = ffpa_byz_mediterranean_congress_fired_v1 }
+		}
+		set_variable = ffpa_byz_mediterranean_congress_scheduled_v1
+		trigger_event = { id = ffpa_flavor.30 days = 7 }
+	}
+
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			ffpa_western_tax_settlement_ready = yes
+			NOT = { has_variable = ffpa_byz_western_cadastre_scheduled_v1 }
+			NOT = { has_variable = ffpa_byz_western_cadastre_fired_v1 }
+		}
+		set_variable = ffpa_byz_western_cadastre_scheduled_v1
+		trigger_event = { id = ffpa_flavor.31 days = 21 }
+	}
+
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			ffpa_western_civic_extension_ready = yes
+			NOT = { has_variable = ffpa_byz_western_civic_extension_scheduled_v1 }
+			NOT = { has_variable = ffpa_byz_western_civic_extension_fired_v1 }
+		}
+		set_variable = ffpa_byz_western_civic_extension_scheduled_v1
+		trigger_event = { id = ffpa_flavor.32 days = 35 }
+	}
+}
+
+# Country scope. The v2 country variables remain the authoritative save-state;
+# these effects only mirror them into the native scripted bars used by the UI.
+ffpa_sync_byz_commonwealth_progress_bars = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth
+			has_variable = ffpa_byz_commonwealth_administration_v2
+			has_variable = ffpa_byz_commonwealth_civic_v2
+			has_variable = ffpa_byz_commonwealth_stability_v2
+		}
+		je:je_ffpa_byz_rhomaic_commonwealth ?= {
+			set_bar_progress = {
+				value = root.var:ffpa_byz_commonwealth_administration_v2
+				name = ffpa_byz_commonwealth_administration_bar
+			}
+			set_bar_progress = {
+				value = root.var:ffpa_byz_commonwealth_civic_v2
+				name = ffpa_byz_commonwealth_civic_bar
+			}
+			set_bar_progress = {
+				value = root.var:ffpa_byz_commonwealth_stability_v2
+				name = ffpa_byz_commonwealth_stability_bar
+			}
+		}
+	}
+}
+
+ffpa_sync_tur_commonwealth_progress_bars = {
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			has_journal_entry = je_ffpa_tur_ottoman_commonwealth
+			has_variable = ffpa_tur_commonwealth_administration_v2
+			has_variable = ffpa_tur_commonwealth_civic_v2
+			has_variable = ffpa_tur_commonwealth_stability_v2
+		}
+		je:je_ffpa_tur_ottoman_commonwealth ?= {
+			set_bar_progress = {
+				value = root.var:ffpa_tur_commonwealth_administration_v2
+				name = ffpa_tur_commonwealth_administration_bar
+			}
+			set_bar_progress = {
+				value = root.var:ffpa_tur_commonwealth_civic_v2
+				name = ffpa_tur_commonwealth_civic_bar
+			}
+			set_bar_progress = {
+				value = root.var:ffpa_tur_commonwealth_stability_v2
+				name = ffpa_tur_commonwealth_stability_bar
+			}
+		}
+	}
+}
+
+# Country scope. Idempotent progress initialization/migration for the two
+# commonwealth journals. Existing v2 axes always win; a missing axis inherits
+# the legacy single-track value when available and otherwise starts at zero.
+ffpa_ensure_byz_commonwealth_progress_v3 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth
+		}
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_commonwealth_administration_v2 } }
+			if = {
+				limit = { has_variable = ffpa_byz_rhomaic_commonwealth_months }
+				set_variable = { name = ffpa_byz_commonwealth_administration_v2 value = var:ffpa_byz_rhomaic_commonwealth_months }
+			}
+			else = { set_variable = { name = ffpa_byz_commonwealth_administration_v2 value = 0 } }
+		}
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_commonwealth_civic_v2 } }
+			if = {
+				limit = { has_variable = ffpa_byz_rhomaic_commonwealth_months }
+				set_variable = { name = ffpa_byz_commonwealth_civic_v2 value = var:ffpa_byz_rhomaic_commonwealth_months }
+			}
+			else = { set_variable = { name = ffpa_byz_commonwealth_civic_v2 value = 0 } }
+		}
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_commonwealth_stability_v2 } }
+			if = {
+				limit = { has_variable = ffpa_byz_rhomaic_commonwealth_months }
+				set_variable = { name = ffpa_byz_commonwealth_stability_v2 value = var:ffpa_byz_rhomaic_commonwealth_months }
+			}
+			else = { set_variable = { name = ffpa_byz_commonwealth_stability_v2 value = 0 } }
+		}
+		clamp_variable = { name = ffpa_byz_commonwealth_administration_v2 min = 0 max = 60 }
+		clamp_variable = { name = ffpa_byz_commonwealth_civic_v2 min = 0 max = 60 }
+		clamp_variable = { name = ffpa_byz_commonwealth_stability_v2 min = 0 max = 60 }
+		remove_variable = ffpa_byz_rhomaic_commonwealth_months
+		set_variable = ffpa_byz_commonwealth_progress_migrated_v2
+		set_variable = ffpa_byz_commonwealth_progress_migrated_v3
+		ffpa_sync_byz_commonwealth_progress_bars = yes
+	}
+}
+
+ffpa_ensure_tur_commonwealth_progress_v3 = {
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			has_journal_entry = je_ffpa_tur_ottoman_commonwealth
+		}
+		if = {
+			limit = { NOT = { has_variable = ffpa_tur_commonwealth_administration_v2 } }
+			if = {
+				limit = { has_variable = ffpa_tur_ottoman_commonwealth_months }
+				set_variable = { name = ffpa_tur_commonwealth_administration_v2 value = var:ffpa_tur_ottoman_commonwealth_months }
+			}
+			else = { set_variable = { name = ffpa_tur_commonwealth_administration_v2 value = 0 } }
+		}
+		if = {
+			limit = { NOT = { has_variable = ffpa_tur_commonwealth_civic_v2 } }
+			if = {
+				limit = { has_variable = ffpa_tur_ottoman_commonwealth_months }
+				set_variable = { name = ffpa_tur_commonwealth_civic_v2 value = var:ffpa_tur_ottoman_commonwealth_months }
+			}
+			else = { set_variable = { name = ffpa_tur_commonwealth_civic_v2 value = 0 } }
+		}
+		if = {
+			limit = { NOT = { has_variable = ffpa_tur_commonwealth_stability_v2 } }
+			if = {
+				limit = { has_variable = ffpa_tur_ottoman_commonwealth_months }
+				set_variable = { name = ffpa_tur_commonwealth_stability_v2 value = var:ffpa_tur_ottoman_commonwealth_months }
+			}
+			else = { set_variable = { name = ffpa_tur_commonwealth_stability_v2 value = 0 } }
+		}
+		clamp_variable = { name = ffpa_tur_commonwealth_administration_v2 min = 0 max = 60 }
+		clamp_variable = { name = ffpa_tur_commonwealth_civic_v2 min = 0 max = 60 }
+		clamp_variable = { name = ffpa_tur_commonwealth_stability_v2 min = 0 max = 60 }
+		remove_variable = ffpa_tur_ottoman_commonwealth_months
+		set_variable = ffpa_tur_commonwealth_progress_migrated_v2
+		set_variable = ffpa_tur_commonwealth_progress_migrated_v3
+		ffpa_sync_tur_commonwealth_progress_bars = yes
+	}
+}
+
+# Guarded repair and scheduling for saves made with earlier Eastern
+# Mediterranean implementations. The caller is a country monthly pulse;
+# each migration branch has its own one-shot version variable.
+ffpa_ensure_eastern_mediterranean_v2 = {
+	if = {
+		limit = { c:GRE ?= ROOT }
+		ffpa_ensure_greek_formation_religion_v1 = yes
+	}
+
+	if = {
+		limit = { c:BYZ ?= ROOT }
+		ffpa_ensure_byzantine_formation_effects = yes
+		ffpa_ensure_byz_commonwealth_progress_v3 = yes
+
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_formation_ideologies_v1 } }
+			ffpa_apply_byz_formation_ideologies_v1 = yes
+		}
+
+		if = {
+			limit = {
+				NOT = { has_variable = ffpa_byz_imperial_symphonia_v1 }
+				OR = {
+					has_variable = ffpa_byz_church_and_crown_chosen_v1
+					has_modifier = ffpa_byz_church_and_crown
+				}
+			}
+			ffpa_apply_byz_imperial_symphonia_v1 = yes
+		}
+
+		if = {
+			limit = {
+				NOT = { has_variable = ffpa_byz_rhomaic_civic_universalism_v1 }
+				OR = {
+					country_has_primary_culture = cu:ffpa_rhomaic
+					has_variable = ffpa_byz_rhomaic_commonwealth_complete
+				}
+			}
+			ffpa_apply_byz_rhomaic_civic_universalism_v1 = yes
+		}
+
+		if = {
+			limit = { NOT = { has_variable = ffpa_western_integration_events_migrated_v1 } }
+			ffpa_check_western_integration_events = yes
+			set_variable = ffpa_western_integration_events_migrated_v1
+		}
+
+		if = {
+			limit = {
+				has_variable = ffpa_byz_new_rome_complete
+				NOT = { has_variable = ffpa_byz_restore_new_rome_complete }
+				NOT = { has_journal_entry = je_ffpa_byz_restore_new_rome }
+			}
+			add_journal_entry = { type = je_ffpa_byz_restore_new_rome }
+		}
+
+		if = {
+			limit = {
+				has_variable = ffpa_byz_new_rome_complete
+				NOT = { has_variable = ffpa_byz_land_register_event_scheduled_v2 }
+				NOT = { has_variable = ffpa_byz_land_register_event_fired_v2 }
+			}
+			set_variable = ffpa_byz_land_register_event_scheduled_v2
+			trigger_event = { id = ffpa_flavor.21 days = 30 }
+		}
+	}
+
+	if = {
+		limit = { c:TUR ?= ROOT }
+		ffpa_ensure_tur_commonwealth_progress_v3 = yes
+		if = {
+			limit = { NOT = { has_variable = ffpa_tur_formation_ideologies_v1 } }
+			ffpa_apply_tur_formation_ideologies_v1 = yes
+		}
+
+		if = {
+			limit = {
+				NOT = { has_variable = ffpa_tur_provincial_compact_ideology_v1 }
+				OR = {
+					has_journal_entry = je_ffpa_tur_ottoman_commonwealth
+					has_variable = ffpa_tur_ottoman_commonwealth_complete
+					country_has_primary_culture = cu:ffpa_ottoman
+				}
+			}
+			ffpa_apply_tur_provincial_compact_v1 = yes
+		}
+
+		if = {
+			limit = {
+				NOT = { has_variable = ffpa_tur_ottoman_constitutionalism_v1 }
+				OR = {
+					country_has_primary_culture = cu:ffpa_ottoman
+					has_variable = ffpa_tur_ottoman_commonwealth_complete
+				}
+			}
+			ffpa_apply_tur_ottoman_constitutionalism_v1 = yes
+		}
+
+		ffpa_apply_ottoman_interest_group_names = yes
+		if = {
+			limit = {
+				has_variable = ffpa_tur_rebuild_anatolia_complete
+				NOT = { has_variable = ffpa_tur_industrial_congress_fired_v2 }
+			}
+			set_variable = ffpa_tur_industrial_congress_fired_v2
+			trigger_event = { id = ffpa_flavor.10 days = 15 }
+		}
+		if = {
+			limit = {
+				has_variable = ffpa_tur_rebuild_anatolia_complete
+				NOT = { has_variable = ffpa_tur_tax_register_event_scheduled_v2 }
+				NOT = { has_variable = ffpa_tur_tax_register_event_fired_v2 }
+			}
+			set_variable = ffpa_tur_tax_register_event_scheduled_v2
+			trigger_event = { id = ffpa_flavor.11 days = 30 }
+		}
+	}
+
+	set_variable = ffpa_eastern_mediterranean_v2_seen
+}

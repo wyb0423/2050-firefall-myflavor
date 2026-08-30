@@ -1,0 +1,41 @@
+# Firefall replaces vanilla cultures with broader 2050 identities. These
+# culture-specific acceptance modifier types are absent from vanilla 1.13.
+country_arab_cultural_acceptance_add = {
+	decimals = 1
+	color = good
+	game_data = {
+		ai_value = 0
+	}
+}
+
+country_egyptian_cultural_acceptance_add = {
+	decimals = 1
+	color = good
+	game_data = {
+		ai_value = 0
+	}
+}
+
+country_italian_cultural_acceptance_add = {
+	decimals = 1
+	color = good
+	game_data = {
+		ai_value = 0
+	}
+}
+
+country_african_arab_cultural_acceptance_add = {
+	decimals = 1
+	color = good
+	game_data = {
+		ai_value = 0
+	}
+}
+
+country_moroccan_cultural_acceptance_add = {
+	decimals = 1
+	color = good
+	game_data = {
+		ai_value = 0
+	}
+}

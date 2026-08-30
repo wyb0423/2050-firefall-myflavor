@@ -1,0 +1,152 @@
+# BYZ party-name localization adapters.
+#
+# Party names are defined inside the global party database. Replacing those
+# definitions for tag-only flavor would duplicate thousands of vanilla lines.
+# The base game already uses scripted-GUI localization for Taikunate party
+# names, so these adapters keep the vanilla generic name for every non-BYZ
+# country and return a dedicated name only when the localization root is BYZ.
+
+ffpa_byz_agrarian_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_agrarian
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_agrarian_fallback }
+	}
+}
+
+ffpa_byz_anarchist_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_anarchist
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_anarchist_fallback }
+	}
+}
+
+ffpa_byz_communist_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_communist
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_communist_fallback }
+	}
+}
+
+ffpa_byz_conservative_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_conservative
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_conservative_fallback }
+	}
+}
+
+ffpa_byz_fascist_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_fascist
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_fascist_fallback }
+	}
+}
+
+ffpa_byz_free_trade_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_free_trade
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_free_trade_fallback }
+	}
+}
+
+ffpa_byz_liberal_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_liberal
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_liberal_fallback }
+	}
+}
+
+ffpa_byz_military_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_military
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_military_fallback }
+	}
+}
+
+ffpa_byz_radical_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_radical
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_radical_fallback }
+	}
+}
+
+ffpa_byz_religious_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_religious
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_religious_fallback }
+	}
+}
+
+# Orthodox BYZ reaches the vanilla religion-based party_christian branch
+# before the generic party_religious fallback, so it needs its own adapter.
+ffpa_byz_christian_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_religious
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_christian_fallback }
+	}
+}
+
+ffpa_byz_revolutionary_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_revolutionary
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_revolutionary_fallback }
+	}
+}
+
+ffpa_byz_social_democrats_party_name_sgui = {
+	scope = country
+	effect = {
+		if = {
+			limit = { this = c:BYZ }
+			custom_tooltip_no_bullet = ffpa_party_byz_social_democrats
+		}
+		else = { custom_tooltip_no_bullet = ffpa_party_social_democrats_fallback }
+	}
+}

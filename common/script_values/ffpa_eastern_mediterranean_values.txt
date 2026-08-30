@@ -1,0 +1,110 @@
+# Country scope. Read-only counters used by the Commonwealth of the Romans
+# journal localization; the journal triggers remain the source of truth.
+ffpa_tur_commonwealth_accessible_core_states = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			ffpa_is_tur_commonwealth_core_state = yes
+			market_access >= 0.75
+		}
+		add = 1
+	}
+}
+
+ffpa_tur_commonwealth_accepted_cultural_groups = {
+	value = 0
+	if = {
+		limit = {
+			OR = {
+				cultural_acceptance_base = { target = cu:greek value >= acceptance_status_3 }
+				cultural_acceptance_base = { target = cu:bulgarian value >= acceptance_status_3 }
+				cultural_acceptance_base = { target = cu:serb value >= acceptance_status_3 }
+				cultural_acceptance_base = { target = cu:romanian value >= acceptance_status_3 }
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = {
+			OR = {
+				cultural_acceptance_base = { target = cu:albanian value >= acceptance_status_3 }
+				cultural_acceptance_base = { target = cu:bosniak value >= acceptance_status_3 }
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = { cultural_acceptance_base = { target = cu:armenian value >= acceptance_status_3 } }
+		add = 1
+	}
+	if = {
+		limit = { cultural_acceptance_base = { target = cu:kurdish value >= acceptance_status_3 } }
+		add = 1
+	}
+	if = {
+		limit = {
+			OR = {
+				cultural_acceptance_base = { target = cu:arab value >= acceptance_status_3 }
+				cultural_acceptance_base = { target = cu:egyptian value >= acceptance_status_3 }
+			}
+		}
+		add = 1
+	}
+}
+
+ffpa_tur_commonwealth_stable_core_states = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			ffpa_is_tur_commonwealth_core_state = yes
+			turmoil < 0.18
+		}
+		add = 1
+	}
+}
+
+ffpa_byz_commonwealth_accessible_core_states = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			ffpa_is_byz_commonwealth_core_state = yes
+			market_access >= 0.80
+		}
+		add = 1
+	}
+}
+
+ffpa_byz_commonwealth_accepted_cultures = {
+	value = 0
+	if = {
+		limit = { cultural_acceptance_base = { target = cu:turkish value >= acceptance_status_3 } }
+		add = 1
+	}
+	if = {
+		limit = { cultural_acceptance_base = { target = cu:albanian value >= acceptance_status_3 } }
+		add = 1
+	}
+	if = {
+		limit = { cultural_acceptance_base = { target = cu:bulgarian value >= acceptance_status_3 } }
+		add = 1
+	}
+	if = {
+		limit = { cultural_acceptance_base = { target = cu:serb value >= acceptance_status_3 } }
+		add = 1
+	}
+	if = {
+		limit = { cultural_acceptance_base = { target = cu:armenian value >= acceptance_status_3 } }
+		add = 1
+	}
+}
+
+ffpa_byz_commonwealth_stable_core_states = {
+	value = 0
+	every_scope_state = {
+		limit = {
+			ffpa_is_byz_commonwealth_core_state = yes
+			turmoil < 0.18
+		}
+		add = 1
+	}
+}

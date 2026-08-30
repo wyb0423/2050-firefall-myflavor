@@ -1,6 +1,7 @@
-# One shared Union War goal is used by every Firefall infamy-rule play variant.
+# Additional Union War goal for the adapter's optional 10% Infamy rule.
 # The calculation is Firefall's annex-country calculation with a final 0.10
-# multiplier and a proportionally scaled minimum of 0.5 Infamy.
+# multiplier and a proportionally scaled minimum of 0.5 Infamy. Firefall's
+# original 25%, 50%, and 100% goals remain untouched.
 ffpa_union_war_annex_country_tenth = {
 	icon = "gfx/interface/icons/war_goals/annex_country.dds"
 

@@ -1,0 +1,68 @@
+# The country variables remain the authoritative save-state for both
+# commonwealth journals. These bars are display mirrors refreshed by the
+# corresponding ffpa_sync_* scripted effects.
+ffpa_tur_commonwealth_administration_bar = {
+	name = "ffpa_commonwealth_administration_bar"
+	desc = "ffpa_tur_commonwealth_administration_bar_desc"
+	second_desc = "ffpa_tur_commonwealth_administration_bar_second_desc"
+
+	default_green = yes
+	start_value = 0
+	min_value = 0
+	max_value = 60
+}
+
+ffpa_tur_commonwealth_civic_bar = {
+	name = "ffpa_commonwealth_civic_bar"
+	desc = "ffpa_tur_commonwealth_civic_bar_desc"
+	second_desc = "ffpa_tur_commonwealth_civic_bar_second_desc"
+
+	default_green = yes
+	start_value = 0
+	min_value = 0
+	max_value = 60
+}
+
+ffpa_tur_commonwealth_stability_bar = {
+	name = "ffpa_commonwealth_stability_bar"
+	desc = "ffpa_tur_commonwealth_stability_bar_desc"
+	second_desc = "ffpa_tur_commonwealth_stability_bar_second_desc"
+
+	default_green = yes
+	start_value = 0
+	min_value = 0
+	max_value = 60
+}
+
+ffpa_byz_commonwealth_administration_bar = {
+	name = "ffpa_commonwealth_administration_bar"
+	desc = "ffpa_byz_commonwealth_administration_bar_desc"
+	second_desc = "ffpa_byz_commonwealth_administration_bar_second_desc"
+
+	default_green = yes
+	start_value = 0
+	min_value = 0
+	max_value = 60
+}
+
+ffpa_byz_commonwealth_civic_bar = {
+	name = "ffpa_commonwealth_civic_bar"
+	desc = "ffpa_byz_commonwealth_civic_bar_desc"
+	second_desc = "ffpa_byz_commonwealth_civic_bar_second_desc"
+
+	default_green = yes
+	start_value = 0
+	min_value = 0
+	max_value = 60
+}
+
+ffpa_byz_commonwealth_stability_bar = {
+	name = "ffpa_commonwealth_stability_bar"
+	desc = "ffpa_byz_commonwealth_stability_bar_desc"
+	second_desc = "ffpa_byz_commonwealth_stability_bar_second_desc"
+
+	default_green = yes
+	start_value = 0
+	min_value = 0
+	max_value = 60
+}

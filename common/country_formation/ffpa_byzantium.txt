@@ -1,0 +1,42 @@
+# Ordered chain: Firefall Greek successor tags -> GRE -> BYZ.
+# TUR is intentionally not redefined; Firefall's TUR is already the vanilla
+# tag and its existing 11-state, 70% formation remains authoritative.
+BYZ = {
+	states = {
+		STATE_EASTERN_THRACE
+		STATE_ATTICA
+		STATE_THESSALIA
+		STATE_MACEDONIA
+		STATE_SKOPIA
+		STATE_WESTERN_THRACE
+		STATE_NORTHERN_THRACE
+		STATE_HUDAVENDIGAR
+		STATE_AYDIN
+		STATE_WEST_AEGEAN_ISLANDS
+		STATE_EAST_AEGEAN_ISLANDS
+		STATE_ALBANIA
+	}
+
+	required_states_fraction = 1.0
+
+	ai_will_do = {
+		country_has_monarchy_law = yes
+		has_variable = embrace_ambitious_agenda_var
+	}
+
+	potential = {
+		c:GRE ?= this
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ffpa_byzantium_only_greece_tt
+			c:GRE ?= this
+		}
+		country_has_monarchy_law = yes
+		custom_tooltip = {
+			text = byzantium_button_check_tt
+			has_variable = embrace_ambitious_agenda_var
+		}
+	}
+}
