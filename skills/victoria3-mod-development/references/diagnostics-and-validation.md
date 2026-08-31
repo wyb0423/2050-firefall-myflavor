@@ -14,7 +14,7 @@
 
 ## 日志读取
 
-检查用户文档目录中的 `debug.log`、`error.log`、`game.log` 及轮转文件。先按修改时间列出文件，再跨全部轮转日志搜索；大日志可能在几分钟内轮转。
+检查当前平台 Victoria 3 用户数据目录下 `logs/` 中的 `debug.log`、`error.log`、`game.log` 及轮转文件。macOS 默认用户数据根目录为 `$HOME/Documents/Paradox Interactive/Victoria 3`；具体发现和安全搜索命令见 [macos-development.md](macos-development.md)。先按修改时间列出文件，再跨全部轮转日志搜索；大日志可能在几分钟内轮转。
 
 为复杂流程使用稳定前缀、对象 ID、状态和关联 ID。典型生命周期可记录：
 
@@ -68,4 +68,3 @@ KEPT / ROLLED_BACK / CANCELLED
 6. 检查 AI 与玩家路径是否按设计不同。
 
 交付时区分：已静态确认、已由生成器断言、已由日志确认、尚需游戏内目测。
-

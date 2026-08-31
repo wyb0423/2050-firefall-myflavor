@@ -1,9 +1,9 @@
 {
-  "name": "2050 Firefall — Personal Preferences Adapter",
+  "name": "FFPA — Firefall Flavor Pack",
   "id": "com.wyb.2050-firefall-personal-adapter",
   "version": "1.2.0",
   "supported_game_version": "1.13.*",
-  "short_description": "Personal balance, Tech & Res compatibility, and Eastern Mediterranean formation and flavor content for Firefall.",
+  "short_description": "A modular collection of country and regional flavor content for Firefall and Tech & Res.",
   "tags": [
     "Gameplay",
     "Economy",

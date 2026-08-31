@@ -1,42 +1,32 @@
-# 2050 Firefall Personal Adapter — Agent 开发指南
+# FFPA Firefall Flavor Pack — Agent 开发指南
 
 ## 1. 适用范围与目标
 
-本文件适用于仓库根目录及全部子目录。它既是当前单体 Mod 的维护约定，也是将来拆成多个 Mod 时的边界说明。
+本文件适用于仓库根目录及全部子目录。统一战争、殖民塑形和全局平衡已经剥离到同级的 `2050-firefall-core-balance`；建筑清理已经剥离到同级的 `ffpa-building-pruning` 与 `ffpa-building-pruning-techres`；自动 PM 兼容已经剥离到同级的 `ffpa-techres-auto-pm-adapter`。本文件约束当前的 Firefall 风味合集，并登记与这些外部模块的边界。
 
-本项目不是独立内容包，而是加载栈末端的个人适配层。判断任何定义是否正确时，必须以“当前游戏版本 + 所有上游 Mod + 本项目”按实际加载顺序形成的最终数据库为准，不能只看本仓库中的同名文件。
+本项目是面向 Firefall 与 Tech & Res 固定加载环境的单一风味内容包。发布、启用和依赖管理以整个合集为单位，运行时代码、持久状态、本地化和覆盖登记按国家或地区明确归属。判断任何定义是否正确时，必须以“当前游戏版本 + 所有上游 Mod + 本项目”按实际加载顺序形成的最终数据库为准，不能只看本仓库中的同名文件。
 
 项目当前目标版本和身份以 `.metadata/metadata.json` 为准：
 
-- Mod ID：`com.wyb.2050-firefall-personal-adapter`
+- 玩家可见名称：`FFPA — Firefall Flavor Pack`
+- Mod ID：`com.wyb.2050-firefall-personal-adapter`（保留既有发布与存档连续性）
 - Victoria 3：`1.13.*`
 - 已声明依赖：`2050: The Fire Falls`、`[1.13] Tech & Res`
-- README 约定的运行顺序：Tech & Res → Auto-Apply PMs → Auto-Apply Automation PMs → 2050: The Fire Falls → 本项目
+- README 约定的运行顺序：Tech & Res → Auto-Apply PMs → Auto-Apply Automation PMs → 2050: The Fire Falls → Core Balance Adapter → FFPA Building Pruning → FFPA Building Pruning: Tech & Res Compatibility → FFPA Tech & Res Auto PM Adapter → FFPA Firefall Flavor Pack
 - Auto-Apply PMs 的 Workshop ID：`3353797125`
 - Auto-Apply Automation PMs 的 Workshop ID：`3344726320`
 - Tech & Res 的 Workshop ID：`3472248460`
 
-后面三个 Workshop ID 是生成器和兼容逻辑的输入接口；它们目前没有全部写入元数据依赖。不要在没有确认可选/必需语义和 Launcher 行为前擅自改动依赖声明。
+后面三个 Workshop ID 已归外部 Auto PM Adapter 的生成器与兼容逻辑所有；本项目只为完整加载栈登记它们。两个 Auto-Apply Mod 的当前 metadata ID 为空，不得在本项目中伪造依赖关系。
 
 ## 2. 开工前必须执行
 
 1. 运行 `git status --short --branch`，确认用户已有修改。不得覆盖、回退、暂存或提交不属于当前任务的改动。
 2. 用 `rg --files -uu -g '!/.git/**'` 盘点文件，用 `rg -n` 同时搜索定义、引用、本地化键和持久变量。
 3. 确认游戏根目录、Workshop 根目录、目标 Mod、依赖版本与真实加载顺序。路径是环境输入，不得把新的机器绝对路径写进可复用实现。
-4. 对要改的顶层键，依次检查原版、Tech & Res、两个自动 PM Mod、Firefall 和本项目的最终定义。
+4. 对要改的顶层键，依次检查原版、Tech & Res、Firefall 和本项目的最终定义；只有外部 Auto PM Adapter 的变更才需要额外检查两个 Auto-Apply Mod。
 5. 在当前安装版本的相同目录、相同脚本类别、相同 scope 中寻找已工作的语法先例。IDE 提示和旧 Wiki 只能作为线索。
 6. 先确定下文中的模块所有者，再改文件。跨模块修改必须说明接口变化和拆分影响。
-
-推荐用参数而不是固化路径调用生成器：
-
-```powershell
-$GameRoot = '<Victoria 3>/game'
-$WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
-./tools/generate_ffpa_auto_pm_compat.ps1 `
-  -GameRoot $GameRoot `
-  -WorkshopRoot $WorkshopRoot `
-  -OutputRoot (Get-Location).Path
-```
 
 ## 3. 总体依赖方向
 
@@ -44,19 +34,22 @@ $WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
 
 ```text
 游戏原版
-  ├─ Firefall ───────────────┬─ 全局平衡
-  │                          ├─ 统一战争
-  │                          ├─ 殖民 AI / 殖民形状
-  │                          └─ 东地中海核心
-  ├─ Tech & Res ─────────────┬─ 自动 PM 兼容
-  │                          ├─ 建筑清理覆盖扩展
-  │                          └─ 东地中海内容的数值环境
+  ├─ Firefall ───────────────┬─ 外部 Core Balance Adapter
+  │                          └─ FFPA Firefall Flavor Pack
+  ├─ Tech & Res ─────────────┬─ 外部 Core Balance Adapter
+  │                          ├─ 外部 Auto PM Adapter
+  │                          ├─ 外部建筑清理兼容包
+  │                          └─ FFPA Firefall Flavor Pack 的数值环境
+  ├─ 外部 Building Pruning（无依赖）
   ├─ Auto-Apply PMs ─────────┐
-  └─ Auto-Apply Automation ──┴─ 自动 PM 兼容
+  └─ Auto-Apply Automation ──┴─ 外部 Auto PM Adapter
 
-东地中海核心
-  ├─ 东地中海状态机与风味
-  └─ 帝国地区建设 ──> 西方整合桥接 ──> 东地中海风味事件
+FFPA Firefall Flavor Pack
+  ├─ 东地中海模块
+  │  ├─ TUR / BYZ 身份与成立链
+  │  ├─ 日志、迁移与共同体状态机
+  │  └─ 帝国地区建设 ──> 西方整合桥接 ──> 东地中海风味事件
+  └─ 未来国家或地区模块（共享相同依赖，内部状态相互隔离）
 ```
 
 `localization/`、`.metadata/metadata.json` 和 on_action 数据库是共享接缝，不是可随意堆放业务逻辑的“公共模块”。共享文件中的每一组键仍归对应功能模块所有。
@@ -80,170 +73,46 @@ $WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
 **边界**
 
 - 不承载游戏脚本定义。
-- README 只描述当前真实行为；生成覆盖数字来自 `TECHRES_AUTO_PM_COVERAGE.md`，不要手工猜测。
+- README 只描述当前真实行为；外部拆分包的覆盖数字和诊断入口归各自 README 与报告所有。
 
-### 4.2 全局平衡与通用生命周期
+### 4.2 外部 Core Balance Adapter 接口
 
-**所有文件/切片**
+以下功能及其运行时定义已经迁移到同级 `2050-firefall-core-balance`，不再由本仓库拥有：
 
-- `common/history/global/zzz_ffpa_global.txt`
-- `common/static_modifiers/ffpa_modifiers.txt`
-- `common/scripted_effects/ffpa_innovation_effects.txt`
-- `common/institutions/00_institutions.txt`
-- `common/production_methods/ffpa_trade_center.txt`
-- `common/on_actions/ffpa_on_actions.txt` 中的创新上限初始化与月度刷新切片
-- 两份本地化文件中的相应键
+- 50 年战后人口恢复、创新上限动态镜像和科技扩散；
+- 七个制度顶层定义与贸易中心 PM 注入；
+- 统一战争 10% 恶名；
+- 殖民 AI 地区评分与 `NDiplomacy` 殖民形状。
 
-**拥有的行为与接口**
+外部 Mod ID 为 `com.wyb.2050-firefall-core-balance`，依赖 Firefall 与 Tech & Res，不依赖本项目。本项目也不声明对它的依赖；玩家同时启用两者时恢复拆分前的完整功能。
 
-- 50 年战后人口恢复：`ffpa_postwar_population_recovery`。
-- 动态镜像并翻倍创新上限：`ffpa_refresh_innovation_cap`、`ffpa_double_innovation_cap`、`ffpa_innovation_cap_mirror_value`。
-- 永久翻倍科技传播：`ffpa_double_technology_spread`。
-- 制度数值覆盖，包括殖民增长、社会保障、工作场所安全、警察和内务。
-- 贸易中心容量和贸易数量 PM 的注入。
+本项目不得重新定义、复制或调用该 Mod 的 `ffpa_refresh_innovation_cap`、统一战争对象、制度、贸易 PM、殖民评分或 define。双方只分别向原版启动/月度 on_action 登记唯一的模块包装入口。
 
-**边界与风险**
+### 4.3 外部 Tech & Res Auto PM Adapter 接口
 
-- 创新上限是动态 modifier 图，读取旧值、移除旧 modifier、重建镜像的顺序是逻辑的一部分；不得简化成无状态的 remove/add。
-- `ffpa_innovation_cap_mirror_value` 是存档接口。改变含义必须使用新版本键并迁移。
-- `common/institutions/00_institutions.txt` 含多个原版顶层键，是未来最适合按顶层键拆分、但也是上游更新风险最高的文件之一。
-- 贸易 PM 使用 `INJECT:`，只能增加指定字段；不要复制完整 PM，也不要让本模块接管自动 PM 的选择逻辑。
+Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-adapter`：
 
-**未来拆分单位**
+- Mod ID：`com.wyb.ffpa-techres-auto-pm-adapter`；
+- metadata 硬依赖：`tech.res`；
+- 必要运行前置：Auto-Apply PMs `3353797125`、Auto-Apply Automation PMs `3344726320`；
+- 独立拥有生成器、三份生成运行时、覆盖报告、决议、JE、按钮、阈值、状态机、on_action 和两种语言本地化。
 
-- 可整体拆成 `ffpa-core-balance`；殖民制度的顶层键也可跟随殖民模块，但必须避免两个包同时定义 `institution_colonial_affairs`。
+两个 Auto-Apply Mod 是彼此及 Tech & Res 均独立的通用 Mod；只有外部适配器同时消费三者。外部适配器必须最后加载，当前两个 Auto-Apply Mod 的空 metadata ID 通过 README 和 AGENTS 登记，而不是伪造 Launcher dependency。
 
-### 4.3 统一战争 10% 恶名适配
+本仓库不依赖该适配器，也不得重新定义、复制或调用其 `ffpa_auto_pm_*`、`je_ffpa_auto_pm_*`、生成 ID、持久变量、guard 或上游 `REPLACE:` 对象。旧存档需要启用外部适配器才能继续获得原自动 PM 功能；技术 ID 和存档变量由外部包原样保留。
 
-**所有文件**
+### 4.4 外部 Building Pruning 接口
 
-- `common/game_rules/ffpa_union_war_rules.txt`
-- `common/script_values/ffpa_union_war_values.txt`
-- `common/diplomatic_plays/ffpa_union_war_plays.txt`
-- `common/war_goal_types/ffpa_union_war_goal.txt`
-- `common/scripted_effects/ffpa_union_war_effects.txt`
-- 两份本地化文件中的 `uw_*` / `ffpa_union_*` 对应键
+低人力亏损建筑清理已经完整迁移到两个同级 Mod：
 
-**拥有的行为与接口**
+- `ffpa-building-pruning` / `com.wyb.ffpa-building-pruning`：无依赖主包，拥有日志、按钮、判定、通知、半年调度、玩家/AI 初始化和 44 个原版建筑清单。
+- `ffpa-building-pruning-techres` / `com.wyb.ffpa-building-pruning-techres`：只依赖主包与 Tech & Res，通过替换两个可选扫描 effect 增加 28 个 Tech & Res 建筑。
 
-- 新增 `dp_union_war_tenth` 和 `ffpa_union_war_annex_country_tenth`。
-- 为 Firefall 的 `uw_infamy_cost` 增加 10% 规则选项。
-- 替换 `uw_estimated_union_war_infamy` 与 `uw_start_union_war`，把 10% 分支接入 AI 估值和实际开战流程。
+主包导出 `ffpa_prune_private_optional_buildings` 与 `ffpa_prune_government_optional_buildings` 两个稳定扩展槽；兼容包是当前唯一替换者。本仓库不依赖上述两个 Mod，也不得重新定义、复制或调用其清理 effect、JE、消息、持久变量和扩展槽。
 
-**边界与风险**
+原有 `ffpa_private_building_pruning_active`、`ffpa_government_building_pruning_active` 等持久 ID 由主包原样保留；自动 PM 的初始化与 on_action 已与建筑清理完全解耦。
 
-- 这是对 Firefall 私有接口的窄适配，不拥有 Firefall 其他 0% / 25% / 50% / 100% 战争目标。
-- `REPLACE:uw_infamy_cost` 的选项顺序就是 UI 顺序；禁止无理由重排。
-- `REPLACE:uw_start_union_war` 和 `REPLACE:uw_estimated_union_war_infamy` 必须在 Firefall 更新后逐段对比上游，确认只增加 10% 分支而未丢失新逻辑。
-- 不得把统一战争逻辑混入普通外交战或东地中海成立链。
-
-**未来拆分单位**
-
-- 可独立为 `ffpa-union-war`，只依赖 Firefall；这是耦合较低的优先拆分候选。
-
-### 4.4 殖民 AI、殖民边界与殖民制度
-
-**所有文件/切片**
-
-- `common/ai_strategies/zzzz_ffpa_colonial_region_stances.txt`
-- `common/defines/zzzz_ffpa_colonial_shape_defines.txt`
-- `common/institutions/00_institutions.txt` 中的 `institution_colonial_affairs`
-- 两份本地化文件中的相关说明键（如有）
-
-**拥有的行为与接口**
-
-- 向 `ai_strategy_default` 注入殖民区域评分。
-- 通过 `NDiplomacy` 调整殖民省份自动扩张形状。
-- 调整殖民事务制度每级的殖民增长。
-
-**边界与风险**
-
-- AI 区域评分只控制“去哪里”；define 控制殖民地内部“选哪个省”；制度控制增长速度。不得用其中一层顺带改变其他层。
-- define 同时影响 AI 和玩家，不能把它描述成纯 AI 行为。
-- 本模块不拥有同时发展的殖民地数量上限。
-- `INJECT:ai_strategy_default` 和 `NDiplomacy` 都是全局冲突面；必须在完整加载栈中检查后加载者。
-
-**未来拆分单位**
-
-- 可独立为 `ffpa-colonial-shaping`。拆分时要决定 `institution_colonial_affairs` 由它还是全局平衡包唯一拥有。
-
-### 4.5 Tech & Res 自动 PM 兼容
-
-**手写控制面**
-
-- `common/decisions/ffpa_auto_pm_decisions.txt`
-- `common/journal_entries/ffpa_auto_pm_compat_je.txt`
-- `common/scripted_buttons/ffpa_auto_pm_buttons.txt`
-- `common/script_values/ffpa_auto_pm_values.txt`
-- `common/scripted_effects/ffpa_auto_pm_settings_effects.txt`
-- `common/scripted_effects/ffpa_auto_pm_journal_effects.txt`
-- `common/on_actions/ffpa_on_actions.txt` 中确保日志存在的调用
-- 两份本地化文件中的 `ffpa_auto_pm_*` 键
-
-**生成器与生成产物**
-
-- 唯一源：`tools/generate_ffpa_auto_pm_compat.ps1`
-- 生成：`common/scripted_effects/ffpa_generated_auto_pm_effects.txt`
-- 生成：`common/scripted_effects/ffpa_generated_auto_pm_trials.txt`
-- 生成：`common/scripted_triggers/ffpa_generated_auto_pm_triggers.txt`
-- 报告：`TECHRES_AUTO_PM_COVERAGE.md`
-
-**拥有的行为与接口**
-
-- 读取原版、Tech & Res、Auto-Apply PMs、Auto-Apply Automation PMs 的最终 building → PMG → PM 图。
-- 为普通生产、自动化、运输和数据优化生成相邻双向切换边。
-- 管理候选、试运行、经济验收、回滚、冷却、手动保护和震荡锁。
-- 读取上游 `zw_var_auto_pm_*` 设置；这些变量属于上游，本模块只消费，不得改名或改变含义。
-- 对已完整覆盖的实例生成 guard，使上游管理器委托给本模块；未覆盖实例仍归上游。
-
-**边界与风险**
-
-- 禁止直接编辑三个 `ffpa_generated_*` 文件和覆盖报告。改变分类、阈值模板、guard 或状态机后运行生成器。
-- 四个生成结果必须与生成器同次提交，且生成器连续运行两次应产生相同哈希。
-- 生成 ID、州变量、建筑/PMG 隔离键和试运行状态都是存档接口；不得因排序或重构重新编号。
-- 普通生产、自动化和运输分类以“上游实际引用 + 最终建筑挂载”为准，不能仅按 PM/PMG 名称猜测。
-- 两个报告中的孤立 PMG 是有意排除项；上游未修复挂载前不得静默纳入。
-- 本模块不拥有生产方式定义本身，也不拥有上游日志、频率变量和未覆盖建筑。
-
-**未来拆分单位**
-
-- 应整体拆为 `ffpa-techres-auto-pm-adapter`，并同时携带生成器、三份运行时产物、覆盖报告和 UI 控制面。
-- 不要把生成器和运行时文件拆到不同仓库，除非建立版本锁定和可重复发布流程。
-
-### 4.6 低人力亏损建筑清理
-
-**所有文件/切片**
-
-- `common/journal_entries/ffpa_building_pruning_je.txt`
-- `common/scripted_buttons/ffpa_building_pruning_buttons.txt`
-- `common/scripted_triggers/ffpa_building_pruning_triggers.txt`
-- `common/scripted_effects/ffpa_building_pruning_effects.txt`
-- `common/messages/ffpa_building_pruning_messages.txt`
-- `common/on_actions/ffpa_on_actions.txt` 中的半年调度切片
-- `common/scripted_effects/ffpa_auto_pm_journal_effects.txt` 中的初始化接缝
-- `BUILDING_PRUNING_PORT.md`
-- 两份本地化文件中的 `ffpa_*building_pruning*` / 清理通知键
-
-**拥有的行为与接口**
-
-- 玩家私有/公有两个开关和 AI 默认启用状态。
-- 和平时期半年扫描，以及玩家开启时立即扫描。
-- 低于 20% 雇佣、周利润不高于 0、未补贴和多数所有权分类。
-- 显式建筑白名单、保护性排除和实际删除通知。
-
-**边界与风险**
-
-- `remove_building` 删除具体州中该类型建筑的全部等级；不得把它描述成降一级。
-- `ffpa_private_building_pruning_active`、`ffpa_government_building_pruning_active` 是持久设置接口。
-- 私有与公有扫描必须覆盖同一建筑集合，只允许所有权判断不同。
-- 自动 PM 模块只负责在其日志确保 effect 中初始化/挂载界面；清理判定与删除权完全属于本模块。
-- 扩充 Tech & Res 建筑时同步更新 `BUILDING_PRUNING_PORT.md`，基础设施和本地商品建筑必须单独评估死循环风险。
-
-**未来拆分单位**
-
-- 可独立为 `ffpa-building-pruning`。若要降低依赖，可再拆“原版建筑核心清单”和“Tech & Res 覆盖扩展”，但两者必须共享同一个扫描接口，不能复制状态机。
-
-### 4.7 东地中海国家身份核心
+### 4.5 东地中海模块：国家身份核心
 
 **所有文件**
 
@@ -259,6 +128,7 @@ $WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
 - `common/modifier_type_definitions/ffpa_cultural_acceptance_modifier_types.txt`
 - `common/ideologies/ffpa_eastern_mediterranean_ideologies.txt`
 - `common/journal_entries/zzzz_ffpa_greek_nationalism_override.txt`
+- `events/ffpa_formation_overrides.txt`
 - 两份本地化文件中的国家、文化、政体、党名、旗帜和成立链键
 
 **拥有的行为与接口**
@@ -271,24 +141,29 @@ $WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
 **边界与风险**
 
 - 本模块拥有“身份和静态定义”，不拥有日志进度、事件调度或地区建设奖励。
-- `BYZ`、`je_greek_nationalism`、党名数据库适配和旗帜定义都可能覆盖上游顶层键；更新 Firefall/原版后必须做最终数据库比较。
+- `BYZ`、`je_greek_nationalism`、`formation.3`、十三个通用党名本地化键、党名数据库适配和旗帜定义都可能覆盖上游对象；更新 Firefall/原版后必须做最终数据库比较。
 - 形成 BYZ 后保留已有宣称的约定不可在身份重构时丢失。
 - 不要为了 TUR 风味复制或替换原版 TUR 国家定义、旗帜或政体视觉。
 
-**未来拆分单位**
+**内部所有权**
 
-- 拆成 `ffpa-eastern-mediterranean-core`，供状态机和地区建设包依赖。
+- 这是东地中海内部的静态身份职责，不再拆成独立物理 Mod。
+- 状态机和地区建设可以消费这些稳定对象，但不得复制其顶层定义。
 
-### 4.8 东地中海日志、迁移与风味状态机
+### 4.6 东地中海模块：日志、迁移与风味状态机
 
 **所有文件/切片**
 
 - `common/journal_entries/ffpa_eastern_mediterranean_journal_entries.txt`
+- `common/customizable_localization/ffpa_eastern_mediterranean_custom_loc.txt`
+- `common/decisions/ffpa_eastern_mediterranean_decisions.txt`
+- `common/script_values/ffpa_eastern_mediterranean_values.txt`
+- `common/scripted_progress_bars/ffpa_eastern_mediterranean_progress_bars.txt`
 - `common/scripted_triggers/ffpa_eastern_mediterranean_triggers.txt` 中共同体、成立和风味条件
-- `common/scripted_effects/ffpa_eastern_mediterranean_effects.txt`
+- `common/scripted_effects/ffpa_eastern_mediterranean_effects.txt` 中身份、共同体、迁移和风味 effect
 - `common/on_actions/ffpa_eastern_mediterranean_on_actions.txt`
 - `common/static_modifiers/ffpa_eastern_mediterranean_modifiers.txt` 中非 `ffpa_region_*` 定义
-- `events/ffpa_eastern_mediterranean_events.txt`
+- `events/ffpa_eastern_mediterranean_events.txt` 中非西方整合事件
 - 两份本地化文件中的 `ffpa_flavor.*`、TUR/BYZ 日志与修正键
 
 **拥有的行为与接口**
@@ -305,12 +180,12 @@ $WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
 - 事件链应保持“未初始化 → 可用 → 运行中 → 完成/失败/取消”的显式状态；每条异常路径都要清理临时状态。
 - 本模块可消费地区建设模块导出的完成变量和查询 trigger，但不得直接重写地区日志内部状态。
 
-**未来拆分单位**
+**内部所有权**
 
-- 可拆为 `ffpa-eastern-mediterranean-flavor`，依赖身份核心。
-- 当前西方整合事件会消费地区建设完成状态；若地区建设另包，风味包必须显式依赖它，或把这部分调用移入单独 bridge 包。
+- 这是东地中海内部的状态机职责，不再拆成独立物理 Mod。
+- 西方整合事件继续消费地区建设导出的稳定查询，不直接读取 15 个日志的内部字段。
 
-### 4.9 帝国地区建设与西方整合桥接
+### 4.7 东地中海模块：帝国地区建设与西方整合桥接
 
 **所有文件/切片**
 
@@ -334,42 +209,38 @@ $WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
 - 完成变量和 modifier 名称是旧存档接口；地区更名时保留技术 ID。
 - 这是东地中海内部唯一允许的“建设 → 风味”桥；不要让事件直接检查 15 个日志的内部字段。
 
-**未来拆分单位**
+**内部所有权**
 
-- 可拆为 `ffpa-imperial-regional-development`，依赖身份核心。
-- 初次拆分建议把西方整合 bridge 暂时与风味包同放，等接口稳定后再独立，避免形成循环依赖。
+- 地区建设、西方整合 bridge 与风味事件继续随东地中海模块一同发布，不再拆成独立物理 Mod。
+- 内部仍通过完成变量和查询 trigger 维持单向“建设 → 风味”数据流，避免形成隐式循环。
 
-### 4.10 开发工具、技能与报告
+### 4.8 开发技能与调研文档
 
 **所有文件**
 
-- `tools/`
 - `skills/`
-- `TECHRES_AUTO_PM_COVERAGE.md`
-- `BUILDING_PRUNING_PORT.md`
+- `docs/`
 
 **职责与边界**
 
-- `tools/` 只生成或验证游戏数据，不应成为游戏运行时依赖。
 - `skills/` 是开发代理说明，不会被 Victoria 3 加载；修改它不等于修改 Mod 行为。
-- 生成报告必须由工具生成；调研文档可以手写，但必须注明上游、版本、差异和有意排除项。
+- `docs/` 中的调研和拆分设计必须注明上游、版本、差异、有意排除项和验证限制。
+- 自动 PM 生成器、生成产物与覆盖报告归外部 Auto PM Adapter，不得复制回本仓库。
 - 这些文件应纳入版本控制，不要因为不是运行时脚本就加入 `.gitignore`。
 
 ## 5. 共享接缝与唯一所有者规则
 
 | 共享接缝 | 当前使用者 | 规则 |
 |---|---|---|
-| `common/on_actions/ffpa_on_actions.txt` | 创新上限、自动 PM 日志、建筑清理 | 只负责调度到模块 effect；新增功能尽量使用自己的命名 on_action 包装，不把复杂逻辑内联。 |
 | `common/on_actions/ffpa_eastern_mediterranean_on_actions.txt` | 东地中海成立、迁移、选举 | 仅调度 TUR/BYZ；不得吸收全局经济功能。 |
-| `common/static_modifiers/ffpa_eastern_mediterranean_modifiers.txt` | 风味、共同体、地区建设 | 技术 ID 前缀决定所有者；拆分时按定义完整移动，不复制。 |
+| `common/static_modifiers/ffpa_eastern_mediterranean_modifiers.txt` | 风味、共同体、地区建设 | 技术 ID 前缀决定内部所有者；整理文件时按定义完整移动，不复制。 |
 | `common/scripted_triggers/ffpa_eastern_mediterranean_triggers.txt` | 风味与地区建设 | 地区模块导出查询 trigger，风味模块消费；禁止反向读取风味内部变量。 |
-| `common/scripted_effects/ffpa_auto_pm_journal_effects.txt` | 自动 PM、建筑清理初始化 | 只允许做“确保存在/初始化默认值”；删除逻辑归各自模块。 |
 | `events/ffpa_eastern_mediterranean_events.txt` | TUR/BYZ 风味与西方整合 | 共享 `ffpa_flavor` namespace；新增 ID 先搜索冲突，不重编号旧事件。 |
-| `localization/english/ffpa_l_english.yml` | 全部玩家可见模块 | 每个模块拥有自己的键切片；改技术对象时同步更新。 |
-| `localization/simp_chinese/ffpa_l_simp_chinese.yml` | 全部玩家可见模块 | 与英文保持键集合一致，不得只补一种语言。 |
-| `.metadata/metadata.json` | 所有发布模块 | 只有发布/依赖变化才改；未来拆包时每个包使用新且稳定的 ID。 |
+| `localization/english/ffpa_l_english.yml` | 东地中海与未来地区模块 | 每组键归明确地区所有；改玩家可见技术对象时同步更新。 |
+| `localization/simp_chinese/ffpa_l_simp_chinese.yml` | 东地中海与未来地区模块 | 与英文保持键集合一致，不得只补一种语言。 |
+| `.metadata/metadata.json` | 风味合集发布外壳 | 只有发布身份或依赖变化才改；不得因内部模块增加而更换既有 Mod ID。 |
 
-跨模块调用优先使用命名清晰的 scripted effect、scripted trigger 或稳定顶层对象。除本表明确列出的存档接口外，禁止直接读取另一个模块的临时变量。
+跨地区调用优先使用命名清晰的 scripted effect、scripted trigger 或稳定顶层对象。除明确登记的存档接口外，禁止直接读取另一个地区模块的临时变量。
 
 ## 6. 覆盖与冲突登记
 
@@ -377,22 +248,19 @@ $WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
 
 | 顶层键/数据库 | 方式 | 原因 | 必查上游 |
 |---|---|---|---|
-| `uw_infamy_cost` | `REPLACE:` | 插入有序 UI 选项 | Firefall |
-| `uw_estimated_union_war_infamy` | `REPLACE:` | AI 恶名估值增加 10% 分支 | Firefall |
-| `uw_start_union_war` | `REPLACE:` | 开战流程增加 10% 分支 | Firefall |
-| `ai_strategy_default` | `INJECT:` | 殖民区域评分 | 原版、Tech & Res、Firefall |
-| `NDiplomacy` | define 覆盖 | 殖民边界形状 | 原版及所有改 define 的 Mod |
-| `institution_*` | 同名顶层定义 | 全局制度平衡 | 原版、Firefall |
 | `BYZ` 国家/成立/动态名/旗帜 | 新建或替换 | Firefall 最终库缺少/改变 BYZ | 原版、Firefall |
 | `je_greek_nationalism` | 同名顶层替换 | 接回 GRE → BYZ 路线 | 原版、Firefall |
-| `pm_trade_center*` | `INJECT:` | 容量与运输投入增量 | 原版、Tech & Res、Firefall |
-| 自动 PM 上游选择器 | 生成 guard 注入/替换 | 委托已覆盖实例 | 两个 Auto-Apply Mod |
+| `formation.3` | 同名事件完整替换 | 保留原版通知与威望流程，以自有查士丁尼宣称白名单替换原版巴尔干/近东广域宣称 | 原版、Firefall |
+| `party_agrarian`、`party_anarchist`、`party_communist`、`party_conservative`、`party_fascist`、`party_free_trade`、`party_liberal`、`party_military`、`party_radicals`、`party_religious`、`party_christian`、`revolutionary_party_name`、`party_social_democrats` | 同名本地化键替换 | 通过 scripted GUI 为 BYZ 返回专属党名，并为其他国家返回原版通用名称 | 原版及任何后加载的党名/本地化 Mod |
 
 文件名前缀 `00_`、`zzz_`、`zzzz_` 只是加载排序工具，不等于安全覆盖。不得仅通过改文件名解决冲突；必须记录目标顶层键、操作语义和后加载者。
 
+统一战争、殖民、制度和贸易中心覆盖登记归外部 Core Balance Adapter；自动 PM 的 40 个上游 replacement 归外部 Auto PM Adapter。若本项目需要消费外部结果，只能通过稳定的最终数据库对象，不得复制覆盖。
+
 ## 7. 命名、作用域与存档兼容
 
-- 新增自有技术 ID 使用 `ffpa_` 前缀；建议继续细分为 `ffpa_auto_pm_`、`ffpa_tur_`、`ffpa_byz_`、`ffpa_region_`、`ffpa_union_` 等。
+- 新增自有技术 ID 使用 `ffpa_` 前缀，并继续细分为地区或国家前缀。现有东地中海沿用 `ffpa_tur_`、`ffpa_byz_`、`ffpa_region_`；新地区不得复用这些空间。
+- 新事件使用独立的地区 namespace；`ffpa_flavor` 保留给现有东地中海事件，不供未来模块复用。
 - 覆盖上游 ID 时保留上游名字，并在文件头注释来源、目标版本、覆盖原因和预期差异。
 - trigger 不产生副作用，effect 改状态，script value 算数值，modifier 描述叠加量；不能跨类别照搬语法。
 - 每次跨 country/state/building/market/strategic region scope 时，在复杂实现旁写明进入和返回的 scope。
@@ -421,23 +289,23 @@ $WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
 - 同一 Mod 内没有意外重复顶层键；有意重复/注入要说明操作语义。
 - `git diff --check` 没有新增空白错误；但不要为通过检查而格式化用户无关文件。
 
-### 9.2 自动 PM 修改的额外验证
+### 9.2 Auto PM Adapter 拆分集成验证
 
-1. 运行生成器，确认所有内置断言通过。
-2. 再运行一次，比较三个生成脚本和覆盖报告的 SHA-256；两次必须一致。
-3. 确认报告仍覆盖全部上游 automation building/PM 对、完整炸药厂双向链，并只保留已记录的有意孤立项。
-4. 复核升级边有反向降级边、设置 gate 正确、未覆盖实例仍由上游管理。
-5. 游戏中搜索 `FFPA_PM|`，至少区分调度到达、候选、试运行、验收、保留/回滚和外部取消。
+- 本仓库不得再包含自动 PM 运行时、生成器、生成产物、覆盖报告、本地化键、持久变量引用或调度调用。
+- 外部适配器必须独立携带全部 517 个顶层键、两种语言各 26 个键和 40 个上游 replacement。
+- 迁移前后生成器、三个生成脚本和覆盖报告的 SHA-256 必须一致。
+- 外部包与本项目不得互相依赖、调用或重复定义自有顶层键。
+- 旧存档需启用外部适配器才能继续获得原自动 PM 状态机和界面。
 
 ### 9.3 建筑清理修改的额外验证
 
-- 私有和公有清单一致。
-- 正向场景同时满足雇佣、利润、补贴和所有权条件后才删除。
-- 战争、补贴、保护建筑、正利润和高雇佣率分别能阻止删除。
-- 只在实际删除后发送对应通知。
-- 新旧存档分别验证默认变量和日志挂载。
+- 本仓库不得再包含建筑清理运行时文件、本地化键、持久变量引用或调度调用。
+- 外部主包的私有/公有原版清单必须一致；外部兼容包的私有/公有 Tech & Res 清单也必须一致，且两包清单不得交叉。
+- 主包单独启用时不得解析 Tech & Res 建筑 ID；兼容包只能替换两个已登记的可选扫描 effect。
+- 同时启用两包时，战争、补贴、保护建筑、正利润和高雇佣率仍能分别阻止删除，且只在实际删除后发送通知。
+- 新旧存档分别验证默认变量、日志挂载和原持久设置的继承。
 
-### 9.4 东地中海修改的额外验证
+### 9.4 东地中海模块修改的额外验证
 
 - GRE → BYZ 成立、TUR 不被替换、BYZ 形成后宣称保留。
 - 共同体三轴分别前进/倒退，完成奖励不重复。
@@ -445,7 +313,14 @@ $WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
 - 地区建设只奖励实际覆盖州；完成状态可稳定触发一次西方整合事件。
 - 动态国名、政府称号、党名、旗帜和两种语言在主要政体路径下显示正确。
 
-### 9.5 运行时证据
+### 9.5 Core Balance 拆分集成验证
+
+- 本项目不得再包含统一战争、殖民塑形、通用平衡或对应本地化键。
+- 新旧 Mod 的自有顶层键不得重复；原版 on_action 接缝只比较各自唯一的包装列表。
+- 同时启用 Core Balance 与本项目时，创新刷新与东地中海迁移分别到达，且互不调用对方的 effect；建筑清理与自动 PM 分别由各自外部包独立调度。
+- 旧存档需同时启用两个 Mod 才能保持拆分前的完整功能。
+
+### 9.6 运行时证据
 
 依次区分以下五层，不要把“定义存在”当成“功能生效”：
 
@@ -468,17 +343,17 @@ $WorkshopRoot = '<Steam>/steamapps/workshop/content/529340'
 - 大型生成文件是运行时产物，允许体积大；评审时重点看生成器差异、覆盖数字和哈希，而不是逐行阅读数十万行生成代码。
 - 不把本机游戏路径、Workshop 路径、日志、存档、崩溃转储、编辑器状态或发布压缩包提交进仓库。
 
-## 11. 推荐拆分顺序
+## 11. 风味合集扩展约定
 
-1. **统一战争**：边界窄、只依赖 Firefall，最容易独立验证。
-2. **殖民形状**：三个全局对象边界清楚，但先决定殖民制度键的唯一所有者。
-3. **建筑清理**：状态机独立；可选择保留 Tech & Res 硬依赖，或拆基础清单/扩展清单。
-4. **全局平衡**：把创新、人口恢复、制度和贸易作为一个小包，再按需求细分。
-5. **自动 PM 兼容**：整体搬迁生成器、产物、UI、报告和上游 guard，不做半拆。
-6. **东地中海身份核心**：先抽出 BYZ/TUR 静态身份接口。
-7. **地区建设与风味**：在身份核心稳定后拆；先保留西方整合 bridge 的单一所有者，避免循环依赖。
+统一战争、殖民塑形和全局平衡已经整体迁移到 `2050-firefall-core-balance`，建筑清理已经迁移到无依赖主包与可选 Tech & Res 兼容包，自动 PM 兼容已经迁移到 `ffpa-techres-auto-pm-adapter`。东地中海身份、状态机、地区建设和风味作为合集的第一个内部模块保留，不再进行物理拆分。
 
-每次拆分都要建立“旧包与新包的顶层键集合差异”：旧包移除的每个自有键必须恰好由一个新包提供；共享覆盖键不能被两个新包同时定义；持久 ID 不因物理移动而改变。
+新增国家或地区风味时依次执行：
+
+1. 确认它继续以 Firefall 与 Tech & Res 为固定依赖；如需新的硬依赖或独立启停，先重新判断物理发布边界。
+2. 登记地区所有者、文件前缀、事件 namespace、持久变量、本地化键和上游覆盖对象。
+3. 分别设计新游戏初始化、旧存档补发和周期刷新入口，并使用唯一的轻量 on_action 包装 ID。
+4. 仅在真实联动出现时导出 scripted trigger/effect；不得预建通用框架或直接读取另一地区的临时变量。
+5. 建立新增前后的顶层键与本地化键清单，确认没有与东地中海或外部拆分包产生意外重复。
 
 ## 12. 交付格式
 
