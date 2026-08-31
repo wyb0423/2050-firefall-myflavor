@@ -328,6 +328,35 @@ ffpa_has_outer_western_development_project = {
 	}
 }
 
+# State scope. This is the exact state set covered by the four outer-western
+# projects above. Flavor rewards consume this stable geographic query instead
+# of reading the projects' internal journal state.
+ffpa_is_byzantine_outer_western_integration_state = {
+	OR = {
+		# Western Mediterranean sea lanes
+		state_region = s:STATE_SARDINIA
+		state_region = s:STATE_CORSICA
+		state_region = s:STATE_MALTA
+		state_region = s:STATE_BALEARIC_ISLANDS
+
+		# Spanian littoral
+		state_region = s:STATE_LOWER_ANDALUSIA
+		state_region = s:STATE_UPPER_ANDALUSIA
+		state_region = s:STATE_VALENCIA
+		state_region = s:STATE_MURCIA
+
+		# Mauretanian coastal road
+		state_region = s:STATE_CONSTANTINE
+		state_region = s:STATE_ALGIERS
+		state_region = s:STATE_AL_RIF
+
+		# Alexandria-Sinai axis
+		state_region = s:STATE_LOWER_EGYPT
+		state_region = s:STATE_SINAI
+		state_region = s:STATE_MATRUH
+	}
+}
+
 ffpa_western_tax_settlement_ready = {
 	has_variable = ffpa_italian_urban_axis_complete
 	OR = {

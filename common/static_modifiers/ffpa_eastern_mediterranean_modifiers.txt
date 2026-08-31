@@ -481,3 +481,154 @@ ffpa_byz_western_crown_senate = {
 	interest_group_ig_landowners_approval_add = 3
 	interest_group_ig_intelligentsia_approval_add = -3
 }
+
+# --- Permanent western-integration event rewards (v2) ---
+
+ffpa_byz_mediterranean_industrial_credit_v2 = {
+	icon = gfx/interface/icons/event_icons/event_industry.dds
+	building_group_bg_manufacturing_throughput_add = 0.05
+	state_capitalists_investment_pool_efficiency_mult = 0.05
+	interest_group_ig_landowners_approval_add = -2
+}
+
+ffpa_byz_mediterranean_port_rail_network_state_v2 = {
+	icon = gfx/interface/icons/event_icons/event_trade.dds
+	state_trade_capacity_mult = 0.15
+	state_construction_mult = 0.05
+}
+
+ffpa_byz_mediterranean_concessions_v2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_authority_add = -100
+}
+
+ffpa_byz_mediterranean_development_banks_state_v2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_pop_qualifications_mult = 0.10
+	state_migration_pull_mult = 0.10
+}
+
+ffpa_byz_mediterranean_banking_compact_v2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_capitalists_investment_pool_efficiency_mult = 0.03
+	interest_group_ig_industrialists_approval_add = -2
+}
+
+ffpa_byz_western_uniform_cadastre_state_v2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_tax_capacity_mult = 0.15
+	state_pop_qualifications_mult = 0.05
+}
+
+ffpa_byz_western_uniform_cadastre_burden_v2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_bureaucracy_mult = -0.05
+	interest_group_ig_landowners_approval_add = -2
+}
+
+ffpa_byz_western_municipal_tax_compact_state_v2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds
+	state_tax_capacity_mult = 0.08
+	state_migration_pull_mult = 0.10
+}
+
+ffpa_byz_western_municipal_vetoes_v2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_authority_add = 100
+	country_law_enactment_speed_mult = -0.05
+}
+
+ffpa_byz_western_military_survey_state_v2 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	state_tax_capacity_mult = 0.10
+	state_construction_mult = 0.05
+}
+
+ffpa_byz_western_military_survey_corps_v2 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	unit_army_defense_mult = 0.03
+	country_military_goods_cost_mult = 0.03
+}
+
+ffpa_byz_western_universal_citizenship_v2 = {
+	icon = gfx/interface/icons/generic_icons/accepted_icon.dds
+	country_italian_cultural_acceptance_add = 15
+	country_spanish_cultural_acceptance_add = 15
+	country_maltese_cultural_acceptance_add = 15
+	country_african_arab_cultural_acceptance_add = 15
+	country_egyptian_cultural_acceptance_add = 15
+	country_moroccan_cultural_acceptance_add = 15
+	country_loyalism_increases_second_rate_citizen_mult = 0.10
+	country_authority_add = -150
+}
+
+ffpa_byz_western_provincial_civic_compact_v2 = {
+	icon = gfx/interface/icons/generic_icons/accepted_icon.dds
+	country_italian_cultural_acceptance_add = 10
+	country_spanish_cultural_acceptance_add = 10
+	country_maltese_cultural_acceptance_add = 10
+	country_african_arab_cultural_acceptance_add = 10
+	country_egyptian_cultural_acceptance_add = 10
+	country_moroccan_cultural_acceptance_add = 10
+	country_law_enactment_success_add = -0.05
+}
+
+ffpa_byz_western_provincial_civic_compact_state_v2 = {
+	icon = gfx/interface/icons/generic_icons/accepted_icon.dds
+	state_migration_pull_mult = 0.10
+	state_pop_qualifications_mult = 0.10
+}
+
+ffpa_byz_western_service_citizenship_v2 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	country_italian_cultural_acceptance_add = 5
+	country_spanish_cultural_acceptance_add = 5
+	country_maltese_cultural_acceptance_add = 5
+	country_african_arab_cultural_acceptance_add = 5
+	country_egyptian_cultural_acceptance_add = 5
+	country_moroccan_cultural_acceptance_add = 5
+	unit_experience_gain_mult = 0.10
+	country_military_goods_cost_mult = 0.03
+}
+
+ffpa_byz_western_veteran_settlement_state_v2 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	state_migration_pull_mult = 0.05
+}
+
+ffpa_byz_western_common_electoral_roll_v2 = {
+	icon = gfx/interface/icons/event_icons/event_election.dds
+	country_law_enactment_success_add = 0.05
+	country_legitimacy_headofstate_add = 5
+	country_authority_add = -100
+	interest_group_ig_landowners_approval_add = -2
+}
+
+ffpa_byz_western_provincial_delegations_state_v2 = {
+	icon = gfx/interface/icons/event_icons/event_election.dds
+	state_turmoil_effects_mult = -0.15
+}
+
+ffpa_byz_western_provincial_delegations_v2 = {
+	icon = gfx/interface/icons/event_icons/event_election.dds
+	country_legitimacy_headofstate_add = 8
+	country_law_enactment_speed_mult = -0.05
+}
+
+ffpa_byz_western_crown_senate_v2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_authority_add = 200
+	country_legitimacy_headofstate_add = 10
+	country_law_enactment_success_add = -0.05
+	interest_group_ig_landowners_approval_add = 3
+	interest_group_ig_intelligentsia_approval_add = -3
+}
+
+ffpa_byz_western_notables_senate_v2 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_authority_add = 100
+	country_legitimacy_headofstate_add = 8
+	country_bureaucracy_add = 100
+	country_law_enactment_speed_mult = -0.05
+	interest_group_ig_intelligentsia_approval_add = -2
+}

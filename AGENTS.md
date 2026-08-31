@@ -200,7 +200,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 **拥有的行为与接口**
 
 - 15 项地区建设 JE、完成变量和仅作用于实际工程州的 `ffpa_region_*` 永久 modifier。
-- 向风味模块导出完成状态查询：`ffpa_has_two_western_development_projects`、`ffpa_has_italian_development_project`、`ffpa_has_outer_western_development_project`、`ffpa_western_*_ready`。
+- 向风味模块导出完成状态查询：`ffpa_has_two_western_development_projects`、`ffpa_has_italian_development_project`、`ffpa_has_outer_western_development_project`、`ffpa_western_*_ready`；导出地区奖励地理查询：`ffpa_is_byzantine_western_integration_state`、`ffpa_is_byzantine_outer_western_integration_state`。
 - 完成日志后调用 `ffpa_check_western_integration_events`，但事件具体奖励归风味模块。
 
 **边界与风险**

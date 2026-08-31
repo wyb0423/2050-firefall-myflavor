@@ -436,6 +436,167 @@ ffpa_apply_ottoman_interest_group_names = {
 	}
 }
 
+# Root = BYZ. These cleanup effects only remove the finite v1 rewards from the
+# current country and its current states. A lost state may retain a finite v1
+# cadastral reward until its original expiry; no global cleanup is performed.
+ffpa_clear_byz_mediterranean_investment_rewards_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_byz_mediterranean_industrial_credit }
+		remove_modifier = ffpa_byz_mediterranean_industrial_credit
+	}
+	if = {
+		limit = { has_modifier = ffpa_byz_mediterranean_port_rail_fund }
+		remove_modifier = ffpa_byz_mediterranean_port_rail_fund
+	}
+	if = {
+		limit = { has_modifier = ffpa_byz_mediterranean_development_banks }
+		remove_modifier = ffpa_byz_mediterranean_development_banks
+	}
+}
+
+ffpa_clear_byz_western_cadastre_rewards_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_byz_western_uniform_cadastre_cost }
+		remove_modifier = ffpa_byz_western_uniform_cadastre_cost
+	}
+	if = {
+		limit = { has_modifier = ffpa_byz_western_provincial_tax_compact }
+		remove_modifier = ffpa_byz_western_provincial_tax_compact
+	}
+	every_scope_state = {
+		if = {
+			limit = { has_modifier = ffpa_byz_western_uniform_cadastre_state }
+			remove_modifier = ffpa_byz_western_uniform_cadastre_state
+		}
+		if = {
+			limit = { has_modifier = ffpa_byz_western_provincial_tax_state }
+			remove_modifier = ffpa_byz_western_provincial_tax_state
+		}
+	}
+}
+
+ffpa_clear_byz_western_citizenship_rewards_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_byz_western_universal_citizenship }
+		remove_modifier = ffpa_byz_western_universal_citizenship
+	}
+	if = {
+		limit = { has_modifier = ffpa_byz_western_provincial_civic_compact }
+		remove_modifier = ffpa_byz_western_provincial_civic_compact
+	}
+}
+
+ffpa_clear_byz_western_representation_rewards_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_byz_western_common_electoral_roll }
+		remove_modifier = ffpa_byz_western_common_electoral_roll
+	}
+	if = {
+		limit = { has_modifier = ffpa_byz_western_provincial_delegations }
+		remove_modifier = ffpa_byz_western_provincial_delegations
+	}
+	if = {
+		limit = { has_modifier = ffpa_byz_western_crown_senate }
+		remove_modifier = ffpa_byz_western_crown_senate
+	}
+}
+
+# Root = BYZ. Old `.30`, `.31`, and `.33` choices cannot be reconstructed once
+# their finite modifiers expire. Reviews are therefore serialized through the
+# original event IDs. `.32` is included only as a fallback for damaged saves in
+# which neither permanent v1 citizenship modifier remains.
+ffpa_schedule_next_western_integration_reward_review_v2 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_byz_western_reward_review_active_v2 }
+		}
+		if = {
+			limit = {
+				has_variable = ffpa_byz_mediterranean_congress_fired_v1
+				NOT = { has_variable = ffpa_byz_western_investment_choice_v2 }
+			}
+			set_variable = ffpa_byz_mediterranean_congress_review_v2
+			set_variable = ffpa_byz_western_reward_review_active_v2
+			set_variable = ffpa_byz_mediterranean_congress_scheduled_v1
+			trigger_event = { id = ffpa_flavor.30 days = 7 }
+		}
+		else_if = {
+			limit = {
+				has_variable = ffpa_byz_western_cadastre_fired_v1
+				NOT = { has_variable = ffpa_byz_western_cadastre_choice_v2 }
+			}
+			set_variable = ffpa_byz_western_cadastre_review_v2
+			set_variable = ffpa_byz_western_reward_review_active_v2
+			set_variable = ffpa_byz_western_cadastre_scheduled_v1
+			trigger_event = { id = ffpa_flavor.31 days = 7 }
+		}
+		else_if = {
+			limit = {
+				has_variable = ffpa_byz_western_civic_extension_fired_v1
+				NOT = { has_variable = ffpa_byz_western_citizenship_choice_v2 }
+			}
+			set_variable = ffpa_byz_western_civic_extension_review_v2
+			set_variable = ffpa_byz_western_reward_review_active_v2
+			set_variable = ffpa_byz_western_civic_extension_scheduled_v1
+			trigger_event = { id = ffpa_flavor.32 days = 7 }
+		}
+		else_if = {
+			limit = {
+				has_variable = ffpa_byz_western_representation_fired_v1
+				NOT = { has_variable = ffpa_byz_western_representation_choice_v2 }
+			}
+			set_variable = ffpa_byz_western_representation_review_v2
+			set_variable = ffpa_byz_western_reward_review_active_v2
+			set_variable = ffpa_byz_western_representation_scheduled_v1
+			trigger_event = { id = ffpa_flavor.33 days = 7 }
+		}
+		else = {
+			set_variable = ffpa_western_integration_rewards_migrated_v2
+		}
+	}
+}
+
+# Root = BYZ. The two v1 citizenship rewards were permanent, so `.32` can be
+# migrated without asking the player. All other expired choices are reviewed.
+ffpa_ensure_western_integration_rewards_v2 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_western_integration_rewards_migrated_v2 }
+		}
+		if = {
+			limit = {
+				has_variable = ffpa_byz_western_civic_extension_fired_v1
+				NOT = { has_variable = ffpa_byz_western_citizenship_choice_v2 }
+				has_modifier = ffpa_byz_western_universal_citizenship
+			}
+			ffpa_clear_byz_western_citizenship_rewards_v1 = yes
+			set_variable = { name = ffpa_byz_western_citizenship_choice_v2 value = 1 }
+			add_modifier = { name = ffpa_byz_western_universal_citizenship_v2 }
+		}
+		else_if = {
+			limit = {
+				has_variable = ffpa_byz_western_civic_extension_fired_v1
+				NOT = { has_variable = ffpa_byz_western_citizenship_choice_v2 }
+				has_modifier = ffpa_byz_western_provincial_civic_compact
+			}
+			ffpa_clear_byz_western_citizenship_rewards_v1 = yes
+			set_variable = { name = ffpa_byz_western_citizenship_choice_v2 value = 2 }
+			add_modifier = { name = ffpa_byz_western_provincial_civic_compact_v2 }
+			every_scope_state = {
+				limit = {
+					ffpa_is_byzantine_western_integration_state = yes
+					NOT = { has_modifier = ffpa_byz_western_provincial_civic_compact_state_v2 }
+				}
+				add_modifier = ffpa_byz_western_provincial_civic_compact_state_v2
+			}
+		}
+
+		ffpa_schedule_next_western_integration_reward_review_v2 = yes
+	}
+}
+
 # Country scope. Called only when a relevant construction journal completes,
 # when Rhomaic identity is adopted, or by the one-shot old-save migration.
 # Events are staggered to avoid presenting several popups on the same day.
@@ -624,6 +785,7 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 		limit = { c:BYZ ?= ROOT }
 		ffpa_ensure_byzantine_formation_effects = yes
 		ffpa_ensure_byz_commonwealth_progress_v3 = yes
+		ffpa_ensure_western_integration_rewards_v2 = yes
 
 		if = {
 			limit = { NOT = { has_variable = ffpa_byz_formation_ideologies_v1 } }

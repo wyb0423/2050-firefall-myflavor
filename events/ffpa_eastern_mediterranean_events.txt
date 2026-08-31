@@ -1024,13 +1024,24 @@ ffpa_flavor.25 = {
 	}
 }
 
-# --- Finite Byzantine western-integration events ---
+# --- Permanent Byzantine western-integration settlements ---
 
 ffpa_flavor.30 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.30.t
-	desc = ffpa_flavor.30.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.30.review_d
+				trigger = { has_variable = ffpa_byz_mediterranean_congress_review_v2 }
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.30.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.30.f
 	event_image = { video = "unspecific_trains" }
 	icon = "gfx/interface/icons/event_icons/event_industry.dds"
@@ -1039,6 +1050,7 @@ ffpa_flavor.30 = {
 	trigger = {
 		c:BYZ ?= this
 		has_variable = ffpa_byz_mediterranean_congress_scheduled_v1
+		NOT = { has_variable = ffpa_byz_western_investment_choice_v2 }
 	}
 	immediate = {
 		remove_variable = ffpa_byz_mediterranean_congress_scheduled_v1
@@ -1048,21 +1060,94 @@ ffpa_flavor.30 = {
 	option = {
 		name = ffpa_flavor.30.a
 		default_option = yes
-		add_modifier = { name = ffpa_byz_mediterranean_industrial_credit years = 10 }
-		add_loyalists = { value = 0.04 interest_group = ig:ig_industrialists }
-		ai_chance = { factor = 1.2 }
+		ffpa_clear_byz_mediterranean_investment_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_investment_choice_v2 value = 1 }
+		add_modifier = { name = ffpa_byz_mediterranean_industrial_credit_v2 }
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_mediterranean_congress_review_v2 } }
+			add_loyalists = { value = 0.04 interest_group = ig:ig_industrialists }
+			add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_industrialists ?= { is_powerful = yes } }
+				add = 0.6
+			}
+			modifier = {
+				trigger = { has_variable = ffpa_italian_urban_axis_complete }
+				add = 0.4
+			}
+		}
 	}
 	option = {
 		name = ffpa_flavor.30.b
-		add_modifier = { name = ffpa_byz_mediterranean_port_rail_fund years = 10 }
-		add_loyalists = { value = 0.03 interest_group = ig:ig_petty_bourgeoisie }
-		ai_chance = { factor = 1.1 }
+		ffpa_clear_byz_mediterranean_investment_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_investment_choice_v2 value = 2 }
+		every_scope_state = {
+			limit = {
+				ffpa_is_byzantine_western_integration_state = yes
+				NOT = { has_modifier = ffpa_byz_mediterranean_port_rail_network_state_v2 }
+			}
+			add_modifier = ffpa_byz_mediterranean_port_rail_network_state_v2
+		}
+		add_modifier = { name = ffpa_byz_mediterranean_concessions_v2 }
+		custom_tooltip = ffpa_western_integration_state_snapshot_tt
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_mediterranean_congress_review_v2 } }
+			add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+			add_loyalists = { value = 0.02 interest_group = ig:ig_industrialists }
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_petty_bourgeoisie ?= { is_powerful = yes } }
+				add = 0.5
+			}
+			modifier = {
+				trigger = { has_variable = ffpa_western_mediterranean_sea_lanes_complete }
+				add = 0.4
+			}
+		}
 	}
 	option = {
 		name = ffpa_flavor.30.c
-		add_modifier = { name = ffpa_byz_mediterranean_development_banks years = 10 }
-		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
-		ai_chance = { factor = 1 }
+		ffpa_clear_byz_mediterranean_investment_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_investment_choice_v2 value = 3 }
+		every_scope_state = {
+			limit = {
+				ffpa_is_byzantine_western_integration_state = yes
+				NOT = { has_modifier = ffpa_byz_mediterranean_development_banks_state_v2 }
+			}
+			add_modifier = ffpa_byz_mediterranean_development_banks_state_v2
+		}
+		add_modifier = { name = ffpa_byz_mediterranean_banking_compact_v2 }
+		custom_tooltip = ffpa_western_integration_state_snapshot_tt
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_mediterranean_congress_review_v2 } }
+			add_loyalists = { value = 0.02 interest_group = ig:ig_intelligentsia }
+			add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_intelligentsia ?= { is_powerful = yes } }
+				add = 0.5
+			}
+			modifier = {
+				trigger = { bureaucracy < 0 }
+				add = 0.3
+			}
+		}
+	}
+
+	after = {
+		if = {
+			limit = { has_variable = ffpa_byz_mediterranean_congress_review_v2 }
+			remove_variable = ffpa_byz_mediterranean_congress_review_v2
+			remove_variable = ffpa_byz_western_reward_review_active_v2
+			ffpa_schedule_next_western_integration_reward_review_v2 = yes
+		}
 	}
 }
 
@@ -1070,7 +1155,18 @@ ffpa_flavor.31 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.31.t
-	desc = ffpa_flavor.31.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.31.review_d
+				trigger = { has_variable = ffpa_byz_western_cadastre_review_v2 }
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.31.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.31.f
 	event_image = { video = "unspecific_signed_contract" }
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
@@ -1079,6 +1175,7 @@ ffpa_flavor.31 = {
 	trigger = {
 		c:BYZ ?= this
 		has_variable = ffpa_byz_western_cadastre_scheduled_v1
+		NOT = { has_variable = ffpa_byz_western_cadastre_choice_v2 }
 	}
 	immediate = {
 		remove_variable = ffpa_byz_western_cadastre_scheduled_v1
@@ -1088,34 +1185,104 @@ ffpa_flavor.31 = {
 	option = {
 		name = ffpa_flavor.31.a
 		default_option = yes
+		ffpa_clear_byz_western_cadastre_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_cadastre_choice_v2 value = 1 }
 		every_scope_state = {
-			limit = { ffpa_is_byzantine_western_integration_state = yes }
-			add_modifier = { name = ffpa_byz_western_uniform_cadastre_state years = 10 }
+			limit = {
+				ffpa_is_byzantine_western_integration_state = yes
+				NOT = { has_modifier = ffpa_byz_western_uniform_cadastre_state_v2 }
+			}
+			add_modifier = ffpa_byz_western_uniform_cadastre_state_v2
 		}
-		add_modifier = { name = ffpa_byz_western_uniform_cadastre_cost years = 10 }
-		add_radicals = { value = 0.04 interest_group = ig:ig_landowners }
+		add_modifier = { name = ffpa_byz_western_uniform_cadastre_burden_v2 }
+		custom_tooltip = ffpa_western_integration_state_snapshot_tt
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_western_cadastre_review_v2 } }
+			add_radicals = { value = 0.04 interest_group = ig:ig_landowners }
+		}
 		ai_chance = {
-			factor = 1.3
+			factor = 1.1
 			modifier = {
 				trigger = { bureaucracy < 0 }
-				add = -0.8
+				add = -0.6
+			}
+			modifier = {
+				trigger = { ig:ig_landowners ?= { is_powerful = yes } }
+				add = -0.3
 			}
 		}
 	}
 	option = {
 		name = ffpa_flavor.31.b
+		ffpa_clear_byz_western_cadastre_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_cadastre_choice_v2 value = 2 }
 		every_scope_state = {
-			limit = { ffpa_is_byzantine_western_integration_state = yes }
-			add_modifier = { name = ffpa_byz_western_provincial_tax_state years = 10 }
+			limit = {
+				ffpa_is_byzantine_western_integration_state = yes
+				NOT = { has_modifier = ffpa_byz_western_municipal_tax_compact_state_v2 }
+			}
+			add_modifier = ffpa_byz_western_municipal_tax_compact_state_v2
 		}
-		add_modifier = { name = ffpa_byz_western_provincial_tax_compact years = 10 }
-		add_loyalists = { value = 0.04 interest_group = ig:ig_landowners }
+		add_modifier = { name = ffpa_byz_western_municipal_vetoes_v2 }
+		custom_tooltip = ffpa_western_integration_state_snapshot_tt
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_western_cadastre_review_v2 } }
+			add_loyalists = { value = 0.03 interest_group = ig:ig_landowners }
+			add_loyalists = { value = 0.02 interest_group = ig:ig_devout }
+		}
 		ai_chance = {
-			factor = 1
+			factor = 0.9
 			modifier = {
 				trigger = { bureaucracy < 0 }
+				add = 0.5
+			}
+			modifier = {
+				trigger = { ig:ig_landowners ?= { is_powerful = yes } }
+				add = 0.4
+			}
+			modifier = {
+				trigger = { ig:ig_devout ?= { is_powerful = yes } }
+				add = 0.3
+			}
+		}
+	}
+	option = {
+		name = ffpa_flavor.31.c
+		ffpa_clear_byz_western_cadastre_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_cadastre_choice_v2 value = 3 }
+		every_scope_state = {
+			limit = {
+				ffpa_is_byzantine_outer_western_integration_state = yes
+				NOT = { has_modifier = ffpa_byz_western_military_survey_state_v2 }
+			}
+			add_modifier = ffpa_byz_western_military_survey_state_v2
+		}
+		add_modifier = { name = ffpa_byz_western_military_survey_corps_v2 }
+		custom_tooltip = ffpa_outer_western_integration_state_snapshot_tt
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_western_cadastre_review_v2 } }
+			add_loyalists = { value = 0.03 interest_group = ig:ig_armed_forces }
+			add_radicals = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		}
+		ai_chance = {
+			factor = 0.8
+			modifier = {
+				trigger = { is_at_war = yes }
+				add = 0.7
+			}
+			modifier = {
+				trigger = { ig:ig_armed_forces ?= { is_powerful = yes } }
 				add = 0.6
 			}
+		}
+	}
+
+	after = {
+		if = {
+			limit = { has_variable = ffpa_byz_western_cadastre_review_v2 }
+			remove_variable = ffpa_byz_western_cadastre_review_v2
+			remove_variable = ffpa_byz_western_reward_review_active_v2
+			ffpa_schedule_next_western_integration_reward_review_v2 = yes
 		}
 	}
 }
@@ -1124,7 +1291,18 @@ ffpa_flavor.32 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.32.t
-	desc = ffpa_flavor.32.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.32.review_d
+				trigger = { has_variable = ffpa_byz_western_civic_extension_review_v2 }
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.32.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.32.f
 	event_image = { video = "unspecific_ruler_speaking_to_people" }
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
@@ -1133,6 +1311,7 @@ ffpa_flavor.32 = {
 	trigger = {
 		c:BYZ ?= this
 		has_variable = ffpa_byz_western_civic_extension_scheduled_v1
+		NOT = { has_variable = ffpa_byz_western_citizenship_choice_v2 }
 	}
 	immediate = {
 		remove_variable = ffpa_byz_western_civic_extension_scheduled_v1
@@ -1142,17 +1321,90 @@ ffpa_flavor.32 = {
 	option = {
 		name = ffpa_flavor.32.a
 		default_option = yes
-		add_modifier = { name = ffpa_byz_western_universal_citizenship }
-		add_loyalists = { value = 0.04 interest_group = ig:ig_intelligentsia }
-		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
-		ai_chance = { factor = 1.2 }
+		ffpa_clear_byz_western_citizenship_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_citizenship_choice_v2 value = 1 }
+		add_modifier = { name = ffpa_byz_western_universal_citizenship_v2 }
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_western_civic_extension_review_v2 } }
+			add_loyalists = { value = 0.04 interest_group = ig:ig_intelligentsia }
+			add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+		}
+		ai_chance = {
+			factor = 1.1
+			modifier = {
+				trigger = { ig:ig_intelligentsia ?= { is_powerful = yes } }
+				add = 0.5
+			}
+		}
 	}
 	option = {
 		name = ffpa_flavor.32.b
-		add_modifier = { name = ffpa_byz_western_provincial_civic_compact }
-		add_loyalists = { value = 0.03 interest_group = ig:ig_landowners }
-		add_loyalists = { value = 0.03 interest_group = ig:ig_devout }
-		ai_chance = { factor = 1 }
+		ffpa_clear_byz_western_citizenship_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_citizenship_choice_v2 value = 2 }
+		add_modifier = { name = ffpa_byz_western_provincial_civic_compact_v2 }
+		every_scope_state = {
+			limit = {
+				ffpa_is_byzantine_western_integration_state = yes
+				NOT = { has_modifier = ffpa_byz_western_provincial_civic_compact_state_v2 }
+			}
+			add_modifier = ffpa_byz_western_provincial_civic_compact_state_v2
+		}
+		custom_tooltip = ffpa_western_integration_state_snapshot_tt
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_western_civic_extension_review_v2 } }
+			add_loyalists = { value = 0.03 interest_group = ig:ig_landowners }
+			add_loyalists = { value = 0.03 interest_group = ig:ig_devout }
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_landowners ?= { is_powerful = yes } }
+				add = 0.4
+			}
+			modifier = {
+				trigger = { ig:ig_devout ?= { is_powerful = yes } }
+				add = 0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_flavor.32.c
+		ffpa_clear_byz_western_citizenship_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_citizenship_choice_v2 value = 3 }
+		add_modifier = { name = ffpa_byz_western_service_citizenship_v2 }
+		every_scope_state = {
+			limit = {
+				ffpa_is_byzantine_outer_western_integration_state = yes
+				NOT = { has_modifier = ffpa_byz_western_veteran_settlement_state_v2 }
+			}
+			add_modifier = ffpa_byz_western_veteran_settlement_state_v2
+		}
+		custom_tooltip = ffpa_outer_western_integration_state_snapshot_tt
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_western_civic_extension_review_v2 } }
+			add_loyalists = { value = 0.03 interest_group = ig:ig_armed_forces }
+			add_radicals = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		}
+		ai_chance = {
+			factor = 0.8
+			modifier = {
+				trigger = { is_at_war = yes }
+				add = 0.7
+			}
+			modifier = {
+				trigger = { ig:ig_armed_forces ?= { is_powerful = yes } }
+				add = 0.6
+			}
+		}
+	}
+
+	after = {
+		if = {
+			limit = { has_variable = ffpa_byz_western_civic_extension_review_v2 }
+			remove_variable = ffpa_byz_western_civic_extension_review_v2
+			remove_variable = ffpa_byz_western_reward_review_active_v2
+			ffpa_schedule_next_western_integration_reward_review_v2 = yes
+		}
 	}
 }
 
@@ -1160,7 +1412,18 @@ ffpa_flavor.33 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.33.t
-	desc = ffpa_flavor.33.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.33.review_d
+				trigger = { has_variable = ffpa_byz_western_representation_review_v2 }
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.33.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.33.f
 	event_image = { video = "unspecific_politicians_arguing" }
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
@@ -1169,6 +1432,7 @@ ffpa_flavor.33 = {
 	trigger = {
 		c:BYZ ?= this
 		has_variable = ffpa_byz_western_representation_scheduled_v1
+		NOT = { has_variable = ffpa_byz_western_representation_choice_v2 }
 	}
 	immediate = {
 		remove_variable = ffpa_byz_western_representation_scheduled_v1
@@ -1178,21 +1442,109 @@ ffpa_flavor.33 = {
 	option = {
 		name = ffpa_flavor.33.a
 		default_option = yes
-		add_modifier = { name = ffpa_byz_western_common_electoral_roll years = 8 }
-		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
-		ai_chance = { factor = 1.2 }
+		ffpa_clear_byz_western_representation_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_representation_choice_v2 value = 1 }
+		add_modifier = { name = ffpa_byz_western_common_electoral_roll_v2 }
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_western_representation_review_v2 } }
+			add_loyalists = { value = 0.02 interest_group = ig:ig_intelligentsia }
+			add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+			add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+		}
+		ai_chance = {
+			factor = 1.1
+			modifier = {
+				trigger = { ig:ig_intelligentsia ?= { is_powerful = yes } }
+				add = 0.5
+			}
+			modifier = {
+				trigger = { country_has_monarchy_law = yes }
+				add = -0.4
+			}
+		}
 	}
 	option = {
 		name = ffpa_flavor.33.b
-		add_modifier = { name = ffpa_byz_western_provincial_delegations years = 8 }
-		add_loyalists = { value = 0.03 interest_group = ig:ig_petty_bourgeoisie }
-		ai_chance = { factor = 1 }
+		ffpa_clear_byz_western_representation_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_representation_choice_v2 value = 2 }
+		every_scope_state = {
+			limit = {
+				ffpa_is_byzantine_western_integration_state = yes
+				NOT = { has_modifier = ffpa_byz_western_provincial_delegations_state_v2 }
+			}
+			add_modifier = ffpa_byz_western_provincial_delegations_state_v2
+		}
+		add_modifier = { name = ffpa_byz_western_provincial_delegations_v2 }
+		custom_tooltip = ffpa_western_integration_state_snapshot_tt
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_western_representation_review_v2 } }
+			add_loyalists = { value = 0.03 interest_group = ig:ig_petty_bourgeoisie }
+			add_loyalists = { value = 0.02 interest_group = ig:ig_devout }
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_petty_bourgeoisie ?= { is_powerful = yes } }
+				add = 0.4
+			}
+			modifier = {
+				trigger = { ig:ig_devout ?= { is_powerful = yes } }
+				add = 0.2
+			}
+		}
 	}
 	option = {
 		name = ffpa_flavor.33.c
 		trigger = { country_has_monarchy_law = yes }
-		add_modifier = { name = ffpa_byz_western_crown_senate years = 8 }
-		add_radicals = { value = 0.03 interest_group = ig:ig_intelligentsia }
-		ai_chance = { factor = 0.8 }
+		ffpa_clear_byz_western_representation_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_representation_choice_v2 value = 3 }
+		set_variable = ffpa_byz_western_crown_senate_variant_v2
+		add_modifier = { name = ffpa_byz_western_crown_senate_v2 }
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_western_representation_review_v2 } }
+			add_loyalists = { value = 0.03 interest_group = ig:ig_landowners }
+			add_radicals = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_landowners ?= { is_powerful = yes } }
+				add = 0.6
+			}
+		}
+	}
+	option = {
+		name = ffpa_flavor.33.c_republic
+		trigger = { NOT = { country_has_monarchy_law = yes } }
+		ffpa_clear_byz_western_representation_rewards_v1 = yes
+		set_variable = { name = ffpa_byz_western_representation_choice_v2 value = 3 }
+		set_variable = ffpa_byz_western_notables_senate_variant_v2
+		add_modifier = { name = ffpa_byz_western_notables_senate_v2 }
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_western_representation_review_v2 } }
+			add_loyalists = { value = 0.02 interest_group = ig:ig_landowners }
+			add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+			add_radicals = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		}
+		ai_chance = {
+			factor = 0.8
+			modifier = {
+				trigger = { ig:ig_petty_bourgeoisie ?= { is_powerful = yes } }
+				add = 0.4
+			}
+			modifier = {
+				trigger = { ig:ig_landowners ?= { is_powerful = yes } }
+				add = 0.4
+			}
+		}
+	}
+
+	after = {
+		if = {
+			limit = { has_variable = ffpa_byz_western_representation_review_v2 }
+			remove_variable = ffpa_byz_western_representation_review_v2
+			remove_variable = ffpa_byz_western_reward_review_active_v2
+			ffpa_schedule_next_western_integration_reward_review_v2 = yes
+		}
 	}
 }
