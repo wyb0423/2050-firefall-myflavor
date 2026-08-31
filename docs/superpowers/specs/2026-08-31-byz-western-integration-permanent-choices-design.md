@@ -31,7 +31,7 @@ BYZ 的四个西方整合单次事件当前由帝国地区建设完成状态和�
 - 不让西方整合事件直接读取各地区 JE 的内部字段；继续只消费地区建设模块导出的稳定查询。
 - 不增加跨四个事件的隐藏路线分数、组合技、第四阶段终局奖励或可重复洗点功能。
 - 不把出生率、死亡率作为永久人口奖励；Tech & Res 已经通过发展阶段和医疗系统大幅改变这些数值。
-- 不为以后征服的所有西方州增加月度全球扫描或复杂的所有权同步状态机。
+- 不让历史地区快照奖励追随后续征服；`.32` 的动态整合速度只通过低频州 on_action 同步，不增加月度全球扫描。
 - 不改变 TUR 事件、BYZ 成立链、共同体三轴、国家身份或上游覆盖对象。
 
 ## 4. 采用架构
@@ -82,6 +82,8 @@ ffpa_flavor.30–.33
 的州。
 
 以后新征服的州不会自动获得。已经获得地区 modifier 的州即使被割让，也保留当地形成的基础设施、地籍或制度遗产。该规则避免增加月度扫描，并让地区奖励表示已经完成的历史投资，而不是随国界实时移动的抽象国家政策。
+
+例外仅限 `.32` 的动态地区整合速度。该奖励不是历史投资快照，而是公民权政策在未整合白名单州持续发挥的行政效果；它按 `2026-08-31-byz-western-citizenship-incorporation-speed-design.md` 通过州级 on_action 同步，未来取得的白名单州可以获得，整合完成或失去领土后移除。
 
 现有 `ffpa_is_byzantine_western_integration_state` 继续作为全部西方整合州的稳定查询。实施军事测绘和退伍军人殖民选项时，地区建设模块新增一个仅按地理范围判断的稳定州查询，例如 `ffpa_is_byzantine_outer_western_integration_state`；风味事件不得自行读取地区 JE 的完成变量。
 
@@ -228,13 +230,16 @@ ffpa_flavor.30–.33
 建议技术对象：
 
 - 选择值：`ffpa_byz_western_citizenship_choice_v2 = 1`；
-- 国家 modifier：`ffpa_byz_western_universal_citizenship_v2`。
+- 国家 modifier：`ffpa_byz_western_universal_citizenship_v2`；
+- 动态州 modifier：`ffpa_byz_western_universal_incorporation_state_v1`。
 
 永久效果：
 
 - 意大利、西班牙、马耳他、埃及和北非相关文化接受度 `+15`；
 - 次等公民忠诚度增长 `+10%`；
 - 权威 `-150`。
+
+当前及以后取得的未整合西方整合白名单州获得地区整合速度 `+75%`，整合完成或失去该州后移除。
 
 一次性反应：知识分子忠诚派增加，地主激进派增加。
 
@@ -246,7 +251,8 @@ ffpa_flavor.30–.33
 
 - 选择值：`ffpa_byz_western_citizenship_choice_v2 = 2`；
 - 国家 modifier：`ffpa_byz_western_provincial_civic_compact_v2`；
-- 州 modifier：`ffpa_byz_western_provincial_civic_compact_state_v2`。
+- 快照州 modifier：`ffpa_byz_western_provincial_civic_compact_state_v2`；
+- 动态州 modifier：`ffpa_byz_western_provincial_incorporation_state_v1`。
 
 全国永久效果：
 
@@ -258,6 +264,8 @@ ffpa_flavor.30–.33
 - 移民吸引力 `+10%`；
 - 资格获取 `+10%`。
 
+当前及以后取得的未整合西方整合白名单州获得地区整合速度 `+50%`，整合完成或失去该州后移除。移民和资格奖励仍只按事件选择时的州快照发放。
+
 一次性反应：地主与虔信者忠诚派增加。
 
 风味定位：公民权通过城市、行省和宗教共同体逐层落实，社会整合温和，但帝国法律必须容纳地方传统。
@@ -268,7 +276,8 @@ ffpa_flavor.30–.33
 
 - 选择值：`ffpa_byz_western_citizenship_choice_v2 = 3`；
 - 国家 modifier：`ffpa_byz_western_service_citizenship_v2`；
-- 州 modifier：`ffpa_byz_western_veteran_settlement_state_v2`。
+- 外西方快照州 modifier：`ffpa_byz_western_veteran_settlement_state_v2`；
+- 动态州 modifier：`ffpa_byz_western_service_incorporation_state_v1`。
 
 全国永久效果与代价：
 
@@ -279,6 +288,8 @@ ffpa_flavor.30–.33
 向当时拥有的外西方边疆州永久发放：
 
 - 移民吸引力 `+5%`。
+
+当前及以后取得的未整合西方整合完整白名单州获得地区整合速度 `+25%`，整合完成或失去该州后移除。退伍军人定居奖励仍只授予事件发生时拥有的外西方边疆州。
 
 一次性反应：军队忠诚派增加，知识分子少量激进化。
 
@@ -431,6 +442,7 @@ AI 权重只使用当前 country scope 中成本较低、语义稳定的条件�
 - `events/ffpa_eastern_mediterranean_events.txt`：替换 `.30`–`.33` 选项效果、增加 review 模式和政体分支；
 - `common/static_modifiers/ffpa_eastern_mediterranean_modifiers.txt`：新增 v2 国家与州 modifier，保留旧定义供迁移识别；
 - `common/scripted_effects/ffpa_eastern_mediterranean_effects.txt`：增加幂等迁移、补选调度和公共发奖/旧奖励清理 effect；
+- `common/on_actions/ffpa_eastern_mediterranean_on_actions.txt`：为 `.32` 的动态整合速度追加所有权、新州和整合状态变化包装入口，不改变 pulse 频率；
 - `common/scripted_triggers/ffpa_eastern_mediterranean_triggers.txt`：增加外西方边疆州稳定查询及必要的迁移判断；
 - `localization/english/ffpa_l_english.yml`：同步事件、选项、modifier 与迁移文本；
 - `localization/simp_chinese/ffpa_l_simp_chinese.yml`：与英文保持相同键集合。
@@ -454,7 +466,7 @@ AI 权重只使用当前 country scope 中成本较低、语义稳定的条件�
 
 - 新 BYZ 依次达到四个既有触发条件时，每个事件只触发一次并写入一个 v2 选择。
 - 地区 modifier 只发给选择时实际拥有且符合范围的州；同一州不重复获得同名 modifier。
-- 后续征服不会自动获得历史地区奖励；被割让的奖励州保留地区遗产。
+- 后续征服不会自动获得历史地区快照奖励；被割让的奖励州保留地区遗产。只有 `.32` 的动态整合速度按专项设计随符合条件的白名单州取得、整合和失去而同步。
 - `.32` 旧永久选择可自动迁移且不叠加新旧 modifier。
 - `.30`、`.31`、`.33` 旧 fired 状态依次进入补选，不同会议不会同时弹窗。
 - 补选不重复制造忠诚派或激进派，仍存在的旧限时奖励会被清理。

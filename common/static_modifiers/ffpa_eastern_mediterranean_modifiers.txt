@@ -596,6 +596,24 @@ ffpa_byz_western_veteran_settlement_state_v2 = {
 	state_migration_pull_mult = 0.05
 }
 
+# Dynamic incorporation rewards. Unlike the permanent v2 settlement snapshots,
+# these exist only while BYZ owns an unincorporated state on the full western
+# integration whitelist.
+ffpa_byz_western_universal_incorporation_state_v1 = {
+	icon = gfx/interface/icons/generic_icons/accepted_icon.dds
+	state_incorporation_speed_mult = 0.75
+}
+
+ffpa_byz_western_provincial_incorporation_state_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_incorporation_speed_mult = 0.50
+}
+
+ffpa_byz_western_service_incorporation_state_v1 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	state_incorporation_speed_mult = 0.25
+}
+
 ffpa_byz_western_common_electoral_roll_v2 = {
 	icon = gfx/interface/icons/event_icons/event_election.dds
 	country_law_enactment_success_add = 0.05

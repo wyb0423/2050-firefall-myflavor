@@ -1324,6 +1324,11 @@ ffpa_flavor.32 = {
 		ffpa_clear_byz_western_citizenship_rewards_v1 = yes
 		set_variable = { name = ffpa_byz_western_citizenship_choice_v2 value = 1 }
 		add_modifier = { name = ffpa_byz_western_universal_citizenship_v2 }
+		custom_tooltip = ffpa_byz_western_universal_incorporation_tt
+		hidden_effect = {
+			ffpa_refresh_byz_western_citizenship_incorporation_states_v1 = yes
+			set_variable = ffpa_byz_western_citizenship_incorporation_migrated_v1
+		}
 		if = {
 			limit = { NOT = { has_variable = ffpa_byz_western_civic_extension_review_v2 } }
 			add_loyalists = { value = 0.04 interest_group = ig:ig_intelligentsia }
@@ -1350,6 +1355,11 @@ ffpa_flavor.32 = {
 			add_modifier = ffpa_byz_western_provincial_civic_compact_state_v2
 		}
 		custom_tooltip = ffpa_western_integration_state_snapshot_tt
+		custom_tooltip = ffpa_byz_western_provincial_incorporation_tt
+		hidden_effect = {
+			ffpa_refresh_byz_western_citizenship_incorporation_states_v1 = yes
+			set_variable = ffpa_byz_western_citizenship_incorporation_migrated_v1
+		}
 		if = {
 			limit = { NOT = { has_variable = ffpa_byz_western_civic_extension_review_v2 } }
 			add_loyalists = { value = 0.03 interest_group = ig:ig_landowners }
@@ -1380,6 +1390,11 @@ ffpa_flavor.32 = {
 			add_modifier = ffpa_byz_western_veteran_settlement_state_v2
 		}
 		custom_tooltip = ffpa_outer_western_integration_state_snapshot_tt
+		custom_tooltip = ffpa_byz_western_service_incorporation_tt
+		hidden_effect = {
+			ffpa_refresh_byz_western_citizenship_incorporation_states_v1 = yes
+			set_variable = ffpa_byz_western_citizenship_incorporation_migrated_v1
+		}
 		if = {
 			limit = { NOT = { has_variable = ffpa_byz_western_civic_extension_review_v2 } }
 			add_loyalists = { value = 0.03 interest_group = ig:ig_armed_forces }

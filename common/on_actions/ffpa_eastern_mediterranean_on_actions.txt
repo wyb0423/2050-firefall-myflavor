@@ -19,6 +19,70 @@ ffpa_on_eastern_mediterranean_country_formed = {
 			ffpa_ensure_byzantine_formation_effects = yes
 			ffpa_apply_byz_formation_ideologies_v1 = yes
 		}
+		if = {
+			limit = {
+				OR = {
+					c:BYZ ?= ROOT
+					any_scope_state = {
+						OR = {
+							has_modifier = ffpa_byz_western_universal_incorporation_state_v1
+							has_modifier = ffpa_byz_western_provincial_incorporation_state_v1
+							has_modifier = ffpa_byz_western_service_incorporation_state_v1
+						}
+					}
+				}
+			}
+			# Country -> owned states. This also clears rewards if BYZ forms another tag.
+			ffpa_refresh_byz_western_citizenship_incorporation_states_v1 = yes
+		}
+	}
+}
+
+on_state_incorporation = {
+	on_actions = {
+		ffpa_on_byz_western_citizenship_state_changed_v1
+	}
+}
+
+on_state_owner_change = {
+	on_actions = {
+		ffpa_on_byz_western_citizenship_state_changed_v1
+	}
+}
+
+on_state_created = {
+	on_actions = {
+		ffpa_on_byz_western_citizenship_state_changed_v1
+	}
+}
+
+# Triggered only by state-scoped code on_actions. Existing dynamic modifiers
+# always enter so ownership loss, incorporation, or later whitelist changes can
+# clean them. Eligible new BYZ states enter through the second branch.
+ffpa_on_byz_western_citizenship_state_changed_v1 = {
+	trigger = {
+		OR = {
+			has_modifier = ffpa_byz_western_universal_incorporation_state_v1
+			has_modifier = ffpa_byz_western_provincial_incorporation_state_v1
+			has_modifier = ffpa_byz_western_service_incorporation_state_v1
+			AND = {
+				ffpa_is_byzantine_western_integration_state = yes
+				is_incorporated = no
+				# State -> current owner country.
+				owner ?= {
+					c:BYZ ?= this
+					has_variable = ffpa_byz_western_citizenship_choice_v2
+					OR = {
+						var:ffpa_byz_western_citizenship_choice_v2 = 1
+						var:ffpa_byz_western_citizenship_choice_v2 = 2
+						var:ffpa_byz_western_citizenship_choice_v2 = 3
+					}
+				}
+			}
+		}
+	}
+	effect = {
+		ffpa_refresh_byz_western_citizenship_incorporation_state_v1 = yes
 	}
 }
 

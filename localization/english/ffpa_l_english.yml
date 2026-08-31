@@ -467,6 +467,9 @@
 
  ffpa_western_integration_state_snapshot_tt: "The permanent provincial reward is granted only to eligible western states currently owned by [GetPlayer.GetName]. Later conquests do not inherit it."
  ffpa_outer_western_integration_state_snapshot_tt: "The permanent provincial reward is granted only to currently owned states covered by the western sea-lane, Spanian, Mauretanian, and Alexandria-Sinai projects. Later conquests do not inherit it."
+ ffpa_byz_western_universal_incorporation_tt: "Every currently owned or later acquired unincorporated state within the Western Integration territories gains +75% state incorporation speed until it is incorporated or lost."
+ ffpa_byz_western_provincial_incorporation_tt: "Every currently owned or later acquired unincorporated state within the Western Integration territories gains +50% state incorporation speed until it is incorporated or lost."
+ ffpa_byz_western_service_incorporation_tt: "Every currently owned or later acquired unincorporated state within the Western Integration territories gains +25% state incorporation speed until it is incorporated or lost."
 
  ffpa_byz_mediterranean_industrial_credit: "Mediterranean Industrial Credit"
  ffpa_byz_mediterranean_industrial_credit_desc: "Imperial guarantees channel a decade of credit into manufacturing and skilled labor, at the cost of additional administration."
@@ -527,6 +530,12 @@
  ffpa_byz_western_service_citizenship_v2_desc: "Military and public service open a narrower road to citizenship, producing experienced formations at a higher material cost."
  ffpa_byz_western_veteran_settlement_state_v2: "Veteran Service Colonies"
  ffpa_byz_western_veteran_settlement_state_v2_desc: "Veterans and public servants receive land and civic status in this outer western province."
+ ffpa_byz_western_universal_incorporation_state_v1: "Universal Roman Civic Integration"
+ ffpa_byz_western_universal_incorporation_state_v1_desc: "Uniform Roman citizenship accelerates the legal and administrative integration of this western province."
+ ffpa_byz_western_provincial_incorporation_state_v1: "Provincial Civic Integration"
+ ffpa_byz_western_provincial_incorporation_state_v1_desc: "Civic compacts let local communities help integrate this western province into the imperial administration."
+ ffpa_byz_western_service_incorporation_state_v1: "Service-Based Civic Integration"
+ ffpa_byz_western_service_incorporation_state_v1_desc: "Military and public service establish a limited administrative bridge between this western province and the Empire."
 
  ffpa_byz_western_common_electoral_roll_v2: "One Imperial Electoral Roll"
  ffpa_byz_western_common_electoral_roll_v2_desc: "A common franchise improves legislative legitimacy while reducing executive authority and confronting landed privilege."

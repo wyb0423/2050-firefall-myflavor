@@ -170,7 +170,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 - TUR 与 BYZ 的重建、共同体、首都工程和有限政治经济事件。
 - `namespace = ffpa_flavor` 的事件 ID 空间。
-- `on_country_formed`、月度迁移检查和首次选举入口。
+- `on_country_formed`、月度迁移检查、首次选举和 BYZ 公民权白名单州动态整合入口。
 - 版本化迁移、一次性事件标记、共同体三轴进退和清理路径。
 
 **边界与风险**
@@ -232,7 +232,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 | 共享接缝 | 当前使用者 | 规则 |
 |---|---|---|
-| `common/on_actions/ffpa_eastern_mediterranean_on_actions.txt` | 东地中海成立、迁移、选举 | 仅调度 TUR/BYZ；不得吸收全局经济功能。 |
+| `common/on_actions/ffpa_eastern_mediterranean_on_actions.txt` | 东地中海成立、迁移、选举、公民权州同步 | 仅调度 TUR/BYZ；州所有权、新州和整合入口必须先用白名单、owner 或既有 modifier 轻量过滤，不得吸收全局经济功能。 |
 | `common/static_modifiers/ffpa_eastern_mediterranean_modifiers.txt` | 风味、共同体、地区建设 | 技术 ID 前缀决定内部所有者；整理文件时按定义完整移动，不复制。 |
 | `common/scripted_triggers/ffpa_eastern_mediterranean_triggers.txt` | 风味与地区建设 | 地区模块导出查询 trigger，风味模块消费；禁止反向读取风味内部变量。 |
 | `events/ffpa_eastern_mediterranean_events.txt` | TUR/BYZ 风味与西方整合 | 共享 `ffpa_flavor` namespace；新增 ID 先搜索冲突，不重编号旧事件。 |
@@ -311,6 +311,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 共同体三轴分别前进/倒退，完成奖励不重复。
 - 所有失败、取消、政体变化、标签形成和旧存档路径都能清理或迁移状态。
 - 地区建设只奖励实际覆盖州；完成状态可稳定触发一次西方整合事件。
+- 公民权整合速度只作用于 BYZ 拥有的未整合西方白名单州，未来取得、失去、完成整合和身份变化路径能补发或清理。
 - 动态国名、政府称号、党名、旗帜和两种语言在主要政体路径下显示正确。
 
 ### 9.5 Core Balance 拆分集成验证

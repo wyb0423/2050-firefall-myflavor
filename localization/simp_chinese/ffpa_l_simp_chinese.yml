@@ -467,6 +467,9 @@
 
  ffpa_western_integration_state_snapshot_tt: "永久行省奖励仅授予[GetPlayer.GetName]目前拥有的合格西方州；以后征服的州不会继承。"
  ffpa_outer_western_integration_state_snapshot_tt: "永久行省奖励仅授予目前拥有、且属于西部海路、西班牙、毛里塔尼亚和亚历山大—西奈工程范围的州；以后征服的州不会继承。"
+ ffpa_byz_western_universal_incorporation_tt: "目前拥有或以后取得、且属于西方整合范围的所有未整合州获得+75%地区整合速度，直至完成整合或失去该州。"
+ ffpa_byz_western_provincial_incorporation_tt: "目前拥有或以后取得、且属于西方整合范围的所有未整合州获得+50%地区整合速度，直至完成整合或失去该州。"
+ ffpa_byz_western_service_incorporation_tt: "目前拥有或以后取得、且属于西方整合范围的所有未整合州获得+25%地区整合速度，直至完成整合或失去该州。"
 
  ffpa_byz_mediterranean_industrial_credit: "地中海工业信贷"
  ffpa_byz_mediterranean_industrial_credit_desc: "帝国担保在十年内把信贷引入制造业与熟练劳动力培养，但也增加行政负担。"
@@ -527,6 +530,12 @@
  ffpa_byz_western_service_citizenship_v2_desc: "军事和公共服务打开了一条较窄的公民权道路，以更高物资成本换取经验丰富的部队。"
  ffpa_byz_western_veteran_settlement_state_v2: "退伍军人服役殖民地"
  ffpa_byz_western_veteran_settlement_state_v2_desc: "退伍军人与公共服务人员在本外西方行省获得土地和公民身份。"
+ ffpa_byz_western_universal_incorporation_state_v1: "普遍罗马公民整合"
+ ffpa_byz_western_universal_incorporation_state_v1_desc: "统一的罗马公民权正在加快本西方行省的法律与行政整合。"
+ ffpa_byz_western_provincial_incorporation_state_v1: "行省公民契约整合"
+ ffpa_byz_western_provincial_incorporation_state_v1_desc: "公民契约使地方共同体能够协助本西方行省融入帝国行政体系。"
+ ffpa_byz_western_service_incorporation_state_v1: "服役公民整合"
+ ffpa_byz_western_service_incorporation_state_v1_desc: "军事与公共服务在本西方行省和帝国之间建立了有限的行政纽带。"
 
  ffpa_byz_western_common_electoral_roll_v2: "一部帝国选民册"
  ffpa_byz_western_common_electoral_roll_v2_desc: "统一选举权提升立法正当性，却会削弱行政权威并触动地主特权。"

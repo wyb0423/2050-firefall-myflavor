@@ -486,6 +486,94 @@ ffpa_clear_byz_western_citizenship_rewards_v1 = {
 	}
 }
 
+# Root = state. Dynamic incorporation support is recalculated from the current
+# owner, the stable western whitelist, and the authoritative v2 route choice.
+# Clearing all three variants first keeps repeated on_action calls idempotent.
+ffpa_refresh_byz_western_citizenship_incorporation_state_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_byz_western_universal_incorporation_state_v1 }
+		remove_modifier = ffpa_byz_western_universal_incorporation_state_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_byz_western_provincial_incorporation_state_v1 }
+		remove_modifier = ffpa_byz_western_provincial_incorporation_state_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_byz_western_service_incorporation_state_v1 }
+		remove_modifier = ffpa_byz_western_service_incorporation_state_v1
+	}
+
+	if = {
+		limit = {
+			ffpa_is_byzantine_western_integration_state = yes
+			is_incorporated = no
+			# State -> current owner country.
+			owner ?= {
+				c:BYZ ?= this
+				has_variable = ffpa_byz_western_citizenship_choice_v2
+				var:ffpa_byz_western_citizenship_choice_v2 = 1
+			}
+		}
+		add_modifier = { name = ffpa_byz_western_universal_incorporation_state_v1 }
+	}
+	else_if = {
+		limit = {
+			ffpa_is_byzantine_western_integration_state = yes
+			is_incorporated = no
+			# State -> current owner country.
+			owner ?= {
+				c:BYZ ?= this
+				has_variable = ffpa_byz_western_citizenship_choice_v2
+				var:ffpa_byz_western_citizenship_choice_v2 = 2
+			}
+		}
+		add_modifier = { name = ffpa_byz_western_provincial_incorporation_state_v1 }
+	}
+	else_if = {
+		limit = {
+			ffpa_is_byzantine_western_integration_state = yes
+			is_incorporated = no
+			# State -> current owner country.
+			owner ?= {
+				c:BYZ ?= this
+				has_variable = ffpa_byz_western_citizenship_choice_v2
+				var:ffpa_byz_western_citizenship_choice_v2 = 3
+			}
+		}
+		add_modifier = { name = ffpa_byz_western_service_incorporation_state_v1 }
+	}
+}
+
+# Root = country. Event selection, old-save repair, and rare identity changes
+# may scan only Root's own states; routine state changes use the single-state
+# effect above and never traverse the country.
+ffpa_refresh_byz_western_citizenship_incorporation_states_v1 = {
+	every_scope_state = {
+		# Country -> owned state -> return to country after each iteration.
+		ffpa_refresh_byz_western_citizenship_incorporation_state_v1 = yes
+	}
+}
+
+# Root = BYZ. This migration is deliberately separate from the broader western
+# reward v2 marker so saves already migrated before this feature still receive
+# exactly one initial state refresh.
+ffpa_ensure_byz_western_citizenship_incorporation_v1 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_byz_western_citizenship_incorporation_migrated_v1 }
+			has_variable = ffpa_byz_western_citizenship_choice_v2
+			OR = {
+				var:ffpa_byz_western_citizenship_choice_v2 = 1
+				var:ffpa_byz_western_citizenship_choice_v2 = 2
+				var:ffpa_byz_western_citizenship_choice_v2 = 3
+			}
+		}
+		ffpa_refresh_byz_western_citizenship_incorporation_states_v1 = yes
+		set_variable = ffpa_byz_western_citizenship_incorporation_migrated_v1
+	}
+}
+
 ffpa_clear_byz_western_representation_rewards_v1 = {
 	if = {
 		limit = { has_modifier = ffpa_byz_western_common_electoral_roll }
@@ -570,6 +658,7 @@ ffpa_ensure_western_integration_rewards_v2 = {
 				has_variable = ffpa_byz_western_civic_extension_fired_v1
 				NOT = { has_variable = ffpa_byz_western_citizenship_choice_v2 }
 				has_modifier = ffpa_byz_western_universal_citizenship
+				NOT = { has_modifier = ffpa_byz_western_provincial_civic_compact }
 			}
 			ffpa_clear_byz_western_citizenship_rewards_v1 = yes
 			set_variable = { name = ffpa_byz_western_citizenship_choice_v2 value = 1 }
@@ -580,6 +669,7 @@ ffpa_ensure_western_integration_rewards_v2 = {
 				has_variable = ffpa_byz_western_civic_extension_fired_v1
 				NOT = { has_variable = ffpa_byz_western_citizenship_choice_v2 }
 				has_modifier = ffpa_byz_western_provincial_civic_compact
+				NOT = { has_modifier = ffpa_byz_western_universal_citizenship }
 			}
 			ffpa_clear_byz_western_citizenship_rewards_v1 = yes
 			set_variable = { name = ffpa_byz_western_citizenship_choice_v2 value = 2 }
@@ -786,6 +876,7 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 		ffpa_ensure_byzantine_formation_effects = yes
 		ffpa_ensure_byz_commonwealth_progress_v3 = yes
 		ffpa_ensure_western_integration_rewards_v2 = yes
+		ffpa_ensure_byz_western_citizenship_incorporation_v1 = yes
 
 		if = {
 			limit = { NOT = { has_variable = ffpa_byz_formation_ideologies_v1 } }
