@@ -1,0 +1,134 @@
+# Country scope unless noted otherwise. These triggers are the stable query
+# surface for the Turkish reconstruction state machine and its one-way links
+# from completed regional construction projects.
+
+ffpa_tur_has_ottoman_state_project_v1 = {
+	c:TUR ?= this
+	has_variable = ffpa_tur_state_project_v1
+	var:ffpa_tur_state_project_v1 = 1
+}
+
+ffpa_tur_has_republican_state_project_v1 = {
+	c:TUR ?= this
+	has_variable = ffpa_tur_state_project_v1
+	var:ffpa_tur_state_project_v1 = 2
+}
+
+ffpa_tur_has_directorate_state_project_v1 = {
+	c:TUR ?= this
+	has_variable = ffpa_tur_state_project_v1
+	var:ffpa_tur_state_project_v1 = 3
+}
+
+# State scope. Firefall's final TUR formation list contains exactly these
+# eleven state regions.
+ffpa_is_tur_reconstruction_core_state_v1 = {
+	OR = {
+		state_region = s:STATE_EASTERN_THRACE
+		state_region = s:STATE_HUDAVENDIGAR
+		state_region = s:STATE_AYDIN
+		state_region = s:STATE_ANKARA
+		state_region = s:STATE_KONYA
+		state_region = s:STATE_ADANA
+		state_region = s:STATE_KASTAMONU
+		state_region = s:STATE_TRABZON
+		state_region = s:STATE_ERZURUM
+		state_region = s:STATE_DIYARBAKIR
+		state_region = s:STATE_KARS
+	}
+}
+
+ffpa_tur_porte_charter_completion_conditions_v1 = {
+	ffpa_tur_has_ottoman_state_project_v1 = yes
+	has_variable = ffpa_tur_porte_waqf_event_fired_v1
+	country_has_monarchy_law = yes
+	government_legitimacy >= 60
+	bureaucracy >= 0
+	is_at_war = no
+	ffpa_has_no_insurrectionary_movement = yes
+	any_scope_state = {
+		count >= 8
+		ffpa_is_tur_reconstruction_core_state_v1 = yes
+		market_access >= 0.75
+		turmoil < 0.18
+	}
+}
+
+ffpa_tur_second_foundation_completion_conditions_v1 = {
+	ffpa_tur_has_republican_state_project_v1 = yes
+	has_variable = ffpa_tur_republic_civil_military_event_fired_v1
+	NOT = { country_has_monarchy_law = yes }
+	country_has_voting_franchise = yes
+	government_legitimacy >= 60
+	bureaucracy >= 0
+	literacy_rate >= 0.30
+	is_at_war = no
+	ffpa_has_no_insurrectionary_movement = yes
+	any_scope_state = {
+		count >= 8
+		ffpa_is_tur_reconstruction_core_state_v1 = yes
+		market_access >= 0.75
+		turmoil < 0.18
+	}
+}
+
+ffpa_tur_directorate_completion_conditions_v1 = {
+	ffpa_tur_has_directorate_state_project_v1 = yes
+	has_variable = ffpa_tur_directorate_technical_corps_event_fired_v1
+	government_legitimacy >= 50
+	bureaucracy >= 100
+	literacy_rate >= 0.25
+	ffpa_has_no_insurrectionary_movement = yes
+	any_scope_state = {
+		count >= 6
+		ffpa_is_tur_reconstruction_core_state_v1 = yes
+		market_access >= 0.75
+		turmoil < 0.20
+		any_scope_building = {
+			is_building_type = building_railway
+			level >= 2
+		}
+		any_scope_building = {
+			is_building_type = building_government_administration
+			level >= 2
+		}
+	}
+}
+
+ffpa_tur_has_three_anatolian_projects_v1 = {
+	calc_true_if = {
+		amount >= 3
+		has_variable = ffpa_anatolian_trunk_lines_complete
+		has_variable = ffpa_tur_black_sea_lifeline_complete_v1
+		has_variable = ffpa_tur_eastern_highlands_survey_complete_v1
+		has_variable = ffpa_tur_cukurova_euphrates_works_complete_v1
+	}
+}
+
+ffpa_tur_rumelian_settlement_ready_v1 = {
+	calc_true_if = {
+		amount >= 2
+		has_variable = ffpa_via_egnatia_complete
+		has_variable = ffpa_danube_thrace_corridor_complete
+		has_variable = ffpa_aegean_maritime_network_complete
+	}
+}
+
+ffpa_tur_eastern_settlement_ready_v1 = {
+	calc_true_if = {
+		amount >= 2
+		has_variable = ffpa_levant_trade_corridor_complete
+		has_variable = ffpa_mesopotamian_waterworks_complete
+		has_variable = ffpa_alexandria_sinai_axis_complete
+		has_variable = ffpa_nile_works_complete
+	}
+}
+
+ffpa_tur_african_settlement_ready_v1 = {
+	calc_true_if = {
+		amount >= 2
+		has_variable = ffpa_ifriqiya_coastal_network_complete
+		has_variable = ffpa_mauretanian_coastal_road_complete
+		has_variable = ffpa_nile_works_complete
+	}
+}

@@ -29,3 +29,29 @@ ffpa_request_eastern_roman_title = {
 		value = 10
 	}
 }
+
+# Reusable player-facing entry to the Byzantine restoration campaign tree.
+# The event presents only branches whose prerequisites and retry cooldowns allow
+# them; the decision itself enforces peace and the shared two-campaign cap.
+ffpa_byz_convene_restoration_council = {
+	is_shown = {
+		c:BYZ ?= this
+		ffpa_byz_has_available_restoration_campaign = yes
+	}
+
+	possible = {
+		is_at_war = no
+		custom_tooltip = {
+			text = ffpa_byz_restoration_campaign_slot_available_tt
+			ffpa_byz_restoration_campaign_slot_available = yes
+		}
+	}
+
+	when_taken = {
+		trigger_event = { id = ffpa_flavor.39 popup = yes }
+	}
+
+	ai_chance = {
+		value = 10
+	}
+}

@@ -1,0 +1,319 @@
+# TUR-specific state projects and reconstruction works. Unlike the Byzantine
+# restoration campaigns, these journals reward institutions and infrastructure;
+# they do not grant claims or create timed conquest objectives.
+
+je_ffpa_tur_charter_of_the_porte = {
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	group = je_group_ffpa_turkish_reconstruction
+
+	is_shown_when_inactive = {
+		ffpa_tur_has_ottoman_state_project_v1 = yes
+		has_variable = ffpa_tur_ottoman_commonwealth_complete
+		NOT = { has_variable = ffpa_tur_porte_charter_complete_v1 }
+	}
+
+	possible = {
+		ffpa_tur_has_ottoman_state_project_v1 = yes
+		has_variable = ffpa_tur_ottoman_commonwealth_complete
+		NOT = { has_variable = ffpa_tur_porte_charter_complete_v1 }
+	}
+
+	immediate = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+
+	complete = { ffpa_tur_porte_charter_completion_conditions_v1 = yes }
+
+	on_complete = {
+		set_variable = ffpa_tur_porte_charter_complete_v1
+		ffpa_cleanup_tur_porte_chain_v1 = yes
+		set_variable = ffpa_tur_porte_charter_capstone_scheduled_v1
+		trigger_event = { id = ffpa_tur_flavor.13 days = 1 }
+	}
+
+	invalid = { NOT = { ffpa_tur_has_ottoman_state_project_v1 = yes } }
+	on_invalid = { ffpa_cleanup_tur_porte_chain_v1 = yes }
+
+	weight = 125
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_second_foundation_of_ankara = {
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	group = je_group_ffpa_turkish_reconstruction
+
+	is_shown_when_inactive = {
+		ffpa_tur_has_republican_state_project_v1 = yes
+		NOT = { has_variable = ffpa_tur_second_foundation_complete_v1 }
+	}
+
+	possible = {
+		ffpa_tur_has_republican_state_project_v1 = yes
+		NOT = { has_variable = ffpa_tur_second_foundation_complete_v1 }
+	}
+
+	immediate = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+
+	complete = { ffpa_tur_second_foundation_completion_conditions_v1 = yes }
+
+	on_complete = {
+		set_variable = ffpa_tur_second_foundation_complete_v1
+		ffpa_cleanup_tur_republic_chain_v1 = yes
+		set_variable = ffpa_tur_republic_capstone_scheduled_v1
+		trigger_event = { id = ffpa_tur_flavor.23 days = 1 }
+	}
+
+	invalid = { NOT = { ffpa_tur_has_republican_state_project_v1 = yes } }
+	on_invalid = { ffpa_cleanup_tur_republic_chain_v1 = yes }
+
+	weight = 125
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_reconstruction_directorate = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds"
+	group = je_group_ffpa_turkish_reconstruction
+
+	is_shown_when_inactive = {
+		ffpa_tur_has_directorate_state_project_v1 = yes
+		NOT = { has_variable = ffpa_tur_reconstruction_directorate_complete_v1 }
+	}
+
+	possible = {
+		ffpa_tur_has_directorate_state_project_v1 = yes
+		NOT = { has_variable = ffpa_tur_reconstruction_directorate_complete_v1 }
+	}
+
+	immediate = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+
+	complete = { ffpa_tur_directorate_completion_conditions_v1 = yes }
+
+	on_complete = {
+		set_variable = ffpa_tur_reconstruction_directorate_complete_v1
+		ffpa_cleanup_tur_directorate_chain_v1 = yes
+		set_variable = ffpa_tur_directorate_capstone_scheduled_v1
+		trigger_event = { id = ffpa_tur_flavor.33 days = 1 }
+	}
+
+	invalid = { NOT = { ffpa_tur_has_directorate_state_project_v1 = yes } }
+	on_invalid = { ffpa_cleanup_tur_directorate_chain_v1 = yes }
+
+	weight = 125
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_black_sea_lifeline = {
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	group = je_group_ffpa_turkish_reconstruction
+
+	is_shown_when_inactive = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_rebuild_anatolia_complete
+		NOT = { has_variable = ffpa_tur_black_sea_lifeline_complete_v1 }
+	}
+
+	possible = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_rebuild_anatolia_complete
+		owns_entire_state_region = STATE_KASTAMONU
+		owns_entire_state_region = STATE_TRABZON
+		NOT = { has_variable = ffpa_tur_black_sea_lifeline_complete_v1 }
+	}
+
+	complete = {
+		any_scope_state = {
+			state_region = s:STATE_KASTAMONU
+			market_access >= 0.85
+			turmoil < 0.18
+			any_scope_building = { is_building_type = building_port level >= 2 }
+			any_scope_building = { is_building_type = building_railway level >= 3 }
+			any_scope_building = { is_building_type = building_power_plant level >= 2 }
+		}
+		any_scope_state = {
+			state_region = s:STATE_TRABZON
+			market_access >= 0.85
+			turmoil < 0.18
+			any_scope_building = { is_building_type = building_port level >= 4 }
+			any_scope_building = { is_building_type = building_railway level >= 3 }
+			any_scope_building = { is_building_type = building_power_plant level >= 2 }
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_tur_black_sea_lifeline_complete_v1
+		every_scope_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_KASTAMONU
+					state_region = s:STATE_TRABZON
+				}
+				NOT = { has_modifier = ffpa_tur_black_sea_lifeline_state_v1 }
+			}
+			add_modifier = ffpa_tur_black_sea_lifeline_state_v1
+		}
+		ffpa_check_tur_post_reconstruction_events_v1 = yes
+	}
+
+	invalid = { NOT = { c:TUR ?= this } }
+	weight = 100
+	should_be_pinned_by_default_uninvolved_or_context = no
+}
+
+je_ffpa_tur_eastern_highlands_survey = {
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	group = je_group_ffpa_turkish_reconstruction
+
+	is_shown_when_inactive = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_rebuild_anatolia_complete
+		NOT = { has_variable = ffpa_tur_eastern_highlands_survey_complete_v1 }
+	}
+
+	possible = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_rebuild_anatolia_complete
+		owns_entire_state_region = STATE_ERZURUM
+		owns_entire_state_region = STATE_KARS
+		NOT = { has_variable = ffpa_tur_eastern_highlands_survey_complete_v1 }
+	}
+
+	complete = {
+		any_scope_state = {
+			state_region = s:STATE_ERZURUM
+			market_access >= 0.80
+			turmoil < 0.20
+			devastation < 0.15
+			any_scope_building = { is_building_type = building_railway level >= 3 }
+			any_scope_building = { is_building_type = building_power_plant level >= 2 }
+			any_scope_building = { is_building_type = building_government_administration level >= 3 }
+		}
+		any_scope_state = {
+			state_region = s:STATE_KARS
+			market_access >= 0.80
+			turmoil < 0.20
+			devastation < 0.15
+			any_scope_building = { is_building_type = building_railway level >= 2 }
+			any_scope_building = { is_building_type = building_power_plant level >= 2 }
+			any_scope_building = { is_building_type = building_government_administration level >= 2 }
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_tur_eastern_highlands_survey_complete_v1
+		every_scope_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_ERZURUM
+					state_region = s:STATE_KARS
+				}
+				NOT = { has_modifier = ffpa_tur_eastern_highlands_survey_state_v1 }
+			}
+			add_modifier = ffpa_tur_eastern_highlands_survey_state_v1
+		}
+		ffpa_check_tur_post_reconstruction_events_v1 = yes
+	}
+
+	invalid = { NOT = { c:TUR ?= this } }
+	weight = 100
+	should_be_pinned_by_default_uninvolved_or_context = no
+}
+
+je_ffpa_tur_cukurova_euphrates_works = {
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	group = je_group_ffpa_turkish_reconstruction
+
+	is_shown_when_inactive = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_rebuild_anatolia_complete
+		NOT = { has_variable = ffpa_tur_cukurova_euphrates_works_complete_v1 }
+	}
+
+	possible = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_rebuild_anatolia_complete
+		owns_entire_state_region = STATE_ADANA
+		owns_entire_state_region = STATE_DIYARBAKIR
+		NOT = { has_variable = ffpa_tur_cukurova_euphrates_works_complete_v1 }
+	}
+
+	complete = {
+		any_scope_state = {
+			state_region = s:STATE_ADANA
+			market_access >= 0.85
+			turmoil < 0.18
+			any_scope_building = { is_building_type = building_railway level >= 4 }
+			any_scope_building = { is_building_type = building_power_plant level >= 3 }
+			any_scope_building = { is_building_type = building_food_industry level >= 4 }
+		}
+		any_scope_state = {
+			state_region = s:STATE_DIYARBAKIR
+			market_access >= 0.80
+			turmoil < 0.20
+			any_scope_building = { is_building_type = building_railway level >= 3 }
+			any_scope_building = { is_building_type = building_power_plant level >= 3 }
+			any_scope_building = { is_building_type = building_food_industry level >= 3 }
+			any_scope_building = { is_building_type = building_government_administration level >= 3 }
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_tur_cukurova_euphrates_works_complete_v1
+		every_scope_state = {
+			limit = {
+				OR = {
+					state_region = s:STATE_ADANA
+					state_region = s:STATE_DIYARBAKIR
+				}
+				NOT = { has_modifier = ffpa_tur_cukurova_euphrates_works_state_v1 }
+			}
+			add_modifier = ffpa_tur_cukurova_euphrates_works_state_v1
+		}
+		ffpa_check_tur_post_reconstruction_events_v1 = yes
+	}
+
+	invalid = { NOT = { c:TUR ?= this } }
+	weight = 100
+	should_be_pinned_by_default_uninvolved_or_context = no
+}
+
+je_ffpa_tur_new_straits_convention = {
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	group = je_group_ffpa_turkish_reconstruction
+
+	is_shown_when_inactive = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_gate_of_two_continents_complete
+		NOT = { has_variable = ffpa_tur_new_straits_convention_complete_v1 }
+	}
+
+	possible = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_gate_of_two_continents_complete
+		owns_entire_state_region = STATE_EASTERN_THRACE
+		NOT = { has_variable = ffpa_tur_new_straits_convention_complete_v1 }
+	}
+
+	complete = {
+		is_at_war = no
+		government_legitimacy >= 60
+		any_scope_state = {
+			state_region = s:STATE_EASTERN_THRACE
+			market_access >= 0.95
+			turmoil < 0.12
+			devastation < 0.05
+			any_scope_building = { is_building_type = building_port level >= 8 }
+			any_scope_building = { is_building_type = building_railway level >= 8 }
+			any_scope_building = { is_building_type = building_government_administration level >= 6 }
+			any_scope_building = { is_building_type = building_naval_administration level >= 3 }
+			any_scope_building = { is_building_type = building_naval_fortification level >= 2 }
+		}
+	}
+
+	on_complete = {
+		set_variable = ffpa_tur_new_straits_convention_complete_v1
+		set_variable = ffpa_tur_straits_convention_event_scheduled_v1
+		trigger_event = { id = ffpa_tur_flavor.41 days = 1 }
+	}
+
+	invalid = { NOT = { c:TUR ?= this } }
+	weight = 110
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

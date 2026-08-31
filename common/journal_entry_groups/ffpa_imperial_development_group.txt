@@ -2,3 +2,8 @@ je_group_ffpa_imperial_development = {
 	context = country
 	updates_strategic_region_stances = yes
 }
+
+je_group_ffpa_byzantine_restoration = {
+	context = country
+	updates_strategic_region_stances = yes
+}

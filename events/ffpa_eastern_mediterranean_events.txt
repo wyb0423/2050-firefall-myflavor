@@ -25,6 +25,7 @@ ffpa_flavor.2 = {
 			name = ffpa_tur_reconstruction_monarchical_compromise
 			years = 10
 		}
+		ffpa_set_tur_state_project_ottoman_v1 = yes
 		ffpa_apply_tur_provincial_compact_v1 = yes
 		add_journal_entry = { type = je_ffpa_tur_ottoman_commonwealth }
 		ai_chance = { factor = 2 }
@@ -35,6 +36,8 @@ ffpa_flavor.2 = {
 		default_option = yes
 		trigger = { NOT = { has_law_or_variant = law_type:law_monarchy } }
 		add_modifier = { name = ffpa_tur_anatolian_citizenship }
+		ffpa_set_tur_state_project_republic_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_second_foundation_of_ankara }
 		ai_chance = { factor = 1 }
 	}
 
@@ -45,6 +48,8 @@ ffpa_flavor.2 = {
 			name = ffpa_tur_reconstruction_pragmatism
 			years = 10
 		}
+		ffpa_set_tur_state_project_directorate_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_reconstruction_directorate }
 		ai_chance = { factor = 1 }
 	}
 }
@@ -167,7 +172,7 @@ ffpa_flavor.6 = {
 			name = ffpa_byz_civic_settlement
 			years = 10
 		}
-		add_journal_entry = { type = je_ffpa_byz_rhomaic_commonwealth }
+		add_journal_entry = { type = je_ffpa_byz_rhomaic_commonwealth_v2 }
 		ai_chance = { factor = 2 }
 	}
 
@@ -214,7 +219,7 @@ ffpa_flavor.7 = {
 		name = ffpa_flavor.7.a
 		default_option = yes
 		add_primary_culture = cu:ffpa_rhomaic
-		add_modifier = { name = ffpa_rhomaic_civic_compact }
+		ffpa_ensure_byz_rhomaic_civic_compact_v2 = yes
 		ffpa_ensure_byzantine_formation_effects = yes
 		ffpa_apply_byz_rhomaic_civic_universalism_v1 = yes
 		ffpa_check_western_integration_events = yes
@@ -771,7 +776,7 @@ ffpa_flavor.21 = {
 		add_modifier = { name = ffpa_byz_uniform_land_register years = 8 }
 		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
 		if = {
-			limit = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			limit = { ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 			custom_tooltip = ffpa_commonwealth_progress_administration_plus_8_tt
 			hidden_effect = {
 				change_variable = { name = ffpa_byz_commonwealth_administration_v2 add = 8 }
@@ -791,7 +796,7 @@ ffpa_flavor.21 = {
 		add_modifier = { name = ffpa_byz_provincial_tax_privileges years = 8 }
 		add_loyalists = { value = 0.04 interest_group = ig:ig_landowners }
 		if = {
-			limit = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			limit = { ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 			custom_tooltip = ffpa_commonwealth_progress_stability_plus_8_tt
 			hidden_effect = {
 				change_variable = { name = ffpa_byz_commonwealth_stability_v2 add = 8 }
@@ -808,7 +813,7 @@ ffpa_flavor.21 = {
 	}
 
 	after = {
-		ffpa_sync_byz_commonwealth_progress_bars = yes
+		ffpa_sync_byz_commonwealth_progress_bars_v2 = yes
 	}
 }
 
@@ -838,7 +843,7 @@ ffpa_flavor.22 = {
 		default_option = yes
 		add_modifier = { name = ffpa_byz_common_civic_roll years = 8 }
 		if = {
-			limit = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			limit = { ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 			custom_tooltip = ffpa_commonwealth_progress_civic_plus_8_tt
 			hidden_effect = {
 				change_variable = { name = ffpa_byz_commonwealth_civic_v2 add = 8 }
@@ -851,7 +856,7 @@ ffpa_flavor.22 = {
 		name = ffpa_flavor.22.b
 		add_modifier = { name = ffpa_byz_provincial_delegations years = 8 }
 		if = {
-			limit = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			limit = { ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 			custom_tooltip = ffpa_commonwealth_progress_civic_plus_4_stability_plus_6_tt
 			hidden_effect = {
 				change_variable = { name = ffpa_byz_commonwealth_civic_v2 add = 4 }
@@ -868,7 +873,7 @@ ffpa_flavor.22 = {
 		add_modifier = { name = ffpa_byz_crown_senate years = 8 }
 		add_radicals = { value = 0.03 interest_group = ig:ig_intelligentsia }
 		if = {
-			limit = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			limit = { ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 			custom_tooltip = ffpa_commonwealth_progress_administration_plus_6_stability_plus_6_tt
 			hidden_effect = {
 				change_variable = { name = ffpa_byz_commonwealth_administration_v2 add = 6 }
@@ -881,7 +886,7 @@ ffpa_flavor.22 = {
 	}
 
 	after = {
-		ffpa_sync_byz_commonwealth_progress_bars = yes
+		ffpa_sync_byz_commonwealth_progress_bars_v2 = yes
 	}
 }
 
@@ -895,7 +900,7 @@ ffpa_flavor.23 = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+	trigger = { c:BYZ ?= this ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 	immediate = {
 		set_variable = ffpa_byz_language_event_fired_v2
 		remove_variable = ffpa_byz_language_event_scheduled_v3
@@ -928,7 +933,7 @@ ffpa_flavor.23 = {
 	}
 
 	after = {
-		ffpa_sync_byz_commonwealth_progress_bars = yes
+		ffpa_sync_byz_commonwealth_progress_bars_v2 = yes
 	}
 }
 
@@ -942,7 +947,7 @@ ffpa_flavor.24 = {
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+	trigger = { c:BYZ ?= this ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 	immediate = {
 		set_variable = ffpa_byz_representation_event_fired_v2
 		remove_variable = ffpa_byz_representation_event_scheduled_v3
@@ -974,7 +979,7 @@ ffpa_flavor.24 = {
 	}
 
 	after = {
-		ffpa_sync_byz_commonwealth_progress_bars = yes
+		ffpa_sync_byz_commonwealth_progress_bars_v2 = yes
 	}
 }
 
@@ -988,7 +993,7 @@ ffpa_flavor.25 = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+	trigger = { c:BYZ ?= this ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 	immediate = {
 		set_variable = ffpa_byz_military_oath_event_fired_v2
 		remove_variable = ffpa_byz_military_oath_event_scheduled_v3
@@ -1020,7 +1025,7 @@ ffpa_flavor.25 = {
 	}
 
 	after = {
-		ffpa_sync_byz_commonwealth_progress_bars = yes
+		ffpa_sync_byz_commonwealth_progress_bars_v2 = yes
 	}
 }
 
@@ -1561,5 +1566,343 @@ ffpa_flavor.33 = {
 			remove_variable = ffpa_byz_western_reward_review_active_v2
 			ffpa_schedule_next_western_integration_reward_review_v2 = yes
 		}
+	}
+}
+
+# --- Optional Byzantine restoration campaigns ---
+
+ffpa_flavor.39 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.39.t
+	desc = ffpa_flavor.39.d
+	flavor = ffpa_flavor.39.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:BYZ ?= this
+		is_at_war = no
+		ffpa_byz_restoration_campaign_slot_available = yes
+		ffpa_byz_has_available_restoration_campaign = yes
+	}
+
+	option = {
+		name = ffpa_byz_restoration_council_balkans_option
+		trigger = { ffpa_byz_balkans_restoration_campaign_available = yes }
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_journal_entry = { type = je_ffpa_byz_restore_balkans }
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_byz_restoration_council_anatolia_option
+		trigger = { ffpa_byz_anatolia_restoration_campaign_available = yes }
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_journal_entry = { type = je_ffpa_byz_restore_anatolia }
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_byz_restoration_council_oriens_option
+		trigger = { ffpa_byz_oriens_restoration_campaign_available = yes }
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_journal_entry = { type = je_ffpa_byz_restore_oriens }
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_byz_restoration_council_aegyptus_option
+		trigger = { ffpa_byz_aegyptus_restoration_campaign_available = yes }
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_journal_entry = { type = je_ffpa_byz_restore_aegyptus }
+		ai_chance = { factor = 0.9 }
+	}
+	option = {
+		name = ffpa_byz_restoration_council_africa_option
+		trigger = { ffpa_byz_africa_restoration_campaign_available = yes }
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_journal_entry = { type = je_ffpa_byz_restore_africa }
+		ai_chance = { factor = 0.8 }
+	}
+	option = {
+		name = ffpa_byz_restoration_council_italia_option
+		trigger = { ffpa_byz_italia_restoration_campaign_available = yes }
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_journal_entry = { type = je_ffpa_byz_restore_italia }
+		ai_chance = { factor = 0.9 }
+	}
+	option = {
+		name = ffpa_byz_restoration_council_spania_option
+		trigger = { ffpa_byz_spania_restoration_campaign_available = yes }
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_journal_entry = { type = je_ffpa_byz_restore_spania }
+		ai_chance = { factor = 0.7 }
+	}
+	option = {
+		name = ffpa_byz_restoration_council_cancel_option
+		default_option = yes
+		ai_chance = { factor = 0.1 }
+	}
+}
+
+ffpa_flavor.40 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.40.t
+	desc = ffpa_flavor.40.d
+	flavor = ffpa_flavor.40.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this }
+	option = {
+		name = ffpa_byz_restoration_success_settlement_option
+		default_option = yes
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
+			remove_modifier = ffpa_byz_restoration_triumph_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_success_triumph_option
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
+		ai_chance = { factor = 0.7 }
+	}
+}
+
+ffpa_flavor.41 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.41.t
+	desc = ffpa_flavor.41.d
+	flavor = ffpa_flavor.41.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this }
+	option = {
+		name = ffpa_byz_restoration_success_settlement_option
+		default_option = yes
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
+			remove_modifier = ffpa_byz_restoration_triumph_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_success_triumph_option
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
+		ai_chance = { factor = 0.7 }
+	}
+}
+
+ffpa_flavor.42 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.42.t
+	desc = ffpa_flavor.42.d
+	flavor = ffpa_flavor.42.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this }
+	option = {
+		name = ffpa_byz_restoration_success_settlement_option
+		default_option = yes
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
+			remove_modifier = ffpa_byz_restoration_triumph_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_success_triumph_option
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
+		ai_chance = { factor = 0.7 }
+	}
+}
+
+ffpa_flavor.43 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.43.t
+	desc = ffpa_flavor.43.d
+	flavor = ffpa_flavor.43.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this }
+	option = {
+		name = ffpa_byz_restoration_success_settlement_option
+		default_option = yes
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
+			remove_modifier = ffpa_byz_restoration_triumph_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_success_triumph_option
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
+		ai_chance = { factor = 0.7 }
+	}
+}
+
+ffpa_flavor.44 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.44.t
+	desc = ffpa_flavor.44.d
+	flavor = ffpa_flavor.44.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this }
+	option = {
+		name = ffpa_byz_restoration_success_settlement_option
+		default_option = yes
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
+			remove_modifier = ffpa_byz_restoration_triumph_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_success_triumph_option
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
+		ai_chance = { factor = 0.7 }
+	}
+}
+
+ffpa_flavor.45 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.45.t
+	desc = ffpa_flavor.45.d
+	flavor = ffpa_flavor.45.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this }
+	option = {
+		name = ffpa_byz_restoration_success_settlement_option
+		default_option = yes
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
+			remove_modifier = ffpa_byz_restoration_triumph_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_success_triumph_option
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
+		ai_chance = { factor = 0.7 }
+	}
+}
+
+ffpa_flavor.46 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.46.t
+	desc = ffpa_flavor.46.d
+	flavor = ffpa_flavor.46.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this }
+	option = {
+		name = ffpa_byz_restoration_success_settlement_option
+		default_option = yes
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
+			remove_modifier = ffpa_byz_restoration_triumph_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_success_triumph_option
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_settlement_v1 }
+			remove_modifier = ffpa_byz_restoration_settlement_v1
+		}
+		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
+		ai_chance = { factor = 0.7 }
+	}
+}
+
+ffpa_flavor.47 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.47.t
+	desc = ffpa_flavor.47.d
+	flavor = ffpa_flavor.47.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { c:BYZ ?= this }
+	option = {
+		name = ffpa_flavor.47.a
+		default_option = yes
+		ai_chance = { factor = 1 }
 	}
 }

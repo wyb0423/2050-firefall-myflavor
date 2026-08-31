@@ -1,0 +1,1194 @@
+namespace = ffpa_tur_flavor
+
+# --- Save migration and explicit legacy repair ---
+
+ffpa_tur_flavor.1 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.1.t
+	desc = ffpa_tur_flavor.1.d
+	flavor = ffpa_tur_flavor.1.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_state_project_repair_event_scheduled_v1
+		NOT = { has_variable = ffpa_tur_state_project_v1 }
+	}
+
+	immediate = { remove_variable = ffpa_tur_state_project_repair_event_scheduled_v1 }
+
+	# Migration records the historical route only. It must not replay the finite
+	# or permanent reward that the original reconstruction event already handled.
+	option = {
+		name = ffpa_tur_flavor.1.a
+		ffpa_set_tur_state_project_ottoman_v1 = yes
+		ffpa_ensure_tur_flavor_v1 = yes
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { country_has_monarchy_law = yes }
+				add = 1
+			}
+		}
+	}
+
+	option = {
+		name = ffpa_tur_flavor.1.b
+		default_option = yes
+		ffpa_set_tur_state_project_republic_v1 = yes
+		ffpa_ensure_tur_flavor_v1 = yes
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { NOT = { country_has_monarchy_law = yes } }
+				add = 1
+			}
+		}
+	}
+
+	option = {
+		name = ffpa_tur_flavor.1.c
+		ffpa_set_tur_state_project_directorate_v1 = yes
+		ffpa_ensure_tur_flavor_v1 = yes
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { has_law_or_variant = law_type:law_technocracy }
+				add = 1
+			}
+		}
+	}
+}
+
+# --- The Charter of the Porte ---
+
+ffpa_tur_flavor.10 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.10.t
+	desc = ffpa_tur_flavor.10.d
+	flavor = ffpa_tur_flavor.10.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = je_ffpa_tur_charter_of_the_porte
+		has_variable = ffpa_tur_porte_fundamental_law_event_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_porte_fundamental_law_event_scheduled_v1
+		set_variable = ffpa_tur_porte_fundamental_law_event_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.10.a
+		default_option = yes
+		set_variable = { name = ffpa_tur_porte_fundamental_law_choice_v1 value = 1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { country_has_voting_franchise = yes }
+				add = 0.6
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.10.b
+		set_variable = { name = ffpa_tur_porte_fundamental_law_choice_v1 value = 2 }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_landowners }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_devout }
+		add_radicals = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { has_law_or_variant = law_type:law_autocracy }
+				add = 0.6
+			}
+		}
+	}
+	after = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+}
+
+ffpa_tur_flavor.11 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.11.t
+	desc = ffpa_tur_flavor.11.d
+	flavor = ffpa_tur_flavor.11.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = je_ffpa_tur_charter_of_the_porte
+		has_variable = ffpa_tur_porte_provincial_councils_event_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_porte_provincial_councils_event_scheduled_v1
+		set_variable = ffpa_tur_porte_provincial_councils_event_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.11.a
+		set_variable = { name = ffpa_tur_porte_provincial_councils_choice_v1 value = 1 }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { bureaucracy >= 0 }
+				add = 0.5
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.11.b
+		default_option = yes
+		set_variable = { name = ffpa_tur_porte_provincial_councils_choice_v1 value = 2 }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { country_has_voting_franchise = yes }
+				add = 0.5
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.11.c
+		set_variable = { name = ffpa_tur_porte_provincial_councils_choice_v1 value = 3 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_landowners }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_devout }
+		ai_chance = {
+			factor = 0.8
+			modifier = {
+				trigger = { ig:ig_landowners ?= { is_powerful = yes } }
+				add = 0.6
+			}
+		}
+	}
+	after = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+}
+
+ffpa_tur_flavor.12 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.12.t
+	desc = ffpa_tur_flavor.12.d
+	flavor = ffpa_tur_flavor.12.f
+	event_image = { video = "unspecific_world_fair" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = je_ffpa_tur_charter_of_the_porte
+		has_variable = ffpa_tur_porte_waqf_event_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_porte_waqf_event_scheduled_v1
+		set_variable = ffpa_tur_porte_waqf_event_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.12.a
+		set_variable = { name = ffpa_tur_porte_waqf_choice_v1 value = 1 }
+		add_loyalists = { value = 0.04 interest_group = ig:ig_devout }
+		add_radicals = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_devout ?= { is_powerful = yes } }
+				add = 0.6
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.12.b
+		set_variable = { name = ffpa_tur_porte_waqf_choice_v1 value = 2 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = 0.03 interest_group = ig:ig_devout }
+		ai_chance = {
+			factor = 0.8
+			modifier = {
+				trigger = { has_law_or_variant = law_type:law_total_separation }
+				add = 0.8
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.12.c
+		default_option = yes
+		set_variable = { name = ffpa_tur_porte_waqf_choice_v1 value = 3 }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_devout }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = { factor = 1.2 }
+	}
+	after = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+}
+
+ffpa_tur_flavor.13 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.13.t
+	desc = ffpa_tur_flavor.13.d
+	flavor = ffpa_tur_flavor.13.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		ffpa_tur_has_ottoman_state_project_v1 = yes
+		has_variable = ffpa_tur_porte_charter_complete_v1
+		has_variable = ffpa_tur_porte_charter_capstone_scheduled_v1
+		NOT = { has_variable = ffpa_tur_porte_charter_choice_v1 }
+	}
+	immediate = { remove_variable = ffpa_tur_porte_charter_capstone_scheduled_v1 }
+
+	option = {
+		name = ffpa_tur_flavor.13.a
+		ffpa_clear_tur_porte_charter_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_porte_charter_choice_v1 value = 1 }
+		add_modifier = { name = ffpa_tur_porte_central_charter_v1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { var:ffpa_tur_porte_provincial_councils_choice_v1 = 1 }
+				add = 0.7
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.13.b
+		default_option = yes
+		ffpa_clear_tur_porte_charter_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_porte_charter_choice_v1 value = 2 }
+		add_modifier = { name = ffpa_tur_porte_vilayet_commonwealth_v1 }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_landowners }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_devout }
+		ai_chance = {
+			factor = 1.1
+			modifier = {
+				trigger = { var:ffpa_tur_porte_provincial_councils_choice_v1 = 2 }
+				add = 0.6
+			}
+			modifier = {
+				trigger = { var:ffpa_tur_porte_waqf_choice_v1 = 3 }
+				add = 0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.13.c
+		ffpa_clear_tur_porte_charter_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_porte_charter_choice_v1 value = 3 }
+		add_modifier = { name = ffpa_tur_porte_palace_bureaucracy_v1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_landowners }
+		add_radicals = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		ai_chance = {
+			factor = 0.9
+			modifier = {
+				trigger = { var:ffpa_tur_porte_fundamental_law_choice_v1 = 2 }
+				add = 0.6
+			}
+			modifier = {
+				trigger = { has_law_or_variant = law_type:law_autocracy }
+				add = 0.5
+			}
+		}
+	}
+}
+
+# --- The Second Foundation of Ankara ---
+
+ffpa_tur_flavor.20 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.20.t
+	desc = ffpa_tur_flavor.20.d
+	flavor = ffpa_tur_flavor.20.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = je_ffpa_tur_second_foundation_of_ankara
+		has_variable = ffpa_tur_republic_assembly_event_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_republic_assembly_event_scheduled_v1
+		set_variable = ffpa_tur_republic_assembly_event_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.20.a
+		default_option = yes
+		set_variable = { name = ffpa_tur_republic_assembly_choice_v1 value = 1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { has_law_or_variant = law_type:law_parliamentary_republic }
+				add = 0.8
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.20.b
+		set_variable = { name = ffpa_tur_republic_assembly_choice_v1 value = 2 }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_armed_forces }
+		add_radicals = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { has_law_or_variant = law_type:law_presidential_republic }
+				add = 0.8
+			}
+		}
+	}
+	after = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+}
+
+ffpa_tur_flavor.21 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.21.t
+	desc = ffpa_tur_flavor.21.d
+	flavor = ffpa_tur_flavor.21.f
+	event_image = { video = "unspecific_gears_pistons" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_lightbulb_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = je_ffpa_tur_second_foundation_of_ankara
+		has_variable = ffpa_tur_republic_education_event_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_republic_education_event_scheduled_v1
+		set_variable = ffpa_tur_republic_education_event_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.21.a
+		default_option = yes
+		set_variable = { name = ffpa_tur_republic_education_choice_v1 value = 1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_rural_folk }
+		add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_rural_folk ?= { is_powerful = yes } }
+				add = 0.6
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.21.b
+		set_variable = { name = ffpa_tur_republic_education_choice_v1 value = 2 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_industrialists }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_industrialists ?= { is_powerful = yes } }
+				add = 0.6
+			}
+		}
+	}
+	after = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+}
+
+ffpa_tur_flavor.22 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.22.t
+	desc = ffpa_tur_flavor.22.d
+	flavor = ffpa_tur_flavor.22.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = je_ffpa_tur_second_foundation_of_ankara
+		has_variable = ffpa_tur_republic_civil_military_event_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_republic_civil_military_event_scheduled_v1
+		set_variable = ffpa_tur_republic_civil_military_event_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.22.a
+		default_option = yes
+		set_variable = { name = ffpa_tur_republic_civil_military_choice_v1 value = 1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = 0.02 interest_group = ig:ig_armed_forces }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_intelligentsia ?= { is_powerful = yes } }
+				add = 0.5
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.22.b
+		set_variable = { name = ffpa_tur_republic_civil_military_choice_v1 value = 2 }
+		add_loyalists = { value = 0.04 interest_group = ig:ig_armed_forces }
+		add_radicals = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		ai_chance = {
+			factor = 0.9
+			modifier = {
+				trigger = { ig:ig_armed_forces ?= { is_powerful = yes } }
+				add = 0.8
+			}
+		}
+	}
+	after = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+}
+
+ffpa_tur_flavor.23 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.23.t
+	desc = ffpa_tur_flavor.23.d
+	flavor = ffpa_tur_flavor.23.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/event_icons/event_election.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		ffpa_tur_has_republican_state_project_v1 = yes
+		has_variable = ffpa_tur_second_foundation_complete_v1
+		has_variable = ffpa_tur_republic_capstone_scheduled_v1
+		NOT = { has_variable = ffpa_tur_republic_settlement_choice_v1 }
+	}
+	immediate = { remove_variable = ffpa_tur_republic_capstone_scheduled_v1 }
+
+	option = {
+		name = ffpa_tur_flavor.23.a
+		default_option = yes
+		ffpa_clear_tur_republic_settlement_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_republic_settlement_choice_v1 value = 1 }
+		add_modifier = { name = ffpa_tur_republic_assembly_settlement_v1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { var:ffpa_tur_republic_assembly_choice_v1 = 1 }
+				add = 0.7
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.23.b
+		ffpa_clear_tur_republic_settlement_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_republic_settlement_choice_v1 value = 2 }
+		add_modifier = { name = ffpa_tur_republic_developmental_settlement_v1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_industrialists }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { var:ffpa_tur_republic_education_choice_v1 = 2 }
+				add = 0.7
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.23.c
+		ffpa_clear_tur_republic_settlement_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_republic_settlement_choice_v1 value = 3 }
+		add_modifier = { name = ffpa_tur_republic_guardian_settlement_v1 }
+		add_loyalists = { value = 0.04 interest_group = ig:ig_armed_forces }
+		add_radicals = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		ai_chance = {
+			factor = 0.8
+			modifier = {
+				trigger = { var:ffpa_tur_republic_civil_military_choice_v1 = 2 }
+				add = 1
+			}
+		}
+	}
+}
+
+# --- The Anatolian Reconstruction Directorate ---
+
+ffpa_tur_flavor.30 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.30.t
+	desc = ffpa_tur_flavor.30.d
+	flavor = ffpa_tur_flavor.30.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = je_ffpa_tur_reconstruction_directorate
+		has_variable = ffpa_tur_directorate_cadastre_event_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_directorate_cadastre_event_scheduled_v1
+		set_variable = ffpa_tur_directorate_cadastre_event_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.30.a
+		default_option = yes
+		set_variable = { name = ffpa_tur_directorate_cadastre_choice_v1 value = 1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { bureaucracy >= 0 }
+				add = 0.5
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.30.b
+		set_variable = { name = ffpa_tur_directorate_cadastre_choice_v1 value = 2 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_landowners }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_devout }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { bureaucracy < 0 }
+				add = 0.7
+			}
+		}
+	}
+	after = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+}
+
+ffpa_tur_flavor.31 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.31.t
+	desc = ffpa_tur_flavor.31.d
+	flavor = ffpa_tur_flavor.31.f
+	event_image = { video = "unspecific_gears_pistons" }
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = je_ffpa_tur_reconstruction_directorate
+		has_variable = ffpa_tur_directorate_combines_event_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_directorate_combines_event_scheduled_v1
+		set_variable = ffpa_tur_directorate_combines_event_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.31.a
+		set_variable = { name = ffpa_tur_directorate_combines_choice_v1 value = 1 }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_armed_forces }
+		add_radicals = { value = 0.03 interest_group = ig:ig_industrialists }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { has_law_or_variant = law_type:law_technocracy }
+				add = 0.7
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.31.b
+		default_option = yes
+		set_variable = { name = ffpa_tur_directorate_combines_choice_v1 value = 2 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_industrialists }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = {
+			factor = 1.1
+			modifier = {
+				trigger = { ig:ig_industrialists ?= { is_powerful = yes } }
+				add = 0.5
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.31.c
+		set_variable = { name = ffpa_tur_directorate_combines_choice_v1 value = 3 }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_rural_folk }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = {
+			factor = 0.9
+			modifier = {
+				trigger = { ig:ig_rural_folk ?= { is_powerful = yes } }
+				add = 0.6
+			}
+		}
+	}
+	after = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+}
+
+ffpa_tur_flavor.32 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.32.t
+	desc = ffpa_tur_flavor.32.d
+	flavor = ffpa_tur_flavor.32.f
+	event_image = { video = "unspecific_trains" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_journal_entry = je_ffpa_tur_reconstruction_directorate
+		has_variable = ffpa_tur_directorate_technical_corps_event_scheduled_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_directorate_technical_corps_event_scheduled_v1
+		set_variable = ffpa_tur_directorate_technical_corps_event_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.32.a
+		default_option = yes
+		set_variable = { name = ffpa_tur_directorate_technical_corps_choice_v1 value = 1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_intelligentsia }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_rural_folk }
+		ai_chance = { factor = 1.1 }
+	}
+	option = {
+		name = ffpa_tur_flavor.32.b
+		set_variable = { name = ffpa_tur_directorate_technical_corps_choice_v1 value = 2 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_petty_bourgeoisie }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_landowners }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { var:ffpa_tur_directorate_cadastre_choice_v1 = 2 }
+				add = 0.5
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.32.c
+		set_variable = { name = ffpa_tur_directorate_technical_corps_choice_v1 value = 3 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_industrialists }
+		add_radicals = { value = 0.02 interest_group = ig:ig_trade_unions }
+		ai_chance = {
+			factor = 0.8
+			modifier = {
+				trigger = { ig:ig_industrialists ?= { is_powerful = yes } }
+				add = 0.6
+			}
+		}
+	}
+	after = { ffpa_ensure_tur_route_event_chains_v1 = yes }
+}
+
+ffpa_tur_flavor.33 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.33.t
+	desc = ffpa_tur_flavor.33.d
+	flavor = ffpa_tur_flavor.33.f
+	event_image = { video = "unspecific_ruler_speaking_to_people" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		ffpa_tur_has_directorate_state_project_v1 = yes
+		has_variable = ffpa_tur_reconstruction_directorate_complete_v1
+		has_variable = ffpa_tur_directorate_capstone_scheduled_v1
+		NOT = { has_variable = ffpa_tur_directorate_settlement_choice_v1 }
+	}
+	immediate = { remove_variable = ffpa_tur_directorate_capstone_scheduled_v1 }
+
+	option = {
+		name = ffpa_tur_flavor.33.a
+		ffpa_clear_tur_directorate_settlement_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_directorate_settlement_choice_v1 value = 1 }
+		add_modifier = { name = ffpa_tur_directorate_etatist_settlement_v1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_armed_forces }
+		add_radicals = { value = 0.02 interest_group = ig:ig_industrialists }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { var:ffpa_tur_directorate_combines_choice_v1 = 1 }
+				add = 0.8
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.33.b
+		default_option = yes
+		ffpa_clear_tur_directorate_settlement_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_directorate_settlement_choice_v1 value = 2 }
+		add_modifier = { name = ffpa_tur_directorate_mixed_planning_settlement_v1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_industrialists }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = {
+			factor = 1.1
+			modifier = {
+				trigger = { var:ffpa_tur_directorate_combines_choice_v1 = 2 }
+				add = 0.7
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.33.c
+		ffpa_clear_tur_directorate_settlement_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_directorate_settlement_choice_v1 value = 3 }
+		add_modifier = { name = ffpa_tur_directorate_local_compacts_settlement_v1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_landowners }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_rural_folk }
+		ai_chance = {
+			factor = 0.9
+			modifier = {
+				trigger = { var:ffpa_tur_directorate_cadastre_choice_v1 = 2 }
+				add = 0.5
+			}
+			modifier = {
+				trigger = { var:ffpa_tur_directorate_technical_corps_choice_v1 = 2 }
+				add = 0.5
+			}
+		}
+	}
+}
+
+# --- Reconstruction and Straits capstones ---
+
+ffpa_tur_flavor.40 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.40.t
+	desc = ffpa_tur_flavor.40.d
+	flavor = ffpa_tur_flavor.40.f
+	event_image = { video = "unspecific_trains" }
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_anatolian_plan_congress_scheduled_v1
+		NOT = { has_variable = ffpa_tur_anatolian_plan_congress_choice_v1 }
+	}
+	immediate = { remove_variable = ffpa_tur_anatolian_plan_congress_scheduled_v1 }
+
+	option = {
+		name = ffpa_tur_flavor.40.a
+		ffpa_clear_tur_anatolian_plan_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_anatolian_plan_congress_choice_v1 value = 1 }
+		add_modifier = { name = ffpa_tur_anatolian_state_combines_v1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_armed_forces }
+		add_radicals = { value = 0.02 interest_group = ig:ig_industrialists }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ffpa_tur_has_directorate_state_project_v1 = yes }
+				add = 0.5
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.40.b
+		default_option = yes
+		ffpa_clear_tur_anatolian_plan_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_anatolian_plan_congress_choice_v1 value = 2 }
+		add_modifier = { name = ffpa_tur_anatolian_village_institutes_v1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_rural_folk }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_intelligentsia }
+		add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
+		ai_chance = {
+			factor = 1.1
+			modifier = {
+				trigger = { ig:ig_rural_folk ?= { is_powerful = yes } }
+				add = 0.5
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.40.c
+		ffpa_clear_tur_anatolian_plan_rewards_v1 = yes
+		set_variable = { name = ffpa_tur_anatolian_plan_congress_choice_v1 value = 3 }
+		add_modifier = { name = ffpa_tur_anatolian_development_banks_v1 }
+		add_loyalists = { value = 0.03 interest_group = ig:ig_industrialists }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_industrialists ?= { is_powerful = yes } }
+				add = 0.5
+			}
+		}
+	}
+}
+
+ffpa_tur_flavor.41 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.41.t
+	desc = ffpa_tur_flavor.41.d
+	flavor = ffpa_tur_flavor.41.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_new_straits_convention_complete_v1
+		has_variable = ffpa_tur_straits_convention_event_scheduled_v1
+		NOT = { has_variable = ffpa_tur_straits_convention_choice_v1 }
+	}
+	immediate = { remove_variable = ffpa_tur_straits_convention_event_scheduled_v1 }
+
+	option = {
+		name = ffpa_tur_flavor.41.a
+		set_variable = { name = ffpa_tur_straits_convention_choice_v1 value = 1 }
+		ffpa_ensure_tur_permanent_flavor_rewards_v1 = yes
+		add_loyalists = { value = 0.03 interest_group = ig:ig_industrialists }
+		add_radicals = { value = 0.02 interest_group = ig:ig_armed_forces }
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { ig:ig_industrialists ?= { is_powerful = yes } }
+				add = 0.7
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.41.b
+		default_option = yes
+		set_variable = { name = ffpa_tur_straits_convention_choice_v1 value = 2 }
+		ffpa_ensure_tur_permanent_flavor_rewards_v1 = yes
+		add_loyalists = { value = 0.02 interest_group = ig:ig_industrialists }
+		add_loyalists = { value = 0.02 interest_group = ig:ig_armed_forces }
+		ai_chance = { factor = 1.2 }
+	}
+	option = {
+		name = ffpa_tur_flavor.41.c
+		set_variable = { name = ffpa_tur_straits_convention_choice_v1 value = 3 }
+		ffpa_ensure_tur_permanent_flavor_rewards_v1 = yes
+		add_loyalists = { value = 0.04 interest_group = ig:ig_armed_forces }
+		add_radicals = { value = 0.03 interest_group = ig:ig_industrialists }
+		ai_chance = {
+			factor = 0.8
+			modifier = {
+				trigger = { ig:ig_armed_forces ?= { is_powerful = yes } }
+				add = 0.9
+			}
+		}
+	}
+}
+
+# --- Post-project administrative conferences ---
+
+ffpa_tur_flavor.50 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.50.t
+	desc = ffpa_tur_flavor.50.d
+	flavor = ffpa_tur_flavor.50.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_rumelian_settlement_scheduled_v1
+		has_variable = ffpa_tur_state_project_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_rumelian_settlement_scheduled_v1
+		set_variable = ffpa_tur_rumelian_settlement_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.50.a
+		trigger = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_rumelian_settlement_model_v1 value = 1 }
+		ffpa_apply_tur_settlement_direct_administration_v1 = yes
+		ai_chance = { factor = 0.9 }
+	}
+	option = {
+		name = ffpa_tur_flavor.50.b
+		default_option = yes
+		trigger = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_rumelian_settlement_model_v1 value = 2 }
+		ffpa_apply_tur_settlement_representative_compact_v1 = yes
+		ai_chance = {
+			factor = 1.1
+			modifier = {
+				trigger = { ig:ig_landowners ?= { is_powerful = yes } }
+				add = 0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.50.c
+		trigger = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_rumelian_settlement_model_v1 value = 3 }
+		ffpa_apply_tur_settlement_development_authority_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+
+	option = {
+		name = ffpa_tur_flavor.50.d_option
+		default_option = yes
+		trigger = { ffpa_tur_has_republican_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_rumelian_settlement_model_v1 value = 1 }
+		ffpa_apply_tur_settlement_direct_administration_v1 = yes
+		ai_chance = { factor = 1.1 }
+	}
+	option = {
+		name = ffpa_tur_flavor.50.e
+		trigger = { ffpa_tur_has_republican_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_rumelian_settlement_model_v1 value = 2 }
+		ffpa_apply_tur_settlement_representative_compact_v1 = yes
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { country_has_voting_franchise = yes }
+				add = 0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_flavor.50.f_option
+		trigger = { ffpa_tur_has_republican_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_rumelian_settlement_model_v1 value = 3 }
+		ffpa_apply_tur_settlement_development_authority_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+
+	option = {
+		name = ffpa_tur_flavor.50.g
+		trigger = { ffpa_tur_has_directorate_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_rumelian_settlement_model_v1 value = 1 }
+		ffpa_apply_tur_settlement_direct_administration_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_tur_flavor.50.h
+		trigger = { ffpa_tur_has_directorate_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_rumelian_settlement_model_v1 value = 2 }
+		ffpa_apply_tur_settlement_representative_compact_v1 = yes
+		ai_chance = { factor = 0.9 }
+	}
+	option = {
+		name = ffpa_tur_flavor.50.i
+		default_option = yes
+		trigger = { ffpa_tur_has_directorate_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_rumelian_settlement_model_v1 value = 3 }
+		ffpa_apply_tur_settlement_development_authority_v1 = yes
+		ai_chance = {
+			factor = 1.2
+			modifier = {
+				trigger = { ig:ig_industrialists ?= { is_powerful = yes } }
+				add = 0.4
+			}
+		}
+	}
+}
+
+ffpa_tur_flavor.51 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.51.t
+	desc = ffpa_tur_flavor.51.d
+	flavor = ffpa_tur_flavor.51.f
+	event_image = { video = "unspecific_gears_pistons" }
+	icon = "gfx/interface/icons/event_icons/event_industry.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_eastern_settlement_scheduled_v1
+		has_variable = ffpa_tur_state_project_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_eastern_settlement_scheduled_v1
+		set_variable = ffpa_tur_eastern_settlement_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.51.a
+		trigger = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_eastern_settlement_model_v1 value = 1 }
+		ffpa_apply_tur_settlement_direct_administration_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_tur_flavor.51.b
+		default_option = yes
+		trigger = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_eastern_settlement_model_v1 value = 2 }
+		ffpa_apply_tur_settlement_representative_compact_v1 = yes
+		ai_chance = { factor = 1.1 }
+	}
+	option = {
+		name = ffpa_tur_flavor.51.c
+		trigger = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_eastern_settlement_model_v1 value = 3 }
+		ffpa_apply_tur_settlement_development_authority_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+
+	option = {
+		name = ffpa_tur_flavor.51.d_option
+		trigger = { ffpa_tur_has_republican_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_eastern_settlement_model_v1 value = 1 }
+		ffpa_apply_tur_settlement_direct_administration_v1 = yes
+		ai_chance = { factor = 0.9 }
+	}
+	option = {
+		name = ffpa_tur_flavor.51.e
+		trigger = { ffpa_tur_has_republican_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_eastern_settlement_model_v1 value = 2 }
+		ffpa_apply_tur_settlement_representative_compact_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_tur_flavor.51.f_option
+		default_option = yes
+		trigger = { ffpa_tur_has_republican_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_eastern_settlement_model_v1 value = 3 }
+		ffpa_apply_tur_settlement_development_authority_v1 = yes
+		ai_chance = {
+			factor = 1.2
+			modifier = {
+				trigger = { ig:ig_industrialists ?= { is_powerful = yes } }
+				add = 0.4
+			}
+		}
+	}
+
+	option = {
+		name = ffpa_tur_flavor.51.g
+		trigger = { ffpa_tur_has_directorate_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_eastern_settlement_model_v1 value = 1 }
+		ffpa_apply_tur_settlement_direct_administration_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_tur_flavor.51.h
+		trigger = { ffpa_tur_has_directorate_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_eastern_settlement_model_v1 value = 2 }
+		ffpa_apply_tur_settlement_representative_compact_v1 = yes
+		ai_chance = { factor = 0.9 }
+	}
+	option = {
+		name = ffpa_tur_flavor.51.i
+		default_option = yes
+		trigger = { ffpa_tur_has_directorate_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_eastern_settlement_model_v1 value = 3 }
+		ffpa_apply_tur_settlement_development_authority_v1 = yes
+		ai_chance = { factor = 1.2 }
+	}
+}
+
+ffpa_tur_flavor.52 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.52.t
+	desc = ffpa_tur_flavor.52.d
+	flavor = ffpa_tur_flavor.52.f
+	event_image = { video = "unspecific_world_fair" }
+	icon = "gfx/interface/icons/event_icons/event_trade.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_african_settlement_scheduled_v1
+		has_variable = ffpa_tur_state_project_v1
+	}
+	immediate = {
+		remove_variable = ffpa_tur_african_settlement_scheduled_v1
+		set_variable = ffpa_tur_african_settlement_fired_v1
+	}
+
+	option = {
+		name = ffpa_tur_flavor.52.a
+		trigger = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_african_settlement_model_v1 value = 1 }
+		ffpa_apply_tur_settlement_direct_administration_v1 = yes
+		ai_chance = { factor = 0.9 }
+	}
+	option = {
+		name = ffpa_tur_flavor.52.b
+		default_option = yes
+		trigger = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_african_settlement_model_v1 value = 2 }
+		ffpa_apply_tur_settlement_representative_compact_v1 = yes
+		ai_chance = { factor = 1.1 }
+	}
+	option = {
+		name = ffpa_tur_flavor.52.c
+		trigger = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_african_settlement_model_v1 value = 3 }
+		ffpa_apply_tur_settlement_development_authority_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+
+	option = {
+		name = ffpa_tur_flavor.52.d_option
+		trigger = { ffpa_tur_has_republican_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_african_settlement_model_v1 value = 1 }
+		ffpa_apply_tur_settlement_direct_administration_v1 = yes
+		ai_chance = { factor = 0.9 }
+	}
+	option = {
+		name = ffpa_tur_flavor.52.e
+		trigger = { ffpa_tur_has_republican_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_african_settlement_model_v1 value = 2 }
+		ffpa_apply_tur_settlement_representative_compact_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_tur_flavor.52.f_option
+		default_option = yes
+		trigger = { ffpa_tur_has_republican_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_african_settlement_model_v1 value = 3 }
+		ffpa_apply_tur_settlement_development_authority_v1 = yes
+		ai_chance = { factor = 1.2 }
+	}
+
+	option = {
+		name = ffpa_tur_flavor.52.g
+		trigger = { ffpa_tur_has_directorate_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_african_settlement_model_v1 value = 1 }
+		ffpa_apply_tur_settlement_direct_administration_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_tur_flavor.52.h
+		trigger = { ffpa_tur_has_directorate_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_african_settlement_model_v1 value = 2 }
+		ffpa_apply_tur_settlement_representative_compact_v1 = yes
+		ai_chance = { factor = 0.9 }
+	}
+	option = {
+		name = ffpa_tur_flavor.52.i
+		default_option = yes
+		trigger = { ffpa_tur_has_directorate_state_project_v1 = yes }
+		set_variable = { name = ffpa_tur_african_settlement_model_v1 value = 3 }
+		ffpa_apply_tur_settlement_development_authority_v1 = yes
+		ai_chance = { factor = 1.2 }
+	}
+}

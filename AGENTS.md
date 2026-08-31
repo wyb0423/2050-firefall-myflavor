@@ -155,30 +155,44 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 **所有文件/切片**
 
 - `common/journal_entries/ffpa_eastern_mediterranean_journal_entries.txt`
+- `common/journal_entries/ffpa_byzantine_restoration_campaigns.txt`
+- `common/journal_entries/ffpa_turkish_reconstruction_programs.txt`
+- `common/journal_entry_groups/ffpa_turkish_reconstruction_group.txt`
 - `common/customizable_localization/ffpa_eastern_mediterranean_custom_loc.txt`
 - `common/decisions/ffpa_eastern_mediterranean_decisions.txt`
+- `common/decisions/ffpa_turkish_flavor_decisions.txt`
 - `common/script_values/ffpa_eastern_mediterranean_values.txt`
 - `common/scripted_progress_bars/ffpa_eastern_mediterranean_progress_bars.txt`
 - `common/scripted_triggers/ffpa_eastern_mediterranean_triggers.txt` 中共同体、成立和风味条件
+- `common/scripted_triggers/ffpa_turkish_flavor_triggers.txt`
 - `common/scripted_effects/ffpa_eastern_mediterranean_effects.txt` 中身份、共同体、迁移和风味 effect
+- `common/scripted_effects/ffpa_turkish_flavor_effects.txt`
 - `common/on_actions/ffpa_eastern_mediterranean_on_actions.txt`
 - `common/static_modifiers/ffpa_eastern_mediterranean_modifiers.txt` 中非 `ffpa_region_*` 定义
+- `common/static_modifiers/ffpa_turkish_flavor_modifiers.txt`
 - `events/ffpa_eastern_mediterranean_events.txt` 中非西方整合事件
+- `events/ffpa_turkish_flavor_events.txt`
 - 两份本地化文件中的 `ffpa_flavor.*`、TUR/BYZ 日志与修正键
+- `localization/english/ffpa_turkish_flavor_l_english.yml`
+- `localization/simp_chinese/ffpa_turkish_flavor_l_simp_chinese.yml`
 
 **拥有的行为与接口**
 
 - TUR 与 BYZ 的重建、共同体、首都工程和有限政治经济事件。
-- `namespace = ffpa_flavor` 的事件 ID 空间。
+- TUR 的三条互斥建国路线、高门/共和国/重建总署事件链、三项安纳托利亚工程、计划大会、新海峡公约与三场地区治理会议。
+- BYZ 分区复归战争的御前会议入口、45–55 年日志、成功/失败/重试状态与战后和议选择。
+- `namespace = ffpa_flavor` 的既有东地中海事件 ID 空间，以及新增 TUR 内容专用的 `namespace = ffpa_tur_flavor`。
 - `on_country_formed`、月度迁移检查、首次选举和 BYZ 公民权白名单州动态整合入口。
 - 版本化迁移、一次性事件标记、共同体三轴进退和清理路径。
 
 **边界与风险**
 
 - 变量名带 `_v1` / `_v2` 的键都是存档 API，不是可清理的命名噪音。
+- `ffpa_tur_state_project_v1` 的值 1/2/3 分别固定表示高门、共和国、重建总署；路线终局、工程、海峡和地区治理选择变量同样属于存档 API。后续政体变化不得自动重写建国路线。
 - ensure/migration effect 必须幂等；月度入口不得反复发奖励、重置有限期限或遍历全世界建筑。
 - 事件链应保持“未初始化 → 可用 → 运行中 → 完成/失败/取消”的显式状态；每条异常路径都要清理临时状态。
 - 本模块可消费地区建设模块导出的完成变量和查询 trigger，但不得直接重写地区日志内部状态。
+- TUR 的地区治理只在既有地区建设实际完成后触发，不自动授予历史宣称，也不得复制 BYZ 的分区复归战争结构。
 
 **内部所有权**
 
@@ -201,6 +215,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 - 15 项地区建设 JE、完成变量和仅作用于实际工程州的 `ffpa_region_*` 永久 modifier。
 - 向风味模块导出完成状态查询：`ffpa_has_two_western_development_projects`、`ffpa_has_italian_development_project`、`ffpa_has_outer_western_development_project`、`ffpa_western_*_ready`；导出地区奖励地理查询：`ffpa_is_byzantine_western_integration_state`、`ffpa_is_byzantine_outer_western_integration_state`。
+- 向 TUR 风味导出既有完成变量，并由 `ffpa_tur_rumelian_settlement_ready_v1`、`ffpa_tur_eastern_settlement_ready_v1`、`ffpa_tur_african_settlement_ready_v1` 聚合为稳定查询；风味侧只调用 `ffpa_check_tur_post_reconstruction_events_v1`，不读取地区 JE 内部状态。
 - 完成日志后调用 `ffpa_check_western_integration_events`，但事件具体奖励归风味模块。
 
 **边界与风险**
@@ -232,12 +247,14 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 | 共享接缝 | 当前使用者 | 规则 |
 |---|---|---|
-| `common/on_actions/ffpa_eastern_mediterranean_on_actions.txt` | 东地中海成立、迁移、选举、公民权州同步 | 仅调度 TUR/BYZ；州所有权、新州和整合入口必须先用白名单、owner 或既有 modifier 轻量过滤，不得吸收全局经济功能。 |
+| `common/on_actions/ffpa_eastern_mediterranean_on_actions.txt` | 东地中海成立、TUR/BYZ 迁移、选举、公民权州同步 | 仅调度 TUR/BYZ；州所有权、新州和整合入口必须先用白名单、owner 或既有 modifier 轻量过滤，不得吸收全局经济功能。 |
 | `common/static_modifiers/ffpa_eastern_mediterranean_modifiers.txt` | 风味、共同体、地区建设 | 技术 ID 前缀决定内部所有者；整理文件时按定义完整移动，不复制。 |
 | `common/scripted_triggers/ffpa_eastern_mediterranean_triggers.txt` | 风味与地区建设 | 地区模块导出查询 trigger，风味模块消费；禁止反向读取风味内部变量。 |
 | `events/ffpa_eastern_mediterranean_events.txt` | TUR/BYZ 风味与西方整合 | 共享 `ffpa_flavor` namespace；新增 ID 先搜索冲突，不重编号旧事件。 |
+| `events/ffpa_turkish_flavor_events.txt` | TUR 三路线、工程与地区治理 | 独占 `ffpa_tur_flavor` namespace；不向未来地区模块开放，也不覆盖上游事件。 |
 | `localization/english/ffpa_l_english.yml` | 东地中海与未来地区模块 | 每组键归明确地区所有；改玩家可见技术对象时同步更新。 |
 | `localization/simp_chinese/ffpa_l_simp_chinese.yml` | 东地中海与未来地区模块 | 与英文保持键集合一致，不得只补一种语言。 |
+| 两份 `ffpa_turkish_flavor_l_*.yml` | TUR 三路线、工程与治理会议 | 两种语言保持完全相同的键集合与 UTF-8 BOM；不得把 TUR 新键回填为上游覆盖。 |
 | `.metadata/metadata.json` | 风味合集发布外壳 | 只有发布身份或依赖变化才改；不得因内部模块增加而更换既有 Mod ID。 |
 
 跨地区调用优先使用命名清晰的 scripted effect、scripted trigger 或稳定顶层对象。除明确登记的存档接口外，禁止直接读取另一个地区模块的临时变量。
@@ -260,7 +277,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 ## 7. 命名、作用域与存档兼容
 
 - 新增自有技术 ID 使用 `ffpa_` 前缀，并继续细分为地区或国家前缀。现有东地中海沿用 `ffpa_tur_`、`ffpa_byz_`、`ffpa_region_`；新地区不得复用这些空间。
-- 新事件使用独立的地区 namespace；`ffpa_flavor` 保留给现有东地中海事件，不供未来模块复用。
+- 新事件使用独立的地区 namespace；`ffpa_flavor` 保留给既有东地中海事件，`ffpa_tur_flavor` 保留给 TUR 新状态机，两者均不供未来地区模块复用。
 - 覆盖上游 ID 时保留上游名字，并在文件头注释来源、目标版本、覆盖原因和预期差异。
 - trigger 不产生副作用，effect 改状态，script value 算数值，modifier 描述叠加量；不能跨类别照搬语法。
 - 每次跨 country/state/building/market/strategic region scope 时，在复杂实现旁写明进入和返回的 scope。
@@ -309,6 +326,10 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 - GRE → BYZ 成立、TUR 不被替换、BYZ 形成后宣称保留。
 - 共同体三轴分别前进/倒退，完成奖励不重复。
+- TUR 三条建国路线在新档中分别可达且互斥；旧档可从奥斯曼共同体/文化和安纳托利亚公民权可靠迁移，无法识别的重建总署旧档只出现一次人工确认入口。
+- TUR 三条路线各自的三场里程碑事件、终局选择和临时状态只能触发一次；政体变化只暂停不符合条件的完成检查，不改写建国路线。
+- 黑海、高原和丘库罗瓦—幼发拉底工程只奖励实际工程州，连同安纳托利亚干线满足四选三后计划大会只触发一次；海峡三种制度互斥并只作用于 TUR 拥有的东色雷斯。
+- 鲁米利亚、东方水利贸易和非洲港口治理会议只消费既有地区完成查询，不授予宣称、不重复触发，也不读取地区 JE 内部字段。
 - 所有失败、取消、政体变化、标签形成和旧存档路径都能清理或迁移状态。
 - 地区建设只奖励实际覆盖州；完成状态可稳定触发一次西方整合事件。
 - 公民权整合速度只作用于 BYZ 拥有的未整合西方白名单州，未来取得、失去、完成整合和身份变化路径能补发或清理。

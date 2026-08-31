@@ -1,0 +1,644 @@
+# Country-scope effects for the Turkish reconstruction state machine. Persistent
+# choices use versioned variables; repeated ensure calls never refresh a finite
+# modifier or re-award loyalists and radicals.
+
+ffpa_set_tur_state_project_ottoman_v1 = {
+	set_variable = { name = ffpa_tur_state_project_v1 value = 1 }
+	remove_variable = ffpa_tur_state_project_repair_needed_v1
+	remove_variable = ffpa_tur_state_project_repair_event_scheduled_v1
+}
+
+ffpa_set_tur_state_project_republic_v1 = {
+	set_variable = { name = ffpa_tur_state_project_v1 value = 2 }
+	remove_variable = ffpa_tur_state_project_repair_needed_v1
+	remove_variable = ffpa_tur_state_project_repair_event_scheduled_v1
+}
+
+ffpa_set_tur_state_project_directorate_v1 = {
+	set_variable = { name = ffpa_tur_state_project_v1 value = 3 }
+	remove_variable = ffpa_tur_state_project_repair_needed_v1
+	remove_variable = ffpa_tur_state_project_repair_event_scheduled_v1
+}
+
+ffpa_clear_tur_porte_charter_rewards_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_tur_porte_central_charter_v1 }
+		remove_modifier = ffpa_tur_porte_central_charter_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_tur_porte_vilayet_commonwealth_v1 }
+		remove_modifier = ffpa_tur_porte_vilayet_commonwealth_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_tur_porte_palace_bureaucracy_v1 }
+		remove_modifier = ffpa_tur_porte_palace_bureaucracy_v1
+	}
+}
+
+ffpa_clear_tur_republic_settlement_rewards_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_tur_republic_assembly_settlement_v1 }
+		remove_modifier = ffpa_tur_republic_assembly_settlement_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_tur_republic_developmental_settlement_v1 }
+		remove_modifier = ffpa_tur_republic_developmental_settlement_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_tur_republic_guardian_settlement_v1 }
+		remove_modifier = ffpa_tur_republic_guardian_settlement_v1
+	}
+}
+
+ffpa_clear_tur_directorate_settlement_rewards_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_tur_directorate_etatist_settlement_v1 }
+		remove_modifier = ffpa_tur_directorate_etatist_settlement_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_tur_directorate_mixed_planning_settlement_v1 }
+		remove_modifier = ffpa_tur_directorate_mixed_planning_settlement_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_tur_directorate_local_compacts_settlement_v1 }
+		remove_modifier = ffpa_tur_directorate_local_compacts_settlement_v1
+	}
+}
+
+ffpa_clear_tur_anatolian_plan_rewards_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_tur_anatolian_state_combines_v1 }
+		remove_modifier = ffpa_tur_anatolian_state_combines_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_tur_anatolian_village_institutes_v1 }
+		remove_modifier = ffpa_tur_anatolian_village_institutes_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_tur_anatolian_development_banks_v1 }
+		remove_modifier = ffpa_tur_anatolian_development_banks_v1
+	}
+}
+
+# State scope. Only used on the owned portion of Eastern Thrace.
+ffpa_clear_tur_straits_doctrines_state_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_tur_straits_open_passage_state_v1 }
+		remove_modifier = ffpa_tur_straits_open_passage_state_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_tur_straits_balanced_stewardship_state_v1 }
+		remove_modifier = ffpa_tur_straits_balanced_stewardship_state_v1
+	}
+	if = {
+		limit = { has_modifier = ffpa_tur_straits_fortified_narrows_state_v1 }
+		remove_modifier = ffpa_tur_straits_fortified_narrows_state_v1
+	}
+}
+
+ffpa_cleanup_tur_porte_chain_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_tur_porte_charter_deliberations_v1 }
+		remove_modifier = ffpa_tur_porte_charter_deliberations_v1
+	}
+	remove_variable = ffpa_tur_porte_fundamental_law_event_scheduled_v1
+	remove_variable = ffpa_tur_porte_provincial_councils_event_scheduled_v1
+	remove_variable = ffpa_tur_porte_waqf_event_scheduled_v1
+}
+
+ffpa_cleanup_tur_republic_chain_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_tur_republic_foundation_convention_v1 }
+		remove_modifier = ffpa_tur_republic_foundation_convention_v1
+	}
+	remove_variable = ffpa_tur_republic_assembly_event_scheduled_v1
+	remove_variable = ffpa_tur_republic_education_event_scheduled_v1
+	remove_variable = ffpa_tur_republic_civil_military_event_scheduled_v1
+}
+
+ffpa_cleanup_tur_directorate_chain_v1 = {
+	if = {
+		limit = { has_modifier = ffpa_tur_directorate_reconstruction_mobilization_v1 }
+		remove_modifier = ffpa_tur_directorate_reconstruction_mobilization_v1
+	}
+	remove_variable = ffpa_tur_directorate_cadastre_event_scheduled_v1
+	remove_variable = ffpa_tur_directorate_combines_event_scheduled_v1
+	remove_variable = ffpa_tur_directorate_technical_corps_event_scheduled_v1
+}
+
+ffpa_cleanup_tur_delayed_events_v1 = {
+	ffpa_cleanup_tur_porte_chain_v1 = yes
+	ffpa_cleanup_tur_republic_chain_v1 = yes
+	ffpa_cleanup_tur_directorate_chain_v1 = yes
+	remove_variable = ffpa_tur_porte_charter_capstone_scheduled_v1
+	remove_variable = ffpa_tur_republic_capstone_scheduled_v1
+	remove_variable = ffpa_tur_directorate_capstone_scheduled_v1
+	remove_variable = ffpa_tur_anatolian_plan_congress_scheduled_v1
+	remove_variable = ffpa_tur_straits_convention_event_scheduled_v1
+	remove_variable = ffpa_tur_rumelian_settlement_scheduled_v1
+	remove_variable = ffpa_tur_eastern_settlement_scheduled_v1
+	remove_variable = ffpa_tur_african_settlement_scheduled_v1
+	remove_variable = ffpa_tur_state_project_repair_event_scheduled_v1
+}
+
+# Repair a delayed chain after reload or after a prior implementation stopped
+# between milestones. Existing scheduled markers prevent duplicate events.
+ffpa_ensure_tur_route_event_chains_v1 = {
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_charter_of_the_porte }
+		if = {
+			limit = { NOT = { has_modifier = ffpa_tur_porte_charter_deliberations_v1 } }
+			add_modifier = { name = ffpa_tur_porte_charter_deliberations_v1 }
+		}
+		if = {
+			limit = {
+				NOT = { has_variable = ffpa_tur_porte_fundamental_law_event_fired_v1 }
+				NOT = { has_variable = ffpa_tur_porte_fundamental_law_event_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_porte_fundamental_law_event_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.10 days = 90 }
+		}
+		else_if = {
+			limit = {
+				has_variable = ffpa_tur_porte_fundamental_law_event_fired_v1
+				NOT = { has_variable = ffpa_tur_porte_provincial_councils_event_fired_v1 }
+				NOT = { has_variable = ffpa_tur_porte_provincial_councils_event_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_porte_provincial_councils_event_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.11 days = 365 }
+		}
+		else_if = {
+			limit = {
+				has_variable = ffpa_tur_porte_provincial_councils_event_fired_v1
+				NOT = { has_variable = ffpa_tur_porte_waqf_event_fired_v1 }
+				NOT = { has_variable = ffpa_tur_porte_waqf_event_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_porte_waqf_event_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.12 days = 365 }
+		}
+	}
+
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_second_foundation_of_ankara }
+		if = {
+			limit = { NOT = { has_modifier = ffpa_tur_republic_foundation_convention_v1 } }
+			add_modifier = { name = ffpa_tur_republic_foundation_convention_v1 }
+		}
+		if = {
+			limit = {
+				NOT = { has_variable = ffpa_tur_republic_assembly_event_fired_v1 }
+				NOT = { has_variable = ffpa_tur_republic_assembly_event_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_republic_assembly_event_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.20 days = 90 }
+		}
+		else_if = {
+			limit = {
+				has_variable = ffpa_tur_republic_assembly_event_fired_v1
+				NOT = { has_variable = ffpa_tur_republic_education_event_fired_v1 }
+				NOT = { has_variable = ffpa_tur_republic_education_event_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_republic_education_event_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.21 days = 365 }
+		}
+		else_if = {
+			limit = {
+				has_variable = ffpa_tur_republic_education_event_fired_v1
+				NOT = { has_variable = ffpa_tur_republic_civil_military_event_fired_v1 }
+				NOT = { has_variable = ffpa_tur_republic_civil_military_event_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_republic_civil_military_event_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.22 days = 365 }
+		}
+	}
+
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_reconstruction_directorate }
+		if = {
+			limit = { NOT = { has_modifier = ffpa_tur_directorate_reconstruction_mobilization_v1 } }
+			add_modifier = { name = ffpa_tur_directorate_reconstruction_mobilization_v1 }
+		}
+		if = {
+			limit = {
+				NOT = { has_variable = ffpa_tur_directorate_cadastre_event_fired_v1 }
+				NOT = { has_variable = ffpa_tur_directorate_cadastre_event_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_directorate_cadastre_event_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.30 days = 90 }
+		}
+		else_if = {
+			limit = {
+				has_variable = ffpa_tur_directorate_cadastre_event_fired_v1
+				NOT = { has_variable = ffpa_tur_directorate_combines_event_fired_v1 }
+				NOT = { has_variable = ffpa_tur_directorate_combines_event_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_directorate_combines_event_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.31 days = 365 }
+		}
+		else_if = {
+			limit = {
+				has_variable = ffpa_tur_directorate_combines_event_fired_v1
+				NOT = { has_variable = ffpa_tur_directorate_technical_corps_event_fired_v1 }
+				NOT = { has_variable = ffpa_tur_directorate_technical_corps_event_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_directorate_technical_corps_event_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.32 days = 365 }
+		}
+	}
+}
+
+ffpa_ensure_tur_permanent_flavor_rewards_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_porte_charter_choice_v1
+			var:ffpa_tur_porte_charter_choice_v1 = 1
+			NOT = { has_modifier = ffpa_tur_porte_central_charter_v1 }
+		}
+		add_modifier = { name = ffpa_tur_porte_central_charter_v1 }
+	}
+	else_if = {
+		limit = {
+			has_variable = ffpa_tur_porte_charter_choice_v1
+			var:ffpa_tur_porte_charter_choice_v1 = 2
+			NOT = { has_modifier = ffpa_tur_porte_vilayet_commonwealth_v1 }
+		}
+		add_modifier = { name = ffpa_tur_porte_vilayet_commonwealth_v1 }
+	}
+	else_if = {
+		limit = {
+			has_variable = ffpa_tur_porte_charter_choice_v1
+			var:ffpa_tur_porte_charter_choice_v1 = 3
+			NOT = { has_modifier = ffpa_tur_porte_palace_bureaucracy_v1 }
+		}
+		add_modifier = { name = ffpa_tur_porte_palace_bureaucracy_v1 }
+	}
+
+	if = {
+		limit = {
+			has_variable = ffpa_tur_republic_settlement_choice_v1
+			var:ffpa_tur_republic_settlement_choice_v1 = 1
+			NOT = { has_modifier = ffpa_tur_republic_assembly_settlement_v1 }
+		}
+		add_modifier = { name = ffpa_tur_republic_assembly_settlement_v1 }
+	}
+	else_if = {
+		limit = {
+			has_variable = ffpa_tur_republic_settlement_choice_v1
+			var:ffpa_tur_republic_settlement_choice_v1 = 2
+			NOT = { has_modifier = ffpa_tur_republic_developmental_settlement_v1 }
+		}
+		add_modifier = { name = ffpa_tur_republic_developmental_settlement_v1 }
+	}
+	else_if = {
+		limit = {
+			has_variable = ffpa_tur_republic_settlement_choice_v1
+			var:ffpa_tur_republic_settlement_choice_v1 = 3
+			NOT = { has_modifier = ffpa_tur_republic_guardian_settlement_v1 }
+		}
+		add_modifier = { name = ffpa_tur_republic_guardian_settlement_v1 }
+	}
+
+	if = {
+		limit = {
+			has_variable = ffpa_tur_directorate_settlement_choice_v1
+			var:ffpa_tur_directorate_settlement_choice_v1 = 1
+			NOT = { has_modifier = ffpa_tur_directorate_etatist_settlement_v1 }
+		}
+		add_modifier = { name = ffpa_tur_directorate_etatist_settlement_v1 }
+	}
+	else_if = {
+		limit = {
+			has_variable = ffpa_tur_directorate_settlement_choice_v1
+			var:ffpa_tur_directorate_settlement_choice_v1 = 2
+			NOT = { has_modifier = ffpa_tur_directorate_mixed_planning_settlement_v1 }
+		}
+		add_modifier = { name = ffpa_tur_directorate_mixed_planning_settlement_v1 }
+	}
+	else_if = {
+		limit = {
+			has_variable = ffpa_tur_directorate_settlement_choice_v1
+			var:ffpa_tur_directorate_settlement_choice_v1 = 3
+			NOT = { has_modifier = ffpa_tur_directorate_local_compacts_settlement_v1 }
+		}
+		add_modifier = { name = ffpa_tur_directorate_local_compacts_settlement_v1 }
+	}
+
+	if = {
+		limit = {
+			has_variable = ffpa_tur_anatolian_plan_congress_choice_v1
+			var:ffpa_tur_anatolian_plan_congress_choice_v1 = 1
+			NOT = { has_modifier = ffpa_tur_anatolian_state_combines_v1 }
+		}
+		add_modifier = { name = ffpa_tur_anatolian_state_combines_v1 }
+	}
+	else_if = {
+		limit = {
+			has_variable = ffpa_tur_anatolian_plan_congress_choice_v1
+			var:ffpa_tur_anatolian_plan_congress_choice_v1 = 2
+			NOT = { has_modifier = ffpa_tur_anatolian_village_institutes_v1 }
+		}
+		add_modifier = { name = ffpa_tur_anatolian_village_institutes_v1 }
+	}
+	else_if = {
+		limit = {
+			has_variable = ffpa_tur_anatolian_plan_congress_choice_v1
+			var:ffpa_tur_anatolian_plan_congress_choice_v1 = 3
+			NOT = { has_modifier = ffpa_tur_anatolian_development_banks_v1 }
+		}
+		add_modifier = { name = ffpa_tur_anatolian_development_banks_v1 }
+	}
+
+	# Country -> state region -> owned state. This is a bounded one-region repair,
+	# not a world scan, and keeps the selected doctrine after a state split.
+	if = {
+		limit = {
+			has_variable = ffpa_tur_straits_convention_choice_v1
+			var:ffpa_tur_straits_convention_choice_v1 = 1
+		}
+		s:STATE_EASTERN_THRACE = {
+			every_scope_state = {
+				limit = {
+					owner = ROOT
+					NOT = { has_modifier = ffpa_tur_straits_open_passage_state_v1 }
+				}
+				ffpa_clear_tur_straits_doctrines_state_v1 = yes
+				add_modifier = ffpa_tur_straits_open_passage_state_v1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = ffpa_tur_straits_convention_choice_v1
+			var:ffpa_tur_straits_convention_choice_v1 = 2
+		}
+		s:STATE_EASTERN_THRACE = {
+			every_scope_state = {
+				limit = {
+					owner = ROOT
+					NOT = { has_modifier = ffpa_tur_straits_balanced_stewardship_state_v1 }
+				}
+				ffpa_clear_tur_straits_doctrines_state_v1 = yes
+				add_modifier = ffpa_tur_straits_balanced_stewardship_state_v1
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			has_variable = ffpa_tur_straits_convention_choice_v1
+			var:ffpa_tur_straits_convention_choice_v1 = 3
+		}
+		s:STATE_EASTERN_THRACE = {
+			every_scope_state = {
+				limit = {
+					owner = ROOT
+					NOT = { has_modifier = ffpa_tur_straits_fortified_narrows_state_v1 }
+				}
+				ffpa_clear_tur_straits_doctrines_state_v1 = yes
+				add_modifier = ffpa_tur_straits_fortified_narrows_state_v1
+			}
+		}
+	}
+}
+
+ffpa_apply_tur_settlement_direct_administration_v1 = {
+	add_modifier = { name = ffpa_tur_settlement_direct_administration_v1 years = 8 }
+	add_loyalists = { value = 0.02 interest_group = ig:ig_intelligentsia }
+	add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
+}
+
+ffpa_apply_tur_settlement_representative_compact_v1 = {
+	add_modifier = { name = ffpa_tur_settlement_representative_compact_v1 years = 8 }
+	add_loyalists = { value = 0.02 interest_group = ig:ig_landowners }
+	add_loyalists = { value = 0.02 interest_group = ig:ig_devout }
+}
+
+ffpa_apply_tur_settlement_development_authority_v1 = {
+	add_modifier = { name = ffpa_tur_settlement_development_authority_v1 years = 8 }
+	add_loyalists = { value = 0.02 interest_group = ig:ig_industrialists }
+	add_loyalists = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+}
+
+ffpa_check_tur_post_reconstruction_events_v1 = {
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			ffpa_tur_has_three_anatolian_projects_v1 = yes
+			NOT = { has_variable = ffpa_tur_anatolian_plan_congress_choice_v1 }
+			NOT = { has_variable = ffpa_tur_anatolian_plan_congress_scheduled_v1 }
+		}
+		set_variable = ffpa_tur_anatolian_plan_congress_scheduled_v1
+		trigger_event = { id = ffpa_tur_flavor.40 days = 21 }
+	}
+
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			has_variable = ffpa_tur_state_project_v1
+			ffpa_tur_rumelian_settlement_ready_v1 = yes
+			NOT = { has_variable = ffpa_tur_rumelian_settlement_fired_v1 }
+			NOT = { has_variable = ffpa_tur_rumelian_settlement_scheduled_v1 }
+		}
+		set_variable = ffpa_tur_rumelian_settlement_scheduled_v1
+		trigger_event = { id = ffpa_tur_flavor.50 days = 45 }
+	}
+
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			has_variable = ffpa_tur_state_project_v1
+			ffpa_tur_eastern_settlement_ready_v1 = yes
+			NOT = { has_variable = ffpa_tur_eastern_settlement_fired_v1 }
+			NOT = { has_variable = ffpa_tur_eastern_settlement_scheduled_v1 }
+		}
+		set_variable = ffpa_tur_eastern_settlement_scheduled_v1
+		trigger_event = { id = ffpa_tur_flavor.51 days = 60 }
+	}
+
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			has_variable = ffpa_tur_state_project_v1
+			ffpa_tur_african_settlement_ready_v1 = yes
+			NOT = { has_variable = ffpa_tur_african_settlement_fired_v1 }
+			NOT = { has_variable = ffpa_tur_african_settlement_scheduled_v1 }
+		}
+		set_variable = ffpa_tur_african_settlement_scheduled_v1
+		trigger_event = { id = ffpa_tur_flavor.52 days = 75 }
+	}
+}
+
+ffpa_ensure_tur_flavor_v1 = {
+	if = {
+		limit = { c:TUR ?= ROOT }
+
+		# Infer only outcomes that leave an unambiguous persistent trace. The
+		# expired pragmatic modifier cannot be reconstructed safely, so unresolved
+		# saves receive a player-facing repair decision instead.
+		if = {
+			limit = { NOT = { has_variable = ffpa_tur_state_project_v1 } }
+			if = {
+				limit = {
+					OR = {
+						has_journal_entry = je_ffpa_tur_ottoman_commonwealth
+						has_variable = ffpa_tur_ottoman_commonwealth_complete
+						country_has_primary_culture = cu:ffpa_ottoman
+						has_modifier = ffpa_ottoman_civic_compact
+					}
+				}
+				ffpa_set_tur_state_project_ottoman_v1 = yes
+			}
+			else_if = {
+				limit = { has_modifier = ffpa_tur_anatolian_citizenship }
+				ffpa_set_tur_state_project_republic_v1 = yes
+			}
+			else_if = {
+				limit = { has_modifier = ffpa_tur_reconstruction_pragmatism }
+				ffpa_set_tur_state_project_directorate_v1 = yes
+			}
+			else_if = {
+				limit = { has_variable = ffpa_tur_rebuild_anatolia_complete }
+				set_variable = ffpa_tur_state_project_repair_needed_v1
+			}
+		}
+
+		if = {
+			limit = {
+				country_has_primary_culture = cu:ffpa_ottoman
+				NOT = { has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+				NOT = { has_variable = ffpa_tur_ottoman_commonwealth_complete }
+			}
+			set_variable = ffpa_tur_ottoman_commonwealth_complete
+		}
+
+		if = {
+			limit = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+			if = {
+				limit = {
+					NOT = { has_variable = ffpa_tur_ottoman_commonwealth_complete }
+					NOT = { has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+				}
+				add_journal_entry = { type = je_ffpa_tur_ottoman_commonwealth }
+			}
+			else_if = {
+				limit = {
+					has_variable = ffpa_tur_ottoman_commonwealth_complete
+					NOT = { has_variable = ffpa_tur_porte_charter_complete_v1 }
+					NOT = { has_journal_entry = je_ffpa_tur_charter_of_the_porte }
+				}
+				add_journal_entry = { type = je_ffpa_tur_charter_of_the_porte }
+			}
+		}
+
+		if = {
+			limit = {
+				ffpa_tur_has_republican_state_project_v1 = yes
+				NOT = { has_variable = ffpa_tur_second_foundation_complete_v1 }
+				NOT = { has_journal_entry = je_ffpa_tur_second_foundation_of_ankara }
+			}
+			add_journal_entry = { type = je_ffpa_tur_second_foundation_of_ankara }
+		}
+
+		if = {
+			limit = {
+				ffpa_tur_has_directorate_state_project_v1 = yes
+				NOT = { has_variable = ffpa_tur_reconstruction_directorate_complete_v1 }
+				NOT = { has_journal_entry = je_ffpa_tur_reconstruction_directorate }
+			}
+			add_journal_entry = { type = je_ffpa_tur_reconstruction_directorate }
+		}
+
+		ffpa_ensure_tur_route_event_chains_v1 = yes
+
+		if = {
+			limit = {
+				ffpa_tur_has_ottoman_state_project_v1 = yes
+				has_variable = ffpa_tur_porte_charter_complete_v1
+				NOT = { has_variable = ffpa_tur_porte_charter_choice_v1 }
+				NOT = { has_variable = ffpa_tur_porte_charter_capstone_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_porte_charter_capstone_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.13 days = 1 }
+		}
+		if = {
+			limit = {
+				ffpa_tur_has_republican_state_project_v1 = yes
+				has_variable = ffpa_tur_second_foundation_complete_v1
+				NOT = { has_variable = ffpa_tur_republic_settlement_choice_v1 }
+				NOT = { has_variable = ffpa_tur_republic_capstone_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_republic_capstone_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.23 days = 1 }
+		}
+		if = {
+			limit = {
+				ffpa_tur_has_directorate_state_project_v1 = yes
+				has_variable = ffpa_tur_reconstruction_directorate_complete_v1
+				NOT = { has_variable = ffpa_tur_directorate_settlement_choice_v1 }
+				NOT = { has_variable = ffpa_tur_directorate_capstone_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_directorate_capstone_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.33 days = 1 }
+		}
+		if = {
+			limit = {
+				has_variable = ffpa_tur_new_straits_convention_complete_v1
+				NOT = { has_variable = ffpa_tur_straits_convention_choice_v1 }
+				NOT = { has_variable = ffpa_tur_straits_convention_event_scheduled_v1 }
+			}
+			set_variable = ffpa_tur_straits_convention_event_scheduled_v1
+			trigger_event = { id = ffpa_tur_flavor.41 days = 1 }
+		}
+
+		ffpa_ensure_tur_permanent_flavor_rewards_v1 = yes
+		ffpa_check_tur_post_reconstruction_events_v1 = yes
+	}
+}
+
+# Called from the existing Eastern Mediterranean on_country_formed wrapper.
+# National route rewards are removed if TUR becomes another tag; persistent
+# choices remain as save API and are restored if the same country later reforms TUR.
+ffpa_handle_tur_flavor_country_formed_v1 = {
+	if = {
+		limit = { c:TUR ?= ROOT }
+		ffpa_ensure_tur_flavor_v1 = yes
+	}
+	else_if = {
+		limit = {
+			OR = {
+				has_variable = ffpa_tur_state_project_v1
+				has_modifier = ffpa_tur_porte_charter_deliberations_v1
+				has_modifier = ffpa_tur_republic_foundation_convention_v1
+				has_modifier = ffpa_tur_directorate_reconstruction_mobilization_v1
+				has_modifier = ffpa_tur_porte_central_charter_v1
+				has_modifier = ffpa_tur_porte_vilayet_commonwealth_v1
+				has_modifier = ffpa_tur_porte_palace_bureaucracy_v1
+				has_modifier = ffpa_tur_republic_assembly_settlement_v1
+				has_modifier = ffpa_tur_republic_developmental_settlement_v1
+				has_modifier = ffpa_tur_republic_guardian_settlement_v1
+				has_modifier = ffpa_tur_directorate_etatist_settlement_v1
+				has_modifier = ffpa_tur_directorate_mixed_planning_settlement_v1
+				has_modifier = ffpa_tur_directorate_local_compacts_settlement_v1
+				has_modifier = ffpa_tur_anatolian_state_combines_v1
+				has_modifier = ffpa_tur_anatolian_village_institutes_v1
+				has_modifier = ffpa_tur_anatolian_development_banks_v1
+			}
+		}
+		ffpa_cleanup_tur_delayed_events_v1 = yes
+		ffpa_clear_tur_porte_charter_rewards_v1 = yes
+		ffpa_clear_tur_republic_settlement_rewards_v1 = yes
+		ffpa_clear_tur_directorate_settlement_rewards_v1 = yes
+		ffpa_clear_tur_anatolian_plan_rewards_v1 = yes
+		if = {
+			limit = { has_modifier = ffpa_tur_settlement_direct_administration_v1 }
+			remove_modifier = ffpa_tur_settlement_direct_administration_v1
+		}
+		if = {
+			limit = { has_modifier = ffpa_tur_settlement_representative_compact_v1 }
+			remove_modifier = ffpa_tur_settlement_representative_compact_v1
+		}
+		if = {
+			limit = { has_modifier = ffpa_tur_settlement_development_authority_v1 }
+			remove_modifier = ffpa_tur_settlement_development_authority_v1
+		}
+	}
+}

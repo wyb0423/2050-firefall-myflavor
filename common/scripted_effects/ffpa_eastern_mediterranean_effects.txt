@@ -319,6 +319,31 @@ ffpa_apply_byz_rhomaic_civic_universalism_v1 = {
 	}
 }
 
+# Root = BYZ. Replace the original permanent reward without stacking its
+# unchanged acceptance, loyalism, migration, and qualification modifiers.
+# The completed variable, Rhomaic primary culture, or legacy modifier can each
+# recover old saves whose completion event has already fired.
+ffpa_ensure_byz_rhomaic_civic_compact_v2 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			OR = {
+				has_variable = ffpa_byz_rhomaic_commonwealth_complete
+				country_has_primary_culture = cu:ffpa_rhomaic
+				has_modifier = ffpa_rhomaic_civic_compact
+			}
+		}
+		if = {
+			limit = { has_modifier = ffpa_rhomaic_civic_compact }
+			remove_modifier = ffpa_rhomaic_civic_compact
+		}
+		if = {
+			limit = { NOT = { has_modifier = ffpa_rhomaic_civic_compact_v2 } }
+			add_modifier = { name = ffpa_rhomaic_civic_compact_v2 }
+		}
+	}
+}
+
 # Root = GRE. Firefall successor countries can form Greece while retaining a
 # Sunni runtime state religion. Normalize the Greek identity once, without
 # overriding State Atheism; leaving State Atheism later restores the Orthodox
@@ -753,6 +778,34 @@ ffpa_sync_byz_commonwealth_progress_bars = {
 	}
 }
 
+# Country scope. v2 targets the versioned JE instance whose three scripted
+# bars are guaranteed to exist in both new games and migrated saves.
+ffpa_sync_byz_commonwealth_progress_bars_v2 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2
+			has_variable = ffpa_byz_commonwealth_administration_v2
+			has_variable = ffpa_byz_commonwealth_civic_v2
+			has_variable = ffpa_byz_commonwealth_stability_v2
+		}
+		je:je_ffpa_byz_rhomaic_commonwealth_v2 ?= {
+			set_bar_progress = {
+				value = root.var:ffpa_byz_commonwealth_administration_v2
+				name = ffpa_byz_commonwealth_administration_bar
+			}
+			set_bar_progress = {
+				value = root.var:ffpa_byz_commonwealth_civic_v2
+				name = ffpa_byz_commonwealth_civic_bar
+			}
+			set_bar_progress = {
+				value = root.var:ffpa_byz_commonwealth_stability_v2
+				name = ffpa_byz_commonwealth_stability_bar
+			}
+		}
+	}
+}
+
 ffpa_sync_tur_commonwealth_progress_bars = {
 	if = {
 		limit = {
@@ -822,6 +875,91 @@ ffpa_ensure_byz_commonwealth_progress_v3 = {
 	}
 }
 
+# Country scope. Create the versioned replacement before marking the legacy JE
+# for its definition-owned invalidation path. The fallback covers an interrupted
+# handoff and never creates the journal without a rebuild marker.
+ffpa_ensure_byz_commonwealth_journal_v4 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth
+			NOT = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2 }
+		}
+		add_journal_entry = { type = je_ffpa_byz_rhomaic_commonwealth_v2 }
+	}
+
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth
+			NOT = { has_variable = ffpa_byz_commonwealth_journal_rebuild_v4 }
+		}
+		set_variable = ffpa_byz_commonwealth_journal_rebuild_v4
+	}
+
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			has_variable = ffpa_byz_commonwealth_journal_rebuild_v4
+			NOT = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+			NOT = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2 }
+			NOT = { has_variable = ffpa_byz_rhomaic_commonwealth_complete }
+		}
+		add_journal_entry = { type = je_ffpa_byz_rhomaic_commonwealth_v2 }
+	}
+
+	if = {
+		limit = {
+			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2
+			NOT = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
+		}
+		set_variable = ffpa_byz_commonwealth_journal_migrated_v4
+		remove_variable = ffpa_byz_commonwealth_journal_rebuild_v4
+	}
+}
+
+# Country scope. Existing v2 axes remain authoritative after the journal
+# instance migration; only missing axes inherit the legacy single-track value.
+ffpa_ensure_byz_commonwealth_progress_v4 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2
+		}
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_commonwealth_administration_v2 } }
+			if = {
+				limit = { has_variable = ffpa_byz_rhomaic_commonwealth_months }
+				set_variable = { name = ffpa_byz_commonwealth_administration_v2 value = var:ffpa_byz_rhomaic_commonwealth_months }
+			}
+			else = { set_variable = { name = ffpa_byz_commonwealth_administration_v2 value = 0 } }
+		}
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_commonwealth_civic_v2 } }
+			if = {
+				limit = { has_variable = ffpa_byz_rhomaic_commonwealth_months }
+				set_variable = { name = ffpa_byz_commonwealth_civic_v2 value = var:ffpa_byz_rhomaic_commonwealth_months }
+			}
+			else = { set_variable = { name = ffpa_byz_commonwealth_civic_v2 value = 0 } }
+		}
+		if = {
+			limit = { NOT = { has_variable = ffpa_byz_commonwealth_stability_v2 } }
+			if = {
+				limit = { has_variable = ffpa_byz_rhomaic_commonwealth_months }
+				set_variable = { name = ffpa_byz_commonwealth_stability_v2 value = var:ffpa_byz_rhomaic_commonwealth_months }
+			}
+			else = { set_variable = { name = ffpa_byz_commonwealth_stability_v2 value = 0 } }
+		}
+		clamp_variable = { name = ffpa_byz_commonwealth_administration_v2 min = 0 max = 60 }
+		clamp_variable = { name = ffpa_byz_commonwealth_civic_v2 min = 0 max = 60 }
+		clamp_variable = { name = ffpa_byz_commonwealth_stability_v2 min = 0 max = 60 }
+		remove_variable = ffpa_byz_rhomaic_commonwealth_months
+		set_variable = ffpa_byz_commonwealth_progress_migrated_v2
+		set_variable = ffpa_byz_commonwealth_progress_migrated_v3
+		ffpa_sync_byz_commonwealth_progress_bars_v2 = yes
+	}
+}
+
 ffpa_ensure_tur_commonwealth_progress_v3 = {
 	if = {
 		limit = {
@@ -875,6 +1013,9 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 		limit = { c:BYZ ?= ROOT }
 		ffpa_ensure_byzantine_formation_effects = yes
 		ffpa_ensure_byz_commonwealth_progress_v3 = yes
+		ffpa_ensure_byz_commonwealth_journal_v4 = yes
+		ffpa_ensure_byz_commonwealth_progress_v4 = yes
+		ffpa_ensure_byz_rhomaic_civic_compact_v2 = yes
 		ffpa_ensure_western_integration_rewards_v2 = yes
 		ffpa_ensure_byz_western_citizenship_incorporation_v1 = yes
 
@@ -933,6 +1074,7 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 
 	if = {
 		limit = { c:TUR ?= ROOT }
+		ffpa_ensure_tur_flavor_v1 = yes
 		ffpa_ensure_tur_commonwealth_progress_v3 = yes
 		if = {
 			limit = { NOT = { has_variable = ffpa_tur_formation_ideologies_v1 } }

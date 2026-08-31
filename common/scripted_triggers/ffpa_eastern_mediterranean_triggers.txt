@@ -241,6 +241,15 @@ ffpa_byz_commonwealth_stability_conditions = {
 	}
 }
 
+# Country scope. The legacy ID remains active only during the one-shot rebuild
+# of old journal instances that predate the three native scripted bars.
+ffpa_byz_has_active_rhomaic_commonwealth_v2 = {
+	OR = {
+		has_journal_entry = je_ffpa_byz_rhomaic_commonwealth
+		has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2
+	}
+}
+
 ffpa_imperial_regional_development_unlocked = {
 	OR = {
 		AND = {
@@ -411,5 +420,90 @@ ffpa_is_byzantine_western_integration_state = {
 		state_region = s:STATE_UPPER_ANDALUSIA
 		state_region = s:STATE_VALENCIA
 		state_region = s:STATE_MURCIA
+	}
+}
+
+# Country scope. Restoration campaigns are started manually from the imperial
+# council decision. Counting live JEs directly avoids a persistent slot counter
+# that could drift after a timeout, tag change, or old-save migration.
+ffpa_byz_restoration_campaign_slot_available = {
+	NOT = {
+		calc_true_if = {
+			amount >= 2
+			has_journal_entry = je_ffpa_byz_restore_balkans
+			has_journal_entry = je_ffpa_byz_restore_anatolia
+			has_journal_entry = je_ffpa_byz_restore_oriens
+			has_journal_entry = je_ffpa_byz_restore_aegyptus
+			has_journal_entry = je_ffpa_byz_restore_africa
+			has_journal_entry = je_ffpa_byz_restore_italia
+			has_journal_entry = je_ffpa_byz_restore_spania
+		}
+	}
+}
+
+ffpa_byz_balkans_restoration_campaign_available = {
+	c:BYZ ?= this
+	NOT = { has_variable = ffpa_byz_balkans_restored_complete_v1 }
+	NOT = { has_variable = ffpa_byz_balkans_restoration_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_byz_restore_balkans }
+}
+
+ffpa_byz_anatolia_restoration_campaign_available = {
+	c:BYZ ?= this
+	NOT = { has_variable = ffpa_byz_anatolia_restored_complete_v1 }
+	NOT = { has_variable = ffpa_byz_anatolia_restoration_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_byz_restore_anatolia }
+}
+
+ffpa_byz_oriens_restoration_campaign_available = {
+	c:BYZ ?= this
+	has_variable = ffpa_byz_anatolia_restored_complete_v1
+	NOT = { has_variable = ffpa_byz_oriens_restored_complete_v1 }
+	NOT = { has_variable = ffpa_byz_oriens_restoration_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_byz_restore_oriens }
+}
+
+ffpa_byz_aegyptus_restoration_campaign_available = {
+	c:BYZ ?= this
+	has_variable = ffpa_byz_oriens_restored_complete_v1
+	NOT = { has_variable = ffpa_byz_aegyptus_restored_complete_v1 }
+	NOT = { has_variable = ffpa_byz_aegyptus_restoration_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_byz_restore_aegyptus }
+}
+
+ffpa_byz_africa_restoration_campaign_available = {
+	c:BYZ ?= this
+	has_variable = ffpa_byz_aegyptus_restored_complete_v1
+	NOT = { has_variable = ffpa_byz_africa_restored_complete_v1 }
+	NOT = { has_variable = ffpa_byz_africa_restoration_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_byz_restore_africa }
+}
+
+ffpa_byz_italia_restoration_campaign_available = {
+	c:BYZ ?= this
+	has_variable = ffpa_byz_balkans_restored_complete_v1
+	NOT = { has_variable = ffpa_byz_italia_restored_complete_v1 }
+	NOT = { has_variable = ffpa_byz_italia_restoration_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_byz_restore_italia }
+}
+
+ffpa_byz_spania_restoration_campaign_available = {
+	c:BYZ ?= this
+	has_variable = ffpa_byz_italia_restored_complete_v1
+	has_variable = ffpa_byz_africa_restored_complete_v1
+	NOT = { has_variable = ffpa_byz_spania_restored_complete_v1 }
+	NOT = { has_variable = ffpa_byz_spania_restoration_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_byz_restore_spania }
+}
+
+ffpa_byz_has_available_restoration_campaign = {
+	OR = {
+		ffpa_byz_balkans_restoration_campaign_available = yes
+		ffpa_byz_anatolia_restoration_campaign_available = yes
+		ffpa_byz_oriens_restoration_campaign_available = yes
+		ffpa_byz_aegyptus_restoration_campaign_available = yes
+		ffpa_byz_africa_restoration_campaign_available = yes
+		ffpa_byz_italia_restoration_campaign_available = yes
+		ffpa_byz_spania_restoration_campaign_available = yes
 	}
 }

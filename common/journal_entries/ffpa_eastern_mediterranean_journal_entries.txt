@@ -450,6 +450,59 @@ je_ffpa_byz_new_rome = {
 }
 
 je_ffpa_byz_rhomaic_commonwealth = {
+	# Legacy save interface. Journal instances created before scripted bars were
+	# introduced cannot acquire them from a changed definition. The monthly
+	# country ensure marks this instance for invalidation, then this branch
+	# replaces it with the versioned journal without clearing country progress.
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	group = je_group_historical_content
+
+	invalid = {
+		OR = {
+			NOT = { c:BYZ ?= this }
+			has_variable = ffpa_byz_commonwealth_journal_rebuild_v4
+		}
+	}
+
+	on_invalid = {
+		if = {
+			limit = {
+				c:BYZ ?= ROOT
+				has_variable = ffpa_byz_commonwealth_journal_rebuild_v4
+				has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2
+			}
+			set_variable = ffpa_byz_commonwealth_journal_migrated_v4
+			remove_variable = ffpa_byz_commonwealth_journal_rebuild_v4
+		}
+		else_if = {
+			limit = {
+				c:BYZ ?= ROOT
+				has_variable = ffpa_byz_commonwealth_journal_rebuild_v4
+				NOT = { has_variable = ffpa_byz_rhomaic_commonwealth_complete }
+			}
+			# Keep the marker for the country ensure fallback on the next pulse.
+			set_variable = ffpa_byz_commonwealth_journal_rebuild_v4
+		}
+		else = {
+			remove_variable = ffpa_byz_commonwealth_administration_v2
+			remove_variable = ffpa_byz_commonwealth_civic_v2
+			remove_variable = ffpa_byz_commonwealth_stability_v2
+			remove_variable = ffpa_byz_commonwealth_event_cooldown_v2
+			remove_variable = ffpa_byz_commonwealth_progress_migrated_v3
+			remove_variable = ffpa_byz_commonwealth_journal_rebuild_v4
+			remove_variable = ffpa_byz_language_event_scheduled_v3
+			remove_variable = ffpa_byz_representation_event_scheduled_v3
+			remove_variable = ffpa_byz_military_oath_event_scheduled_v3
+		}
+	}
+
+	status_desc = { triggered_desc = { desc = je_ffpa_byz_rhomaic_commonwealth_status } }
+	progressbar = no
+	weight = 135
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_byz_rhomaic_commonwealth_v2 = {
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	group = je_group_historical_content
 	scripted_progress_bar = ffpa_byz_commonwealth_administration_bar
@@ -457,12 +510,17 @@ je_ffpa_byz_rhomaic_commonwealth = {
 	scripted_progress_bar = ffpa_byz_commonwealth_stability_bar
 
 	immediate = {
-		ffpa_ensure_byz_commonwealth_progress_v3 = yes
+		set_variable = ffpa_byz_commonwealth_journal_migrated_v4
+		if = {
+			limit = { NOT = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth } }
+			remove_variable = ffpa_byz_commonwealth_journal_rebuild_v4
+		}
+		ffpa_ensure_byz_commonwealth_progress_v4 = yes
 	}
 
 	on_monthly_pulse = {
 		effect = {
-			ffpa_ensure_byz_commonwealth_progress_v3 = yes
+			ffpa_ensure_byz_commonwealth_progress_v4 = yes
 
 			if = {
 				limit = { ffpa_byz_commonwealth_administration_conditions = yes }
@@ -519,7 +577,7 @@ je_ffpa_byz_rhomaic_commonwealth = {
 				}
 			}
 
-			ffpa_sync_byz_commonwealth_progress_bars = yes
+			ffpa_sync_byz_commonwealth_progress_bars_v2 = yes
 		}
 	}
 
@@ -545,6 +603,7 @@ je_ffpa_byz_rhomaic_commonwealth = {
 		remove_variable = ffpa_byz_commonwealth_stability_v2
 		remove_variable = ffpa_byz_commonwealth_event_cooldown_v2
 		remove_variable = ffpa_byz_commonwealth_progress_migrated_v3
+		remove_variable = ffpa_byz_commonwealth_journal_rebuild_v4
 		remove_variable = ffpa_byz_language_event_scheduled_v3
 		remove_variable = ffpa_byz_representation_event_scheduled_v3
 		remove_variable = ffpa_byz_military_oath_event_scheduled_v3
@@ -558,6 +617,7 @@ je_ffpa_byz_rhomaic_commonwealth = {
 		remove_variable = ffpa_byz_commonwealth_stability_v2
 		remove_variable = ffpa_byz_commonwealth_event_cooldown_v2
 		remove_variable = ffpa_byz_commonwealth_progress_migrated_v3
+		remove_variable = ffpa_byz_commonwealth_journal_rebuild_v4
 		remove_variable = ffpa_byz_language_event_scheduled_v3
 		remove_variable = ffpa_byz_representation_event_scheduled_v3
 		remove_variable = ffpa_byz_military_oath_event_scheduled_v3

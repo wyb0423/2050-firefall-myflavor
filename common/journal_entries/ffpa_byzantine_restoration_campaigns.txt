@@ -1,0 +1,338 @@
+# Optional Byzantine restoration campaigns. They are added only through the
+# restoration-council decision, so their 45-55 year clocks begin when the player
+# deliberately accepts a frontier. Claims are supplied by the formation module;
+# these JEs only observe direct ownership and never alter war-goal definitions.
+
+je_ffpa_byz_restore_balkans = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_byzantine_restoration
+
+	immediate = {
+		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+	}
+
+	complete = {
+		owns_entire_state_region = STATE_SLOVENIA
+		owns_entire_state_region = STATE_CROATIA
+		owns_entire_state_region = STATE_SLAVONIA
+		owns_entire_state_region = STATE_DALMATIA
+		owns_entire_state_region = STATE_BOSNIA
+		owns_entire_state_region = STATE_MONTENEGRO
+		owns_entire_state_region = STATE_ALBANIA
+		owns_entire_state_region = STATE_SKOPIA
+		owns_entire_state_region = STATE_KOSOVO
+		owns_entire_state_region = STATE_NORTHERN_THRACE
+		owns_entire_state_region = STATE_BULGARIA
+		owns_entire_state_region = STATE_EASTERN_SERBIA
+		owns_entire_state_region = STATE_WESTERN_SERBIA
+		owns_entire_state_region = STATE_PELOPONNESE
+		owns_entire_state_region = STATE_IONIAN_ISLANDS
+		owns_entire_state_region = STATE_ATTICA
+		owns_entire_state_region = STATE_THESSALIA
+		owns_entire_state_region = STATE_MACEDONIA
+		owns_entire_state_region = STATE_WESTERN_THRACE
+		owns_entire_state_region = STATE_CRETE
+		owns_entire_state_region = STATE_WEST_AEGEAN_ISLANDS
+		owns_entire_state_region = STATE_DOBRUDJA
+		owns_entire_state_region = STATE_EASTERN_THRACE
+	}
+
+	on_complete = {
+		set_variable = ffpa_byz_balkans_restored_complete_v1
+		add_modifier = ffpa_byz_balkans_restored_v1
+		trigger_event = { id = ffpa_flavor.40 popup = yes }
+	}
+
+	timeout = 16425 # 45 years
+	on_timeout = {
+		set_variable = { name = ffpa_byz_balkans_restoration_retry_cooldown_v1 years = 5 }
+		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
+		trigger_event = { id = ffpa_flavor.47 popup = yes }
+	}
+
+	invalid = { NOT = { c:BYZ ?= this } }
+	on_invalid = {
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
+			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
+		}
+	}
+	status_desc = { triggered_desc = { desc = je_ffpa_byz_restoration_campaign_status } }
+	progressbar = no
+	weight = 130
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_byz_restore_anatolia = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_byzantine_restoration
+
+	immediate = {
+		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+	}
+
+	complete = {
+		owns_entire_state_region = STATE_HUDAVENDIGAR
+		owns_entire_state_region = STATE_AYDIN
+		owns_entire_state_region = STATE_KONYA
+		owns_entire_state_region = STATE_ANKARA
+		owns_entire_state_region = STATE_ADANA
+		owns_entire_state_region = STATE_KASTAMONU
+		owns_entire_state_region = STATE_DIYARBAKIR
+		owns_entire_state_region = STATE_TRABZON
+		owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS
+		owns_entire_state_region = STATE_ERZURUM
+		owns_entire_state_region = STATE_KARS
+	}
+
+	on_complete = {
+		set_variable = ffpa_byz_anatolia_restored_complete_v1
+		add_modifier = ffpa_byz_anatolia_restored_v1
+		trigger_event = { id = ffpa_flavor.41 popup = yes }
+	}
+
+	timeout = 16425 # 45 years
+	on_timeout = {
+		set_variable = { name = ffpa_byz_anatolia_restoration_retry_cooldown_v1 years = 5 }
+		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
+		trigger_event = { id = ffpa_flavor.47 popup = yes }
+	}
+
+	invalid = { NOT = { c:BYZ ?= this } }
+	on_invalid = {
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
+			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
+		}
+	}
+	status_desc = { triggered_desc = { desc = je_ffpa_byz_restoration_campaign_status } }
+	progressbar = no
+	weight = 130
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_byz_restore_oriens = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_byzantine_restoration
+
+	immediate = {
+		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+	}
+
+	complete = {
+		owns_entire_state_region = STATE_CYPRUS
+		owns_entire_state_region = STATE_TRANSJORDAN
+		owns_entire_state_region = STATE_PALESTINE
+		owns_entire_state_region = STATE_LEBANON
+		owns_entire_state_region = STATE_SYRIA
+		owns_entire_state_region = STATE_ALEPPO
+		owns_entire_state_region = STATE_DEIR_EZ_ZOR
+	}
+
+	on_complete = {
+		set_variable = ffpa_byz_oriens_restored_complete_v1
+		add_modifier = ffpa_byz_oriens_restored_v1
+		trigger_event = { id = ffpa_flavor.42 popup = yes }
+	}
+
+	timeout = 18250 # 50 years
+	on_timeout = {
+		set_variable = { name = ffpa_byz_oriens_restoration_retry_cooldown_v1 years = 5 }
+		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
+		trigger_event = { id = ffpa_flavor.47 popup = yes }
+	}
+
+	invalid = { NOT = { c:BYZ ?= this } }
+	on_invalid = {
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
+			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
+		}
+	}
+	status_desc = { triggered_desc = { desc = je_ffpa_byz_restoration_campaign_status } }
+	progressbar = no
+	weight = 125
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_byz_restore_aegyptus = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_byzantine_restoration
+
+	immediate = {
+		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+	}
+
+	complete = {
+		owns_entire_state_region = STATE_LOWER_EGYPT
+		owns_entire_state_region = STATE_MIDDLE_EGYPT
+		owns_entire_state_region = STATE_UPPER_EGYPT
+		owns_entire_state_region = STATE_MATRUH
+		owns_entire_state_region = STATE_SINAI
+		owns_entire_state_region = STATE_EGYPTIAN_DESERT
+	}
+
+	on_complete = {
+		set_variable = ffpa_byz_aegyptus_restored_complete_v1
+		add_modifier = ffpa_byz_aegyptus_restored_v1
+		trigger_event = { id = ffpa_flavor.43 popup = yes }
+	}
+
+	timeout = 18250 # 50 years
+	on_timeout = {
+		set_variable = { name = ffpa_byz_aegyptus_restoration_retry_cooldown_v1 years = 5 }
+		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
+		trigger_event = { id = ffpa_flavor.47 popup = yes }
+	}
+
+	invalid = { NOT = { c:BYZ ?= this } }
+	on_invalid = {
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
+			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
+		}
+	}
+	status_desc = { triggered_desc = { desc = je_ffpa_byz_restoration_campaign_status } }
+	progressbar = no
+	weight = 120
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_byz_restore_africa = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_byzantine_restoration
+
+	immediate = {
+		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+	}
+
+	complete = {
+		owns_entire_state_region = STATE_LIBYA
+		owns_entire_state_region = STATE_TRIPOLI
+		owns_entire_state_region = STATE_TUNISIA
+		owns_entire_state_region = STATE_CONSTANTINE
+		owns_entire_state_region = STATE_ALGIERS
+		owns_entire_state_region = STATE_AL_RIF
+	}
+
+	on_complete = {
+		set_variable = ffpa_byz_africa_restored_complete_v1
+		add_modifier = ffpa_byz_africa_restored_v1
+		trigger_event = { id = ffpa_flavor.44 popup = yes }
+	}
+
+	timeout = 20075 # 55 years
+	on_timeout = {
+		set_variable = { name = ffpa_byz_africa_restoration_retry_cooldown_v1 years = 5 }
+		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
+		trigger_event = { id = ffpa_flavor.47 popup = yes }
+	}
+
+	invalid = { NOT = { c:BYZ ?= this } }
+	on_invalid = {
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
+			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
+		}
+	}
+	status_desc = { triggered_desc = { desc = je_ffpa_byz_restoration_campaign_status } }
+	progressbar = no
+	weight = 115
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_byz_restore_italia = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_byzantine_restoration
+
+	immediate = {
+		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+	}
+
+	complete = {
+		owns_entire_state_region = STATE_ISTRIA
+		owns_entire_state_region = STATE_PIEDMONT
+		owns_entire_state_region = STATE_LOMBARDY
+		owns_entire_state_region = STATE_VENETIA
+		owns_entire_state_region = STATE_EMILIA
+		owns_entire_state_region = STATE_ROMAGNA
+		owns_entire_state_region = STATE_TUSCANY
+		owns_entire_state_region = STATE_UMBRIA
+		owns_entire_state_region = STATE_LAZIO
+		owns_entire_state_region = STATE_ABRUZZO
+		owns_entire_state_region = STATE_CAMPANIA
+		owns_entire_state_region = STATE_APULIA
+		owns_entire_state_region = STATE_CALABRIA
+		owns_entire_state_region = STATE_SICILY
+		owns_entire_state_region = STATE_SARDINIA
+		owns_entire_state_region = STATE_CORSICA
+		owns_entire_state_region = STATE_MALTA
+	}
+
+	on_complete = {
+		set_variable = ffpa_byz_italia_restored_complete_v1
+		add_modifier = ffpa_byz_italia_restored_v1
+		trigger_event = { id = ffpa_flavor.45 popup = yes }
+	}
+
+	timeout = 20075 # 55 years
+	on_timeout = {
+		set_variable = { name = ffpa_byz_italia_restoration_retry_cooldown_v1 years = 5 }
+		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
+		trigger_event = { id = ffpa_flavor.47 popup = yes }
+	}
+
+	invalid = { NOT = { c:BYZ ?= this } }
+	on_invalid = {
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
+			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
+		}
+	}
+	status_desc = { triggered_desc = { desc = je_ffpa_byz_restoration_campaign_status } }
+	progressbar = no
+	weight = 115
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_byz_restore_spania = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_byzantine_restoration
+
+	immediate = {
+		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+	}
+
+	complete = {
+		owns_entire_state_region = STATE_BALEARIC_ISLANDS
+		owns_entire_state_region = STATE_LOWER_ANDALUSIA
+		owns_entire_state_region = STATE_UPPER_ANDALUSIA
+		owns_entire_state_region = STATE_VALENCIA
+		owns_entire_state_region = STATE_MURCIA
+	}
+
+	on_complete = {
+		set_variable = ffpa_byz_spania_restored_complete_v1
+		add_modifier = ffpa_byz_spania_restored_v1
+		trigger_event = { id = ffpa_flavor.46 popup = yes }
+	}
+
+	timeout = 18250 # 50 years
+	on_timeout = {
+		set_variable = { name = ffpa_byz_spania_restoration_retry_cooldown_v1 years = 5 }
+		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
+		trigger_event = { id = ffpa_flavor.47 popup = yes }
+	}
+
+	invalid = { NOT = { c:BYZ ?= this } }
+	on_invalid = {
+		if = {
+			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
+			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
+		}
+	}
+	status_desc = { triggered_desc = { desc = je_ffpa_byz_restoration_campaign_status } }
+	progressbar = no
+	weight = 110
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

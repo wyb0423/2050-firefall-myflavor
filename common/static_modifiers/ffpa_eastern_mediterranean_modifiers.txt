@@ -120,6 +120,21 @@ ffpa_rhomaic_civic_compact = {
 	state_pop_qualifications_mult = 0.25
 }
 
+# v1 remains defined as a save interface. v2 preserves its rewards and adds
+# a restrained assimilation bonus for the completed Rhomaic civic identity.
+ffpa_rhomaic_civic_compact_v2 = {
+	icon = gfx/interface/icons/generic_icons/accepted_icon.dds
+	country_turkish_cultural_acceptance_add = 15
+	country_albanian_cultural_acceptance_add = 15
+	country_bulgarian_cultural_acceptance_add = 15
+	country_serb_cultural_acceptance_add = 15
+	country_armenian_cultural_acceptance_add = 15
+	country_loyalism_increases_second_rate_citizen_mult = 0.15
+	state_migration_pull_mult = 0.20
+	state_pop_qualifications_mult = 0.25
+	state_assimilation_mult = 0.20
+}
+
 ffpa_byz_new_rome_construction_drive = {
 	icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
 	state_construction_mult = 0.20
@@ -649,4 +664,75 @@ ffpa_byz_western_notables_senate_v2 = {
 	country_bureaucracy_add = 100
 	country_law_enactment_speed_mult = -0.05
 	interest_group_ig_intelligentsia_approval_add = -2
+}
+
+# --- Byzantine restoration campaigns ---
+
+ffpa_byz_restoration_campaign_mobilization_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_rifle_positive.dds
+	unit_army_offense_add = 2
+	building_training_rate_mult = 0.10
+	country_military_goods_cost_mult = -0.05
+}
+
+ffpa_byz_restoration_settlement_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_infamy_decay_mult = 0.20
+	country_diplomatic_play_maneuvers_mult = -0.15
+}
+
+ffpa_byz_restoration_triumph_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.05
+	country_legitimacy_base_add = 3
+	interest_group_ig_armed_forces_approval_add = 1
+}
+
+ffpa_byz_restoration_failure_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+	country_prestige_mult = -0.10
+	country_legitimacy_base_add = -5
+	interest_group_ig_armed_forces_approval_add = -2
+}
+
+ffpa_byz_balkans_restored_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.01
+	country_legitimacy_base_add = 1
+}
+
+ffpa_byz_anatolia_restored_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.01
+	country_legitimacy_base_add = 1
+}
+
+ffpa_byz_oriens_restored_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.01
+	country_legitimacy_base_add = 1
+}
+
+ffpa_byz_aegyptus_restored_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.01
+	country_legitimacy_base_add = 1
+}
+
+ffpa_byz_africa_restored_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.01
+	country_legitimacy_base_add = 1
+}
+
+ffpa_byz_italia_restored_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.01
+	country_legitimacy_base_add = 1
+}
+
+ffpa_byz_spania_restored_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+	country_prestige_mult = 0.01
+	country_legitimacy_base_add = 1
 }
