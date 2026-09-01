@@ -1063,6 +1063,7 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 	if = {
 		limit = { ROOT = { country_definition = cd:BYZ } }
 		ffpa_ensure_byzantine_formation_effects = yes
+		ffpa_migrate_byz_restoration_predecessor_tracking_v1 = yes
 		ffpa_ensure_byz_commonwealth_progress_v3 = yes
 		ffpa_ensure_byz_commonwealth_journal_v4 = yes
 		ffpa_ensure_byz_commonwealth_progress_v4 = yes
@@ -1181,4 +1182,829 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 	ffpa_ensure_permanent_governance_journals_v1 = yes
 
 	set_variable = ffpa_eastern_mediterranean_v2_seen
+}
+
+
+# --- Byzantine restoration direct-predecessor narration ---
+# State instances retain a campaign-specific owner snapshot. The shared owner-
+# change on_action records a predecessor only when a tracked state passes into
+# the corresponding country; campaign completion itself still uses the existing
+# state-region ownership checks.
+
+ffpa_initialize_byz_balkans_predecessor_state_v1 = {
+	set_variable = ffpa_byz_balkans_owner_tracking_v1
+	remove_variable = ffpa_byz_balkans_owner_snapshot_v1
+	clear_saved_scope = ffpa_byz_balkans_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_byz_balkans_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_byz_balkans_new_owner_scope }
+		set_variable = { name = ffpa_byz_balkans_owner_snapshot_v1 value = scope:ffpa_byz_balkans_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_byz_balkans_new_owner_scope
+}
+
+ffpa_cleanup_byz_balkans_predecessor_state_v1 = {
+	remove_variable = ffpa_byz_balkans_owner_tracking_v1
+	remove_variable = ffpa_byz_balkans_owner_snapshot_v1
+}
+
+ffpa_initialize_byz_balkans_predecessor_tracking_v1 = {
+	remove_variable = ffpa_byz_balkans_completion_predecessor_v1
+	remove_variable = ffpa_byz_balkans_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_SLOVENIA
+			this = s:STATE_CROATIA
+			this = s:STATE_SLAVONIA
+			this = s:STATE_DALMATIA
+			this = s:STATE_BOSNIA
+			this = s:STATE_MONTENEGRO
+			this = s:STATE_ALBANIA
+			this = s:STATE_SKOPIA
+			this = s:STATE_KOSOVO
+			this = s:STATE_NORTHERN_THRACE
+			this = s:STATE_BULGARIA
+			this = s:STATE_EASTERN_SERBIA
+			this = s:STATE_WESTERN_SERBIA
+			this = s:STATE_PELOPONNESE
+			this = s:STATE_IONIAN_ISLANDS
+			this = s:STATE_ATTICA
+			this = s:STATE_THESSALIA
+			this = s:STATE_MACEDONIA
+			this = s:STATE_WESTERN_THRACE
+			this = s:STATE_CRETE
+			this = s:STATE_WEST_AEGEAN_ISLANDS
+			this = s:STATE_DOBRUDJA
+			this = s:STATE_EASTERN_THRACE
+			}
+		}
+		every_scope_state = { ffpa_initialize_byz_balkans_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_byz_balkans_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_SLOVENIA
+			this = s:STATE_CROATIA
+			this = s:STATE_SLAVONIA
+			this = s:STATE_DALMATIA
+			this = s:STATE_BOSNIA
+			this = s:STATE_MONTENEGRO
+			this = s:STATE_ALBANIA
+			this = s:STATE_SKOPIA
+			this = s:STATE_KOSOVO
+			this = s:STATE_NORTHERN_THRACE
+			this = s:STATE_BULGARIA
+			this = s:STATE_EASTERN_SERBIA
+			this = s:STATE_WESTERN_SERBIA
+			this = s:STATE_PELOPONNESE
+			this = s:STATE_IONIAN_ISLANDS
+			this = s:STATE_ATTICA
+			this = s:STATE_THESSALIA
+			this = s:STATE_MACEDONIA
+			this = s:STATE_WESTERN_THRACE
+			this = s:STATE_CRETE
+			this = s:STATE_WEST_AEGEAN_ISLANDS
+			this = s:STATE_DOBRUDJA
+			this = s:STATE_EASTERN_THRACE
+			}
+		}
+		every_scope_state = { ffpa_cleanup_byz_balkans_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_byz_balkans_completion_predecessor_v1
+	remove_variable = ffpa_byz_balkans_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_byz_anatolia_predecessor_state_v1 = {
+	set_variable = ffpa_byz_anatolia_owner_tracking_v1
+	remove_variable = ffpa_byz_anatolia_owner_snapshot_v1
+	clear_saved_scope = ffpa_byz_anatolia_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_byz_anatolia_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_byz_anatolia_new_owner_scope }
+		set_variable = { name = ffpa_byz_anatolia_owner_snapshot_v1 value = scope:ffpa_byz_anatolia_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_byz_anatolia_new_owner_scope
+}
+
+ffpa_cleanup_byz_anatolia_predecessor_state_v1 = {
+	remove_variable = ffpa_byz_anatolia_owner_tracking_v1
+	remove_variable = ffpa_byz_anatolia_owner_snapshot_v1
+}
+
+ffpa_initialize_byz_anatolia_predecessor_tracking_v1 = {
+	remove_variable = ffpa_byz_anatolia_completion_predecessor_v1
+	remove_variable = ffpa_byz_anatolia_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_HUDAVENDIGAR
+			this = s:STATE_AYDIN
+			this = s:STATE_KONYA
+			this = s:STATE_ANKARA
+			this = s:STATE_ADANA
+			this = s:STATE_KASTAMONU
+			this = s:STATE_DIYARBAKIR
+			this = s:STATE_TRABZON
+			this = s:STATE_EAST_AEGEAN_ISLANDS
+			this = s:STATE_ERZURUM
+			this = s:STATE_KARS
+			}
+		}
+		every_scope_state = { ffpa_initialize_byz_anatolia_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_byz_anatolia_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_HUDAVENDIGAR
+			this = s:STATE_AYDIN
+			this = s:STATE_KONYA
+			this = s:STATE_ANKARA
+			this = s:STATE_ADANA
+			this = s:STATE_KASTAMONU
+			this = s:STATE_DIYARBAKIR
+			this = s:STATE_TRABZON
+			this = s:STATE_EAST_AEGEAN_ISLANDS
+			this = s:STATE_ERZURUM
+			this = s:STATE_KARS
+			}
+		}
+		every_scope_state = { ffpa_cleanup_byz_anatolia_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_byz_anatolia_completion_predecessor_v1
+	remove_variable = ffpa_byz_anatolia_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_byz_oriens_predecessor_state_v1 = {
+	set_variable = ffpa_byz_oriens_owner_tracking_v1
+	remove_variable = ffpa_byz_oriens_owner_snapshot_v1
+	clear_saved_scope = ffpa_byz_oriens_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_byz_oriens_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_byz_oriens_new_owner_scope }
+		set_variable = { name = ffpa_byz_oriens_owner_snapshot_v1 value = scope:ffpa_byz_oriens_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_byz_oriens_new_owner_scope
+}
+
+ffpa_cleanup_byz_oriens_predecessor_state_v1 = {
+	remove_variable = ffpa_byz_oriens_owner_tracking_v1
+	remove_variable = ffpa_byz_oriens_owner_snapshot_v1
+}
+
+ffpa_initialize_byz_oriens_predecessor_tracking_v1 = {
+	remove_variable = ffpa_byz_oriens_completion_predecessor_v1
+	remove_variable = ffpa_byz_oriens_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_CYPRUS
+			this = s:STATE_TRANSJORDAN
+			this = s:STATE_PALESTINE
+			this = s:STATE_LEBANON
+			this = s:STATE_SYRIA
+			this = s:STATE_ALEPPO
+			this = s:STATE_DEIR_EZ_ZOR
+			}
+		}
+		every_scope_state = { ffpa_initialize_byz_oriens_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_byz_oriens_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_CYPRUS
+			this = s:STATE_TRANSJORDAN
+			this = s:STATE_PALESTINE
+			this = s:STATE_LEBANON
+			this = s:STATE_SYRIA
+			this = s:STATE_ALEPPO
+			this = s:STATE_DEIR_EZ_ZOR
+			}
+		}
+		every_scope_state = { ffpa_cleanup_byz_oriens_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_byz_oriens_completion_predecessor_v1
+	remove_variable = ffpa_byz_oriens_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_byz_aegyptus_predecessor_state_v1 = {
+	set_variable = ffpa_byz_aegyptus_owner_tracking_v1
+	remove_variable = ffpa_byz_aegyptus_owner_snapshot_v1
+	clear_saved_scope = ffpa_byz_aegyptus_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_byz_aegyptus_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_byz_aegyptus_new_owner_scope }
+		set_variable = { name = ffpa_byz_aegyptus_owner_snapshot_v1 value = scope:ffpa_byz_aegyptus_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_byz_aegyptus_new_owner_scope
+}
+
+ffpa_cleanup_byz_aegyptus_predecessor_state_v1 = {
+	remove_variable = ffpa_byz_aegyptus_owner_tracking_v1
+	remove_variable = ffpa_byz_aegyptus_owner_snapshot_v1
+}
+
+ffpa_initialize_byz_aegyptus_predecessor_tracking_v1 = {
+	remove_variable = ffpa_byz_aegyptus_completion_predecessor_v1
+	remove_variable = ffpa_byz_aegyptus_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_LOWER_EGYPT
+			this = s:STATE_MIDDLE_EGYPT
+			this = s:STATE_UPPER_EGYPT
+			this = s:STATE_MATRUH
+			this = s:STATE_SINAI
+			this = s:STATE_EGYPTIAN_DESERT
+			}
+		}
+		every_scope_state = { ffpa_initialize_byz_aegyptus_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_byz_aegyptus_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_LOWER_EGYPT
+			this = s:STATE_MIDDLE_EGYPT
+			this = s:STATE_UPPER_EGYPT
+			this = s:STATE_MATRUH
+			this = s:STATE_SINAI
+			this = s:STATE_EGYPTIAN_DESERT
+			}
+		}
+		every_scope_state = { ffpa_cleanup_byz_aegyptus_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_byz_aegyptus_completion_predecessor_v1
+	remove_variable = ffpa_byz_aegyptus_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_byz_africa_predecessor_state_v1 = {
+	set_variable = ffpa_byz_africa_owner_tracking_v1
+	remove_variable = ffpa_byz_africa_owner_snapshot_v1
+	clear_saved_scope = ffpa_byz_africa_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_byz_africa_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_byz_africa_new_owner_scope }
+		set_variable = { name = ffpa_byz_africa_owner_snapshot_v1 value = scope:ffpa_byz_africa_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_byz_africa_new_owner_scope
+}
+
+ffpa_cleanup_byz_africa_predecessor_state_v1 = {
+	remove_variable = ffpa_byz_africa_owner_tracking_v1
+	remove_variable = ffpa_byz_africa_owner_snapshot_v1
+}
+
+ffpa_initialize_byz_africa_predecessor_tracking_v1 = {
+	remove_variable = ffpa_byz_africa_completion_predecessor_v1
+	remove_variable = ffpa_byz_africa_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_LIBYA
+			this = s:STATE_TRIPOLI
+			this = s:STATE_TUNISIA
+			this = s:STATE_CONSTANTINE
+			this = s:STATE_ALGIERS
+			this = s:STATE_AL_RIF
+			}
+		}
+		every_scope_state = { ffpa_initialize_byz_africa_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_byz_africa_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_LIBYA
+			this = s:STATE_TRIPOLI
+			this = s:STATE_TUNISIA
+			this = s:STATE_CONSTANTINE
+			this = s:STATE_ALGIERS
+			this = s:STATE_AL_RIF
+			}
+		}
+		every_scope_state = { ffpa_cleanup_byz_africa_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_byz_africa_completion_predecessor_v1
+	remove_variable = ffpa_byz_africa_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_byz_italia_predecessor_state_v1 = {
+	set_variable = ffpa_byz_italia_owner_tracking_v1
+	remove_variable = ffpa_byz_italia_owner_snapshot_v1
+	clear_saved_scope = ffpa_byz_italia_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_byz_italia_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_byz_italia_new_owner_scope }
+		set_variable = { name = ffpa_byz_italia_owner_snapshot_v1 value = scope:ffpa_byz_italia_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_byz_italia_new_owner_scope
+}
+
+ffpa_cleanup_byz_italia_predecessor_state_v1 = {
+	remove_variable = ffpa_byz_italia_owner_tracking_v1
+	remove_variable = ffpa_byz_italia_owner_snapshot_v1
+}
+
+ffpa_initialize_byz_italia_predecessor_tracking_v1 = {
+	remove_variable = ffpa_byz_italia_completion_predecessor_v1
+	remove_variable = ffpa_byz_italia_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_ISTRIA
+			this = s:STATE_PIEDMONT
+			this = s:STATE_LOMBARDY
+			this = s:STATE_VENETIA
+			this = s:STATE_EMILIA
+			this = s:STATE_ROMAGNA
+			this = s:STATE_TUSCANY
+			this = s:STATE_UMBRIA
+			this = s:STATE_LAZIO
+			this = s:STATE_ABRUZZO
+			this = s:STATE_CAMPANIA
+			this = s:STATE_APULIA
+			this = s:STATE_CALABRIA
+			this = s:STATE_SICILY
+			this = s:STATE_SARDINIA
+			this = s:STATE_CORSICA
+			this = s:STATE_MALTA
+			}
+		}
+		every_scope_state = { ffpa_initialize_byz_italia_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_byz_italia_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_ISTRIA
+			this = s:STATE_PIEDMONT
+			this = s:STATE_LOMBARDY
+			this = s:STATE_VENETIA
+			this = s:STATE_EMILIA
+			this = s:STATE_ROMAGNA
+			this = s:STATE_TUSCANY
+			this = s:STATE_UMBRIA
+			this = s:STATE_LAZIO
+			this = s:STATE_ABRUZZO
+			this = s:STATE_CAMPANIA
+			this = s:STATE_APULIA
+			this = s:STATE_CALABRIA
+			this = s:STATE_SICILY
+			this = s:STATE_SARDINIA
+			this = s:STATE_CORSICA
+			this = s:STATE_MALTA
+			}
+		}
+		every_scope_state = { ffpa_cleanup_byz_italia_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_byz_italia_completion_predecessor_v1
+	remove_variable = ffpa_byz_italia_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_byz_spania_predecessor_state_v1 = {
+	set_variable = ffpa_byz_spania_owner_tracking_v1
+	remove_variable = ffpa_byz_spania_owner_snapshot_v1
+	clear_saved_scope = ffpa_byz_spania_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_byz_spania_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_byz_spania_new_owner_scope }
+		set_variable = { name = ffpa_byz_spania_owner_snapshot_v1 value = scope:ffpa_byz_spania_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_byz_spania_new_owner_scope
+}
+
+ffpa_cleanup_byz_spania_predecessor_state_v1 = {
+	remove_variable = ffpa_byz_spania_owner_tracking_v1
+	remove_variable = ffpa_byz_spania_owner_snapshot_v1
+}
+
+ffpa_initialize_byz_spania_predecessor_tracking_v1 = {
+	remove_variable = ffpa_byz_spania_completion_predecessor_v1
+	remove_variable = ffpa_byz_spania_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_BALEARIC_ISLANDS
+			this = s:STATE_LOWER_ANDALUSIA
+			this = s:STATE_UPPER_ANDALUSIA
+			this = s:STATE_VALENCIA
+			this = s:STATE_MURCIA
+			}
+		}
+		every_scope_state = { ffpa_initialize_byz_spania_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_byz_spania_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_BALEARIC_ISLANDS
+			this = s:STATE_LOWER_ANDALUSIA
+			this = s:STATE_UPPER_ANDALUSIA
+			this = s:STATE_VALENCIA
+			this = s:STATE_MURCIA
+			}
+		}
+		every_scope_state = { ffpa_cleanup_byz_spania_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_byz_spania_completion_predecessor_v1
+	remove_variable = ffpa_byz_spania_completion_predecessor_ready_v1
+}
+
+ffpa_track_byz_restoration_predecessors_on_owner_change_state_v1 = {
+	if = {
+		limit = { has_variable = ffpa_byz_balkans_owner_tracking_v1 }
+		clear_saved_scope = ffpa_byz_balkans_old_owner_scope
+		var:ffpa_byz_balkans_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_byz_balkans_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_byz_balkans_old_owner_scope
+				owner ?= { country_definition = cd:BYZ }
+				scope:ffpa_byz_balkans_old_owner_scope = { NOT = { country_definition = cd:BYZ } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_byz_balkans_completion_predecessor_v1 value = scope:ffpa_byz_balkans_old_owner_scope }
+				set_variable = ffpa_byz_balkans_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_byz_balkans_owner_snapshot_v1
+		clear_saved_scope = ffpa_byz_balkans_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_byz_balkans_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_byz_balkans_new_owner_scope }
+			set_variable = { name = ffpa_byz_balkans_owner_snapshot_v1 value = scope:ffpa_byz_balkans_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_byz_balkans_old_owner_scope
+		clear_saved_scope = ffpa_byz_balkans_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_byz_anatolia_owner_tracking_v1 }
+		clear_saved_scope = ffpa_byz_anatolia_old_owner_scope
+		var:ffpa_byz_anatolia_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_byz_anatolia_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_byz_anatolia_old_owner_scope
+				owner ?= { country_definition = cd:BYZ }
+				scope:ffpa_byz_anatolia_old_owner_scope = { NOT = { country_definition = cd:BYZ } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_byz_anatolia_completion_predecessor_v1 value = scope:ffpa_byz_anatolia_old_owner_scope }
+				set_variable = ffpa_byz_anatolia_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_byz_anatolia_owner_snapshot_v1
+		clear_saved_scope = ffpa_byz_anatolia_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_byz_anatolia_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_byz_anatolia_new_owner_scope }
+			set_variable = { name = ffpa_byz_anatolia_owner_snapshot_v1 value = scope:ffpa_byz_anatolia_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_byz_anatolia_old_owner_scope
+		clear_saved_scope = ffpa_byz_anatolia_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_byz_oriens_owner_tracking_v1 }
+		clear_saved_scope = ffpa_byz_oriens_old_owner_scope
+		var:ffpa_byz_oriens_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_byz_oriens_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_byz_oriens_old_owner_scope
+				owner ?= { country_definition = cd:BYZ }
+				scope:ffpa_byz_oriens_old_owner_scope = { NOT = { country_definition = cd:BYZ } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_byz_oriens_completion_predecessor_v1 value = scope:ffpa_byz_oriens_old_owner_scope }
+				set_variable = ffpa_byz_oriens_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_byz_oriens_owner_snapshot_v1
+		clear_saved_scope = ffpa_byz_oriens_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_byz_oriens_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_byz_oriens_new_owner_scope }
+			set_variable = { name = ffpa_byz_oriens_owner_snapshot_v1 value = scope:ffpa_byz_oriens_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_byz_oriens_old_owner_scope
+		clear_saved_scope = ffpa_byz_oriens_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_byz_aegyptus_owner_tracking_v1 }
+		clear_saved_scope = ffpa_byz_aegyptus_old_owner_scope
+		var:ffpa_byz_aegyptus_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_byz_aegyptus_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_byz_aegyptus_old_owner_scope
+				owner ?= { country_definition = cd:BYZ }
+				scope:ffpa_byz_aegyptus_old_owner_scope = { NOT = { country_definition = cd:BYZ } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_byz_aegyptus_completion_predecessor_v1 value = scope:ffpa_byz_aegyptus_old_owner_scope }
+				set_variable = ffpa_byz_aegyptus_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_byz_aegyptus_owner_snapshot_v1
+		clear_saved_scope = ffpa_byz_aegyptus_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_byz_aegyptus_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_byz_aegyptus_new_owner_scope }
+			set_variable = { name = ffpa_byz_aegyptus_owner_snapshot_v1 value = scope:ffpa_byz_aegyptus_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_byz_aegyptus_old_owner_scope
+		clear_saved_scope = ffpa_byz_aegyptus_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_byz_africa_owner_tracking_v1 }
+		clear_saved_scope = ffpa_byz_africa_old_owner_scope
+		var:ffpa_byz_africa_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_byz_africa_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_byz_africa_old_owner_scope
+				owner ?= { country_definition = cd:BYZ }
+				scope:ffpa_byz_africa_old_owner_scope = { NOT = { country_definition = cd:BYZ } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_byz_africa_completion_predecessor_v1 value = scope:ffpa_byz_africa_old_owner_scope }
+				set_variable = ffpa_byz_africa_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_byz_africa_owner_snapshot_v1
+		clear_saved_scope = ffpa_byz_africa_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_byz_africa_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_byz_africa_new_owner_scope }
+			set_variable = { name = ffpa_byz_africa_owner_snapshot_v1 value = scope:ffpa_byz_africa_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_byz_africa_old_owner_scope
+		clear_saved_scope = ffpa_byz_africa_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_byz_italia_owner_tracking_v1 }
+		clear_saved_scope = ffpa_byz_italia_old_owner_scope
+		var:ffpa_byz_italia_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_byz_italia_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_byz_italia_old_owner_scope
+				owner ?= { country_definition = cd:BYZ }
+				scope:ffpa_byz_italia_old_owner_scope = { NOT = { country_definition = cd:BYZ } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_byz_italia_completion_predecessor_v1 value = scope:ffpa_byz_italia_old_owner_scope }
+				set_variable = ffpa_byz_italia_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_byz_italia_owner_snapshot_v1
+		clear_saved_scope = ffpa_byz_italia_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_byz_italia_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_byz_italia_new_owner_scope }
+			set_variable = { name = ffpa_byz_italia_owner_snapshot_v1 value = scope:ffpa_byz_italia_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_byz_italia_old_owner_scope
+		clear_saved_scope = ffpa_byz_italia_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_byz_spania_owner_tracking_v1 }
+		clear_saved_scope = ffpa_byz_spania_old_owner_scope
+		var:ffpa_byz_spania_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_byz_spania_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_byz_spania_old_owner_scope
+				owner ?= { country_definition = cd:BYZ }
+				scope:ffpa_byz_spania_old_owner_scope = { NOT = { country_definition = cd:BYZ } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_byz_spania_completion_predecessor_v1 value = scope:ffpa_byz_spania_old_owner_scope }
+				set_variable = ffpa_byz_spania_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_byz_spania_owner_snapshot_v1
+		clear_saved_scope = ffpa_byz_spania_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_byz_spania_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_byz_spania_new_owner_scope }
+			set_variable = { name = ffpa_byz_spania_owner_snapshot_v1 value = scope:ffpa_byz_spania_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_byz_spania_old_owner_scope
+		clear_saved_scope = ffpa_byz_spania_new_owner_scope
+	}
+	if = {
+		limit = { NOT = { exists = c:BYZ } }
+		ffpa_cleanup_byz_balkans_predecessor_state_v1 = yes
+		ffpa_cleanup_byz_anatolia_predecessor_state_v1 = yes
+		ffpa_cleanup_byz_oriens_predecessor_state_v1 = yes
+		ffpa_cleanup_byz_aegyptus_predecessor_state_v1 = yes
+		ffpa_cleanup_byz_africa_predecessor_state_v1 = yes
+		ffpa_cleanup_byz_italia_predecessor_state_v1 = yes
+		ffpa_cleanup_byz_spania_predecessor_state_v1 = yes
+	}
+}
+
+ffpa_seed_byz_restoration_predecessors_on_state_created_v1 = {
+	if = {
+		limit = {
+			c:BYZ ?= { has_journal_entry = je_ffpa_byz_restore_balkans }
+			OR = {
+				state_region = s:STATE_SLOVENIA
+				state_region = s:STATE_CROATIA
+				state_region = s:STATE_SLAVONIA
+				state_region = s:STATE_DALMATIA
+				state_region = s:STATE_BOSNIA
+				state_region = s:STATE_MONTENEGRO
+				state_region = s:STATE_ALBANIA
+				state_region = s:STATE_SKOPIA
+				state_region = s:STATE_KOSOVO
+				state_region = s:STATE_NORTHERN_THRACE
+				state_region = s:STATE_BULGARIA
+				state_region = s:STATE_EASTERN_SERBIA
+				state_region = s:STATE_WESTERN_SERBIA
+				state_region = s:STATE_PELOPONNESE
+				state_region = s:STATE_IONIAN_ISLANDS
+				state_region = s:STATE_ATTICA
+				state_region = s:STATE_THESSALIA
+				state_region = s:STATE_MACEDONIA
+				state_region = s:STATE_WESTERN_THRACE
+				state_region = s:STATE_CRETE
+				state_region = s:STATE_WEST_AEGEAN_ISLANDS
+				state_region = s:STATE_DOBRUDJA
+				state_region = s:STATE_EASTERN_THRACE
+			}
+		}
+		ffpa_initialize_byz_balkans_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:BYZ ?= { has_journal_entry = je_ffpa_byz_restore_anatolia }
+			OR = {
+				state_region = s:STATE_HUDAVENDIGAR
+				state_region = s:STATE_AYDIN
+				state_region = s:STATE_KONYA
+				state_region = s:STATE_ANKARA
+				state_region = s:STATE_ADANA
+				state_region = s:STATE_KASTAMONU
+				state_region = s:STATE_DIYARBAKIR
+				state_region = s:STATE_TRABZON
+				state_region = s:STATE_EAST_AEGEAN_ISLANDS
+				state_region = s:STATE_ERZURUM
+				state_region = s:STATE_KARS
+			}
+		}
+		ffpa_initialize_byz_anatolia_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:BYZ ?= { has_journal_entry = je_ffpa_byz_restore_oriens }
+			OR = {
+				state_region = s:STATE_CYPRUS
+				state_region = s:STATE_TRANSJORDAN
+				state_region = s:STATE_PALESTINE
+				state_region = s:STATE_LEBANON
+				state_region = s:STATE_SYRIA
+				state_region = s:STATE_ALEPPO
+				state_region = s:STATE_DEIR_EZ_ZOR
+			}
+		}
+		ffpa_initialize_byz_oriens_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:BYZ ?= { has_journal_entry = je_ffpa_byz_restore_aegyptus }
+			OR = {
+				state_region = s:STATE_LOWER_EGYPT
+				state_region = s:STATE_MIDDLE_EGYPT
+				state_region = s:STATE_UPPER_EGYPT
+				state_region = s:STATE_MATRUH
+				state_region = s:STATE_SINAI
+				state_region = s:STATE_EGYPTIAN_DESERT
+			}
+		}
+		ffpa_initialize_byz_aegyptus_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:BYZ ?= { has_journal_entry = je_ffpa_byz_restore_africa }
+			OR = {
+				state_region = s:STATE_LIBYA
+				state_region = s:STATE_TRIPOLI
+				state_region = s:STATE_TUNISIA
+				state_region = s:STATE_CONSTANTINE
+				state_region = s:STATE_ALGIERS
+				state_region = s:STATE_AL_RIF
+			}
+		}
+		ffpa_initialize_byz_africa_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:BYZ ?= { has_journal_entry = je_ffpa_byz_restore_italia }
+			OR = {
+				state_region = s:STATE_ISTRIA
+				state_region = s:STATE_PIEDMONT
+				state_region = s:STATE_LOMBARDY
+				state_region = s:STATE_VENETIA
+				state_region = s:STATE_EMILIA
+				state_region = s:STATE_ROMAGNA
+				state_region = s:STATE_TUSCANY
+				state_region = s:STATE_UMBRIA
+				state_region = s:STATE_LAZIO
+				state_region = s:STATE_ABRUZZO
+				state_region = s:STATE_CAMPANIA
+				state_region = s:STATE_APULIA
+				state_region = s:STATE_CALABRIA
+				state_region = s:STATE_SICILY
+				state_region = s:STATE_SARDINIA
+				state_region = s:STATE_CORSICA
+				state_region = s:STATE_MALTA
+			}
+		}
+		ffpa_initialize_byz_italia_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:BYZ ?= { has_journal_entry = je_ffpa_byz_restore_spania }
+			OR = {
+				state_region = s:STATE_BALEARIC_ISLANDS
+				state_region = s:STATE_LOWER_ANDALUSIA
+				state_region = s:STATE_UPPER_ANDALUSIA
+				state_region = s:STATE_VALENCIA
+				state_region = s:STATE_MURCIA
+			}
+		}
+		ffpa_initialize_byz_spania_predecessor_state_v1 = yes
+	}
+}
+
+ffpa_migrate_byz_restoration_predecessor_tracking_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_byz_restoration_predecessor_tracking_migrated_v1 } }
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_restore_balkans }
+			ffpa_initialize_byz_balkans_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_restore_anatolia }
+			ffpa_initialize_byz_anatolia_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_restore_oriens }
+			ffpa_initialize_byz_oriens_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_restore_aegyptus }
+			ffpa_initialize_byz_aegyptus_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_restore_africa }
+			ffpa_initialize_byz_africa_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_restore_italia }
+			ffpa_initialize_byz_italia_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_byz_restore_spania }
+			ffpa_initialize_byz_spania_predecessor_tracking_v1 = yes
+		}
+		set_variable = ffpa_byz_restoration_predecessor_tracking_migrated_v1
+	}
+}
+
+ffpa_cleanup_all_byz_restoration_predecessor_tracking_v1 = {
+	ffpa_cleanup_byz_balkans_predecessor_tracking_v1 = yes
+	ffpa_cleanup_byz_anatolia_predecessor_tracking_v1 = yes
+	ffpa_cleanup_byz_oriens_predecessor_tracking_v1 = yes
+	ffpa_cleanup_byz_aegyptus_predecessor_tracking_v1 = yes
+	ffpa_cleanup_byz_africa_predecessor_tracking_v1 = yes
+	ffpa_cleanup_byz_italia_predecessor_tracking_v1 = yes
+	ffpa_cleanup_byz_spania_predecessor_tracking_v1 = yes
 }

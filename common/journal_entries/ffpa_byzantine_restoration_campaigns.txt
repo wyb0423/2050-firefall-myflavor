@@ -9,6 +9,7 @@ je_ffpa_byz_restore_balkans = {
 
 	immediate = {
 		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+		ffpa_initialize_byz_balkans_predecessor_tracking_v1 = yes
 	}
 
 	complete = {
@@ -40,11 +41,12 @@ je_ffpa_byz_restore_balkans = {
 	on_complete = {
 		set_variable = ffpa_byz_balkans_restored_complete_v1
 		add_modifier = ffpa_byz_balkans_restored_v1
-		trigger_event = { id = ffpa_flavor.40 popup = yes }
+		trigger_event = { id = ffpa_flavor.40 days = 1 popup = yes }
 	}
 
 	timeout = 16425 # 45 years
 	on_timeout = {
+		ffpa_cleanup_byz_balkans_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_balkans_restoration_retry_cooldown_v1 years = 5 }
 		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
@@ -52,6 +54,7 @@ je_ffpa_byz_restore_balkans = {
 
 	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
+		ffpa_cleanup_byz_balkans_predecessor_tracking_v1 = yes
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
 			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
@@ -69,6 +72,7 @@ je_ffpa_byz_restore_anatolia = {
 
 	immediate = {
 		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+		ffpa_initialize_byz_anatolia_predecessor_tracking_v1 = yes
 	}
 
 	complete = {
@@ -88,11 +92,12 @@ je_ffpa_byz_restore_anatolia = {
 	on_complete = {
 		set_variable = ffpa_byz_anatolia_restored_complete_v1
 		add_modifier = ffpa_byz_anatolia_restored_v1
-		trigger_event = { id = ffpa_flavor.41 popup = yes }
+		trigger_event = { id = ffpa_flavor.41 days = 1 popup = yes }
 	}
 
 	timeout = 16425 # 45 years
 	on_timeout = {
+		ffpa_cleanup_byz_anatolia_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_anatolia_restoration_retry_cooldown_v1 years = 5 }
 		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
@@ -100,6 +105,7 @@ je_ffpa_byz_restore_anatolia = {
 
 	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
+		ffpa_cleanup_byz_anatolia_predecessor_tracking_v1 = yes
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
 			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
@@ -117,6 +123,7 @@ je_ffpa_byz_restore_oriens = {
 
 	immediate = {
 		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+		ffpa_initialize_byz_oriens_predecessor_tracking_v1 = yes
 	}
 
 	complete = {
@@ -132,11 +139,12 @@ je_ffpa_byz_restore_oriens = {
 	on_complete = {
 		set_variable = ffpa_byz_oriens_restored_complete_v1
 		add_modifier = ffpa_byz_oriens_restored_v1
-		trigger_event = { id = ffpa_flavor.42 popup = yes }
+		trigger_event = { id = ffpa_flavor.42 days = 1 popup = yes }
 	}
 
 	timeout = 18250 # 50 years
 	on_timeout = {
+		ffpa_cleanup_byz_oriens_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_oriens_restoration_retry_cooldown_v1 years = 5 }
 		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
@@ -144,6 +152,7 @@ je_ffpa_byz_restore_oriens = {
 
 	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
+		ffpa_cleanup_byz_oriens_predecessor_tracking_v1 = yes
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
 			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
@@ -161,6 +170,7 @@ je_ffpa_byz_restore_aegyptus = {
 
 	immediate = {
 		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+		ffpa_initialize_byz_aegyptus_predecessor_tracking_v1 = yes
 	}
 
 	complete = {
@@ -175,11 +185,12 @@ je_ffpa_byz_restore_aegyptus = {
 	on_complete = {
 		set_variable = ffpa_byz_aegyptus_restored_complete_v1
 		add_modifier = ffpa_byz_aegyptus_restored_v1
-		trigger_event = { id = ffpa_flavor.43 popup = yes }
+		trigger_event = { id = ffpa_flavor.43 days = 1 popup = yes }
 	}
 
 	timeout = 18250 # 50 years
 	on_timeout = {
+		ffpa_cleanup_byz_aegyptus_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_aegyptus_restoration_retry_cooldown_v1 years = 5 }
 		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
@@ -187,6 +198,7 @@ je_ffpa_byz_restore_aegyptus = {
 
 	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
+		ffpa_cleanup_byz_aegyptus_predecessor_tracking_v1 = yes
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
 			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
@@ -204,6 +216,7 @@ je_ffpa_byz_restore_africa = {
 
 	immediate = {
 		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+		ffpa_initialize_byz_africa_predecessor_tracking_v1 = yes
 	}
 
 	complete = {
@@ -218,11 +231,12 @@ je_ffpa_byz_restore_africa = {
 	on_complete = {
 		set_variable = ffpa_byz_africa_restored_complete_v1
 		add_modifier = ffpa_byz_africa_restored_v1
-		trigger_event = { id = ffpa_flavor.44 popup = yes }
+		trigger_event = { id = ffpa_flavor.44 days = 1 popup = yes }
 	}
 
 	timeout = 20075 # 55 years
 	on_timeout = {
+		ffpa_cleanup_byz_africa_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_africa_restoration_retry_cooldown_v1 years = 5 }
 		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
@@ -230,6 +244,7 @@ je_ffpa_byz_restore_africa = {
 
 	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
+		ffpa_cleanup_byz_africa_predecessor_tracking_v1 = yes
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
 			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
@@ -247,6 +262,7 @@ je_ffpa_byz_restore_italia = {
 
 	immediate = {
 		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+		ffpa_initialize_byz_italia_predecessor_tracking_v1 = yes
 	}
 
 	complete = {
@@ -272,11 +288,12 @@ je_ffpa_byz_restore_italia = {
 	on_complete = {
 		set_variable = ffpa_byz_italia_restored_complete_v1
 		add_modifier = ffpa_byz_italia_restored_v1
-		trigger_event = { id = ffpa_flavor.45 popup = yes }
+		trigger_event = { id = ffpa_flavor.45 days = 1 popup = yes }
 	}
 
 	timeout = 20075 # 55 years
 	on_timeout = {
+		ffpa_cleanup_byz_italia_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_italia_restoration_retry_cooldown_v1 years = 5 }
 		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
@@ -284,6 +301,7 @@ je_ffpa_byz_restore_italia = {
 
 	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
+		ffpa_cleanup_byz_italia_predecessor_tracking_v1 = yes
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
 			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1
@@ -301,6 +319,7 @@ je_ffpa_byz_restore_spania = {
 
 	immediate = {
 		add_modifier = { name = ffpa_byz_restoration_campaign_mobilization_v1 years = 8 }
+		ffpa_initialize_byz_spania_predecessor_tracking_v1 = yes
 	}
 
 	complete = {
@@ -314,11 +333,12 @@ je_ffpa_byz_restore_spania = {
 	on_complete = {
 		set_variable = ffpa_byz_spania_restored_complete_v1
 		add_modifier = ffpa_byz_spania_restored_v1
-		trigger_event = { id = ffpa_flavor.46 popup = yes }
+		trigger_event = { id = ffpa_flavor.46 days = 1 popup = yes }
 	}
 
 	timeout = 18250 # 50 years
 	on_timeout = {
+		ffpa_cleanup_byz_spania_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_spania_restoration_retry_cooldown_v1 years = 5 }
 		add_modifier = { name = ffpa_byz_restoration_failure_v1 years = 8 }
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
@@ -326,6 +346,7 @@ je_ffpa_byz_restore_spania = {
 
 	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
+		ffpa_cleanup_byz_spania_predecessor_tracking_v1 = yes
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
 			remove_modifier = ffpa_byz_restoration_campaign_mobilization_v1

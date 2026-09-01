@@ -35,6 +35,771 @@ ffpa_clear_tur_porte_charter_rewards_v1 = {
 	}
 }
 
+
+# --- Turkish frontier direct-predecessor narration ---
+# State instances retain a campaign-specific owner snapshot. The shared owner-
+# change on_action records a predecessor only when a tracked state passes into
+# the corresponding country; campaign completion itself still uses the existing
+# state-region ownership checks.
+
+ffpa_initialize_tur_front_western_pact_predecessor_state_v1 = {
+	set_variable = ffpa_tur_front_western_pact_owner_tracking_v1
+	remove_variable = ffpa_tur_front_western_pact_owner_snapshot_v1
+	clear_saved_scope = ffpa_tur_front_western_pact_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_tur_front_western_pact_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_tur_front_western_pact_new_owner_scope }
+		set_variable = { name = ffpa_tur_front_western_pact_owner_snapshot_v1 value = scope:ffpa_tur_front_western_pact_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_tur_front_western_pact_new_owner_scope
+}
+
+ffpa_cleanup_tur_front_western_pact_predecessor_state_v1 = {
+	remove_variable = ffpa_tur_front_western_pact_owner_tracking_v1
+	remove_variable = ffpa_tur_front_western_pact_owner_snapshot_v1
+}
+
+ffpa_initialize_tur_front_western_pact_predecessor_tracking_v1 = {
+	remove_variable = ffpa_tur_front_western_pact_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_western_pact_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_WESTERN_THRACE
+			}
+		}
+		every_scope_state = { ffpa_initialize_tur_front_western_pact_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_tur_front_western_pact_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_WESTERN_THRACE
+			}
+		}
+		every_scope_state = { ffpa_cleanup_tur_front_western_pact_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_tur_front_western_pact_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_western_pact_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_tur_front_mosul_predecessor_state_v1 = {
+	set_variable = ffpa_tur_front_mosul_owner_tracking_v1
+	remove_variable = ffpa_tur_front_mosul_owner_snapshot_v1
+	clear_saved_scope = ffpa_tur_front_mosul_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_tur_front_mosul_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_tur_front_mosul_new_owner_scope }
+		set_variable = { name = ffpa_tur_front_mosul_owner_snapshot_v1 value = scope:ffpa_tur_front_mosul_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_tur_front_mosul_new_owner_scope
+}
+
+ffpa_cleanup_tur_front_mosul_predecessor_state_v1 = {
+	remove_variable = ffpa_tur_front_mosul_owner_tracking_v1
+	remove_variable = ffpa_tur_front_mosul_owner_snapshot_v1
+}
+
+ffpa_initialize_tur_front_mosul_predecessor_tracking_v1 = {
+	remove_variable = ffpa_tur_front_mosul_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_mosul_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_MOSUL
+			}
+		}
+		every_scope_state = { ffpa_initialize_tur_front_mosul_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_tur_front_mosul_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_MOSUL
+			}
+		}
+		every_scope_state = { ffpa_cleanup_tur_front_mosul_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_tur_front_mosul_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_mosul_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_tur_front_rumelia_predecessor_state_v1 = {
+	set_variable = ffpa_tur_front_rumelia_owner_tracking_v1
+	remove_variable = ffpa_tur_front_rumelia_owner_snapshot_v1
+	clear_saved_scope = ffpa_tur_front_rumelia_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_tur_front_rumelia_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_tur_front_rumelia_new_owner_scope }
+		set_variable = { name = ffpa_tur_front_rumelia_owner_snapshot_v1 value = scope:ffpa_tur_front_rumelia_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_tur_front_rumelia_new_owner_scope
+}
+
+ffpa_cleanup_tur_front_rumelia_predecessor_state_v1 = {
+	remove_variable = ffpa_tur_front_rumelia_owner_tracking_v1
+	remove_variable = ffpa_tur_front_rumelia_owner_snapshot_v1
+}
+
+ffpa_initialize_tur_front_rumelia_predecessor_tracking_v1 = {
+	remove_variable = ffpa_tur_front_rumelia_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_rumelia_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_ALBANIA
+			this = s:STATE_MACEDONIA
+			this = s:STATE_WESTERN_THRACE
+			this = s:STATE_BULGARIA
+			this = s:STATE_DOBRUDJA
+			this = s:STATE_NORTHERN_THRACE
+			}
+		}
+		every_scope_state = { ffpa_initialize_tur_front_rumelia_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_tur_front_rumelia_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_ALBANIA
+			this = s:STATE_MACEDONIA
+			this = s:STATE_WESTERN_THRACE
+			this = s:STATE_BULGARIA
+			this = s:STATE_DOBRUDJA
+			this = s:STATE_NORTHERN_THRACE
+			}
+		}
+		every_scope_state = { ffpa_cleanup_tur_front_rumelia_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_tur_front_rumelia_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_rumelia_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_tur_front_aegean_cyprus_predecessor_state_v1 = {
+	set_variable = ffpa_tur_front_aegean_cyprus_owner_tracking_v1
+	remove_variable = ffpa_tur_front_aegean_cyprus_owner_snapshot_v1
+	clear_saved_scope = ffpa_tur_front_aegean_cyprus_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_tur_front_aegean_cyprus_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_tur_front_aegean_cyprus_new_owner_scope }
+		set_variable = { name = ffpa_tur_front_aegean_cyprus_owner_snapshot_v1 value = scope:ffpa_tur_front_aegean_cyprus_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_tur_front_aegean_cyprus_new_owner_scope
+}
+
+ffpa_cleanup_tur_front_aegean_cyprus_predecessor_state_v1 = {
+	remove_variable = ffpa_tur_front_aegean_cyprus_owner_tracking_v1
+	remove_variable = ffpa_tur_front_aegean_cyprus_owner_snapshot_v1
+}
+
+ffpa_initialize_tur_front_aegean_cyprus_predecessor_tracking_v1 = {
+	remove_variable = ffpa_tur_front_aegean_cyprus_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_aegean_cyprus_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_ATTICA
+			this = s:STATE_CRETE
+			this = s:STATE_EAST_AEGEAN_ISLANDS
+			this = s:STATE_WEST_AEGEAN_ISLANDS
+			this = s:STATE_IONIAN_ISLANDS
+			this = s:STATE_CYPRUS
+			}
+		}
+		every_scope_state = { ffpa_initialize_tur_front_aegean_cyprus_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_tur_front_aegean_cyprus_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_ATTICA
+			this = s:STATE_CRETE
+			this = s:STATE_EAST_AEGEAN_ISLANDS
+			this = s:STATE_WEST_AEGEAN_ISLANDS
+			this = s:STATE_IONIAN_ISLANDS
+			this = s:STATE_CYPRUS
+			}
+		}
+		every_scope_state = { ffpa_cleanup_tur_front_aegean_cyprus_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_tur_front_aegean_cyprus_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_aegean_cyprus_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_tur_front_levant_predecessor_state_v1 = {
+	set_variable = ffpa_tur_front_levant_owner_tracking_v1
+	remove_variable = ffpa_tur_front_levant_owner_snapshot_v1
+	clear_saved_scope = ffpa_tur_front_levant_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_tur_front_levant_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_tur_front_levant_new_owner_scope }
+		set_variable = { name = ffpa_tur_front_levant_owner_snapshot_v1 value = scope:ffpa_tur_front_levant_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_tur_front_levant_new_owner_scope
+}
+
+ffpa_cleanup_tur_front_levant_predecessor_state_v1 = {
+	remove_variable = ffpa_tur_front_levant_owner_tracking_v1
+	remove_variable = ffpa_tur_front_levant_owner_snapshot_v1
+}
+
+ffpa_initialize_tur_front_levant_predecessor_tracking_v1 = {
+	remove_variable = ffpa_tur_front_levant_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_levant_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_ALEPPO
+			this = s:STATE_SYRIA
+			this = s:STATE_LEBANON
+			this = s:STATE_PALESTINE
+			this = s:STATE_TRANSJORDAN
+			}
+		}
+		every_scope_state = { ffpa_initialize_tur_front_levant_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_tur_front_levant_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_ALEPPO
+			this = s:STATE_SYRIA
+			this = s:STATE_LEBANON
+			this = s:STATE_PALESTINE
+			this = s:STATE_TRANSJORDAN
+			}
+		}
+		every_scope_state = { ffpa_cleanup_tur_front_levant_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_tur_front_levant_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_levant_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_tur_front_mesopotamia_predecessor_state_v1 = {
+	set_variable = ffpa_tur_front_mesopotamia_owner_tracking_v1
+	remove_variable = ffpa_tur_front_mesopotamia_owner_snapshot_v1
+	clear_saved_scope = ffpa_tur_front_mesopotamia_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_tur_front_mesopotamia_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_tur_front_mesopotamia_new_owner_scope }
+		set_variable = { name = ffpa_tur_front_mesopotamia_owner_snapshot_v1 value = scope:ffpa_tur_front_mesopotamia_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_tur_front_mesopotamia_new_owner_scope
+}
+
+ffpa_cleanup_tur_front_mesopotamia_predecessor_state_v1 = {
+	remove_variable = ffpa_tur_front_mesopotamia_owner_tracking_v1
+	remove_variable = ffpa_tur_front_mesopotamia_owner_snapshot_v1
+}
+
+ffpa_initialize_tur_front_mesopotamia_predecessor_tracking_v1 = {
+	remove_variable = ffpa_tur_front_mesopotamia_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_mesopotamia_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_MOSUL
+			this = s:STATE_BAGHDAD
+			this = s:STATE_DEIR_EZ_ZOR
+			this = s:STATE_BASRA
+			}
+		}
+		every_scope_state = { ffpa_initialize_tur_front_mesopotamia_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_tur_front_mesopotamia_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_MOSUL
+			this = s:STATE_BAGHDAD
+			this = s:STATE_DEIR_EZ_ZOR
+			this = s:STATE_BASRA
+			}
+		}
+		every_scope_state = { ffpa_cleanup_tur_front_mesopotamia_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_tur_front_mesopotamia_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_mesopotamia_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_tur_front_egypt_predecessor_state_v1 = {
+	set_variable = ffpa_tur_front_egypt_owner_tracking_v1
+	remove_variable = ffpa_tur_front_egypt_owner_snapshot_v1
+	clear_saved_scope = ffpa_tur_front_egypt_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_tur_front_egypt_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_tur_front_egypt_new_owner_scope }
+		set_variable = { name = ffpa_tur_front_egypt_owner_snapshot_v1 value = scope:ffpa_tur_front_egypt_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_tur_front_egypt_new_owner_scope
+}
+
+ffpa_cleanup_tur_front_egypt_predecessor_state_v1 = {
+	remove_variable = ffpa_tur_front_egypt_owner_tracking_v1
+	remove_variable = ffpa_tur_front_egypt_owner_snapshot_v1
+}
+
+ffpa_initialize_tur_front_egypt_predecessor_tracking_v1 = {
+	remove_variable = ffpa_tur_front_egypt_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_egypt_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_LOWER_EGYPT
+			this = s:STATE_MIDDLE_EGYPT
+			this = s:STATE_UPPER_EGYPT
+			this = s:STATE_SINAI
+			this = s:STATE_MATRUH
+			}
+		}
+		every_scope_state = { ffpa_initialize_tur_front_egypt_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_tur_front_egypt_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_LOWER_EGYPT
+			this = s:STATE_MIDDLE_EGYPT
+			this = s:STATE_UPPER_EGYPT
+			this = s:STATE_SINAI
+			this = s:STATE_MATRUH
+			}
+		}
+		every_scope_state = { ffpa_cleanup_tur_front_egypt_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_tur_front_egypt_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_egypt_completion_predecessor_ready_v1
+}
+
+ffpa_initialize_tur_front_ifriqiya_predecessor_state_v1 = {
+	set_variable = ffpa_tur_front_ifriqiya_owner_tracking_v1
+	remove_variable = ffpa_tur_front_ifriqiya_owner_snapshot_v1
+	clear_saved_scope = ffpa_tur_front_ifriqiya_new_owner_scope
+	owner ?= { save_temporary_scope_as = ffpa_tur_front_ifriqiya_new_owner_scope }
+	if = {
+		limit = { exists = scope:ffpa_tur_front_ifriqiya_new_owner_scope }
+		set_variable = { name = ffpa_tur_front_ifriqiya_owner_snapshot_v1 value = scope:ffpa_tur_front_ifriqiya_new_owner_scope }
+	}
+	clear_saved_scope = ffpa_tur_front_ifriqiya_new_owner_scope
+}
+
+ffpa_cleanup_tur_front_ifriqiya_predecessor_state_v1 = {
+	remove_variable = ffpa_tur_front_ifriqiya_owner_tracking_v1
+	remove_variable = ffpa_tur_front_ifriqiya_owner_snapshot_v1
+}
+
+ffpa_initialize_tur_front_ifriqiya_predecessor_tracking_v1 = {
+	remove_variable = ffpa_tur_front_ifriqiya_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_ifriqiya_completion_predecessor_ready_v1
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_LIBYA
+			this = s:STATE_TRIPOLI
+			this = s:STATE_TUNISIA
+			}
+		}
+		every_scope_state = { ffpa_initialize_tur_front_ifriqiya_predecessor_state_v1 = yes }
+	}
+}
+
+ffpa_cleanup_tur_front_ifriqiya_predecessor_tracking_v1 = {
+	every_state_region = {
+		limit = {
+			OR = {
+			this = s:STATE_LIBYA
+			this = s:STATE_TRIPOLI
+			this = s:STATE_TUNISIA
+			}
+		}
+		every_scope_state = { ffpa_cleanup_tur_front_ifriqiya_predecessor_state_v1 = yes }
+	}
+	remove_variable = ffpa_tur_front_ifriqiya_completion_predecessor_v1
+	remove_variable = ffpa_tur_front_ifriqiya_completion_predecessor_ready_v1
+}
+
+ffpa_track_tur_restoration_predecessors_on_owner_change_state_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_front_western_pact_owner_tracking_v1 }
+		clear_saved_scope = ffpa_tur_front_western_pact_old_owner_scope
+		var:ffpa_tur_front_western_pact_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_tur_front_western_pact_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_tur_front_western_pact_old_owner_scope
+				owner ?= { country_definition = cd:TUR }
+				scope:ffpa_tur_front_western_pact_old_owner_scope = { NOT = { country_definition = cd:TUR } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_tur_front_western_pact_completion_predecessor_v1 value = scope:ffpa_tur_front_western_pact_old_owner_scope }
+				set_variable = ffpa_tur_front_western_pact_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_tur_front_western_pact_owner_snapshot_v1
+		clear_saved_scope = ffpa_tur_front_western_pact_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_tur_front_western_pact_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_tur_front_western_pact_new_owner_scope }
+			set_variable = { name = ffpa_tur_front_western_pact_owner_snapshot_v1 value = scope:ffpa_tur_front_western_pact_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_tur_front_western_pact_old_owner_scope
+		clear_saved_scope = ffpa_tur_front_western_pact_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_tur_front_mosul_owner_tracking_v1 }
+		clear_saved_scope = ffpa_tur_front_mosul_old_owner_scope
+		var:ffpa_tur_front_mosul_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_tur_front_mosul_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_tur_front_mosul_old_owner_scope
+				owner ?= { country_definition = cd:TUR }
+				scope:ffpa_tur_front_mosul_old_owner_scope = { NOT = { country_definition = cd:TUR } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_tur_front_mosul_completion_predecessor_v1 value = scope:ffpa_tur_front_mosul_old_owner_scope }
+				set_variable = ffpa_tur_front_mosul_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_tur_front_mosul_owner_snapshot_v1
+		clear_saved_scope = ffpa_tur_front_mosul_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_tur_front_mosul_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_tur_front_mosul_new_owner_scope }
+			set_variable = { name = ffpa_tur_front_mosul_owner_snapshot_v1 value = scope:ffpa_tur_front_mosul_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_tur_front_mosul_old_owner_scope
+		clear_saved_scope = ffpa_tur_front_mosul_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_tur_front_rumelia_owner_tracking_v1 }
+		clear_saved_scope = ffpa_tur_front_rumelia_old_owner_scope
+		var:ffpa_tur_front_rumelia_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_tur_front_rumelia_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_tur_front_rumelia_old_owner_scope
+				owner ?= { country_definition = cd:TUR }
+				scope:ffpa_tur_front_rumelia_old_owner_scope = { NOT = { country_definition = cd:TUR } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_tur_front_rumelia_completion_predecessor_v1 value = scope:ffpa_tur_front_rumelia_old_owner_scope }
+				set_variable = ffpa_tur_front_rumelia_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_tur_front_rumelia_owner_snapshot_v1
+		clear_saved_scope = ffpa_tur_front_rumelia_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_tur_front_rumelia_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_tur_front_rumelia_new_owner_scope }
+			set_variable = { name = ffpa_tur_front_rumelia_owner_snapshot_v1 value = scope:ffpa_tur_front_rumelia_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_tur_front_rumelia_old_owner_scope
+		clear_saved_scope = ffpa_tur_front_rumelia_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_tur_front_aegean_cyprus_owner_tracking_v1 }
+		clear_saved_scope = ffpa_tur_front_aegean_cyprus_old_owner_scope
+		var:ffpa_tur_front_aegean_cyprus_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_tur_front_aegean_cyprus_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_tur_front_aegean_cyprus_old_owner_scope
+				owner ?= { country_definition = cd:TUR }
+				scope:ffpa_tur_front_aegean_cyprus_old_owner_scope = { NOT = { country_definition = cd:TUR } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_tur_front_aegean_cyprus_completion_predecessor_v1 value = scope:ffpa_tur_front_aegean_cyprus_old_owner_scope }
+				set_variable = ffpa_tur_front_aegean_cyprus_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_tur_front_aegean_cyprus_owner_snapshot_v1
+		clear_saved_scope = ffpa_tur_front_aegean_cyprus_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_tur_front_aegean_cyprus_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_tur_front_aegean_cyprus_new_owner_scope }
+			set_variable = { name = ffpa_tur_front_aegean_cyprus_owner_snapshot_v1 value = scope:ffpa_tur_front_aegean_cyprus_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_tur_front_aegean_cyprus_old_owner_scope
+		clear_saved_scope = ffpa_tur_front_aegean_cyprus_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_tur_front_levant_owner_tracking_v1 }
+		clear_saved_scope = ffpa_tur_front_levant_old_owner_scope
+		var:ffpa_tur_front_levant_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_tur_front_levant_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_tur_front_levant_old_owner_scope
+				owner ?= { country_definition = cd:TUR }
+				scope:ffpa_tur_front_levant_old_owner_scope = { NOT = { country_definition = cd:TUR } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_tur_front_levant_completion_predecessor_v1 value = scope:ffpa_tur_front_levant_old_owner_scope }
+				set_variable = ffpa_tur_front_levant_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_tur_front_levant_owner_snapshot_v1
+		clear_saved_scope = ffpa_tur_front_levant_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_tur_front_levant_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_tur_front_levant_new_owner_scope }
+			set_variable = { name = ffpa_tur_front_levant_owner_snapshot_v1 value = scope:ffpa_tur_front_levant_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_tur_front_levant_old_owner_scope
+		clear_saved_scope = ffpa_tur_front_levant_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_tur_front_mesopotamia_owner_tracking_v1 }
+		clear_saved_scope = ffpa_tur_front_mesopotamia_old_owner_scope
+		var:ffpa_tur_front_mesopotamia_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_tur_front_mesopotamia_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_tur_front_mesopotamia_old_owner_scope
+				owner ?= { country_definition = cd:TUR }
+				scope:ffpa_tur_front_mesopotamia_old_owner_scope = { NOT = { country_definition = cd:TUR } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_tur_front_mesopotamia_completion_predecessor_v1 value = scope:ffpa_tur_front_mesopotamia_old_owner_scope }
+				set_variable = ffpa_tur_front_mesopotamia_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_tur_front_mesopotamia_owner_snapshot_v1
+		clear_saved_scope = ffpa_tur_front_mesopotamia_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_tur_front_mesopotamia_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_tur_front_mesopotamia_new_owner_scope }
+			set_variable = { name = ffpa_tur_front_mesopotamia_owner_snapshot_v1 value = scope:ffpa_tur_front_mesopotamia_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_tur_front_mesopotamia_old_owner_scope
+		clear_saved_scope = ffpa_tur_front_mesopotamia_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_tur_front_egypt_owner_tracking_v1 }
+		clear_saved_scope = ffpa_tur_front_egypt_old_owner_scope
+		var:ffpa_tur_front_egypt_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_tur_front_egypt_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_tur_front_egypt_old_owner_scope
+				owner ?= { country_definition = cd:TUR }
+				scope:ffpa_tur_front_egypt_old_owner_scope = { NOT = { country_definition = cd:TUR } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_tur_front_egypt_completion_predecessor_v1 value = scope:ffpa_tur_front_egypt_old_owner_scope }
+				set_variable = ffpa_tur_front_egypt_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_tur_front_egypt_owner_snapshot_v1
+		clear_saved_scope = ffpa_tur_front_egypt_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_tur_front_egypt_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_tur_front_egypt_new_owner_scope }
+			set_variable = { name = ffpa_tur_front_egypt_owner_snapshot_v1 value = scope:ffpa_tur_front_egypt_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_tur_front_egypt_old_owner_scope
+		clear_saved_scope = ffpa_tur_front_egypt_new_owner_scope
+	}
+	if = {
+		limit = { has_variable = ffpa_tur_front_ifriqiya_owner_tracking_v1 }
+		clear_saved_scope = ffpa_tur_front_ifriqiya_old_owner_scope
+		var:ffpa_tur_front_ifriqiya_owner_snapshot_v1 ?= { save_temporary_scope_as = ffpa_tur_front_ifriqiya_old_owner_scope }
+		if = {
+			limit = {
+				exists = scope:ffpa_tur_front_ifriqiya_old_owner_scope
+				owner ?= { country_definition = cd:TUR }
+				scope:ffpa_tur_front_ifriqiya_old_owner_scope = { NOT = { country_definition = cd:TUR } }
+			}
+			# State -> current owner country. The saved scope is the direct owner
+			# snapshot from before this owner-change on_action.
+			owner = {
+				set_variable = { name = ffpa_tur_front_ifriqiya_completion_predecessor_v1 value = scope:ffpa_tur_front_ifriqiya_old_owner_scope }
+				set_variable = ffpa_tur_front_ifriqiya_completion_predecessor_ready_v1
+			}
+		}
+		remove_variable = ffpa_tur_front_ifriqiya_owner_snapshot_v1
+		clear_saved_scope = ffpa_tur_front_ifriqiya_new_owner_scope
+		owner ?= { save_temporary_scope_as = ffpa_tur_front_ifriqiya_new_owner_scope }
+		if = {
+			limit = { exists = scope:ffpa_tur_front_ifriqiya_new_owner_scope }
+			set_variable = { name = ffpa_tur_front_ifriqiya_owner_snapshot_v1 value = scope:ffpa_tur_front_ifriqiya_new_owner_scope }
+		}
+		clear_saved_scope = ffpa_tur_front_ifriqiya_old_owner_scope
+		clear_saved_scope = ffpa_tur_front_ifriqiya_new_owner_scope
+	}
+	if = {
+		limit = { NOT = { exists = c:TUR } }
+		ffpa_cleanup_tur_front_western_pact_predecessor_state_v1 = yes
+		ffpa_cleanup_tur_front_mosul_predecessor_state_v1 = yes
+		ffpa_cleanup_tur_front_rumelia_predecessor_state_v1 = yes
+		ffpa_cleanup_tur_front_aegean_cyprus_predecessor_state_v1 = yes
+		ffpa_cleanup_tur_front_levant_predecessor_state_v1 = yes
+		ffpa_cleanup_tur_front_mesopotamia_predecessor_state_v1 = yes
+		ffpa_cleanup_tur_front_egypt_predecessor_state_v1 = yes
+		ffpa_cleanup_tur_front_ifriqiya_predecessor_state_v1 = yes
+	}
+}
+
+ffpa_seed_tur_restoration_predecessors_on_state_created_v1 = {
+	if = {
+		limit = {
+			c:TUR ?= { has_journal_entry = je_ffpa_tur_front_western_pact }
+			OR = {
+				state_region = s:STATE_WESTERN_THRACE
+			}
+		}
+		ffpa_initialize_tur_front_western_pact_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:TUR ?= { has_journal_entry = je_ffpa_tur_front_mosul }
+			OR = {
+				state_region = s:STATE_MOSUL
+			}
+		}
+		ffpa_initialize_tur_front_mosul_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:TUR ?= { has_journal_entry = je_ffpa_tur_front_rumelia }
+			OR = {
+				state_region = s:STATE_ALBANIA
+				state_region = s:STATE_MACEDONIA
+				state_region = s:STATE_WESTERN_THRACE
+				state_region = s:STATE_BULGARIA
+				state_region = s:STATE_DOBRUDJA
+				state_region = s:STATE_NORTHERN_THRACE
+			}
+		}
+		ffpa_initialize_tur_front_rumelia_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:TUR ?= { has_journal_entry = je_ffpa_tur_front_aegean_cyprus }
+			OR = {
+				state_region = s:STATE_ATTICA
+				state_region = s:STATE_CRETE
+				state_region = s:STATE_EAST_AEGEAN_ISLANDS
+				state_region = s:STATE_WEST_AEGEAN_ISLANDS
+				state_region = s:STATE_IONIAN_ISLANDS
+				state_region = s:STATE_CYPRUS
+			}
+		}
+		ffpa_initialize_tur_front_aegean_cyprus_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:TUR ?= { has_journal_entry = je_ffpa_tur_front_levant }
+			OR = {
+				state_region = s:STATE_ALEPPO
+				state_region = s:STATE_SYRIA
+				state_region = s:STATE_LEBANON
+				state_region = s:STATE_PALESTINE
+				state_region = s:STATE_TRANSJORDAN
+			}
+		}
+		ffpa_initialize_tur_front_levant_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:TUR ?= { has_journal_entry = je_ffpa_tur_front_mesopotamia }
+			OR = {
+				state_region = s:STATE_MOSUL
+				state_region = s:STATE_BAGHDAD
+				state_region = s:STATE_DEIR_EZ_ZOR
+				state_region = s:STATE_BASRA
+			}
+		}
+		ffpa_initialize_tur_front_mesopotamia_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:TUR ?= { has_journal_entry = je_ffpa_tur_front_egypt }
+			OR = {
+				state_region = s:STATE_LOWER_EGYPT
+				state_region = s:STATE_MIDDLE_EGYPT
+				state_region = s:STATE_UPPER_EGYPT
+				state_region = s:STATE_SINAI
+				state_region = s:STATE_MATRUH
+			}
+		}
+		ffpa_initialize_tur_front_egypt_predecessor_state_v1 = yes
+	}
+	if = {
+		limit = {
+			c:TUR ?= { has_journal_entry = je_ffpa_tur_front_ifriqiya }
+			OR = {
+				state_region = s:STATE_LIBYA
+				state_region = s:STATE_TRIPOLI
+				state_region = s:STATE_TUNISIA
+			}
+		}
+		ffpa_initialize_tur_front_ifriqiya_predecessor_state_v1 = yes
+	}
+}
+
+ffpa_migrate_tur_restoration_predecessor_tracking_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_tur_restoration_predecessor_tracking_migrated_v1 } }
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_front_western_pact }
+			ffpa_initialize_tur_front_western_pact_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_front_mosul }
+			ffpa_initialize_tur_front_mosul_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_front_rumelia }
+			ffpa_initialize_tur_front_rumelia_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_front_aegean_cyprus }
+			ffpa_initialize_tur_front_aegean_cyprus_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_front_levant }
+			ffpa_initialize_tur_front_levant_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_front_mesopotamia }
+			ffpa_initialize_tur_front_mesopotamia_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_front_egypt }
+			ffpa_initialize_tur_front_egypt_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = { has_journal_entry = je_ffpa_tur_front_ifriqiya }
+			ffpa_initialize_tur_front_ifriqiya_predecessor_tracking_v1 = yes
+		}
+		set_variable = ffpa_tur_restoration_predecessor_tracking_migrated_v1
+	}
+}
+
+
 ffpa_clear_tur_republic_settlement_rewards_v1 = {
 	if = {
 		limit = { has_modifier = ffpa_tur_republic_assembly_settlement_v1 }
@@ -1842,6 +2607,7 @@ ffpa_start_tur_front_western_pact_v1 = {
 		}
 		ffpa_add_tur_front_western_pact_claims_v1 = yes
 		add_journal_entry = { type = je_ffpa_tur_front_western_pact }
+		ffpa_initialize_tur_front_western_pact_predecessor_tracking_v1 = yes
 	}
 }
 
@@ -1851,11 +2617,12 @@ ffpa_complete_tur_front_western_pact_v1 = {
 		set_variable = ffpa_tur_front_western_pact_complete_v1
 		ffpa_cleanup_tur_front_western_pact_claims_v1 = yes
 		remove_variable = ffpa_tur_front_western_pact_resolution_pending_v1
-		trigger_event = { id = ffpa_tur_flavor.61 popup = yes }
+		trigger_event = { id = ffpa_tur_flavor.61 days = 1 popup = yes }
 	}
 }
 
 ffpa_fail_tur_front_western_pact_v1 = {
+	ffpa_cleanup_tur_front_western_pact_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_western_pact_complete_v1 }
@@ -1869,6 +2636,7 @@ ffpa_fail_tur_front_western_pact_v1 = {
 }
 
 ffpa_withdraw_tur_front_western_pact_v1 = {
+	ffpa_cleanup_tur_front_western_pact_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_western_pact_complete_v1 }
@@ -1890,6 +2658,7 @@ ffpa_start_tur_front_mosul_v1 = {
 		}
 		ffpa_add_tur_front_mosul_claims_v1 = yes
 		add_journal_entry = { type = je_ffpa_tur_front_mosul }
+		ffpa_initialize_tur_front_mosul_predecessor_tracking_v1 = yes
 	}
 }
 
@@ -1899,11 +2668,12 @@ ffpa_complete_tur_front_mosul_v1 = {
 		set_variable = ffpa_tur_front_mosul_complete_v1
 		ffpa_cleanup_tur_front_mosul_claims_v1 = yes
 		remove_variable = ffpa_tur_front_mosul_resolution_pending_v1
-		trigger_event = { id = ffpa_tur_flavor.62 popup = yes }
+		trigger_event = { id = ffpa_tur_flavor.62 days = 1 popup = yes }
 	}
 }
 
 ffpa_fail_tur_front_mosul_v1 = {
+	ffpa_cleanup_tur_front_mosul_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_mosul_complete_v1 }
@@ -1917,6 +2687,7 @@ ffpa_fail_tur_front_mosul_v1 = {
 }
 
 ffpa_withdraw_tur_front_mosul_v1 = {
+	ffpa_cleanup_tur_front_mosul_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_mosul_complete_v1 }
@@ -1938,6 +2709,7 @@ ffpa_start_tur_front_rumelia_v1 = {
 		}
 		ffpa_add_tur_front_rumelia_claims_v1 = yes
 		add_journal_entry = { type = je_ffpa_tur_front_rumelia }
+		ffpa_initialize_tur_front_rumelia_predecessor_tracking_v1 = yes
 	}
 }
 
@@ -1947,11 +2719,12 @@ ffpa_complete_tur_front_rumelia_v1 = {
 		set_variable = ffpa_tur_front_rumelia_complete_v1
 		ffpa_cleanup_tur_front_rumelia_claims_v1 = yes
 		remove_variable = ffpa_tur_front_rumelia_resolution_pending_v1
-		trigger_event = { id = ffpa_tur_flavor.63 popup = yes }
+		trigger_event = { id = ffpa_tur_flavor.63 days = 1 popup = yes }
 	}
 }
 
 ffpa_fail_tur_front_rumelia_v1 = {
+	ffpa_cleanup_tur_front_rumelia_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_rumelia_complete_v1 }
@@ -1965,6 +2738,7 @@ ffpa_fail_tur_front_rumelia_v1 = {
 }
 
 ffpa_withdraw_tur_front_rumelia_v1 = {
+	ffpa_cleanup_tur_front_rumelia_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_rumelia_complete_v1 }
@@ -1986,6 +2760,7 @@ ffpa_start_tur_front_aegean_cyprus_v1 = {
 		}
 		ffpa_add_tur_front_aegean_cyprus_claims_v1 = yes
 		add_journal_entry = { type = je_ffpa_tur_front_aegean_cyprus }
+		ffpa_initialize_tur_front_aegean_cyprus_predecessor_tracking_v1 = yes
 	}
 }
 
@@ -1995,11 +2770,12 @@ ffpa_complete_tur_front_aegean_cyprus_v1 = {
 		set_variable = ffpa_tur_front_aegean_cyprus_complete_v1
 		ffpa_cleanup_tur_front_aegean_cyprus_claims_v1 = yes
 		remove_variable = ffpa_tur_front_aegean_cyprus_resolution_pending_v1
-		trigger_event = { id = ffpa_tur_flavor.64 popup = yes }
+		trigger_event = { id = ffpa_tur_flavor.64 days = 1 popup = yes }
 	}
 }
 
 ffpa_fail_tur_front_aegean_cyprus_v1 = {
+	ffpa_cleanup_tur_front_aegean_cyprus_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_aegean_cyprus_complete_v1 }
@@ -2013,6 +2789,7 @@ ffpa_fail_tur_front_aegean_cyprus_v1 = {
 }
 
 ffpa_withdraw_tur_front_aegean_cyprus_v1 = {
+	ffpa_cleanup_tur_front_aegean_cyprus_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_aegean_cyprus_complete_v1 }
@@ -2034,6 +2811,7 @@ ffpa_start_tur_front_levant_v1 = {
 		}
 		ffpa_add_tur_front_levant_claims_v1 = yes
 		add_journal_entry = { type = je_ffpa_tur_front_levant }
+		ffpa_initialize_tur_front_levant_predecessor_tracking_v1 = yes
 	}
 }
 
@@ -2043,11 +2821,12 @@ ffpa_complete_tur_front_levant_v1 = {
 		set_variable = ffpa_tur_front_levant_complete_v1
 		ffpa_cleanup_tur_front_levant_claims_v1 = yes
 		remove_variable = ffpa_tur_front_levant_resolution_pending_v1
-		trigger_event = { id = ffpa_tur_flavor.65 popup = yes }
+		trigger_event = { id = ffpa_tur_flavor.65 days = 1 popup = yes }
 	}
 }
 
 ffpa_fail_tur_front_levant_v1 = {
+	ffpa_cleanup_tur_front_levant_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_levant_complete_v1 }
@@ -2061,6 +2840,7 @@ ffpa_fail_tur_front_levant_v1 = {
 }
 
 ffpa_withdraw_tur_front_levant_v1 = {
+	ffpa_cleanup_tur_front_levant_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_levant_complete_v1 }
@@ -2082,6 +2862,7 @@ ffpa_start_tur_front_mesopotamia_v1 = {
 		}
 		ffpa_add_tur_front_mesopotamia_claims_v1 = yes
 		add_journal_entry = { type = je_ffpa_tur_front_mesopotamia }
+		ffpa_initialize_tur_front_mesopotamia_predecessor_tracking_v1 = yes
 	}
 }
 
@@ -2091,11 +2872,12 @@ ffpa_complete_tur_front_mesopotamia_v1 = {
 		set_variable = ffpa_tur_front_mesopotamia_complete_v1
 		ffpa_cleanup_tur_front_mesopotamia_claims_v1 = yes
 		remove_variable = ffpa_tur_front_mesopotamia_resolution_pending_v1
-		trigger_event = { id = ffpa_tur_flavor.66 popup = yes }
+		trigger_event = { id = ffpa_tur_flavor.66 days = 1 popup = yes }
 	}
 }
 
 ffpa_fail_tur_front_mesopotamia_v1 = {
+	ffpa_cleanup_tur_front_mesopotamia_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_mesopotamia_complete_v1 }
@@ -2109,6 +2891,7 @@ ffpa_fail_tur_front_mesopotamia_v1 = {
 }
 
 ffpa_withdraw_tur_front_mesopotamia_v1 = {
+	ffpa_cleanup_tur_front_mesopotamia_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_mesopotamia_complete_v1 }
@@ -2130,6 +2913,7 @@ ffpa_start_tur_front_egypt_v1 = {
 		}
 		ffpa_add_tur_front_egypt_claims_v1 = yes
 		add_journal_entry = { type = je_ffpa_tur_front_egypt }
+		ffpa_initialize_tur_front_egypt_predecessor_tracking_v1 = yes
 	}
 }
 
@@ -2139,11 +2923,12 @@ ffpa_complete_tur_front_egypt_v1 = {
 		set_variable = ffpa_tur_front_egypt_complete_v1
 		ffpa_cleanup_tur_front_egypt_claims_v1 = yes
 		remove_variable = ffpa_tur_front_egypt_resolution_pending_v1
-		trigger_event = { id = ffpa_tur_flavor.67 popup = yes }
+		trigger_event = { id = ffpa_tur_flavor.67 days = 1 popup = yes }
 	}
 }
 
 ffpa_fail_tur_front_egypt_v1 = {
+	ffpa_cleanup_tur_front_egypt_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_egypt_complete_v1 }
@@ -2157,6 +2942,7 @@ ffpa_fail_tur_front_egypt_v1 = {
 }
 
 ffpa_withdraw_tur_front_egypt_v1 = {
+	ffpa_cleanup_tur_front_egypt_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_egypt_complete_v1 }
@@ -2178,6 +2964,7 @@ ffpa_start_tur_front_ifriqiya_v1 = {
 		}
 		ffpa_add_tur_front_ifriqiya_claims_v1 = yes
 		add_journal_entry = { type = je_ffpa_tur_front_ifriqiya }
+		ffpa_initialize_tur_front_ifriqiya_predecessor_tracking_v1 = yes
 	}
 }
 
@@ -2187,11 +2974,12 @@ ffpa_complete_tur_front_ifriqiya_v1 = {
 		set_variable = ffpa_tur_front_ifriqiya_complete_v1
 		ffpa_cleanup_tur_front_ifriqiya_claims_v1 = yes
 		remove_variable = ffpa_tur_front_ifriqiya_resolution_pending_v1
-		trigger_event = { id = ffpa_tur_flavor.68 popup = yes }
+		trigger_event = { id = ffpa_tur_flavor.68 days = 1 popup = yes }
 	}
 }
 
 ffpa_fail_tur_front_ifriqiya_v1 = {
+	ffpa_cleanup_tur_front_ifriqiya_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_ifriqiya_complete_v1 }
@@ -2205,6 +2993,7 @@ ffpa_fail_tur_front_ifriqiya_v1 = {
 }
 
 ffpa_withdraw_tur_front_ifriqiya_v1 = {
+	ffpa_cleanup_tur_front_ifriqiya_predecessor_tracking_v1 = yes
 	if = {
 		limit = {
 			NOT = { has_variable = ffpa_tur_front_ifriqiya_complete_v1 }
@@ -2417,6 +3206,14 @@ ffpa_migrate_tur_frontier_recovery_v1 = {
 }
 
 ffpa_cleanup_tur_frontier_on_tag_change_v1 = {
+	ffpa_cleanup_tur_front_western_pact_predecessor_tracking_v1 = yes
+	ffpa_cleanup_tur_front_mosul_predecessor_tracking_v1 = yes
+	ffpa_cleanup_tur_front_rumelia_predecessor_tracking_v1 = yes
+	ffpa_cleanup_tur_front_aegean_cyprus_predecessor_tracking_v1 = yes
+	ffpa_cleanup_tur_front_levant_predecessor_tracking_v1 = yes
+	ffpa_cleanup_tur_front_mesopotamia_predecessor_tracking_v1 = yes
+	ffpa_cleanup_tur_front_egypt_predecessor_tracking_v1 = yes
+	ffpa_cleanup_tur_front_ifriqiya_predecessor_tracking_v1 = yes
 	ffpa_cleanup_tur_front_western_pact_claims_v1 = yes
 	remove_variable = ffpa_tur_front_western_pact_resolution_pending_v1
 	ffpa_cleanup_tur_front_mosul_claims_v1 = yes
@@ -2439,6 +3236,7 @@ ffpa_cleanup_tur_frontier_on_tag_change_v1 = {
 ffpa_ensure_tur_frontier_recovery_v1 = {
 	set_variable = ffpa_tur_flavor_initialized_v1
 	ffpa_ensure_tur_formation_core_claims_v1 = yes
+	ffpa_migrate_tur_restoration_predecessor_tracking_v1 = yes
 	ffpa_ensure_tur_active_front_claims_v1 = yes
 	ffpa_resolve_tur_pending_fronts_v1 = yes
 	ffpa_migrate_tur_frontier_recovery_v1 = yes

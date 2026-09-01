@@ -8,9 +8,9 @@ formation.3 = {
 	type = country_event
 	placement = ROOT
 
-	title = formation.3.t
-	desc = formation.3.d
-	flavor = formation.3.f
+	title = ffpa_formation_byzantium.t
+	desc = ffpa_formation_byzantium.d
+	flavor = ffpa_formation_byzantium.f
 
 	event_image = {
 		video = "unspecific_signed_contract"
@@ -39,7 +39,7 @@ formation.3 = {
 	}
 
 	option = {
-		name = formation.3.a
+		name = ffpa_formation_byzantium.a
 		default_option = yes
 		add_modifier = {
 			name = unification_prestige

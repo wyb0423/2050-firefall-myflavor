@@ -548,7 +548,24 @@ ffpa_tur_flavor.61 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_tur_flavor.61.t
-	desc = ffpa_tur_flavor.61.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_tur_flavor.61.d.named
+				trigger = {
+					has_variable = ffpa_tur_front_western_pact_completion_predecessor_ready_v1
+					exists = var:ffpa_tur_front_western_pact_completion_predecessor_v1
+					var:ffpa_tur_front_western_pact_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:TUR }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_tur_flavor.61.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_tur_flavor.61.f
 	event_image = { video = "unspecific_signed_contract" }
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
@@ -561,6 +578,7 @@ ffpa_tur_flavor.61 = {
 	option = {
 		name = ffpa_tur_flavor.61.a
 		default_option = yes
+		ffpa_cleanup_tur_front_western_pact_predecessor_tracking_v1 = yes
 		ai_chance = { factor = 1 }
 	}
 }
@@ -611,7 +629,24 @@ ffpa_tur_flavor.62 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_tur_flavor.62.t
-	desc = ffpa_tur_flavor.62.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_tur_flavor.62.d.named
+				trigger = {
+					has_variable = ffpa_tur_front_mosul_completion_predecessor_ready_v1
+					exists = var:ffpa_tur_front_mosul_completion_predecessor_v1
+					var:ffpa_tur_front_mosul_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:TUR }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_tur_flavor.62.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_tur_flavor.62.f
 	event_image = { video = "unspecific_signed_contract" }
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
@@ -624,6 +659,7 @@ ffpa_tur_flavor.62 = {
 	option = {
 		name = ffpa_tur_flavor.62.a
 		default_option = yes
+		ffpa_cleanup_tur_front_mosul_predecessor_tracking_v1 = yes
 		ai_chance = { factor = 1 }
 	}
 }
@@ -674,7 +710,24 @@ ffpa_tur_flavor.63 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_tur_flavor.63.t
-	desc = ffpa_tur_flavor.63.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_tur_flavor.63.d.named
+				trigger = {
+					has_variable = ffpa_tur_front_rumelia_completion_predecessor_ready_v1
+					exists = var:ffpa_tur_front_rumelia_completion_predecessor_v1
+					var:ffpa_tur_front_rumelia_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:TUR }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_tur_flavor.63.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_tur_flavor.63.f
 	event_image = { video = "unspecific_signed_contract" }
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
@@ -687,6 +740,7 @@ ffpa_tur_flavor.63 = {
 	option = {
 		name = ffpa_tur_flavor.63.a
 		default_option = yes
+		ffpa_cleanup_tur_front_rumelia_predecessor_tracking_v1 = yes
 		ai_chance = { factor = 1 }
 	}
 }
@@ -737,7 +791,24 @@ ffpa_tur_flavor.64 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_tur_flavor.64.t
-	desc = ffpa_tur_flavor.64.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_tur_flavor.64.d.named
+				trigger = {
+					has_variable = ffpa_tur_front_aegean_cyprus_completion_predecessor_ready_v1
+					exists = var:ffpa_tur_front_aegean_cyprus_completion_predecessor_v1
+					var:ffpa_tur_front_aegean_cyprus_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:TUR }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_tur_flavor.64.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_tur_flavor.64.f
 	event_image = { video = "unspecific_signed_contract" }
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
@@ -750,6 +821,7 @@ ffpa_tur_flavor.64 = {
 	option = {
 		name = ffpa_tur_flavor.64.a
 		default_option = yes
+		ffpa_cleanup_tur_front_aegean_cyprus_predecessor_tracking_v1 = yes
 		ai_chance = { factor = 1 }
 	}
 }
@@ -800,7 +872,24 @@ ffpa_tur_flavor.65 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_tur_flavor.65.t
-	desc = ffpa_tur_flavor.65.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_tur_flavor.65.d.named
+				trigger = {
+					has_variable = ffpa_tur_front_levant_completion_predecessor_ready_v1
+					exists = var:ffpa_tur_front_levant_completion_predecessor_v1
+					var:ffpa_tur_front_levant_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:TUR }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_tur_flavor.65.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_tur_flavor.65.f
 	event_image = { video = "unspecific_signed_contract" }
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
@@ -813,6 +902,7 @@ ffpa_tur_flavor.65 = {
 	option = {
 		name = ffpa_tur_flavor.65.a
 		default_option = yes
+		ffpa_cleanup_tur_front_levant_predecessor_tracking_v1 = yes
 		ai_chance = { factor = 1 }
 	}
 }
@@ -863,7 +953,24 @@ ffpa_tur_flavor.66 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_tur_flavor.66.t
-	desc = ffpa_tur_flavor.66.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_tur_flavor.66.d.named
+				trigger = {
+					has_variable = ffpa_tur_front_mesopotamia_completion_predecessor_ready_v1
+					exists = var:ffpa_tur_front_mesopotamia_completion_predecessor_v1
+					var:ffpa_tur_front_mesopotamia_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:TUR }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_tur_flavor.66.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_tur_flavor.66.f
 	event_image = { video = "unspecific_signed_contract" }
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
@@ -876,6 +983,7 @@ ffpa_tur_flavor.66 = {
 	option = {
 		name = ffpa_tur_flavor.66.a
 		default_option = yes
+		ffpa_cleanup_tur_front_mesopotamia_predecessor_tracking_v1 = yes
 		ai_chance = { factor = 1 }
 	}
 }
@@ -926,7 +1034,24 @@ ffpa_tur_flavor.67 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_tur_flavor.67.t
-	desc = ffpa_tur_flavor.67.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_tur_flavor.67.d.named
+				trigger = {
+					has_variable = ffpa_tur_front_egypt_completion_predecessor_ready_v1
+					exists = var:ffpa_tur_front_egypt_completion_predecessor_v1
+					var:ffpa_tur_front_egypt_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:TUR }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_tur_flavor.67.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_tur_flavor.67.f
 	event_image = { video = "unspecific_signed_contract" }
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
@@ -939,6 +1064,7 @@ ffpa_tur_flavor.67 = {
 	option = {
 		name = ffpa_tur_flavor.67.a
 		default_option = yes
+		ffpa_cleanup_tur_front_egypt_predecessor_tracking_v1 = yes
 		ai_chance = { factor = 1 }
 	}
 }
@@ -989,7 +1115,24 @@ ffpa_tur_flavor.68 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_tur_flavor.68.t
-	desc = ffpa_tur_flavor.68.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_tur_flavor.68.d.named
+				trigger = {
+					has_variable = ffpa_tur_front_ifriqiya_completion_predecessor_ready_v1
+					exists = var:ffpa_tur_front_ifriqiya_completion_predecessor_v1
+					var:ffpa_tur_front_ifriqiya_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:TUR }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_tur_flavor.68.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_tur_flavor.68.f
 	event_image = { video = "unspecific_signed_contract" }
 	icon = "gfx/interface/icons/event_icons/event_map.dds"
@@ -1002,6 +1145,7 @@ ffpa_tur_flavor.68 = {
 	option = {
 		name = ffpa_tur_flavor.68.a
 		default_option = yes
+		ffpa_cleanup_tur_front_ifriqiya_predecessor_tracking_v1 = yes
 		ai_chance = { factor = 1 }
 	}
 }

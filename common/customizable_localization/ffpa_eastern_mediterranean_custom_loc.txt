@@ -71,3 +71,70 @@ ffpa_byz_commonwealth_stability_direction = {
 		localization_key = ffpa_commonwealth_progress_decreasing
 	}
 }
+
+# Country scope. The vanilla success and failure events retain their upstream
+# effects, while these selectors adapt their narrative to the route already
+# recorded by the Greek Nationalism journal entry.
+ffpa_greek_nationalism_success_desc = {
+	type = country
+	text = {
+		trigger = { has_variable = embrace_ambitious_agenda_var }
+		localization_key = ffpa_greek_nationalism_success_desc_byzantine
+	}
+	text = {
+		trigger = { has_variable = embrace_megali_idea_var }
+		localization_key = ffpa_greek_nationalism_success_desc_megali
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = ffpa_greek_nationalism_success_desc_limited
+	}
+}
+
+ffpa_greek_nationalism_success_flavor = {
+	type = country
+	text = {
+		trigger = { has_variable = embrace_ambitious_agenda_var }
+		localization_key = ffpa_greek_nationalism_success_flavor_byzantine
+	}
+	text = {
+		trigger = { has_variable = embrace_megali_idea_var }
+		localization_key = ffpa_greek_nationalism_success_flavor_megali
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = ffpa_greek_nationalism_success_flavor_limited
+	}
+}
+
+ffpa_greek_nationalism_failure_desc = {
+	type = country
+	text = {
+		trigger = { has_variable = embrace_ambitious_agenda_var }
+		localization_key = ffpa_greek_nationalism_failure_desc_byzantine
+	}
+	text = {
+		trigger = { has_variable = embrace_megali_idea_var }
+		localization_key = ffpa_greek_nationalism_failure_desc_megali
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = ffpa_greek_nationalism_failure_desc_limited
+	}
+}
+
+ffpa_greek_nationalism_failure_flavor = {
+	type = country
+	text = {
+		trigger = { has_variable = embrace_ambitious_agenda_var }
+		localization_key = ffpa_greek_nationalism_failure_flavor_byzantine
+	}
+	text = {
+		trigger = { has_variable = embrace_megali_idea_var }
+		localization_key = ffpa_greek_nationalism_failure_flavor_megali
+	}
+	text = {
+		trigger = { always = yes }
+		localization_key = ffpa_greek_nationalism_failure_flavor_limited
+	}
+}

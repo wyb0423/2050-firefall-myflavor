@@ -234,7 +234,7 @@ ffpa_flavor.8 = {
 	type = country_event
 	placement = ROOT
 
-	title = greece.2.t
+	title = ffpa_flavor.8.t
 	desc = {
 		first_valid = {
 			triggered_desc = {
@@ -242,12 +242,12 @@ ffpa_flavor.8 = {
 				trigger = { has_variable = je_greek_nationalism_complete }
 			}
 			triggered_desc = {
-				desc = greece.2.d
+				desc = ffpa_flavor.8.d
 				trigger = { always = yes }
 			}
 		}
 	}
-	flavor = greece.2.f
+	flavor = ffpa_flavor.8.f
 
 	event_image = { video = "unspecific_signed_contract" }
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -302,7 +302,7 @@ ffpa_flavor.8 = {
 	}
 
 	option = {
-		name = greece.2.a
+		name = ffpa_flavor.8.a
 		if = {
 			limit = {
 				exists = c:TUR
@@ -373,7 +373,7 @@ ffpa_flavor.8 = {
 	}
 
 	option = {
-		name = greece.2.b
+		name = ffpa_flavor.8.b
 		default_option = yes
 		if = {
 			limit = {
@@ -1669,7 +1669,24 @@ ffpa_flavor.40 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.40.t
-	desc = ffpa_flavor.40.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.40.d.named
+				trigger = {
+					has_variable = ffpa_byz_balkans_completion_predecessor_ready_v1
+					exists = var:ffpa_byz_balkans_completion_predecessor_v1
+					var:ffpa_byz_balkans_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:BYZ }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.40.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.40.f
 	event_image = { video = "unspecific_ruler_speaking_to_people" }
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -1695,13 +1712,33 @@ ffpa_flavor.40 = {
 		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
 		ai_chance = { factor = 0.7 }
 	}
+	after = {
+		ffpa_cleanup_byz_balkans_predecessor_tracking_v1 = yes
+	}
 }
 
 ffpa_flavor.41 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.41.t
-	desc = ffpa_flavor.41.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.41.d.named
+				trigger = {
+					has_variable = ffpa_byz_anatolia_completion_predecessor_ready_v1
+					exists = var:ffpa_byz_anatolia_completion_predecessor_v1
+					var:ffpa_byz_anatolia_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:BYZ }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.41.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.41.f
 	event_image = { video = "unspecific_ruler_speaking_to_people" }
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -1727,13 +1764,33 @@ ffpa_flavor.41 = {
 		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
 		ai_chance = { factor = 0.7 }
 	}
+	after = {
+		ffpa_cleanup_byz_anatolia_predecessor_tracking_v1 = yes
+	}
 }
 
 ffpa_flavor.42 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.42.t
-	desc = ffpa_flavor.42.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.42.d.named
+				trigger = {
+					has_variable = ffpa_byz_oriens_completion_predecessor_ready_v1
+					exists = var:ffpa_byz_oriens_completion_predecessor_v1
+					var:ffpa_byz_oriens_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:BYZ }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.42.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.42.f
 	event_image = { video = "unspecific_ruler_speaking_to_people" }
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -1759,13 +1816,33 @@ ffpa_flavor.42 = {
 		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
 		ai_chance = { factor = 0.7 }
 	}
+	after = {
+		ffpa_cleanup_byz_oriens_predecessor_tracking_v1 = yes
+	}
 }
 
 ffpa_flavor.43 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.43.t
-	desc = ffpa_flavor.43.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.43.d.named
+				trigger = {
+					has_variable = ffpa_byz_aegyptus_completion_predecessor_ready_v1
+					exists = var:ffpa_byz_aegyptus_completion_predecessor_v1
+					var:ffpa_byz_aegyptus_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:BYZ }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.43.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.43.f
 	event_image = { video = "unspecific_ruler_speaking_to_people" }
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -1791,13 +1868,33 @@ ffpa_flavor.43 = {
 		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
 		ai_chance = { factor = 0.7 }
 	}
+	after = {
+		ffpa_cleanup_byz_aegyptus_predecessor_tracking_v1 = yes
+	}
 }
 
 ffpa_flavor.44 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.44.t
-	desc = ffpa_flavor.44.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.44.d.named
+				trigger = {
+					has_variable = ffpa_byz_africa_completion_predecessor_ready_v1
+					exists = var:ffpa_byz_africa_completion_predecessor_v1
+					var:ffpa_byz_africa_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:BYZ }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.44.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.44.f
 	event_image = { video = "unspecific_ruler_speaking_to_people" }
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -1823,13 +1920,33 @@ ffpa_flavor.44 = {
 		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
 		ai_chance = { factor = 0.7 }
 	}
+	after = {
+		ffpa_cleanup_byz_africa_predecessor_tracking_v1 = yes
+	}
 }
 
 ffpa_flavor.45 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.45.t
-	desc = ffpa_flavor.45.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.45.d.named
+				trigger = {
+					has_variable = ffpa_byz_italia_completion_predecessor_ready_v1
+					exists = var:ffpa_byz_italia_completion_predecessor_v1
+					var:ffpa_byz_italia_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:BYZ }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.45.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.45.f
 	event_image = { video = "unspecific_ruler_speaking_to_people" }
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -1855,13 +1972,33 @@ ffpa_flavor.45 = {
 		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
 		ai_chance = { factor = 0.7 }
 	}
+	after = {
+		ffpa_cleanup_byz_italia_predecessor_tracking_v1 = yes
+	}
 }
 
 ffpa_flavor.46 = {
 	type = country_event
 	placement = ROOT
 	title = ffpa_flavor.46.t
-	desc = ffpa_flavor.46.d
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = ffpa_flavor.46.d.named
+				trigger = {
+					has_variable = ffpa_byz_spania_completion_predecessor_ready_v1
+					exists = var:ffpa_byz_spania_completion_predecessor_v1
+					var:ffpa_byz_spania_completion_predecessor_v1 ?= {
+						NOT = { country_definition = cd:BYZ }
+					}
+				}
+			}
+			triggered_desc = {
+				desc = ffpa_flavor.46.d
+				trigger = { always = yes }
+			}
+		}
+	}
 	flavor = ffpa_flavor.46.f
 	event_image = { video = "unspecific_ruler_speaking_to_people" }
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
@@ -1886,6 +2023,9 @@ ffpa_flavor.46 = {
 		}
 		add_modifier = { name = ffpa_byz_restoration_triumph_v1 years = 5 }
 		ai_chance = { factor = 0.7 }
+	}
+	after = {
+		ffpa_cleanup_byz_spania_predecessor_tracking_v1 = yes
 	}
 }
 

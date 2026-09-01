@@ -23,6 +23,35 @@ ffpa_on_eastern_mediterranean_country_formed = {
 		}
 		if = {
 			limit = {
+				ROOT = { NOT = { country_definition = cd:BYZ } }
+				OR = {
+					has_journal_entry = je_ffpa_byz_restore_balkans
+					has_journal_entry = je_ffpa_byz_restore_anatolia
+					has_journal_entry = je_ffpa_byz_restore_oriens
+					has_journal_entry = je_ffpa_byz_restore_aegyptus
+					has_journal_entry = je_ffpa_byz_restore_africa
+					has_journal_entry = je_ffpa_byz_restore_italia
+					has_journal_entry = je_ffpa_byz_restore_spania
+					has_variable = ffpa_byz_balkans_restored_complete_v1
+					has_variable = ffpa_byz_anatolia_restored_complete_v1
+					has_variable = ffpa_byz_oriens_restored_complete_v1
+					has_variable = ffpa_byz_aegyptus_restored_complete_v1
+					has_variable = ffpa_byz_africa_restored_complete_v1
+					has_variable = ffpa_byz_italia_restored_complete_v1
+					has_variable = ffpa_byz_spania_restored_complete_v1
+					has_variable = ffpa_byz_balkans_completion_predecessor_ready_v1
+					has_variable = ffpa_byz_anatolia_completion_predecessor_ready_v1
+					has_variable = ffpa_byz_oriens_completion_predecessor_ready_v1
+					has_variable = ffpa_byz_aegyptus_completion_predecessor_ready_v1
+					has_variable = ffpa_byz_africa_completion_predecessor_ready_v1
+					has_variable = ffpa_byz_italia_completion_predecessor_ready_v1
+					has_variable = ffpa_byz_spania_completion_predecessor_ready_v1
+				}
+			}
+			ffpa_cleanup_all_byz_restoration_predecessor_tracking_v1 = yes
+		}
+		if = {
+			limit = {
 				OR = {
 					ROOT = { country_definition = cd:BYZ }
 					any_scope_state = {
@@ -48,13 +77,54 @@ on_state_incorporation = {
 
 on_state_owner_change = {
 	on_actions = {
+		ffpa_on_eastern_mediterranean_predecessor_owner_change_v1
 		ffpa_on_byz_western_citizenship_state_changed_v1
 	}
 }
 
 on_state_created = {
 	on_actions = {
+		ffpa_on_eastern_mediterranean_predecessor_state_created_v1
 		ffpa_on_byz_western_citizenship_state_changed_v1
+	}
+}
+
+# Root = state. Ordinary ownership changes stop at the shallow tracking-marker
+# guard; only a state currently watched by one of the fifteen campaigns enters
+# the country-specific snapshot handlers.
+ffpa_on_eastern_mediterranean_predecessor_owner_change_v1 = {
+	trigger = {
+		OR = {
+			has_variable = ffpa_tur_front_western_pact_owner_tracking_v1
+			has_variable = ffpa_tur_front_mosul_owner_tracking_v1
+			has_variable = ffpa_tur_front_rumelia_owner_tracking_v1
+			has_variable = ffpa_tur_front_aegean_cyprus_owner_tracking_v1
+			has_variable = ffpa_tur_front_levant_owner_tracking_v1
+			has_variable = ffpa_tur_front_mesopotamia_owner_tracking_v1
+			has_variable = ffpa_tur_front_egypt_owner_tracking_v1
+			has_variable = ffpa_tur_front_ifriqiya_owner_tracking_v1
+			has_variable = ffpa_byz_balkans_owner_tracking_v1
+			has_variable = ffpa_byz_anatolia_owner_tracking_v1
+			has_variable = ffpa_byz_oriens_owner_tracking_v1
+			has_variable = ffpa_byz_aegyptus_owner_tracking_v1
+			has_variable = ffpa_byz_africa_owner_tracking_v1
+			has_variable = ffpa_byz_italia_owner_tracking_v1
+			has_variable = ffpa_byz_spania_owner_tracking_v1
+		}
+	}
+	effect = {
+		ffpa_track_tur_restoration_predecessors_on_owner_change_state_v1 = yes
+		ffpa_track_byz_restoration_predecessors_on_owner_change_state_v1 = yes
+	}
+}
+
+# Root = newly created state. State creation is rare; each country handler
+# directly checks the unique TUR/BYZ tag, its active JE, and the new state's
+# region before adding a campaign-specific snapshot.
+ffpa_on_eastern_mediterranean_predecessor_state_created_v1 = {
+	effect = {
+		ffpa_seed_tur_restoration_predecessors_on_state_created_v1 = yes
+		ffpa_seed_byz_restoration_predecessors_on_state_created_v1 = yes
 	}
 }
 
