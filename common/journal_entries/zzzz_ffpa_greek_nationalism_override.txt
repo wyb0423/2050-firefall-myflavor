@@ -1,15 +1,18 @@
 # Full replacement of vanilla 1.13.11 je_greek_nationalism. The adapter keeps
-# the original political sequence and rewards, but confines it to formed GRE
-# and removes the plausible-formables rule gate from the ambitious agenda.
+# the original political sequence and rewards, confines new instances to
+# formed GRE, transfers the ambitious route to BYZ, and removes invalid legacy
+# instances without treating them as a Greek national failure. It also retains
+# FFPA's removal of the plausible-formables rule gate from the ambitious route.
 je_greek_nationalism = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	group = je_group_historical_content
+	transferable = yes
 
-	is_shown_in_lobby = { c:GRE ?= this }
-	is_shown_when_inactive = { c:GRE ?= this }
+	is_shown_in_lobby = { country_definition = cd:GRE }
+	is_shown_when_inactive = { country_definition = cd:GRE }
 
 	possible = {
-		c:GRE ?= this
+		country_definition = cd:GRE
 		has_technology_researched = nationalism
 		custom_tooltip = {
 			text = greek_state_possible_tt
@@ -24,6 +27,27 @@ je_greek_nationalism = {
 			NOT = { has_variable = je_greek_nationalism_complete }
 		}
 		is_diplomatic_play_committed_participant = no
+	}
+
+	invalid = {
+		NOT = {
+			OR = {
+				country_definition = cd:GRE
+				AND = {
+					country_definition = cd:BYZ
+					has_variable = embrace_ambitious_agenda_var
+				}
+			}
+		}
+	}
+
+	on_invalid = {
+		remove_variable = greek_homeland_states_owned_var
+		remove_variable = byzantium_states_owned_var
+		remove_variable = no_megali_idea_var
+		remove_variable = embrace_megali_idea_var
+		remove_variable = embrace_ambitious_agenda_var
+		remove_variable = byzantium_event_fired
 	}
 
 	status_desc = {
@@ -89,6 +113,7 @@ je_greek_nationalism = {
 		}
 		trigger_if = {
 			limit = { has_variable = no_megali_idea_var }
+			country_definition = cd:GRE
 			custom_tooltip = {
 				text = greek_state_complete_tt
 				any_scope_state = {
@@ -104,6 +129,7 @@ je_greek_nationalism = {
 		}
 		trigger_if = {
 			limit = { has_variable = embrace_megali_idea_var }
+			country_definition = cd:GRE
 			custom_tooltip = {
 				text = greek_state_complete_tt_2
 				any_scope_state = {
@@ -116,6 +142,7 @@ je_greek_nationalism = {
 		}
 		trigger_if = {
 			limit = { has_variable = embrace_ambitious_agenda_var }
+			country_definition = cd:BYZ
 			country_has_monarchy_law = yes
 			custom_tooltip = {
 				text = greek_state_complete_tt_3
@@ -127,14 +154,14 @@ je_greek_nationalism = {
 			}
 			custom_tooltip = {
 				text = byz_is_this_tt
-				c:BYZ ?= this
+				country_definition = cd:BYZ
 			}
 			government_legitimacy >= 50
 		}
 	}
 
 	on_complete = {
-		trigger_event = { id = greece.4 }
+		trigger_event = { id = greece.4 popup = yes }
 		set_variable = je_greek_nationalism_complete
 	}
 
@@ -157,6 +184,13 @@ je_greek_nationalism = {
 
 	fail = {
 		OR = {
+			country_definition = cd:GRE
+			AND = {
+				country_definition = cd:BYZ
+				has_variable = embrace_ambitious_agenda_var
+			}
+		}
+		OR = {
 			is_subject = yes
 			AND = {
 				country_rank < rank_value:minor_power
@@ -166,7 +200,7 @@ je_greek_nationalism = {
 	}
 
 	on_fail = {
-		trigger_event = { id = greece.5 }
+		trigger_event = { id = greece.5 popup = yes }
 		set_variable = je_greek_nationalism_complete
 	}
 

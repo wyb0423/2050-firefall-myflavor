@@ -25,13 +25,13 @@ BYZ = {
 	}
 
 	potential = {
-		c:GRE ?= this
+		country_definition = cd:GRE
 	}
 
 	possible = {
 		custom_tooltip = {
 			text = ffpa_byzantium_only_greece_tt
-			c:GRE ?= this
+			country_definition = cd:GRE
 		}
 		country_has_monarchy_law = yes
 		custom_tooltip = {

@@ -255,7 +255,7 @@ ffpa_flavor.8 = {
 	duration = 3
 
 	trigger = {
-		c:GRE ?= this
+		country_definition = cd:GRE
 		NOT = { has_variable = byzantium_event_fired }
 		has_variable = embrace_megali_idea_var
 		any_scope_state = { state_region = s:STATE_IONIAN_ISLANDS }

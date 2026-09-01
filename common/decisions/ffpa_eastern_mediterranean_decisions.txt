@@ -4,7 +4,7 @@
 # has completed in an existing save.
 ffpa_request_eastern_roman_title = {
 	is_shown = {
-		c:GRE ?= this
+		country_definition = cd:GRE
 		has_variable = embrace_megali_idea_var
 		NOT = { has_variable = embrace_ambitious_agenda_var }
 		NOT = { has_variable = byzantium_event_fired }
