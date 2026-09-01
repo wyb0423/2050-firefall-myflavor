@@ -122,6 +122,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `common/government_types/00_ffpa_byzantine_governments.txt`
 - `common/government_types/00_ffpa_turkish_governments.txt`
 - `common/dynamic_country_names/ffpa_byzantium_dynamic_names.txt`
+- `common/power_bloc_names/ffpa_eastern_mediterranean_power_bloc_names.txt`
 - `common/flag_definitions/ffpa_byzantine_flag_definitions.txt`
 - `common/coat_of_arms/coat_of_arms/ffpa_byzantine_flags.txt`
 - `common/scripted_guis/ffpa_byzantium_party_names.txt`
@@ -130,13 +131,14 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `common/interest_group_traits/ffpa_eastern_mediterranean_interest_group_traits.txt`
 - `common/journal_entries/zzzz_ffpa_greek_nationalism_override.txt`
 - `events/ffpa_formation_overrides.txt`
-- 两份本地化文件中的国家、文化、政体、党名、旗帜和成立链键
+- 两份本地化文件中的国家、文化、政体、党名、旗帜、国家集团候选名称和成立链键
 
 **拥有的行为与接口**
 
 - 恢复 Firefall 最终数据库中缺失的 `BYZ` 身份和 GRE → BYZ 成立链。
 - 保持原版 `TUR`，不创建第二个等价土耳其 tag。
 - 定义 `ffpa_ottoman`、`ffpa_rhomaic`、TUR/BYZ 专属政体与政府称谓，以及 BYZ 动态国名、旗帜和党名适配。
+- 为 TUR 提供两个通用及三条建国路线各两个国家集团候选名称，为 BYZ 提供两个通用及五类政体各一个候选名称；这些条目只扩展随机名称池，不自动改名。
 - 定义五个已改名利益集团使用的八个 `ig_trait_ffpa_*` 风味 trait；每个集团仍保留至少一个原版槽位。
 - 提供东地中海状态机使用的意识形态与文化接受 modifier 类型。
 
@@ -146,6 +148,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `BYZ`、`je_greek_nationalism`、`formation.3`、十三个通用党名本地化键、党名数据库适配和旗帜定义都可能覆盖上游对象；更新 Firefall/原版后必须做最终数据库比较。
 - 形成 BYZ 后保留已有宣称的约定不可在身份重构时丢失。
 - 八个 trait 技术 ID 是存档对象；不得通过覆盖原版 `interest_group` 的 `on_enable` 重新实现其分配。
+- 十五个 `ffpa_tur_*` / `ffpa_byz_*` 国家集团名称是普通新增顶层键，不得覆盖原版名称、绑定集团效果或通过周期逻辑强制改名。
 - 不要为了 TUR 风味复制或替换原版 TUR 国家定义、旗帜或政体视觉。
 
 **内部所有权**
@@ -339,7 +342,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 公民权整合速度只作用于 BYZ 拥有的未整合西方白名单州，未来取得、失去、完成整合和身份变化路径能补发或清理。
 - BYZ 新旧档分别获得五个专属 trait，且四个未替换槽位保持原版；TUR 只在取得 `ffpa_ottoman` 后获得三个专属 trait，两个已改名集团的其余三个槽位及未改名虔诚集团的 Mecelle 等原版 trait 不受影响。
 - 两个 trait 迁移变量设置后不得在月度 pulse 重复写槽位；旧档已有名称变量时仍必须补发 trait。
-- 动态国名、政府称号、党名、旗帜和两种语言在主要政体路径下显示正确。
+- 动态国名、政府称号、党名、旗帜、国家集团候选名称和两种语言在主要政体路径下显示正确。
 
 ### 9.5 Core Balance 拆分集成验证
 

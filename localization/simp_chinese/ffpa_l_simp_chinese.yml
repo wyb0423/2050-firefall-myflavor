@@ -96,6 +96,23 @@
  dyn_c_ffpa_roman_corporate_state: "罗马法团国"
  dyn_c_ffpa_roman_corporate_state_adj: "罗马"
 
+ # TUR与BYZ国家集团风味名称
+ ffpa_tur_anatolian_recovery_community: "安纳托利亚重建共同体"
+ ffpa_tur_council_of_the_straits: "海峡理事会"
+ ffpa_tur_porte_charter_system: "高门宪章体系"
+ ffpa_tur_conference_of_vilayets: "行省会议"
+ ffpa_tur_ankara_recovery_framework: "安卡拉重建框架"
+ ffpa_tur_council_of_anatolian_corridors: "安纳托利亚走廊理事会"
+ ffpa_tur_anatolian_recovery_directorate: "安纳托利亚重建总署"
+ ffpa_tur_anatolian_development_board: "安纳托利亚发展理事会"
+ ffpa_byz_oikoumene_of_new_rome: "新罗马普世共同体"
+ ffpa_byz_mediterranean_recovery_council: "地中海复兴理事会"
+ ffpa_byz_council_of_imperial_provinces: "帝国行省理事会"
+ ffpa_byz_senate_of_cities_and_provinces: "城市与行省元老院"
+ ffpa_byz_restored_oikoumene_synod: "复兴普世宗教会议"
+ ffpa_byz_congress_of_roman_communes: "罗马公社大会"
+ ffpa_byz_mediterranean_recovery_system: "地中海重建体系"
+
  # BYZ风味党名。以下通用键使用原版已有的脚本GUI本地化模式，
  # 在BYZ之外仍返回对应的原版通用名称。
  party_agrarian: "[GetScriptedGui('ffpa_byz_agrarian_party_name_sgui').ExecuteTooltip(GuiScope.SetRoot(ROOT.GetCountry.MakeScope).End)]"

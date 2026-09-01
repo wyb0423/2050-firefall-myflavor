@@ -96,6 +96,23 @@
  dyn_c_ffpa_roman_corporate_state: "Roman Corporate State"
  dyn_c_ffpa_roman_corporate_state_adj: "Roman"
 
+ # TUR and BYZ power bloc flavor names
+ ffpa_tur_anatolian_recovery_community: "Anatolian Recovery Community"
+ ffpa_tur_council_of_the_straits: "Council of the Straits"
+ ffpa_tur_porte_charter_system: "Porte Charter System"
+ ffpa_tur_conference_of_vilayets: "Conference of Vilayets"
+ ffpa_tur_ankara_recovery_framework: "Ankara Recovery Framework"
+ ffpa_tur_council_of_anatolian_corridors: "Council of Anatolian Corridors"
+ ffpa_tur_anatolian_recovery_directorate: "Anatolian Recovery Directorate"
+ ffpa_tur_anatolian_development_board: "Anatolian Development Board"
+ ffpa_byz_oikoumene_of_new_rome: "Oikoumene of New Rome"
+ ffpa_byz_mediterranean_recovery_council: "Mediterranean Recovery Council"
+ ffpa_byz_council_of_imperial_provinces: "Council of Imperial Provinces"
+ ffpa_byz_senate_of_cities_and_provinces: "Senate of Cities and Provinces"
+ ffpa_byz_restored_oikoumene_synod: "Restored Oikoumene Synod"
+ ffpa_byz_congress_of_roman_communes: "Congress of Roman Communes"
+ ffpa_byz_mediterranean_recovery_system: "Mediterranean Recovery System"
+
  # BYZ party names. These generic keys use the base game's scripted-GUI
  # localization pattern and preserve the vanilla name outside BYZ.
  party_agrarian: "[GetScriptedGui('ffpa_byz_agrarian_party_name_sgui').ExecuteTooltip(GuiScope.SetRoot(ROOT.GetCountry.MakeScope).End)]"
