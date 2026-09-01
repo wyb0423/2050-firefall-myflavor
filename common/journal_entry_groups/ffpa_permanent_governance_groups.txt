@@ -1,0 +1,9 @@
+je_group_ffpa_tur_permanent_governance = {
+	context = country
+	updates_strategic_region_stances = yes
+}
+
+je_group_ffpa_byz_permanent_governance = {
+	context = country
+	updates_strategic_region_stances = yes
+}

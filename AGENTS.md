@@ -164,31 +164,45 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `common/journal_entries/ffpa_byzantine_restoration_campaigns.txt`
 - `common/journal_entries/ffpa_turkish_reconstruction_programs.txt`
 - `common/journal_entries/ffpa_turkish_frontier_recovery.txt`
+- `common/journal_entries/ffpa_permanent_governance_journals.txt`
 - `common/journal_entries/zzzz_ffpa_techres_ottoman_collapse_override.txt`
 - `common/journal_entry_groups/ffpa_turkish_reconstruction_group.txt`
+- `common/journal_entry_groups/ffpa_permanent_governance_groups.txt`
 - `common/customizable_localization/ffpa_eastern_mediterranean_custom_loc.txt`
 - `common/decisions/ffpa_eastern_mediterranean_decisions.txt`
 - `common/decisions/ffpa_turkish_flavor_decisions.txt`
 - `common/script_values/ffpa_eastern_mediterranean_values.txt`
+- `common/script_values/ffpa_permanent_governance_values.txt`
+- `common/scripted_buttons/ffpa_permanent_governance_buttons.txt`
 - `common/scripted_progress_bars/ffpa_eastern_mediterranean_progress_bars.txt`
+- `common/scripted_progress_bars/ffpa_permanent_governance_progress_bars.txt`
 - `common/scripted_triggers/ffpa_eastern_mediterranean_triggers.txt` 中共同体、成立和风味条件
 - `common/scripted_triggers/ffpa_turkish_flavor_triggers.txt`
+- `common/scripted_triggers/ffpa_permanent_governance_triggers.txt`
 - `common/scripted_effects/ffpa_eastern_mediterranean_effects.txt` 中身份、共同体、迁移和风味 effect
 - `common/scripted_effects/ffpa_turkish_flavor_effects.txt`
+- `common/scripted_effects/ffpa_permanent_governance_effects.txt`
 - `common/on_actions/ffpa_eastern_mediterranean_on_actions.txt`
 - `common/static_modifiers/ffpa_eastern_mediterranean_modifiers.txt` 中非 `ffpa_region_*` 定义
 - `common/static_modifiers/ffpa_turkish_flavor_modifiers.txt`
+- `common/static_modifiers/ffpa_permanent_governance_modifiers.txt`
 - `events/ffpa_eastern_mediterranean_events.txt` 中非西方整合事件
 - `events/ffpa_turkish_flavor_events.txt`
+- `events/ffpa_turkish_permanent_governance_events.txt`
+- `events/ffpa_byzantine_permanent_governance_events.txt`
 - 两份本地化文件中的 `ffpa_flavor.*`、TUR/BYZ 日志与修正键
 - `localization/english/ffpa_turkish_flavor_l_english.yml`
 - `localization/simp_chinese/ffpa_turkish_flavor_l_simp_chinese.yml`
+- `localization/english/ffpa_permanent_governance_l_english.yml`
+- `localization/simp_chinese/ffpa_permanent_governance_l_simp_chinese.yml`
 
 **拥有的行为与接口**
 
 - TUR 与 BYZ 的重建、共同体、首都工程和有限政治经济事件。
 - TUR 的三条互斥建国路线、高门/共和国/重建总署事件链、三项安纳托利亚工程、计划大会、新海峡公约与三场地区治理会议。
 - TUR 的 11 州成立核心永久宣称，以及按建国路线分层、一次一条、15–20 年限期的八条边疆收复前线；临时宣称使用逐州来源标记，超时或撤回后只清理未实现的自有宣称。
+- TUR 路线终局后的“帝国簿册与行省中介”“面包与首都”，以及 BYZ 双重重建终局后的“罗马人的公共体”“军户与权门”四项常驻治理日志；四者分别使用平衡、消耗性储备、三支柱修复和单向结构压力，不共享统一模板。
+- BYZ 军户日志导出的三阶段改革状态：军役户籍立即落实职业军队或大规模征兵，田产清丈逐步切断土地压力，军需与退伍安置院完成后永久提供全国福利金修正。
 - 通过完整替换 Tech & Res `je_ottoman_empire_collapse`，只对 FFPA 管理的 TUR 排除旧奥斯曼崩溃并迁移活动实例；未标记 TUR 保留上游行为。
 - BYZ 分区复归战争的御前会议入口、45–55 年日志、成功/失败/重试状态与战后和议选择。
 - `namespace = ffpa_flavor` 的既有东地中海事件 ID 空间，以及新增 TUR 内容专用的 `namespace = ffpa_tur_flavor`。
@@ -201,6 +215,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 变量名带 `_v1` / `_v2` 的键都是存档 API，不是可清理的命名噪音。
 - `ffpa_tur_state_project_v1` 的值 1/2/3 分别固定表示高门、共和国、重建总署；路线终局、工程、海峡和地区治理选择变量同样属于存档 API。后续政体变化不得自动重写建国路线。
 - `ffpa_tur_front_<front>_complete_v1`、`ffpa_tur_front_<front>_retry_cooldown_v1`、`ffpa_tur_front_<front>_resolution_pending_v1`、`ffpa_tur_temporary_claim_<state>_v1`、八条前线 JE 与 `ffpa_tur_flavor.60–84` 都是存档 API；州范围或状态语义变化时必须版本化迁移。
+- 四项常驻日志的 `ffpa_tur_register_*_v1`、`ffpa_tur_capital_*_v1`、`ffpa_byz_public_*_v1`、`ffpa_byz_dynatoi_*_v1`、`ffpa_byz_military_reform_*_v1`、改革完成与福利变量、四项 JE 和六条进度条镜像，以及 `ffpa_tur_flavor.90–92`、`ffpa_flavor.50–52` 均为存档 API；失败只清理运行时冷却与未完成工程，不得删除已完成改革或已落实法律。
 - ensure/migration effect 必须幂等；月度入口不得反复发奖励、重置有限期限或遍历全世界建筑。
 - 事件链应保持“未初始化 → 可用 → 运行中 → 完成/失败/取消”的显式状态；每条异常路径都要清理临时状态。
 - 本模块可消费地区建设模块导出的完成变量和查询 trigger，但不得直接重写地区日志内部状态。
@@ -348,6 +363,9 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 共和国、重建总署和高门只显示各自前线及正确解锁顺序；活动或待结算前线占用唯一槽位，成功、部分超时、主动撤回、战争中延迟结算和五年重试均能幂等收尾。
 - 临时宣称只在边疆委员会授权时添加；清理必须同时要求逐州来源标记，保留已取得州和启动前已有的宣称，前线成功不得自动完成地区建设。
 - FFPA 管理的 TUR 不显示或完成 Tech & Res 奥斯曼崩溃日志；旧活动实例失效时不拆分领土，并在一年清理窗口吸收已排程事件对 TUR 崩溃变量的回写；未标记 TUR 保持上游行为。
+- TUR 常驻簿册日志的两个极端计时分别推进且离开极端会倒退；首都供应异常严格对应谷物、首都运输、首都电力和首都市场接入四项，失败后的首都地区与国家修正均随时间衰减，并固定留在失败时的首都州。
+- BYZ 公共体的法统、全国福祉和公共认同条件不交叉复用，全国州判定每月只扫描一次已整合州；警告、破裂、强制修复、五年失败冷却和重试初态分别可达。
+- BYZ 权门压力按法律、地主力量、税收路线和三个改革阶段正确累加；重编军役户籍事件立即落实所选军制法，违约暂停工程，改革疲劳与高压强制入口互斥，失败保留已完成阶段、军制法和永久福利修正。
 - 所有失败、取消、政体变化、标签形成和旧存档路径都能清理或迁移状态。
 - 地区建设只奖励实际覆盖州；完成状态可稳定触发一次西方整合事件。
 - 公民权整合速度只作用于 BYZ 拥有的未整合西方白名单州，未来取得、失去、完成整合和身份变化路径能补发或清理。

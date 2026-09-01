@@ -1,0 +1,61 @@
+# Country variables are the save-state authority. These bars are UI mirrors
+# refreshed by ffpa_sync_permanent_governance_progress_bars_v1.
+ffpa_tur_register_balance_bar_v1 = {
+	name = "ffpa_tur_register_balance_bar_v1"
+	desc = "ffpa_tur_register_balance_bar_v1_desc"
+	second_desc = "ffpa_tur_register_balance_bar_v1_second_desc"
+	default_green = yes
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+ffpa_tur_capital_reserve_bar_v1 = {
+	name = "ffpa_tur_capital_reserve_bar_v1"
+	desc = "ffpa_tur_capital_reserve_bar_v1_desc"
+	second_desc = "ffpa_tur_capital_reserve_bar_v1_second_desc"
+	default_green = yes
+	start_value = 50
+	min_value = 0
+	max_value = 100
+}
+
+ffpa_byz_public_law_pillar_bar_v1 = {
+	name = "ffpa_byz_public_law_pillar_bar_v1"
+	desc = "ffpa_byz_public_law_pillar_bar_v1_desc"
+	second_desc = "ffpa_byz_public_pillar_bar_v1_second_desc"
+	default_bad = yes
+	start_value = 0
+	min_value = 0
+	max_value = 3
+}
+
+ffpa_byz_public_welfare_pillar_bar_v1 = {
+	name = "ffpa_byz_public_welfare_pillar_bar_v1"
+	desc = "ffpa_byz_public_welfare_pillar_bar_v1_desc"
+	second_desc = "ffpa_byz_public_pillar_bar_v1_second_desc"
+	default_bad = yes
+	start_value = 0
+	min_value = 0
+	max_value = 3
+}
+
+ffpa_byz_public_recognition_pillar_bar_v1 = {
+	name = "ffpa_byz_public_recognition_pillar_bar_v1"
+	desc = "ffpa_byz_public_recognition_pillar_bar_v1_desc"
+	second_desc = "ffpa_byz_public_pillar_bar_v1_second_desc"
+	default_bad = yes
+	start_value = 0
+	min_value = 0
+	max_value = 3
+}
+
+ffpa_byz_dynatoi_pressure_bar_v1 = {
+	name = "ffpa_byz_dynatoi_pressure_bar_v1"
+	desc = "ffpa_byz_dynatoi_pressure_bar_v1_desc"
+	second_desc = "ffpa_byz_dynatoi_pressure_bar_v1_second_desc"
+	default_bad = yes
+	start_value = 20
+	min_value = 0
+	max_value = 100
+}

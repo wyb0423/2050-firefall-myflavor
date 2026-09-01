@@ -1,0 +1,111 @@
+namespace = ffpa_flavor
+
+# Permanent BYZ governance events extend the existing eastern-Mediterranean
+# namespace without changing or renumbering any earlier event.
+
+ffpa_flavor.50 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.50.t
+	desc = ffpa_flavor.50.d
+	flavor = ffpa_flavor.50.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = { c:BYZ ?= this }
+
+	option = {
+		name = ffpa_flavor.50.a
+		default_option = yes
+		add_modifier = { name = ffpa_byz_public_polity_failure_v1 years = 5 }
+		add_radicals = {
+			value = 0.04
+			strata = lower
+		}
+		add_radicals = {
+			value = 0.03
+			strata = middle
+		}
+	}
+}
+
+ffpa_flavor.51 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.51.t
+	desc = ffpa_flavor.51.d
+	flavor = ffpa_flavor.51.f
+	event_image = { video = "unspecific_military_parade" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:BYZ ?= this
+		var:ffpa_byz_military_reform_stage_v1 = 0
+		NOT = { has_variable = ffpa_byz_military_reform_project_v1 }
+	}
+
+	option = {
+		name = ffpa_flavor.51.a
+		default_option = yes
+		ffpa_start_byz_military_register_professional_v1 = yes
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { has_law_or_variant = law_type:law_professional_army }
+				add = 1
+			}
+		}
+	}
+
+	option = {
+		name = ffpa_flavor.51.b
+		ffpa_start_byz_military_register_mass_v1 = yes
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = { has_law_or_variant = law_type:law_mass_conscription }
+				add = 1
+			}
+		}
+	}
+
+	option = {
+		name = ffpa_flavor.51.c
+		set_variable = { name = ffpa_byz_military_stage1_button_cooldown_v1 months = 3 }
+		ai_chance = { factor = 0.15 }
+	}
+}
+
+ffpa_flavor.52 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_flavor.52.t
+	desc = ffpa_flavor.52.d
+	flavor = ffpa_flavor.52.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = {
+		c:BYZ ?= this
+		has_variable = ffpa_byz_dynatoi_failure_resolution_pending_v1
+	}
+
+	option = {
+		name = ffpa_flavor.52.a
+		default_option = yes
+		ffpa_apply_byz_dynatoi_compact_failure_v1 = yes
+		ai_chance = { factor = 1.5 }
+	}
+
+	option = {
+		name = ffpa_flavor.52.b
+		ffpa_apply_byz_dynatoi_confiscation_failure_v1 = yes
+		ai_chance = { factor = 1 }
+	}
+}

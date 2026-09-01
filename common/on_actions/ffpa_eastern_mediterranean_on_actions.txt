@@ -7,6 +7,7 @@ on_country_formed = {
 ffpa_on_eastern_mediterranean_country_formed = {
 	effect = {
 		ffpa_handle_tur_flavor_country_formed_v1 = yes
+		ffpa_handle_permanent_governance_country_formed_v1 = yes
 		if = {
 			limit = { c:TUR ?= ROOT }
 			ffpa_apply_tur_formation_ideologies_v1 = yes

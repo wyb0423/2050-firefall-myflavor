@@ -1175,5 +1175,10 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 		}
 	}
 
+	# Shared lightweight entry for the four permanent TUR/BYZ governance
+	# journals. The effect itself filters by tag and terminal reconstruction
+	# state, so the monthly wrapper remains bounded to eastern Mediterranean tags.
+	ffpa_ensure_permanent_governance_journals_v1 = yes
+
 	set_variable = ffpa_eastern_mediterranean_v2_seen
 }

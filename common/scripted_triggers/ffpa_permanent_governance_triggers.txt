@@ -1,0 +1,269 @@
+# Country scope. The journals begin only after the corresponding long-form
+# reconstruction has reached a stable terminal state.
+ffpa_tur_permanent_governance_ready_v1 = {
+	c:TUR ?= this
+	has_variable = ffpa_tur_state_project_v1
+	OR = {
+		AND = {
+			var:ffpa_tur_state_project_v1 = 1
+			has_variable = ffpa_tur_porte_charter_choice_v1
+		}
+		AND = {
+			var:ffpa_tur_state_project_v1 = 2
+			has_variable = ffpa_tur_republic_settlement_choice_v1
+		}
+		AND = {
+			var:ffpa_tur_state_project_v1 = 3
+			has_variable = ffpa_tur_directorate_settlement_choice_v1
+		}
+	}
+}
+
+ffpa_byz_permanent_governance_ready_v1 = {
+	c:BYZ ?= this
+	has_variable = ffpa_byz_new_rome_complete
+	has_variable = ffpa_byz_rhomaic_commonwealth_complete
+}
+
+ffpa_tur_capital_has_famine_v1 = {
+	capital = { has_famine = yes }
+}
+
+ffpa_tur_capital_supply_severe_crisis_v1 = {
+	OR = {
+		ffpa_tur_capital_has_famine_v1 = yes
+		capital = { market_access < 0.60 }
+		AND = {
+			market_capital.market = {
+				mg:grain = { market_goods_pricier > 0.50 }
+			}
+			capital = {
+				OR = {
+					sg:transportation = { state_goods_pricier > 0.50 }
+					sg:electricity = { state_goods_pricier > 0.50 }
+				}
+			}
+		}
+		AND = {
+			market_capital.market = {
+				mg:grain = { market_goods_pricier > 0.25 }
+			}
+			capital = {
+				market_access < 0.85
+				sg:transportation = { state_goods_pricier > 0.25 }
+				sg:electricity = { state_goods_pricier > 0.25 }
+			}
+		}
+	}
+}
+
+# The three public-polity pillars deliberately do not reuse each other's
+# conditions. The nationwide state ratios are cached by one monthly scan.
+ffpa_byz_public_law_condition_count_v1 = {
+	calc_true_if = {
+		amount >= 2
+		government_legitimacy >= 55
+		bureaucracy >= 0
+		in_default = no
+	}
+}
+
+ffpa_byz_public_law_healthy_v1 = {
+	government_legitimacy >= 55
+	bureaucracy >= 0
+	in_default = no
+}
+
+ffpa_byz_public_law_two_or_more_bad_v1 = {
+	NOT = { ffpa_byz_public_law_condition_count_v1 = yes }
+}
+
+ffpa_byz_public_law_all_bad_v1 = {
+	NOT = {
+		OR = {
+			government_legitimacy >= 55
+			bureaucracy >= 0
+			in_default = no
+		}
+	}
+}
+
+ffpa_byz_public_welfare_condition_count_v1 = {
+	calc_true_if = {
+		amount >= 2
+		average_sol >= {
+			value = var:ffpa_byz_public_sol_baseline_v1
+			subtract = 1
+		}
+		AND = {
+			var:ffpa_byz_public_incorporated_states_v1 > 0
+			var:ffpa_byz_public_access_states_v1 >= {
+				value = var:ffpa_byz_public_incorporated_states_v1
+				multiply = 0.80
+			}
+		}
+		var:ffpa_byz_public_famine_states_v1 <= {
+			value = var:ffpa_byz_public_incorporated_states_v1
+			multiply = 0.05
+		}
+	}
+}
+
+ffpa_byz_public_welfare_healthy_v1 = {
+	average_sol >= {
+		value = var:ffpa_byz_public_sol_baseline_v1
+		subtract = 1
+	}
+	var:ffpa_byz_public_incorporated_states_v1 > 0
+	var:ffpa_byz_public_access_states_v1 >= {
+		value = var:ffpa_byz_public_incorporated_states_v1
+		multiply = 0.80
+	}
+	var:ffpa_byz_public_famine_states_v1 <= {
+		value = var:ffpa_byz_public_incorporated_states_v1
+		multiply = 0.05
+	}
+}
+
+ffpa_byz_public_welfare_two_or_more_bad_v1 = {
+	NOT = { ffpa_byz_public_welfare_condition_count_v1 = yes }
+}
+
+ffpa_byz_public_welfare_all_bad_v1 = {
+	NOT = {
+		OR = {
+			average_sol >= {
+				value = var:ffpa_byz_public_sol_baseline_v1
+				subtract = 1
+			}
+			AND = {
+				var:ffpa_byz_public_incorporated_states_v1 > 0
+				var:ffpa_byz_public_access_states_v1 >= {
+					value = var:ffpa_byz_public_incorporated_states_v1
+					multiply = 0.80
+				}
+			}
+			var:ffpa_byz_public_famine_states_v1 <= {
+				value = var:ffpa_byz_public_incorporated_states_v1
+				multiply = 0.05
+			}
+		}
+	}
+}
+
+ffpa_byz_public_recognition_condition_count_v1 = {
+	calc_true_if = {
+		amount >= 2
+		AND = {
+			is_not_in_civil_war = yes
+			ffpa_has_no_insurrectionary_movement = yes
+		}
+		NOT = {
+			any_political_movement = {
+				political_movement_radicalism >= 65
+			}
+		}
+		var:ffpa_byz_public_turmoil_states_v1 <= {
+			value = var:ffpa_byz_public_incorporated_states_v1
+			multiply = 0.15
+		}
+	}
+}
+
+ffpa_byz_public_recognition_healthy_v1 = {
+	is_not_in_civil_war = yes
+	ffpa_has_no_insurrectionary_movement = yes
+	NOT = {
+		any_political_movement = {
+			political_movement_radicalism >= 65
+		}
+	}
+	var:ffpa_byz_public_turmoil_states_v1 <= {
+		value = var:ffpa_byz_public_incorporated_states_v1
+		multiply = 0.15
+	}
+}
+
+ffpa_byz_public_recognition_two_or_more_bad_v1 = {
+	NOT = { ffpa_byz_public_recognition_condition_count_v1 = yes }
+}
+
+ffpa_byz_public_recognition_all_bad_v1 = {
+	NOT = {
+		OR = {
+			AND = {
+				is_not_in_civil_war = yes
+				ffpa_has_no_insurrectionary_movement = yes
+			}
+			NOT = {
+				any_political_movement = {
+					political_movement_radicalism >= 65
+				}
+			}
+			var:ffpa_byz_public_turmoil_states_v1 <= {
+				value = var:ffpa_byz_public_incorporated_states_v1
+				multiply = 0.15
+			}
+		}
+	}
+}
+
+ffpa_byz_public_all_pillars_healthy_v1 = {
+	ffpa_byz_public_law_healthy_v1 = yes
+	ffpa_byz_public_welfare_healthy_v1 = yes
+	ffpa_byz_public_recognition_healthy_v1 = yes
+}
+
+ffpa_byz_public_polity_failure_v1 = {
+	OR = {
+		AND = {
+			var:ffpa_byz_public_all_broken_months_v1 >= 6
+		}
+		AND = {
+			var:ffpa_byz_public_two_broken_months_v1 >= 12
+		}
+	}
+}
+
+ffpa_byz_dynatoi_structural_problem_v1 = {
+	OR = {
+		ig:ig_landowners = { is_powerful = yes }
+		has_law_or_variant = law_type:law_serfdom
+		has_law_or_variant = law_type:law_tenant_farmers
+		has_law_or_variant = law_type:law_peasant_levies
+	}
+}
+
+ffpa_byz_dynatoi_failure_v1 = {
+	OR = {
+		var:ffpa_byz_dynatoi_at_max_months_v1 >= 6
+		AND = {
+			var:ffpa_byz_dynatoi_high_months_v1 >= 18
+			ffpa_byz_dynatoi_structural_problem_v1 = yes
+		}
+	}
+}
+
+ffpa_byz_military_reform_common_ready_v1 = {
+	c:BYZ ?= this
+	in_default = no
+	is_not_in_civil_war = yes
+	ffpa_has_no_insurrectionary_movement = yes
+	NOT = { has_variable = ffpa_byz_military_reform_project_v1 }
+	OR = {
+		NOT = { has_variable = ffpa_byz_military_reform_fatigue_v1 }
+		AND = {
+			var:ffpa_byz_dynatoi_pressure_v1 >= 80
+			NOT = { has_variable = ffpa_byz_military_reform_emergency_used_v1 }
+		}
+	}
+}
+
+ffpa_byz_military_register_reform_ready_v1 = {
+	ffpa_byz_military_reform_common_ready_v1 = yes
+	var:ffpa_byz_military_reform_stage_v1 = 0
+	bureaucracy >= 0
+	has_technology_researched = military_drill
+	has_technology_researched = enlistment_offices
+	enacting_any_law = no
+}

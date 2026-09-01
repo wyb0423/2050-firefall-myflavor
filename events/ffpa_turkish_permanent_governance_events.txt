@@ -1,0 +1,84 @@
+namespace = ffpa_tur_flavor
+
+# Permanent-governance failures live outside the finite TUR reconstruction
+# state machine. Their modifiers expire independently; retry timing remains in
+# the journal variables owned by the scripted effects.
+
+ffpa_tur_flavor.90 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.90.t
+	desc = ffpa_tur_flavor.90.d
+	flavor = ffpa_tur_flavor.90.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = { c:TUR ?= this }
+
+	option = {
+		name = ffpa_tur_flavor.90.a
+		default_option = yes
+		add_modifier = { name = ffpa_tur_register_local_capture_failure_v1 years = 5 }
+	}
+}
+
+ffpa_tur_flavor.91 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.91.t
+	desc = ffpa_tur_flavor.91.d
+	flavor = ffpa_tur_flavor.91.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = { c:TUR ?= this }
+
+	option = {
+		name = ffpa_tur_flavor.91.a
+		default_option = yes
+		add_modifier = { name = ffpa_tur_register_paper_centralism_failure_v1 years = 5 }
+	}
+}
+
+ffpa_tur_flavor.92 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.92.t
+	desc = ffpa_tur_flavor.92.d
+	flavor = ffpa_tur_flavor.92.f
+	event_image = { video = "unspecific_trains" }
+	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+
+	trigger = { c:TUR ?= this }
+
+	option = {
+		name = ffpa_tur_flavor.92.a
+		default_option = yes
+		capital = {
+			add_modifier = {
+				name = ffpa_tur_capital_supply_failure_state_v1
+				years = 8
+				is_decaying = yes
+			}
+			add_radicals_in_state = {
+				value = 0.06
+				strata = lower
+			}
+			add_radicals_in_state = {
+				value = 0.04
+				strata = middle
+			}
+		}
+		add_modifier = {
+			name = ffpa_tur_capital_supply_failure_country_v1
+			years = 6
+			is_decaying = yes
+		}
+	}
+}

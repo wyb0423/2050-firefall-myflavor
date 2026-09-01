@@ -1,0 +1,117 @@
+# Country scope. The register drifts through lightweight country and capital
+# accessors; no building or state loop is needed.
+ffpa_tur_register_monthly_balance_change_v1 = {
+	value = 0
+	if = {
+		limit = { bureaucracy >= 0 }
+		add = 0.25
+	}
+	else = { subtract = 0.50 }
+	if = {
+		limit = { government_legitimacy >= 60 }
+		add = 0.25
+	}
+	else_if = {
+		limit = { government_legitimacy < 40 }
+		subtract = 0.25
+	}
+	if = {
+		limit = { in_default = yes }
+		subtract = 0.50
+	}
+	if = {
+		limit = { capital = { market_access >= 0.85 } }
+		add = 0.25
+	}
+	else = { subtract = 0.25 }
+	min = -1
+	max = 0.75
+}
+
+# Country scope. Counts the four explicitly documented capital-supply
+# anomalies without iterating states, pops, or buildings.
+ffpa_tur_capital_supply_anomaly_count_v1 = {
+	value = 0
+	if = {
+		limit = {
+			market_capital.market = {
+				mg:grain = { market_goods_pricier > 0.25 }
+			}
+		}
+		add = 1
+	}
+	if = {
+		limit = { capital = { sg:transportation = { state_goods_pricier > 0.25 } } }
+		add = 1
+	}
+	if = {
+		limit = { capital = { sg:electricity = { state_goods_pricier > 0.25 } } }
+		add = 1
+	}
+	if = {
+		limit = { capital = { market_access < 0.85 } }
+		add = 1
+	}
+}
+
+# Country scope. Stage reductions are encoded at the source so a completed
+# reform never needs a second corrective pass.
+ffpa_byz_dynatoi_monthly_pressure_gain_v1 = {
+	value = 0
+	if = {
+		limit = { var:ffpa_byz_military_reform_stage_v1 < 1 }
+		add = 0.25
+	}
+	if = {
+		limit = { ig:ig_landowners = { is_powerful = yes } }
+		if = {
+			limit = { var:ffpa_byz_military_reform_stage_v1 >= 3 }
+			add = 0.25
+		}
+		else = { add = 0.50 }
+	}
+	if = {
+		limit = { has_law_or_variant = law_type:law_serfdom }
+		if = {
+			limit = { var:ffpa_byz_military_reform_stage_v1 >= 2 }
+			add = 0.50
+		}
+		else = { add = 1.00 }
+	}
+	else_if = {
+		limit = { has_law_or_variant = law_type:law_tenant_farmers }
+		if = {
+			limit = { var:ffpa_byz_military_reform_stage_v1 >= 2 }
+			add = 0.25
+		}
+		else = { add = 0.50 }
+	}
+	if = {
+		limit = {
+			var:ffpa_byz_military_reform_stage_v1 < 1
+			has_law_or_variant = law_type:law_peasant_levies
+		}
+		add = 0.50
+	}
+	if = {
+		limit = {
+			var:ffpa_byz_military_reform_stage_v1 < 3
+			OR = {
+				has_modifier = ffpa_byz_western_provincial_tax_compact
+				AND = {
+					has_variable = ffpa_byz_western_cadastre_choice_v2
+					var:ffpa_byz_western_cadastre_choice_v2 = 2
+				}
+			}
+		}
+		add = 0.25
+	}
+	if = {
+		limit = {
+			has_variable = ffpa_byz_western_cadastre_choice_v2
+			var:ffpa_byz_western_cadastre_choice_v2 = 1
+		}
+		subtract = 0.25
+	}
+	min = 0
+}

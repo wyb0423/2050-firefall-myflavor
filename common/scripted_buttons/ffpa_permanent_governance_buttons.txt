@@ -1,0 +1,262 @@
+# --- TUR imperial registers ---
+
+ffpa_tur_register_audit_button_v1 = {
+	name = "ffpa_tur_register_audit_button_v1"
+	desc = "ffpa_tur_register_audit_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		var:ffpa_tur_register_balance_v1 < 100
+		NOT = { has_variable = ffpa_tur_register_audit_cooldown_v1 }
+	}
+	ai_chance = {
+		value = 0
+		if = { limit = { var:ffpa_tur_register_balance_v1 < 35 } add = 35 }
+	}
+	effect = { ffpa_tur_register_audit_v1 = yes }
+}
+
+ffpa_tur_register_provincial_roll_button_v1 = {
+	name = "ffpa_tur_register_provincial_roll_button_v1"
+	desc = "ffpa_tur_register_provincial_roll_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		var:ffpa_tur_register_balance_v1 > 0
+		NOT = { has_variable = ffpa_tur_register_provincial_cooldown_v1 }
+	}
+	ai_chance = {
+		value = 0
+		if = { limit = { var:ffpa_tur_register_balance_v1 > 65 } add = 35 }
+	}
+	effect = { ffpa_tur_register_provincial_roll_v1 = yes }
+}
+
+ffpa_tur_register_dual_ledgers_button_v1 = {
+	name = "ffpa_tur_register_dual_ledgers_button_v1"
+	desc = "ffpa_tur_register_dual_ledgers_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		OR = {
+			var:ffpa_tur_register_balance_v1 < 50
+			var:ffpa_tur_register_balance_v1 > 50
+		}
+		OR = {
+			NOT = { has_variable = ffpa_tur_register_dual_cooldown_v1 }
+			AND = {
+				OR = {
+					var:ffpa_tur_register_balance_v1 <= 9
+					var:ffpa_tur_register_balance_v1 >= 90
+				}
+				NOT = { has_variable = ffpa_tur_register_emergency_used_v1 }
+			}
+		}
+	}
+	ai_chance = {
+		value = 0
+		if = {
+			limit = {
+				OR = {
+					var:ffpa_tur_register_balance_v1 <= 24
+					var:ffpa_tur_register_balance_v1 >= 75
+				}
+			}
+			add = 50
+		}
+	}
+	effect = { ffpa_tur_register_dual_ledgers_v1 = yes }
+}
+
+# --- TUR bread and the capital ---
+
+ffpa_tur_capital_purchase_button_v1 = {
+	name = "ffpa_tur_capital_purchase_button_v1"
+	desc = "ffpa_tur_capital_purchase_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		var:ffpa_tur_capital_reserve_v1 < 100
+		NOT = { has_variable = ffpa_tur_capital_purchase_cooldown_v1 }
+	}
+	ai_chance = {
+		value = 10
+		if = { limit = { var:ffpa_tur_capital_reserve_v1 < 30 } add = 50 }
+	}
+	effect = { ffpa_tur_capital_purchase_v1 = yes }
+}
+
+ffpa_tur_capital_granary_button_v1 = {
+	name = "ffpa_tur_capital_granary_button_v1"
+	desc = "ffpa_tur_capital_granary_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		var:ffpa_tur_capital_reserve_v1 >= 15
+		NOT = { has_variable = ffpa_tur_capital_granary_cooldown_v1 }
+	}
+	ai_chance = {
+		value = 5
+		if = { limit = { ffpa_tur_capital_supply_severe_crisis_v1 = yes } add = 30 }
+	}
+	effect = { ffpa_tur_capital_open_granaries_v1 = yes }
+}
+
+ffpa_tur_capital_ration_button_v1 = {
+	name = "ffpa_tur_capital_ration_button_v1"
+	desc = "ffpa_tur_capital_ration_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		var:ffpa_tur_capital_reserve_v1 < 100
+		OR = {
+			NOT = { has_variable = ffpa_tur_capital_ration_cooldown_v1 }
+			AND = {
+				ffpa_tur_capital_supply_severe_crisis_v1 = yes
+				NOT = { has_variable = ffpa_tur_capital_emergency_used_v1 }
+			}
+		}
+	}
+	ai_chance = {
+		value = 0
+		if = { limit = { var:ffpa_tur_capital_reserve_v1 <= 10 } add = 40 }
+	}
+	effect = { ffpa_tur_capital_emergency_rationing_v1 = yes }
+}
+
+# --- BYZ public polity ---
+
+ffpa_byz_public_new_decree_button_v1 = {
+	name = "ffpa_byz_public_new_decree_button_v1"
+	desc = "ffpa_byz_public_new_decree_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		OR = {
+			var:ffpa_byz_public_law_state_v1 = 1
+			var:ffpa_byz_public_law_state_v1 = 2
+		}
+		OR = {
+			NOT = { has_variable = ffpa_byz_public_law_button_cooldown_v1 }
+			AND = {
+				var:ffpa_byz_public_law_state_v1 = 2
+				NOT = { has_variable = ffpa_byz_public_law_emergency_used_v1 }
+			}
+		}
+	}
+	ai_chance = { value = 35 }
+	effect = { ffpa_byz_public_new_decree_v1 = yes }
+}
+
+ffpa_byz_public_benefaction_button_v1 = {
+	name = "ffpa_byz_public_benefaction_button_v1"
+	desc = "ffpa_byz_public_benefaction_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		OR = {
+			var:ffpa_byz_public_welfare_state_v1 = 1
+			var:ffpa_byz_public_welfare_state_v1 = 2
+		}
+		OR = {
+			NOT = { has_variable = ffpa_byz_public_welfare_button_cooldown_v1 }
+			AND = {
+				var:ffpa_byz_public_welfare_state_v1 = 2
+				NOT = { has_variable = ffpa_byz_public_welfare_emergency_used_v1 }
+			}
+		}
+	}
+	ai_chance = { value = 35 }
+	effect = { ffpa_byz_public_benefaction_v1 = yes }
+}
+
+ffpa_byz_public_representation_button_v1 = {
+	name = "ffpa_byz_public_representation_button_v1"
+	desc = "ffpa_byz_public_representation_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		OR = {
+			var:ffpa_byz_public_recognition_state_v1 = 1
+			var:ffpa_byz_public_recognition_state_v1 = 2
+		}
+		OR = {
+			NOT = { has_variable = ffpa_byz_public_recognition_button_cooldown_v1 }
+			AND = {
+				var:ffpa_byz_public_recognition_state_v1 = 2
+				NOT = { has_variable = ffpa_byz_public_recognition_emergency_used_v1 }
+			}
+		}
+	}
+	ai_chance = { value = 35 }
+	effect = { ffpa_byz_public_representation_v1 = yes }
+}
+
+# --- BYZ military households and institutional reforms ---
+
+ffpa_byz_dynatoi_audit_button_v1 = {
+	name = "ffpa_byz_dynatoi_audit_button_v1"
+	desc = "ffpa_byz_dynatoi_audit_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		var:ffpa_byz_dynatoi_pressure_v1 > 0
+		NOT = { has_variable = ffpa_byz_dynatoi_audit_cooldown_v1 }
+	}
+	ai_chance = { value = 20 }
+	effect = { ffpa_byz_dynatoi_court_audit_v1 = yes }
+}
+
+ffpa_byz_dynatoi_redemption_button_v1 = {
+	name = "ffpa_byz_dynatoi_redemption_button_v1"
+	desc = "ffpa_byz_dynatoi_redemption_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		in_default = no
+		var:ffpa_byz_dynatoi_pressure_v1 > 0
+		NOT = { has_variable = ffpa_byz_dynatoi_redemption_cooldown_v1 }
+	}
+	ai_chance = { value = 25 }
+	effect = { ffpa_byz_dynatoi_village_redemption_v1 = yes }
+}
+
+ffpa_byz_dynatoi_allelengyon_button_v1 = {
+	name = "ffpa_byz_dynatoi_allelengyon_button_v1"
+	desc = "ffpa_byz_dynatoi_allelengyon_button_v1_desc"
+	visible = { always = yes }
+	possible = {
+		var:ffpa_byz_dynatoi_pressure_v1 >= 70
+		OR = {
+			NOT = { has_variable = ffpa_byz_dynatoi_allelengyon_cooldown_v1 }
+			AND = {
+				var:ffpa_byz_dynatoi_pressure_v1 >= 90
+				NOT = { has_variable = ffpa_byz_dynatoi_emergency_used_v1 }
+			}
+		}
+	}
+	ai_chance = { value = 20 }
+	effect = { ffpa_byz_dynatoi_allelengyon_v1 = yes }
+}
+
+ffpa_byz_military_register_reform_button_v1 = {
+	name = "ffpa_byz_military_register_reform_button_v1"
+	desc = "ffpa_byz_military_register_reform_button_v1_desc"
+	visible = { var:ffpa_byz_military_reform_stage_v1 = 0 }
+	possible = {
+		ffpa_byz_military_register_reform_ready_v1 = yes
+		NOT = { has_variable = ffpa_byz_military_stage1_button_cooldown_v1 }
+	}
+	ai_chance = { value = 35 }
+	effect = { trigger_event = { id = ffpa_flavor.51 } }
+}
+
+ffpa_byz_land_tenure_reform_button_v1 = {
+	name = "ffpa_byz_land_tenure_reform_button_v1"
+	desc = "ffpa_byz_land_tenure_reform_button_v1_desc"
+	visible = { var:ffpa_byz_military_reform_stage_v1 = 1 }
+	possible = { ffpa_byz_military_reform_common_ready_v1 = yes }
+	ai_chance = { value = 35 }
+	effect = { ffpa_start_byz_land_tenure_reform_v1 = yes }
+}
+
+ffpa_byz_supply_veterans_reform_button_v1 = {
+	name = "ffpa_byz_supply_veterans_reform_button_v1"
+	desc = "ffpa_byz_supply_veterans_reform_button_v1_desc"
+	visible = { var:ffpa_byz_military_reform_stage_v1 = 2 }
+	possible = {
+		ffpa_byz_military_reform_common_ready_v1 = yes
+		gold_reserves > 0
+	}
+	ai_chance = { value = 35 }
+	effect = { ffpa_start_byz_supply_veterans_reform_v1 = yes }
+}

@@ -1,0 +1,295 @@
+# --- TUR: imperial registers and provincial intermediaries ---
+
+ffpa_tur_register_local_compacts_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_tax_capacity_mult = -0.05
+	country_authority_add = -100
+	country_bureaucracy_mult = 0.03
+	state_turmoil_effects_mult = -0.05
+	interest_group_ig_landowners_approval_add = 1
+}
+
+ffpa_tur_register_provincial_balance_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_tax_capacity_mult = 0.03
+	country_bureaucracy_mult = 0.03
+}
+
+ffpa_tur_register_mediated_equilibrium_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	state_tax_capacity_mult = 0.05
+	country_bureaucracy_mult = 0.06
+	country_legitimacy_base_add = 3
+}
+
+ffpa_tur_register_admin_balance_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_mult = 0.04
+	country_authority_add = 75
+	country_law_enactment_speed_mult = 0.03
+}
+
+ffpa_tur_register_direct_admin_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds
+	country_bureaucracy_mult = -0.05
+	country_authority_add = 150
+	state_tax_capacity_mult = 0.05
+	state_turmoil_effects_mult = 0.05
+}
+
+ffpa_tur_register_audit_cost_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_bureaucracy_mult = -0.03
+	country_expenses_add = 1
+}
+
+ffpa_tur_register_provincial_roll_cost_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_authority_add = -100
+	country_expenses_add = 1
+}
+
+ffpa_tur_register_dual_ledgers_cost_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_bureaucracy_mult = -0.05
+	country_law_enactment_speed_mult = -0.05
+	country_expenses_add = 1
+}
+
+ffpa_tur_register_local_capture_failure_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	state_tax_capacity_mult = -0.10
+	country_bureaucracy_mult = -0.10
+	country_authority_add = -100
+	country_legitimacy_base_add = -3
+	interest_group_ig_landowners_approval_add = 2
+}
+
+ffpa_tur_register_paper_centralism_failure_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_authority_add = -150
+	country_bureaucracy_mult = -0.08
+	country_law_enactment_speed_mult = -0.15
+	country_legitimacy_base_add = -5
+	state_tax_capacity_mult = -0.05
+	state_turmoil_effects_mult = 0.10
+}
+
+# --- TUR: bread and the capital ---
+
+ffpa_tur_capital_supply_secure_v1 = {
+	icon = gfx/interface/icons/event_icons/event_trade.dds
+	state_standard_of_living_add = 0.5
+	state_welfare_payments_add = 0.05
+	state_mortality_mult = -0.02
+	state_migration_pull_mult = 0.10
+	state_turmoil_effects_mult = -0.05
+	country_expenses_add = 1
+}
+
+ffpa_tur_capital_supply_serviceable_v1 = {
+	icon = gfx/interface/icons/event_icons/event_trade.dds
+	state_welfare_payments_add = 0.03
+	state_mortality_mult = -0.01
+	state_migration_pull_mult = 0.05
+}
+
+ffpa_tur_capital_supply_purchase_cost_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 1
+}
+
+ffpa_tur_capital_granary_release_v1 = {
+	icon = gfx/interface/icons/event_icons/event_trade.dds
+	state_standard_of_living_add = 0.25
+	state_welfare_payments_add = 0.08
+	country_authority_add = -50
+}
+
+ffpa_tur_capital_emergency_rationing_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	state_welfare_payments_add = 0.10
+	state_standard_of_living_add = -0.25
+	country_authority_add = -100
+}
+
+ffpa_tur_capital_supply_failure_state_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	state_migration_pull_mult = -0.30
+	building_group_bg_manufacturing_throughput_add = -0.10
+	building_group_bg_service_throughput_add = -0.10
+	state_turmoil_effects_mult = 0.15
+}
+
+ffpa_tur_capital_supply_failure_country_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_bureaucracy_mult = -0.10
+	country_legitimacy_base_add = -10
+	country_authority_add = -150
+	state_tax_capacity_mult = -0.10
+}
+
+# --- BYZ: the public polity ---
+
+ffpa_byz_public_law_intact_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_bureaucracy_mult = 0.04
+	country_law_enactment_speed_mult = 0.03
+	state_tax_capacity_mult = 0.03
+}
+
+ffpa_byz_public_welfare_intact_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	state_welfare_payments_add = 0.05
+	state_migration_pull_mult = 0.05
+	state_mortality_mult = -0.01
+}
+
+ffpa_byz_public_recognition_intact_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds
+	country_legitimacy_base_add = 3
+	country_prestige_mult = 0.05
+	state_turmoil_effects_mult = -0.03
+}
+
+ffpa_byz_public_new_decree_cost_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_bureaucracy_mult = -0.05
+	country_law_enactment_speed_mult = -0.05
+}
+
+ffpa_byz_public_benefaction_cost_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 1
+	state_welfare_payments_add = 0.05
+}
+
+ffpa_byz_public_representation_cost_v1 = {
+	icon = gfx/interface/icons/event_icons/event_election.dds
+	country_authority_add = -100
+	interest_group_ig_landowners_approval_add = -2
+}
+
+ffpa_byz_public_polity_failure_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	country_legitimacy_base_add = -8
+	country_authority_add = -150
+	country_bureaucracy_mult = -0.10
+	country_law_enactment_speed_mult = -0.10
+	state_welfare_payments_add = -0.05
+}
+
+# --- BYZ: military households and the dynatoi ---
+
+ffpa_byz_dynatoi_tier_0_v1 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	state_tax_capacity_mult = 0.05
+	state_conscription_rate_mult = 0.10
+	building_training_rate_mult = 0.05
+	interest_group_ig_landowners_approval_add = -1
+}
+
+ffpa_byz_dynatoi_tier_1_v1 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	state_tax_capacity_mult = 0.03
+	state_conscription_rate_mult = 0.05
+}
+
+ffpa_byz_dynatoi_tier_2_v1 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	building_group_bg_agriculture_throughput_add = 0.05
+	state_tax_capacity_mult = -0.05
+	state_conscription_rate_mult = -0.05
+	interest_group_ig_landowners_approval_add = 1
+}
+
+ffpa_byz_dynatoi_tier_3_v1 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	building_group_bg_agriculture_throughput_add = 0.08
+	country_authority_add = 100
+	state_tax_capacity_mult = -0.10
+	state_conscription_rate_mult = -0.10
+	building_training_rate_mult = -0.05
+	interest_group_ig_landowners_approval_add = 2
+}
+
+ffpa_byz_dynatoi_tier_4_v1 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	building_group_bg_agriculture_throughput_add = 0.10
+	country_authority_add = 150
+	state_tax_capacity_mult = -0.15
+	state_conscription_rate_mult = -0.15
+	building_training_rate_mult = -0.10
+	interest_group_ig_landowners_approval_add = 3
+}
+
+ffpa_byz_dynatoi_court_audit_cost_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_documents_negative.dds
+	country_bureaucracy_mult = -0.05
+	country_law_enactment_speed_mult = -0.10
+	interest_group_ig_landowners_approval_add = -2
+}
+
+ffpa_byz_dynatoi_village_redemption_cost_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	country_expenses_add = 1
+	interest_group_ig_landowners_approval_add = -2
+}
+
+ffpa_byz_dynatoi_allelengyon_cost_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	building_group_bg_agriculture_throughput_add = -0.05
+	country_authority_add = -150
+	interest_group_ig_landowners_approval_add = -5
+}
+
+ffpa_byz_military_register_professional_cost_v1 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	country_military_goods_cost_mult = 0.10
+	country_bureaucracy_mult = -0.05
+}
+
+ffpa_byz_military_register_mass_cost_v1 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	country_bureaucracy_mult = -0.10
+	country_authority_add = -150
+}
+
+ffpa_byz_land_tenure_reform_cost_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	state_capitalists_investment_pool_efficiency_mult = -0.05
+	building_group_bg_agriculture_throughput_add = -0.03
+	country_authority_add = -100
+}
+
+ffpa_byz_supply_veterans_reform_cost_v1 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	country_military_goods_cost_mult = 0.05
+	country_bureaucracy_mult = -0.05
+	country_expenses_add = 1
+	interest_group_ig_landowners_approval_add = -2
+	interest_group_ig_industrialists_approval_add = -2
+}
+
+ffpa_byz_supply_veterans_welfare_v1 = {
+	icon = gfx/interface/icons/event_icons/event_military.dds
+	state_welfare_payments_add = 0.10
+}
+
+ffpa_byz_dynatoi_compact_failure_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_statue_negative.dds
+	building_group_bg_agriculture_throughput_add = 0.10
+	country_authority_add = 150
+	state_tax_capacity_mult = -0.15
+	state_conscription_rate_mult = -0.20
+	building_training_rate_mult = -0.10
+	interest_group_ig_landowners_approval_add = 4
+}
+
+ffpa_byz_dynatoi_confiscation_failure_v1 = {
+	icon = gfx/interface/icons/timed_modifier_icons/modifier_coins_negative.dds
+	building_group_bg_agriculture_throughput_add = -0.10
+	state_capitalists_investment_pool_efficiency_mult = -0.10
+	country_bureaucracy_mult = -0.10
+	country_authority_add = -100
+}

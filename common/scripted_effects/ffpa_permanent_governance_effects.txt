@@ -1,0 +1,1179 @@
+# Permanent TUR/BYZ governance journals. All four journals use country
+# variables as save-state authority; journal bars and tier modifiers are
+# disposable UI/runtime mirrors.
+
+ffpa_sync_permanent_governance_progress_bars_v1 = {
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_imperial_registers_v1 }
+		je:je_ffpa_tur_imperial_registers_v1 ?= {
+			set_bar_progress = {
+				value = root.var:ffpa_tur_register_balance_v1
+				name = ffpa_tur_register_balance_bar_v1
+			}
+		}
+	}
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_bread_and_capital_v1 }
+		je:je_ffpa_tur_bread_and_capital_v1 ?= {
+			set_bar_progress = {
+				value = root.var:ffpa_tur_capital_reserve_v1
+				name = ffpa_tur_capital_reserve_bar_v1
+			}
+		}
+	}
+	if = {
+		limit = { has_journal_entry = je_ffpa_byz_public_polity_v1 }
+		je:je_ffpa_byz_public_polity_v1 ?= {
+			set_bar_progress = {
+				value = root.var:ffpa_byz_public_law_state_v1
+				name = ffpa_byz_public_law_pillar_bar_v1
+			}
+			set_bar_progress = {
+				value = root.var:ffpa_byz_public_welfare_state_v1
+				name = ffpa_byz_public_welfare_pillar_bar_v1
+			}
+			set_bar_progress = {
+				value = root.var:ffpa_byz_public_recognition_state_v1
+				name = ffpa_byz_public_recognition_pillar_bar_v1
+			}
+		}
+	}
+	if = {
+		limit = { has_journal_entry = je_ffpa_byz_military_households_v1 }
+		je:je_ffpa_byz_military_households_v1 ?= {
+			set_bar_progress = {
+				value = root.var:ffpa_byz_dynatoi_pressure_v1
+				name = ffpa_byz_dynatoi_pressure_bar_v1
+			}
+		}
+	}
+}
+
+ffpa_clear_tur_register_tier_modifiers_v1 = {
+	if = { limit = { has_modifier = ffpa_tur_register_local_compacts_v1 } remove_modifier = ffpa_tur_register_local_compacts_v1 }
+	if = { limit = { has_modifier = ffpa_tur_register_provincial_balance_v1 } remove_modifier = ffpa_tur_register_provincial_balance_v1 }
+	if = { limit = { has_modifier = ffpa_tur_register_mediated_equilibrium_v1 } remove_modifier = ffpa_tur_register_mediated_equilibrium_v1 }
+	if = { limit = { has_modifier = ffpa_tur_register_admin_balance_v1 } remove_modifier = ffpa_tur_register_admin_balance_v1 }
+	if = { limit = { has_modifier = ffpa_tur_register_direct_admin_v1 } remove_modifier = ffpa_tur_register_direct_admin_v1 }
+}
+
+ffpa_refresh_tur_register_tier_modifier_v1 = {
+	if = {
+		limit = {
+			var:ffpa_tur_register_balance_v1 >= 10
+			var:ffpa_tur_register_balance_v1 <= 24
+		}
+		if = { limit = { NOT = { has_modifier = ffpa_tur_register_local_compacts_v1 } } add_modifier = ffpa_tur_register_local_compacts_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_tur_register_local_compacts_v1 } remove_modifier = ffpa_tur_register_local_compacts_v1 } }
+	if = {
+		limit = {
+			var:ffpa_tur_register_balance_v1 >= 25
+			var:ffpa_tur_register_balance_v1 <= 34
+		}
+		if = { limit = { NOT = { has_modifier = ffpa_tur_register_provincial_balance_v1 } } add_modifier = ffpa_tur_register_provincial_balance_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_tur_register_provincial_balance_v1 } remove_modifier = ffpa_tur_register_provincial_balance_v1 } }
+	if = {
+		limit = {
+			var:ffpa_tur_register_balance_v1 >= 35
+			var:ffpa_tur_register_balance_v1 <= 65
+		}
+		if = { limit = { NOT = { has_modifier = ffpa_tur_register_mediated_equilibrium_v1 } } add_modifier = ffpa_tur_register_mediated_equilibrium_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_tur_register_mediated_equilibrium_v1 } remove_modifier = ffpa_tur_register_mediated_equilibrium_v1 } }
+	if = {
+		limit = {
+			var:ffpa_tur_register_balance_v1 >= 66
+			var:ffpa_tur_register_balance_v1 <= 74
+		}
+		if = { limit = { NOT = { has_modifier = ffpa_tur_register_admin_balance_v1 } } add_modifier = ffpa_tur_register_admin_balance_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_tur_register_admin_balance_v1 } remove_modifier = ffpa_tur_register_admin_balance_v1 } }
+	if = {
+		limit = {
+			var:ffpa_tur_register_balance_v1 >= 75
+			var:ffpa_tur_register_balance_v1 <= 89
+		}
+		if = { limit = { NOT = { has_modifier = ffpa_tur_register_direct_admin_v1 } } add_modifier = ffpa_tur_register_direct_admin_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_tur_register_direct_admin_v1 } remove_modifier = ffpa_tur_register_direct_admin_v1 } }
+}
+
+ffpa_initialize_tur_register_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_tur_register_balance_v1 } }
+		if = {
+			limit = { var:ffpa_tur_state_project_v1 = 1 }
+			set_variable = { name = ffpa_tur_register_balance_v1 value = 45 }
+		}
+		else_if = {
+			limit = { var:ffpa_tur_state_project_v1 = 2 }
+			set_variable = { name = ffpa_tur_register_balance_v1 value = 55 }
+		}
+		else = { set_variable = { name = ffpa_tur_register_balance_v1 value = 65 } }
+	}
+	if = { limit = { NOT = { has_variable = ffpa_tur_register_low_months_v1 } } set_variable = { name = ffpa_tur_register_low_months_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_tur_register_high_months_v1 } } set_variable = { name = ffpa_tur_register_high_months_v1 value = 0 } }
+	clamp_variable = { name = ffpa_tur_register_balance_v1 min = 0 max = 100 }
+	ffpa_refresh_tur_register_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_monthly_tur_register_v1 = {
+	ffpa_initialize_tur_register_v1 = yes
+	set_variable = { name = ffpa_tur_register_monthly_change_v1 value = ffpa_tur_register_monthly_balance_change_v1 }
+	change_variable = { name = ffpa_tur_register_balance_v1 add = var:ffpa_tur_register_monthly_change_v1 }
+	clamp_variable = { name = ffpa_tur_register_balance_v1 min = 0 max = 100 }
+	if = {
+		limit = { var:ffpa_tur_register_balance_v1 <= 9 }
+		change_variable = { name = ffpa_tur_register_low_months_v1 add = 1 }
+		change_variable = { name = ffpa_tur_register_high_months_v1 subtract = 3 }
+	}
+	else_if = {
+		limit = { var:ffpa_tur_register_balance_v1 >= 90 }
+		change_variable = { name = ffpa_tur_register_high_months_v1 add = 1 }
+		change_variable = { name = ffpa_tur_register_low_months_v1 subtract = 3 }
+	}
+	else = {
+		change_variable = { name = ffpa_tur_register_low_months_v1 subtract = 3 }
+		change_variable = { name = ffpa_tur_register_high_months_v1 subtract = 3 }
+		remove_variable = ffpa_tur_register_emergency_used_v1
+	}
+	clamp_variable = { name = ffpa_tur_register_low_months_v1 min = 0 max = 24 }
+	clamp_variable = { name = ffpa_tur_register_high_months_v1 min = 0 max = 24 }
+	ffpa_refresh_tur_register_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_tur_register_audit_v1 = {
+	add_modifier = { name = ffpa_tur_register_audit_cost_v1 months = 12 }
+	change_variable = { name = ffpa_tur_register_balance_v1 add = 10 }
+	clamp_variable = { name = ffpa_tur_register_balance_v1 min = 0 max = 100 }
+	set_variable = { name = ffpa_tur_register_audit_cooldown_v1 months = 12 }
+	ffpa_refresh_tur_register_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_tur_register_provincial_roll_v1 = {
+	add_modifier = { name = ffpa_tur_register_provincial_roll_cost_v1 months = 12 }
+	change_variable = { name = ffpa_tur_register_balance_v1 subtract = 10 }
+	clamp_variable = { name = ffpa_tur_register_balance_v1 min = 0 max = 100 }
+	set_variable = { name = ffpa_tur_register_provincial_cooldown_v1 months = 12 }
+	ffpa_refresh_tur_register_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_tur_register_dual_ledgers_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_register_dual_cooldown_v1 }
+		set_variable = ffpa_tur_register_emergency_used_v1
+		add_modifier = { name = ffpa_tur_register_dual_ledgers_cost_v1 months = 18 multiplier = 2 }
+	}
+	else = {
+		add_modifier = { name = ffpa_tur_register_dual_ledgers_cost_v1 months = 12 }
+	}
+	if = {
+		limit = { var:ffpa_tur_register_balance_v1 < 35 }
+		change_variable = { name = ffpa_tur_register_balance_v1 add = 15 }
+	}
+	else_if = {
+		limit = { var:ffpa_tur_register_balance_v1 > 65 }
+		change_variable = { name = ffpa_tur_register_balance_v1 subtract = 15 }
+	}
+	else_if = {
+		limit = { var:ffpa_tur_register_balance_v1 < 50 }
+		set_variable = { name = ffpa_tur_register_balance_v1 value = 50 }
+	}
+	else_if = {
+		limit = { var:ffpa_tur_register_balance_v1 > 50 }
+		set_variable = { name = ffpa_tur_register_balance_v1 value = 50 }
+	}
+	clamp_variable = { name = ffpa_tur_register_balance_v1 min = 0 max = 100 }
+	set_variable = { name = ffpa_tur_register_dual_cooldown_v1 months = 24 }
+	ffpa_refresh_tur_register_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_on_tur_register_failure_v1 = {
+	if = {
+		limit = { var:ffpa_tur_register_balance_v1 <= 9 }
+		set_variable = { name = ffpa_tur_register_balance_v1 value = 25 }
+		trigger_event = { id = ffpa_tur_flavor.90 }
+	}
+	else = {
+		set_variable = { name = ffpa_tur_register_balance_v1 value = 75 }
+		trigger_event = { id = ffpa_tur_flavor.91 }
+	}
+	set_variable = { name = ffpa_tur_register_failure_cooldown_v1 years = 3 }
+	set_variable = { name = ffpa_tur_register_low_months_v1 value = 0 }
+	set_variable = { name = ffpa_tur_register_high_months_v1 value = 0 }
+	remove_variable = ffpa_tur_register_audit_cooldown_v1
+	remove_variable = ffpa_tur_register_provincial_cooldown_v1
+	remove_variable = ffpa_tur_register_dual_cooldown_v1
+	remove_variable = ffpa_tur_register_emergency_used_v1
+	ffpa_clear_tur_register_tier_modifiers_v1 = yes
+}
+
+ffpa_clear_tur_supply_tier_modifiers_v1 = {
+	if = { limit = { has_modifier = ffpa_tur_capital_supply_secure_v1 } remove_modifier = ffpa_tur_capital_supply_secure_v1 }
+	if = { limit = { has_modifier = ffpa_tur_capital_supply_serviceable_v1 } remove_modifier = ffpa_tur_capital_supply_serviceable_v1 }
+}
+
+ffpa_refresh_tur_supply_tier_modifier_v1 = {
+	if = {
+		limit = { var:ffpa_tur_capital_reserve_v1 >= 70 }
+		if = { limit = { NOT = { has_modifier = ffpa_tur_capital_supply_secure_v1 } } add_modifier = ffpa_tur_capital_supply_secure_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_tur_capital_supply_secure_v1 } remove_modifier = ffpa_tur_capital_supply_secure_v1 } }
+	if = {
+		limit = { var:ffpa_tur_capital_reserve_v1 >= 30 }
+		if = {
+			limit = {
+				var:ffpa_tur_capital_reserve_v1 < 70
+				NOT = { has_modifier = ffpa_tur_capital_supply_serviceable_v1 }
+			}
+			add_modifier = ffpa_tur_capital_supply_serviceable_v1
+		}
+	}
+	else = { if = { limit = { has_modifier = ffpa_tur_capital_supply_serviceable_v1 } remove_modifier = ffpa_tur_capital_supply_serviceable_v1 } }
+	if = {
+		limit = {
+			var:ffpa_tur_capital_reserve_v1 >= 70
+			has_modifier = ffpa_tur_capital_supply_serviceable_v1
+		}
+		remove_modifier = ffpa_tur_capital_supply_serviceable_v1
+	}
+}
+
+ffpa_initialize_tur_capital_supply_v1 = {
+	if = { limit = { NOT = { has_variable = ffpa_tur_capital_reserve_v1 } } set_variable = { name = ffpa_tur_capital_reserve_v1 value = 50 } }
+	if = { limit = { NOT = { has_variable = ffpa_tur_capital_crisis_months_v1 } } set_variable = { name = ffpa_tur_capital_crisis_months_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_tur_capital_famine_months_v1 } } set_variable = { name = ffpa_tur_capital_famine_months_v1 value = 0 } }
+	clamp_variable = { name = ffpa_tur_capital_reserve_v1 min = 0 max = 100 }
+	ffpa_refresh_tur_supply_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_reset_tur_capital_supply_failure_counters_v1 = {
+	set_variable = { name = ffpa_tur_capital_crisis_months_v1 value = 0 }
+	set_variable = { name = ffpa_tur_capital_famine_months_v1 value = 0 }
+}
+
+ffpa_monthly_tur_capital_supply_v1 = {
+	ffpa_initialize_tur_capital_supply_v1 = yes
+	set_variable = { name = ffpa_tur_capital_anomalies_v1 value = ffpa_tur_capital_supply_anomaly_count_v1 }
+	if = {
+		limit = { var:ffpa_tur_capital_anomalies_v1 = 0 }
+		change_variable = { name = ffpa_tur_capital_reserve_v1 add = 3 }
+	}
+	else_if = {
+		limit = { var:ffpa_tur_capital_anomalies_v1 = 1 }
+		change_variable = { name = ffpa_tur_capital_reserve_v1 add = 1 }
+	}
+	else_if = {
+		limit = { var:ffpa_tur_capital_anomalies_v1 = 2 }
+		change_variable = { name = ffpa_tur_capital_reserve_v1 subtract = 2 }
+	}
+	else_if = {
+		limit = { var:ffpa_tur_capital_anomalies_v1 = 3 }
+		change_variable = { name = ffpa_tur_capital_reserve_v1 subtract = 5 }
+	}
+	else = { change_variable = { name = ffpa_tur_capital_reserve_v1 subtract = 8 } }
+	if = {
+		limit = { ffpa_tur_capital_has_famine_v1 = yes }
+		change_variable = { name = ffpa_tur_capital_reserve_v1 subtract = 10 }
+	}
+	if = {
+		limit = { NOT = { ffpa_tur_capital_supply_severe_crisis_v1 = yes } }
+		remove_variable = ffpa_tur_capital_emergency_used_v1
+	}
+	clamp_variable = { name = ffpa_tur_capital_reserve_v1 min = 0 max = 100 }
+	if = {
+		limit = { var:ffpa_tur_capital_reserve_v1 > 0 }
+		ffpa_reset_tur_capital_supply_failure_counters_v1 = yes
+	}
+	else = {
+		if = {
+			limit = { ffpa_tur_capital_supply_severe_crisis_v1 = yes }
+			change_variable = { name = ffpa_tur_capital_crisis_months_v1 add = 1 }
+		}
+		else = { set_variable = { name = ffpa_tur_capital_crisis_months_v1 value = 0 } }
+		if = {
+			limit = { ffpa_tur_capital_has_famine_v1 = yes }
+			change_variable = { name = ffpa_tur_capital_famine_months_v1 add = 1 }
+		}
+		else = { set_variable = { name = ffpa_tur_capital_famine_months_v1 value = 0 } }
+	}
+	clamp_variable = { name = ffpa_tur_capital_crisis_months_v1 min = 0 max = 6 }
+	clamp_variable = { name = ffpa_tur_capital_famine_months_v1 min = 0 max = 3 }
+	ffpa_refresh_tur_supply_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_tur_capital_purchase_v1 = {
+	add_modifier = { name = ffpa_tur_capital_supply_purchase_cost_v1 months = 6 multiplier = money_amount_multiplier_medium }
+	change_variable = { name = ffpa_tur_capital_reserve_v1 add = 15 }
+	clamp_variable = { name = ffpa_tur_capital_reserve_v1 min = 0 max = 100 }
+	set_variable = { name = ffpa_tur_capital_purchase_cooldown_v1 months = 6 }
+	ffpa_reset_tur_capital_supply_failure_counters_v1 = yes
+	ffpa_refresh_tur_supply_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_tur_capital_open_granaries_v1 = {
+	add_modifier = { name = ffpa_tur_capital_granary_release_v1 years = 2 }
+	change_variable = { name = ffpa_tur_capital_reserve_v1 subtract = 15 }
+	clamp_variable = { name = ffpa_tur_capital_reserve_v1 min = 0 max = 100 }
+	set_variable = { name = ffpa_tur_capital_granary_cooldown_v1 months = 6 }
+	ffpa_refresh_tur_supply_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_tur_capital_emergency_rationing_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_capital_ration_cooldown_v1 }
+		set_variable = ffpa_tur_capital_emergency_used_v1
+		add_modifier = { name = ffpa_tur_capital_supply_purchase_cost_v1 months = 12 multiplier = money_amount_multiplier_large }
+		add_radicals = { value = 0.06 interest_group = ig:ig_trade_unions }
+		add_radicals = { value = 0.04 interest_group = ig:ig_petty_bourgeoisie }
+	}
+	else = {
+		add_radicals = { value = 0.03 interest_group = ig:ig_trade_unions }
+		add_radicals = { value = 0.02 interest_group = ig:ig_petty_bourgeoisie }
+	}
+	add_modifier = { name = ffpa_tur_capital_emergency_rationing_v1 years = 1 }
+	change_variable = { name = ffpa_tur_capital_reserve_v1 add = 25 }
+	clamp_variable = { name = ffpa_tur_capital_reserve_v1 min = 0 max = 100 }
+	set_variable = { name = ffpa_tur_capital_ration_cooldown_v1 months = 12 }
+	ffpa_reset_tur_capital_supply_failure_counters_v1 = yes
+	ffpa_refresh_tur_supply_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_on_tur_capital_supply_failure_v1 = {
+	set_variable = { name = ffpa_tur_capital_supply_failure_cooldown_v1 years = 4 }
+	set_variable = { name = ffpa_tur_capital_reserve_v1 value = 10 }
+	ffpa_reset_tur_capital_supply_failure_counters_v1 = yes
+	remove_variable = ffpa_tur_capital_purchase_cooldown_v1
+	remove_variable = ffpa_tur_capital_granary_cooldown_v1
+	remove_variable = ffpa_tur_capital_ration_cooldown_v1
+	remove_variable = ffpa_tur_capital_emergency_used_v1
+	ffpa_clear_tur_supply_tier_modifiers_v1 = yes
+	trigger_event = { id = ffpa_tur_flavor.92 }
+}
+
+# --- BYZ public polity ---
+
+ffpa_clear_byz_public_polity_tier_modifiers_v1 = {
+	if = { limit = { has_modifier = ffpa_byz_public_law_intact_v1 } remove_modifier = ffpa_byz_public_law_intact_v1 }
+	if = { limit = { has_modifier = ffpa_byz_public_welfare_intact_v1 } remove_modifier = ffpa_byz_public_welfare_intact_v1 }
+	if = { limit = { has_modifier = ffpa_byz_public_recognition_intact_v1 } remove_modifier = ffpa_byz_public_recognition_intact_v1 }
+}
+
+ffpa_refresh_byz_public_polity_tier_modifier_v1 = {
+	if = {
+		limit = { var:ffpa_byz_public_law_state_v1 = 0 }
+		if = { limit = { NOT = { has_modifier = ffpa_byz_public_law_intact_v1 } } add_modifier = ffpa_byz_public_law_intact_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_byz_public_law_intact_v1 } remove_modifier = ffpa_byz_public_law_intact_v1 } }
+	if = {
+		limit = { var:ffpa_byz_public_welfare_state_v1 = 0 }
+		if = { limit = { NOT = { has_modifier = ffpa_byz_public_welfare_intact_v1 } } add_modifier = ffpa_byz_public_welfare_intact_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_byz_public_welfare_intact_v1 } remove_modifier = ffpa_byz_public_welfare_intact_v1 } }
+	if = {
+		limit = { var:ffpa_byz_public_recognition_state_v1 = 0 }
+		if = { limit = { NOT = { has_modifier = ffpa_byz_public_recognition_intact_v1 } } add_modifier = ffpa_byz_public_recognition_intact_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_byz_public_recognition_intact_v1 } remove_modifier = ffpa_byz_public_recognition_intact_v1 } }
+}
+
+ffpa_initialize_byz_public_polity_v1 = {
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_law_state_v1 } } set_variable = { name = ffpa_byz_public_law_state_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_welfare_state_v1 } } set_variable = { name = ffpa_byz_public_welfare_state_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_recognition_state_v1 } } set_variable = { name = ffpa_byz_public_recognition_state_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_law_deterioration_v1 } } set_variable = { name = ffpa_byz_public_law_deterioration_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_welfare_deterioration_v1 } } set_variable = { name = ffpa_byz_public_welfare_deterioration_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_recognition_deterioration_v1 } } set_variable = { name = ffpa_byz_public_recognition_deterioration_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_law_repair_months_v1 } } set_variable = { name = ffpa_byz_public_law_repair_months_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_welfare_repair_months_v1 } } set_variable = { name = ffpa_byz_public_welfare_repair_months_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_recognition_repair_months_v1 } } set_variable = { name = ffpa_byz_public_recognition_repair_months_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_all_broken_months_v1 } } set_variable = { name = ffpa_byz_public_all_broken_months_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_two_broken_months_v1 } } set_variable = { name = ffpa_byz_public_two_broken_months_v1 value = 0 } }
+	if = {
+		limit = { NOT = { has_variable = ffpa_byz_public_sol_baseline_v1 } }
+		set_variable = { name = ffpa_byz_public_sol_baseline_v1 value = average_sol }
+		set_variable = { name = ffpa_byz_public_sol_review_months_v1 value = 0 }
+	}
+	if = { limit = { NOT = { has_variable = ffpa_byz_public_sol_review_months_v1 } } set_variable = { name = ffpa_byz_public_sol_review_months_v1 value = 0 } }
+	ffpa_refresh_byz_public_polity_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+# Country -> owned incorporated states -> country. This is the single monthly
+# nationwide scan shared by the welfare and recognition pillars.
+ffpa_scan_byz_public_polity_states_v1 = {
+	set_variable = { name = ffpa_byz_public_incorporated_states_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_access_states_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_famine_states_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_turmoil_states_v1 value = 0 }
+	every_scope_state = {
+		limit = { is_incorporated = yes }
+		root = { change_variable = { name = ffpa_byz_public_incorporated_states_v1 add = 1 } }
+		if = {
+			limit = { market_access >= 0.85 }
+			root = { change_variable = { name = ffpa_byz_public_access_states_v1 add = 1 } }
+		}
+		if = {
+			limit = { has_famine = yes }
+			root = { change_variable = { name = ffpa_byz_public_famine_states_v1 add = 1 } }
+		}
+		if = {
+			limit = { turmoil >= 0.25 }
+			root = { change_variable = { name = ffpa_byz_public_turmoil_states_v1 add = 1 } }
+		}
+	}
+}
+
+ffpa_monthly_byz_public_law_pillar_v1 = {
+	if = {
+		limit = { has_variable = ffpa_byz_public_law_protection_v1 }
+		set_variable = { name = ffpa_byz_public_law_state_v1 value = 0 }
+		set_variable = { name = ffpa_byz_public_law_deterioration_v1 value = 0 }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_public_law_state_v1 = 3 }
+		if = {
+			limit = { ffpa_byz_public_all_pillars_healthy_v1 = yes }
+			change_variable = { name = ffpa_byz_public_law_repair_months_v1 add = 1 }
+		}
+		else = { set_variable = { name = ffpa_byz_public_law_repair_months_v1 value = 0 } }
+		if = {
+			limit = { var:ffpa_byz_public_law_repair_months_v1 >= 6 }
+			set_variable = { name = ffpa_byz_public_law_state_v1 value = 0 }
+			set_variable = { name = ffpa_byz_public_law_repair_months_v1 value = 0 }
+		}
+	}
+	else_if = {
+		limit = { var:ffpa_byz_public_law_state_v1 < 2 }
+		if = {
+			limit = { ffpa_byz_public_law_healthy_v1 = yes }
+			set_variable = { name = ffpa_byz_public_law_state_v1 value = 0 }
+			set_variable = { name = ffpa_byz_public_law_deterioration_v1 value = 0 }
+		}
+		else = {
+			set_variable = { name = ffpa_byz_public_law_state_v1 value = 1 }
+			if = {
+				limit = { ffpa_byz_public_law_all_bad_v1 = yes }
+				change_variable = { name = ffpa_byz_public_law_deterioration_v1 add = 2 }
+			}
+			else_if = {
+				limit = { ffpa_byz_public_law_two_or_more_bad_v1 = yes }
+				change_variable = { name = ffpa_byz_public_law_deterioration_v1 add = 1 }
+			}
+			else = { set_variable = { name = ffpa_byz_public_law_deterioration_v1 value = 0 } }
+			if = {
+				limit = { var:ffpa_byz_public_law_deterioration_v1 >= 12 }
+				set_variable = { name = ffpa_byz_public_law_state_v1 value = 2 }
+				set_variable = { name = ffpa_byz_public_law_deterioration_v1 value = 0 }
+			}
+		}
+	}
+}
+
+ffpa_monthly_byz_public_welfare_pillar_v1 = {
+	if = {
+		limit = { has_variable = ffpa_byz_public_welfare_protection_v1 }
+		set_variable = { name = ffpa_byz_public_welfare_state_v1 value = 0 }
+		set_variable = { name = ffpa_byz_public_welfare_deterioration_v1 value = 0 }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_public_welfare_state_v1 = 3 }
+		if = {
+			limit = { ffpa_byz_public_all_pillars_healthy_v1 = yes }
+			change_variable = { name = ffpa_byz_public_welfare_repair_months_v1 add = 1 }
+		}
+		else = { set_variable = { name = ffpa_byz_public_welfare_repair_months_v1 value = 0 } }
+		if = {
+			limit = { var:ffpa_byz_public_welfare_repair_months_v1 >= 6 }
+			set_variable = { name = ffpa_byz_public_welfare_state_v1 value = 0 }
+			set_variable = { name = ffpa_byz_public_welfare_repair_months_v1 value = 0 }
+		}
+	}
+	else_if = {
+		limit = { var:ffpa_byz_public_welfare_state_v1 < 2 }
+		if = {
+			limit = { ffpa_byz_public_welfare_healthy_v1 = yes }
+			set_variable = { name = ffpa_byz_public_welfare_state_v1 value = 0 }
+			set_variable = { name = ffpa_byz_public_welfare_deterioration_v1 value = 0 }
+		}
+		else = {
+			set_variable = { name = ffpa_byz_public_welfare_state_v1 value = 1 }
+			if = {
+				limit = { ffpa_byz_public_welfare_all_bad_v1 = yes }
+				change_variable = { name = ffpa_byz_public_welfare_deterioration_v1 add = 2 }
+			}
+			else_if = {
+				limit = { ffpa_byz_public_welfare_two_or_more_bad_v1 = yes }
+				change_variable = { name = ffpa_byz_public_welfare_deterioration_v1 add = 1 }
+			}
+			else = { set_variable = { name = ffpa_byz_public_welfare_deterioration_v1 value = 0 } }
+			if = {
+				limit = { var:ffpa_byz_public_welfare_deterioration_v1 >= 12 }
+				set_variable = { name = ffpa_byz_public_welfare_state_v1 value = 2 }
+				set_variable = { name = ffpa_byz_public_welfare_deterioration_v1 value = 0 }
+			}
+		}
+	}
+}
+
+ffpa_monthly_byz_public_recognition_pillar_v1 = {
+	if = {
+		limit = { has_variable = ffpa_byz_public_recognition_protection_v1 }
+		set_variable = { name = ffpa_byz_public_recognition_state_v1 value = 0 }
+		set_variable = { name = ffpa_byz_public_recognition_deterioration_v1 value = 0 }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_public_recognition_state_v1 = 3 }
+		if = {
+			limit = { ffpa_byz_public_all_pillars_healthy_v1 = yes }
+			change_variable = { name = ffpa_byz_public_recognition_repair_months_v1 add = 1 }
+		}
+		else = { set_variable = { name = ffpa_byz_public_recognition_repair_months_v1 value = 0 } }
+		if = {
+			limit = { var:ffpa_byz_public_recognition_repair_months_v1 >= 6 }
+			set_variable = { name = ffpa_byz_public_recognition_state_v1 value = 0 }
+			set_variable = { name = ffpa_byz_public_recognition_repair_months_v1 value = 0 }
+		}
+	}
+	else_if = {
+		limit = { var:ffpa_byz_public_recognition_state_v1 < 2 }
+		if = {
+			limit = { ffpa_byz_public_recognition_healthy_v1 = yes }
+			set_variable = { name = ffpa_byz_public_recognition_state_v1 value = 0 }
+			set_variable = { name = ffpa_byz_public_recognition_deterioration_v1 value = 0 }
+		}
+		else = {
+			set_variable = { name = ffpa_byz_public_recognition_state_v1 value = 1 }
+			if = {
+				limit = { ffpa_byz_public_recognition_all_bad_v1 = yes }
+				change_variable = { name = ffpa_byz_public_recognition_deterioration_v1 add = 2 }
+			}
+			else_if = {
+				limit = { ffpa_byz_public_recognition_two_or_more_bad_v1 = yes }
+				change_variable = { name = ffpa_byz_public_recognition_deterioration_v1 add = 1 }
+			}
+			else = { set_variable = { name = ffpa_byz_public_recognition_deterioration_v1 value = 0 } }
+			if = {
+				limit = { var:ffpa_byz_public_recognition_deterioration_v1 >= 12 }
+				set_variable = { name = ffpa_byz_public_recognition_state_v1 value = 2 }
+				set_variable = { name = ffpa_byz_public_recognition_deterioration_v1 value = 0 }
+			}
+		}
+	}
+}
+
+ffpa_monthly_byz_public_polity_v1 = {
+	ffpa_initialize_byz_public_polity_v1 = yes
+	ffpa_scan_byz_public_polity_states_v1 = yes
+	change_variable = { name = ffpa_byz_public_sol_review_months_v1 add = 1 }
+	if = {
+		limit = { var:ffpa_byz_public_sol_review_months_v1 >= 60 }
+		if = {
+			limit = { average_sol > var:ffpa_byz_public_sol_baseline_v1 }
+			set_variable = { name = ffpa_byz_public_sol_baseline_v1 value = average_sol }
+		}
+		set_variable = { name = ffpa_byz_public_sol_review_months_v1 value = 0 }
+	}
+	ffpa_monthly_byz_public_law_pillar_v1 = yes
+	ffpa_monthly_byz_public_welfare_pillar_v1 = yes
+	ffpa_monthly_byz_public_recognition_pillar_v1 = yes
+	set_variable = { name = ffpa_byz_public_broken_pillars_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_warning_pillars_v1 value = 0 }
+	if = { limit = { var:ffpa_byz_public_law_state_v1 >= 2 } change_variable = { name = ffpa_byz_public_broken_pillars_v1 add = 1 } }
+	if = { limit = { var:ffpa_byz_public_welfare_state_v1 >= 2 } change_variable = { name = ffpa_byz_public_broken_pillars_v1 add = 1 } }
+	if = { limit = { var:ffpa_byz_public_recognition_state_v1 >= 2 } change_variable = { name = ffpa_byz_public_broken_pillars_v1 add = 1 } }
+	if = { limit = { var:ffpa_byz_public_law_state_v1 = 1 } change_variable = { name = ffpa_byz_public_warning_pillars_v1 add = 1 } }
+	if = { limit = { var:ffpa_byz_public_welfare_state_v1 = 1 } change_variable = { name = ffpa_byz_public_warning_pillars_v1 add = 1 } }
+	if = { limit = { var:ffpa_byz_public_recognition_state_v1 = 1 } change_variable = { name = ffpa_byz_public_warning_pillars_v1 add = 1 } }
+	if = {
+		limit = { var:ffpa_byz_public_broken_pillars_v1 = 3 }
+		change_variable = { name = ffpa_byz_public_all_broken_months_v1 add = 1 }
+	}
+	else = { set_variable = { name = ffpa_byz_public_all_broken_months_v1 value = 0 } }
+	if = {
+		limit = {
+			var:ffpa_byz_public_broken_pillars_v1 = 2
+			var:ffpa_byz_public_warning_pillars_v1 >= 1
+		}
+		change_variable = { name = ffpa_byz_public_two_broken_months_v1 add = 1 }
+	}
+	else = { set_variable = { name = ffpa_byz_public_two_broken_months_v1 value = 0 } }
+	clamp_variable = { name = ffpa_byz_public_all_broken_months_v1 min = 0 max = 6 }
+	clamp_variable = { name = ffpa_byz_public_two_broken_months_v1 min = 0 max = 12 }
+	if = { limit = { var:ffpa_byz_public_law_state_v1 = 0 } remove_variable = ffpa_byz_public_law_emergency_used_v1 }
+	if = { limit = { var:ffpa_byz_public_welfare_state_v1 = 0 } remove_variable = ffpa_byz_public_welfare_emergency_used_v1 }
+	if = { limit = { var:ffpa_byz_public_recognition_state_v1 = 0 } remove_variable = ffpa_byz_public_recognition_emergency_used_v1 }
+	ffpa_refresh_byz_public_polity_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_byz_public_new_decree_v1 = {
+	if = {
+		limit = { has_variable = ffpa_byz_public_law_button_cooldown_v1 }
+		set_variable = ffpa_byz_public_law_emergency_used_v1
+		add_modifier = { name = ffpa_byz_public_new_decree_cost_v1 months = 6 multiplier = 2 }
+	}
+	else = { add_modifier = { name = ffpa_byz_public_new_decree_cost_v1 months = 6 } }
+	if = {
+		limit = { var:ffpa_byz_public_law_state_v1 = 2 }
+		set_variable = { name = ffpa_byz_public_law_state_v1 value = 3 }
+		set_variable = { name = ffpa_byz_public_law_repair_months_v1 value = 0 }
+	}
+	else = {
+		set_variable = { name = ffpa_byz_public_law_state_v1 value = 0 }
+		set_variable = { name = ffpa_byz_public_law_protection_v1 months = 6 }
+		set_variable = { name = ffpa_byz_public_law_deterioration_v1 value = 0 }
+	}
+	set_variable = { name = ffpa_byz_public_law_button_cooldown_v1 months = 6 }
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_byz_public_benefaction_v1 = {
+	if = {
+		limit = { has_variable = ffpa_byz_public_welfare_button_cooldown_v1 }
+		set_variable = ffpa_byz_public_welfare_emergency_used_v1
+		add_modifier = { name = ffpa_byz_public_benefaction_cost_v1 months = 6 multiplier = 2 }
+	}
+	else = { add_modifier = { name = ffpa_byz_public_benefaction_cost_v1 months = 6 } }
+	add_loyalists = { value = 0.02 interest_group = ig:ig_trade_unions }
+	if = {
+		limit = { var:ffpa_byz_public_welfare_state_v1 = 2 }
+		set_variable = { name = ffpa_byz_public_welfare_state_v1 value = 3 }
+		set_variable = { name = ffpa_byz_public_welfare_repair_months_v1 value = 0 }
+	}
+	else = {
+		set_variable = { name = ffpa_byz_public_welfare_state_v1 value = 0 }
+		set_variable = { name = ffpa_byz_public_welfare_protection_v1 months = 6 }
+		set_variable = { name = ffpa_byz_public_welfare_deterioration_v1 value = 0 }
+	}
+	set_variable = { name = ffpa_byz_public_welfare_button_cooldown_v1 months = 6 }
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_byz_public_representation_v1 = {
+	if = {
+		limit = { has_variable = ffpa_byz_public_recognition_button_cooldown_v1 }
+		set_variable = ffpa_byz_public_recognition_emergency_used_v1
+		add_modifier = { name = ffpa_byz_public_representation_cost_v1 months = 6 multiplier = 2 }
+	}
+	else = { add_modifier = { name = ffpa_byz_public_representation_cost_v1 months = 6 } }
+	add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
+	add_loyalists = { value = 0.02 interest_group = ig:ig_intelligentsia }
+	if = {
+		limit = { var:ffpa_byz_public_recognition_state_v1 = 2 }
+		set_variable = { name = ffpa_byz_public_recognition_state_v1 value = 3 }
+		set_variable = { name = ffpa_byz_public_recognition_repair_months_v1 value = 0 }
+	}
+	else = {
+		set_variable = { name = ffpa_byz_public_recognition_state_v1 value = 0 }
+		set_variable = { name = ffpa_byz_public_recognition_protection_v1 months = 6 }
+		set_variable = { name = ffpa_byz_public_recognition_deterioration_v1 value = 0 }
+	}
+	set_variable = { name = ffpa_byz_public_recognition_button_cooldown_v1 months = 6 }
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_on_byz_public_polity_failure_v1 = {
+	set_variable = { name = ffpa_byz_public_polity_failure_cooldown_v1 years = 5 }
+	set_variable = { name = ffpa_byz_public_law_state_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_welfare_state_v1 value = 2 }
+	set_variable = { name = ffpa_byz_public_recognition_state_v1 value = 2 }
+	set_variable = { name = ffpa_byz_public_law_deterioration_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_welfare_deterioration_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_recognition_deterioration_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_law_repair_months_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_welfare_repair_months_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_recognition_repair_months_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_all_broken_months_v1 value = 0 }
+	set_variable = { name = ffpa_byz_public_two_broken_months_v1 value = 0 }
+	remove_variable = ffpa_byz_public_law_protection_v1
+	remove_variable = ffpa_byz_public_welfare_protection_v1
+	remove_variable = ffpa_byz_public_recognition_protection_v1
+	remove_variable = ffpa_byz_public_law_button_cooldown_v1
+	remove_variable = ffpa_byz_public_welfare_button_cooldown_v1
+	remove_variable = ffpa_byz_public_recognition_button_cooldown_v1
+	remove_variable = ffpa_byz_public_law_emergency_used_v1
+	remove_variable = ffpa_byz_public_welfare_emergency_used_v1
+	remove_variable = ffpa_byz_public_recognition_emergency_used_v1
+	ffpa_clear_byz_public_polity_tier_modifiers_v1 = yes
+	trigger_event = { id = ffpa_flavor.50 }
+}
+
+# --- BYZ military households and dynatoi pressure ---
+
+ffpa_clear_byz_dynatoi_tier_modifiers_v1 = {
+	if = { limit = { has_modifier = ffpa_byz_dynatoi_tier_0_v1 } remove_modifier = ffpa_byz_dynatoi_tier_0_v1 }
+	if = { limit = { has_modifier = ffpa_byz_dynatoi_tier_1_v1 } remove_modifier = ffpa_byz_dynatoi_tier_1_v1 }
+	if = { limit = { has_modifier = ffpa_byz_dynatoi_tier_2_v1 } remove_modifier = ffpa_byz_dynatoi_tier_2_v1 }
+	if = { limit = { has_modifier = ffpa_byz_dynatoi_tier_3_v1 } remove_modifier = ffpa_byz_dynatoi_tier_3_v1 }
+	if = { limit = { has_modifier = ffpa_byz_dynatoi_tier_4_v1 } remove_modifier = ffpa_byz_dynatoi_tier_4_v1 }
+}
+
+ffpa_refresh_byz_dynatoi_tier_modifier_v1 = {
+	if = {
+		limit = { var:ffpa_byz_dynatoi_pressure_v1 <= 24 }
+		if = { limit = { NOT = { has_modifier = ffpa_byz_dynatoi_tier_0_v1 } } add_modifier = ffpa_byz_dynatoi_tier_0_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_byz_dynatoi_tier_0_v1 } remove_modifier = ffpa_byz_dynatoi_tier_0_v1 } }
+	if = {
+		limit = {
+			var:ffpa_byz_dynatoi_pressure_v1 >= 25
+			var:ffpa_byz_dynatoi_pressure_v1 <= 49
+		}
+		if = { limit = { NOT = { has_modifier = ffpa_byz_dynatoi_tier_1_v1 } } add_modifier = ffpa_byz_dynatoi_tier_1_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_byz_dynatoi_tier_1_v1 } remove_modifier = ffpa_byz_dynatoi_tier_1_v1 } }
+	if = {
+		limit = {
+			var:ffpa_byz_dynatoi_pressure_v1 >= 50
+			var:ffpa_byz_dynatoi_pressure_v1 <= 74
+		}
+		if = { limit = { NOT = { has_modifier = ffpa_byz_dynatoi_tier_2_v1 } } add_modifier = ffpa_byz_dynatoi_tier_2_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_byz_dynatoi_tier_2_v1 } remove_modifier = ffpa_byz_dynatoi_tier_2_v1 } }
+	if = {
+		limit = {
+			var:ffpa_byz_dynatoi_pressure_v1 >= 75
+			var:ffpa_byz_dynatoi_pressure_v1 <= 89
+		}
+		if = { limit = { NOT = { has_modifier = ffpa_byz_dynatoi_tier_3_v1 } } add_modifier = ffpa_byz_dynatoi_tier_3_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_byz_dynatoi_tier_3_v1 } remove_modifier = ffpa_byz_dynatoi_tier_3_v1 } }
+	if = {
+		limit = { var:ffpa_byz_dynatoi_pressure_v1 >= 90 }
+		if = { limit = { NOT = { has_modifier = ffpa_byz_dynatoi_tier_4_v1 } } add_modifier = ffpa_byz_dynatoi_tier_4_v1 }
+	}
+	else = { if = { limit = { has_modifier = ffpa_byz_dynatoi_tier_4_v1 } remove_modifier = ffpa_byz_dynatoi_tier_4_v1 } }
+}
+
+ffpa_ensure_byz_supply_veterans_welfare_v1 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			OR = {
+				has_variable = ffpa_byz_supply_veterans_welfare_v1
+				var:ffpa_byz_military_reform_stage_v1 >= 3
+			}
+			NOT = { has_modifier = ffpa_byz_supply_veterans_welfare_v1 }
+		}
+		set_variable = ffpa_byz_supply_veterans_welfare_v1
+		add_modifier = ffpa_byz_supply_veterans_welfare_v1
+	}
+}
+
+ffpa_initialize_byz_dynatoi_v1 = {
+	if = { limit = { NOT = { has_variable = ffpa_byz_dynatoi_pressure_v1 } } set_variable = { name = ffpa_byz_dynatoi_pressure_v1 value = 20 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_military_reform_stage_v1 } } set_variable = { name = ffpa_byz_military_reform_stage_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_dynatoi_at_max_months_v1 } } set_variable = { name = ffpa_byz_dynatoi_at_max_months_v1 value = 0 } }
+	if = { limit = { NOT = { has_variable = ffpa_byz_dynatoi_high_months_v1 } } set_variable = { name = ffpa_byz_dynatoi_high_months_v1 value = 0 } }
+	if = {
+		limit = {
+			has_variable = ffpa_byz_military_reform_project_v1
+			NOT = { has_variable = ffpa_byz_military_reform_project_months_v1 }
+		}
+		set_variable = { name = ffpa_byz_military_reform_project_months_v1 value = 0 }
+	}
+	clamp_variable = { name = ffpa_byz_dynatoi_pressure_v1 min = 0 max = 100 }
+	clamp_variable = { name = ffpa_byz_military_reform_stage_v1 min = 0 max = 3 }
+	ffpa_ensure_byz_supply_veterans_welfare_v1 = yes
+	ffpa_refresh_byz_dynatoi_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_complete_byz_military_reform_project_v1 = {
+	if = {
+		limit = { var:ffpa_byz_military_reform_project_v1 = 1 }
+		set_variable = { name = ffpa_byz_military_reform_stage_v1 value = 1 }
+		change_variable = { name = ffpa_byz_dynatoi_pressure_v1 subtract = 15 }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_military_reform_project_v1 = 2 }
+		set_variable = { name = ffpa_byz_military_reform_stage_v1 value = 2 }
+		change_variable = { name = ffpa_byz_dynatoi_pressure_v1 subtract = 20 }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_military_reform_project_v1 = 3 }
+		set_variable = { name = ffpa_byz_military_reform_stage_v1 value = 3 }
+		change_variable = { name = ffpa_byz_dynatoi_pressure_v1 subtract = 25 }
+		set_variable = ffpa_byz_supply_veterans_welfare_v1
+		ffpa_ensure_byz_supply_veterans_welfare_v1 = yes
+	}
+	clamp_variable = { name = ffpa_byz_dynatoi_pressure_v1 min = 0 max = 100 }
+	remove_variable = ffpa_byz_military_reform_project_v1
+	remove_variable = ffpa_byz_military_reform_project_months_v1
+	set_variable = { name = ffpa_byz_military_reform_fatigue_v1 years = 3 }
+	ffpa_refresh_byz_dynatoi_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_monthly_byz_military_reform_project_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_byz_military_reform_project_v1
+			in_default = no
+		}
+		change_variable = { name = ffpa_byz_military_reform_project_months_v1 add = 1 }
+		if = {
+			limit = {
+				OR = {
+					AND = {
+						var:ffpa_byz_military_reform_project_v1 = 1
+						var:ffpa_byz_military_reform_project_months_v1 >= 12
+					}
+					AND = {
+						var:ffpa_byz_military_reform_project_v1 = 2
+						var:ffpa_byz_military_reform_project_months_v1 >= 18
+					}
+					AND = {
+						var:ffpa_byz_military_reform_project_v1 = 3
+						var:ffpa_byz_military_reform_project_months_v1 >= 24
+					}
+				}
+			}
+			ffpa_complete_byz_military_reform_project_v1 = yes
+		}
+	}
+}
+
+ffpa_monthly_byz_dynatoi_v1 = {
+	ffpa_initialize_byz_dynatoi_v1 = yes
+	ffpa_monthly_byz_military_reform_project_v1 = yes
+	set_variable = { name = ffpa_byz_dynatoi_monthly_gain_v1 value = ffpa_byz_dynatoi_monthly_pressure_gain_v1 }
+	change_variable = { name = ffpa_byz_dynatoi_pressure_v1 add = var:ffpa_byz_dynatoi_monthly_gain_v1 }
+	clamp_variable = { name = ffpa_byz_dynatoi_pressure_v1 min = 0 max = 100 }
+	if = {
+		limit = { var:ffpa_byz_dynatoi_pressure_v1 >= 100 }
+		change_variable = { name = ffpa_byz_dynatoi_at_max_months_v1 add = 1 }
+	}
+	else = { set_variable = { name = ffpa_byz_dynatoi_at_max_months_v1 value = 0 } }
+	if = {
+		limit = { var:ffpa_byz_dynatoi_pressure_v1 >= 90 }
+		change_variable = { name = ffpa_byz_dynatoi_high_months_v1 add = 1 }
+	}
+	else = { set_variable = { name = ffpa_byz_dynatoi_high_months_v1 value = 0 } }
+	if = {
+		limit = { var:ffpa_byz_dynatoi_pressure_v1 < 90 }
+		remove_variable = ffpa_byz_dynatoi_emergency_used_v1
+	}
+	if = {
+		limit = { var:ffpa_byz_dynatoi_pressure_v1 < 80 }
+		remove_variable = ffpa_byz_military_reform_emergency_used_v1
+	}
+	clamp_variable = { name = ffpa_byz_dynatoi_at_max_months_v1 min = 0 max = 6 }
+	clamp_variable = { name = ffpa_byz_dynatoi_high_months_v1 min = 0 max = 18 }
+	ffpa_refresh_byz_dynatoi_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_byz_dynatoi_court_audit_v1 = {
+	add_modifier = { name = ffpa_byz_dynatoi_court_audit_cost_v1 months = 18 }
+	add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
+	change_variable = { name = ffpa_byz_dynatoi_pressure_v1 subtract = 8 }
+	clamp_variable = { name = ffpa_byz_dynatoi_pressure_v1 min = 0 max = 100 }
+	set_variable = { name = ffpa_byz_dynatoi_audit_cooldown_v1 months = 18 }
+	ffpa_refresh_byz_dynatoi_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_byz_dynatoi_village_redemption_v1 = {
+	add_modifier = { name = ffpa_byz_dynatoi_village_redemption_cost_v1 months = 12 }
+	add_radicals = { value = 0.02 interest_group = ig:ig_landowners }
+	change_variable = { name = ffpa_byz_dynatoi_pressure_v1 subtract = 10 }
+	clamp_variable = { name = ffpa_byz_dynatoi_pressure_v1 min = 0 max = 100 }
+	set_variable = { name = ffpa_byz_dynatoi_redemption_cooldown_v1 months = 12 }
+	ffpa_refresh_byz_dynatoi_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_byz_dynatoi_allelengyon_v1 = {
+	if = {
+		limit = { has_variable = ffpa_byz_dynatoi_allelengyon_cooldown_v1 }
+		set_variable = ffpa_byz_dynatoi_emergency_used_v1
+		add_modifier = { name = ffpa_byz_dynatoi_allelengyon_cost_v1 years = 3 multiplier = 2 }
+		add_radicals = { value = 0.10 interest_group = ig:ig_landowners }
+	}
+	else = {
+		add_modifier = { name = ffpa_byz_dynatoi_allelengyon_cost_v1 years = 3 }
+		add_radicals = { value = 0.05 interest_group = ig:ig_landowners }
+	}
+	change_variable = { name = ffpa_byz_dynatoi_pressure_v1 subtract = 18 }
+	clamp_variable = { name = ffpa_byz_dynatoi_pressure_v1 min = 0 max = 100 }
+	set_variable = { name = ffpa_byz_dynatoi_allelengyon_cooldown_v1 months = 24 }
+	ffpa_refresh_byz_dynatoi_tier_modifier_v1 = yes
+	ffpa_sync_permanent_governance_progress_bars_v1 = yes
+}
+
+ffpa_prepare_byz_military_reform_emergency_cost_v1 = {
+	if = {
+		limit = { has_variable = ffpa_byz_military_reform_fatigue_v1 }
+		set_variable = ffpa_byz_military_reform_emergency_used_v1
+		add_modifier = { name = ffpa_byz_dynatoi_court_audit_cost_v1 years = 3 multiplier = 2 }
+	}
+}
+
+ffpa_start_byz_military_register_professional_v1 = {
+	ffpa_prepare_byz_military_reform_emergency_cost_v1 = yes
+	if = {
+		limit = { has_law_or_variant = law_type:law_professional_army }
+		add_radicals = { value = 0.015 interest_group = ig:ig_landowners }
+	}
+	else = {
+		add_radicals = { value = 0.03 interest_group = ig:ig_landowners }
+		activate_law = law_type:law_professional_army
+	}
+	add_loyalists = { value = 0.02 interest_group = ig:ig_armed_forces }
+	add_modifier = { name = ffpa_byz_military_register_professional_cost_v1 years = 5 }
+	set_variable = { name = ffpa_byz_military_register_choice_v1 value = 1 }
+	set_variable = { name = ffpa_byz_military_reform_project_v1 value = 1 }
+	set_variable = { name = ffpa_byz_military_reform_project_months_v1 value = 0 }
+}
+
+ffpa_start_byz_military_register_mass_v1 = {
+	ffpa_prepare_byz_military_reform_emergency_cost_v1 = yes
+	if = {
+		limit = { has_law_or_variant = law_type:law_mass_conscription }
+		add_radicals = { value = 0.015 interest_group = ig:ig_rural_folk }
+	}
+	else = {
+		add_radicals = { value = 0.03 interest_group = ig:ig_rural_folk }
+		activate_law = law_type:law_mass_conscription
+	}
+	add_loyalists = { value = 0.02 interest_group = ig:ig_armed_forces }
+	add_modifier = { name = ffpa_byz_military_register_mass_cost_v1 years = 5 }
+	set_variable = { name = ffpa_byz_military_register_choice_v1 value = 2 }
+	set_variable = { name = ffpa_byz_military_reform_project_v1 value = 1 }
+	set_variable = { name = ffpa_byz_military_reform_project_months_v1 value = 0 }
+}
+
+ffpa_start_byz_land_tenure_reform_v1 = {
+	ffpa_prepare_byz_military_reform_emergency_cost_v1 = yes
+	add_radicals = { value = 0.04 interest_group = ig:ig_landowners }
+	add_loyalists = { value = 0.02 interest_group = ig:ig_rural_folk }
+	add_modifier = { name = ffpa_byz_land_tenure_reform_cost_v1 years = 5 }
+	set_variable = { name = ffpa_byz_military_reform_project_v1 value = 2 }
+	set_variable = { name = ffpa_byz_military_reform_project_months_v1 value = 0 }
+}
+
+ffpa_start_byz_supply_veterans_reform_v1 = {
+	ffpa_prepare_byz_military_reform_emergency_cost_v1 = yes
+	add_loyalists = { value = 0.03 interest_group = ig:ig_armed_forces }
+	add_modifier = { name = ffpa_byz_supply_veterans_reform_cost_v1 years = 5 }
+	set_variable = { name = ffpa_byz_military_reform_project_v1 value = 3 }
+	set_variable = { name = ffpa_byz_military_reform_project_months_v1 value = 0 }
+}
+
+ffpa_cancel_incomplete_byz_military_reform_v1 = {
+	remove_variable = ffpa_byz_military_reform_project_v1
+	remove_variable = ffpa_byz_military_reform_project_months_v1
+	if = { limit = { has_modifier = ffpa_byz_military_register_professional_cost_v1 } remove_modifier = ffpa_byz_military_register_professional_cost_v1 }
+	if = { limit = { has_modifier = ffpa_byz_military_register_mass_cost_v1 } remove_modifier = ffpa_byz_military_register_mass_cost_v1 }
+	if = { limit = { has_modifier = ffpa_byz_land_tenure_reform_cost_v1 } remove_modifier = ffpa_byz_land_tenure_reform_cost_v1 }
+	if = { limit = { has_modifier = ffpa_byz_supply_veterans_reform_cost_v1 } remove_modifier = ffpa_byz_supply_veterans_reform_cost_v1 }
+}
+
+ffpa_on_byz_dynatoi_failure_v1 = {
+	ffpa_cancel_incomplete_byz_military_reform_v1 = yes
+	remove_variable = ffpa_byz_dynatoi_audit_cooldown_v1
+	remove_variable = ffpa_byz_dynatoi_redemption_cooldown_v1
+	remove_variable = ffpa_byz_dynatoi_allelengyon_cooldown_v1
+	remove_variable = ffpa_byz_dynatoi_emergency_used_v1
+	remove_variable = ffpa_byz_military_reform_fatigue_v1
+	remove_variable = ffpa_byz_military_reform_emergency_used_v1
+	set_variable = { name = ffpa_byz_dynatoi_at_max_months_v1 value = 0 }
+	set_variable = { name = ffpa_byz_dynatoi_high_months_v1 value = 0 }
+	set_variable = ffpa_byz_dynatoi_failure_resolution_pending_v1
+	ffpa_clear_byz_dynatoi_tier_modifiers_v1 = yes
+	trigger_event = { id = ffpa_flavor.52 }
+}
+
+ffpa_apply_byz_dynatoi_compact_failure_v1 = {
+	remove_variable = ffpa_byz_dynatoi_failure_resolution_pending_v1
+	set_variable = { name = ffpa_byz_dynatoi_pressure_v1 value = 70 }
+	set_variable = { name = ffpa_byz_dynatoi_failure_cooldown_v1 years = 4 }
+	add_modifier = { name = ffpa_byz_dynatoi_compact_failure_v1 years = 8 }
+}
+
+ffpa_apply_byz_dynatoi_confiscation_failure_v1 = {
+	remove_variable = ffpa_byz_dynatoi_failure_resolution_pending_v1
+	set_variable = { name = ffpa_byz_dynatoi_pressure_v1 value = 55 }
+	set_variable = { name = ffpa_byz_dynatoi_failure_cooldown_v1 years = 3 }
+	add_radicals = { value = 0.08 interest_group = ig:ig_landowners }
+	add_loyalists = { value = 0.03 interest_group = ig:ig_rural_folk }
+	add_modifier = { name = ffpa_byz_dynatoi_confiscation_failure_v1 years = 5 }
+}
+
+# --- Idempotent ensure, migration, and identity cleanup ---
+
+ffpa_cleanup_tur_permanent_governance_runtime_v1 = {
+	ffpa_clear_tur_register_tier_modifiers_v1 = yes
+	ffpa_clear_tur_supply_tier_modifiers_v1 = yes
+	remove_variable = ffpa_tur_register_monthly_change_v1
+	remove_variable = ffpa_tur_register_low_months_v1
+	remove_variable = ffpa_tur_register_high_months_v1
+	remove_variable = ffpa_tur_register_failure_cooldown_v1
+	remove_variable = ffpa_tur_register_audit_cooldown_v1
+	remove_variable = ffpa_tur_register_provincial_cooldown_v1
+	remove_variable = ffpa_tur_register_dual_cooldown_v1
+	remove_variable = ffpa_tur_register_emergency_used_v1
+	remove_variable = ffpa_tur_capital_supply_unlock_delay_v1
+	remove_variable = ffpa_tur_capital_anomalies_v1
+	remove_variable = ffpa_tur_capital_crisis_months_v1
+	remove_variable = ffpa_tur_capital_famine_months_v1
+	remove_variable = ffpa_tur_capital_supply_failure_cooldown_v1
+	remove_variable = ffpa_tur_capital_purchase_cooldown_v1
+	remove_variable = ffpa_tur_capital_granary_cooldown_v1
+	remove_variable = ffpa_tur_capital_ration_cooldown_v1
+	remove_variable = ffpa_tur_capital_emergency_used_v1
+	set_variable = ffpa_tur_permanent_governance_tag_cleaned_v1
+}
+
+ffpa_cleanup_byz_permanent_governance_runtime_v1 = {
+	ffpa_clear_byz_public_polity_tier_modifiers_v1 = yes
+	ffpa_clear_byz_dynatoi_tier_modifiers_v1 = yes
+	ffpa_cancel_incomplete_byz_military_reform_v1 = yes
+	if = { limit = { has_modifier = ffpa_byz_supply_veterans_welfare_v1 } remove_modifier = ffpa_byz_supply_veterans_welfare_v1 }
+	remove_variable = ffpa_byz_public_law_button_cooldown_v1
+	remove_variable = ffpa_byz_public_welfare_button_cooldown_v1
+	remove_variable = ffpa_byz_public_recognition_button_cooldown_v1
+	remove_variable = ffpa_byz_public_law_emergency_used_v1
+	remove_variable = ffpa_byz_public_welfare_emergency_used_v1
+	remove_variable = ffpa_byz_public_recognition_emergency_used_v1
+	remove_variable = ffpa_byz_public_law_protection_v1
+	remove_variable = ffpa_byz_public_welfare_protection_v1
+	remove_variable = ffpa_byz_public_recognition_protection_v1
+	remove_variable = ffpa_byz_public_law_deterioration_v1
+	remove_variable = ffpa_byz_public_welfare_deterioration_v1
+	remove_variable = ffpa_byz_public_recognition_deterioration_v1
+	remove_variable = ffpa_byz_public_law_repair_months_v1
+	remove_variable = ffpa_byz_public_welfare_repair_months_v1
+	remove_variable = ffpa_byz_public_recognition_repair_months_v1
+	remove_variable = ffpa_byz_public_incorporated_states_v1
+	remove_variable = ffpa_byz_public_access_states_v1
+	remove_variable = ffpa_byz_public_famine_states_v1
+	remove_variable = ffpa_byz_public_turmoil_states_v1
+	remove_variable = ffpa_byz_public_broken_pillars_v1
+	remove_variable = ffpa_byz_public_warning_pillars_v1
+	remove_variable = ffpa_byz_public_sol_review_months_v1
+	remove_variable = ffpa_byz_public_all_broken_months_v1
+	remove_variable = ffpa_byz_public_two_broken_months_v1
+	remove_variable = ffpa_byz_public_polity_failure_cooldown_v1
+	remove_variable = ffpa_byz_dynatoi_audit_cooldown_v1
+	remove_variable = ffpa_byz_dynatoi_redemption_cooldown_v1
+	remove_variable = ffpa_byz_dynatoi_allelengyon_cooldown_v1
+	remove_variable = ffpa_byz_dynatoi_emergency_used_v1
+	remove_variable = ffpa_byz_dynatoi_monthly_gain_v1
+	remove_variable = ffpa_byz_dynatoi_at_max_months_v1
+	remove_variable = ffpa_byz_dynatoi_high_months_v1
+	remove_variable = ffpa_byz_dynatoi_failure_cooldown_v1
+	remove_variable = ffpa_byz_dynatoi_failure_resolution_pending_v1
+	remove_variable = ffpa_byz_military_reform_fatigue_v1
+	remove_variable = ffpa_byz_military_reform_emergency_used_v1
+	remove_variable = ffpa_byz_military_stage1_button_cooldown_v1
+	set_variable = ffpa_byz_permanent_governance_tag_cleaned_v1
+}
+
+ffpa_ensure_permanent_governance_journals_v1 = {
+	if = {
+		limit = { c:TUR ?= ROOT }
+		remove_variable = ffpa_tur_permanent_governance_tag_cleaned_v1
+		if = {
+			limit = { ffpa_tur_permanent_governance_ready_v1 = yes }
+			if = {
+				limit = {
+					NOT = { has_variable = ffpa_tur_register_failure_cooldown_v1 }
+					NOT = { has_journal_entry = je_ffpa_tur_imperial_registers_v1 }
+				}
+				add_journal_entry = { type = je_ffpa_tur_imperial_registers_v1 }
+				if = {
+					limit = {
+						NOT = { has_variable = ffpa_tur_capital_supply_unlocked_v1 }
+						NOT = { has_variable = ffpa_tur_capital_supply_unlock_delay_v1 }
+					}
+					set_variable = { name = ffpa_tur_capital_supply_unlock_delay_v1 months = 12 }
+				}
+			}
+			if = {
+				limit = {
+					has_variable = ffpa_tur_register_balance_v1
+					NOT = { has_variable = ffpa_tur_capital_supply_unlocked_v1 }
+					NOT = { has_variable = ffpa_tur_capital_supply_unlock_delay_v1 }
+				}
+				set_variable = ffpa_tur_capital_supply_unlocked_v1
+			}
+			if = {
+				limit = {
+					has_variable = ffpa_tur_capital_supply_unlocked_v1
+					NOT = { has_variable = ffpa_tur_capital_supply_failure_cooldown_v1 }
+					NOT = { has_journal_entry = je_ffpa_tur_bread_and_capital_v1 }
+				}
+				add_journal_entry = { type = je_ffpa_tur_bread_and_capital_v1 }
+			}
+		}
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_permanent_governance_tag_cleaned_v1 }
+			OR = {
+				has_variable = ffpa_tur_register_balance_v1
+				has_variable = ffpa_tur_capital_reserve_v1
+			}
+		}
+		ffpa_cleanup_tur_permanent_governance_runtime_v1 = yes
+	}
+
+	if = {
+		limit = { c:BYZ ?= ROOT }
+		remove_variable = ffpa_byz_permanent_governance_tag_cleaned_v1
+		if = {
+			limit = { ffpa_byz_permanent_governance_ready_v1 = yes }
+			if = {
+				limit = {
+					NOT = { has_variable = ffpa_byz_public_polity_failure_cooldown_v1 }
+					NOT = { has_journal_entry = je_ffpa_byz_public_polity_v1 }
+				}
+				add_journal_entry = { type = je_ffpa_byz_public_polity_v1 }
+			}
+			if = {
+				limit = {
+					NOT = { has_variable = ffpa_byz_dynatoi_failure_cooldown_v1 }
+					NOT = { has_variable = ffpa_byz_dynatoi_failure_resolution_pending_v1 }
+					NOT = { has_journal_entry = je_ffpa_byz_military_households_v1 }
+				}
+				add_journal_entry = { type = je_ffpa_byz_military_households_v1 }
+			}
+		}
+		ffpa_ensure_byz_supply_veterans_welfare_v1 = yes
+	}
+	else_if = {
+		limit = {
+			NOT = { has_variable = ffpa_byz_permanent_governance_tag_cleaned_v1 }
+			OR = {
+				has_variable = ffpa_byz_public_law_state_v1
+				has_variable = ffpa_byz_dynatoi_pressure_v1
+				has_modifier = ffpa_byz_supply_veterans_welfare_v1
+			}
+		}
+		ffpa_cleanup_byz_permanent_governance_runtime_v1 = yes
+	}
+
+	if = {
+		limit = { NOT = { has_variable = ffpa_permanent_governance_migrated_v1 } }
+		set_variable = ffpa_permanent_governance_migrated_v1
+	}
+}
+
+ffpa_handle_permanent_governance_country_formed_v1 = {
+	ffpa_ensure_permanent_governance_journals_v1 = yes
+}
