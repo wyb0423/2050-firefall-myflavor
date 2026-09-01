@@ -195,6 +195,8 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `localization/simp_chinese/ffpa_turkish_flavor_l_simp_chinese.yml`
 - `localization/english/ffpa_permanent_governance_l_english.yml`
 - `localization/simp_chinese/ffpa_permanent_governance_l_simp_chinese.yml`
+- `localization/replace/english/zzzz_ffpa_country_variable_tooltip_l_english.yml`
+- `localization/replace/simp_chinese/zzzz_ffpa_country_variable_tooltip_l_simp_chinese.yml`
 
 **拥有的行为与接口**
 
@@ -300,6 +302,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 | `je_ottoman_empire_collapse` | 同名日志完整替换 | 排除 FFPA 管理的 2050 TUR，并在旧活动实例失效时清理 T&R 崩溃运行状态；其余上游语义保持不变 | Tech & Res |
 | `je_greek_nationalism_reason`、`je_greek_nationalism_lobby`、`greece.1.t/d/f/a/b`、`greece.4.t/d1/d2/f/a/b/c`、`greece.5.t/d/f/a/b` | 同名本地化键替换 | 将原版十九世纪希腊叙事改写为大火后重新拼合国家对旧世界档案的再解释，并按克制、伟大理想与东罗马路线显示不同结局 | 原版及任何后加载的希腊事件/本地化 Mod |
 | `TUR_ADJ`、`GRE_ADJ` | 同名本地化键替换 | 将 Firefall 英文中误作国名的 `Turkey`、`Greece` 恢复为形容词 `Turkish`、`Greek`；简中同步登记同形词 | 原版、Firefall 及任何后加载的国家本地化 Mod |
+| `country_var_equal` | 同名本地化键替换 | 修复“牛奶汉化”将引擎通用国家变量相等提示误写为融合文化长说明、并在日志条件中反复泄漏的问题 | Workshop `2880069248` 及任何后加载的通用触发器本地化 Mod |
 | `party_agrarian`、`party_anarchist`、`party_communist`、`party_conservative`、`party_fascist`、`party_free_trade`、`party_liberal`、`party_military`、`party_radicals`、`party_religious`、`party_christian`、`revolutionary_party_name`、`party_social_democrats` | 同名本地化键替换 | 通过 scripted GUI 为 BYZ 返回专属党名，并为其他国家返回原版通用名称 | 原版及任何后加载的党名/本地化 Mod |
 
 文件名前缀 `00_`、`zzz_`、`zzzz_` 只是加载排序工具，不等于安全覆盖。不得仅通过改文件名解决冲突；必须记录目标顶层键、操作语义和后加载者。

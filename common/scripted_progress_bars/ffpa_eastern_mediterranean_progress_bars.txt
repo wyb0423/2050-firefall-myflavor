@@ -1,10 +1,17 @@
-# The country variables remain the authoritative save-state for both
-# commonwealth journals. These bars are display mirrors refreshed by the
-# corresponding ffpa_sync_* scripted effects.
+# Country variables remain the authoritative save-state for both commonwealth
+# journals. Native monthly_progress supplies the standard/CMF UI breakdown;
+# the journal pulse then mirrors the country value back into each bar.
 ffpa_tur_commonwealth_administration_bar = {
 	name = "ffpa_commonwealth_administration_bar"
 	desc = "ffpa_tur_commonwealth_administration_bar_desc"
 	second_desc = "ffpa_tur_commonwealth_administration_bar_second_desc"
+	monthly_progress = {
+		if = {
+			limit = { ffpa_tur_commonwealth_administration_conditions = yes }
+			add = { desc = "ffpa_commonwealth_periodic_increase_desc" value = 1 }
+		}
+		else = { subtract = { desc = "ffpa_commonwealth_periodic_decrease_desc" value = 1 } }
+	}
 
 	default_green = yes
 	start_value = 0
@@ -16,6 +23,13 @@ ffpa_tur_commonwealth_civic_bar = {
 	name = "ffpa_commonwealth_civic_bar"
 	desc = "ffpa_tur_commonwealth_civic_bar_desc"
 	second_desc = "ffpa_tur_commonwealth_civic_bar_second_desc"
+	monthly_progress = {
+		if = {
+			limit = { ffpa_tur_commonwealth_civic_conditions = yes }
+			add = { desc = "ffpa_commonwealth_periodic_increase_desc" value = 1 }
+		}
+		else = { subtract = { desc = "ffpa_commonwealth_periodic_decrease_desc" value = 1 } }
+	}
 
 	default_green = yes
 	start_value = 0
@@ -27,6 +41,13 @@ ffpa_tur_commonwealth_stability_bar = {
 	name = "ffpa_commonwealth_stability_bar"
 	desc = "ffpa_tur_commonwealth_stability_bar_desc"
 	second_desc = "ffpa_tur_commonwealth_stability_bar_second_desc"
+	monthly_progress = {
+		if = {
+			limit = { ffpa_tur_commonwealth_stability_conditions = yes }
+			add = { desc = "ffpa_commonwealth_periodic_increase_desc" value = 1 }
+		}
+		else = { subtract = { desc = "ffpa_commonwealth_periodic_decrease_desc" value = 1 } }
+	}
 
 	default_green = yes
 	start_value = 0
@@ -38,6 +59,13 @@ ffpa_byz_commonwealth_administration_bar = {
 	name = "ffpa_commonwealth_administration_bar"
 	desc = "ffpa_byz_commonwealth_administration_bar_desc"
 	second_desc = "ffpa_byz_commonwealth_administration_bar_second_desc"
+	monthly_progress = {
+		if = {
+			limit = { ffpa_byz_commonwealth_administration_conditions = yes }
+			add = { desc = "ffpa_commonwealth_periodic_increase_desc" value = 1 }
+		}
+		else = { subtract = { desc = "ffpa_commonwealth_periodic_decrease_desc" value = 1 } }
+	}
 
 	default_green = yes
 	start_value = 0
@@ -49,6 +77,13 @@ ffpa_byz_commonwealth_civic_bar = {
 	name = "ffpa_commonwealth_civic_bar"
 	desc = "ffpa_byz_commonwealth_civic_bar_desc"
 	second_desc = "ffpa_byz_commonwealth_civic_bar_second_desc"
+	monthly_progress = {
+		if = {
+			limit = { ffpa_byz_commonwealth_civic_conditions = yes }
+			add = { desc = "ffpa_commonwealth_periodic_increase_desc" value = 1 }
+		}
+		else = { subtract = { desc = "ffpa_commonwealth_periodic_decrease_desc" value = 1 } }
+	}
 
 	default_green = yes
 	start_value = 0
@@ -60,6 +95,13 @@ ffpa_byz_commonwealth_stability_bar = {
 	name = "ffpa_commonwealth_stability_bar"
 	desc = "ffpa_byz_commonwealth_stability_bar_desc"
 	second_desc = "ffpa_byz_commonwealth_stability_bar_second_desc"
+	monthly_progress = {
+		if = {
+			limit = { ffpa_byz_commonwealth_stability_conditions = yes }
+			add = { desc = "ffpa_commonwealth_periodic_increase_desc" value = 1 }
+		}
+		else = { subtract = { desc = "ffpa_commonwealth_periodic_decrease_desc" value = 1 } }
+	}
 
 	default_green = yes
 	start_value = 0
