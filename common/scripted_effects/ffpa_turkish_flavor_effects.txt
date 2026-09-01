@@ -467,9 +467,1991 @@ ffpa_check_tur_post_reconstruction_events_v1 = {
 	}
 }
 
+# --- Route-limited frontier recovery ---------------------------------------
+# Country scope throughout. State-region blocks are explicit fixed whitelists;
+# the monthly ensure never traverses the world or refreshes finite cooldowns.
+
+ffpa_ensure_tur_formation_core_claims_v1 = {
+	if = {
+		limit = { c:TUR ?= ROOT }
+		if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_EASTERN_THRACE }
+			NOT = { has_claim = s:STATE_EASTERN_THRACE }
+		}
+		s:STATE_EASTERN_THRACE = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_HUDAVENDIGAR }
+			NOT = { has_claim = s:STATE_HUDAVENDIGAR }
+		}
+		s:STATE_HUDAVENDIGAR = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_AYDIN }
+			NOT = { has_claim = s:STATE_AYDIN }
+		}
+		s:STATE_AYDIN = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_ANKARA }
+			NOT = { has_claim = s:STATE_ANKARA }
+		}
+		s:STATE_ANKARA = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_KONYA }
+			NOT = { has_claim = s:STATE_KONYA }
+		}
+		s:STATE_KONYA = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_ADANA }
+			NOT = { has_claim = s:STATE_ADANA }
+		}
+		s:STATE_ADANA = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_KASTAMONU }
+			NOT = { has_claim = s:STATE_KASTAMONU }
+		}
+		s:STATE_KASTAMONU = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_TRABZON }
+			NOT = { has_claim = s:STATE_TRABZON }
+		}
+		s:STATE_TRABZON = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_ERZURUM }
+			NOT = { has_claim = s:STATE_ERZURUM }
+		}
+		s:STATE_ERZURUM = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_DIYARBAKIR }
+			NOT = { has_claim = s:STATE_DIYARBAKIR }
+		}
+		s:STATE_DIYARBAKIR = { add_claim = ROOT }
+	}
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_KARS }
+			NOT = { has_claim = s:STATE_KARS }
+		}
+		s:STATE_KARS = { add_claim = ROOT }
+	}
+	}
+}
+
+# STATE_WESTERN_THRACE: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_western_thrace_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_WESTERN_THRACE }
+			NOT = { has_claim = s:STATE_WESTERN_THRACE }
+		}
+		s:STATE_WESTERN_THRACE = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_western_thrace_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_western_thrace_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_western_thrace_v1
+			NOT = { owns_entire_state_region = STATE_WESTERN_THRACE }
+			NOT = { has_claim = s:STATE_WESTERN_THRACE }
+		}
+		s:STATE_WESTERN_THRACE = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_western_thrace_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_western_thrace_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_WESTERN_THRACE }
+				has_claim = s:STATE_WESTERN_THRACE
+			}
+			s:STATE_WESTERN_THRACE = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_western_thrace_v1
+	}
+}
+
+# STATE_MOSUL: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_mosul_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_MOSUL }
+			NOT = { has_claim = s:STATE_MOSUL }
+		}
+		s:STATE_MOSUL = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_mosul_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_mosul_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_mosul_v1
+			NOT = { owns_entire_state_region = STATE_MOSUL }
+			NOT = { has_claim = s:STATE_MOSUL }
+		}
+		s:STATE_MOSUL = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_mosul_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_mosul_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_MOSUL }
+				has_claim = s:STATE_MOSUL
+			}
+			s:STATE_MOSUL = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_mosul_v1
+	}
+}
+
+# STATE_ALBANIA: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_albania_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_ALBANIA }
+			NOT = { has_claim = s:STATE_ALBANIA }
+		}
+		s:STATE_ALBANIA = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_albania_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_albania_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_albania_v1
+			NOT = { owns_entire_state_region = STATE_ALBANIA }
+			NOT = { has_claim = s:STATE_ALBANIA }
+		}
+		s:STATE_ALBANIA = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_albania_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_albania_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_ALBANIA }
+				has_claim = s:STATE_ALBANIA
+			}
+			s:STATE_ALBANIA = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_albania_v1
+	}
+}
+
+# STATE_MACEDONIA: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_macedonia_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_MACEDONIA }
+			NOT = { has_claim = s:STATE_MACEDONIA }
+		}
+		s:STATE_MACEDONIA = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_macedonia_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_macedonia_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_macedonia_v1
+			NOT = { owns_entire_state_region = STATE_MACEDONIA }
+			NOT = { has_claim = s:STATE_MACEDONIA }
+		}
+		s:STATE_MACEDONIA = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_macedonia_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_macedonia_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_MACEDONIA }
+				has_claim = s:STATE_MACEDONIA
+			}
+			s:STATE_MACEDONIA = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_macedonia_v1
+	}
+}
+
+# STATE_BULGARIA: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_bulgaria_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_BULGARIA }
+			NOT = { has_claim = s:STATE_BULGARIA }
+		}
+		s:STATE_BULGARIA = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_bulgaria_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_bulgaria_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_bulgaria_v1
+			NOT = { owns_entire_state_region = STATE_BULGARIA }
+			NOT = { has_claim = s:STATE_BULGARIA }
+		}
+		s:STATE_BULGARIA = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_bulgaria_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_bulgaria_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_BULGARIA }
+				has_claim = s:STATE_BULGARIA
+			}
+			s:STATE_BULGARIA = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_bulgaria_v1
+	}
+}
+
+# STATE_DOBRUDJA: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_dobrudja_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_DOBRUDJA }
+			NOT = { has_claim = s:STATE_DOBRUDJA }
+		}
+		s:STATE_DOBRUDJA = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_dobrudja_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_dobrudja_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_dobrudja_v1
+			NOT = { owns_entire_state_region = STATE_DOBRUDJA }
+			NOT = { has_claim = s:STATE_DOBRUDJA }
+		}
+		s:STATE_DOBRUDJA = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_dobrudja_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_dobrudja_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_DOBRUDJA }
+				has_claim = s:STATE_DOBRUDJA
+			}
+			s:STATE_DOBRUDJA = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_dobrudja_v1
+	}
+}
+
+# STATE_NORTHERN_THRACE: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_northern_thrace_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_NORTHERN_THRACE }
+			NOT = { has_claim = s:STATE_NORTHERN_THRACE }
+		}
+		s:STATE_NORTHERN_THRACE = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_northern_thrace_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_northern_thrace_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_northern_thrace_v1
+			NOT = { owns_entire_state_region = STATE_NORTHERN_THRACE }
+			NOT = { has_claim = s:STATE_NORTHERN_THRACE }
+		}
+		s:STATE_NORTHERN_THRACE = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_northern_thrace_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_northern_thrace_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_NORTHERN_THRACE }
+				has_claim = s:STATE_NORTHERN_THRACE
+			}
+			s:STATE_NORTHERN_THRACE = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_northern_thrace_v1
+	}
+}
+
+# STATE_ATTICA: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_attica_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_ATTICA }
+			NOT = { has_claim = s:STATE_ATTICA }
+		}
+		s:STATE_ATTICA = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_attica_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_attica_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_attica_v1
+			NOT = { owns_entire_state_region = STATE_ATTICA }
+			NOT = { has_claim = s:STATE_ATTICA }
+		}
+		s:STATE_ATTICA = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_attica_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_attica_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_ATTICA }
+				has_claim = s:STATE_ATTICA
+			}
+			s:STATE_ATTICA = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_attica_v1
+	}
+}
+
+# STATE_CRETE: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_crete_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_CRETE }
+			NOT = { has_claim = s:STATE_CRETE }
+		}
+		s:STATE_CRETE = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_crete_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_crete_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_crete_v1
+			NOT = { owns_entire_state_region = STATE_CRETE }
+			NOT = { has_claim = s:STATE_CRETE }
+		}
+		s:STATE_CRETE = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_crete_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_crete_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_CRETE }
+				has_claim = s:STATE_CRETE
+			}
+			s:STATE_CRETE = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_crete_v1
+	}
+}
+
+# STATE_EAST_AEGEAN_ISLANDS: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_east_aegean_islands_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS }
+			NOT = { has_claim = s:STATE_EAST_AEGEAN_ISLANDS }
+		}
+		s:STATE_EAST_AEGEAN_ISLANDS = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_east_aegean_islands_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_east_aegean_islands_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_east_aegean_islands_v1
+			NOT = { owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS }
+			NOT = { has_claim = s:STATE_EAST_AEGEAN_ISLANDS }
+		}
+		s:STATE_EAST_AEGEAN_ISLANDS = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_east_aegean_islands_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_east_aegean_islands_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS }
+				has_claim = s:STATE_EAST_AEGEAN_ISLANDS
+			}
+			s:STATE_EAST_AEGEAN_ISLANDS = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_east_aegean_islands_v1
+	}
+}
+
+# STATE_WEST_AEGEAN_ISLANDS: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_west_aegean_islands_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_WEST_AEGEAN_ISLANDS }
+			NOT = { has_claim = s:STATE_WEST_AEGEAN_ISLANDS }
+		}
+		s:STATE_WEST_AEGEAN_ISLANDS = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_west_aegean_islands_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_west_aegean_islands_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_west_aegean_islands_v1
+			NOT = { owns_entire_state_region = STATE_WEST_AEGEAN_ISLANDS }
+			NOT = { has_claim = s:STATE_WEST_AEGEAN_ISLANDS }
+		}
+		s:STATE_WEST_AEGEAN_ISLANDS = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_west_aegean_islands_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_west_aegean_islands_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_WEST_AEGEAN_ISLANDS }
+				has_claim = s:STATE_WEST_AEGEAN_ISLANDS
+			}
+			s:STATE_WEST_AEGEAN_ISLANDS = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_west_aegean_islands_v1
+	}
+}
+
+# STATE_IONIAN_ISLANDS: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_ionian_islands_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_IONIAN_ISLANDS }
+			NOT = { has_claim = s:STATE_IONIAN_ISLANDS }
+		}
+		s:STATE_IONIAN_ISLANDS = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_ionian_islands_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_ionian_islands_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_ionian_islands_v1
+			NOT = { owns_entire_state_region = STATE_IONIAN_ISLANDS }
+			NOT = { has_claim = s:STATE_IONIAN_ISLANDS }
+		}
+		s:STATE_IONIAN_ISLANDS = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_ionian_islands_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_ionian_islands_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_IONIAN_ISLANDS }
+				has_claim = s:STATE_IONIAN_ISLANDS
+			}
+			s:STATE_IONIAN_ISLANDS = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_ionian_islands_v1
+	}
+}
+
+# STATE_CYPRUS: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_cyprus_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_CYPRUS }
+			NOT = { has_claim = s:STATE_CYPRUS }
+		}
+		s:STATE_CYPRUS = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_cyprus_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_cyprus_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_cyprus_v1
+			NOT = { owns_entire_state_region = STATE_CYPRUS }
+			NOT = { has_claim = s:STATE_CYPRUS }
+		}
+		s:STATE_CYPRUS = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_cyprus_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_cyprus_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_CYPRUS }
+				has_claim = s:STATE_CYPRUS
+			}
+			s:STATE_CYPRUS = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_cyprus_v1
+	}
+}
+
+# STATE_ALEPPO: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_aleppo_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_ALEPPO }
+			NOT = { has_claim = s:STATE_ALEPPO }
+		}
+		s:STATE_ALEPPO = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_aleppo_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_aleppo_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_aleppo_v1
+			NOT = { owns_entire_state_region = STATE_ALEPPO }
+			NOT = { has_claim = s:STATE_ALEPPO }
+		}
+		s:STATE_ALEPPO = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_aleppo_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_aleppo_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_ALEPPO }
+				has_claim = s:STATE_ALEPPO
+			}
+			s:STATE_ALEPPO = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_aleppo_v1
+	}
+}
+
+# STATE_SYRIA: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_syria_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_SYRIA }
+			NOT = { has_claim = s:STATE_SYRIA }
+		}
+		s:STATE_SYRIA = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_syria_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_syria_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_syria_v1
+			NOT = { owns_entire_state_region = STATE_SYRIA }
+			NOT = { has_claim = s:STATE_SYRIA }
+		}
+		s:STATE_SYRIA = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_syria_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_syria_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_SYRIA }
+				has_claim = s:STATE_SYRIA
+			}
+			s:STATE_SYRIA = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_syria_v1
+	}
+}
+
+# STATE_LEBANON: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_lebanon_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_LEBANON }
+			NOT = { has_claim = s:STATE_LEBANON }
+		}
+		s:STATE_LEBANON = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_lebanon_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_lebanon_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_lebanon_v1
+			NOT = { owns_entire_state_region = STATE_LEBANON }
+			NOT = { has_claim = s:STATE_LEBANON }
+		}
+		s:STATE_LEBANON = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_lebanon_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_lebanon_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_LEBANON }
+				has_claim = s:STATE_LEBANON
+			}
+			s:STATE_LEBANON = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_lebanon_v1
+	}
+}
+
+# STATE_PALESTINE: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_palestine_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_PALESTINE }
+			NOT = { has_claim = s:STATE_PALESTINE }
+		}
+		s:STATE_PALESTINE = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_palestine_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_palestine_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_palestine_v1
+			NOT = { owns_entire_state_region = STATE_PALESTINE }
+			NOT = { has_claim = s:STATE_PALESTINE }
+		}
+		s:STATE_PALESTINE = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_palestine_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_palestine_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_PALESTINE }
+				has_claim = s:STATE_PALESTINE
+			}
+			s:STATE_PALESTINE = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_palestine_v1
+	}
+}
+
+# STATE_TRANSJORDAN: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_transjordan_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_TRANSJORDAN }
+			NOT = { has_claim = s:STATE_TRANSJORDAN }
+		}
+		s:STATE_TRANSJORDAN = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_transjordan_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_transjordan_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_transjordan_v1
+			NOT = { owns_entire_state_region = STATE_TRANSJORDAN }
+			NOT = { has_claim = s:STATE_TRANSJORDAN }
+		}
+		s:STATE_TRANSJORDAN = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_transjordan_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_transjordan_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_TRANSJORDAN }
+				has_claim = s:STATE_TRANSJORDAN
+			}
+			s:STATE_TRANSJORDAN = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_transjordan_v1
+	}
+}
+
+# STATE_BAGHDAD: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_baghdad_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_BAGHDAD }
+			NOT = { has_claim = s:STATE_BAGHDAD }
+		}
+		s:STATE_BAGHDAD = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_baghdad_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_baghdad_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_baghdad_v1
+			NOT = { owns_entire_state_region = STATE_BAGHDAD }
+			NOT = { has_claim = s:STATE_BAGHDAD }
+		}
+		s:STATE_BAGHDAD = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_baghdad_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_baghdad_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_BAGHDAD }
+				has_claim = s:STATE_BAGHDAD
+			}
+			s:STATE_BAGHDAD = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_baghdad_v1
+	}
+}
+
+# STATE_DEIR_EZ_ZOR: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_deir_ez_zor_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_DEIR_EZ_ZOR }
+			NOT = { has_claim = s:STATE_DEIR_EZ_ZOR }
+		}
+		s:STATE_DEIR_EZ_ZOR = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_deir_ez_zor_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_deir_ez_zor_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_deir_ez_zor_v1
+			NOT = { owns_entire_state_region = STATE_DEIR_EZ_ZOR }
+			NOT = { has_claim = s:STATE_DEIR_EZ_ZOR }
+		}
+		s:STATE_DEIR_EZ_ZOR = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_deir_ez_zor_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_deir_ez_zor_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_DEIR_EZ_ZOR }
+				has_claim = s:STATE_DEIR_EZ_ZOR
+			}
+			s:STATE_DEIR_EZ_ZOR = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_deir_ez_zor_v1
+	}
+}
+
+# STATE_BASRA: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_basra_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_BASRA }
+			NOT = { has_claim = s:STATE_BASRA }
+		}
+		s:STATE_BASRA = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_basra_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_basra_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_basra_v1
+			NOT = { owns_entire_state_region = STATE_BASRA }
+			NOT = { has_claim = s:STATE_BASRA }
+		}
+		s:STATE_BASRA = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_basra_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_basra_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_BASRA }
+				has_claim = s:STATE_BASRA
+			}
+			s:STATE_BASRA = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_basra_v1
+	}
+}
+
+# STATE_LOWER_EGYPT: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_lower_egypt_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_LOWER_EGYPT }
+			NOT = { has_claim = s:STATE_LOWER_EGYPT }
+		}
+		s:STATE_LOWER_EGYPT = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_lower_egypt_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_lower_egypt_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_lower_egypt_v1
+			NOT = { owns_entire_state_region = STATE_LOWER_EGYPT }
+			NOT = { has_claim = s:STATE_LOWER_EGYPT }
+		}
+		s:STATE_LOWER_EGYPT = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_lower_egypt_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_lower_egypt_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_LOWER_EGYPT }
+				has_claim = s:STATE_LOWER_EGYPT
+			}
+			s:STATE_LOWER_EGYPT = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_lower_egypt_v1
+	}
+}
+
+# STATE_MIDDLE_EGYPT: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_middle_egypt_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_MIDDLE_EGYPT }
+			NOT = { has_claim = s:STATE_MIDDLE_EGYPT }
+		}
+		s:STATE_MIDDLE_EGYPT = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_middle_egypt_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_middle_egypt_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_middle_egypt_v1
+			NOT = { owns_entire_state_region = STATE_MIDDLE_EGYPT }
+			NOT = { has_claim = s:STATE_MIDDLE_EGYPT }
+		}
+		s:STATE_MIDDLE_EGYPT = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_middle_egypt_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_middle_egypt_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_MIDDLE_EGYPT }
+				has_claim = s:STATE_MIDDLE_EGYPT
+			}
+			s:STATE_MIDDLE_EGYPT = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_middle_egypt_v1
+	}
+}
+
+# STATE_UPPER_EGYPT: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_upper_egypt_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_UPPER_EGYPT }
+			NOT = { has_claim = s:STATE_UPPER_EGYPT }
+		}
+		s:STATE_UPPER_EGYPT = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_upper_egypt_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_upper_egypt_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_upper_egypt_v1
+			NOT = { owns_entire_state_region = STATE_UPPER_EGYPT }
+			NOT = { has_claim = s:STATE_UPPER_EGYPT }
+		}
+		s:STATE_UPPER_EGYPT = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_upper_egypt_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_upper_egypt_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_UPPER_EGYPT }
+				has_claim = s:STATE_UPPER_EGYPT
+			}
+			s:STATE_UPPER_EGYPT = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_upper_egypt_v1
+	}
+}
+
+# STATE_SINAI: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_sinai_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_SINAI }
+			NOT = { has_claim = s:STATE_SINAI }
+		}
+		s:STATE_SINAI = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_sinai_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_sinai_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_sinai_v1
+			NOT = { owns_entire_state_region = STATE_SINAI }
+			NOT = { has_claim = s:STATE_SINAI }
+		}
+		s:STATE_SINAI = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_sinai_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_sinai_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_SINAI }
+				has_claim = s:STATE_SINAI
+			}
+			s:STATE_SINAI = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_sinai_v1
+	}
+}
+
+# STATE_MATRUH: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_matruh_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_MATRUH }
+			NOT = { has_claim = s:STATE_MATRUH }
+		}
+		s:STATE_MATRUH = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_matruh_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_matruh_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_matruh_v1
+			NOT = { owns_entire_state_region = STATE_MATRUH }
+			NOT = { has_claim = s:STATE_MATRUH }
+		}
+		s:STATE_MATRUH = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_matruh_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_matruh_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_MATRUH }
+				has_claim = s:STATE_MATRUH
+			}
+			s:STATE_MATRUH = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_matruh_v1
+	}
+}
+
+# STATE_LIBYA: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_libya_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_LIBYA }
+			NOT = { has_claim = s:STATE_LIBYA }
+		}
+		s:STATE_LIBYA = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_libya_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_libya_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_libya_v1
+			NOT = { owns_entire_state_region = STATE_LIBYA }
+			NOT = { has_claim = s:STATE_LIBYA }
+		}
+		s:STATE_LIBYA = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_libya_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_libya_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_LIBYA }
+				has_claim = s:STATE_LIBYA
+			}
+			s:STATE_LIBYA = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_libya_v1
+	}
+}
+
+# STATE_TRIPOLI: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_tripoli_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_TRIPOLI }
+			NOT = { has_claim = s:STATE_TRIPOLI }
+		}
+		s:STATE_TRIPOLI = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_tripoli_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_tripoli_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_tripoli_v1
+			NOT = { owns_entire_state_region = STATE_TRIPOLI }
+			NOT = { has_claim = s:STATE_TRIPOLI }
+		}
+		s:STATE_TRIPOLI = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_tripoli_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_tripoli_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_TRIPOLI }
+				has_claim = s:STATE_TRIPOLI
+			}
+			s:STATE_TRIPOLI = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_tripoli_v1
+	}
+}
+
+# STATE_TUNISIA: add only when FFPA is the first source, repair only while marked,
+# and remove only the claim whose provenance marker is still present.
+ffpa_add_tur_temporary_claim_tunisia_v1 = {
+	if = {
+		limit = {
+			NOT = { owns_entire_state_region = STATE_TUNISIA }
+			NOT = { has_claim = s:STATE_TUNISIA }
+		}
+		s:STATE_TUNISIA = { add_claim = ROOT }
+		set_variable = ffpa_tur_temporary_claim_tunisia_v1
+	}
+}
+
+ffpa_ensure_tur_temporary_claim_tunisia_v1 = {
+	if = {
+		limit = {
+			has_variable = ffpa_tur_temporary_claim_tunisia_v1
+			NOT = { owns_entire_state_region = STATE_TUNISIA }
+			NOT = { has_claim = s:STATE_TUNISIA }
+		}
+		s:STATE_TUNISIA = { add_claim = ROOT }
+	}
+}
+
+ffpa_cleanup_tur_temporary_claim_tunisia_v1 = {
+	if = {
+		limit = { has_variable = ffpa_tur_temporary_claim_tunisia_v1 }
+		if = {
+			limit = {
+				NOT = { owns_entire_state_region = STATE_TUNISIA }
+				has_claim = s:STATE_TUNISIA
+			}
+			s:STATE_TUNISIA = { remove_claim = ROOT }
+		}
+		remove_variable = ffpa_tur_temporary_claim_tunisia_v1
+	}
+}
+
+ffpa_add_tur_front_western_pact_claims_v1 = {
+	ffpa_add_tur_temporary_claim_western_thrace_v1 = yes
+}
+
+ffpa_ensure_tur_front_western_pact_claims_v1 = {
+	ffpa_ensure_tur_temporary_claim_western_thrace_v1 = yes
+}
+
+ffpa_cleanup_tur_front_western_pact_claims_v1 = {
+	ffpa_cleanup_tur_temporary_claim_western_thrace_v1 = yes
+}
+
+ffpa_add_tur_front_mosul_claims_v1 = {
+	ffpa_add_tur_temporary_claim_mosul_v1 = yes
+}
+
+ffpa_ensure_tur_front_mosul_claims_v1 = {
+	ffpa_ensure_tur_temporary_claim_mosul_v1 = yes
+}
+
+ffpa_cleanup_tur_front_mosul_claims_v1 = {
+	ffpa_cleanup_tur_temporary_claim_mosul_v1 = yes
+}
+
+ffpa_add_tur_front_rumelia_claims_v1 = {
+	ffpa_add_tur_temporary_claim_albania_v1 = yes
+	ffpa_add_tur_temporary_claim_macedonia_v1 = yes
+	ffpa_add_tur_temporary_claim_western_thrace_v1 = yes
+	ffpa_add_tur_temporary_claim_bulgaria_v1 = yes
+	ffpa_add_tur_temporary_claim_dobrudja_v1 = yes
+	ffpa_add_tur_temporary_claim_northern_thrace_v1 = yes
+}
+
+ffpa_ensure_tur_front_rumelia_claims_v1 = {
+	ffpa_ensure_tur_temporary_claim_albania_v1 = yes
+	ffpa_ensure_tur_temporary_claim_macedonia_v1 = yes
+	ffpa_ensure_tur_temporary_claim_western_thrace_v1 = yes
+	ffpa_ensure_tur_temporary_claim_bulgaria_v1 = yes
+	ffpa_ensure_tur_temporary_claim_dobrudja_v1 = yes
+	ffpa_ensure_tur_temporary_claim_northern_thrace_v1 = yes
+}
+
+ffpa_cleanup_tur_front_rumelia_claims_v1 = {
+	ffpa_cleanup_tur_temporary_claim_albania_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_macedonia_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_western_thrace_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_bulgaria_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_dobrudja_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_northern_thrace_v1 = yes
+}
+
+ffpa_add_tur_front_aegean_cyprus_claims_v1 = {
+	ffpa_add_tur_temporary_claim_attica_v1 = yes
+	ffpa_add_tur_temporary_claim_crete_v1 = yes
+	ffpa_add_tur_temporary_claim_east_aegean_islands_v1 = yes
+	ffpa_add_tur_temporary_claim_west_aegean_islands_v1 = yes
+	ffpa_add_tur_temporary_claim_ionian_islands_v1 = yes
+	ffpa_add_tur_temporary_claim_cyprus_v1 = yes
+}
+
+ffpa_ensure_tur_front_aegean_cyprus_claims_v1 = {
+	ffpa_ensure_tur_temporary_claim_attica_v1 = yes
+	ffpa_ensure_tur_temporary_claim_crete_v1 = yes
+	ffpa_ensure_tur_temporary_claim_east_aegean_islands_v1 = yes
+	ffpa_ensure_tur_temporary_claim_west_aegean_islands_v1 = yes
+	ffpa_ensure_tur_temporary_claim_ionian_islands_v1 = yes
+	ffpa_ensure_tur_temporary_claim_cyprus_v1 = yes
+}
+
+ffpa_cleanup_tur_front_aegean_cyprus_claims_v1 = {
+	ffpa_cleanup_tur_temporary_claim_attica_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_crete_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_east_aegean_islands_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_west_aegean_islands_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_ionian_islands_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_cyprus_v1 = yes
+}
+
+ffpa_add_tur_front_levant_claims_v1 = {
+	ffpa_add_tur_temporary_claim_aleppo_v1 = yes
+	ffpa_add_tur_temporary_claim_syria_v1 = yes
+	ffpa_add_tur_temporary_claim_lebanon_v1 = yes
+	ffpa_add_tur_temporary_claim_palestine_v1 = yes
+	ffpa_add_tur_temporary_claim_transjordan_v1 = yes
+}
+
+ffpa_ensure_tur_front_levant_claims_v1 = {
+	ffpa_ensure_tur_temporary_claim_aleppo_v1 = yes
+	ffpa_ensure_tur_temporary_claim_syria_v1 = yes
+	ffpa_ensure_tur_temporary_claim_lebanon_v1 = yes
+	ffpa_ensure_tur_temporary_claim_palestine_v1 = yes
+	ffpa_ensure_tur_temporary_claim_transjordan_v1 = yes
+}
+
+ffpa_cleanup_tur_front_levant_claims_v1 = {
+	ffpa_cleanup_tur_temporary_claim_aleppo_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_syria_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_lebanon_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_palestine_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_transjordan_v1 = yes
+}
+
+ffpa_add_tur_front_mesopotamia_claims_v1 = {
+	ffpa_add_tur_temporary_claim_mosul_v1 = yes
+	ffpa_add_tur_temporary_claim_baghdad_v1 = yes
+	ffpa_add_tur_temporary_claim_deir_ez_zor_v1 = yes
+	ffpa_add_tur_temporary_claim_basra_v1 = yes
+}
+
+ffpa_ensure_tur_front_mesopotamia_claims_v1 = {
+	ffpa_ensure_tur_temporary_claim_mosul_v1 = yes
+	ffpa_ensure_tur_temporary_claim_baghdad_v1 = yes
+	ffpa_ensure_tur_temporary_claim_deir_ez_zor_v1 = yes
+	ffpa_ensure_tur_temporary_claim_basra_v1 = yes
+}
+
+ffpa_cleanup_tur_front_mesopotamia_claims_v1 = {
+	ffpa_cleanup_tur_temporary_claim_mosul_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_baghdad_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_deir_ez_zor_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_basra_v1 = yes
+}
+
+ffpa_add_tur_front_egypt_claims_v1 = {
+	ffpa_add_tur_temporary_claim_lower_egypt_v1 = yes
+	ffpa_add_tur_temporary_claim_middle_egypt_v1 = yes
+	ffpa_add_tur_temporary_claim_upper_egypt_v1 = yes
+	ffpa_add_tur_temporary_claim_sinai_v1 = yes
+	ffpa_add_tur_temporary_claim_matruh_v1 = yes
+}
+
+ffpa_ensure_tur_front_egypt_claims_v1 = {
+	ffpa_ensure_tur_temporary_claim_lower_egypt_v1 = yes
+	ffpa_ensure_tur_temporary_claim_middle_egypt_v1 = yes
+	ffpa_ensure_tur_temporary_claim_upper_egypt_v1 = yes
+	ffpa_ensure_tur_temporary_claim_sinai_v1 = yes
+	ffpa_ensure_tur_temporary_claim_matruh_v1 = yes
+}
+
+ffpa_cleanup_tur_front_egypt_claims_v1 = {
+	ffpa_cleanup_tur_temporary_claim_lower_egypt_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_middle_egypt_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_upper_egypt_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_sinai_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_matruh_v1 = yes
+}
+
+ffpa_add_tur_front_ifriqiya_claims_v1 = {
+	ffpa_add_tur_temporary_claim_libya_v1 = yes
+	ffpa_add_tur_temporary_claim_tripoli_v1 = yes
+	ffpa_add_tur_temporary_claim_tunisia_v1 = yes
+}
+
+ffpa_ensure_tur_front_ifriqiya_claims_v1 = {
+	ffpa_ensure_tur_temporary_claim_libya_v1 = yes
+	ffpa_ensure_tur_temporary_claim_tripoli_v1 = yes
+	ffpa_ensure_tur_temporary_claim_tunisia_v1 = yes
+}
+
+ffpa_cleanup_tur_front_ifriqiya_claims_v1 = {
+	ffpa_cleanup_tur_temporary_claim_libya_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_tripoli_v1 = yes
+	ffpa_cleanup_tur_temporary_claim_tunisia_v1 = yes
+}
+
+ffpa_clear_tur_ztr_collapse_runtime_v1 = {
+	remove_variable = ottoman_empire_collapse_var
+	remove_variable = ottoman_empire_collapse_arab_var
+	remove_variable = ottoman_empire_collapse_army_var
+	remove_variable = ottoman_empire_collapse_foreign_var
+	remove_variable = ottoman_collapse_arab_congress_var
+	remove_variable = ottoman_collapse_debt_var
+	remove_variable = ottoman_collapse_officer_var
+	remove_variable = ztr_ottoman_collapse_egypt_aid_taken
+	remove_variable = ztr_ottoman_collapse_syria_aid_taken
+	remove_variable = ztr_ottoman_collapse_iraq_aid_taken
+}
+
+ffpa_start_tur_front_western_pact_v1 = {
+	if = {
+		limit = {
+			ffpa_tur_frontier_slot_available_v1 = yes
+			ffpa_tur_front_western_pact_available_v1 = yes
+		}
+		ffpa_add_tur_front_western_pact_claims_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_front_western_pact }
+	}
+}
+
+ffpa_complete_tur_front_western_pact_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_tur_front_western_pact_complete_v1 } }
+		set_variable = ffpa_tur_front_western_pact_complete_v1
+		ffpa_cleanup_tur_front_western_pact_claims_v1 = yes
+		remove_variable = ffpa_tur_front_western_pact_resolution_pending_v1
+		trigger_event = { id = ffpa_tur_flavor.61 popup = yes }
+	}
+}
+
+ffpa_fail_tur_front_western_pact_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_western_pact_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_western_pact_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_western_pact_claims_v1 = yes
+		remove_variable = ffpa_tur_front_western_pact_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_western_pact_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.69 popup = yes }
+	}
+}
+
+ffpa_withdraw_tur_front_western_pact_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_western_pact_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_western_pact_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_western_pact_claims_v1 = yes
+		remove_variable = ffpa_tur_front_western_pact_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_western_pact_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.77 popup = yes }
+	}
+	remove_variable = ffpa_tur_frontier_withdraw_requested_v1
+}
+
+ffpa_start_tur_front_mosul_v1 = {
+	if = {
+		limit = {
+			ffpa_tur_frontier_slot_available_v1 = yes
+			ffpa_tur_front_mosul_available_v1 = yes
+		}
+		ffpa_add_tur_front_mosul_claims_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_front_mosul }
+	}
+}
+
+ffpa_complete_tur_front_mosul_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_tur_front_mosul_complete_v1 } }
+		set_variable = ffpa_tur_front_mosul_complete_v1
+		ffpa_cleanup_tur_front_mosul_claims_v1 = yes
+		remove_variable = ffpa_tur_front_mosul_resolution_pending_v1
+		trigger_event = { id = ffpa_tur_flavor.62 popup = yes }
+	}
+}
+
+ffpa_fail_tur_front_mosul_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_mosul_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_mosul_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_mosul_claims_v1 = yes
+		remove_variable = ffpa_tur_front_mosul_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_mosul_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.70 popup = yes }
+	}
+}
+
+ffpa_withdraw_tur_front_mosul_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_mosul_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_mosul_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_mosul_claims_v1 = yes
+		remove_variable = ffpa_tur_front_mosul_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_mosul_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.78 popup = yes }
+	}
+	remove_variable = ffpa_tur_frontier_withdraw_requested_v1
+}
+
+ffpa_start_tur_front_rumelia_v1 = {
+	if = {
+		limit = {
+			ffpa_tur_frontier_slot_available_v1 = yes
+			ffpa_tur_front_rumelia_available_v1 = yes
+		}
+		ffpa_add_tur_front_rumelia_claims_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_front_rumelia }
+	}
+}
+
+ffpa_complete_tur_front_rumelia_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_tur_front_rumelia_complete_v1 } }
+		set_variable = ffpa_tur_front_rumelia_complete_v1
+		ffpa_cleanup_tur_front_rumelia_claims_v1 = yes
+		remove_variable = ffpa_tur_front_rumelia_resolution_pending_v1
+		trigger_event = { id = ffpa_tur_flavor.63 popup = yes }
+	}
+}
+
+ffpa_fail_tur_front_rumelia_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_rumelia_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_rumelia_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_rumelia_claims_v1 = yes
+		remove_variable = ffpa_tur_front_rumelia_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_rumelia_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.71 popup = yes }
+	}
+}
+
+ffpa_withdraw_tur_front_rumelia_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_rumelia_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_rumelia_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_rumelia_claims_v1 = yes
+		remove_variable = ffpa_tur_front_rumelia_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_rumelia_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.79 popup = yes }
+	}
+	remove_variable = ffpa_tur_frontier_withdraw_requested_v1
+}
+
+ffpa_start_tur_front_aegean_cyprus_v1 = {
+	if = {
+		limit = {
+			ffpa_tur_frontier_slot_available_v1 = yes
+			ffpa_tur_front_aegean_cyprus_available_v1 = yes
+		}
+		ffpa_add_tur_front_aegean_cyprus_claims_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_front_aegean_cyprus }
+	}
+}
+
+ffpa_complete_tur_front_aegean_cyprus_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_tur_front_aegean_cyprus_complete_v1 } }
+		set_variable = ffpa_tur_front_aegean_cyprus_complete_v1
+		ffpa_cleanup_tur_front_aegean_cyprus_claims_v1 = yes
+		remove_variable = ffpa_tur_front_aegean_cyprus_resolution_pending_v1
+		trigger_event = { id = ffpa_tur_flavor.64 popup = yes }
+	}
+}
+
+ffpa_fail_tur_front_aegean_cyprus_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_aegean_cyprus_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_aegean_cyprus_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_aegean_cyprus_claims_v1 = yes
+		remove_variable = ffpa_tur_front_aegean_cyprus_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_aegean_cyprus_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.72 popup = yes }
+	}
+}
+
+ffpa_withdraw_tur_front_aegean_cyprus_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_aegean_cyprus_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_aegean_cyprus_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_aegean_cyprus_claims_v1 = yes
+		remove_variable = ffpa_tur_front_aegean_cyprus_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_aegean_cyprus_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.80 popup = yes }
+	}
+	remove_variable = ffpa_tur_frontier_withdraw_requested_v1
+}
+
+ffpa_start_tur_front_levant_v1 = {
+	if = {
+		limit = {
+			ffpa_tur_frontier_slot_available_v1 = yes
+			ffpa_tur_front_levant_available_v1 = yes
+		}
+		ffpa_add_tur_front_levant_claims_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_front_levant }
+	}
+}
+
+ffpa_complete_tur_front_levant_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_tur_front_levant_complete_v1 } }
+		set_variable = ffpa_tur_front_levant_complete_v1
+		ffpa_cleanup_tur_front_levant_claims_v1 = yes
+		remove_variable = ffpa_tur_front_levant_resolution_pending_v1
+		trigger_event = { id = ffpa_tur_flavor.65 popup = yes }
+	}
+}
+
+ffpa_fail_tur_front_levant_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_levant_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_levant_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_levant_claims_v1 = yes
+		remove_variable = ffpa_tur_front_levant_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_levant_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.73 popup = yes }
+	}
+}
+
+ffpa_withdraw_tur_front_levant_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_levant_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_levant_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_levant_claims_v1 = yes
+		remove_variable = ffpa_tur_front_levant_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_levant_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.81 popup = yes }
+	}
+	remove_variable = ffpa_tur_frontier_withdraw_requested_v1
+}
+
+ffpa_start_tur_front_mesopotamia_v1 = {
+	if = {
+		limit = {
+			ffpa_tur_frontier_slot_available_v1 = yes
+			ffpa_tur_front_mesopotamia_available_v1 = yes
+		}
+		ffpa_add_tur_front_mesopotamia_claims_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_front_mesopotamia }
+	}
+}
+
+ffpa_complete_tur_front_mesopotamia_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_tur_front_mesopotamia_complete_v1 } }
+		set_variable = ffpa_tur_front_mesopotamia_complete_v1
+		ffpa_cleanup_tur_front_mesopotamia_claims_v1 = yes
+		remove_variable = ffpa_tur_front_mesopotamia_resolution_pending_v1
+		trigger_event = { id = ffpa_tur_flavor.66 popup = yes }
+	}
+}
+
+ffpa_fail_tur_front_mesopotamia_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_mesopotamia_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_mesopotamia_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_mesopotamia_claims_v1 = yes
+		remove_variable = ffpa_tur_front_mesopotamia_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_mesopotamia_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.74 popup = yes }
+	}
+}
+
+ffpa_withdraw_tur_front_mesopotamia_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_mesopotamia_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_mesopotamia_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_mesopotamia_claims_v1 = yes
+		remove_variable = ffpa_tur_front_mesopotamia_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_mesopotamia_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.82 popup = yes }
+	}
+	remove_variable = ffpa_tur_frontier_withdraw_requested_v1
+}
+
+ffpa_start_tur_front_egypt_v1 = {
+	if = {
+		limit = {
+			ffpa_tur_frontier_slot_available_v1 = yes
+			ffpa_tur_front_egypt_available_v1 = yes
+		}
+		ffpa_add_tur_front_egypt_claims_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_front_egypt }
+	}
+}
+
+ffpa_complete_tur_front_egypt_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_tur_front_egypt_complete_v1 } }
+		set_variable = ffpa_tur_front_egypt_complete_v1
+		ffpa_cleanup_tur_front_egypt_claims_v1 = yes
+		remove_variable = ffpa_tur_front_egypt_resolution_pending_v1
+		trigger_event = { id = ffpa_tur_flavor.67 popup = yes }
+	}
+}
+
+ffpa_fail_tur_front_egypt_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_egypt_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_egypt_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_egypt_claims_v1 = yes
+		remove_variable = ffpa_tur_front_egypt_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_egypt_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.75 popup = yes }
+	}
+}
+
+ffpa_withdraw_tur_front_egypt_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_egypt_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_egypt_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_egypt_claims_v1 = yes
+		remove_variable = ffpa_tur_front_egypt_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_egypt_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.83 popup = yes }
+	}
+	remove_variable = ffpa_tur_frontier_withdraw_requested_v1
+}
+
+ffpa_start_tur_front_ifriqiya_v1 = {
+	if = {
+		limit = {
+			ffpa_tur_frontier_slot_available_v1 = yes
+			ffpa_tur_front_ifriqiya_available_v1 = yes
+		}
+		ffpa_add_tur_front_ifriqiya_claims_v1 = yes
+		add_journal_entry = { type = je_ffpa_tur_front_ifriqiya }
+	}
+}
+
+ffpa_complete_tur_front_ifriqiya_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_tur_front_ifriqiya_complete_v1 } }
+		set_variable = ffpa_tur_front_ifriqiya_complete_v1
+		ffpa_cleanup_tur_front_ifriqiya_claims_v1 = yes
+		remove_variable = ffpa_tur_front_ifriqiya_resolution_pending_v1
+		trigger_event = { id = ffpa_tur_flavor.68 popup = yes }
+	}
+}
+
+ffpa_fail_tur_front_ifriqiya_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_ifriqiya_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_ifriqiya_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_ifriqiya_claims_v1 = yes
+		remove_variable = ffpa_tur_front_ifriqiya_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_ifriqiya_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.76 popup = yes }
+	}
+}
+
+ffpa_withdraw_tur_front_ifriqiya_v1 = {
+	if = {
+		limit = {
+			NOT = { has_variable = ffpa_tur_front_ifriqiya_complete_v1 }
+			NOT = { has_variable = ffpa_tur_front_ifriqiya_retry_cooldown_v1 }
+		}
+		ffpa_cleanup_tur_front_ifriqiya_claims_v1 = yes
+		remove_variable = ffpa_tur_front_ifriqiya_resolution_pending_v1
+		set_variable = { name = ffpa_tur_front_ifriqiya_retry_cooldown_v1 years = 5 }
+		trigger_event = { id = ffpa_tur_flavor.84 popup = yes }
+	}
+	remove_variable = ffpa_tur_frontier_withdraw_requested_v1
+}
+
+ffpa_ensure_tur_active_front_claims_v1 = {
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_front_western_pact }
+		ffpa_ensure_tur_front_western_pact_claims_v1 = yes
+	}
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_front_mosul }
+		ffpa_ensure_tur_front_mosul_claims_v1 = yes
+	}
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_front_rumelia }
+		ffpa_ensure_tur_front_rumelia_claims_v1 = yes
+	}
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_front_aegean_cyprus }
+		ffpa_ensure_tur_front_aegean_cyprus_claims_v1 = yes
+	}
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_front_levant }
+		ffpa_ensure_tur_front_levant_claims_v1 = yes
+	}
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_front_mesopotamia }
+		ffpa_ensure_tur_front_mesopotamia_claims_v1 = yes
+	}
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_front_egypt }
+		ffpa_ensure_tur_front_egypt_claims_v1 = yes
+	}
+	if = {
+		limit = { has_journal_entry = je_ffpa_tur_front_ifriqiya }
+		ffpa_ensure_tur_front_ifriqiya_claims_v1 = yes
+	}
+}
+
+ffpa_resolve_tur_pending_fronts_v1 = {
+	if = {
+		limit = {
+			is_at_war = no
+			is_diplomatic_play_committed_participant = no
+		}
+		if = {
+			limit = { has_variable = ffpa_tur_front_western_pact_resolution_pending_v1 }
+			if = {
+				limit = { ffpa_tur_front_western_pact_owned_v1 = yes }
+				ffpa_complete_tur_front_western_pact_v1 = yes
+			}
+			else = { ffpa_fail_tur_front_western_pact_v1 = yes }
+		}
+		if = {
+			limit = { has_variable = ffpa_tur_front_mosul_resolution_pending_v1 }
+			if = {
+				limit = { ffpa_tur_front_mosul_owned_v1 = yes }
+				ffpa_complete_tur_front_mosul_v1 = yes
+			}
+			else = { ffpa_fail_tur_front_mosul_v1 = yes }
+		}
+		if = {
+			limit = { has_variable = ffpa_tur_front_rumelia_resolution_pending_v1 }
+			if = {
+				limit = { ffpa_tur_front_rumelia_owned_v1 = yes }
+				ffpa_complete_tur_front_rumelia_v1 = yes
+			}
+			else = { ffpa_fail_tur_front_rumelia_v1 = yes }
+		}
+		if = {
+			limit = { has_variable = ffpa_tur_front_aegean_cyprus_resolution_pending_v1 }
+			if = {
+				limit = { ffpa_tur_front_aegean_cyprus_owned_v1 = yes }
+				ffpa_complete_tur_front_aegean_cyprus_v1 = yes
+			}
+			else = { ffpa_fail_tur_front_aegean_cyprus_v1 = yes }
+		}
+		if = {
+			limit = { has_variable = ffpa_tur_front_levant_resolution_pending_v1 }
+			if = {
+				limit = { ffpa_tur_front_levant_owned_v1 = yes }
+				ffpa_complete_tur_front_levant_v1 = yes
+			}
+			else = { ffpa_fail_tur_front_levant_v1 = yes }
+		}
+		if = {
+			limit = { has_variable = ffpa_tur_front_mesopotamia_resolution_pending_v1 }
+			if = {
+				limit = { ffpa_tur_front_mesopotamia_owned_v1 = yes }
+				ffpa_complete_tur_front_mesopotamia_v1 = yes
+			}
+			else = { ffpa_fail_tur_front_mesopotamia_v1 = yes }
+		}
+		if = {
+			limit = { has_variable = ffpa_tur_front_egypt_resolution_pending_v1 }
+			if = {
+				limit = { ffpa_tur_front_egypt_owned_v1 = yes }
+				ffpa_complete_tur_front_egypt_v1 = yes
+			}
+			else = { ffpa_fail_tur_front_egypt_v1 = yes }
+		}
+		if = {
+			limit = { has_variable = ffpa_tur_front_ifriqiya_resolution_pending_v1 }
+			if = {
+				limit = { ffpa_tur_front_ifriqiya_owned_v1 = yes }
+				ffpa_complete_tur_front_ifriqiya_v1 = yes
+			}
+			else = { ffpa_fail_tur_front_ifriqiya_v1 = yes }
+		}
+	}
+}
+
+ffpa_migrate_tur_frontier_recovery_v1 = {
+	if = {
+		limit = {
+			ffpa_tur_has_frontier_route_terminal_v1 = yes
+			NOT = { has_variable = ffpa_tur_frontier_recovery_migrated_v1 }
+		}
+		if = {
+			limit = { ffpa_tur_has_republican_state_project_v1 = yes }
+			if = {
+				limit = { ffpa_tur_front_western_pact_owned_v1 = yes }
+				set_variable = ffpa_tur_front_western_pact_complete_v1
+			}
+			if = {
+				limit = { ffpa_tur_front_mosul_owned_v1 = yes }
+				set_variable = ffpa_tur_front_mosul_complete_v1
+			}
+		}
+		else_if = {
+			limit = { ffpa_tur_has_directorate_state_project_v1 = yes }
+			if = {
+				limit = {
+					ffpa_tur_front_rumelia_owned_v1 = yes
+				}
+				set_variable = ffpa_tur_front_rumelia_complete_v1
+			}
+			if = {
+				limit = {
+					ffpa_tur_front_levant_owned_v1 = yes
+				}
+				set_variable = ffpa_tur_front_levant_complete_v1
+			}
+			if = {
+				limit = {
+					has_variable = ffpa_tur_front_levant_complete_v1
+					ffpa_tur_front_mesopotamia_owned_v1 = yes
+				}
+				set_variable = ffpa_tur_front_mesopotamia_complete_v1
+			}
+		}
+		else_if = {
+			limit = { ffpa_tur_has_ottoman_state_project_v1 = yes }
+			if = {
+				limit = {
+					ffpa_tur_front_rumelia_owned_v1 = yes
+				}
+				set_variable = ffpa_tur_front_rumelia_complete_v1
+			}
+			if = {
+				limit = {
+					ffpa_tur_front_levant_owned_v1 = yes
+				}
+				set_variable = ffpa_tur_front_levant_complete_v1
+			}
+			if = {
+				limit = {
+					has_variable = ffpa_tur_front_rumelia_complete_v1
+					ffpa_tur_front_aegean_cyprus_owned_v1 = yes
+				}
+				set_variable = ffpa_tur_front_aegean_cyprus_complete_v1
+			}
+			if = {
+				limit = {
+					has_variable = ffpa_tur_front_levant_complete_v1
+					ffpa_tur_front_mesopotamia_owned_v1 = yes
+				}
+				set_variable = ffpa_tur_front_mesopotamia_complete_v1
+			}
+			if = {
+				limit = {
+					has_variable = ffpa_tur_front_levant_complete_v1
+					OR = {
+						has_variable = ffpa_tur_front_rumelia_complete_v1
+						has_variable = ffpa_tur_front_mesopotamia_complete_v1
+					}
+					ffpa_tur_front_egypt_owned_v1 = yes
+				}
+				set_variable = ffpa_tur_front_egypt_complete_v1
+			}
+			if = {
+				limit = {
+					has_variable = ffpa_tur_front_egypt_complete_v1
+					ffpa_tur_front_ifriqiya_owned_v1 = yes
+				}
+				set_variable = ffpa_tur_front_ifriqiya_complete_v1
+			}
+		}
+		set_variable = ffpa_tur_frontier_recovery_migrated_v1
+	}
+}
+
+ffpa_cleanup_tur_frontier_on_tag_change_v1 = {
+	ffpa_cleanup_tur_front_western_pact_claims_v1 = yes
+	remove_variable = ffpa_tur_front_western_pact_resolution_pending_v1
+	ffpa_cleanup_tur_front_mosul_claims_v1 = yes
+	remove_variable = ffpa_tur_front_mosul_resolution_pending_v1
+	ffpa_cleanup_tur_front_rumelia_claims_v1 = yes
+	remove_variable = ffpa_tur_front_rumelia_resolution_pending_v1
+	ffpa_cleanup_tur_front_aegean_cyprus_claims_v1 = yes
+	remove_variable = ffpa_tur_front_aegean_cyprus_resolution_pending_v1
+	ffpa_cleanup_tur_front_levant_claims_v1 = yes
+	remove_variable = ffpa_tur_front_levant_resolution_pending_v1
+	ffpa_cleanup_tur_front_mesopotamia_claims_v1 = yes
+	remove_variable = ffpa_tur_front_mesopotamia_resolution_pending_v1
+	ffpa_cleanup_tur_front_egypt_claims_v1 = yes
+	remove_variable = ffpa_tur_front_egypt_resolution_pending_v1
+	ffpa_cleanup_tur_front_ifriqiya_claims_v1 = yes
+	remove_variable = ffpa_tur_front_ifriqiya_resolution_pending_v1
+	remove_variable = ffpa_tur_frontier_withdraw_requested_v1
+}
+
+ffpa_ensure_tur_frontier_recovery_v1 = {
+	set_variable = ffpa_tur_flavor_initialized_v1
+	ffpa_ensure_tur_formation_core_claims_v1 = yes
+	ffpa_ensure_tur_active_front_claims_v1 = yes
+	ffpa_resolve_tur_pending_fronts_v1 = yes
+	ffpa_migrate_tur_frontier_recovery_v1 = yes
+	if = {
+		limit = { has_variable = ffpa_tur_ztr_collapse_cleanup_pending_v1 }
+		ffpa_clear_tur_ztr_collapse_runtime_v1 = yes
+	}
+}
+
 ffpa_ensure_tur_flavor_v1 = {
 	if = {
 		limit = { c:TUR ?= ROOT }
+		ffpa_ensure_tur_frontier_recovery_v1 = yes
 
 		# Infer only outcomes that leave an unambiguous persistent trace. The
 		# expired pragmatic modifier cannot be reconstructed safely, so unresolved
@@ -605,7 +2587,10 @@ ffpa_handle_tur_flavor_country_formed_v1 = {
 	else_if = {
 		limit = {
 			OR = {
+				has_variable = ffpa_tur_flavor_initialized_v1
 				has_variable = ffpa_tur_state_project_v1
+				ffpa_tur_any_front_active_v1 = yes
+				ffpa_tur_any_front_pending_v1 = yes
 				has_modifier = ffpa_tur_porte_charter_deliberations_v1
 				has_modifier = ffpa_tur_republic_foundation_convention_v1
 				has_modifier = ffpa_tur_directorate_reconstruction_mobilization_v1
@@ -623,6 +2608,7 @@ ffpa_handle_tur_flavor_country_formed_v1 = {
 				has_modifier = ffpa_tur_anatolian_development_banks_v1
 			}
 		}
+		ffpa_cleanup_tur_frontier_on_tag_change_v1 = yes
 		ffpa_cleanup_tur_delayed_events_v1 = yes
 		ffpa_clear_tur_porte_charter_rewards_v1 = yes
 		ffpa_clear_tur_republic_settlement_rewards_v1 = yes

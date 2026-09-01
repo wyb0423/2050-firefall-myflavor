@@ -1,0 +1,450 @@
+# Route-limited TUR frontier mandates. Claims are granted only by the council
+# start effects. Each JE observes direct ownership, expires after its fixed
+# mandate, and delegates all result and cleanup work to idempotent effects.
+
+je_ffpa_tur_front_western_pact = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_turkish_frontier_recovery
+
+	complete = { ffpa_tur_front_western_pact_owned_v1 = yes }
+
+	on_complete = { ffpa_complete_tur_front_western_pact_v1 = yes }
+
+	timeout = 5475
+	on_timeout = {
+		# Full ownership wins the same-day complete/timeout race.
+		if = {
+			limit = { ffpa_tur_front_western_pact_owned_v1 = yes }
+			ffpa_complete_tur_front_western_pact_v1 = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_at_war = yes
+					is_diplomatic_play_committed_participant = yes
+				}
+			}
+			set_variable = ffpa_tur_front_western_pact_resolution_pending_v1
+			ffpa_ensure_tur_front_western_pact_claims_v1 = yes
+		}
+		else = { ffpa_fail_tur_front_western_pact_v1 = yes }
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			has_variable = ffpa_tur_frontier_withdraw_requested_v1
+		}
+	}
+	on_invalid = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				has_variable = ffpa_tur_frontier_withdraw_requested_v1
+			}
+			ffpa_withdraw_tur_front_western_pact_v1 = yes
+		}
+		else = {
+			ffpa_cleanup_tur_front_western_pact_claims_v1 = yes
+			remove_variable = ffpa_tur_front_western_pact_resolution_pending_v1
+		}
+	}
+
+	status_desc = {
+		triggered_desc = { desc = je_ffpa_tur_front_western_pact_status }
+	}
+	progressbar = no
+	weight = 120
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+je_ffpa_tur_front_mosul = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_turkish_frontier_recovery
+
+	complete = { ffpa_tur_front_mosul_owned_v1 = yes }
+
+	on_complete = { ffpa_complete_tur_front_mosul_v1 = yes }
+
+	timeout = 5475
+	on_timeout = {
+		# Full ownership wins the same-day complete/timeout race.
+		if = {
+			limit = { ffpa_tur_front_mosul_owned_v1 = yes }
+			ffpa_complete_tur_front_mosul_v1 = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_at_war = yes
+					is_diplomatic_play_committed_participant = yes
+				}
+			}
+			set_variable = ffpa_tur_front_mosul_resolution_pending_v1
+			ffpa_ensure_tur_front_mosul_claims_v1 = yes
+		}
+		else = { ffpa_fail_tur_front_mosul_v1 = yes }
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			has_variable = ffpa_tur_frontier_withdraw_requested_v1
+		}
+	}
+	on_invalid = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				has_variable = ffpa_tur_frontier_withdraw_requested_v1
+			}
+			ffpa_withdraw_tur_front_mosul_v1 = yes
+		}
+		else = {
+			ffpa_cleanup_tur_front_mosul_claims_v1 = yes
+			remove_variable = ffpa_tur_front_mosul_resolution_pending_v1
+		}
+	}
+
+	status_desc = {
+		triggered_desc = { desc = je_ffpa_tur_front_mosul_status }
+	}
+	progressbar = no
+	weight = 120
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_front_rumelia = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_turkish_frontier_recovery
+
+	complete = { ffpa_tur_front_rumelia_owned_v1 = yes }
+
+	on_complete = { ffpa_complete_tur_front_rumelia_v1 = yes }
+
+	timeout = 7300
+	on_timeout = {
+		# Full ownership wins the same-day complete/timeout race.
+		if = {
+			limit = { ffpa_tur_front_rumelia_owned_v1 = yes }
+			ffpa_complete_tur_front_rumelia_v1 = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_at_war = yes
+					is_diplomatic_play_committed_participant = yes
+				}
+			}
+			set_variable = ffpa_tur_front_rumelia_resolution_pending_v1
+			ffpa_ensure_tur_front_rumelia_claims_v1 = yes
+		}
+		else = { ffpa_fail_tur_front_rumelia_v1 = yes }
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			has_variable = ffpa_tur_frontier_withdraw_requested_v1
+		}
+	}
+	on_invalid = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				has_variable = ffpa_tur_frontier_withdraw_requested_v1
+			}
+			ffpa_withdraw_tur_front_rumelia_v1 = yes
+		}
+		else = {
+			ffpa_cleanup_tur_front_rumelia_claims_v1 = yes
+			remove_variable = ffpa_tur_front_rumelia_resolution_pending_v1
+		}
+	}
+
+	status_desc = {
+		triggered_desc = { desc = je_ffpa_tur_front_rumelia_status }
+	}
+	progressbar = no
+	weight = 120
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_front_aegean_cyprus = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_turkish_frontier_recovery
+
+	complete = { ffpa_tur_front_aegean_cyprus_owned_v1 = yes }
+
+	on_complete = { ffpa_complete_tur_front_aegean_cyprus_v1 = yes }
+
+	timeout = 7300
+	on_timeout = {
+		# Full ownership wins the same-day complete/timeout race.
+		if = {
+			limit = { ffpa_tur_front_aegean_cyprus_owned_v1 = yes }
+			ffpa_complete_tur_front_aegean_cyprus_v1 = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_at_war = yes
+					is_diplomatic_play_committed_participant = yes
+				}
+			}
+			set_variable = ffpa_tur_front_aegean_cyprus_resolution_pending_v1
+			ffpa_ensure_tur_front_aegean_cyprus_claims_v1 = yes
+		}
+		else = { ffpa_fail_tur_front_aegean_cyprus_v1 = yes }
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			has_variable = ffpa_tur_frontier_withdraw_requested_v1
+		}
+	}
+	on_invalid = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				has_variable = ffpa_tur_frontier_withdraw_requested_v1
+			}
+			ffpa_withdraw_tur_front_aegean_cyprus_v1 = yes
+		}
+		else = {
+			ffpa_cleanup_tur_front_aegean_cyprus_claims_v1 = yes
+			remove_variable = ffpa_tur_front_aegean_cyprus_resolution_pending_v1
+		}
+	}
+
+	status_desc = {
+		triggered_desc = { desc = je_ffpa_tur_front_aegean_cyprus_status }
+	}
+	progressbar = no
+	weight = 120
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_front_levant = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_turkish_frontier_recovery
+
+	complete = { ffpa_tur_front_levant_owned_v1 = yes }
+
+	on_complete = { ffpa_complete_tur_front_levant_v1 = yes }
+
+	timeout = 7300
+	on_timeout = {
+		# Full ownership wins the same-day complete/timeout race.
+		if = {
+			limit = { ffpa_tur_front_levant_owned_v1 = yes }
+			ffpa_complete_tur_front_levant_v1 = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_at_war = yes
+					is_diplomatic_play_committed_participant = yes
+				}
+			}
+			set_variable = ffpa_tur_front_levant_resolution_pending_v1
+			ffpa_ensure_tur_front_levant_claims_v1 = yes
+		}
+		else = { ffpa_fail_tur_front_levant_v1 = yes }
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			has_variable = ffpa_tur_frontier_withdraw_requested_v1
+		}
+	}
+	on_invalid = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				has_variable = ffpa_tur_frontier_withdraw_requested_v1
+			}
+			ffpa_withdraw_tur_front_levant_v1 = yes
+		}
+		else = {
+			ffpa_cleanup_tur_front_levant_claims_v1 = yes
+			remove_variable = ffpa_tur_front_levant_resolution_pending_v1
+		}
+	}
+
+	status_desc = {
+		triggered_desc = { desc = je_ffpa_tur_front_levant_status }
+	}
+	progressbar = no
+	weight = 120
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_front_mesopotamia = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_turkish_frontier_recovery
+
+	complete = { ffpa_tur_front_mesopotamia_owned_v1 = yes }
+
+	on_complete = { ffpa_complete_tur_front_mesopotamia_v1 = yes }
+
+	timeout = 7300
+	on_timeout = {
+		# Full ownership wins the same-day complete/timeout race.
+		if = {
+			limit = { ffpa_tur_front_mesopotamia_owned_v1 = yes }
+			ffpa_complete_tur_front_mesopotamia_v1 = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_at_war = yes
+					is_diplomatic_play_committed_participant = yes
+				}
+			}
+			set_variable = ffpa_tur_front_mesopotamia_resolution_pending_v1
+			ffpa_ensure_tur_front_mesopotamia_claims_v1 = yes
+		}
+		else = { ffpa_fail_tur_front_mesopotamia_v1 = yes }
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			has_variable = ffpa_tur_frontier_withdraw_requested_v1
+		}
+	}
+	on_invalid = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				has_variable = ffpa_tur_frontier_withdraw_requested_v1
+			}
+			ffpa_withdraw_tur_front_mesopotamia_v1 = yes
+		}
+		else = {
+			ffpa_cleanup_tur_front_mesopotamia_claims_v1 = yes
+			remove_variable = ffpa_tur_front_mesopotamia_resolution_pending_v1
+		}
+	}
+
+	status_desc = {
+		triggered_desc = { desc = je_ffpa_tur_front_mesopotamia_status }
+	}
+	progressbar = no
+	weight = 120
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_front_egypt = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_turkish_frontier_recovery
+
+	complete = { ffpa_tur_front_egypt_owned_v1 = yes }
+
+	on_complete = { ffpa_complete_tur_front_egypt_v1 = yes }
+
+	timeout = 7300
+	on_timeout = {
+		# Full ownership wins the same-day complete/timeout race.
+		if = {
+			limit = { ffpa_tur_front_egypt_owned_v1 = yes }
+			ffpa_complete_tur_front_egypt_v1 = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_at_war = yes
+					is_diplomatic_play_committed_participant = yes
+				}
+			}
+			set_variable = ffpa_tur_front_egypt_resolution_pending_v1
+			ffpa_ensure_tur_front_egypt_claims_v1 = yes
+		}
+		else = { ffpa_fail_tur_front_egypt_v1 = yes }
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			has_variable = ffpa_tur_frontier_withdraw_requested_v1
+		}
+	}
+	on_invalid = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				has_variable = ffpa_tur_frontier_withdraw_requested_v1
+			}
+			ffpa_withdraw_tur_front_egypt_v1 = yes
+		}
+		else = {
+			ffpa_cleanup_tur_front_egypt_claims_v1 = yes
+			remove_variable = ffpa_tur_front_egypt_resolution_pending_v1
+		}
+	}
+
+	status_desc = {
+		triggered_desc = { desc = je_ffpa_tur_front_egypt_status }
+	}
+	progressbar = no
+	weight = 120
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_tur_front_ifriqiya = {
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	group = je_group_ffpa_turkish_frontier_recovery
+
+	complete = { ffpa_tur_front_ifriqiya_owned_v1 = yes }
+
+	on_complete = { ffpa_complete_tur_front_ifriqiya_v1 = yes }
+
+	timeout = 7300
+	on_timeout = {
+		# Full ownership wins the same-day complete/timeout race.
+		if = {
+			limit = { ffpa_tur_front_ifriqiya_owned_v1 = yes }
+			ffpa_complete_tur_front_ifriqiya_v1 = yes
+		}
+		else_if = {
+			limit = {
+				OR = {
+					is_at_war = yes
+					is_diplomatic_play_committed_participant = yes
+				}
+			}
+			set_variable = ffpa_tur_front_ifriqiya_resolution_pending_v1
+			ffpa_ensure_tur_front_ifriqiya_claims_v1 = yes
+		}
+		else = { ffpa_fail_tur_front_ifriqiya_v1 = yes }
+	}
+
+	invalid = {
+		OR = {
+			NOT = { c:TUR ?= this }
+			has_variable = ffpa_tur_frontier_withdraw_requested_v1
+		}
+	}
+	on_invalid = {
+		if = {
+			limit = {
+				c:TUR ?= this
+				has_variable = ffpa_tur_frontier_withdraw_requested_v1
+			}
+			ffpa_withdraw_tur_front_ifriqiya_v1 = yes
+		}
+		else = {
+			ffpa_cleanup_tur_front_ifriqiya_claims_v1 = yes
+			remove_variable = ffpa_tur_front_ifriqiya_resolution_pending_v1
+		}
+	}
+
+	status_desc = {
+		triggered_desc = { desc = je_ffpa_tur_front_ifriqiya_status }
+	}
+	progressbar = no
+	weight = 120
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

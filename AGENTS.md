@@ -163,6 +163,8 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `common/journal_entries/ffpa_eastern_mediterranean_journal_entries.txt`
 - `common/journal_entries/ffpa_byzantine_restoration_campaigns.txt`
 - `common/journal_entries/ffpa_turkish_reconstruction_programs.txt`
+- `common/journal_entries/ffpa_turkish_frontier_recovery.txt`
+- `common/journal_entries/zzzz_ffpa_techres_ottoman_collapse_override.txt`
 - `common/journal_entry_groups/ffpa_turkish_reconstruction_group.txt`
 - `common/customizable_localization/ffpa_eastern_mediterranean_custom_loc.txt`
 - `common/decisions/ffpa_eastern_mediterranean_decisions.txt`
@@ -186,6 +188,8 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 - TUR 与 BYZ 的重建、共同体、首都工程和有限政治经济事件。
 - TUR 的三条互斥建国路线、高门/共和国/重建总署事件链、三项安纳托利亚工程、计划大会、新海峡公约与三场地区治理会议。
+- TUR 的 11 州成立核心永久宣称，以及按建国路线分层、一次一条、15–20 年限期的八条边疆收复前线；临时宣称使用逐州来源标记，超时或撤回后只清理未实现的自有宣称。
+- 通过完整替换 Tech & Res `je_ottoman_empire_collapse`，只对 FFPA 管理的 TUR 排除旧奥斯曼崩溃并迁移活动实例；未标记 TUR 保留上游行为。
 - BYZ 分区复归战争的御前会议入口、45–55 年日志、成功/失败/重试状态与战后和议选择。
 - `namespace = ffpa_flavor` 的既有东地中海事件 ID 空间，以及新增 TUR 内容专用的 `namespace = ffpa_tur_flavor`。
 - `on_country_formed`、月度迁移检查、首次选举和 BYZ 公民权白名单州动态整合入口。
@@ -196,10 +200,12 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 - 变量名带 `_v1` / `_v2` 的键都是存档 API，不是可清理的命名噪音。
 - `ffpa_tur_state_project_v1` 的值 1/2/3 分别固定表示高门、共和国、重建总署；路线终局、工程、海峡和地区治理选择变量同样属于存档 API。后续政体变化不得自动重写建国路线。
+- `ffpa_tur_front_<front>_complete_v1`、`ffpa_tur_front_<front>_retry_cooldown_v1`、`ffpa_tur_front_<front>_resolution_pending_v1`、`ffpa_tur_temporary_claim_<state>_v1`、八条前线 JE 与 `ffpa_tur_flavor.60–84` 都是存档 API；州范围或状态语义变化时必须版本化迁移。
 - ensure/migration effect 必须幂等；月度入口不得反复发奖励、重置有限期限或遍历全世界建筑。
 - 事件链应保持“未初始化 → 可用 → 运行中 → 完成/失败/取消”的显式状态；每条异常路径都要清理临时状态。
 - 本模块可消费地区建设模块导出的完成变量和查询 trigger，但不得直接重写地区日志内部状态。
 - TUR 的地区治理只在既有地区建设实际完成后触发，不自动授予历史宣称，也不得复制 BYZ 的分区复归战争结构。
+- TUR 历史宣称只由边疆收复状态机授予；地区治理会议仍不得添加宣称或直接读取前线 JE 内部状态。
 
 **内部所有权**
 
@@ -275,6 +281,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 | `BYZ` 国家/成立/动态名/旗帜 | 新建或替换 | Firefall 最终库缺少/改变 BYZ | 原版、Firefall |
 | `je_greek_nationalism` | 同名顶层替换 | 接回 GRE → BYZ 路线 | 原版、Firefall |
 | `formation.3` | 同名事件完整替换 | 保留原版通知与威望流程，以自有查士丁尼宣称白名单替换原版巴尔干/近东广域宣称 | 原版、Firefall |
+| `je_ottoman_empire_collapse` | 同名日志完整替换 | 排除 FFPA 管理的 2050 TUR，并在旧活动实例失效时清理 T&R 崩溃运行状态；其余上游语义保持不变 | Tech & Res |
 | `party_agrarian`、`party_anarchist`、`party_communist`、`party_conservative`、`party_fascist`、`party_free_trade`、`party_liberal`、`party_military`、`party_radicals`、`party_religious`、`party_christian`、`revolutionary_party_name`、`party_social_democrats` | 同名本地化键替换 | 通过 scripted GUI 为 BYZ 返回专属党名，并为其他国家返回原版通用名称 | 原版及任何后加载的党名/本地化 Mod |
 
 文件名前缀 `00_`、`zzz_`、`zzzz_` 只是加载排序工具，不等于安全覆盖。不得仅通过改文件名解决冲突；必须记录目标顶层键、操作语义和后加载者。
@@ -337,6 +344,10 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - TUR 三条路线各自的三场里程碑事件、终局选择和临时状态只能触发一次；政体变化只暂停不符合条件的完成检查，不改写建国路线。
 - 黑海、高原和丘库罗瓦—幼发拉底工程只奖励实际工程州，连同安纳托利亚干线满足四选三后计划大会只触发一次；海峡三种制度互斥并只作用于 TUR 拥有的东色雷斯。
 - 鲁米利亚、东方水利贸易和非洲港口治理会议只消费既有地区完成查询，不授予宣称、不重复触发，也不读取地区 JE 内部字段。
+- TUR 新旧档均补齐 Firefall 成立清单中的 11 州核心宣称；已有领土或其他来源宣称不被重写，核心宣称不因前线结束或标签变化清理。
+- 共和国、重建总署和高门只显示各自前线及正确解锁顺序；活动或待结算前线占用唯一槽位，成功、部分超时、主动撤回、战争中延迟结算和五年重试均能幂等收尾。
+- 临时宣称只在边疆委员会授权时添加；清理必须同时要求逐州来源标记，保留已取得州和启动前已有的宣称，前线成功不得自动完成地区建设。
+- FFPA 管理的 TUR 不显示或完成 Tech & Res 奥斯曼崩溃日志；旧活动实例失效时不拆分领土，并在一年清理窗口吸收已排程事件对 TUR 崩溃变量的回写；未标记 TUR 保持上游行为。
 - 所有失败、取消、政体变化、标签形成和旧存档路径都能清理或迁移状态。
 - 地区建设只奖励实际覆盖州；完成状态可稳定触发一次西方整合事件。
 - 公民权整合速度只作用于 BYZ 拥有的未整合西方白名单州，未来取得、失去、完成整合和身份变化路径能补发或清理。

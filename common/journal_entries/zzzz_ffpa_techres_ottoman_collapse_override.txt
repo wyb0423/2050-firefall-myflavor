@@ -1,0 +1,815 @@
+# Full replacement of Tech & Res je_ottoman_empire_collapse.
+# Upstream: [1.13] Tech & Res; metadata id tech.res; version 1.6'; Workshop 3472248460.
+# Source: common/journal_entries/ztr_je_turkey.txt
+# SHA-256: a83651a43bc4f2e72b0589c298a1ff0108c00fd0ca4f177be0c8f5d97198552a
+# Expected differences: FFPA-managed TUR guards in shown/possible/complete/invalid
+# and an on_invalid cleanup window. All other upstream behavior is preserved.
+
+je_ottoman_empire_collapse = {
+	icon = "gfx/interface/icons/event_icons/waving_flag_ottoman.dds"
+	group = je_group_global_historical_content
+	should_show_when_not_involved = {
+		always = no
+	}
+	is_shown_when_inactive = {
+		has_game_rule = allow_ztr_historical_content
+		year > 1900
+		exists = c:TUR
+		c:TUR = {
+			NOT = { ffpa_tur_is_ffpa_managed_v1 = yes }
+		}
+	}
+	should_be_involved = {
+		OR = {
+			c:TUR ?= this
+			AND = {
+				country_rank = rank_value:great_power
+				navy_size >= 30				#Naval Power
+			}
+		}
+	}
+	is_shown_in_lobby = {
+		c:TUR ?= this
+		is_involved_in_journal_entry = je_ottoman_empire_collapse
+	}
+	scripted_button = ztr_ottoman_collapse_request_egypt
+	scripted_button = ztr_ottoman_collapse_request_levant
+	scripted_button = ztr_ottoman_collapse_request_iraq
+	possible = {
+		has_game_rule = allow_ztr_historical_content
+		exists = c:TUR
+		c:TUR = {
+			NOT = { ffpa_tur_is_ffpa_managed_v1 = yes }
+			# Power Humiliation
+			NOT = {
+				country_rank = rank_value:great_power
+			}
+			# Autocratic and Low SOL
+			ztr_is_not_democratic = yes
+			average_sol < 12
+		}
+	}
+	immediate = {
+		c:TUR = {
+			save_scope_as = ztr_ottoman_collapse_target_country
+			set_variable = {
+				name = ottoman_empire_collapse_var
+				value = 0
+			}
+			set_variable = {
+				name = ottoman_empire_collapse_arab_var
+				value = 0
+			}
+			set_variable = {
+				name = ottoman_empire_collapse_army_var
+				value = 0
+			}
+			set_variable = {
+				name = ottoman_empire_collapse_foreign_var
+				value = 0
+			}
+		}
+	}
+	on_monthly_pulse = {
+		effect = {
+			if = {
+				limit = {
+					NOT = { exists = scope:ztr_ottoman_collapse_target_country }
+				}
+				c:TUR = {
+					save_scope_as = ztr_ottoman_collapse_target_country
+				}
+			}
+			if = {
+				limit = {
+					NOT = {
+						has_global_variable = ztr_ottoman_collapse_happened
+					}
+				}
+				set_global_variable = ztr_ottoman_collapse_happened
+				# We can only accept or refuse the invitation once
+				scope:journal_entry = {
+					every_scope_je_involved = {
+						limit = {
+							NOT = {
+								c:TUR ?= this
+							}
+						}
+						trigger_event = {
+							id = ztr_ottoman_collapse.100
+							days = 5
+							popup = yes
+						}
+					}
+				}
+				c:TUR = {
+					trigger_event = {
+						id = ztr_ottoman_collapse.1
+						days = 30
+						popup = yes
+					}
+				}
+			}
+		}
+	}
+	on_yearly_pulse = {
+		effect = {
+			scope:ztr_ottoman_collapse_target_country = {
+				change_variable = {
+					name = ottoman_empire_collapse_var
+					add = 2
+				}
+				# Liberal reforms lessen centrifugal forces
+				if = {
+					limit = {
+						has_law_or_variant = law_type:law_universal_suffrage
+					}
+					change_variable = {
+						name = ottoman_empire_collapse_var
+						subtract = 1
+					}
+				}
+				# More inclusive citizenship reduces provincial separatism
+				if = {
+					limit = {
+						has_law_or_variant = law_type:law_cultural_exclusion
+					}
+					change_variable = {
+						name = ottoman_empire_collapse_var
+						subtract = 1
+					}
+				}
+				if = {
+					limit = {
+						has_law_or_variant = law_type:law_multicultural
+					}
+					change_variable = {
+						name = ottoman_empire_collapse_var
+						subtract = 2
+					}
+				}
+				# Economic weakness fuels decline
+				if = {
+					limit = {
+						get_country_gdp_per < 2.5
+					}
+					change_variable = {
+						name = ottoman_empire_collapse_var
+						add = 1
+					}
+				}
+				# Russia's ambitions for the straits and eastern Anatolia
+				if = {
+					limit = {
+						c:RUS = {
+							exists = yes
+							country_rank = rank_value:great_power
+						}
+					}
+					change_variable = {
+						name = ottoman_empire_collapse_var
+						add = 1
+					}
+				}
+				# Slipping down the prestige ladder accelerates disintegration
+				if = {
+					limit = {
+						country_rank < rank_value:major_power
+					}
+					change_variable = {
+						name = ottoman_empire_collapse_var
+						add = 2
+					}
+				}
+				# Crisis fronts that have been mishandled for several years now feed the main collapse meter
+				if = {
+					limit = {
+						var:ottoman_empire_collapse_arab_var >= 4
+					}
+					change_variable = {
+						name = ottoman_empire_collapse_var
+						add = 1
+					}
+				}
+				if = {
+					limit = {
+						var:ottoman_empire_collapse_army_var >= 4
+					}
+					change_variable = {
+						name = ottoman_empire_collapse_var
+						add = 1
+					}
+				}
+				if = {
+					limit = {
+						var:ottoman_empire_collapse_foreign_var >= 4
+					}
+					change_variable = {
+						name = ottoman_empire_collapse_var
+						add = 1
+					}
+				}
+				random_list = {
+					20 = {
+					}
+					5 = {
+						trigger_event = {
+							id = ztr_ottoman_collapse.2
+							days = 20
+						}
+					}
+					5 = {
+						trigger_event = {
+							id = ztr_ottoman_collapse.3
+							days = 50
+						}
+					}
+					5 = {
+						trigger_event = {
+							id = ztr_ottoman_collapse.4
+							days = 90
+						}
+					}
+				}
+			}
+		}
+	}
+	complete = {
+		c:TUR = {
+			NOT = { ffpa_tur_is_ffpa_managed_v1 = yes }
+		}
+		scope:journal_entry = {
+			is_goal_complete = yes
+		}
+	}
+	on_complete = {
+		scope:ztr_ottoman_collapse_target_country = {
+			custom_tooltip = {
+				text = ztr_ottoman_collapse_complete_tt
+				add_loyalists = {
+					value = 0.9
+				}
+				# Greece
+				if = {
+					limit = {
+						any_scope_state = {
+							NOT = {
+								is_homeland_of_country_cultures = scope:ztr_ottoman_collapse_target_country
+							}
+							state_region = {
+								is_homeland = cu:greek
+							}
+							count > 0
+						}
+					}
+					ztr_define_greece = yes
+				}
+				if = {
+					limit = {
+						exists = c:GRE
+					}
+					s:STATE_CRETE.region_state:TUR = {
+						set_state_owner = c:GRE
+					}
+					s:STATE_CYPRUS.region_state:TUR = {
+						set_state_owner = c:GRE
+					}
+					s:STATE_EAST_AEGEAN_ISLANDS.region_state:TUR = {
+						set_state_owner = c:GRE
+					}
+					s:STATE_MACEDONIA.region_state:TUR = {
+						set_state_owner = c:GRE
+					}
+					s:STATE_WESTERN_THRACE.region_state:TUR = {
+						set_state_owner = c:GRE
+					}
+					#TODO Trigger an event in which Greece can choose to attack Turkey and try to retake Constantinople
+				}
+				# Bulgaria
+				if = {
+					limit = {
+						NOT = {
+							exists = c:BUL
+						}
+						has_state_in_state_region = STATE_BULGARIA
+					}
+					create_country = {
+						tag = BUL
+						origin = this
+						state = s:STATE_BULGARIA.region_state:TUR
+						on_created = {
+							set_country_type = recognized
+							activate_law = law_type:law_parliamentary_republic
+							activate_law = law_type:law_census_voting
+						}
+					}
+				}
+				if = {
+					limit = {
+						exists = c:BUL
+					}
+					s:STATE_NORTHERN_THRACE.region_state:TUR = {
+						set_state_owner = c:BUL
+					}
+					s:STATE_DOBRUDJA.region_state:TUR = {
+						set_state_owner = c:BUL
+					}
+					s:STATE_SKOPIA.region_state:TUR = {
+						set_state_owner = c:BUL
+					}
+				}
+				# Romania
+				if = {
+					limit = {
+						any_scope_state = {
+							NOT = {
+								is_homeland_of_country_cultures = scope:ztr_ottoman_collapse_target_country
+							}
+							state_region = {
+								is_homeland = cu:romanian
+							}
+							count > 0
+						}
+					}
+					ztr_define_romania = yes
+				}
+				# Albania
+				if = {
+					limit = {
+						any_scope_state = {
+							NOT = {
+								is_homeland_of_country_cultures = scope:ztr_ottoman_collapse_target_country
+							}
+							state_region = {
+								is_homeland = cu:albanian
+							}
+							count > 0
+						}
+					}
+					ztr_define_albania = yes
+				}
+				# Serbia
+				if = {
+					limit = {
+						any_scope_state = {
+							NOT = {
+								is_homeland_of_country_cultures = scope:ztr_ottoman_collapse_target_country
+							}
+							state_region = {
+								is_homeland = cu:serb
+							}
+							count > 0
+						}
+					}
+					ztr_define_serbia = yes
+				}
+				# Sudan
+				if = {
+					limit = {
+						any_scope_state = {
+							NOT = {
+								is_homeland_of_country_cultures = scope:ztr_ottoman_collapse_target_country
+							}
+							state_region = {
+								is_homeland = cu:sudanese
+							}
+							count > 0
+						}
+					}
+					ztr_define_sudan = yes
+				}
+				# Egypt
+				if = {
+					limit = {
+						any_scope_state = {
+							NOT = {
+								is_homeland_of_country_cultures = scope:ztr_ottoman_collapse_target_country
+							}
+							state_region = {
+								is_homeland = cu:misri
+							}
+							count > 0
+						}
+					}
+					ztr_define_egypt = yes
+				}
+				# Armenia
+				if = {
+					limit = {
+						NOT = {
+							exists = c:ARM
+						}
+						s:STATE_ERZURUM = {
+							any_scope_state = {
+								owner = scope:ztr_ottoman_collapse_target_country
+							}
+						}
+					}
+					create_country = {
+						tag = ARM
+						origin = this
+						state = s:STATE_ERZURUM.region_state:TUR
+						on_created = {
+							set_country_type = recognized
+							activate_law = law_type:law_parliamentary_republic
+							activate_law = law_type:law_universal_suffrage
+						}
+					}
+				}
+				if = {
+					limit = {
+						exists = c:ARM
+					}
+					s:STATE_ERZURUM.region_state:TUR = {
+						set_state_owner = c:ARM
+					}
+					s:STATE_KARS.region_state:TUR = {
+						set_state_owner = c:ARM
+					}
+					s:STATE_ARMENIA.region_state:TUR = {
+						set_state_owner = c:ARM
+					}
+				}
+				# Iraq
+				if = {
+					limit = {
+						NOT = {
+							exists = c:IRQ
+						}
+						s:STATE_BAGHDAD = {
+							any_scope_state = {
+								owner = scope:ztr_ottoman_collapse_target_country
+							}
+						}
+					}
+					create_country = {
+						tag = IRQ
+						origin = this
+						state = s:STATE_BAGHDAD.region_state:TUR
+						on_created = {
+							set_country_type = recognized
+							activate_law = law_type:law_monarchy
+						}
+					}
+				}
+				if = {
+					limit = {
+						exists = c:IRQ
+					}
+					s:STATE_BAGHDAD.region_state:TUR = {
+						set_state_owner = c:IRQ
+					}
+					s:STATE_BASRA.region_state:TUR = {
+						set_state_owner = c:IRQ
+					}
+					s:STATE_MOSUL.region_state:TUR = {
+						set_state_owner = c:IRQ
+					}
+				}
+				# Syria
+				if = {
+					limit = {
+						NOT = {
+							exists = c:SYR
+						}
+						s:STATE_ALEPPO = {
+							any_scope_state = {
+								owner = scope:ztr_ottoman_collapse_target_country
+							}
+						}
+					}
+					create_country = {
+						tag = SYR
+						origin = this
+						state = s:STATE_ALEPPO.region_state:TUR
+						on_created = {
+							set_country_type = recognized
+							activate_law = law_type:law_monarchy
+						}
+					}
+				}
+				if = {
+					limit = {
+						exists = c:SYR
+					}
+					s:STATE_ALEPPO.region_state:TUR = {
+						set_state_owner = c:SYR
+					}
+					s:STATE_SYRIA.region_state:TUR = {
+						set_state_owner = c:SYR
+					}
+					s:STATE_DEIR_EZ_ZOR.region_state:TUR = {
+						set_state_owner = c:SYR
+					}
+				}
+				# Palestine
+				if = {
+					limit = {
+						NOT = {
+							exists = c:PAL
+						}
+						s:STATE_PALESTINE = {
+							any_scope_state = {
+								owner = scope:ztr_ottoman_collapse_target_country
+							}
+						}
+					}
+					create_country = {
+						tag = PAL
+						origin = this
+						state = s:STATE_PALESTINE.region_state:TUR
+						on_created = {
+							set_country_type = recognized
+							activate_law = law_type:law_monarchy
+						}
+					}
+				}
+				if = {
+					limit = {
+						exists = c:PAL
+					}
+					s:STATE_PALESTINE.region_state:TUR = {
+						set_state_owner = c:PAL
+					}
+				}
+				# Jordan
+				if = {
+					limit = {
+						NOT = {
+							exists = c:EOT
+						}
+						s:STATE_TRANSJORDAN = {
+							any_scope_state = {
+								owner = scope:ztr_ottoman_collapse_target_country
+							}
+						}
+					}
+					create_country = {
+						tag = EOT
+						origin = this
+						state = s:STATE_TRANSJORDAN.region_state:TUR
+						on_created = {
+							set_country_type = recognized
+							activate_law = law_type:law_monarchy
+						}
+					}
+				}
+				if = {
+					limit = {
+						exists = c:EOT
+					}
+					s:STATE_TRANSJORDAN.region_state:TUR = {
+						set_state_owner = c:EOT
+					}
+				}
+				# Lebanon
+				if = {
+					limit = {
+						NOT = {
+							exists = c:LEB
+						}
+						s:STATE_LEBANON = {
+							any_scope_state = {
+								owner = scope:ztr_ottoman_collapse_target_country
+							}
+						}
+					}
+					create_country = {
+						tag = LEB
+						origin = this
+						state = s:STATE_LEBANON.region_state:TUR
+						on_created = {
+							set_country_type = recognized
+							activate_law = law_type:law_monarchy
+						}
+					}
+				}
+				if = {
+					limit = {
+						exists = c:LEB
+					}
+					s:STATE_LEBANON.region_state:TUR = {
+						set_state_owner = c:LEB
+					}
+				}
+			}
+			# Ottoman Empire becomes Turkey
+			activate_law = law_type:law_presidential_republic
+			trigger_event = {
+				id = ztr_ottoman_collapse.90
+				days = 5
+			}
+		}
+		every_country = {
+			limit = {
+				has_variable = ztr_ottoman_collapse_egypt_aid_patron
+			}
+			save_scope_as = ztr_ottoman_collapse_patron_power
+			s:STATE_LOWER_EGYPT = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+			s:STATE_MIDDLE_EGYPT = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+			s:STATE_UPPER_EGYPT = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+			s:STATE_SINAI = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+			s:STATE_MATRUH = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+			s:STATE_EGYPTIAN_DESERT = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+		}
+		every_country = {
+			limit = {
+				has_variable = ztr_ottoman_collapse_syria_aid_patron
+			}
+			save_scope_as = ztr_ottoman_collapse_patron_power
+			s:STATE_SYRIA = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+			s:STATE_LEBANON = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+			s:STATE_PALESTINE = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+			s:STATE_TRANSJORDAN = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+		}
+		every_country = {
+			limit = {
+				has_variable = ztr_ottoman_collapse_iraq_aid_patron
+			}
+			save_scope_as = ztr_ottoman_collapse_patron_power
+			s:STATE_BAGHDAD = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+			s:STATE_BASRA = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+			s:STATE_MOSUL = {
+				add_claim = scope:ztr_ottoman_collapse_patron_power
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:ztr_ottoman_collapse_target_country
+			}
+			scope:ztr_ottoman_collapse_target_country = {
+				remove_variable = ztr_ottoman_collapse_egypt_aid_taken
+				remove_variable = ztr_ottoman_collapse_syria_aid_taken
+				remove_variable = ztr_ottoman_collapse_iraq_aid_taken
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					has_variable = ztr_ottoman_collapse_egypt_aid_patron
+					has_variable = ztr_ottoman_collapse_syria_aid_patron
+					has_variable = ztr_ottoman_collapse_iraq_aid_patron
+				}
+			}
+			remove_variable = ztr_ottoman_collapse_egypt_aid_patron
+			remove_variable = ztr_ottoman_collapse_syria_aid_patron
+			remove_variable = ztr_ottoman_collapse_iraq_aid_patron
+		}
+	}
+	status_desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = je_ottoman_empire_collapse_status_terminal
+				trigger = {
+					scope:ztr_ottoman_collapse_target_country = {
+						var:ottoman_empire_collapse_var >= 45
+					}
+				}
+			}
+			triggered_desc = {
+				desc = je_ottoman_empire_collapse_status_foreign
+				trigger = {
+					scope:ztr_ottoman_collapse_target_country = {
+						var:ottoman_empire_collapse_foreign_var >= 4
+					}
+				}
+			}
+			triggered_desc = {
+				desc = je_ottoman_empire_collapse_status_army
+				trigger = {
+					scope:ztr_ottoman_collapse_target_country = {
+						var:ottoman_empire_collapse_army_var >= 4
+					}
+				}
+			}
+			triggered_desc = {
+				desc = je_ottoman_empire_collapse_status_arab
+				trigger = {
+					scope:ztr_ottoman_collapse_target_country = {
+						var:ottoman_empire_collapse_arab_var >= 4
+					}
+				}
+			}
+			desc = je_ottoman_empire_collapse_status
+		}
+	}
+	fail = {
+		scope:ztr_ottoman_collapse_target_country = {
+			OR = {
+				ztr_is_democratic = yes
+				get_country_gdp_per > 3.5
+				#country_rank = rank_value:great_power
+				year > 1945
+			}
+		}
+	}
+	on_fail = {
+		scope:ztr_ottoman_collapse_target_country = {
+			add_loyalists = {
+				value = 0.9
+			}
+			trigger_event = {
+				id = ztr_ottoman_collapse.91
+				days = 3
+			}
+		}
+		if = {
+			limit = {
+				exists = scope:ztr_ottoman_collapse_target_country
+			}
+			scope:ztr_ottoman_collapse_target_country = {
+				remove_variable = ztr_ottoman_collapse_egypt_aid_taken
+				remove_variable = ztr_ottoman_collapse_syria_aid_taken
+				remove_variable = ztr_ottoman_collapse_iraq_aid_taken
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					has_variable = ztr_ottoman_collapse_egypt_aid_patron
+					has_variable = ztr_ottoman_collapse_syria_aid_patron
+					has_variable = ztr_ottoman_collapse_iraq_aid_patron
+				}
+			}
+			remove_variable = ztr_ottoman_collapse_egypt_aid_patron
+			remove_variable = ztr_ottoman_collapse_syria_aid_patron
+			remove_variable = ztr_ottoman_collapse_iraq_aid_patron
+		}
+	}
+	invalid = {
+		OR = {
+			NOT = { exists = c:TUR }
+			c:TUR = { ffpa_tur_is_ffpa_managed_v1 = yes }
+		}
+	}
+	on_invalid = {
+		if = {
+			limit = {
+				exists = scope:ztr_ottoman_collapse_target_country
+			}
+			scope:ztr_ottoman_collapse_target_country = {
+				remove_variable = ztr_ottoman_collapse_egypt_aid_taken
+				remove_variable = ztr_ottoman_collapse_syria_aid_taken
+				remove_variable = ztr_ottoman_collapse_iraq_aid_taken
+			}
+		}
+		every_country = {
+			limit = {
+				OR = {
+					has_variable = ztr_ottoman_collapse_egypt_aid_patron
+					has_variable = ztr_ottoman_collapse_syria_aid_patron
+					has_variable = ztr_ottoman_collapse_iraq_aid_patron
+				}
+			}
+			remove_variable = ztr_ottoman_collapse_egypt_aid_patron
+			remove_variable = ztr_ottoman_collapse_syria_aid_patron
+			remove_variable = ztr_ottoman_collapse_iraq_aid_patron
+		}
+		# FFPA-managed TUR uses its route-specific reconstruction state machine.
+		# This one-year marker is created only here and is never refreshed monthly;
+		# it absorbs delayed T&R .1-.4 event writes after the old JE invalidates.
+		if = {
+			limit = {
+				exists = c:TUR
+				c:TUR = { ffpa_tur_is_ffpa_managed_v1 = yes }
+			}
+			c:TUR = {
+				ffpa_clear_tur_ztr_collapse_runtime_v1 = yes
+				set_variable = { name = ffpa_tur_ztr_collapse_cleanup_pending_v1 years = 1 }
+			}
+		}
+	}
+	current_value = {
+		value = c:TUR.var:ottoman_empire_collapse_var
+	}
+	goal_add_value = {
+		value = 60
+	}
+	progressbar = yes
+	weight = 20
+	should_be_pinned_by_default_uninvolved_or_context = yes
+}

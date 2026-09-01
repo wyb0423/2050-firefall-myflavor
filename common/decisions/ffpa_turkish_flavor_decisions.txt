@@ -20,3 +20,63 @@ ffpa_tur_confirm_reconstruction_legacy = {
 
 	ai_chance = { value = 100 }
 }
+
+# Opens the route-limited frontier menu after one of the three reconstruction
+# settlements has fixed the state's long-term constitutional direction.
+ffpa_tur_convene_frontier_council = {
+	is_shown = {
+		c:TUR ?= this
+		ffpa_tur_has_frontier_route_terminal_v1 = yes
+		ffpa_tur_has_incomplete_supported_front_v1 = yes
+	}
+
+	possible = {
+		custom_tooltip = {
+			text = ffpa_tur_frontier_council_peace_tt
+			is_at_war = no
+			is_diplomatic_play_committed_participant = no
+		}
+		custom_tooltip = {
+			text = ffpa_tur_frontier_slot_available_tt
+			ffpa_tur_frontier_slot_available_v1 = yes
+		}
+		custom_tooltip = {
+			text = ffpa_tur_frontier_available_tt
+			ffpa_tur_has_available_front_v1 = yes
+		}
+	}
+
+	when_taken = {
+		trigger_event = { id = ffpa_tur_flavor.60 popup = yes }
+	}
+
+	ai_chance = {
+		value = 0
+		if = {
+			limit = { ffpa_tur_ai_frontier_council_ready_v1 = yes }
+			add = 10
+		}
+	}
+}
+
+# Victoria 3 1.13 exposes no remove_journal_entry effect. The decision marks a
+# withdrawal request; the sole active JE then invalidates itself and performs
+# its own provenance-safe cleanup and five-year cooldown in on_invalid.
+ffpa_tur_withdraw_frontier_mandate = {
+	is_shown = {
+		c:TUR ?= this
+		ffpa_tur_any_front_active_v1 = yes
+	}
+
+	possible = {
+		is_at_war = no
+		is_diplomatic_play_committed_participant = no
+		NOT = { has_variable = ffpa_tur_frontier_withdraw_requested_v1 }
+	}
+
+	when_taken = {
+		set_variable = ffpa_tur_frontier_withdraw_requested_v1
+	}
+
+	ai_chance = { value = 0 }
+}

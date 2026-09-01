@@ -64,6 +64,991 @@ ffpa_tur_flavor.1 = {
 	}
 }
 
+# --- Route-limited TUR frontier recovery ---
+
+ffpa_tur_flavor.60 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.60.t
+	desc = ffpa_tur_flavor.60.d
+	flavor = ffpa_tur_flavor.60.f
+	event_image = { video = "unspecific_politicians_arguing" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		ffpa_tur_frontier_council_ready_v1 = yes
+	}
+
+	option = {
+		name = ffpa_tur_frontier_council_western_pact_option
+		trigger = {
+			ffpa_tur_front_western_pact_available_v1 = yes
+		}
+		custom_tooltip = {
+			text = ffpa_tur_frontier_council_western_pact_tt
+			ffpa_start_tur_front_western_pact_v1 = yes
+		}
+		ai_chance = {
+			factor = 1.3
+			modifier = {
+				trigger = {
+					any_scope_state = {
+						OR = {
+							state_region = s:STATE_WESTERN_THRACE
+						}
+					}
+				}
+				add = 0.6
+			}
+			modifier = {
+				trigger = {
+					OR = {
+						s:STATE_WESTERN_THRACE = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+					}
+				}
+				add = -0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_frontier_council_mosul_option
+		trigger = {
+			ffpa_tur_front_mosul_available_v1 = yes
+		}
+		custom_tooltip = {
+			text = ffpa_tur_frontier_council_mosul_tt
+			ffpa_start_tur_front_mosul_v1 = yes
+		}
+		ai_chance = {
+			factor = 1
+			modifier = {
+				trigger = {
+					any_scope_state = {
+						OR = {
+							state_region = s:STATE_MOSUL
+						}
+					}
+				}
+				add = 0.6
+			}
+			modifier = {
+				trigger = {
+					OR = {
+						s:STATE_MOSUL = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+					}
+				}
+				add = -0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_frontier_council_rumelia_option
+		trigger = {
+			ffpa_tur_front_rumelia_available_v1 = yes
+		}
+		custom_tooltip = {
+			text = ffpa_tur_frontier_council_rumelia_tt
+			ffpa_start_tur_front_rumelia_v1 = yes
+		}
+		ai_chance = {
+			factor = 1.3
+			modifier = {
+				trigger = {
+					any_scope_state = {
+						OR = {
+							state_region = s:STATE_ALBANIA
+							state_region = s:STATE_MACEDONIA
+							state_region = s:STATE_WESTERN_THRACE
+							state_region = s:STATE_BULGARIA
+							state_region = s:STATE_DOBRUDJA
+							state_region = s:STATE_NORTHERN_THRACE
+						}
+					}
+				}
+				add = 0.6
+			}
+			modifier = {
+				trigger = {
+					OR = {
+						s:STATE_ALBANIA = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_MACEDONIA = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_WESTERN_THRACE = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_BULGARIA = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_DOBRUDJA = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_NORTHERN_THRACE = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+					}
+				}
+				add = -0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_frontier_council_aegean_cyprus_option
+		trigger = {
+			ffpa_tur_front_aegean_cyprus_available_v1 = yes
+		}
+		custom_tooltip = {
+			text = ffpa_tur_frontier_council_aegean_cyprus_tt
+			ffpa_start_tur_front_aegean_cyprus_v1 = yes
+		}
+		ai_chance = {
+			factor = 0.9
+			modifier = {
+				trigger = {
+					any_scope_state = {
+						OR = {
+							state_region = s:STATE_ATTICA
+							state_region = s:STATE_CRETE
+							state_region = s:STATE_EAST_AEGEAN_ISLANDS
+							state_region = s:STATE_WEST_AEGEAN_ISLANDS
+							state_region = s:STATE_IONIAN_ISLANDS
+							state_region = s:STATE_CYPRUS
+						}
+					}
+				}
+				add = 0.6
+			}
+			modifier = {
+				trigger = {
+					OR = {
+						s:STATE_ATTICA = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_CRETE = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_EAST_AEGEAN_ISLANDS = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_WEST_AEGEAN_ISLANDS = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_IONIAN_ISLANDS = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_CYPRUS = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+					}
+				}
+				add = -0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_frontier_council_levant_option
+		trigger = {
+			ffpa_tur_front_levant_available_v1 = yes
+		}
+		custom_tooltip = {
+			text = ffpa_tur_frontier_council_levant_tt
+			ffpa_start_tur_front_levant_v1 = yes
+		}
+		ai_chance = {
+			factor = 1.2
+			modifier = {
+				trigger = {
+					any_scope_state = {
+						OR = {
+							state_region = s:STATE_ALEPPO
+							state_region = s:STATE_SYRIA
+							state_region = s:STATE_LEBANON
+							state_region = s:STATE_PALESTINE
+							state_region = s:STATE_TRANSJORDAN
+						}
+					}
+				}
+				add = 0.6
+			}
+			modifier = {
+				trigger = {
+					OR = {
+						s:STATE_ALEPPO = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_SYRIA = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_LEBANON = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_PALESTINE = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_TRANSJORDAN = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+					}
+				}
+				add = -0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_frontier_council_mesopotamia_option
+		trigger = {
+			ffpa_tur_front_mesopotamia_available_v1 = yes
+		}
+		custom_tooltip = {
+			text = ffpa_tur_frontier_council_mesopotamia_tt
+			ffpa_start_tur_front_mesopotamia_v1 = yes
+		}
+		ai_chance = {
+			factor = 0.9
+			modifier = {
+				trigger = {
+					any_scope_state = {
+						OR = {
+							state_region = s:STATE_MOSUL
+							state_region = s:STATE_BAGHDAD
+							state_region = s:STATE_DEIR_EZ_ZOR
+							state_region = s:STATE_BASRA
+						}
+					}
+				}
+				add = 0.6
+			}
+			modifier = {
+				trigger = {
+					OR = {
+						s:STATE_MOSUL = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_BAGHDAD = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_DEIR_EZ_ZOR = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_BASRA = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+					}
+				}
+				add = -0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_frontier_council_egypt_option
+		trigger = {
+			ffpa_tur_front_egypt_available_v1 = yes
+			OR = {
+				is_ai = no
+				country_rank <= rank_value:major_power
+			}
+		}
+		custom_tooltip = {
+			text = ffpa_tur_frontier_council_egypt_tt
+			ffpa_start_tur_front_egypt_v1 = yes
+		}
+		ai_chance = {
+			factor = 0.5
+			modifier = {
+				trigger = {
+					any_scope_state = {
+						OR = {
+							state_region = s:STATE_LOWER_EGYPT
+							state_region = s:STATE_MIDDLE_EGYPT
+							state_region = s:STATE_UPPER_EGYPT
+							state_region = s:STATE_SINAI
+							state_region = s:STATE_MATRUH
+						}
+					}
+				}
+				add = 0.6
+			}
+			modifier = {
+				trigger = {
+					OR = {
+						s:STATE_LOWER_EGYPT = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_MIDDLE_EGYPT = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_UPPER_EGYPT = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_SINAI = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_MATRUH = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+					}
+				}
+				add = -0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_frontier_council_ifriqiya_option
+		trigger = {
+			ffpa_tur_front_ifriqiya_available_v1 = yes
+			OR = {
+				is_ai = no
+				country_rank <= rank_value:major_power
+			}
+		}
+		custom_tooltip = {
+			text = ffpa_tur_frontier_council_ifriqiya_tt
+			ffpa_start_tur_front_ifriqiya_v1 = yes
+		}
+		ai_chance = {
+			factor = 0.4
+			modifier = {
+				trigger = {
+					any_scope_state = {
+						OR = {
+							state_region = s:STATE_LIBYA
+							state_region = s:STATE_TRIPOLI
+							state_region = s:STATE_TUNISIA
+						}
+					}
+				}
+				add = 0.6
+			}
+			modifier = {
+				trigger = {
+					OR = {
+						s:STATE_LIBYA = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_TRIPOLI = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+						s:STATE_TUNISIA = {
+							any_scope_state = {
+								NOT = { owner = ROOT }
+								owner ?= { army_power_projection > ROOT.army_power_projection }
+							}
+						}
+					}
+				}
+				add = -0.4
+			}
+		}
+	}
+	option = {
+		name = ffpa_tur_frontier_council_cancel_option
+		default_option = yes
+		ai_chance = { factor = 0.05 }
+	}
+}
+
+ffpa_tur_flavor.61 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.61.t
+	desc = ffpa_tur_flavor.61.d
+	flavor = ffpa_tur_flavor.61.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_western_pact_complete_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.61.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.69 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.69.t
+	desc = ffpa_tur_flavor.69.d
+	flavor = ffpa_tur_flavor.69.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_western_pact_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.69.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.77 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.77.t
+	desc = ffpa_tur_flavor.77.d
+	flavor = ffpa_tur_flavor.77.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_western_pact_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.77.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.62 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.62.t
+	desc = ffpa_tur_flavor.62.d
+	flavor = ffpa_tur_flavor.62.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_mosul_complete_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.62.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.70 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.70.t
+	desc = ffpa_tur_flavor.70.d
+	flavor = ffpa_tur_flavor.70.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_mosul_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.70.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.78 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.78.t
+	desc = ffpa_tur_flavor.78.d
+	flavor = ffpa_tur_flavor.78.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_mosul_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.78.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.63 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.63.t
+	desc = ffpa_tur_flavor.63.d
+	flavor = ffpa_tur_flavor.63.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_rumelia_complete_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.63.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.71 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.71.t
+	desc = ffpa_tur_flavor.71.d
+	flavor = ffpa_tur_flavor.71.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_rumelia_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.71.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.79 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.79.t
+	desc = ffpa_tur_flavor.79.d
+	flavor = ffpa_tur_flavor.79.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_rumelia_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.79.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.64 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.64.t
+	desc = ffpa_tur_flavor.64.d
+	flavor = ffpa_tur_flavor.64.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_aegean_cyprus_complete_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.64.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.72 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.72.t
+	desc = ffpa_tur_flavor.72.d
+	flavor = ffpa_tur_flavor.72.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_aegean_cyprus_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.72.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.80 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.80.t
+	desc = ffpa_tur_flavor.80.d
+	flavor = ffpa_tur_flavor.80.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_aegean_cyprus_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.80.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.65 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.65.t
+	desc = ffpa_tur_flavor.65.d
+	flavor = ffpa_tur_flavor.65.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_levant_complete_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.65.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.73 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.73.t
+	desc = ffpa_tur_flavor.73.d
+	flavor = ffpa_tur_flavor.73.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_levant_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.73.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.81 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.81.t
+	desc = ffpa_tur_flavor.81.d
+	flavor = ffpa_tur_flavor.81.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_levant_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.81.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.66 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.66.t
+	desc = ffpa_tur_flavor.66.d
+	flavor = ffpa_tur_flavor.66.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_mesopotamia_complete_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.66.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.74 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.74.t
+	desc = ffpa_tur_flavor.74.d
+	flavor = ffpa_tur_flavor.74.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_mesopotamia_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.74.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.82 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.82.t
+	desc = ffpa_tur_flavor.82.d
+	flavor = ffpa_tur_flavor.82.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_mesopotamia_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.82.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.67 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.67.t
+	desc = ffpa_tur_flavor.67.d
+	flavor = ffpa_tur_flavor.67.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_egypt_complete_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.67.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.75 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.75.t
+	desc = ffpa_tur_flavor.75.d
+	flavor = ffpa_tur_flavor.75.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_egypt_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.75.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.83 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.83.t
+	desc = ffpa_tur_flavor.83.d
+	flavor = ffpa_tur_flavor.83.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_egypt_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.83.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.68 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.68.t
+	desc = ffpa_tur_flavor.68.d
+	flavor = ffpa_tur_flavor.68.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_ifriqiya_complete_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.68.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.76 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.76.t
+	desc = ffpa_tur_flavor.76.d
+	flavor = ffpa_tur_flavor.76.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_ifriqiya_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.76.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+ffpa_tur_flavor.84 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_tur_flavor.84.t
+	desc = ffpa_tur_flavor.84.d
+	flavor = ffpa_tur_flavor.84.f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = {
+		c:TUR ?= this
+		has_variable = ffpa_tur_front_ifriqiya_retry_cooldown_v1
+	}
+	option = {
+		name = ffpa_tur_flavor.84.a
+		default_option = yes
+		ai_chance = { factor = 1 }
+	}
+}
+
+
 # --- The Charter of the Porte ---
 
 ffpa_tur_flavor.10 = {

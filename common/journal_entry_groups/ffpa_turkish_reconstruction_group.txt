@@ -2,3 +2,8 @@ je_group_ffpa_turkish_reconstruction = {
 	context = country
 	updates_strategic_region_stances = yes
 }
+
+je_group_ffpa_turkish_frontier_recovery = {
+	context = country
+	updates_strategic_region_stances = yes
+}

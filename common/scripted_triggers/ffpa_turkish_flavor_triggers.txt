@@ -132,3 +132,299 @@ ffpa_tur_african_settlement_ready_v1 = {
 		has_variable = ffpa_nile_works_complete
 	}
 }
+
+# --- Route-limited frontier recovery ---------------------------------------
+# Country scope. This marker is also the narrow compatibility guard used by
+# the Tech & Res Ottoman-collapse JE override. Auxiliary evidence covers old
+# saves before the first monthly ensure; it never guesses from government form.
+ffpa_tur_is_ffpa_managed_v1 = {
+	c:TUR ?= this
+	OR = {
+		has_variable = ffpa_tur_flavor_initialized_v1
+		has_variable = ffpa_tur_state_project_v1
+		has_variable = ffpa_tur_porte_charter_choice_v1
+		has_variable = ffpa_tur_republic_settlement_choice_v1
+		has_variable = ffpa_tur_directorate_settlement_choice_v1
+		has_journal_entry = je_ffpa_tur_charter_of_the_porte
+		has_journal_entry = je_ffpa_tur_second_foundation_of_ankara
+		has_journal_entry = je_ffpa_tur_reconstruction_directorate
+		has_variable = ffpa_tur_porte_charter_complete_v1
+		has_variable = ffpa_tur_second_foundation_complete_v1
+		has_variable = ffpa_tur_reconstruction_directorate_complete_v1
+	}
+}
+
+ffpa_tur_has_frontier_route_terminal_v1 = {
+	OR = {
+		AND = {
+			ffpa_tur_has_ottoman_state_project_v1 = yes
+			has_variable = ffpa_tur_porte_charter_choice_v1
+		}
+		AND = {
+			ffpa_tur_has_republican_state_project_v1 = yes
+			has_variable = ffpa_tur_republic_settlement_choice_v1
+		}
+		AND = {
+			ffpa_tur_has_directorate_state_project_v1 = yes
+			has_variable = ffpa_tur_directorate_settlement_choice_v1
+		}
+	}
+}
+
+ffpa_tur_front_western_pact_owned_v1 = {
+	owns_entire_state_region = STATE_WESTERN_THRACE
+}
+
+ffpa_tur_front_mosul_owned_v1 = {
+	owns_entire_state_region = STATE_MOSUL
+}
+
+ffpa_tur_front_rumelia_owned_v1 = {
+	owns_entire_state_region = STATE_ALBANIA
+	owns_entire_state_region = STATE_MACEDONIA
+	owns_entire_state_region = STATE_WESTERN_THRACE
+	owns_entire_state_region = STATE_BULGARIA
+	owns_entire_state_region = STATE_DOBRUDJA
+	owns_entire_state_region = STATE_NORTHERN_THRACE
+}
+
+ffpa_tur_front_aegean_cyprus_owned_v1 = {
+	owns_entire_state_region = STATE_ATTICA
+	owns_entire_state_region = STATE_CRETE
+	owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS
+	owns_entire_state_region = STATE_WEST_AEGEAN_ISLANDS
+	owns_entire_state_region = STATE_IONIAN_ISLANDS
+	owns_entire_state_region = STATE_CYPRUS
+}
+
+ffpa_tur_front_levant_owned_v1 = {
+	owns_entire_state_region = STATE_ALEPPO
+	owns_entire_state_region = STATE_SYRIA
+	owns_entire_state_region = STATE_LEBANON
+	owns_entire_state_region = STATE_PALESTINE
+	owns_entire_state_region = STATE_TRANSJORDAN
+}
+
+ffpa_tur_front_mesopotamia_owned_v1 = {
+	owns_entire_state_region = STATE_MOSUL
+	owns_entire_state_region = STATE_BAGHDAD
+	owns_entire_state_region = STATE_DEIR_EZ_ZOR
+	owns_entire_state_region = STATE_BASRA
+}
+
+ffpa_tur_front_egypt_owned_v1 = {
+	owns_entire_state_region = STATE_LOWER_EGYPT
+	owns_entire_state_region = STATE_MIDDLE_EGYPT
+	owns_entire_state_region = STATE_UPPER_EGYPT
+	owns_entire_state_region = STATE_SINAI
+	owns_entire_state_region = STATE_MATRUH
+}
+
+ffpa_tur_front_ifriqiya_owned_v1 = {
+	owns_entire_state_region = STATE_LIBYA
+	owns_entire_state_region = STATE_TRIPOLI
+	owns_entire_state_region = STATE_TUNISIA
+}
+
+ffpa_tur_any_front_active_v1 = {
+	OR = {
+		has_journal_entry = je_ffpa_tur_front_western_pact
+		has_journal_entry = je_ffpa_tur_front_mosul
+		has_journal_entry = je_ffpa_tur_front_rumelia
+		has_journal_entry = je_ffpa_tur_front_aegean_cyprus
+		has_journal_entry = je_ffpa_tur_front_levant
+		has_journal_entry = je_ffpa_tur_front_mesopotamia
+		has_journal_entry = je_ffpa_tur_front_egypt
+		has_journal_entry = je_ffpa_tur_front_ifriqiya
+	}
+}
+
+ffpa_tur_any_front_pending_v1 = {
+	OR = {
+		has_variable = ffpa_tur_front_western_pact_resolution_pending_v1
+		has_variable = ffpa_tur_front_mosul_resolution_pending_v1
+		has_variable = ffpa_tur_front_rumelia_resolution_pending_v1
+		has_variable = ffpa_tur_front_aegean_cyprus_resolution_pending_v1
+		has_variable = ffpa_tur_front_levant_resolution_pending_v1
+		has_variable = ffpa_tur_front_mesopotamia_resolution_pending_v1
+		has_variable = ffpa_tur_front_egypt_resolution_pending_v1
+		has_variable = ffpa_tur_front_ifriqiya_resolution_pending_v1
+	}
+}
+
+# One live JE or deferred timeout consumes the single frontier slot. Direct JE
+# checks avoid a persistent counter that could drift after migration or invalid.
+ffpa_tur_frontier_slot_available_v1 = {
+	NOT = { ffpa_tur_any_front_active_v1 = yes }
+	NOT = { ffpa_tur_any_front_pending_v1 = yes }
+}
+
+ffpa_tur_front_western_pact_available_v1 = {
+	ffpa_tur_has_republican_state_project_v1 = yes
+	has_variable = ffpa_tur_republic_settlement_choice_v1
+	NOT = { has_variable = ffpa_tur_front_western_pact_complete_v1 }
+	NOT = { has_variable = ffpa_tur_front_western_pact_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_tur_front_western_pact }
+	NOT = { ffpa_tur_front_western_pact_owned_v1 = yes }
+}
+
+ffpa_tur_front_mosul_available_v1 = {
+	ffpa_tur_has_republican_state_project_v1 = yes
+	has_variable = ffpa_tur_republic_settlement_choice_v1
+	NOT = { has_variable = ffpa_tur_front_mosul_complete_v1 }
+	NOT = { has_variable = ffpa_tur_front_mosul_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_tur_front_mosul }
+	NOT = { ffpa_tur_front_mosul_owned_v1 = yes }
+}
+
+ffpa_tur_front_rumelia_available_v1 = {
+	OR = {
+		AND = {
+			ffpa_tur_has_ottoman_state_project_v1 = yes
+			has_variable = ffpa_tur_porte_charter_choice_v1
+		}
+		AND = {
+			ffpa_tur_has_directorate_state_project_v1 = yes
+			has_variable = ffpa_tur_directorate_settlement_choice_v1
+		}
+	}
+	NOT = { has_variable = ffpa_tur_front_rumelia_complete_v1 }
+	NOT = { has_variable = ffpa_tur_front_rumelia_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_tur_front_rumelia }
+	NOT = { ffpa_tur_front_rumelia_owned_v1 = yes }
+}
+
+ffpa_tur_front_aegean_cyprus_available_v1 = {
+	ffpa_tur_has_ottoman_state_project_v1 = yes
+	has_variable = ffpa_tur_porte_charter_choice_v1
+	has_variable = ffpa_tur_front_rumelia_complete_v1
+	NOT = { has_variable = ffpa_tur_front_aegean_cyprus_complete_v1 }
+	NOT = { has_variable = ffpa_tur_front_aegean_cyprus_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_tur_front_aegean_cyprus }
+	NOT = { ffpa_tur_front_aegean_cyprus_owned_v1 = yes }
+}
+
+ffpa_tur_front_levant_available_v1 = {
+	OR = {
+		AND = {
+			ffpa_tur_has_ottoman_state_project_v1 = yes
+			has_variable = ffpa_tur_porte_charter_choice_v1
+		}
+		AND = {
+			ffpa_tur_has_directorate_state_project_v1 = yes
+			has_variable = ffpa_tur_directorate_settlement_choice_v1
+		}
+	}
+	NOT = { has_variable = ffpa_tur_front_levant_complete_v1 }
+	NOT = { has_variable = ffpa_tur_front_levant_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_tur_front_levant }
+	NOT = { ffpa_tur_front_levant_owned_v1 = yes }
+}
+
+ffpa_tur_front_mesopotamia_available_v1 = {
+	OR = {
+		AND = {
+			ffpa_tur_has_ottoman_state_project_v1 = yes
+			has_variable = ffpa_tur_porte_charter_choice_v1
+		}
+		AND = {
+			ffpa_tur_has_directorate_state_project_v1 = yes
+			has_variable = ffpa_tur_directorate_settlement_choice_v1
+		}
+	}
+	has_variable = ffpa_tur_front_levant_complete_v1
+	NOT = { has_variable = ffpa_tur_front_mesopotamia_complete_v1 }
+	NOT = { has_variable = ffpa_tur_front_mesopotamia_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_tur_front_mesopotamia }
+	NOT = { ffpa_tur_front_mesopotamia_owned_v1 = yes }
+}
+
+# High Porte Egypt requires Levant and one of the two adjacent imperial fronts.
+ffpa_tur_front_egypt_available_v1 = {
+	ffpa_tur_has_ottoman_state_project_v1 = yes
+	has_variable = ffpa_tur_porte_charter_choice_v1
+	has_variable = ffpa_tur_front_levant_complete_v1
+	OR = {
+		has_variable = ffpa_tur_front_rumelia_complete_v1
+		has_variable = ffpa_tur_front_mesopotamia_complete_v1
+	}
+	NOT = { has_variable = ffpa_tur_front_egypt_complete_v1 }
+	NOT = { has_variable = ffpa_tur_front_egypt_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_tur_front_egypt }
+	NOT = { ffpa_tur_front_egypt_owned_v1 = yes }
+}
+
+ffpa_tur_front_ifriqiya_available_v1 = {
+	ffpa_tur_has_ottoman_state_project_v1 = yes
+	has_variable = ffpa_tur_porte_charter_choice_v1
+	has_variable = ffpa_tur_front_egypt_complete_v1
+	NOT = { has_variable = ffpa_tur_front_ifriqiya_complete_v1 }
+	NOT = { has_variable = ffpa_tur_front_ifriqiya_retry_cooldown_v1 }
+	NOT = { has_journal_entry = je_ffpa_tur_front_ifriqiya }
+	NOT = { ffpa_tur_front_ifriqiya_owned_v1 = yes }
+}
+
+ffpa_tur_has_available_front_v1 = {
+	OR = {
+		ffpa_tur_front_western_pact_available_v1 = yes
+		ffpa_tur_front_mosul_available_v1 = yes
+		ffpa_tur_front_rumelia_available_v1 = yes
+		ffpa_tur_front_aegean_cyprus_available_v1 = yes
+		ffpa_tur_front_levant_available_v1 = yes
+		ffpa_tur_front_mesopotamia_available_v1 = yes
+		ffpa_tur_front_egypt_available_v1 = yes
+		ffpa_tur_front_ifriqiya_available_v1 = yes
+	}
+}
+
+# Used only for decision visibility: cooldowns and prerequisites do not hide the
+# system permanently while a route still has supported, incomplete frontiers.
+ffpa_tur_has_incomplete_supported_front_v1 = {
+	OR = {
+		AND = {
+			ffpa_tur_has_republican_state_project_v1 = yes
+			has_variable = ffpa_tur_republic_settlement_choice_v1
+			OR = {
+				NOT = { has_variable = ffpa_tur_front_western_pact_complete_v1 }
+				NOT = { has_variable = ffpa_tur_front_mosul_complete_v1 }
+			}
+		}
+		AND = {
+			ffpa_tur_has_directorate_state_project_v1 = yes
+			has_variable = ffpa_tur_directorate_settlement_choice_v1
+			OR = {
+				NOT = { has_variable = ffpa_tur_front_rumelia_complete_v1 }
+				NOT = { has_variable = ffpa_tur_front_levant_complete_v1 }
+				NOT = { has_variable = ffpa_tur_front_mesopotamia_complete_v1 }
+			}
+		}
+		AND = {
+			ffpa_tur_has_ottoman_state_project_v1 = yes
+			has_variable = ffpa_tur_porte_charter_choice_v1
+			OR = {
+				NOT = { has_variable = ffpa_tur_front_rumelia_complete_v1 }
+				NOT = { has_variable = ffpa_tur_front_aegean_cyprus_complete_v1 }
+				NOT = { has_variable = ffpa_tur_front_levant_complete_v1 }
+				NOT = { has_variable = ffpa_tur_front_mesopotamia_complete_v1 }
+				NOT = { has_variable = ffpa_tur_front_egypt_complete_v1 }
+				NOT = { has_variable = ffpa_tur_front_ifriqiya_complete_v1 }
+			}
+		}
+	}
+}
+
+ffpa_tur_frontier_council_ready_v1 = {
+	c:TUR ?= this
+	ffpa_tur_has_frontier_route_terminal_v1 = yes
+	is_at_war = no
+	is_diplomatic_play_committed_participant = no
+	ffpa_tur_frontier_slot_available_v1 = yes
+	ffpa_tur_has_available_front_v1 = yes
+}
+
+ffpa_tur_ai_frontier_council_ready_v1 = {
+	ffpa_tur_frontier_council_ready_v1 = yes
+	infamy < infamy_threshold:infamous
+	gold_reserves > 0
+	country_rank <= rank_value:minor_power
+}
