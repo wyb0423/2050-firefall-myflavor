@@ -10,7 +10,7 @@ gov_ffpa_ottoman_autocracy = {
 	female_heir = "" # Preserve the vanilla Ottoman sultanate behavior.
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_law_or_variant = law_type:law_monarchy
 		has_law_or_variant = law_type:law_autocracy
 		has_gov_regency = no
@@ -30,7 +30,7 @@ gov_ffpa_ottoman_empire = {
 	female_heir = "" # Preserve the vanilla Ottoman sultanate behavior.
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_law_or_variant = law_type:law_monarchy
 		country_has_voting_franchise = no
 		NOT = { has_law_or_variant = law_type:law_autocracy }
@@ -51,7 +51,7 @@ gov_ffpa_ottoman_constitutional_empire = {
 	female_heir = "" # Preserve the vanilla Ottoman sultanate behavior.
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_law_or_variant = law_type:law_monarchy
 		country_has_voting_franchise = yes
 		has_gov_regency = no
@@ -70,7 +70,7 @@ gov_ffpa_turkish_presidential_republic = {
 	female_ruler = "RULER_TITLE_PRESIDENT"
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_law_or_variant = law_type:law_presidential_republic
 		country_has_voting_franchise = yes
 		NOR = {
@@ -90,7 +90,7 @@ gov_ffpa_turkish_presidential_state = {
 	female_ruler = "RULER_TITLE_PRESIDENT"
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_law_or_variant = law_type:law_presidential_republic
 		country_has_voting_franchise = no
 	}
@@ -107,7 +107,7 @@ gov_ffpa_turkish_parliamentary_republic = {
 	female_ruler = "RULER_TITLE_PRIME_MINISTER"
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_law_or_variant = law_type:law_parliamentary_republic
 		country_has_voting_franchise = yes
 		NOT = { has_law_or_variant = law_type:law_single_party_state }
@@ -124,7 +124,7 @@ gov_ffpa_turkish_restricted_republic = {
 	female_ruler = "RULER_TITLE_PRIME_MINISTER"
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_law_or_variant = law_type:law_parliamentary_republic
 		country_has_voting_franchise = no
 	}

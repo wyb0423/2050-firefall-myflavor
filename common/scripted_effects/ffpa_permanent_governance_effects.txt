@@ -761,7 +761,7 @@ ffpa_refresh_byz_dynatoi_tier_modifier_v1 = {
 ffpa_ensure_byz_supply_veterans_welfare_v1 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			OR = {
 				has_variable = ffpa_byz_supply_veterans_welfare_v1
 				var:ffpa_byz_military_reform_stage_v1 >= 3
@@ -1086,7 +1086,7 @@ ffpa_cleanup_byz_permanent_governance_runtime_v1 = {
 
 ffpa_ensure_permanent_governance_journals_v1 = {
 	if = {
-		limit = { c:TUR ?= ROOT }
+		limit = { ROOT = { country_definition = cd:TUR } }
 		remove_variable = ffpa_tur_permanent_governance_tag_cleaned_v1
 		if = {
 			limit = { ffpa_tur_permanent_governance_ready_v1 = yes }
@@ -1134,7 +1134,7 @@ ffpa_ensure_permanent_governance_journals_v1 = {
 	}
 
 	if = {
-		limit = { c:BYZ ?= ROOT }
+		limit = { ROOT = { country_definition = cd:BYZ } }
 		remove_variable = ffpa_byz_permanent_governance_tag_cleaned_v1
 		if = {
 			limit = { ffpa_byz_permanent_governance_ready_v1 = yes }

@@ -6,13 +6,13 @@
 
 ffpa_tur_anatolian_recovery_community = {
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 	}
 }
 
 ffpa_tur_council_of_the_straits = {
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 	}
 }
 
@@ -56,26 +56,26 @@ ffpa_tur_anatolian_development_board = {
 
 ffpa_byz_oikoumene_of_new_rome = {
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 	}
 }
 
 ffpa_byz_mediterranean_recovery_council = {
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 	}
 }
 
 ffpa_byz_council_of_imperial_provinces = {
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		country_has_monarchy_law = yes
 	}
 }
 
 ffpa_byz_senate_of_cities_and_provinces = {
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		OR = {
 			has_law_or_variant = law_type:law_presidential_republic
 			has_law_or_variant = law_type:law_parliamentary_republic
@@ -85,14 +85,14 @@ ffpa_byz_senate_of_cities_and_provinces = {
 
 ffpa_byz_restored_oikoumene_synod = {
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		has_law_or_variant = law_type:law_theocracy
 	}
 }
 
 ffpa_byz_congress_of_roman_communes = {
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		has_law_or_variant = law_type:law_council_republic
 		has_law_or_variant = law_type:law_anarchy
 	}
@@ -100,7 +100,7 @@ ffpa_byz_congress_of_roman_communes = {
 
 ffpa_byz_mediterranean_recovery_system = {
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		has_law_or_variant = law_type:law_corporate_state
 	}
 }

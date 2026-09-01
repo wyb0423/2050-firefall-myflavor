@@ -50,7 +50,7 @@ je_ffpa_byz_restore_balkans = {
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
@@ -98,7 +98,7 @@ je_ffpa_byz_restore_anatolia = {
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
@@ -142,7 +142,7 @@ je_ffpa_byz_restore_oriens = {
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
@@ -185,7 +185,7 @@ je_ffpa_byz_restore_aegyptus = {
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
@@ -228,7 +228,7 @@ je_ffpa_byz_restore_africa = {
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
@@ -282,7 +282,7 @@ je_ffpa_byz_restore_italia = {
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }
@@ -324,7 +324,7 @@ je_ffpa_byz_restore_spania = {
 		trigger_event = { id = ffpa_flavor.47 popup = yes }
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_campaign_mobilization_v1 }

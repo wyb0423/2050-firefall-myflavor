@@ -14,7 +14,7 @@ ffpa_flavor.50 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 
 	option = {
 		name = ffpa_flavor.50.a
@@ -43,7 +43,7 @@ ffpa_flavor.51 = {
 	duration = 3
 
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		var:ffpa_byz_military_reform_stage_v1 = 0
 		NOT = { has_variable = ffpa_byz_military_reform_project_v1 }
 	}
@@ -92,7 +92,7 @@ ffpa_flavor.52 = {
 	duration = 3
 
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		has_variable = ffpa_byz_dynatoi_failure_resolution_pending_v1
 	}
 

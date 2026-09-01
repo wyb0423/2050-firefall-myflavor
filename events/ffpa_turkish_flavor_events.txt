@@ -14,7 +14,7 @@ ffpa_tur_flavor.1 = {
 	duration = 3
 
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_state_project_repair_event_scheduled_v1
 		NOT = { has_variable = ffpa_tur_state_project_v1 }
 	}
@@ -555,7 +555,7 @@ ffpa_tur_flavor.61 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_western_pact_complete_v1
 	}
 	option = {
@@ -576,7 +576,7 @@ ffpa_tur_flavor.69 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_western_pact_retry_cooldown_v1
 	}
 	option = {
@@ -597,7 +597,7 @@ ffpa_tur_flavor.77 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_western_pact_retry_cooldown_v1
 	}
 	option = {
@@ -618,7 +618,7 @@ ffpa_tur_flavor.62 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_mosul_complete_v1
 	}
 	option = {
@@ -639,7 +639,7 @@ ffpa_tur_flavor.70 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_mosul_retry_cooldown_v1
 	}
 	option = {
@@ -660,7 +660,7 @@ ffpa_tur_flavor.78 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_mosul_retry_cooldown_v1
 	}
 	option = {
@@ -681,7 +681,7 @@ ffpa_tur_flavor.63 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_rumelia_complete_v1
 	}
 	option = {
@@ -702,7 +702,7 @@ ffpa_tur_flavor.71 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_rumelia_retry_cooldown_v1
 	}
 	option = {
@@ -723,7 +723,7 @@ ffpa_tur_flavor.79 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_rumelia_retry_cooldown_v1
 	}
 	option = {
@@ -744,7 +744,7 @@ ffpa_tur_flavor.64 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_aegean_cyprus_complete_v1
 	}
 	option = {
@@ -765,7 +765,7 @@ ffpa_tur_flavor.72 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_aegean_cyprus_retry_cooldown_v1
 	}
 	option = {
@@ -786,7 +786,7 @@ ffpa_tur_flavor.80 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_aegean_cyprus_retry_cooldown_v1
 	}
 	option = {
@@ -807,7 +807,7 @@ ffpa_tur_flavor.65 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_levant_complete_v1
 	}
 	option = {
@@ -828,7 +828,7 @@ ffpa_tur_flavor.73 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_levant_retry_cooldown_v1
 	}
 	option = {
@@ -849,7 +849,7 @@ ffpa_tur_flavor.81 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_levant_retry_cooldown_v1
 	}
 	option = {
@@ -870,7 +870,7 @@ ffpa_tur_flavor.66 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_mesopotamia_complete_v1
 	}
 	option = {
@@ -891,7 +891,7 @@ ffpa_tur_flavor.74 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_mesopotamia_retry_cooldown_v1
 	}
 	option = {
@@ -912,7 +912,7 @@ ffpa_tur_flavor.82 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_mesopotamia_retry_cooldown_v1
 	}
 	option = {
@@ -933,7 +933,7 @@ ffpa_tur_flavor.67 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_egypt_complete_v1
 	}
 	option = {
@@ -954,7 +954,7 @@ ffpa_tur_flavor.75 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_egypt_retry_cooldown_v1
 	}
 	option = {
@@ -975,7 +975,7 @@ ffpa_tur_flavor.83 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_egypt_retry_cooldown_v1
 	}
 	option = {
@@ -996,7 +996,7 @@ ffpa_tur_flavor.68 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_ifriqiya_complete_v1
 	}
 	option = {
@@ -1017,7 +1017,7 @@ ffpa_tur_flavor.76 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_ifriqiya_retry_cooldown_v1
 	}
 	option = {
@@ -1038,7 +1038,7 @@ ffpa_tur_flavor.84 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_front_ifriqiya_retry_cooldown_v1
 	}
 	option = {
@@ -1062,7 +1062,7 @@ ffpa_tur_flavor.10 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_journal_entry = je_ffpa_tur_charter_of_the_porte
 		has_variable = ffpa_tur_porte_fundamental_law_event_scheduled_v1
 	}
@@ -1113,7 +1113,7 @@ ffpa_tur_flavor.11 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_journal_entry = je_ffpa_tur_charter_of_the_porte
 		has_variable = ffpa_tur_porte_provincial_councils_event_scheduled_v1
 	}
@@ -1176,7 +1176,7 @@ ffpa_tur_flavor.12 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_journal_entry = je_ffpa_tur_charter_of_the_porte
 		has_variable = ffpa_tur_porte_waqf_event_scheduled_v1
 	}
@@ -1233,7 +1233,7 @@ ffpa_tur_flavor.13 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		ffpa_tur_has_ottoman_state_project_v1 = yes
 		has_variable = ffpa_tur_porte_charter_complete_v1
 		has_variable = ffpa_tur_porte_charter_capstone_scheduled_v1
@@ -1310,7 +1310,7 @@ ffpa_tur_flavor.20 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_journal_entry = je_ffpa_tur_second_foundation_of_ankara
 		has_variable = ffpa_tur_republic_assembly_event_scheduled_v1
 	}
@@ -1360,7 +1360,7 @@ ffpa_tur_flavor.21 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_journal_entry = je_ffpa_tur_second_foundation_of_ankara
 		has_variable = ffpa_tur_republic_education_event_scheduled_v1
 	}
@@ -1410,7 +1410,7 @@ ffpa_tur_flavor.22 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_journal_entry = je_ffpa_tur_second_foundation_of_ankara
 		has_variable = ffpa_tur_republic_civil_military_event_scheduled_v1
 	}
@@ -1460,7 +1460,7 @@ ffpa_tur_flavor.23 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		ffpa_tur_has_republican_state_project_v1 = yes
 		has_variable = ffpa_tur_second_foundation_complete_v1
 		has_variable = ffpa_tur_republic_capstone_scheduled_v1
@@ -1527,7 +1527,7 @@ ffpa_tur_flavor.30 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_journal_entry = je_ffpa_tur_reconstruction_directorate
 		has_variable = ffpa_tur_directorate_cadastre_event_scheduled_v1
 	}
@@ -1577,7 +1577,7 @@ ffpa_tur_flavor.31 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_journal_entry = je_ffpa_tur_reconstruction_directorate
 		has_variable = ffpa_tur_directorate_combines_event_scheduled_v1
 	}
@@ -1640,7 +1640,7 @@ ffpa_tur_flavor.32 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_journal_entry = je_ffpa_tur_reconstruction_directorate
 		has_variable = ffpa_tur_directorate_technical_corps_event_scheduled_v1
 	}
@@ -1697,7 +1697,7 @@ ffpa_tur_flavor.33 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		ffpa_tur_has_directorate_state_project_v1 = yes
 		has_variable = ffpa_tur_reconstruction_directorate_complete_v1
 		has_variable = ffpa_tur_directorate_capstone_scheduled_v1
@@ -1770,7 +1770,7 @@ ffpa_tur_flavor.40 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_anatolian_plan_congress_scheduled_v1
 		NOT = { has_variable = ffpa_tur_anatolian_plan_congress_choice_v1 }
 	}
@@ -1836,7 +1836,7 @@ ffpa_tur_flavor.41 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_new_straits_convention_complete_v1
 		has_variable = ffpa_tur_straits_convention_event_scheduled_v1
 		NOT = { has_variable = ffpa_tur_straits_convention_choice_v1 }
@@ -1895,7 +1895,7 @@ ffpa_tur_flavor.50 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_rumelian_settlement_scheduled_v1
 		has_variable = ffpa_tur_state_project_v1
 	}
@@ -2003,7 +2003,7 @@ ffpa_tur_flavor.51 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_eastern_settlement_scheduled_v1
 		has_variable = ffpa_tur_state_project_v1
 	}
@@ -2099,7 +2099,7 @@ ffpa_tur_flavor.52 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_african_settlement_scheduled_v1
 		has_variable = ffpa_tur_state_project_v1
 	}

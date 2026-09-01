@@ -310,6 +310,8 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 覆盖上游 ID 时保留上游名字，并在文件头注释来源、目标版本、覆盖原因和预期差异。
 - trigger 不产生副作用，effect 改状态，script value 算数值，modifier 描述叠加量；不能跨类别照搬语法。
 - 每次跨 country/state/building/market/strategic region scope 时，在复杂实现旁写明进入和返回的 scope。
+- Firefall 的可成立国家在开局可能没有全局 country 对象。凡“当前国家必须是 TUR/GRE/BYZ”的排他身份门控，必须在 country scope 使用 `country_definition = cd:TUR`、`cd:GRE` 或 `cd:BYZ`；不得把 `c:TAG ?= this` / `c:TAG ?= ROOT` 作为唯一身份断言。
+- `?=` 只用于目标对象允许不存在的可选 scope，例如外部国家关系、战争对象、保存 scope、事件目标或已经先用 `exists` 保护的 actor。审查时必须按 scope 与意图区分，禁止对 `c:TAG ?=` 做全仓盲目替换。
 - 标识符可能包含连字符；工具和正则不得只接受字母、数字和下划线。
 - 持久变量、event target、JE 状态、动态 modifier、事件 ID 和生成 ID 都是存档 API。
 - 旧键含义变化时创建新版本键并在幂等 ensure effect 中迁移；不要静默复用，也不要仅为“整洁”删除 `_v1` / `_v2` 键。
@@ -333,6 +335,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 新增引用能在“最终加载栈”中找到，而不只是本仓库。
 - 新增玩家可见对象同时有英文和简体中文本地化。
 - 同一 Mod 内没有意外重复顶层键；有意重复/注入要说明操作语义。
+- 玩家可见入口、调度包装与其 readiness trigger 中的 TUR/GRE/BYZ 排他身份门控使用 strict `country_definition`；保留的 `c:TAG ?=` 必须能说明对象为何允许不存在。
 - `git diff --check` 没有新增空白错误；但不要为通过检查而格式化用户无关文件。
 
 ### 9.2 Auto PM Adapter 拆分集成验证
@@ -353,6 +356,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 ### 9.4 东地中海模块修改的额外验证
 
+- Firefall 开局尚无 TUR/GRE/BYZ country 对象时，其他国家不得获得其政府类型、决议、JE、事件、迁移变量或国家集团候选名称；对应 tag 形成后这些内容只对正确 country definition 开放。
 - GRE → BYZ 成立、TUR 不被替换、BYZ 形成后宣称保留。
 - 共同体三轴分别前进/倒退，完成奖励不重复。
 - TUR 三条建国路线在新档中分别可达且互斥；旧档可从奥斯曼共同体/文化和安纳托利亚公民权可靠迁移，无法识别的重建总署旧档只出现一次人工确认入口。

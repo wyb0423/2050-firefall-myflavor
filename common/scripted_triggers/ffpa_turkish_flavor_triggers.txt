@@ -3,19 +3,19 @@
 # from completed regional construction projects.
 
 ffpa_tur_has_ottoman_state_project_v1 = {
-	c:TUR ?= this
+	country_definition = cd:TUR
 	has_variable = ffpa_tur_state_project_v1
 	var:ffpa_tur_state_project_v1 = 1
 }
 
 ffpa_tur_has_republican_state_project_v1 = {
-	c:TUR ?= this
+	country_definition = cd:TUR
 	has_variable = ffpa_tur_state_project_v1
 	var:ffpa_tur_state_project_v1 = 2
 }
 
 ffpa_tur_has_directorate_state_project_v1 = {
-	c:TUR ?= this
+	country_definition = cd:TUR
 	has_variable = ffpa_tur_state_project_v1
 	var:ffpa_tur_state_project_v1 = 3
 }
@@ -138,7 +138,7 @@ ffpa_tur_african_settlement_ready_v1 = {
 # the Tech & Res Ottoman-collapse JE override. Auxiliary evidence covers old
 # saves before the first monthly ensure; it never guesses from government form.
 ffpa_tur_is_ffpa_managed_v1 = {
-	c:TUR ?= this
+	country_definition = cd:TUR
 	OR = {
 		has_variable = ffpa_tur_flavor_initialized_v1
 		has_variable = ffpa_tur_state_project_v1
@@ -414,7 +414,7 @@ ffpa_tur_has_incomplete_supported_front_v1 = {
 }
 
 ffpa_tur_frontier_council_ready_v1 = {
-	c:TUR ?= this
+	country_definition = cd:TUR
 	ffpa_tur_has_frontier_route_terminal_v1 = yes
 	is_at_war = no
 	is_diplomatic_play_committed_participant = no

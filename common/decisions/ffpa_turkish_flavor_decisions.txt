@@ -3,7 +3,7 @@
 # explicit recovery event and disappears as soon as a route is recorded.
 ffpa_tur_confirm_reconstruction_legacy = {
 	is_shown = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_rebuild_anatolia_complete
 		has_variable = ffpa_tur_state_project_repair_needed_v1
 		NOT = { has_variable = ffpa_tur_state_project_v1 }
@@ -25,7 +25,7 @@ ffpa_tur_confirm_reconstruction_legacy = {
 # settlements has fixed the state's long-term constitutional direction.
 ffpa_tur_convene_frontier_council = {
 	is_shown = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		ffpa_tur_has_frontier_route_terminal_v1 = yes
 		ffpa_tur_has_incomplete_supported_front_v1 = yes
 	}
@@ -64,7 +64,7 @@ ffpa_tur_convene_frontier_council = {
 # its own provenance-safe cleanup and five-year cooldown in on_invalid.
 ffpa_tur_withdraw_frontier_mandate = {
 	is_shown = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		ffpa_tur_any_front_active_v1 = yes
 	}
 

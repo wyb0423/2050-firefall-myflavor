@@ -15,7 +15,7 @@ ffpa_flavor.2 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 
-	trigger = { c:TUR ?= this }
+	trigger = { country_definition = cd:TUR }
 
 	option = {
 		name = ffpa_flavor.2.a
@@ -70,7 +70,7 @@ ffpa_flavor.3 = {
 	duration = 3
 
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_law_or_variant = law_type:law_monarchy
 	}
 
@@ -99,7 +99,7 @@ ffpa_flavor.4 = {
 	duration = 3
 
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		owns_entire_state_region = STATE_EASTERN_THRACE
 	}
 
@@ -137,7 +137,7 @@ ffpa_flavor.5 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 
-	trigger = { c:GRE ?= this }
+	trigger = { country_definition = cd:GRE }
 
 	option = {
 		name = ffpa_flavor.5.a
@@ -163,7 +163,7 @@ ffpa_flavor.6 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 
 	option = {
 		name = ffpa_flavor.6.a
@@ -213,7 +213,7 @@ ffpa_flavor.7 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 
 	option = {
 		name = ffpa_flavor.7.a
@@ -329,7 +329,7 @@ ffpa_flavor.8 = {
 			limit = {
 				AND = {
 					exists = scope:thrace_owner
-					scope:thrace_owner = { NOT = { c:TUR ?= this } }
+					scope:thrace_owner = { NOT = { country_definition = cd:TUR } }
 				}
 			}
 			create_incident = { country = scope:thrace_owner value = -10 }
@@ -338,7 +338,7 @@ ffpa_flavor.8 = {
 			limit = {
 				AND = {
 					exists = scope:aydin_owner
-					scope:aydin_owner = { NOT = { c:TUR ?= this } }
+					scope:aydin_owner = { NOT = { country_definition = cd:TUR } }
 				}
 			}
 			create_incident = { country = scope:aydin_owner value = -10 }
@@ -420,7 +420,7 @@ ffpa_flavor.10 = {
 	icon = "gfx/interface/icons/event_icons/event_industry.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:TUR ?= this }
+	trigger = { country_definition = cd:TUR }
 	immediate = { set_variable = ffpa_tur_industrial_congress_fired_v2 }
 
 	option = {
@@ -448,7 +448,7 @@ ffpa_flavor.11 = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:TUR ?= this has_variable = ffpa_tur_rebuild_anatolia_complete }
+	trigger = { country_definition = cd:TUR has_variable = ffpa_tur_rebuild_anatolia_complete }
 	immediate = {
 		set_variable = ffpa_tur_tax_register_event_fired_v2
 		remove_variable = ffpa_tur_tax_register_event_scheduled_v2
@@ -512,7 +512,7 @@ ffpa_flavor.12 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		OR = {
 			has_variable = ffpa_tur_first_imperial_election_scheduled_v3
 			has_variable = ffpa_tur_first_imperial_election_fired_v2
@@ -586,7 +586,7 @@ ffpa_flavor.13 = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:TUR ?= this has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+	trigger = { country_definition = cd:TUR has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
 	immediate = {
 		set_variable = ffpa_tur_language_event_fired_v2
 		remove_variable = ffpa_tur_language_event_scheduled_v3
@@ -633,7 +633,7 @@ ffpa_flavor.14 = {
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:TUR ?= this has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+	trigger = { country_definition = cd:TUR has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
 	immediate = {
 		set_variable = ffpa_tur_representation_event_fired_v2
 		remove_variable = ffpa_tur_representation_event_scheduled_v3
@@ -679,7 +679,7 @@ ffpa_flavor.15 = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:TUR ?= this has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
+	trigger = { country_definition = cd:TUR has_journal_entry = je_ffpa_tur_ottoman_commonwealth }
 	immediate = {
 		set_variable = ffpa_tur_military_oath_event_fired_v2
 		remove_variable = ffpa_tur_military_oath_event_scheduled_v3
@@ -727,7 +727,7 @@ ffpa_flavor.20 = {
 	icon = "gfx/interface/icons/event_icons/event_industry.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this owns_entire_state_region = STATE_EASTERN_THRACE }
+	trigger = { country_definition = cd:BYZ owns_entire_state_region = STATE_EASTERN_THRACE }
 	option = {
 		name = ffpa_flavor.20.a
 		default_option = yes
@@ -765,7 +765,7 @@ ffpa_flavor.21 = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_coins_positive.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this has_variable = ffpa_byz_new_rome_complete }
+	trigger = { country_definition = cd:BYZ has_variable = ffpa_byz_new_rome_complete }
 	immediate = {
 		set_variable = ffpa_byz_land_register_event_fired_v2
 		remove_variable = ffpa_byz_land_register_event_scheduled_v2
@@ -828,7 +828,7 @@ ffpa_flavor.22 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		OR = {
 			has_variable = ffpa_byz_first_election_scheduled_v3
 			has_variable = ffpa_byz_first_election_fired_v2
@@ -900,7 +900,7 @@ ffpa_flavor.23 = {
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
+	trigger = { country_definition = cd:BYZ ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 	immediate = {
 		set_variable = ffpa_byz_language_event_fired_v2
 		remove_variable = ffpa_byz_language_event_scheduled_v3
@@ -947,7 +947,7 @@ ffpa_flavor.24 = {
 	icon = "gfx/interface/icons/event_icons/event_election.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
+	trigger = { country_definition = cd:BYZ ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 	immediate = {
 		set_variable = ffpa_byz_representation_event_fired_v2
 		remove_variable = ffpa_byz_representation_event_scheduled_v3
@@ -993,7 +993,7 @@ ffpa_flavor.25 = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
+	trigger = { country_definition = cd:BYZ ffpa_byz_has_active_rhomaic_commonwealth_v2 = yes }
 	immediate = {
 		set_variable = ffpa_byz_military_oath_event_fired_v2
 		remove_variable = ffpa_byz_military_oath_event_scheduled_v3
@@ -1053,7 +1053,7 @@ ffpa_flavor.30 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		has_variable = ffpa_byz_mediterranean_congress_scheduled_v1
 		NOT = { has_variable = ffpa_byz_western_investment_choice_v2 }
 	}
@@ -1178,7 +1178,7 @@ ffpa_flavor.31 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		has_variable = ffpa_byz_western_cadastre_scheduled_v1
 		NOT = { has_variable = ffpa_byz_western_cadastre_choice_v2 }
 	}
@@ -1314,7 +1314,7 @@ ffpa_flavor.32 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		has_variable = ffpa_byz_western_civic_extension_scheduled_v1
 		NOT = { has_variable = ffpa_byz_western_citizenship_choice_v2 }
 	}
@@ -1450,7 +1450,7 @@ ffpa_flavor.33 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		has_variable = ffpa_byz_western_representation_scheduled_v1
 		NOT = { has_variable = ffpa_byz_western_representation_choice_v2 }
 	}
@@ -1582,7 +1582,7 @@ ffpa_flavor.39 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 	trigger = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		is_at_war = no
 		ffpa_byz_restoration_campaign_slot_available = yes
 		ffpa_byz_has_available_restoration_campaign = yes
@@ -1675,7 +1675,7 @@ ffpa_flavor.40 = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
@@ -1707,7 +1707,7 @@ ffpa_flavor.41 = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
@@ -1739,7 +1739,7 @@ ffpa_flavor.42 = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
@@ -1771,7 +1771,7 @@ ffpa_flavor.43 = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
@@ -1803,7 +1803,7 @@ ffpa_flavor.44 = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
@@ -1835,7 +1835,7 @@ ffpa_flavor.45 = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
@@ -1867,7 +1867,7 @@ ffpa_flavor.46 = {
 	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
@@ -1899,7 +1899,7 @@ ffpa_flavor.47 = {
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
-	trigger = { c:BYZ ?= this }
+	trigger = { country_definition = cd:BYZ }
 	option = {
 		name = ffpa_flavor.47.a
 		default_option = yes

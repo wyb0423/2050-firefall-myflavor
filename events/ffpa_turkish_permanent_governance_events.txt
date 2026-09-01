@@ -15,7 +15,7 @@ ffpa_tur_flavor.90 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 
-	trigger = { c:TUR ?= this }
+	trigger = { country_definition = cd:TUR }
 
 	option = {
 		name = ffpa_tur_flavor.90.a
@@ -35,7 +35,7 @@ ffpa_tur_flavor.91 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 
-	trigger = { c:TUR ?= this }
+	trigger = { country_definition = cd:TUR }
 
 	option = {
 		name = ffpa_tur_flavor.91.a
@@ -55,7 +55,7 @@ ffpa_tur_flavor.92 = {
 	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
 	duration = 3
 
-	trigger = { c:TUR ?= this }
+	trigger = { country_definition = cd:TUR }
 
 	option = {
 		name = ffpa_tur_flavor.92.a

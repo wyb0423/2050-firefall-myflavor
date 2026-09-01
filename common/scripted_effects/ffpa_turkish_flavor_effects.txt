@@ -421,7 +421,7 @@ ffpa_apply_tur_settlement_development_authority_v1 = {
 ffpa_check_tur_post_reconstruction_events_v1 = {
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			ffpa_tur_has_three_anatolian_projects_v1 = yes
 			NOT = { has_variable = ffpa_tur_anatolian_plan_congress_choice_v1 }
 			NOT = { has_variable = ffpa_tur_anatolian_plan_congress_scheduled_v1 }
@@ -432,7 +432,7 @@ ffpa_check_tur_post_reconstruction_events_v1 = {
 
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_state_project_v1
 			ffpa_tur_rumelian_settlement_ready_v1 = yes
 			NOT = { has_variable = ffpa_tur_rumelian_settlement_fired_v1 }
@@ -444,7 +444,7 @@ ffpa_check_tur_post_reconstruction_events_v1 = {
 
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_state_project_v1
 			ffpa_tur_eastern_settlement_ready_v1 = yes
 			NOT = { has_variable = ffpa_tur_eastern_settlement_fired_v1 }
@@ -456,7 +456,7 @@ ffpa_check_tur_post_reconstruction_events_v1 = {
 
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_state_project_v1
 			ffpa_tur_african_settlement_ready_v1 = yes
 			NOT = { has_variable = ffpa_tur_african_settlement_fired_v1 }
@@ -473,7 +473,7 @@ ffpa_check_tur_post_reconstruction_events_v1 = {
 
 ffpa_ensure_tur_formation_core_claims_v1 = {
 	if = {
-		limit = { c:TUR ?= ROOT }
+		limit = { ROOT = { country_definition = cd:TUR } }
 		if = {
 		limit = {
 			NOT = { owns_entire_state_region = STATE_EASTERN_THRACE }
@@ -2450,7 +2450,7 @@ ffpa_ensure_tur_frontier_recovery_v1 = {
 
 ffpa_ensure_tur_flavor_v1 = {
 	if = {
-		limit = { c:TUR ?= ROOT }
+		limit = { ROOT = { country_definition = cd:TUR } }
 		ffpa_ensure_tur_frontier_recovery_v1 = yes
 
 		# Infer only outcomes that leave an unambiguous persistent trace. The
@@ -2581,7 +2581,7 @@ ffpa_ensure_tur_flavor_v1 = {
 # choices remain as save API and are restored if the same country later reforms TUR.
 ffpa_handle_tur_flavor_country_formed_v1 = {
 	if = {
-		limit = { c:TUR ?= ROOT }
+		limit = { ROOT = { country_definition = cd:TUR } }
 		ffpa_ensure_tur_flavor_v1 = yes
 	}
 	else_if = {

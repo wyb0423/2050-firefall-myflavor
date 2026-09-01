@@ -3,12 +3,12 @@ je_ffpa_tur_rebuild_anatolia = {
 	group = je_group_historical_content
 
 	is_shown_when_inactive = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		NOT = { has_variable = ffpa_tur_rebuild_anatolia_complete }
 	}
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		NOT = { has_variable = ffpa_tur_rebuild_anatolia_complete }
 	}
 
@@ -83,7 +83,7 @@ je_ffpa_tur_rebuild_anatolia = {
 		trigger_event = { id = ffpa_flavor.2 }
 	}
 
-	invalid = { NOT = { c:TUR ?= this } }
+	invalid = { NOT = { country_definition = cd:TUR } }
 	on_invalid = { remove_variable = ffpa_tur_rebuild_anatolia_start_gdp }
 
 	weight = 120
@@ -194,7 +194,7 @@ je_ffpa_tur_ottoman_commonwealth = {
 		trigger_event = { id = ffpa_flavor.3 }
 	}
 
-	invalid = { NOT = { c:TUR ?= this } }
+	invalid = { NOT = { country_definition = cd:TUR } }
 	on_invalid = {
 		remove_variable = ffpa_tur_commonwealth_administration_v2
 		remove_variable = ffpa_tur_commonwealth_civic_v2
@@ -218,13 +218,13 @@ je_ffpa_tur_gate_of_two_continents = {
 	group = je_group_historical_content
 
 	is_shown_when_inactive = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_rebuild_anatolia_complete
 		NOT = { has_variable = ffpa_tur_gate_of_two_continents_complete }
 	}
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_rebuild_anatolia_complete
 		owns_entire_state_region = STATE_EASTERN_THRACE
 		NOT = { has_variable = ffpa_tur_gate_of_two_continents_complete }
@@ -293,7 +293,7 @@ je_ffpa_tur_gate_of_two_continents = {
 		trigger_event = { id = ffpa_flavor.4 }
 	}
 
-	invalid = { NOT = { c:TUR ?= this } }
+	invalid = { NOT = { country_definition = cd:TUR } }
 	on_invalid = {
 		every_scope_state = {
 			limit = {
@@ -312,12 +312,12 @@ je_ffpa_gre_islands_and_mainland = {
 	group = je_group_historical_content
 
 	is_shown_when_inactive = {
-		c:GRE ?= this
+		country_definition = cd:GRE
 		NOT = { has_variable = ffpa_gre_islands_and_mainland_complete }
 	}
 
 	possible = {
-		c:GRE ?= this
+		country_definition = cd:GRE
 		NOT = { has_variable = ffpa_gre_islands_and_mainland_complete }
 	}
 
@@ -377,7 +377,7 @@ je_ffpa_gre_islands_and_mainland = {
 		trigger_event = { id = ffpa_flavor.5 }
 	}
 
-	invalid = { NOT = { c:GRE ?= this } }
+	invalid = { NOT = { country_definition = cd:GRE } }
 	on_invalid = { remove_variable = ffpa_gre_islands_and_mainland_start_gdp }
 
 	weight = 115
@@ -389,12 +389,12 @@ je_ffpa_byz_new_rome = {
 	group = je_group_historical_content
 
 	is_shown_when_inactive = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		NOT = { has_variable = ffpa_byz_new_rome_complete }
 	}
 
 	possible = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		NOT = { has_variable = ffpa_byz_new_rome_complete }
 	}
 
@@ -444,7 +444,7 @@ je_ffpa_byz_new_rome = {
 		trigger_event = { id = ffpa_flavor.6 }
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	weight = 130
 	should_be_pinned_by_default_uninvolved_or_context = yes
 }
@@ -459,7 +459,7 @@ je_ffpa_byz_rhomaic_commonwealth = {
 
 	invalid = {
 		OR = {
-			NOT = { c:BYZ ?= this }
+			NOT = { country_definition = cd:BYZ }
 			has_variable = ffpa_byz_commonwealth_journal_rebuild_v4
 		}
 	}
@@ -467,7 +467,7 @@ je_ffpa_byz_rhomaic_commonwealth = {
 	on_invalid = {
 		if = {
 			limit = {
-				c:BYZ ?= ROOT
+				ROOT = { country_definition = cd:BYZ }
 				has_variable = ffpa_byz_commonwealth_journal_rebuild_v4
 				has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2
 			}
@@ -476,7 +476,7 @@ je_ffpa_byz_rhomaic_commonwealth = {
 		}
 		else_if = {
 			limit = {
-				c:BYZ ?= ROOT
+				ROOT = { country_definition = cd:BYZ }
 				has_variable = ffpa_byz_commonwealth_journal_rebuild_v4
 				NOT = { has_variable = ffpa_byz_rhomaic_commonwealth_complete }
 			}
@@ -610,7 +610,7 @@ je_ffpa_byz_rhomaic_commonwealth_v2 = {
 		trigger_event = { id = ffpa_flavor.7 }
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
 		remove_variable = ffpa_byz_commonwealth_administration_v2
 		remove_variable = ffpa_byz_commonwealth_civic_v2
@@ -635,13 +635,13 @@ je_ffpa_byz_restore_new_rome = {
 	group = je_group_historical_content
 
 	is_shown_when_inactive = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		has_variable = ffpa_byz_new_rome_complete
 		NOT = { has_variable = ffpa_byz_restore_new_rome_complete }
 	}
 
 	possible = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		has_variable = ffpa_byz_new_rome_complete
 		owns_entire_state_region = STATE_EASTERN_THRACE
 		NOT = { has_variable = ffpa_byz_restore_new_rome_complete }
@@ -703,7 +703,7 @@ je_ffpa_byz_restore_new_rome = {
 		trigger_event = { id = ffpa_flavor.20 }
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = {
 		every_scope_state = {
 			limit = {

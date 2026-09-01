@@ -21,7 +21,7 @@ je_ottoman_empire_collapse = {
 	}
 	should_be_involved = {
 		OR = {
-			c:TUR ?= this
+			country_definition = cd:TUR
 			AND = {
 				country_rank = rank_value:great_power
 				navy_size >= 30				#Naval Power
@@ -29,7 +29,7 @@ je_ottoman_empire_collapse = {
 		}
 	}
 	is_shown_in_lobby = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		is_involved_in_journal_entry = je_ottoman_empire_collapse
 	}
 	scripted_button = ztr_ottoman_collapse_request_egypt
@@ -92,7 +92,7 @@ je_ottoman_empire_collapse = {
 					every_scope_je_involved = {
 						limit = {
 							NOT = {
-								c:TUR ?= this
+								country_definition = cd:TUR
 							}
 						}
 						trigger_event = {

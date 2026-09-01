@@ -38,7 +38,7 @@ je_ffpa_tur_imperial_registers_v1 = {
 
 	on_fail = { ffpa_on_tur_register_failure_v1 = yes }
 
-	invalid = { NOT = { c:TUR ?= this } }
+	invalid = { NOT = { country_definition = cd:TUR } }
 	on_invalid = { ffpa_cleanup_tur_permanent_governance_runtime_v1 = yes }
 
 	status_desc = {
@@ -95,7 +95,7 @@ je_ffpa_tur_bread_and_capital_v1 = {
 
 	on_fail = { ffpa_on_tur_capital_supply_failure_v1 = yes }
 
-	invalid = { NOT = { c:TUR ?= this } }
+	invalid = { NOT = { country_definition = cd:TUR } }
 	on_invalid = { ffpa_cleanup_tur_permanent_governance_runtime_v1 = yes }
 
 	status_desc = {
@@ -142,7 +142,7 @@ je_ffpa_byz_public_polity_v1 = {
 	fail = { ffpa_byz_public_polity_failure_v1 = yes }
 	on_fail = { ffpa_on_byz_public_polity_failure_v1 = yes }
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = { ffpa_cleanup_byz_permanent_governance_runtime_v1 = yes }
 
 	status_desc = {
@@ -190,7 +190,7 @@ je_ffpa_byz_military_households_v1 = {
 	fail = { ffpa_byz_dynatoi_failure_v1 = yes }
 	on_fail = { ffpa_on_byz_dynatoi_failure_v1 = yes }
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	on_invalid = { ffpa_cleanup_byz_permanent_governance_runtime_v1 = yes }
 
 	status_desc = {

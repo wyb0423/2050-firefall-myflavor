@@ -7,7 +7,7 @@ ffpa_has_no_insurrectionary_movement = {
 }
 
 ffpa_tur_ottoman_commonwealth_month_conditions = {
-	c:TUR ?= this
+	country_definition = cd:TUR
 	country_has_monarchy_law = yes
 	OR = {
 		has_law_or_variant = law_type:law_cultural_exclusion
@@ -61,7 +61,7 @@ ffpa_tur_ottoman_commonwealth_month_conditions = {
 }
 
 ffpa_byz_rhomaic_commonwealth_month_conditions = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	OR = {
 		has_law_or_variant = law_type:law_cultural_exclusion
 		has_law_or_variant = law_type:law_multicultural
@@ -125,7 +125,7 @@ ffpa_is_tur_commonwealth_core_state = {
 }
 
 ffpa_tur_commonwealth_administration_conditions = {
-	c:TUR ?= this
+	country_definition = cd:TUR
 	country_has_monarchy_law = yes
 	government_legitimacy >= 55
 	bureaucracy >= 0
@@ -137,7 +137,7 @@ ffpa_tur_commonwealth_administration_conditions = {
 }
 
 ffpa_tur_commonwealth_civic_conditions = {
-	c:TUR ?= this
+	country_definition = cd:TUR
 	country_has_monarchy_law = yes
 	OR = {
 		has_law_or_variant = law_type:law_cultural_exclusion
@@ -169,7 +169,7 @@ ffpa_tur_commonwealth_civic_conditions = {
 }
 
 ffpa_tur_commonwealth_stability_conditions = {
-	c:TUR ?= this
+	country_definition = cd:TUR
 	country_has_monarchy_law = yes
 	is_at_war = no
 	ffpa_has_no_insurrectionary_movement = yes
@@ -200,7 +200,7 @@ ffpa_is_byz_commonwealth_core_state = {
 }
 
 ffpa_byz_commonwealth_administration_conditions = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	government_legitimacy >= 55
 	bureaucracy >= 0
 	any_scope_state = {
@@ -211,7 +211,7 @@ ffpa_byz_commonwealth_administration_conditions = {
 }
 
 ffpa_byz_commonwealth_civic_conditions = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	OR = {
 		has_law_or_variant = law_type:law_cultural_exclusion
 		has_law_or_variant = law_type:law_multicultural
@@ -231,7 +231,7 @@ ffpa_byz_commonwealth_civic_conditions = {
 }
 
 ffpa_byz_commonwealth_stability_conditions = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	is_at_war = no
 	ffpa_has_no_insurrectionary_movement = yes
 	any_scope_state = {
@@ -253,11 +253,11 @@ ffpa_byz_has_active_rhomaic_commonwealth_v2 = {
 ffpa_imperial_regional_development_unlocked = {
 	OR = {
 		AND = {
-			c:TUR ?= this
+			country_definition = cd:TUR
 			has_variable = ffpa_tur_rebuild_anatolia_complete
 		}
 		AND = {
-			c:BYZ ?= this
+			country_definition = cd:BYZ
 			has_variable = ffpa_byz_new_rome_complete
 		}
 	}
@@ -442,21 +442,21 @@ ffpa_byz_restoration_campaign_slot_available = {
 }
 
 ffpa_byz_balkans_restoration_campaign_available = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	NOT = { has_variable = ffpa_byz_balkans_restored_complete_v1 }
 	NOT = { has_variable = ffpa_byz_balkans_restoration_retry_cooldown_v1 }
 	NOT = { has_journal_entry = je_ffpa_byz_restore_balkans }
 }
 
 ffpa_byz_anatolia_restoration_campaign_available = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	NOT = { has_variable = ffpa_byz_anatolia_restored_complete_v1 }
 	NOT = { has_variable = ffpa_byz_anatolia_restoration_retry_cooldown_v1 }
 	NOT = { has_journal_entry = je_ffpa_byz_restore_anatolia }
 }
 
 ffpa_byz_oriens_restoration_campaign_available = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	has_variable = ffpa_byz_anatolia_restored_complete_v1
 	NOT = { has_variable = ffpa_byz_oriens_restored_complete_v1 }
 	NOT = { has_variable = ffpa_byz_oriens_restoration_retry_cooldown_v1 }
@@ -464,7 +464,7 @@ ffpa_byz_oriens_restoration_campaign_available = {
 }
 
 ffpa_byz_aegyptus_restoration_campaign_available = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	has_variable = ffpa_byz_oriens_restored_complete_v1
 	NOT = { has_variable = ffpa_byz_aegyptus_restored_complete_v1 }
 	NOT = { has_variable = ffpa_byz_aegyptus_restoration_retry_cooldown_v1 }
@@ -472,7 +472,7 @@ ffpa_byz_aegyptus_restoration_campaign_available = {
 }
 
 ffpa_byz_africa_restoration_campaign_available = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	has_variable = ffpa_byz_aegyptus_restored_complete_v1
 	NOT = { has_variable = ffpa_byz_africa_restored_complete_v1 }
 	NOT = { has_variable = ffpa_byz_africa_restoration_retry_cooldown_v1 }
@@ -480,7 +480,7 @@ ffpa_byz_africa_restoration_campaign_available = {
 }
 
 ffpa_byz_italia_restoration_campaign_available = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	has_variable = ffpa_byz_balkans_restored_complete_v1
 	NOT = { has_variable = ffpa_byz_italia_restored_complete_v1 }
 	NOT = { has_variable = ffpa_byz_italia_restoration_retry_cooldown_v1 }
@@ -488,7 +488,7 @@ ffpa_byz_italia_restoration_campaign_available = {
 }
 
 ffpa_byz_spania_restoration_campaign_available = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	has_variable = ffpa_byz_italia_restored_complete_v1
 	has_variable = ffpa_byz_africa_restored_complete_v1
 	NOT = { has_variable = ffpa_byz_spania_restored_complete_v1 }

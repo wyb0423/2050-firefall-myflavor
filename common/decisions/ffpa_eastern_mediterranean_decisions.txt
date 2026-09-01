@@ -35,7 +35,7 @@ ffpa_request_eastern_roman_title = {
 # them; the decision itself enforces peace and the shared two-campaign cap.
 ffpa_byz_convene_restoration_council = {
 	is_shown = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_byz_has_available_restoration_campaign = yes
 	}
 

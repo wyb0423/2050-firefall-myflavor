@@ -128,7 +128,7 @@ ffpa_grant_byzantine_justinianic_claims_v2 = {
 ffpa_apply_tur_formation_ideologies_v1 = {
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			NOT = { has_variable = ffpa_tur_formation_ideologies_v1 }
 		}
 
@@ -184,7 +184,7 @@ ffpa_apply_tur_formation_ideologies_v1 = {
 ffpa_apply_byz_formation_ideologies_v1 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_byz_formation_ideologies_v1 }
 		}
 
@@ -242,7 +242,7 @@ ffpa_apply_byz_formation_ideologies_v1 = {
 ffpa_apply_tur_provincial_compact_v1 = {
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			NOT = { has_variable = ffpa_tur_provincial_compact_ideology_v1 }
 		}
 		ig:ig_landowners = {
@@ -262,7 +262,7 @@ ffpa_apply_tur_provincial_compact_v1 = {
 ffpa_apply_tur_ottoman_constitutionalism_v1 = {
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			NOT = { has_variable = ffpa_tur_ottoman_constitutionalism_v1 }
 		}
 		ig:ig_intelligentsia = {
@@ -282,7 +282,7 @@ ffpa_apply_tur_ottoman_constitutionalism_v1 = {
 ffpa_apply_byz_imperial_symphonia_v1 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_byz_imperial_symphonia_v1 }
 		}
 		ig:ig_devout = {
@@ -302,7 +302,7 @@ ffpa_apply_byz_imperial_symphonia_v1 = {
 ffpa_apply_byz_rhomaic_civic_universalism_v1 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_byz_rhomaic_civic_universalism_v1 }
 		}
 		ig:ig_intelligentsia = {
@@ -326,7 +326,7 @@ ffpa_apply_byz_rhomaic_civic_universalism_v1 = {
 ffpa_ensure_byz_rhomaic_civic_compact_v2 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			OR = {
 				has_variable = ffpa_byz_rhomaic_commonwealth_complete
 				country_has_primary_culture = cu:ffpa_rhomaic
@@ -351,7 +351,7 @@ ffpa_ensure_byz_rhomaic_civic_compact_v2 = {
 ffpa_ensure_greek_formation_religion_v1 = {
 	if = {
 		limit = {
-			c:GRE ?= ROOT
+			ROOT = { country_definition = cd:GRE }
 			NOT = { has_variable = ffpa_greek_state_religion_normalized_v1 }
 		}
 
@@ -373,7 +373,7 @@ ffpa_ensure_greek_formation_religion_v1 = {
 ffpa_ensure_byzantine_interest_group_traits_v1 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_byzantine_interest_group_traits_v1 }
 		}
 
@@ -398,7 +398,7 @@ ffpa_ensure_byzantine_interest_group_traits_v1 = {
 ffpa_apply_ottoman_interest_group_traits_v1 = {
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			country_has_primary_culture = cu:ffpa_ottoman
 			NOT = { has_variable = ffpa_ottoman_interest_group_traits_v1 }
 		}
@@ -422,7 +422,7 @@ ffpa_ensure_byzantine_formation_effects = {
 	# formation-effects key so existing BYZ saves receive the repair once.
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_byzantine_state_religion_normalized_v1 }
 		}
 
@@ -440,7 +440,7 @@ ffpa_ensure_byzantine_formation_effects = {
 
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_byzantine_formation_incorporation_v2 }
 		}
 
@@ -473,7 +473,7 @@ ffpa_ensure_byzantine_formation_effects = {
 	# preserved; this migration only grants missing states from the new whitelist.
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_byzantine_justinianic_claims_v2 }
 		}
 		ffpa_grant_byzantine_justinianic_claims_v2 = yes
@@ -483,7 +483,7 @@ ffpa_ensure_byzantine_formation_effects = {
 
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_byzantine_flavor_names_v2 }
 		}
 		ig:ig_devout = { set_interest_group_name = ffpa_ig_byz_holy_synod }
@@ -500,7 +500,7 @@ ffpa_ensure_byzantine_formation_effects = {
 ffpa_apply_ottoman_interest_group_names = {
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			country_has_primary_culture = cu:ffpa_ottoman
 			NOT = { has_variable = ffpa_ottoman_flavor_names_v2 }
 		}
@@ -585,7 +585,7 @@ ffpa_refresh_byz_western_citizenship_incorporation_state_v1 = {
 			is_incorporated = no
 			# State -> current owner country.
 			owner ?= {
-				c:BYZ ?= this
+				country_definition = cd:BYZ
 				has_variable = ffpa_byz_western_citizenship_choice_v2
 				var:ffpa_byz_western_citizenship_choice_v2 = 1
 			}
@@ -598,7 +598,7 @@ ffpa_refresh_byz_western_citizenship_incorporation_state_v1 = {
 			is_incorporated = no
 			# State -> current owner country.
 			owner ?= {
-				c:BYZ ?= this
+				country_definition = cd:BYZ
 				has_variable = ffpa_byz_western_citizenship_choice_v2
 				var:ffpa_byz_western_citizenship_choice_v2 = 2
 			}
@@ -611,7 +611,7 @@ ffpa_refresh_byz_western_citizenship_incorporation_state_v1 = {
 			is_incorporated = no
 			# State -> current owner country.
 			owner ?= {
-				c:BYZ ?= this
+				country_definition = cd:BYZ
 				has_variable = ffpa_byz_western_citizenship_choice_v2
 				var:ffpa_byz_western_citizenship_choice_v2 = 3
 			}
@@ -636,7 +636,7 @@ ffpa_refresh_byz_western_citizenship_incorporation_states_v1 = {
 ffpa_ensure_byz_western_citizenship_incorporation_v1 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_byz_western_citizenship_incorporation_migrated_v1 }
 			has_variable = ffpa_byz_western_citizenship_choice_v2
 			OR = {
@@ -672,7 +672,7 @@ ffpa_clear_byz_western_representation_rewards_v1 = {
 ffpa_schedule_next_western_integration_reward_review_v2 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_byz_western_reward_review_active_v2 }
 		}
 		if = {
@@ -726,7 +726,7 @@ ffpa_schedule_next_western_integration_reward_review_v2 = {
 ffpa_ensure_western_integration_rewards_v2 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			NOT = { has_variable = ffpa_western_integration_rewards_migrated_v2 }
 		}
 		if = {
@@ -769,7 +769,7 @@ ffpa_ensure_western_integration_rewards_v2 = {
 ffpa_check_western_integration_events = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			ffpa_has_two_western_development_projects = yes
 			NOT = { has_variable = ffpa_byz_mediterranean_congress_scheduled_v1 }
 			NOT = { has_variable = ffpa_byz_mediterranean_congress_fired_v1 }
@@ -780,7 +780,7 @@ ffpa_check_western_integration_events = {
 
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			ffpa_western_tax_settlement_ready = yes
 			NOT = { has_variable = ffpa_byz_western_cadastre_scheduled_v1 }
 			NOT = { has_variable = ffpa_byz_western_cadastre_fired_v1 }
@@ -791,7 +791,7 @@ ffpa_check_western_integration_events = {
 
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			ffpa_western_civic_extension_ready = yes
 			NOT = { has_variable = ffpa_byz_western_civic_extension_scheduled_v1 }
 			NOT = { has_variable = ffpa_byz_western_civic_extension_fired_v1 }
@@ -806,7 +806,7 @@ ffpa_check_western_integration_events = {
 ffpa_sync_byz_commonwealth_progress_bars = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth
 			has_variable = ffpa_byz_commonwealth_administration_v2
 			has_variable = ffpa_byz_commonwealth_civic_v2
@@ -834,7 +834,7 @@ ffpa_sync_byz_commonwealth_progress_bars = {
 ffpa_sync_byz_commonwealth_progress_bars_v2 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2
 			has_variable = ffpa_byz_commonwealth_administration_v2
 			has_variable = ffpa_byz_commonwealth_civic_v2
@@ -860,7 +860,7 @@ ffpa_sync_byz_commonwealth_progress_bars_v2 = {
 ffpa_sync_tur_commonwealth_progress_bars = {
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			has_journal_entry = je_ffpa_tur_ottoman_commonwealth
 			has_variable = ffpa_tur_commonwealth_administration_v2
 			has_variable = ffpa_tur_commonwealth_civic_v2
@@ -889,7 +889,7 @@ ffpa_sync_tur_commonwealth_progress_bars = {
 ffpa_ensure_byz_commonwealth_progress_v3 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth
 		}
 		if = {
@@ -932,7 +932,7 @@ ffpa_ensure_byz_commonwealth_progress_v3 = {
 ffpa_ensure_byz_commonwealth_journal_v4 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth
 			NOT = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2 }
 		}
@@ -941,7 +941,7 @@ ffpa_ensure_byz_commonwealth_journal_v4 = {
 
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth
 			NOT = { has_variable = ffpa_byz_commonwealth_journal_rebuild_v4 }
 		}
@@ -950,7 +950,7 @@ ffpa_ensure_byz_commonwealth_journal_v4 = {
 
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			has_variable = ffpa_byz_commonwealth_journal_rebuild_v4
 			NOT = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth }
 			NOT = { has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2 }
@@ -974,7 +974,7 @@ ffpa_ensure_byz_commonwealth_journal_v4 = {
 ffpa_ensure_byz_commonwealth_progress_v4 = {
 	if = {
 		limit = {
-			c:BYZ ?= ROOT
+			ROOT = { country_definition = cd:BYZ }
 			has_journal_entry = je_ffpa_byz_rhomaic_commonwealth_v2
 		}
 		if = {
@@ -1014,7 +1014,7 @@ ffpa_ensure_byz_commonwealth_progress_v4 = {
 ffpa_ensure_tur_commonwealth_progress_v3 = {
 	if = {
 		limit = {
-			c:TUR ?= ROOT
+			ROOT = { country_definition = cd:TUR }
 			has_journal_entry = je_ffpa_tur_ottoman_commonwealth
 		}
 		if = {
@@ -1056,12 +1056,12 @@ ffpa_ensure_tur_commonwealth_progress_v3 = {
 # each migration branch has its own one-shot version variable.
 ffpa_ensure_eastern_mediterranean_v2 = {
 	if = {
-		limit = { c:GRE ?= ROOT }
+		limit = { ROOT = { country_definition = cd:GRE } }
 		ffpa_ensure_greek_formation_religion_v1 = yes
 	}
 
 	if = {
-		limit = { c:BYZ ?= ROOT }
+		limit = { ROOT = { country_definition = cd:BYZ } }
 		ffpa_ensure_byzantine_formation_effects = yes
 		ffpa_ensure_byz_commonwealth_progress_v3 = yes
 		ffpa_ensure_byz_commonwealth_journal_v4 = yes
@@ -1124,7 +1124,7 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 	}
 
 	if = {
-		limit = { c:TUR ?= ROOT }
+		limit = { ROOT = { country_definition = cd:TUR } }
 		ffpa_ensure_tur_flavor_v1 = yes
 		ffpa_ensure_tur_commonwealth_progress_v3 = yes
 		if = {

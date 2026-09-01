@@ -32,14 +32,14 @@ je_ffpa_tur_front_western_pact = {
 
 	invalid = {
 		OR = {
-			NOT = { c:TUR ?= this }
+			NOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_frontier_withdraw_requested_v1
 		}
 	}
 	on_invalid = {
 		if = {
 			limit = {
-				c:TUR ?= this
+				country_definition = cd:TUR
 				has_variable = ffpa_tur_frontier_withdraw_requested_v1
 			}
 			ffpa_withdraw_tur_front_western_pact_v1 = yes
@@ -87,14 +87,14 @@ je_ffpa_tur_front_mosul = {
 
 	invalid = {
 		OR = {
-			NOT = { c:TUR ?= this }
+			NOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_frontier_withdraw_requested_v1
 		}
 	}
 	on_invalid = {
 		if = {
 			limit = {
-				c:TUR ?= this
+				country_definition = cd:TUR
 				has_variable = ffpa_tur_frontier_withdraw_requested_v1
 			}
 			ffpa_withdraw_tur_front_mosul_v1 = yes
@@ -143,14 +143,14 @@ je_ffpa_tur_front_rumelia = {
 
 	invalid = {
 		OR = {
-			NOT = { c:TUR ?= this }
+			NOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_frontier_withdraw_requested_v1
 		}
 	}
 	on_invalid = {
 		if = {
 			limit = {
-				c:TUR ?= this
+				country_definition = cd:TUR
 				has_variable = ffpa_tur_frontier_withdraw_requested_v1
 			}
 			ffpa_withdraw_tur_front_rumelia_v1 = yes
@@ -199,14 +199,14 @@ je_ffpa_tur_front_aegean_cyprus = {
 
 	invalid = {
 		OR = {
-			NOT = { c:TUR ?= this }
+			NOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_frontier_withdraw_requested_v1
 		}
 	}
 	on_invalid = {
 		if = {
 			limit = {
-				c:TUR ?= this
+				country_definition = cd:TUR
 				has_variable = ffpa_tur_frontier_withdraw_requested_v1
 			}
 			ffpa_withdraw_tur_front_aegean_cyprus_v1 = yes
@@ -255,14 +255,14 @@ je_ffpa_tur_front_levant = {
 
 	invalid = {
 		OR = {
-			NOT = { c:TUR ?= this }
+			NOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_frontier_withdraw_requested_v1
 		}
 	}
 	on_invalid = {
 		if = {
 			limit = {
-				c:TUR ?= this
+				country_definition = cd:TUR
 				has_variable = ffpa_tur_frontier_withdraw_requested_v1
 			}
 			ffpa_withdraw_tur_front_levant_v1 = yes
@@ -311,14 +311,14 @@ je_ffpa_tur_front_mesopotamia = {
 
 	invalid = {
 		OR = {
-			NOT = { c:TUR ?= this }
+			NOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_frontier_withdraw_requested_v1
 		}
 	}
 	on_invalid = {
 		if = {
 			limit = {
-				c:TUR ?= this
+				country_definition = cd:TUR
 				has_variable = ffpa_tur_frontier_withdraw_requested_v1
 			}
 			ffpa_withdraw_tur_front_mesopotamia_v1 = yes
@@ -367,14 +367,14 @@ je_ffpa_tur_front_egypt = {
 
 	invalid = {
 		OR = {
-			NOT = { c:TUR ?= this }
+			NOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_frontier_withdraw_requested_v1
 		}
 	}
 	on_invalid = {
 		if = {
 			limit = {
-				c:TUR ?= this
+				country_definition = cd:TUR
 				has_variable = ffpa_tur_frontier_withdraw_requested_v1
 			}
 			ffpa_withdraw_tur_front_egypt_v1 = yes
@@ -423,14 +423,14 @@ je_ffpa_tur_front_ifriqiya = {
 
 	invalid = {
 		OR = {
-			NOT = { c:TUR ?= this }
+			NOT = { country_definition = cd:TUR }
 			has_variable = ffpa_tur_frontier_withdraw_requested_v1
 		}
 	}
 	on_invalid = {
 		if = {
 			limit = {
-				c:TUR ?= this
+				country_definition = cd:TUR
 				has_variable = ffpa_tur_frontier_withdraw_requested_v1
 			}
 			ffpa_withdraw_tur_front_ifriqiya_v1 = yes

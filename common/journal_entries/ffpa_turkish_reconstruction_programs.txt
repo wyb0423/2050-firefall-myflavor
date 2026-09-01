@@ -105,13 +105,13 @@ je_ffpa_tur_black_sea_lifeline = {
 	group = je_group_ffpa_turkish_reconstruction
 
 	is_shown_when_inactive = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_rebuild_anatolia_complete
 		NOT = { has_variable = ffpa_tur_black_sea_lifeline_complete_v1 }
 	}
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_rebuild_anatolia_complete
 		owns_entire_state_region = STATE_KASTAMONU
 		owns_entire_state_region = STATE_TRABZON
@@ -152,7 +152,7 @@ je_ffpa_tur_black_sea_lifeline = {
 		ffpa_check_tur_post_reconstruction_events_v1 = yes
 	}
 
-	invalid = { NOT = { c:TUR ?= this } }
+	invalid = { NOT = { country_definition = cd:TUR } }
 	weight = 100
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -162,13 +162,13 @@ je_ffpa_tur_eastern_highlands_survey = {
 	group = je_group_ffpa_turkish_reconstruction
 
 	is_shown_when_inactive = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_rebuild_anatolia_complete
 		NOT = { has_variable = ffpa_tur_eastern_highlands_survey_complete_v1 }
 	}
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_rebuild_anatolia_complete
 		owns_entire_state_region = STATE_ERZURUM
 		owns_entire_state_region = STATE_KARS
@@ -211,7 +211,7 @@ je_ffpa_tur_eastern_highlands_survey = {
 		ffpa_check_tur_post_reconstruction_events_v1 = yes
 	}
 
-	invalid = { NOT = { c:TUR ?= this } }
+	invalid = { NOT = { country_definition = cd:TUR } }
 	weight = 100
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -221,13 +221,13 @@ je_ffpa_tur_cukurova_euphrates_works = {
 	group = je_group_ffpa_turkish_reconstruction
 
 	is_shown_when_inactive = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_rebuild_anatolia_complete
 		NOT = { has_variable = ffpa_tur_cukurova_euphrates_works_complete_v1 }
 	}
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_rebuild_anatolia_complete
 		owns_entire_state_region = STATE_ADANA
 		owns_entire_state_region = STATE_DIYARBAKIR
@@ -269,7 +269,7 @@ je_ffpa_tur_cukurova_euphrates_works = {
 		ffpa_check_tur_post_reconstruction_events_v1 = yes
 	}
 
-	invalid = { NOT = { c:TUR ?= this } }
+	invalid = { NOT = { country_definition = cd:TUR } }
 	weight = 100
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -279,13 +279,13 @@ je_ffpa_tur_new_straits_convention = {
 	group = je_group_ffpa_turkish_reconstruction
 
 	is_shown_when_inactive = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_gate_of_two_continents_complete
 		NOT = { has_variable = ffpa_tur_new_straits_convention_complete_v1 }
 	}
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		has_variable = ffpa_tur_gate_of_two_continents_complete
 		owns_entire_state_region = STATE_EASTERN_THRACE
 		NOT = { has_variable = ffpa_tur_new_straits_convention_complete_v1 }
@@ -313,7 +313,7 @@ je_ffpa_tur_new_straits_convention = {
 		trigger_event = { id = ffpa_tur_flavor.41 days = 1 }
 	}
 
-	invalid = { NOT = { c:TUR ?= this } }
+	invalid = { NOT = { country_definition = cd:TUR } }
 	weight = 110
 	should_be_pinned_by_default_uninvolved_or_context = yes
 }

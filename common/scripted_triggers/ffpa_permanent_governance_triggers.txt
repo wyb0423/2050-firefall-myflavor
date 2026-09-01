@@ -1,7 +1,7 @@
 # Country scope. The journals begin only after the corresponding long-form
 # reconstruction has reached a stable terminal state.
 ffpa_tur_permanent_governance_ready_v1 = {
-	c:TUR ?= this
+	country_definition = cd:TUR
 	has_variable = ffpa_tur_state_project_v1
 	OR = {
 		AND = {
@@ -20,7 +20,7 @@ ffpa_tur_permanent_governance_ready_v1 = {
 }
 
 ffpa_byz_permanent_governance_ready_v1 = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	has_variable = ffpa_byz_new_rome_complete
 	has_variable = ffpa_byz_rhomaic_commonwealth_complete
 }
@@ -245,7 +245,7 @@ ffpa_byz_dynatoi_failure_v1 = {
 }
 
 ffpa_byz_military_reform_common_ready_v1 = {
-	c:BYZ ?= this
+	country_definition = cd:BYZ
 	in_default = no
 	is_not_in_civil_war = yes
 	ffpa_has_no_insurrectionary_movement = yes

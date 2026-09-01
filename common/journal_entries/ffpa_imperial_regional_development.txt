@@ -58,7 +58,7 @@ je_ffpa_via_egnatia = {
 		}
 	}
 
-	invalid = { NOT = { OR = { c:TUR ?= this c:BYZ ?= this } } }
+	invalid = { NOT = { OR = { country_definition = cd:TUR country_definition = cd:BYZ } } }
 	weight = 105
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -120,7 +120,7 @@ je_ffpa_danube_thrace_corridor = {
 		}
 	}
 
-	invalid = { NOT = { OR = { c:TUR ?= this c:BYZ ?= this } } }
+	invalid = { NOT = { OR = { country_definition = cd:TUR country_definition = cd:BYZ } } }
 	weight = 100
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -196,7 +196,7 @@ je_ffpa_aegean_maritime_network = {
 		}
 	}
 
-	invalid = { NOT = { OR = { c:TUR ?= this c:BYZ ?= this } } }
+	invalid = { NOT = { OR = { country_definition = cd:TUR country_definition = cd:BYZ } } }
 	weight = 100
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -206,13 +206,13 @@ je_ffpa_southern_italian_harbors = {
 	group = je_group_ffpa_imperial_development
 
 	is_shown_when_inactive = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_imperial_regional_development_unlocked = yes
 		NOT = { has_variable = ffpa_southern_italian_harbors_complete }
 	}
 
 	possible = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_imperial_regional_development_unlocked = yes
 		owns_entire_state_region = STATE_CAMPANIA
 		owns_entire_state_region = STATE_APULIA
@@ -272,7 +272,7 @@ je_ffpa_southern_italian_harbors = {
 		}
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	weight = 90
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -337,7 +337,7 @@ je_ffpa_nile_works = {
 		}
 	}
 
-	invalid = { NOT = { OR = { c:TUR ?= this c:BYZ ?= this } } }
+	invalid = { NOT = { OR = { country_definition = cd:TUR country_definition = cd:BYZ } } }
 	weight = 95
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -401,7 +401,7 @@ je_ffpa_ifriqiya_coastal_network = {
 		}
 	}
 
-	invalid = { NOT = { OR = { c:TUR ?= this c:BYZ ?= this } } }
+	invalid = { NOT = { OR = { country_definition = cd:TUR country_definition = cd:BYZ } } }
 	weight = 90
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -475,7 +475,7 @@ je_ffpa_anatolian_trunk_lines = {
 		}
 	}
 
-	invalid = { NOT = { OR = { c:TUR ?= this c:BYZ ?= this } } }
+	invalid = { NOT = { OR = { country_definition = cd:TUR country_definition = cd:BYZ } } }
 	weight = 105
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -547,7 +547,7 @@ je_ffpa_levant_trade_corridor = {
 		}
 	}
 
-	invalid = { NOT = { OR = { c:TUR ?= this c:BYZ ?= this } } }
+	invalid = { NOT = { OR = { country_definition = cd:TUR country_definition = cd:BYZ } } }
 	weight = 95
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -557,13 +557,13 @@ je_ffpa_mesopotamian_waterworks = {
 	group = je_group_ffpa_imperial_development
 
 	is_shown_when_inactive = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		ffpa_imperial_regional_development_unlocked = yes
 		NOT = { has_variable = ffpa_mesopotamian_waterworks_complete }
 	}
 
 	possible = {
-		c:TUR ?= this
+		country_definition = cd:TUR
 		ffpa_imperial_regional_development_unlocked = yes
 		owns_entire_state_region = STATE_MOSUL
 		owns_entire_state_region = STATE_BAGHDAD
@@ -622,7 +622,7 @@ je_ffpa_mesopotamian_waterworks = {
 		}
 	}
 
-	invalid = { NOT = { c:TUR ?= this } }
+	invalid = { NOT = { country_definition = cd:TUR } }
 	weight = 95
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -634,13 +634,13 @@ je_ffpa_italian_urban_axis = {
 	group = je_group_ffpa_imperial_development
 
 	is_shown_when_inactive = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_imperial_regional_development_unlocked = yes
 		NOT = { has_variable = ffpa_italian_urban_axis_complete }
 	}
 
 	possible = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_imperial_regional_development_unlocked = yes
 		owns_entire_state_region = STATE_PIEDMONT
 		owns_entire_state_region = STATE_LOMBARDY
@@ -723,7 +723,7 @@ je_ffpa_italian_urban_axis = {
 		}
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	weight = 100
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -733,13 +733,13 @@ je_ffpa_adriatic_arsenals = {
 	group = je_group_ffpa_imperial_development
 
 	is_shown_when_inactive = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_imperial_regional_development_unlocked = yes
 		NOT = { has_variable = ffpa_adriatic_arsenals_complete }
 	}
 
 	possible = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_imperial_regional_development_unlocked = yes
 		owns_entire_state_region = STATE_VENETIA
 		owns_entire_state_region = STATE_ISTRIA
@@ -791,7 +791,7 @@ je_ffpa_adriatic_arsenals = {
 		}
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	weight = 95
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -801,13 +801,13 @@ je_ffpa_western_mediterranean_sea_lanes = {
 	group = je_group_ffpa_imperial_development
 
 	is_shown_when_inactive = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_imperial_regional_development_unlocked = yes
 		NOT = { has_variable = ffpa_western_mediterranean_sea_lanes_complete }
 	}
 
 	possible = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_imperial_regional_development_unlocked = yes
 		owns_entire_state_region = STATE_SARDINIA
 		owns_entire_state_region = STATE_CORSICA
@@ -865,7 +865,7 @@ je_ffpa_western_mediterranean_sea_lanes = {
 		}
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	weight = 85
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -875,13 +875,13 @@ je_ffpa_spanian_littoral = {
 	group = je_group_ffpa_imperial_development
 
 	is_shown_when_inactive = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_imperial_regional_development_unlocked = yes
 		NOT = { has_variable = ffpa_spanian_littoral_complete }
 	}
 
 	possible = {
-		c:BYZ ?= this
+		country_definition = cd:BYZ
 		ffpa_imperial_regional_development_unlocked = yes
 		owns_entire_state_region = STATE_LOWER_ANDALUSIA
 		owns_entire_state_region = STATE_UPPER_ANDALUSIA
@@ -942,7 +942,7 @@ je_ffpa_spanian_littoral = {
 		}
 	}
 
-	invalid = { NOT = { c:BYZ ?= this } }
+	invalid = { NOT = { country_definition = cd:BYZ } }
 	weight = 90
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -1007,7 +1007,7 @@ je_ffpa_mauretanian_coastal_road = {
 		}
 	}
 
-	invalid = { NOT = { OR = { c:TUR ?= this c:BYZ ?= this } } }
+	invalid = { NOT = { OR = { country_definition = cd:TUR country_definition = cd:BYZ } } }
 	weight = 90
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
@@ -1075,7 +1075,7 @@ je_ffpa_alexandria_sinai_axis = {
 		}
 	}
 
-	invalid = { NOT = { OR = { c:TUR ?= this c:BYZ ?= this } } }
+	invalid = { NOT = { OR = { country_definition = cd:TUR country_definition = cd:BYZ } } }
 	weight = 95
 	should_be_pinned_by_default_uninvolved_or_context = no
 }
