@@ -1,0 +1,86 @@
+# FFPA-owned Eastern Mediterranean interest-group traits.
+# Assigned at runtime so the vanilla interest_group on_enable definitions remain intact.
+
+# Byzantine Holy Synod
+ig_trait_ffpa_byz_synodal_deadlock = {
+	icon = "gfx/interface/icons/ig_trait_icons/pious_fiction.dds"
+	max_approval = unhappy
+
+	modifier = {
+		country_bureaucracy_mult = -0.05
+		state_radicals_from_political_movements_mult = 0.05
+	}
+}
+
+ig_trait_ffpa_byz_synodal_stewardship = {
+	icon = "gfx/interface/icons/ig_trait_icons/divine_right.dds"
+	min_approval = happy
+
+	modifier = {
+		country_bureaucracy_mult = 0.05
+		state_education_access_add = 0.05
+	}
+}
+
+# Byzantine Roman Army
+ig_trait_ffpa_byz_strategikon = {
+	icon = "gfx/interface/icons/ig_trait_icons/veteran_consultation.dds"
+	min_approval = happy
+
+	modifier = {
+		building_training_rate_mult = 0.10
+		unit_morale_recovery_mult = 0.05
+	}
+}
+
+ig_trait_ffpa_byz_restored_eagles = {
+	icon = "gfx/interface/icons/ig_trait_icons/patriotic_fervor.dds"
+	min_approval = loyal
+
+	modifier = {
+		unit_offense_mult = 0.10
+		unit_morale_recovery_mult = 0.10
+	}
+}
+
+# Byzantine Society of New Rome
+ig_trait_ffpa_byz_new_rome_academies = {
+	icon = "gfx/interface/icons/ig_trait_icons/avant_garde.dds"
+	min_approval = loyal
+
+	modifier = {
+		state_pop_qualifications_mult = 0.05
+		state_education_access_add = 0.05
+	}
+}
+
+# Ottoman Imperial General Staff
+ig_trait_ffpa_tur_erkan_i_harbiye = {
+	icon = "gfx/interface/icons/ig_trait_icons/veteran_consultation.dds"
+	min_approval = happy
+
+	modifier = {
+		building_training_rate_mult = 0.10
+		country_military_tech_research_speed_mult = 0.05
+	}
+}
+
+# Ottoman Reformers
+ig_trait_ffpa_tur_reformist_fractures = {
+	icon = "gfx/interface/icons/ig_trait_icons/social_criticism.dds"
+	max_approval = unhappy
+
+	modifier = {
+		country_law_enactment_speed_mult = -0.10
+	}
+}
+
+ig_trait_ffpa_tur_tanzimat_legacy = {
+	icon = "gfx/interface/icons/ig_trait_icons/propagandists.dds"
+	min_approval = loyal
+
+	modifier = {
+		country_law_enactment_speed_mult = 0.10
+		country_bureaucracy_mult = 0.05
+	}
+}

@@ -368,6 +368,53 @@ ffpa_ensure_greek_formation_religion_v1 = {
 	}
 }
 
+# Root = BYZ. One-shot package for formation and old-save repair. Each
+# set_ig_trait call replaces only the trait in the matching approval slot.
+ffpa_ensure_byzantine_interest_group_traits_v1 = {
+	if = {
+		limit = {
+			c:BYZ ?= ROOT
+			NOT = { has_variable = ffpa_byzantine_interest_group_traits_v1 }
+		}
+
+		ig:ig_devout ?= {
+			set_ig_trait = ig_trait:ig_trait_ffpa_byz_synodal_deadlock
+			set_ig_trait = ig_trait:ig_trait_ffpa_byz_synodal_stewardship
+		}
+		ig:ig_armed_forces ?= {
+			set_ig_trait = ig_trait:ig_trait_ffpa_byz_strategikon
+			set_ig_trait = ig_trait:ig_trait_ffpa_byz_restored_eagles
+		}
+		ig:ig_intelligentsia ?= {
+			set_ig_trait = ig_trait:ig_trait_ffpa_byz_new_rome_academies
+		}
+
+		set_variable = ffpa_byzantine_interest_group_traits_v1
+	}
+}
+
+# Root = TUR. The Ottoman package is earned with the inclusive political
+# identity, not merely by possessing the TUR tag.
+ffpa_apply_ottoman_interest_group_traits_v1 = {
+	if = {
+		limit = {
+			c:TUR ?= ROOT
+			country_has_primary_culture = cu:ffpa_ottoman
+			NOT = { has_variable = ffpa_ottoman_interest_group_traits_v1 }
+		}
+
+		ig:ig_armed_forces ?= {
+			set_ig_trait = ig_trait:ig_trait_ffpa_tur_erkan_i_harbiye
+		}
+		ig:ig_intelligentsia ?= {
+			set_ig_trait = ig_trait:ig_trait_ffpa_tur_reformist_fractures
+			set_ig_trait = ig_trait:ig_trait_ffpa_tur_tanzimat_legacy
+		}
+
+		set_variable = ffpa_ottoman_interest_group_traits_v1
+	}
+}
+
 # Root = BYZ. Safe for both formation-time execution and old-save repair.
 ffpa_ensure_byzantine_formation_effects = {
 	# BYZ's static country definition does not replace the runtime religion
@@ -444,6 +491,8 @@ ffpa_ensure_byzantine_formation_effects = {
 		ig:ig_intelligentsia = { set_interest_group_name = ffpa_ig_byz_new_rome_society }
 		set_variable = ffpa_byzantine_flavor_names_v2
 	}
+
+	ffpa_ensure_byzantine_interest_group_traits_v1 = yes
 }
 
 # Root = TUR. Applied when the inclusive Ottoman political identity is earned;
@@ -459,6 +508,8 @@ ffpa_apply_ottoman_interest_group_names = {
 		ig:ig_intelligentsia = { set_interest_group_name = ffpa_ig_tur_ottoman_reformers }
 		set_variable = ffpa_ottoman_flavor_names_v2
 	}
+
+	ffpa_apply_ottoman_interest_group_traits_v1 = yes
 }
 
 # Root = BYZ. These cleanup effects only remove the finite v1 rewards from the

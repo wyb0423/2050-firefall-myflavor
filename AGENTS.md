@@ -127,6 +127,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `common/scripted_guis/ffpa_byzantium_party_names.txt`
 - `common/modifier_type_definitions/ffpa_cultural_acceptance_modifier_types.txt`
 - `common/ideologies/ffpa_eastern_mediterranean_ideologies.txt`
+- `common/interest_group_traits/ffpa_eastern_mediterranean_interest_group_traits.txt`
 - `common/journal_entries/zzzz_ffpa_greek_nationalism_override.txt`
 - `events/ffpa_formation_overrides.txt`
 - 两份本地化文件中的国家、文化、政体、党名、旗帜和成立链键
@@ -136,6 +137,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 恢复 Firefall 最终数据库中缺失的 `BYZ` 身份和 GRE → BYZ 成立链。
 - 保持原版 `TUR`，不创建第二个等价土耳其 tag。
 - 定义 `ffpa_ottoman`、`ffpa_rhomaic`、TUR/BYZ 专属政体与政府称谓，以及 BYZ 动态国名、旗帜和党名适配。
+- 定义五个已改名利益集团使用的八个 `ig_trait_ffpa_*` 风味 trait；每个集团仍保留至少一个原版槽位。
 - 提供东地中海状态机使用的意识形态与文化接受 modifier 类型。
 
 **边界与风险**
@@ -143,6 +145,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 本模块拥有“身份和静态定义”，不拥有日志进度、事件调度或地区建设奖励。
 - `BYZ`、`je_greek_nationalism`、`formation.3`、十三个通用党名本地化键、党名数据库适配和旗帜定义都可能覆盖上游对象；更新 Firefall/原版后必须做最终数据库比较。
 - 形成 BYZ 后保留已有宣称的约定不可在身份重构时丢失。
+- 八个 trait 技术 ID 是存档对象；不得通过覆盖原版 `interest_group` 的 `on_enable` 重新实现其分配。
 - 不要为了 TUR 风味复制或替换原版 TUR 国家定义、旗帜或政体视觉。
 
 **内部所有权**
@@ -183,6 +186,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - BYZ 分区复归战争的御前会议入口、45–55 年日志、成功/失败/重试状态与战后和议选择。
 - `namespace = ffpa_flavor` 的既有东地中海事件 ID 空间，以及新增 TUR 内容专用的 `namespace = ffpa_tur_flavor`。
 - `on_country_formed`、月度迁移检查、首次选举和 BYZ 公民权白名单州动态整合入口。
+- BYZ 成立时与 TUR 取得奥斯曼共同体身份时的一次性 trait 分配，以及 `ffpa_byzantine_interest_group_traits_v1`、`ffpa_ottoman_interest_group_traits_v1` 旧档补发门控。
 - 版本化迁移、一次性事件标记、共同体三轴进退和清理路径。
 
 **边界与风险**
@@ -333,6 +337,8 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 所有失败、取消、政体变化、标签形成和旧存档路径都能清理或迁移状态。
 - 地区建设只奖励实际覆盖州；完成状态可稳定触发一次西方整合事件。
 - 公民权整合速度只作用于 BYZ 拥有的未整合西方白名单州，未来取得、失去、完成整合和身份变化路径能补发或清理。
+- BYZ 新旧档分别获得五个专属 trait，且四个未替换槽位保持原版；TUR 只在取得 `ffpa_ottoman` 后获得三个专属 trait，两个已改名集团的其余三个槽位及未改名虔诚集团的 Mecelle 等原版 trait 不受影响。
+- 两个 trait 迁移变量设置后不得在月度 pulse 重复写槽位；旧档已有名称变量时仍必须补发 trait。
 - 动态国名、政府称号、党名、旗帜和两种语言在主要政体路径下显示正确。
 
 ### 9.5 Core Balance 拆分集成验证
