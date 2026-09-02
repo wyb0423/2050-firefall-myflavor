@@ -171,7 +171,6 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `common/customizable_localization/ffpa_eastern_mediterranean_custom_loc.txt`
 - `common/decisions/ffpa_eastern_mediterranean_decisions.txt`
 - `common/decisions/ffpa_turkish_flavor_decisions.txt`
-- `common/script_values/ffpa_eastern_mediterranean_values.txt`
 - `common/script_values/ffpa_permanent_governance_values.txt`
 - `common/scripted_buttons/ffpa_permanent_governance_buttons.txt`
 - `common/scripted_progress_bars/ffpa_eastern_mediterranean_progress_bars.txt`

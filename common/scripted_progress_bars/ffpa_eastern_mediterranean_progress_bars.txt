@@ -3,14 +3,14 @@
 # the journal pulse then mirrors the country value back into each bar.
 ffpa_tur_commonwealth_administration_bar = {
 	name = "ffpa_commonwealth_administration_bar"
-	desc = "ffpa_tur_commonwealth_administration_bar_desc"
-	second_desc = "ffpa_tur_commonwealth_administration_bar_second_desc"
+	desc = "ffpa_commonwealth_administration_bar"
+	second_desc = "ffpa_commonwealth_progress_value"
 	monthly_progress = {
 		if = {
 			limit = { ffpa_tur_commonwealth_administration_conditions = yes }
-			add = { desc = "ffpa_tur_commonwealth_administration_bar_second_desc" value = 1 }
+			add = { desc = "ffpa_commonwealth_progress_increasing" value = 1 }
 		}
-		else = { subtract = { desc = "ffpa_tur_commonwealth_administration_bar_second_desc" value = 1 } }
+		else = { subtract = { desc = "ffpa_commonwealth_progress_decreasing" value = 1 } }
 	}
 
 	default_green = yes
@@ -21,14 +21,14 @@ ffpa_tur_commonwealth_administration_bar = {
 
 ffpa_tur_commonwealth_civic_bar = {
 	name = "ffpa_commonwealth_civic_bar"
-	desc = "ffpa_tur_commonwealth_civic_bar_desc"
-	second_desc = "ffpa_tur_commonwealth_civic_bar_second_desc"
+	desc = "ffpa_commonwealth_civic_bar"
+	second_desc = "ffpa_commonwealth_progress_value"
 	monthly_progress = {
 		if = {
 			limit = { ffpa_tur_commonwealth_civic_conditions = yes }
-			add = { desc = "ffpa_tur_commonwealth_civic_bar_second_desc" value = 1 }
+			add = { desc = "ffpa_commonwealth_progress_increasing" value = 1 }
 		}
-		else = { subtract = { desc = "ffpa_tur_commonwealth_civic_bar_second_desc" value = 1 } }
+		else = { subtract = { desc = "ffpa_commonwealth_progress_decreasing" value = 1 } }
 	}
 
 	default_green = yes
@@ -39,14 +39,14 @@ ffpa_tur_commonwealth_civic_bar = {
 
 ffpa_tur_commonwealth_stability_bar = {
 	name = "ffpa_commonwealth_stability_bar"
-	desc = "ffpa_tur_commonwealth_stability_bar_desc"
-	second_desc = "ffpa_tur_commonwealth_stability_bar_second_desc"
+	desc = "ffpa_commonwealth_stability_bar"
+	second_desc = "ffpa_commonwealth_progress_value"
 	monthly_progress = {
 		if = {
 			limit = { ffpa_tur_commonwealth_stability_conditions = yes }
-			add = { desc = "ffpa_tur_commonwealth_stability_bar_second_desc" value = 1 }
+			add = { desc = "ffpa_commonwealth_progress_increasing" value = 1 }
 		}
-		else = { subtract = { desc = "ffpa_tur_commonwealth_stability_bar_second_desc" value = 1 } }
+		else = { subtract = { desc = "ffpa_commonwealth_progress_decreasing" value = 1 } }
 	}
 
 	default_green = yes
@@ -57,14 +57,14 @@ ffpa_tur_commonwealth_stability_bar = {
 
 ffpa_byz_commonwealth_administration_bar = {
 	name = "ffpa_commonwealth_administration_bar"
-	desc = "ffpa_byz_commonwealth_administration_bar_desc"
-	second_desc = "ffpa_byz_commonwealth_administration_bar_second_desc"
+	desc = "ffpa_commonwealth_administration_bar"
+	second_desc = "ffpa_commonwealth_progress_value"
 	monthly_progress = {
 		if = {
 			limit = { ffpa_byz_commonwealth_administration_conditions = yes }
-			add = { desc = "ffpa_byz_commonwealth_administration_bar_second_desc" value = 1 }
+			add = { desc = "ffpa_commonwealth_progress_increasing" value = 1 }
 		}
-		else = { subtract = { desc = "ffpa_byz_commonwealth_administration_bar_second_desc" value = 1 } }
+		else = { subtract = { desc = "ffpa_commonwealth_progress_decreasing" value = 1 } }
 	}
 
 	default_green = yes
@@ -75,14 +75,14 @@ ffpa_byz_commonwealth_administration_bar = {
 
 ffpa_byz_commonwealth_civic_bar = {
 	name = "ffpa_commonwealth_civic_bar"
-	desc = "ffpa_byz_commonwealth_civic_bar_desc"
-	second_desc = "ffpa_byz_commonwealth_civic_bar_second_desc"
+	desc = "ffpa_commonwealth_civic_bar"
+	second_desc = "ffpa_commonwealth_progress_value"
 	monthly_progress = {
 		if = {
 			limit = { ffpa_byz_commonwealth_civic_conditions = yes }
-			add = { desc = "ffpa_byz_commonwealth_civic_bar_second_desc" value = 1 }
+			add = { desc = "ffpa_commonwealth_progress_increasing" value = 1 }
 		}
-		else = { subtract = { desc = "ffpa_byz_commonwealth_civic_bar_second_desc" value = 1 } }
+		else = { subtract = { desc = "ffpa_commonwealth_progress_decreasing" value = 1 } }
 	}
 
 	default_green = yes
@@ -93,14 +93,14 @@ ffpa_byz_commonwealth_civic_bar = {
 
 ffpa_byz_commonwealth_stability_bar = {
 	name = "ffpa_commonwealth_stability_bar"
-	desc = "ffpa_byz_commonwealth_stability_bar_desc"
-	second_desc = "ffpa_byz_commonwealth_stability_bar_second_desc"
+	desc = "ffpa_commonwealth_stability_bar"
+	second_desc = "ffpa_commonwealth_progress_value"
 	monthly_progress = {
 		if = {
 			limit = { ffpa_byz_commonwealth_stability_conditions = yes }
-			add = { desc = "ffpa_byz_commonwealth_stability_bar_second_desc" value = 1 }
+			add = { desc = "ffpa_commonwealth_progress_increasing" value = 1 }
 		}
-		else = { subtract = { desc = "ffpa_byz_commonwealth_stability_bar_second_desc" value = 1 } }
+		else = { subtract = { desc = "ffpa_commonwealth_progress_decreasing" value = 1 } }
 	}
 
 	default_green = yes

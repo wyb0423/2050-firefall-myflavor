@@ -303,19 +303,32 @@ ffpa_apply_byz_rhomaic_civic_universalism_v1 = {
 	if = {
 		limit = {
 			ROOT = { country_definition = cd:BYZ }
-			NOT = { has_variable = ffpa_byz_rhomaic_civic_universalism_v1 }
+			NOT = { has_variable = ffpa_byz_rhomaic_civic_universalism_v2 }
 		}
 		ig:ig_intelligentsia = {
 			if = {
 				limit = { has_ideology = ideology:ideology_republican }
 				remove_ideology = ideology_republican
-				if = {
-					limit = { NOT = { has_ideology = ideology:ideology_ffpa_rhomaic_civic_universalism } }
-					add_ideology = ideology_ffpa_rhomaic_civic_universalism
-				}
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_liberal }
+				remove_ideology = ideology_liberal
+			}
+			if = {
+				limit = { has_ideology = ideology:ideology_liberal_modern }
+				remove_ideology = ideology_liberal_modern
+			}
+			if = {
+				limit = { NOT = { has_ideology = ideology:ideology_ffpa_rhomaic_liberalism } }
+				add_ideology = ideology_ffpa_rhomaic_liberalism
+			}
+			if = {
+				limit = { NOT = { has_ideology = ideology:ideology_ffpa_rhomaic_civic_universalism } }
+				add_ideology = ideology_ffpa_rhomaic_civic_universalism
 			}
 		}
 		set_variable = ffpa_byz_rhomaic_civic_universalism_v1
+		set_variable = ffpa_byz_rhomaic_civic_universalism_v2
 	}
 }
 
@@ -1090,8 +1103,9 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 
 		if = {
 			limit = {
-				NOT = { has_variable = ffpa_byz_rhomaic_civic_universalism_v1 }
+				NOT = { has_variable = ffpa_byz_rhomaic_civic_universalism_v2 }
 				OR = {
+					has_variable = ffpa_byz_rhomaic_civic_universalism_v1
 					country_has_primary_culture = cu:ffpa_rhomaic
 					has_variable = ffpa_byz_rhomaic_commonwealth_complete
 				}
