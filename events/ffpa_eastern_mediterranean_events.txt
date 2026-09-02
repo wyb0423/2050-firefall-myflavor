@@ -1696,12 +1696,13 @@ ffpa_flavor.40 = {
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_success_settlement_tt }
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
 			remove_modifier = ffpa_byz_restoration_triumph_v1
 		}
 		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
-		ai_chance = { factor = 1.5 }
+		ai_chance = { factor = 0.9 }
 	}
 	option = {
 		name = ffpa_byz_restoration_success_triumph_option
@@ -1713,7 +1714,16 @@ ffpa_flavor.40 = {
 		ai_chance = { factor = 0.7 }
 	}
 	after = {
-		ffpa_cleanup_byz_balkans_predecessor_tracking_v1 = yes
+		if = {
+			limit = {
+				any_scope_state = {
+					has_variable = ffpa_byz_balkans_postwar_target_v1
+					owner ?= { country_definition = cd:BYZ }
+				}
+			}
+			trigger_event = { id = ffpa_flavor.100 popup = yes }
+		}
+		else = { ffpa_cleanup_byz_balkans_predecessor_tracking_v1 = yes }
 	}
 }
 
@@ -1748,12 +1758,13 @@ ffpa_flavor.41 = {
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_success_settlement_tt }
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
 			remove_modifier = ffpa_byz_restoration_triumph_v1
 		}
 		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
-		ai_chance = { factor = 1.5 }
+		ai_chance = { factor = 0.9 }
 	}
 	option = {
 		name = ffpa_byz_restoration_success_triumph_option
@@ -1765,7 +1776,16 @@ ffpa_flavor.41 = {
 		ai_chance = { factor = 0.7 }
 	}
 	after = {
-		ffpa_cleanup_byz_anatolia_predecessor_tracking_v1 = yes
+		if = {
+			limit = {
+				any_scope_state = {
+					has_variable = ffpa_byz_anatolia_postwar_target_v1
+					owner ?= { country_definition = cd:BYZ }
+				}
+			}
+			trigger_event = { id = ffpa_flavor.101 popup = yes }
+		}
+		else = { ffpa_cleanup_byz_anatolia_predecessor_tracking_v1 = yes }
 	}
 }
 
@@ -1800,12 +1820,13 @@ ffpa_flavor.42 = {
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_success_settlement_tt }
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
 			remove_modifier = ffpa_byz_restoration_triumph_v1
 		}
 		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
-		ai_chance = { factor = 1.5 }
+		ai_chance = { factor = 0.9 }
 	}
 	option = {
 		name = ffpa_byz_restoration_success_triumph_option
@@ -1817,7 +1838,16 @@ ffpa_flavor.42 = {
 		ai_chance = { factor = 0.7 }
 	}
 	after = {
-		ffpa_cleanup_byz_oriens_predecessor_tracking_v1 = yes
+		if = {
+			limit = {
+				any_scope_state = {
+					has_variable = ffpa_byz_oriens_postwar_target_v1
+					owner ?= { country_definition = cd:BYZ }
+				}
+			}
+			trigger_event = { id = ffpa_flavor.102 popup = yes }
+		}
+		else = { ffpa_cleanup_byz_oriens_predecessor_tracking_v1 = yes }
 	}
 }
 
@@ -1852,12 +1882,13 @@ ffpa_flavor.43 = {
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_success_settlement_tt }
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
 			remove_modifier = ffpa_byz_restoration_triumph_v1
 		}
 		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
-		ai_chance = { factor = 1.5 }
+		ai_chance = { factor = 0.9 }
 	}
 	option = {
 		name = ffpa_byz_restoration_success_triumph_option
@@ -1869,7 +1900,16 @@ ffpa_flavor.43 = {
 		ai_chance = { factor = 0.7 }
 	}
 	after = {
-		ffpa_cleanup_byz_aegyptus_predecessor_tracking_v1 = yes
+		if = {
+			limit = {
+				any_scope_state = {
+					has_variable = ffpa_byz_aegyptus_postwar_target_v1
+					owner ?= { country_definition = cd:BYZ }
+				}
+			}
+			trigger_event = { id = ffpa_flavor.103 popup = yes }
+		}
+		else = { ffpa_cleanup_byz_aegyptus_predecessor_tracking_v1 = yes }
 	}
 }
 
@@ -1904,12 +1944,13 @@ ffpa_flavor.44 = {
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_success_settlement_tt }
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
 			remove_modifier = ffpa_byz_restoration_triumph_v1
 		}
 		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
-		ai_chance = { factor = 1.5 }
+		ai_chance = { factor = 0.9 }
 	}
 	option = {
 		name = ffpa_byz_restoration_success_triumph_option
@@ -1921,7 +1962,16 @@ ffpa_flavor.44 = {
 		ai_chance = { factor = 0.7 }
 	}
 	after = {
-		ffpa_cleanup_byz_africa_predecessor_tracking_v1 = yes
+		if = {
+			limit = {
+				any_scope_state = {
+					has_variable = ffpa_byz_africa_postwar_target_v1
+					owner ?= { country_definition = cd:BYZ }
+				}
+			}
+			trigger_event = { id = ffpa_flavor.104 popup = yes }
+		}
+		else = { ffpa_cleanup_byz_africa_predecessor_tracking_v1 = yes }
 	}
 }
 
@@ -1956,12 +2006,13 @@ ffpa_flavor.45 = {
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_success_settlement_tt }
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
 			remove_modifier = ffpa_byz_restoration_triumph_v1
 		}
 		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
-		ai_chance = { factor = 1.5 }
+		ai_chance = { factor = 0.9 }
 	}
 	option = {
 		name = ffpa_byz_restoration_success_triumph_option
@@ -1973,7 +2024,16 @@ ffpa_flavor.45 = {
 		ai_chance = { factor = 0.7 }
 	}
 	after = {
-		ffpa_cleanup_byz_italia_predecessor_tracking_v1 = yes
+		if = {
+			limit = {
+				any_scope_state = {
+					has_variable = ffpa_byz_italia_postwar_target_v1
+					owner ?= { country_definition = cd:BYZ }
+				}
+			}
+			trigger_event = { id = ffpa_flavor.105 popup = yes }
+		}
+		else = { ffpa_cleanup_byz_italia_predecessor_tracking_v1 = yes }
 	}
 }
 
@@ -2008,12 +2068,13 @@ ffpa_flavor.46 = {
 	option = {
 		name = ffpa_byz_restoration_success_settlement_option
 		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_success_settlement_tt }
 		if = {
 			limit = { has_modifier = ffpa_byz_restoration_triumph_v1 }
 			remove_modifier = ffpa_byz_restoration_triumph_v1
 		}
 		add_modifier = { name = ffpa_byz_restoration_settlement_v1 years = 8 }
-		ai_chance = { factor = 1.5 }
+		ai_chance = { factor = 0.9 }
 	}
 	option = {
 		name = ffpa_byz_restoration_success_triumph_option
@@ -2025,7 +2086,16 @@ ffpa_flavor.46 = {
 		ai_chance = { factor = 0.7 }
 	}
 	after = {
-		ffpa_cleanup_byz_spania_predecessor_tracking_v1 = yes
+		if = {
+			limit = {
+				any_scope_state = {
+					has_variable = ffpa_byz_spania_postwar_target_v1
+					owner ?= { country_definition = cd:BYZ }
+				}
+			}
+			trigger_event = { id = ffpa_flavor.106 popup = yes }
+		}
+		else = { ffpa_cleanup_byz_spania_predecessor_tracking_v1 = yes }
 	}
 }
 
@@ -2045,4 +2115,308 @@ ffpa_flavor.47 = {
 		default_option = yes
 		ai_chance = { factor = 1 }
 	}
+}
+
+# The seven regional wrappers keep simultaneous restoration completions isolated:
+# each event consumes only its campaign's state markers and cleanup path.
+
+ffpa_flavor.100 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_byz_restoration_postwar_event_t
+	desc = ffpa_byz_restoration_postwar_event_d
+	flavor = ffpa_byz_restoration_postwar_event_f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { country_definition = cd:BYZ }
+	option = {
+		name = ffpa_byz_restoration_postwar_weak_option
+		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_weak_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 1 }
+		ffpa_apply_byz_balkans_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_medium_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_medium_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 2 }
+		ffpa_apply_byz_balkans_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_strong_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_strong_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 3 }
+		ffpa_apply_byz_balkans_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 0.35 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_decline_option
+		ai_chance = { factor = 0.4 }
+	}
+	after = { ffpa_cleanup_byz_balkans_predecessor_tracking_v1 = yes }
+}
+
+ffpa_flavor.101 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_byz_restoration_postwar_event_t
+	desc = ffpa_byz_restoration_postwar_event_d
+	flavor = ffpa_byz_restoration_postwar_event_f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { country_definition = cd:BYZ }
+	option = {
+		name = ffpa_byz_restoration_postwar_weak_option
+		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_weak_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 1 }
+		ffpa_apply_byz_anatolia_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_medium_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_medium_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 2 }
+		ffpa_apply_byz_anatolia_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_strong_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_strong_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 3 }
+		ffpa_apply_byz_anatolia_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 0.35 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_decline_option
+		ai_chance = { factor = 0.4 }
+	}
+	after = { ffpa_cleanup_byz_anatolia_predecessor_tracking_v1 = yes }
+}
+
+ffpa_flavor.102 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_byz_restoration_postwar_event_t
+	desc = ffpa_byz_restoration_postwar_event_d
+	flavor = ffpa_byz_restoration_postwar_event_f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { country_definition = cd:BYZ }
+	option = {
+		name = ffpa_byz_restoration_postwar_weak_option
+		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_weak_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 1 }
+		ffpa_apply_byz_oriens_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_medium_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_medium_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 2 }
+		ffpa_apply_byz_oriens_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_strong_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_strong_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 3 }
+		ffpa_apply_byz_oriens_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 0.35 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_decline_option
+		ai_chance = { factor = 0.4 }
+	}
+	after = { ffpa_cleanup_byz_oriens_predecessor_tracking_v1 = yes }
+}
+
+ffpa_flavor.103 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_byz_restoration_postwar_event_t
+	desc = ffpa_byz_restoration_postwar_event_d
+	flavor = ffpa_byz_restoration_postwar_event_f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { country_definition = cd:BYZ }
+	option = {
+		name = ffpa_byz_restoration_postwar_weak_option
+		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_weak_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 1 }
+		ffpa_apply_byz_aegyptus_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_medium_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_medium_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 2 }
+		ffpa_apply_byz_aegyptus_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_strong_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_strong_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 3 }
+		ffpa_apply_byz_aegyptus_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 0.35 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_decline_option
+		ai_chance = { factor = 0.4 }
+	}
+	after = { ffpa_cleanup_byz_aegyptus_predecessor_tracking_v1 = yes }
+}
+
+ffpa_flavor.104 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_byz_restoration_postwar_event_t
+	desc = ffpa_byz_restoration_postwar_event_d
+	flavor = ffpa_byz_restoration_postwar_event_f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { country_definition = cd:BYZ }
+	option = {
+		name = ffpa_byz_restoration_postwar_weak_option
+		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_weak_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 1 }
+		ffpa_apply_byz_africa_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_medium_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_medium_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 2 }
+		ffpa_apply_byz_africa_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_strong_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_strong_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 3 }
+		ffpa_apply_byz_africa_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 0.35 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_decline_option
+		ai_chance = { factor = 0.4 }
+	}
+	after = { ffpa_cleanup_byz_africa_predecessor_tracking_v1 = yes }
+}
+
+ffpa_flavor.105 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_byz_restoration_postwar_event_t
+	desc = ffpa_byz_restoration_postwar_event_d
+	flavor = ffpa_byz_restoration_postwar_event_f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { country_definition = cd:BYZ }
+	option = {
+		name = ffpa_byz_restoration_postwar_weak_option
+		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_weak_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 1 }
+		ffpa_apply_byz_italia_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_medium_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_medium_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 2 }
+		ffpa_apply_byz_italia_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_strong_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_strong_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 3 }
+		ffpa_apply_byz_italia_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 0.35 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_decline_option
+		ai_chance = { factor = 0.4 }
+	}
+	after = { ffpa_cleanup_byz_italia_predecessor_tracking_v1 = yes }
+}
+
+ffpa_flavor.106 = {
+	type = country_event
+	placement = ROOT
+	title = ffpa_byz_restoration_postwar_event_t
+	desc = ffpa_byz_restoration_postwar_event_d
+	flavor = ffpa_byz_restoration_postwar_event_f
+	event_image = { video = "unspecific_signed_contract" }
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	duration = 3
+	trigger = { country_definition = cd:BYZ }
+	option = {
+		name = ffpa_byz_restoration_postwar_weak_option
+		default_option = yes
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_weak_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 1 }
+		ffpa_apply_byz_spania_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1.5 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_medium_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_medium_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 2 }
+		ffpa_apply_byz_spania_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 1 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_strong_option
+		custom_tooltip = { text = ffpa_byz_restoration_postwar_strong_tt }
+		set_variable = { name = ffpa_byz_restoration_postwar_tier_v1 value = 3 }
+		ffpa_apply_byz_spania_postwar_program_v1 = yes
+		remove_variable = ffpa_byz_restoration_postwar_tier_v1
+		ai_chance = { factor = 0.35 }
+	}
+	option = {
+		name = ffpa_byz_restoration_postwar_decline_option
+		ai_chance = { factor = 0.4 }
+	}
+	after = { ffpa_cleanup_byz_spania_predecessor_tracking_v1 = yes }
 }

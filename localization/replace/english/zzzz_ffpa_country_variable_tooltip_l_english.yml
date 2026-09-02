@@ -1,3 +1,0 @@
-﻿l_english:
- # Repair a generic engine tooltip key misused by the Milk Chinese localization pack.
- country_var_equal:0 "The country variable is equal to #v $NUM|0v$#!"

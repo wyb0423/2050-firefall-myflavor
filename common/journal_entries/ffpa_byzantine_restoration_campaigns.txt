@@ -1,5 +1,5 @@
 # Optional Byzantine restoration campaigns. They are added only through the
-# restoration-council decision, so their 45-55 year clocks begin when the player
+# restoration-council decision, so their 10-15 year clocks begin when the player
 # deliberately accepts a frontier. Claims are supplied by the formation module;
 # these JEs only observe direct ownership and never alter war-goal definitions.
 
@@ -44,7 +44,7 @@ je_ffpa_byz_restore_balkans = {
 		trigger_event = { id = ffpa_flavor.40 days = 1 popup = yes }
 	}
 
-	timeout = 16425 # 45 years
+	timeout = 5475 # 15 years
 	on_timeout = {
 		ffpa_cleanup_byz_balkans_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_balkans_restoration_retry_cooldown_v1 years = 5 }
@@ -95,7 +95,7 @@ je_ffpa_byz_restore_anatolia = {
 		trigger_event = { id = ffpa_flavor.41 days = 1 popup = yes }
 	}
 
-	timeout = 16425 # 45 years
+	timeout = 4380 # 12 years
 	on_timeout = {
 		ffpa_cleanup_byz_anatolia_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_anatolia_restoration_retry_cooldown_v1 years = 5 }
@@ -142,7 +142,7 @@ je_ffpa_byz_restore_oriens = {
 		trigger_event = { id = ffpa_flavor.42 days = 1 popup = yes }
 	}
 
-	timeout = 18250 # 50 years
+	timeout = 4380 # 12 years
 	on_timeout = {
 		ffpa_cleanup_byz_oriens_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_oriens_restoration_retry_cooldown_v1 years = 5 }
@@ -188,7 +188,7 @@ je_ffpa_byz_restore_aegyptus = {
 		trigger_event = { id = ffpa_flavor.43 days = 1 popup = yes }
 	}
 
-	timeout = 18250 # 50 years
+	timeout = 3650 # 10 years
 	on_timeout = {
 		ffpa_cleanup_byz_aegyptus_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_aegyptus_restoration_retry_cooldown_v1 years = 5 }
@@ -234,7 +234,7 @@ je_ffpa_byz_restore_africa = {
 		trigger_event = { id = ffpa_flavor.44 days = 1 popup = yes }
 	}
 
-	timeout = 20075 # 55 years
+	timeout = 4380 # 12 years
 	on_timeout = {
 		ffpa_cleanup_byz_africa_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_africa_restoration_retry_cooldown_v1 years = 5 }
@@ -291,7 +291,7 @@ je_ffpa_byz_restore_italia = {
 		trigger_event = { id = ffpa_flavor.45 days = 1 popup = yes }
 	}
 
-	timeout = 20075 # 55 years
+	timeout = 5475 # 15 years
 	on_timeout = {
 		ffpa_cleanup_byz_italia_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_italia_restoration_retry_cooldown_v1 years = 5 }
@@ -336,7 +336,7 @@ je_ffpa_byz_restore_spania = {
 		trigger_event = { id = ffpa_flavor.46 days = 1 popup = yes }
 	}
 
-	timeout = 18250 # 50 years
+	timeout = 3650 # 10 years
 	on_timeout = {
 		ffpa_cleanup_byz_spania_predecessor_tracking_v1 = yes
 		set_variable = { name = ffpa_byz_spania_restoration_retry_cooldown_v1 years = 5 }

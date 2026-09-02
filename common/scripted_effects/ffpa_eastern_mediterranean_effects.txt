@@ -1064,6 +1064,7 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 		limit = { ROOT = { country_definition = cd:BYZ } }
 		ffpa_ensure_byzantine_formation_effects = yes
 		ffpa_migrate_byz_restoration_predecessor_tracking_v1 = yes
+		ffpa_migrate_byz_restoration_postwar_targets_v1 = yes
 		ffpa_ensure_byz_commonwealth_progress_v3 = yes
 		ffpa_ensure_byz_commonwealth_journal_v4 = yes
 		ffpa_ensure_byz_commonwealth_progress_v4 = yes
@@ -1206,6 +1207,7 @@ ffpa_initialize_byz_balkans_predecessor_state_v1 = {
 ffpa_cleanup_byz_balkans_predecessor_state_v1 = {
 	remove_variable = ffpa_byz_balkans_owner_tracking_v1
 	remove_variable = ffpa_byz_balkans_owner_snapshot_v1
+	remove_variable = ffpa_byz_balkans_postwar_target_v1
 }
 
 ffpa_initialize_byz_balkans_predecessor_tracking_v1 = {
@@ -1293,6 +1295,7 @@ ffpa_initialize_byz_anatolia_predecessor_state_v1 = {
 ffpa_cleanup_byz_anatolia_predecessor_state_v1 = {
 	remove_variable = ffpa_byz_anatolia_owner_tracking_v1
 	remove_variable = ffpa_byz_anatolia_owner_snapshot_v1
+	remove_variable = ffpa_byz_anatolia_postwar_target_v1
 }
 
 ffpa_initialize_byz_anatolia_predecessor_tracking_v1 = {
@@ -1356,6 +1359,7 @@ ffpa_initialize_byz_oriens_predecessor_state_v1 = {
 ffpa_cleanup_byz_oriens_predecessor_state_v1 = {
 	remove_variable = ffpa_byz_oriens_owner_tracking_v1
 	remove_variable = ffpa_byz_oriens_owner_snapshot_v1
+	remove_variable = ffpa_byz_oriens_postwar_target_v1
 }
 
 ffpa_initialize_byz_oriens_predecessor_tracking_v1 = {
@@ -1411,6 +1415,7 @@ ffpa_initialize_byz_aegyptus_predecessor_state_v1 = {
 ffpa_cleanup_byz_aegyptus_predecessor_state_v1 = {
 	remove_variable = ffpa_byz_aegyptus_owner_tracking_v1
 	remove_variable = ffpa_byz_aegyptus_owner_snapshot_v1
+	remove_variable = ffpa_byz_aegyptus_postwar_target_v1
 }
 
 ffpa_initialize_byz_aegyptus_predecessor_tracking_v1 = {
@@ -1464,6 +1469,7 @@ ffpa_initialize_byz_africa_predecessor_state_v1 = {
 ffpa_cleanup_byz_africa_predecessor_state_v1 = {
 	remove_variable = ffpa_byz_africa_owner_tracking_v1
 	remove_variable = ffpa_byz_africa_owner_snapshot_v1
+	remove_variable = ffpa_byz_africa_postwar_target_v1
 }
 
 ffpa_initialize_byz_africa_predecessor_tracking_v1 = {
@@ -1517,6 +1523,7 @@ ffpa_initialize_byz_italia_predecessor_state_v1 = {
 ffpa_cleanup_byz_italia_predecessor_state_v1 = {
 	remove_variable = ffpa_byz_italia_owner_tracking_v1
 	remove_variable = ffpa_byz_italia_owner_snapshot_v1
+	remove_variable = ffpa_byz_italia_postwar_target_v1
 }
 
 ffpa_initialize_byz_italia_predecessor_tracking_v1 = {
@@ -1592,6 +1599,7 @@ ffpa_initialize_byz_spania_predecessor_state_v1 = {
 ffpa_cleanup_byz_spania_predecessor_state_v1 = {
 	remove_variable = ffpa_byz_spania_owner_tracking_v1
 	remove_variable = ffpa_byz_spania_owner_snapshot_v1
+	remove_variable = ffpa_byz_spania_postwar_target_v1
 }
 
 ffpa_initialize_byz_spania_predecessor_tracking_v1 = {
@@ -1645,6 +1653,7 @@ ffpa_track_byz_restoration_predecessors_on_owner_change_state_v1 = {
 				set_variable = { name = ffpa_byz_balkans_completion_predecessor_v1 value = scope:ffpa_byz_balkans_old_owner_scope }
 				set_variable = ffpa_byz_balkans_completion_predecessor_ready_v1
 			}
+			set_variable = ffpa_byz_balkans_postwar_target_v1
 		}
 		remove_variable = ffpa_byz_balkans_owner_snapshot_v1
 		clear_saved_scope = ffpa_byz_balkans_new_owner_scope
@@ -1672,6 +1681,7 @@ ffpa_track_byz_restoration_predecessors_on_owner_change_state_v1 = {
 				set_variable = { name = ffpa_byz_anatolia_completion_predecessor_v1 value = scope:ffpa_byz_anatolia_old_owner_scope }
 				set_variable = ffpa_byz_anatolia_completion_predecessor_ready_v1
 			}
+			set_variable = ffpa_byz_anatolia_postwar_target_v1
 		}
 		remove_variable = ffpa_byz_anatolia_owner_snapshot_v1
 		clear_saved_scope = ffpa_byz_anatolia_new_owner_scope
@@ -1699,6 +1709,7 @@ ffpa_track_byz_restoration_predecessors_on_owner_change_state_v1 = {
 				set_variable = { name = ffpa_byz_oriens_completion_predecessor_v1 value = scope:ffpa_byz_oriens_old_owner_scope }
 				set_variable = ffpa_byz_oriens_completion_predecessor_ready_v1
 			}
+			set_variable = ffpa_byz_oriens_postwar_target_v1
 		}
 		remove_variable = ffpa_byz_oriens_owner_snapshot_v1
 		clear_saved_scope = ffpa_byz_oriens_new_owner_scope
@@ -1726,6 +1737,7 @@ ffpa_track_byz_restoration_predecessors_on_owner_change_state_v1 = {
 				set_variable = { name = ffpa_byz_aegyptus_completion_predecessor_v1 value = scope:ffpa_byz_aegyptus_old_owner_scope }
 				set_variable = ffpa_byz_aegyptus_completion_predecessor_ready_v1
 			}
+			set_variable = ffpa_byz_aegyptus_postwar_target_v1
 		}
 		remove_variable = ffpa_byz_aegyptus_owner_snapshot_v1
 		clear_saved_scope = ffpa_byz_aegyptus_new_owner_scope
@@ -1753,6 +1765,7 @@ ffpa_track_byz_restoration_predecessors_on_owner_change_state_v1 = {
 				set_variable = { name = ffpa_byz_africa_completion_predecessor_v1 value = scope:ffpa_byz_africa_old_owner_scope }
 				set_variable = ffpa_byz_africa_completion_predecessor_ready_v1
 			}
+			set_variable = ffpa_byz_africa_postwar_target_v1
 		}
 		remove_variable = ffpa_byz_africa_owner_snapshot_v1
 		clear_saved_scope = ffpa_byz_africa_new_owner_scope
@@ -1780,6 +1793,7 @@ ffpa_track_byz_restoration_predecessors_on_owner_change_state_v1 = {
 				set_variable = { name = ffpa_byz_italia_completion_predecessor_v1 value = scope:ffpa_byz_italia_old_owner_scope }
 				set_variable = ffpa_byz_italia_completion_predecessor_ready_v1
 			}
+			set_variable = ffpa_byz_italia_postwar_target_v1
 		}
 		remove_variable = ffpa_byz_italia_owner_snapshot_v1
 		clear_saved_scope = ffpa_byz_italia_new_owner_scope
@@ -1807,6 +1821,7 @@ ffpa_track_byz_restoration_predecessors_on_owner_change_state_v1 = {
 				set_variable = { name = ffpa_byz_spania_completion_predecessor_v1 value = scope:ffpa_byz_spania_old_owner_scope }
 				set_variable = ffpa_byz_spania_completion_predecessor_ready_v1
 			}
+			set_variable = ffpa_byz_spania_postwar_target_v1
 		}
 		remove_variable = ffpa_byz_spania_owner_snapshot_v1
 		clear_saved_scope = ffpa_byz_spania_new_owner_scope
@@ -2007,4 +2022,257 @@ ffpa_cleanup_all_byz_restoration_predecessor_tracking_v1 = {
 	ffpa_cleanup_byz_africa_predecessor_tracking_v1 = yes
 	ffpa_cleanup_byz_italia_predecessor_tracking_v1 = yes
 	ffpa_cleanup_byz_spania_predecessor_tracking_v1 = yes
+}
+
+ffpa_migrate_byz_restoration_postwar_targets_v1 = {
+	if = {
+		limit = { NOT = { has_variable = ffpa_byz_restoration_postwar_tracking_migrated_v1 } }
+		every_scope_state = {
+			if = {
+				limit = {
+					is_incorporated = no
+					has_variable = ffpa_byz_balkans_owner_tracking_v1
+				}
+				set_variable = ffpa_byz_balkans_postwar_target_v1
+			}
+			if = {
+				limit = {
+					is_incorporated = no
+					has_variable = ffpa_byz_anatolia_owner_tracking_v1
+				}
+				set_variable = ffpa_byz_anatolia_postwar_target_v1
+			}
+			if = {
+				limit = {
+					is_incorporated = no
+					has_variable = ffpa_byz_oriens_owner_tracking_v1
+				}
+				set_variable = ffpa_byz_oriens_postwar_target_v1
+			}
+			if = {
+				limit = {
+					is_incorporated = no
+					has_variable = ffpa_byz_aegyptus_owner_tracking_v1
+				}
+				set_variable = ffpa_byz_aegyptus_postwar_target_v1
+			}
+			if = {
+				limit = {
+					is_incorporated = no
+					has_variable = ffpa_byz_africa_owner_tracking_v1
+				}
+				set_variable = ffpa_byz_africa_postwar_target_v1
+			}
+			if = {
+				limit = {
+					is_incorporated = no
+					has_variable = ffpa_byz_italia_owner_tracking_v1
+				}
+				set_variable = ffpa_byz_italia_postwar_target_v1
+			}
+			if = {
+				limit = {
+					is_incorporated = no
+					has_variable = ffpa_byz_spania_owner_tracking_v1
+				}
+				set_variable = ffpa_byz_spania_postwar_target_v1
+			}
+		}
+		set_variable = ffpa_byz_restoration_postwar_tracking_migrated_v1
+	}
+}
+
+# --- Byzantine restoration postwar provincial programs ---
+# ROOT is the victorious BYZ country. Each regional wrapper only visits states
+# that actually entered BYZ during that campaign (or were already unincorporated
+# when an active old-save campaign was migrated).
+
+ffpa_apply_byz_restoration_postwar_state_v1 = {
+	if = {
+		limit = { owner ?= { var:ffpa_byz_restoration_postwar_tier_v1 = 1 } }
+		add_modifier = { name = ffpa_byz_restoration_postwar_weak_state_v1 years = 10 }
+	}
+	else_if = {
+		limit = { owner ?= { var:ffpa_byz_restoration_postwar_tier_v1 = 2 } }
+		add_modifier = { name = ffpa_byz_restoration_postwar_medium_state_v1 years = 10 }
+	}
+	else_if = {
+		limit = { owner ?= { var:ffpa_byz_restoration_postwar_tier_v1 = 3 } }
+		add_modifier = { name = ffpa_byz_restoration_postwar_strong_state_v1 years = 10 }
+	}
+}
+
+ffpa_apply_byz_balkans_postwar_program_v1 = {
+	if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 1 }
+		add_modifier = { name = ffpa_byz_balkans_postwar_administration_v1 years = 5 multiplier = 0.10 }
+		add_modifier = { name = ffpa_byz_balkans_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_small }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 2 }
+		add_modifier = { name = ffpa_byz_balkans_postwar_administration_v1 years = 5 multiplier = 0.15 }
+		add_modifier = { name = ffpa_byz_balkans_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_medium }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 3 }
+		add_modifier = { name = ffpa_byz_balkans_postwar_administration_v1 years = 5 multiplier = 0.20 }
+		add_modifier = { name = ffpa_byz_balkans_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_large }
+	}
+	every_scope_state = {
+		limit = {
+			has_variable = ffpa_byz_balkans_postwar_target_v1
+			owner ?= { country_definition = cd:BYZ }
+		}
+		ffpa_apply_byz_restoration_postwar_state_v1 = yes
+	}
+}
+
+ffpa_apply_byz_anatolia_postwar_program_v1 = {
+	if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 1 }
+		add_modifier = { name = ffpa_byz_anatolia_postwar_administration_v1 years = 5 multiplier = 0.10 }
+		add_modifier = { name = ffpa_byz_anatolia_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_small }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 2 }
+		add_modifier = { name = ffpa_byz_anatolia_postwar_administration_v1 years = 5 multiplier = 0.15 }
+		add_modifier = { name = ffpa_byz_anatolia_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_medium }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 3 }
+		add_modifier = { name = ffpa_byz_anatolia_postwar_administration_v1 years = 5 multiplier = 0.20 }
+		add_modifier = { name = ffpa_byz_anatolia_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_large }
+	}
+	every_scope_state = {
+		limit = {
+			has_variable = ffpa_byz_anatolia_postwar_target_v1
+			owner ?= { country_definition = cd:BYZ }
+		}
+		ffpa_apply_byz_restoration_postwar_state_v1 = yes
+	}
+}
+
+ffpa_apply_byz_oriens_postwar_program_v1 = {
+	if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 1 }
+		add_modifier = { name = ffpa_byz_oriens_postwar_administration_v1 years = 5 multiplier = 0.10 }
+		add_modifier = { name = ffpa_byz_oriens_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_small }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 2 }
+		add_modifier = { name = ffpa_byz_oriens_postwar_administration_v1 years = 5 multiplier = 0.15 }
+		add_modifier = { name = ffpa_byz_oriens_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_medium }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 3 }
+		add_modifier = { name = ffpa_byz_oriens_postwar_administration_v1 years = 5 multiplier = 0.20 }
+		add_modifier = { name = ffpa_byz_oriens_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_large }
+	}
+	every_scope_state = {
+		limit = {
+			has_variable = ffpa_byz_oriens_postwar_target_v1
+			owner ?= { country_definition = cd:BYZ }
+		}
+		ffpa_apply_byz_restoration_postwar_state_v1 = yes
+	}
+}
+
+ffpa_apply_byz_aegyptus_postwar_program_v1 = {
+	if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 1 }
+		add_modifier = { name = ffpa_byz_aegyptus_postwar_administration_v1 years = 5 multiplier = 0.10 }
+		add_modifier = { name = ffpa_byz_aegyptus_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_small }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 2 }
+		add_modifier = { name = ffpa_byz_aegyptus_postwar_administration_v1 years = 5 multiplier = 0.15 }
+		add_modifier = { name = ffpa_byz_aegyptus_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_medium }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 3 }
+		add_modifier = { name = ffpa_byz_aegyptus_postwar_administration_v1 years = 5 multiplier = 0.20 }
+		add_modifier = { name = ffpa_byz_aegyptus_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_large }
+	}
+	every_scope_state = {
+		limit = {
+			has_variable = ffpa_byz_aegyptus_postwar_target_v1
+			owner ?= { country_definition = cd:BYZ }
+		}
+		ffpa_apply_byz_restoration_postwar_state_v1 = yes
+	}
+}
+
+ffpa_apply_byz_africa_postwar_program_v1 = {
+	if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 1 }
+		add_modifier = { name = ffpa_byz_africa_postwar_administration_v1 years = 5 multiplier = 0.10 }
+		add_modifier = { name = ffpa_byz_africa_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_small }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 2 }
+		add_modifier = { name = ffpa_byz_africa_postwar_administration_v1 years = 5 multiplier = 0.15 }
+		add_modifier = { name = ffpa_byz_africa_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_medium }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 3 }
+		add_modifier = { name = ffpa_byz_africa_postwar_administration_v1 years = 5 multiplier = 0.20 }
+		add_modifier = { name = ffpa_byz_africa_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_large }
+	}
+	every_scope_state = {
+		limit = {
+			has_variable = ffpa_byz_africa_postwar_target_v1
+			owner ?= { country_definition = cd:BYZ }
+		}
+		ffpa_apply_byz_restoration_postwar_state_v1 = yes
+	}
+}
+
+ffpa_apply_byz_italia_postwar_program_v1 = {
+	if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 1 }
+		add_modifier = { name = ffpa_byz_italia_postwar_administration_v1 years = 5 multiplier = 0.10 }
+		add_modifier = { name = ffpa_byz_italia_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_small }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 2 }
+		add_modifier = { name = ffpa_byz_italia_postwar_administration_v1 years = 5 multiplier = 0.15 }
+		add_modifier = { name = ffpa_byz_italia_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_medium }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 3 }
+		add_modifier = { name = ffpa_byz_italia_postwar_administration_v1 years = 5 multiplier = 0.20 }
+		add_modifier = { name = ffpa_byz_italia_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_large }
+	}
+	every_scope_state = {
+		limit = {
+			has_variable = ffpa_byz_italia_postwar_target_v1
+			owner ?= { country_definition = cd:BYZ }
+		}
+		ffpa_apply_byz_restoration_postwar_state_v1 = yes
+	}
+}
+
+ffpa_apply_byz_spania_postwar_program_v1 = {
+	if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 1 }
+		add_modifier = { name = ffpa_byz_spania_postwar_administration_v1 years = 5 multiplier = 0.10 }
+		add_modifier = { name = ffpa_byz_spania_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_small }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 2 }
+		add_modifier = { name = ffpa_byz_spania_postwar_administration_v1 years = 5 multiplier = 0.15 }
+		add_modifier = { name = ffpa_byz_spania_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_medium }
+	}
+	else_if = {
+		limit = { var:ffpa_byz_restoration_postwar_tier_v1 = 3 }
+		add_modifier = { name = ffpa_byz_spania_postwar_administration_v1 years = 5 multiplier = 0.20 }
+		add_modifier = { name = ffpa_byz_spania_postwar_expenses_v1 years = 5 multiplier = money_amount_multiplier_large }
+	}
+	every_scope_state = {
+		limit = {
+			has_variable = ffpa_byz_spania_postwar_target_v1
+			owner ?= { country_definition = cd:BYZ }
+		}
+		ffpa_apply_byz_restoration_postwar_state_v1 = yes
+	}
 }

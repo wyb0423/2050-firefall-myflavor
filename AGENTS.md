@@ -195,8 +195,6 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `localization/simp_chinese/ffpa_turkish_flavor_l_simp_chinese.yml`
 - `localization/english/ffpa_permanent_governance_l_english.yml`
 - `localization/simp_chinese/ffpa_permanent_governance_l_simp_chinese.yml`
-- `localization/replace/english/zzzz_ffpa_country_variable_tooltip_l_english.yml`
-- `localization/replace/simp_chinese/zzzz_ffpa_country_variable_tooltip_l_simp_chinese.yml`
 
 **拥有的行为与接口**
 
@@ -206,7 +204,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - TUR 路线终局后的“帝国簿册与行省中介”“面包与首都”，以及 BYZ 双重重建终局后的“罗马人的公共体”“军户与权门”四项常驻治理日志；四者分别使用平衡、消耗性储备、三支柱修复和单向结构压力，不共享统一模板。
 - BYZ 军户日志导出的三阶段改革状态：军役户籍立即落实职业军队或大规模征兵，田产清丈逐步切断土地压力，军需与退伍安置院完成后永久提供全国福利金修正。
 - 通过完整替换 Tech & Res `je_ottoman_empire_collapse`，只对 FFPA 管理的 TUR 排除旧奥斯曼崩溃并迁移活动实例；未标记 TUR 保留上游行为。
-- BYZ 分区复归战争的御前会议入口、45–55 年日志、成功/失败/重试状态与战后和议选择。
+- BYZ 分区复归战争的御前会议入口、10–15 年日志、成功/失败/重试状态、战后和议选择与分档行省安置。
 - `namespace = ffpa_flavor` 的既有东地中海事件 ID 空间，以及新增 TUR 内容专用的 `namespace = ffpa_tur_flavor`。
 - `on_country_formed`、月度迁移检查、首次选举和 BYZ 公民权白名单州动态整合入口。
 - BYZ 成立时与 TUR 取得奥斯曼共同体身份时的一次性 trait 分配，以及 `ffpa_byzantine_interest_group_traits_v1`、`ffpa_ottoman_interest_group_traits_v1` 旧档补发门控。
@@ -218,6 +216,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `ffpa_tur_state_project_v1` 的值 1/2/3 分别固定表示高门、共和国、重建总署；路线终局、工程、海峡和地区治理选择变量同样属于存档 API。后续政体变化不得自动重写建国路线。
 - `ffpa_tur_front_<front>_complete_v1`、`ffpa_tur_front_<front>_retry_cooldown_v1`、`ffpa_tur_front_<front>_resolution_pending_v1`、`ffpa_tur_temporary_claim_<state>_v1`、八条前线 JE 与 `ffpa_tur_flavor.60–84` 都是存档 API；州范围或状态语义变化时必须版本化迁移。
 - TUR 八条前线与 BYZ 七条复归战争的 `*_owner_tracking_v1`、`*_owner_snapshot_v1`、`*_completion_predecessor_v1`、`*_completion_predecessor_ready_v1`，以及 `ffpa_tur_restoration_predecessor_tracking_migrated_v1`、`ffpa_byz_restoration_predecessor_tracking_migrated_v1` 都是叙事用存档 API；其含义固定为当前活动前线中最后转入本国的目标 state 实例之直接前所有者，不得改作主要敌国或开战对象。
+- BYZ 七条复归的 `ffpa_byz_<region>_postwar_target_v1`、`ffpa_byz_restoration_postwar_tracking_migrated_v1`、临时档位变量、七项行政负担、七项持续财政负担、三项州修正与 `ffpa_flavor.100–106` 均为战后安置存档 API；新目标只登记日志期间实际转入 BYZ 的州，旧活动日志迁移时只补记仍未整合的自有目标州，完成、失败或失效必须按地区清理。
 - 四项常驻日志的 `ffpa_tur_register_*_v1`、`ffpa_tur_capital_*_v1`、`ffpa_byz_public_*_v1`、`ffpa_byz_dynatoi_*_v1`、`ffpa_byz_military_reform_*_v1`、改革完成与福利变量、四项 JE 和六条进度条镜像，以及 `ffpa_tur_flavor.90–92`、`ffpa_flavor.50–52` 均为存档 API；失败只清理运行时冷却与未完成工程，不得删除已完成改革或已落实法律。
 - ensure/migration effect 必须幂等；月度入口不得反复发奖励、重置有限期限或遍历全世界建筑。
 - 事件链应保持“未初始化 → 可用 → 运行中 → 完成/失败/取消”的显式状态；每条异常路径都要清理临时状态。
@@ -302,7 +301,6 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 | `je_ottoman_empire_collapse` | 同名日志完整替换 | 排除 FFPA 管理的 2050 TUR，并在旧活动实例失效时清理 T&R 崩溃运行状态；其余上游语义保持不变 | Tech & Res |
 | `je_greek_nationalism_reason`、`je_greek_nationalism_lobby`、`greece.1.t/d/f/a/b`、`greece.4.t/d1/d2/f/a/b/c`、`greece.5.t/d/f/a/b` | 同名本地化键替换 | 将原版十九世纪希腊叙事改写为大火后重新拼合国家对旧世界档案的再解释，并按克制、伟大理想与东罗马路线显示不同结局 | 原版及任何后加载的希腊事件/本地化 Mod |
 | `TUR_ADJ`、`GRE_ADJ` | 同名本地化键替换 | 将 Firefall 英文中误作国名的 `Turkey`、`Greece` 恢复为形容词 `Turkish`、`Greek`；简中同步登记同形词 | 原版、Firefall 及任何后加载的国家本地化 Mod |
-| `country_var_equal` | 同名本地化键替换 | 修复“牛奶汉化”将引擎通用国家变量相等提示误写为融合文化长说明、并在日志条件中反复泄漏的问题 | Workshop `2880069248` 及任何后加载的通用触发器本地化 Mod |
 | `party_agrarian`、`party_anarchist`、`party_communist`、`party_conservative`、`party_fascist`、`party_free_trade`、`party_liberal`、`party_military`、`party_radicals`、`party_religious`、`party_christian`、`revolutionary_party_name`、`party_social_democrats` | 同名本地化键替换 | 通过 scripted GUI 为 BYZ 返回专属党名，并为其他国家返回原版通用名称 | 原版及任何后加载的党名/本地化 Mod |
 
 文件名前缀 `00_`、`zzz_`、`zzzz_` 只是加载排序工具，不等于安全覆盖。不得仅通过改文件名解决冲突；必须记录目标顶层键、操作语义和后加载者。

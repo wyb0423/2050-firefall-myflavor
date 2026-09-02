@@ -1,3 +1,0 @@
-﻿l_simp_chinese:
- # 修复“牛奶汉化”误占用的引擎通用变量提示键。
- country_var_equal:0 "国家变量等于#v $NUM|0v$#!"

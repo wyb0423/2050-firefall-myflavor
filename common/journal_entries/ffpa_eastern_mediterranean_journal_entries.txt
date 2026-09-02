@@ -169,15 +169,21 @@ je_ffpa_tur_ottoman_commonwealth = {
 	complete = {
 		custom_tooltip = {
 			text = ffpa_tur_commonwealth_administration_complete_tt
-			var:ffpa_tur_commonwealth_administration_v2 >= 60
+			scope:journal_entry = {
+				"scripted_bar_progress(ffpa_tur_commonwealth_administration_bar)" >= 60
+			}
 		}
 		custom_tooltip = {
 			text = ffpa_tur_commonwealth_civic_complete_tt
-			var:ffpa_tur_commonwealth_civic_v2 >= 60
+			scope:journal_entry = {
+				"scripted_bar_progress(ffpa_tur_commonwealth_civic_bar)" >= 60
+			}
 		}
 		custom_tooltip = {
 			text = ffpa_tur_commonwealth_stability_complete_tt
-			var:ffpa_tur_commonwealth_stability_v2 >= 60
+			scope:journal_entry = {
+				"scripted_bar_progress(ffpa_tur_commonwealth_stability_bar)" >= 60
+			}
 		}
 	}
 
@@ -584,15 +590,21 @@ je_ffpa_byz_rhomaic_commonwealth_v2 = {
 	complete = {
 		custom_tooltip = {
 			text = ffpa_byz_commonwealth_administration_complete_tt
-			var:ffpa_byz_commonwealth_administration_v2 >= 60
+			scope:journal_entry = {
+				"scripted_bar_progress(ffpa_byz_commonwealth_administration_bar)" >= 60
+			}
 		}
 		custom_tooltip = {
 			text = ffpa_byz_commonwealth_civic_complete_tt
-			var:ffpa_byz_commonwealth_civic_v2 >= 60
+			scope:journal_entry = {
+				"scripted_bar_progress(ffpa_byz_commonwealth_civic_bar)" >= 60
+			}
 		}
 		custom_tooltip = {
 			text = ffpa_byz_commonwealth_stability_complete_tt
-			var:ffpa_byz_commonwealth_stability_v2 >= 60
+			scope:journal_entry = {
+				"scripted_bar_progress(ffpa_byz_commonwealth_stability_bar)" >= 60
+			}
 		}
 	}
 
