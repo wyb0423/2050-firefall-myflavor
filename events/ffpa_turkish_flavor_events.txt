@@ -1656,6 +1656,7 @@ ffpa_tur_flavor.23 = {
 			}
 		}
 	}
+	after = { ffpa_apply_tur_route_interest_group_identity_v1 = yes }
 }
 
 # --- The Anatolian Reconstruction Directorate ---
@@ -1899,6 +1900,7 @@ ffpa_tur_flavor.33 = {
 			}
 		}
 	}
+	after = { ffpa_apply_tur_route_interest_group_identity_v1 = yes }
 }
 
 # --- Reconstruction and Straits capstones ---

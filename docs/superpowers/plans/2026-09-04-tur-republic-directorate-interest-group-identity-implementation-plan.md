@@ -4,7 +4,7 @@
 
 依据：`docs/superpowers/specs/2026-09-04-tur-republic-directorate-interest-group-identity-design.md`
 
-状态：待实施
+状态：已实施并完成静态验证，待游戏内验证
 
 ## 1. 实施约束
 
@@ -115,10 +115,10 @@ rg -n 'ffpa_ig_tur_(republican_general_staff|ankara_civic_society|national_recon
 
 ## 6. Task 4：静态、最终数据库与运行时验证
 
-1. 在原版、Firefall、Tech & Res 和本项目中搜索六个 Trait ID、四个名称键与共享 effect，确认没有上游冲突或本项目重复定义。
-2. 验证所有图标和 modifier 能在当前原版同类数据中找到先例。
-3. 对所有修改脚本执行花括号、字符串和顶层键检查。
-4. 解析 `.metadata/metadata.json`，运行 `git diff --check`，比较英中新增键集合。
+1. 新增并运行无依赖的 `tests/test_tur_route_interest_group_identity.py`，检查固定 ID、分支条件、事件接线、花括号和双语键集合。
+2. 在原版、Firefall、Tech & Res 和本项目中搜索六个 Trait ID、四个名称键与共享 effect，确认没有上游冲突或本项目重复定义。
+3. 验证所有图标和 modifier 能在当前原版同类数据中找到先例。
+4. 解析 `.metadata/metadata.json`，运行 `git diff --check`。
 5. 搜索当前及轮转 `error*.log` 中的新增技术 ID；若未启动包含本次改动的游戏，只将其作为历史日志检查。
 6. 游戏内分别验证：终局前无身份、共和国三个终局选项、重建总署三个终局选项、旧档月度补发、重复 ensure、高门路线隔离、保存重载。
 

@@ -2,7 +2,7 @@
 
 日期：2026-09-04
 
-状态：已确认，待实施计划
+状态：已实施并完成静态验证，待游戏内验证
 
 ## 1. 背景与判断
 
@@ -81,6 +81,7 @@ FFPA 的 TUR 已有三条互斥建国路线、路线事件链、终局选择、�
 - `localization/english/ffpa_turkish_flavor_l_english.yml`；
 - `localization/simp_chinese/ffpa_turkish_flavor_l_simp_chinese.yml`；
 - `README.md` 与 `AGENTS.md`：窄幅登记真实行为、所有权和存档 API。
+- `tests/test_tur_route_interest_group_identity.py`：无依赖静态回归检查。
 
 静态 Trait 属于东地中海国家身份核心；路线判定、授予和迁移属于 TUR 风味状态机。两个模块只通过六个稳定 Trait 顶层对象连接。不修改 `.metadata/metadata.json`，不新增 on_action 或运行时文件。
 

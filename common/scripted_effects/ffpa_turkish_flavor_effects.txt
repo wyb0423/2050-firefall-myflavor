@@ -20,6 +20,46 @@ ffpa_set_tur_state_project_directorate_v1 = {
 	remove_variable = ffpa_tur_state_project_repair_event_scheduled_v1
 }
 
+# Route capstones establish a persistent interest-group identity. The version
+# variables make this safe for both immediate event use and monthly save repair.
+ffpa_apply_tur_route_interest_group_identity_v1 = {
+	if = {
+		limit = {
+			ffpa_tur_has_republican_state_project_v1 = yes
+			has_variable = ffpa_tur_republic_settlement_choice_v1
+			NOT = { has_variable = ffpa_tur_republic_interest_group_identity_v1 }
+		}
+		ig:ig_armed_forces ?= {
+			set_interest_group_name = ffpa_ig_tur_republican_general_staff
+			set_ig_trait = ig_trait:ig_trait_ffpa_tur_guardianship_intervention
+			set_ig_trait = ig_trait:ig_trait_ffpa_tur_civilian_command
+		}
+		ig:ig_intelligentsia ?= {
+			set_interest_group_name = ffpa_ig_tur_ankara_civic_society
+			set_ig_trait = ig_trait:ig_trait_ffpa_tur_republican_public_instruction
+		}
+		set_variable = ffpa_tur_republic_interest_group_identity_v1
+	}
+
+	if = {
+		limit = {
+			ffpa_tur_has_directorate_state_project_v1 = yes
+			has_variable = ffpa_tur_directorate_settlement_choice_v1
+			NOT = { has_variable = ffpa_tur_directorate_interest_group_identity_v1 }
+		}
+		ig:ig_industrialists ?= {
+			set_interest_group_name = ffpa_ig_tur_national_reconstruction_combines
+			set_ig_trait = ig_trait:ig_trait_ffpa_tur_contractual_obstruction
+			set_ig_trait = ig_trait:ig_trait_ffpa_tur_reconstruction_contracts
+		}
+		ig:ig_intelligentsia ?= {
+			set_interest_group_name = ffpa_ig_tur_national_technical_service_corps
+			set_ig_trait = ig_trait:ig_trait_ffpa_tur_national_technical_service
+		}
+		set_variable = ffpa_tur_directorate_interest_group_identity_v1
+	}
+}
+
 ffpa_clear_tur_porte_charter_rewards_v1 = {
 	if = {
 		limit = { has_modifier = ffpa_tur_porte_central_charter_v1 }
@@ -1163,6 +1203,8 @@ ffpa_ensure_tur_permanent_flavor_rewards_v1 = {
 			}
 		}
 	}
+
+	ffpa_apply_tur_route_interest_group_identity_v1 = yes
 }
 
 ffpa_apply_tur_settlement_direct_administration_v1 = {

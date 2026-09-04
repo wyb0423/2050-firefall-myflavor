@@ -131,7 +131,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `common/interest_group_traits/ffpa_eastern_mediterranean_interest_group_traits.txt`
 - `common/journal_entries/zzzz_ffpa_greek_nationalism_override.txt`
 - `events/ffpa_formation_overrides.txt`
-- 两份本地化文件中的国家、文化、政体、党名、旗帜、国家集团候选名称和成立链键
+- 两份共享本地化文件中的国家、文化、政体、党名、旗帜、国家集团候选名称和成立链键，以及两份 TUR 风味本地化文件中的路线利益集团名称与 trait 键
 
 **拥有的行为与接口**
 
@@ -139,7 +139,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 保持原版 `TUR`，不创建第二个等价土耳其 tag。
 - 定义 `ffpa_ottoman`、`ffpa_rhomaic`、TUR/BYZ 专属政体与政府称谓，以及 BYZ 动态国名、旗帜和党名适配。
 - 为 TUR 提供两个通用及三条建国路线各两个国家集团候选名称，为 BYZ 提供两个通用及五类政体各一个候选名称；这些条目只扩展随机名称池，不自动改名。
-- 定义五个已改名利益集团使用的八个 `ig_trait_ffpa_*` 风味 trait；每个集团仍保留至少一个原版槽位。
+- 定义 BYZ、奥斯曼共同体、安卡拉共和国与重建总署九组利益集团风味名称使用的十四个 `ig_trait_ffpa_*` trait；每组映射仍保留至少一个原版槽位。
 - 提供东地中海状态机使用的意识形态与文化接受 modifier 类型。
 
 **边界与风险**
@@ -147,7 +147,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 本模块拥有“身份和静态定义”，不拥有日志进度、事件调度或地区建设奖励。
 - `BYZ`、`je_greek_nationalism`、`formation.3`、十三个通用党名本地化键、党名数据库适配和旗帜定义都可能覆盖上游对象；更新 Firefall/原版后必须做最终数据库比较。
 - 形成 BYZ 后保留已有宣称的约定不可在身份重构时丢失。
-- 八个 trait 技术 ID 是存档对象；不得通过覆盖原版 `interest_group` 的 `on_enable` 重新实现其分配。
+- 十四个 trait 技术 ID 是存档对象；不得通过覆盖原版 `interest_group` 的 `on_enable` 重新实现其分配。
 - 十五个 `ffpa_tur_*` / `ffpa_byz_*` 国家集团名称是普通新增顶层键，不得覆盖原版名称、绑定集团效果或通过周期逻辑强制改名。
 - 不要为了 TUR 风味复制或替换原版 TUR 国家定义、旗帜或政体视觉。
 
@@ -199,6 +199,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 - TUR 与 BYZ 的重建、共同体、首都工程和有限政治经济事件。
 - TUR 的三条互斥建国路线、高门/共和国/重建总署事件链、三项安纳托利亚工程、计划大会、新海峡公约与三场地区治理会议。
+- 共和国与重建总署路线在终局后分别获得两项利益集团名称和三个专属 trait；两个身份包不按终局细分选项继续分支。
 - TUR 的 11 州成立核心永久宣称，以及按建国路线分层、一次一条、15–20 年限期的八条边疆收复前线；临时宣称使用逐州来源标记，超时或撤回后只清理未实现的自有宣称。
 - TUR 路线终局后的“帝国簿册与行省中介”“面包与首都”，以及 BYZ 双重重建终局后的“罗马人的公共体”“军户与权门”四项常驻治理日志；四者分别使用平衡、消耗性储备、三支柱修复和单向结构压力，不共享统一模板。
 - BYZ 军户日志导出的三阶段改革状态：军役户籍立即落实职业军队或大规模征兵，田产清丈逐步切断土地压力，军需与退伍安置院完成后永久提供全国福利金修正。
@@ -213,6 +214,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 - 变量名带 `_v1` / `_v2` 的键都是存档 API，不是可清理的命名噪音。
 - `ffpa_tur_state_project_v1` 的值 1/2/3 分别固定表示高门、共和国、重建总署；路线终局、工程、海峡和地区治理选择变量同样属于存档 API。后续政体变化不得自动重写建国路线。
+- `ffpa_tur_republic_interest_group_identity_v1` 与 `ffpa_tur_directorate_interest_group_identity_v1` 是路线身份包的旧档补发门控；只能在严格 TUR、匹配路线且终局选择已存在时设置。
 - `ffpa_tur_front_<front>_complete_v1`、`ffpa_tur_front_<front>_retry_cooldown_v1`、`ffpa_tur_front_<front>_resolution_pending_v1`、`ffpa_tur_temporary_claim_<state>_v1`、八条前线 JE 与 `ffpa_tur_flavor.60–84` 都是存档 API；州范围或状态语义变化时必须版本化迁移。
 - TUR 八条前线与 BYZ 七条复归战争的 `*_owner_tracking_v1`、`*_owner_snapshot_v1`、`*_completion_predecessor_v1`、`*_completion_predecessor_ready_v1`，以及 `ffpa_tur_restoration_predecessor_tracking_migrated_v1`、`ffpa_byz_restoration_predecessor_tracking_migrated_v1` 都是叙事用存档 API；其含义固定为当前活动前线中最后转入本国的目标 state 实例之直接前所有者，不得改作主要敌国或开战对象。
 - BYZ 七条复归的 `ffpa_byz_<region>_postwar_target_v1`、`ffpa_byz_restoration_postwar_tracking_migrated_v1`、临时档位变量、七项行政负担、七项持续财政负担、三项州修正与 `ffpa_flavor.100–106` 均为战后安置存档 API；新目标只登记日志期间实际转入 BYZ 的州，旧活动日志迁移时只补记仍未整合的自有目标州，完成、失败或失效必须按地区清理。
@@ -283,7 +285,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 | `events/ffpa_turkish_flavor_events.txt` | TUR 三路线、工程与地区治理 | 独占 `ffpa_tur_flavor` namespace；不向未来地区模块开放，也不覆盖上游事件。 |
 | `localization/english/ffpa_l_english.yml` | 东地中海与未来地区模块 | 每组键归明确地区所有；改玩家可见技术对象时同步更新。 |
 | `localization/simp_chinese/ffpa_l_simp_chinese.yml` | 东地中海与未来地区模块 | 与英文保持键集合一致，不得只补一种语言。 |
-| 两份 `ffpa_turkish_flavor_l_*.yml` | TUR 三路线、工程与治理会议 | 两种语言保持完全相同的键集合与 UTF-8 BOM；不得把 TUR 新键回填为上游覆盖。 |
+| 两份 `ffpa_turkish_flavor_l_*.yml` | TUR 三路线、路线利益集团身份、工程与治理会议 | 两种语言保持完全相同的键集合与 UTF-8 BOM；不得把 TUR 新键回填为上游覆盖。 |
 | `.metadata/metadata.json` | 风味合集发布外壳 | 只有发布身份或依赖变化才改；不得因内部模块增加而更换既有 Mod ID。 |
 
 跨地区调用优先使用命名清晰的 scripted effect、scripted trigger 或稳定顶层对象。除明确登记的存档接口外，禁止直接读取另一个地区模块的临时变量。
@@ -376,8 +378,9 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 所有失败、取消、政体变化、标签形成和旧存档路径都能清理或迁移状态。
 - 地区建设只奖励实际覆盖州；完成状态可稳定触发一次西方整合事件。
 - 公民权整合速度只作用于 BYZ 拥有的未整合西方白名单州，未来取得、失去、完成整合和身份变化路径能补发或清理。
-- BYZ 新旧档分别获得五个专属 trait，虔信者忠诚槽归正为原版东正教回退的 `ig_trait_be_fruitful_and_multiply`，其余三个未替换槽位保持原版；TUR 只在取得 `ffpa_ottoman` 后获得三个专属 trait，两个已改名集团的其余三个槽位及未改名虔诚集团的 Mecelle 等原版 trait 不受影响。
-- 三个 trait 迁移变量设置后不得在月度 pulse 重复写槽位；旧档已有名称变量时仍必须补发 trait。
+- BYZ 新旧档分别获得五个专属 trait，虔信者忠诚槽归正为原版东正教回退的 `ig_trait_be_fruitful_and_multiply`，其余三个未替换槽位保持原版；高门 TUR 只在取得 `ffpa_ottoman` 后获得三个专属 trait，两个已改名集团的其余三个槽位及未改名虔诚集团的 Mecelle 等原版 trait 不受影响。
+- 共和国与重建总署在各自终局前不得获得路线身份包；终局后分别改名两个利益集团并替换三个指定 trait 槽位，其他原版槽位保留，三个终局细分选项使用同一身份包。
+- 五个 trait/身份迁移变量设置后不得在月度 pulse 重复写槽位；旧档已有名称或终局变量时仍必须补发对应 trait。
 - 动态国名、政府称号、党名、旗帜、国家集团候选名称和两种语言在主要政体路径下显示正确。
 
 ### 9.5 Core Balance 拆分集成验证
