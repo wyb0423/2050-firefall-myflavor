@@ -404,6 +404,19 @@ ffpa_ensure_byzantine_interest_group_traits_v1 = {
 
 		set_variable = ffpa_byzantine_interest_group_traits_v1
 	}
+
+	# Orthodox is the vanilla fallback, but changing state religion does not
+	# refresh IG traits; clear Da'wat inherited from a Sunni predecessor.
+	if = {
+		limit = {
+			ROOT = { country_definition = cd:BYZ }
+			NOT = { has_variable = ffpa_byzantine_devout_loyal_trait_v1 }
+		}
+		ig:ig_devout ?= {
+			set_ig_trait = ig_trait:ig_trait_be_fruitful_and_multiply
+		}
+		set_variable = ffpa_byzantine_devout_loyal_trait_v1
+	}
 }
 
 # Root = TUR. The Ottoman package is earned with the inclusive political

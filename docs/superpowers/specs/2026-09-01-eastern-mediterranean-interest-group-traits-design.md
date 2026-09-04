@@ -13,7 +13,7 @@ FFPA 已经为 BYZ 和取得奥斯曼共同体身份后的 TUR 设置了五个�
 
 现有实现只使用 `set_interest_group_name` 改变显示名。五个利益集团仍使用其原版不满、满意和忠诚 trait，因此显示身份与实际提供的增益、减益之间缺少联系。
 
-本设计在五个已改名利益集团的十五个槽位中选择八个最能表达其身份的槽位进行替换。其余七个槽位继续保留原版行为，以控制平衡面、兼容风险和本地化规模。
+本设计在五个已改名利益集团的十五个槽位中选择八个最能表达其身份的槽位进行替换。其余七个槽位继续保留原版行为；BYZ 虔信者的忠诚槽显式归正为原版东正教回退使用的 `ig_trait_be_fruitful_and_multiply`，避免从逊尼前身继承 `ig_trait_da_wat`。
 
 ## 2. 当前版本与最终数据库
 
@@ -133,6 +133,8 @@ Firefall 与 Tech & Res 当前均未提供 `common/interest_groups/` 或 `common
 3. `ig:ig_intelligentsia ?=` 设置 `ig_trait_ffpa_byz_new_rome_academies`；
 4. 设置国家变量 `ffpa_byzantine_interest_group_traits_v1`。
 
+同一 ensure 另以 `ffpa_byzantine_devout_loyal_trait_v1` 为一次性门控，把 BYZ 虔信者忠诚槽设置为原版 `ig_trait_be_fruitful_and_multiply`。原版 `state_religion_switch_effect` 只同步人物意识形态，不刷新 IG trait；独立门控可同时修复已经拥有旧 trait 包变量的存档。
+
 调用位置放在现有 `ffpa_ensure_byzantine_formation_effects` 中，与三项利益集团名称相邻但使用独立的 `if` 分支。该 ensure 已由 `on_country_formed` 和月度旧档入口调用，因此：
 
 - 新形成 BYZ 当次立即应用；
@@ -185,8 +187,8 @@ Firefall 与 Tech & Res 当前均未提供 `common/interest_groups/` 或 `common
 
 - 八个新 trait 顶层键均使用 `ig_trait_ffpa_` 前缀，不覆盖原版、Firefall 或 Tech & Res。
 - `set_ig_trait` 按满意度槽位替换当前对象，因此不会把原版 trait 继续叠加在同一槽位。
-- FFPA 在首次身份 ensure 时有意接管这八个槽位。若其他 Mod 随后通过事件重写同槽位，后执行者获胜；本设计不增加周期性争夺写入。
-- 两个新国家变量与八个新 trait ID 都是存档 API。后续语义变化必须增加新版本变量或迁移，不能静默复用 `_v1`。
+- FFPA 在首次身份 ensure 时有意接管八个风味槽位，并把 BYZ 虔信者忠诚槽归正为原版东正教回退。若其他 Mod 随后通过事件重写同槽位，后执行者获胜；本设计不增加周期性争夺写入。
+- `ffpa_byzantine_interest_group_traits_v1`、`ffpa_byzantine_devout_loyal_trait_v1`、`ffpa_ottoman_interest_group_traits_v1` 与八个新 trait ID 都是存档 API。后续语义变化必须增加新版本变量或迁移，不能静默复用 `_v1`。
 - 更新前已经处于对应满意度阈值的旧档可能在首次换槽时看到一次 trait 激活或停用通知；是否出现以及通知顺序需要游戏内验证。
 - 本设计不尝试恢复另一个 Mod 已写入的未知 trait，因为当前 1.13.11 数据中没有找到可验证的通用 `has_ig_trait` 兼容先例。
 
@@ -214,8 +216,8 @@ Firefall 与 Tech & Res 当前均未提供 `common/interest_groups/` 或 `common
 
 ### 13.2 新游戏
 
-- GRE 形成 BYZ 后，三个风味名称和五个新 trait 同次到达。
-- BYZ 四个未替换槽位仍保持原版结果。
+- GRE 形成 BYZ 后，三个风味名称、五个新 trait 与原版东正教回退的虔信者忠诚 trait 同次到达。
+- BYZ 虔信者忠诚槽为 `ig_trait_be_fruitful_and_multiply`，其余三个未替换槽位仍保持原版结果。
 - TUR 在没有 `ffpa_ottoman` 主流文化时不获得三个新 trait。
 - TUR 取得 `ffpa_ottoman` 主流文化后，同次获得两个风味名称与三个新 trait。
 - TUR 两个已改名集团的其余三个原版槽位继续保留；未改名虔诚集团的 Mecelle 等原版专属 trait 也不受影响。
@@ -223,14 +225,15 @@ Firefall 与 Tech & Res 当前均未提供 `common/interest_groups/` 或 `common
 ### 13.3 旧存档与幂等性
 
 - 已经拥有 `ffpa_byzantine_flavor_names_v2` 的 BYZ 在首次月度 ensure 后仍能获得五个新 trait。
+- 已经拥有 `ffpa_byzantine_interest_group_traits_v1` 的 BYZ 在首次月度 ensure 后清除继承的 `ig_trait_da_wat`，并设置 `ffpa_byzantine_devout_loyal_trait_v1`。
 - 已经拥有 `ffpa_ottoman_flavor_names_v2` 与 `ffpa_ottoman` 的 TUR 在首次月度 ensure 后仍能获得三个新 trait。
-- 两个新版本变量设置后，后续月度 pulse 不再次写 trait或重复通知。
+- 三个 trait 迁移变量设置后，后续月度 pulse 不再次写 trait或重复通知。
 - 缺少 `ffpa_ottoman` 的 TUR 旧档不设置奥斯曼 trait 变量，以便将来身份达成时正常应用。
 - 保存并重载后，trait 分配和版本变量继续存在。
 
 ### 13.4 运行时证据
 
-- 最新 `error*.log` 不出现八个 trait、两项 effect、两个变量或 modifier 类型的解析错误。
+- 最新 `error*.log` 不出现八个 trait、两项 effect、三个迁移变量或 modifier 类型的解析错误。
 - IG 面板分别检查不满、满意和忠诚阈值下的实际启停与 modifier 数值。
 - 确认旧档首次迁移时的系统通知是否可接受。
 - 确认形成 BYZ 后原 GRE trait 的相应槽位确实被替换，而不是并存。

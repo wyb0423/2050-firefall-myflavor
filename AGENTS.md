@@ -206,7 +206,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - BYZ 分区复归战争的御前会议入口、10–15 年日志、成功/失败/重试状态、战后和议选择与分档行省安置。
 - `namespace = ffpa_flavor` 的既有东地中海事件 ID 空间，以及新增 TUR 内容专用的 `namespace = ffpa_tur_flavor`。
 - `on_country_formed`、月度迁移检查、首次选举和 BYZ 公民权白名单州动态整合入口。
-- BYZ 成立时与 TUR 取得奥斯曼共同体身份时的一次性 trait 分配，以及 `ffpa_byzantine_interest_group_traits_v1`、`ffpa_ottoman_interest_group_traits_v1` 旧档补发门控。
+- BYZ 成立时与 TUR 取得奥斯曼共同体身份时的一次性 trait 分配；`ffpa_byzantine_interest_group_traits_v1`、`ffpa_byzantine_devout_loyal_trait_v1`、`ffpa_ottoman_interest_group_traits_v1` 分别门控旧档补发及 BYZ 虔信者忠诚槽的东正教归正。
 - 版本化迁移、一次性事件标记、共同体三轴进退和清理路径。
 
 **边界与风险**
@@ -376,8 +376,8 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 所有失败、取消、政体变化、标签形成和旧存档路径都能清理或迁移状态。
 - 地区建设只奖励实际覆盖州；完成状态可稳定触发一次西方整合事件。
 - 公民权整合速度只作用于 BYZ 拥有的未整合西方白名单州，未来取得、失去、完成整合和身份变化路径能补发或清理。
-- BYZ 新旧档分别获得五个专属 trait，且四个未替换槽位保持原版；TUR 只在取得 `ffpa_ottoman` 后获得三个专属 trait，两个已改名集团的其余三个槽位及未改名虔诚集团的 Mecelle 等原版 trait 不受影响。
-- 两个 trait 迁移变量设置后不得在月度 pulse 重复写槽位；旧档已有名称变量时仍必须补发 trait。
+- BYZ 新旧档分别获得五个专属 trait，虔信者忠诚槽归正为原版东正教回退的 `ig_trait_be_fruitful_and_multiply`，其余三个未替换槽位保持原版；TUR 只在取得 `ffpa_ottoman` 后获得三个专属 trait，两个已改名集团的其余三个槽位及未改名虔诚集团的 Mecelle 等原版 trait 不受影响。
+- 三个 trait 迁移变量设置后不得在月度 pulse 重复写槽位；旧档已有名称变量时仍必须补发 trait。
 - 动态国名、政府称号、党名、旗帜、国家集团候选名称和两种语言在主要政体路径下显示正确。
 
 ### 9.5 Core Balance 拆分集成验证
