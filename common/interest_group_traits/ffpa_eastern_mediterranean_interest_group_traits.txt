@@ -45,7 +45,7 @@ ig_trait_ffpa_byz_restored_eagles = {
 
 # Byzantine Society of New Rome
 ig_trait_ffpa_byz_new_rome_academies = {
-	icon = "gfx/interface/icons/ig_trait_icons/avant_garde.dds"
+	icon = "gfx/interface/icons/ig_trait_icons/propagandists.dds"
 	min_approval = loyal
 
 	modifier = {
