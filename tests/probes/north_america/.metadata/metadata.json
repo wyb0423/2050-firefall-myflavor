@@ -1,0 +1,15 @@
+{
+  "name": "FFPA DEV — North America State Probe",
+  "id": "com.wyb.ffpa-north-america-state-probe",
+  "version": "0.0.1",
+  "supported_game_version": "1.13.*",
+  "short_description": "Development only. Explicit console commands modify Illinois in a disposable new game.",
+  "relationships": [
+    {
+      "rel_type": "dependency",
+      "id": "alter_time_2050_fire_falls",
+      "display_name": "2050: The Fire Falls",
+      "resource_type": "mod"
+    }
+  ]
+}

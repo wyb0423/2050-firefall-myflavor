@@ -1,0 +1,8 @@
+ffpa_na_local_months_bar_v1 = {
+ name = ffpa_na_local_months_bar_v1
+ desc = ffpa_na_local_months_bar_v1_desc
+ default_green = yes
+ start_value = 0
+ min_value = 0
+ max_value = 12
+}

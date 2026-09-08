@@ -1,0 +1,4 @@
+# Deliberately visible marker for a disposable new-game test only.
+ffpa_na_probe_engineering_v1 = {
+	state_tax_capacity_mult = 0.01
+}

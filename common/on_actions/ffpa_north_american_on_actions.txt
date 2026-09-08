@@ -1,0 +1,11 @@
+# Only cleanup is needed here. Native JE activation handles new and old saves;
+# its own monthly pulse counts the selected state's completed building levels.
+on_country_formed = { on_actions = { ffpa_na_on_country_formed_v1 } }
+ffpa_na_on_country_formed_v1 = {
+ effect = {
+  if = {
+   limit = { has_variable = ffpa_na_local_target_v1 NOT = { ffpa_na_is_predecessor_v1 = yes } }
+   ffpa_na_local_cleanup_v1 = yes
+  }
+ }
+}

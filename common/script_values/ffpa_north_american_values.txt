@@ -1,0 +1,52 @@
+# State scope. Counts built levels, not workers or population groups.
+ffpa_na_local_qualified_levels_v1 = {
+ value = 0
+ if = {
+  limit = { owner = { var:ffpa_na_local_route_v1 = 1 } }
+  every_scope_building = {
+   limit = { ffpa_na_local_building_1_v1 = yes level > 0 occupancy >= 0.60 }
+   add = this.level
+  }
+ }
+ if = {
+  limit = { owner = { var:ffpa_na_local_route_v1 = 2 } }
+  every_scope_building = {
+   limit = { ffpa_na_local_building_2_v1 = yes level > 0 occupancy >= 0.60 }
+   add = this.level
+  }
+ }
+ if = {
+  limit = { owner = { var:ffpa_na_local_route_v1 = 3 } }
+  every_scope_building = {
+   limit = { ffpa_na_local_building_3_v1 = yes level > 0 occupancy >= 0.60 }
+   add = this.level
+  }
+ }
+}
+
+# State scope: existing capacity for direction availability, regardless of staffing.
+ffpa_na_local_existing_levels_1_v1 = {
+ value = 0
+ every_scope_building = {
+  limit = { ffpa_na_local_building_1_v1 = yes level > 0 }
+  add = this.level
+ }
+}
+
+# State scope: existing capacity for direction availability, regardless of staffing.
+ffpa_na_local_existing_levels_2_v1 = {
+ value = 0
+ every_scope_building = {
+  limit = { ffpa_na_local_building_2_v1 = yes level > 0 }
+  add = this.level
+ }
+}
+
+# State scope: existing capacity for direction availability, regardless of staffing.
+ffpa_na_local_existing_levels_3_v1 = {
+ value = 0
+ every_scope_building = {
+  limit = { ffpa_na_local_building_3_v1 = yes level > 0 }
+  add = this.level
+ }
+}

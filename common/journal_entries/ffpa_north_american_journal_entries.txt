@@ -1,0 +1,31 @@
+je_ffpa_na_local_recovery_v1 = {
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ scripted_progress_bar = ffpa_na_local_months_bar_v1
+ scripted_button = ffpa_na_local_next_state_button_v1
+ scripted_button = ffpa_na_local_choose_button_v1
+ is_shown_when_inactive = {
+  ffpa_na_is_predecessor_v1 = yes
+  NOT = { has_variable = ffpa_na_local_complete_v1 }
+  NOT = { has_variable = ffpa_na_local_notice_pending_v1 }
+  any_scope_state = { ffpa_na_local_candidate_state_v1 = yes }
+ }
+ possible = {
+  ffpa_na_is_predecessor_v1 = yes
+  NOT = { has_variable = ffpa_na_local_complete_v1 }
+  NOT = { has_variable = ffpa_na_local_notice_pending_v1 }
+  any_scope_state = { ffpa_na_local_candidate_state_v1 = yes }
+ }
+ immediate = { ffpa_na_local_initialize_v1 = yes }
+ on_monthly_pulse = { effect = { ffpa_na_local_monthly_v1 = yes } }
+ complete = {
+  ffpa_na_local_target_valid_v1 = yes
+  has_variable = ffpa_na_local_route_v1
+  var:ffpa_na_local_months_v1 >= 12
+  var:ffpa_na_local_target_v1 = { market_access >= 0.80 ffpa_na_local_qualified_levels_v1 >= 3 }
+ }
+ on_complete = { ffpa_na_local_complete_v1 = yes }
+ invalid = { NOT = { ffpa_na_local_target_valid_v1 = yes } }
+ on_invalid = { ffpa_na_local_cleanup_v1 = yes }
+ weight = 100
+ should_be_pinned_by_default_uninvolved_or_context = yes
+}

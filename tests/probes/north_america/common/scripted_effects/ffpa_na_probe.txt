@@ -1,0 +1,107 @@
+# DEV ONLY: explicit commands in a disposable, paused Firefall new game.
+# Country scope must be Chicago; no startup or periodic mutation.
+# Native source: 00_chris_scripted_effects.txt / transfer_province.
+# Province IDs are the five starting Rockford provinces in Firefall 0.1.1.
+
+ffpa_na_probe_setup_v1 = {
+	if = {
+		limit = {
+			country_definition = cd:ZZZILLINOISCITY
+			NOT = { has_variable = ffpa_na_probe_stage_v1 }
+			p:xAD5337.state.owner = { country_definition = cd:ZZZILLINOISWOOD }
+			p:x2FBF72.state.owner = { country_definition = cd:ZZZILLINOISWOOD }
+			p:x34036E.state.owner = { country_definition = cd:ZZZILLINOISWOOD }
+			p:x50C040.state.owner = { country_definition = cd:ZZZILLINOISWOOD }
+			p:x543986.state.owner = { country_definition = cd:ZZZILLINOISWOOD }
+		}
+		p:xAD5337.state = {
+			save_scope_as = ffpa_na_probe_source_state
+			set_variable = ffpa_na_probe_engineering_marker_v1
+			add_modifier = ffpa_na_probe_engineering_v1
+		}
+		set_variable = { name = ffpa_na_probe_saved_state_v1 value = scope:ffpa_na_probe_source_state }
+		set_variable = { name = ffpa_na_probe_stage_v1 value = 1 }
+		debug_log = "FFPA_NA_PROBE SETUP_OK"
+		ffpa_na_probe_report_v1 = yes
+	}
+	else = { debug_log = "FFPA_NA_PROBE SETUP_REJECTED: wrong country, changed starting provinces, or already initialized" }
+}
+
+ffpa_na_probe_partial_v1 = {
+	if = {
+		limit = {
+			country_definition = cd:ZZZILLINOISCITY
+			var:ffpa_na_probe_stage_v1 = 1
+			p:xAD5337.state.owner = { country_definition = cd:ZZZILLINOISWOOD }
+		}
+		s:STATE_ILLINOIS = {
+			set_owner_of_provinces = { country = c:ZZZILLINOISCITY provinces = { xAD5337 } }
+		}
+		set_variable = { name = ffpa_na_probe_stage_v1 value = 2 }
+		debug_log = "FFPA_NA_PROBE PARTIAL_TRANSFER_REQUESTED"
+		ffpa_na_probe_report_v1 = yes
+	}
+	else = { debug_log = "FFPA_NA_PROBE PARTIAL_REJECTED" }
+}
+
+ffpa_na_probe_merge_v1 = {
+	if = {
+		limit = {
+			country_definition = cd:ZZZILLINOISCITY
+			var:ffpa_na_probe_stage_v1 = 2
+			p:x2FBF72.state.owner = { country_definition = cd:ZZZILLINOISWOOD }
+			p:x34036E.state.owner = { country_definition = cd:ZZZILLINOISWOOD }
+			p:x50C040.state.owner = { country_definition = cd:ZZZILLINOISWOOD }
+			p:x543986.state.owner = { country_definition = cd:ZZZILLINOISWOOD }
+		}
+		s:STATE_ILLINOIS = {
+			set_owner_of_provinces = {
+				country = c:ZZZILLINOISCITY
+				provinces = { x2FBF72 x34036E x50C040 x543986 }
+			}
+		}
+		set_variable = { name = ffpa_na_probe_stage_v1 value = 3 }
+		debug_log = "FFPA_NA_PROBE FINAL_TRANSFER_REQUESTED"
+		ffpa_na_probe_report_v1 = yes
+	}
+	else = { debug_log = "FFPA_NA_PROBE MERGE_REJECTED" }
+}
+
+# Read only: run immediately, after one game day, and after save/reload.
+# PRESENT/ABSENT are observations, not assumed pass/fail results.
+ffpa_na_probe_report_v1 = {
+	if = {
+		limit = { country_definition = cd:ZZZILLINOISCITY has_variable = ffpa_na_probe_stage_v1 }
+		debug_log = "FFPA_NA_PROBE REPORT_BEGIN"
+		if = {
+			limit = { exists = var:ffpa_na_probe_saved_state_v1 }
+			debug_log = "FFPA_NA_PROBE ORIGINAL_STATE_PRESENT"
+		}
+		else = { debug_log = "FFPA_NA_PROBE ORIGINAL_STATE_ABSENT" }
+		if = {
+			limit = {
+				p:xAD5337.state.owner = { country_definition = cd:ZZZILLINOISCITY }
+				p:x2FBF72.state.owner = { country_definition = cd:ZZZILLINOISCITY }
+				p:x34036E.state.owner = { country_definition = cd:ZZZILLINOISCITY }
+				p:x50C040.state.owner = { country_definition = cd:ZZZILLINOISCITY }
+				p:x543986.state.owner = { country_definition = cd:ZZZILLINOISCITY }
+			}
+			debug_log = "FFPA_NA_PROBE ALL_FIVE_OWNED"
+		}
+		else = { debug_log = "FFPA_NA_PROBE NOT_ALL_FIVE_OWNED" }
+		p:xAD5337.state = {
+			if = {
+				limit = { has_modifier = ffpa_na_probe_engineering_v1 }
+				debug_log = "FFPA_NA_PROBE DESTINATION_MODIFIER_PRESENT"
+			}
+			else = { debug_log = "FFPA_NA_PROBE DESTINATION_MODIFIER_ABSENT" }
+			if = {
+				limit = { has_variable = ffpa_na_probe_engineering_marker_v1 }
+				debug_log = "FFPA_NA_PROBE DESTINATION_MARKER_PRESENT"
+			}
+			else = { debug_log = "FFPA_NA_PROBE DESTINATION_MARKER_ABSENT" }
+		}
+		debug_log = "FFPA_NA_PROBE REPORT_END"
+	}
+	else = { debug_log = "FFPA_NA_PROBE REPORT_REJECTED" }
+}

@@ -1,0 +1,21 @@
+# Observation only. No transfer, initialization, modifier or auto-repair here.
+on_state_owner_change = {
+	on_actions = { ffpa_na_probe_state_change_v1 }
+}
+on_state_created = {
+	on_actions = { ffpa_na_probe_state_created_v1 }
+}
+ffpa_na_probe_state_change_v1 = {
+	trigger = { state_region = s:STATE_ILLINOIS }
+	effect = {
+		debug_log = "FFPA_NA_PROBE OWNER_CHANGE_CALLBACK"
+		debug_log_scopes = yes
+	}
+}
+ffpa_na_probe_state_created_v1 = {
+	trigger = { state_region = s:STATE_ILLINOIS }
+	effect = {
+		debug_log = "FFPA_NA_PROBE STATE_CREATED_CALLBACK"
+		debug_log_scopes = yes
+	}
+}

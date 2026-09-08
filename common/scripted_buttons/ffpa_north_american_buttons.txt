@@ -1,0 +1,32 @@
+ffpa_na_local_next_state_button_v1 = {
+ name = ffpa_na_local_next_state_button_v1
+ desc = ffpa_na_local_next_state_button_v1_desc
+ visible = { NOT = { has_variable = ffpa_na_local_route_v1 } }
+ possible = { ffpa_na_local_can_choose_v1 = yes NOT = { has_variable = ffpa_na_local_choice_pending_v1 } }
+ ai_chance = { value = 0 }
+ effect = {
+  if = {
+   limit = { ffpa_na_local_can_choose_v1 = yes NOT = { has_variable = ffpa_na_local_choice_pending_v1 } }
+   change_variable = { name = ffpa_na_local_index_v1 add = 1 }
+   ffpa_na_local_select_target_v1 = yes
+  }
+ }
+}
+ffpa_na_local_choose_button_v1 = {
+ name = ffpa_na_local_choose_button_v1
+ desc = ffpa_na_local_choose_button_v1_desc
+ visible = { NOT = { has_variable = ffpa_na_local_route_v1 } }
+ possible = {
+  ffpa_na_local_can_choose_v1 = yes
+  NOT = { has_variable = ffpa_na_local_choice_pending_v1 }
+  OR = { ffpa_na_local_route_1_available_v1 = yes ffpa_na_local_route_2_available_v1 = yes ffpa_na_local_route_3_available_v1 = yes }
+ }
+ ai_chance = { value = 20 }
+ effect = {
+  if = {
+   limit = { ffpa_na_local_can_choose_v1 = yes NOT = { has_variable = ffpa_na_local_choice_pending_v1 } }
+   set_variable = ffpa_na_local_choice_pending_v1
+   trigger_event = { id = ffpa_na_flavor.1 days = 1 }
+  }
+ }
+}

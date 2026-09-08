@@ -49,6 +49,7 @@ FFPA Firefall Flavor Pack
   │  ├─ TUR / BYZ 身份与成立链
   │  ├─ 日志、迁移与共同体状态机
   │  └─ 帝国地区建设 ──> 西方整合桥接 ──> 东地中海风味事件
+  ├─ 北美模块：前身政权本地工程
   └─ 未来国家或地区模块（共享相同依赖，内部状态相互隔离）
 ```
 
@@ -275,6 +276,25 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 实际模块产生新的可复用风味要素时，可以继续扩展工具箱；不得要求既有模块为形式统一而反向补齐。
 - 自动 PM 生成器、生成产物与覆盖报告归外部 Auto PM Adapter，不得复制回本仓库。
 - 这些文件应纳入版本控制，不要因为不是运行时脚本就加入 `.gitignore`。
+
+### 4.9 北美模块：前身政权本地工程
+
+**所有文件**
+
+- `common/{journal_entries,scripted_triggers,scripted_effects,script_values,scripted_buttons,scripted_progress_bars,static_modifiers,on_actions,customizable_localization}/ffpa_north_american*.txt`（按数据库各一份，不供东地中海复用）
+- `events/ffpa_north_american_events.txt`
+- `localization/{english,simp_chinese}/ffpa_north_american_l_*.yml`
+- `tests/check_north_america_local_recovery.py`、`tests/check_north_america_preflight.py` 与独立开发测试包 `tests/probes/north_america/`
+
+**行为、状态和边界**
+
+- 当前只实现《州界之间》及 `ffpa_na_flavor.1–2`。其余北美设计不是已实现行为；不得向既有东地中海调度器加入北美业务，也不改变 USA 成立条件或战争目标。
+- `ffpa_na_` 独占本期美国前身对象，身份门控为 15 个 strict country definition；本土白名单为 Firefall USA 成立清单去掉波多黎各后的 49 个州区域。
+- `je_ffpa_na_local_recovery_v1`、`ffpa_na_local_*_v1` 变量、州修正与两个事件 ID 为存档接口。route 的 1/2/3 固定表示农产加工、基础工业、交通集散；target 保存实际 state 实例，index 仅用于开工前选州。
+- complete 与 progress_event 为一次性门控，清理不得删除；notice_pending 仅用于半年事件排程，choice_pending 用于工程选择。失效/成立清理删除临时项目状态，不移除已获州奖励。不得让重复打开的旧事件修改新目标。
+- 使用原生 JE 激活和自身月度 pulse；月度只扫描当前工程州建筑，选择只扫描自有州，不遍历世界或人口。独立 `on_country_formed` 包装仅负责身份变化清理。
+- 完成需 3 级合格建筑、60% 就业、80% 市场接入，连续 12 个月；半年进展事件每国一次。所有交通事件及专精奖励使用基础设施吞吐量修正。
+- 每次修改运行上述两个检查和 `tests/validate_localization.py`。静态检查不证明原生激活、变量索引选州、AI、读档或分裂/合并继承；用户明确禁止本机启动游戏，保留这些待验项。开发测试包不会由主 Mod 自动加载。
 
 ## 5. 共享接缝与唯一所有者规则
 

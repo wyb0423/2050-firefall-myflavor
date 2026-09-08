@@ -1,0 +1,92 @@
+# Country scope. No global/pops scan: selection visits owned states only.
+ffpa_na_local_select_target_v1 = {
+ set_variable = { name = ffpa_na_local_candidate_count_v1 value = 0 }
+ every_scope_state = {
+  limit = { ffpa_na_local_candidate_state_v1 = yes }
+  owner = { change_variable = { name = ffpa_na_local_candidate_count_v1 add = 1 } }
+ }
+ if = {
+  limit = { var:ffpa_na_local_index_v1 >= var:ffpa_na_local_candidate_count_v1 }
+  set_variable = { name = ffpa_na_local_index_v1 value = 0 }
+ }
+ remove_variable = ffpa_na_local_target_v1
+ # Native ordered_scope_state/position selection; variable index requires UI validation.
+ ordered_scope_state = {
+  limit = { ffpa_na_local_candidate_state_v1 = yes }
+  order_by = state_population
+  position = var:ffpa_na_local_index_v1
+  check_range_bounds = no
+  save_scope_as = ffpa_na_selected_state
+ }
+ if = {
+  limit = { exists = scope:ffpa_na_selected_state }
+  set_variable = { name = ffpa_na_local_target_v1 value = scope:ffpa_na_selected_state }
+ }
+ remove_variable = ffpa_na_local_candidate_count_v1
+}
+ffpa_na_local_initialize_v1 = {
+ if = {
+  limit = { NOT = { has_variable = ffpa_na_local_months_v1 } }
+  set_variable = { name = ffpa_na_local_months_v1 value = 0 }
+  set_variable = { name = ffpa_na_local_index_v1 value = 0 }
+  ffpa_na_local_select_target_v1 = yes
+ }
+}
+ffpa_na_local_cleanup_v1 = {
+ remove_variable = ffpa_na_local_route_v1
+ remove_variable = ffpa_na_local_months_v1
+ remove_variable = ffpa_na_local_index_v1
+ remove_variable = ffpa_na_local_target_v1
+ remove_variable = ffpa_na_local_choice_pending_v1
+ remove_variable = ffpa_na_local_notice_pending_v1
+}
+ffpa_na_local_sync_bar_v1 = {
+ je:je_ffpa_na_local_recovery_v1 ?= {
+  set_bar_progress = { name = ffpa_na_local_months_bar_v1 value = root.var:ffpa_na_local_months_v1 }
+ }
+}
+ffpa_na_local_monthly_v1 = {
+ if = {
+  limit = { ffpa_na_local_target_valid_v1 = yes has_variable = ffpa_na_local_route_v1 }
+  if = {
+   limit = {
+    var:ffpa_na_local_target_v1 = {
+     market_access >= 0.80
+     ffpa_na_local_qualified_levels_v1 >= 3
+    }
+   }
+   change_variable = { name = ffpa_na_local_months_v1 add = 1 }
+  }
+  else = { set_variable = { name = ffpa_na_local_months_v1 value = 0 } }
+ }
+ if = {
+  limit = {
+   ffpa_na_local_target_valid_v1 = yes
+   var:ffpa_na_local_months_v1 >= 6
+   NOT = { has_variable = ffpa_na_local_progress_event_v1 }
+  }
+  set_variable = ffpa_na_local_progress_event_v1
+  set_variable = ffpa_na_local_notice_pending_v1
+  trigger_event = { id = ffpa_na_flavor.2 days = 1 }
+ }
+ ffpa_na_local_sync_bar_v1 = yes
+}
+ffpa_na_local_complete_v1 = {
+ if = {
+  limit = { ffpa_na_local_target_valid_v1 = yes NOT = { has_variable = ffpa_na_local_complete_v1 } }
+  if = {
+   limit = { var:ffpa_na_local_route_v1 = 1 }
+   var:ffpa_na_local_target_v1 = { add_modifier = { name = ffpa_na_local_food_v1 } }
+  }
+  if = {
+   limit = { var:ffpa_na_local_route_v1 = 2 }
+   var:ffpa_na_local_target_v1 = { add_modifier = { name = ffpa_na_local_industry_v1 } }
+  }
+  if = {
+   limit = { var:ffpa_na_local_route_v1 = 3 }
+   var:ffpa_na_local_target_v1 = { add_modifier = { name = ffpa_na_local_transport_v1 } }
+  }
+  set_variable = ffpa_na_local_complete_v1
+  ffpa_na_local_cleanup_v1 = yes
+ }
+}

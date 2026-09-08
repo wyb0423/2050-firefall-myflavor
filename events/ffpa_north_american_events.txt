@@ -1,0 +1,85 @@
+namespace = ffpa_na_flavor
+
+ffpa_na_flavor.1 = {
+ type = country_event
+ placement = ROOT
+ title = ffpa_na_flavor.1.t
+ desc = ffpa_na_flavor.1.d
+ flavor = ffpa_na_flavor.1.f
+ event_image = { video = "unspecific_signed_contract" }
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_na_local_can_choose_v1 = yes has_variable = ffpa_na_local_choice_pending_v1 }
+ immediate = { var:ffpa_na_local_target_v1 = { save_scope_as = ffpa_na_event_target } }
+ option = {
+  name = ffpa_na_flavor.1.1
+  trigger = { ffpa_na_local_route_1_available_v1 = yes }
+  if = {
+   limit = { ffpa_na_local_route_1_available_v1 = yes var:ffpa_na_local_target_v1 = scope:ffpa_na_event_target }
+   set_variable = { name = ffpa_na_local_route_v1 value = 1 }
+   remove_variable = ffpa_na_local_choice_pending_v1
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_na_flavor.1.2
+  trigger = { ffpa_na_local_route_2_available_v1 = yes }
+  if = {
+   limit = { ffpa_na_local_route_2_available_v1 = yes var:ffpa_na_local_target_v1 = scope:ffpa_na_event_target }
+   set_variable = { name = ffpa_na_local_route_v1 value = 2 }
+   remove_variable = ffpa_na_local_choice_pending_v1
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_na_flavor.1.3
+  trigger = { ffpa_na_local_route_3_available_v1 = yes }
+  if = {
+   limit = { ffpa_na_local_route_3_available_v1 = yes var:ffpa_na_local_target_v1 = scope:ffpa_na_event_target }
+   set_variable = { name = ffpa_na_local_route_v1 value = 3 }
+   remove_variable = ffpa_na_local_choice_pending_v1
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_na_flavor.1.defer
+  default_option = yes
+  if = {
+   limit = { exists = scope:ffpa_na_event_target var:ffpa_na_local_target_v1 = scope:ffpa_na_event_target }
+   remove_variable = ffpa_na_local_choice_pending_v1
+  }
+  ai_chance = { factor = 0 }
+ }
+}
+
+ffpa_na_flavor.2 = {
+ type = country_event
+ placement = ROOT
+ title = ffpa_na_flavor.2.t
+ desc = ffpa_na_flavor.2.d
+ flavor = ffpa_na_flavor.2.f
+ event_image = { video = "unspecific_signed_contract" }
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_na_local_target_valid_v1 = yes has_variable = ffpa_na_local_route_v1 has_variable = ffpa_na_local_notice_pending_v1 }
+ immediate = { remove_variable = ffpa_na_local_notice_pending_v1 var:ffpa_na_local_target_v1 = { save_scope_as = ffpa_na_event_target } }
+ option = {
+  name = ffpa_na_flavor.2.a
+  default_option = yes
+  if = {
+   limit = { ffpa_na_local_target_valid_v1 = yes var:ffpa_na_local_target_v1 = scope:ffpa_na_event_target }
+   var:ffpa_na_local_target_v1 = { add_modifier = { name = ffpa_na_local_public_orders_v1 months = 12 } }
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_na_flavor.2.b
+  if = {
+   limit = { ffpa_na_local_target_valid_v1 = yes var:ffpa_na_local_target_v1 = scope:ffpa_na_event_target }
+   var:ffpa_na_local_target_v1 = { add_modifier = { name = ffpa_na_local_producer_orders_v1 months = 12 } }
+  }
+  ai_chance = { factor = 10 }
+ }
+}

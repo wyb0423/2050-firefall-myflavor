@@ -1,0 +1,166 @@
+# North American local recovery. Country scope unless marked state/building.
+ffpa_na_is_predecessor_v1 = {
+ is_revolutionary = no
+ OR = {
+  country_definition = cd:ZZZCONNECTICUT
+  country_definition = cd:ZZZDELAWARECITY
+  country_definition = cd:ZZZFLORIDACITY
+  country_definition = cd:ZZZGEORGIA
+  country_definition = cd:ZZZIDAHOWOOD
+  country_definition = cd:ZZZILLINOISCITY
+  country_definition = cd:ZZZILLINOISWOOD
+  country_definition = cd:ZZZIOWAFARM
+  country_definition = cd:ZZZNEWHAMPSHIREWOOD
+  country_definition = cd:ZZZNEWMEXICOFARM
+  country_definition = cd:ZZZNEWYORKFARM
+  country_definition = cd:ZZZOREGONMINE
+  country_definition = cd:ZZZSOUTHCAROLINAMINE
+  country_definition = cd:ZZZWISCONSINMINE
+  country_definition = cd:ZZZWYOMINGMINE
+ }
+}
+# State scope: the formation mainland, excluding Puerto Rico.
+ffpa_na_is_mainland_state_v1 = {
+ OR = {
+  state_region = s:STATE_ALABAMA
+  state_region = s:STATE_ARIZONA
+  state_region = s:STATE_ARKANSAS
+  state_region = s:STATE_CALIFORNIA
+  state_region = s:STATE_COLORADO
+  state_region = s:STATE_CONNECTICUT
+  state_region = s:STATE_DELAWARE
+  state_region = s:STATE_DISTRICT_OF_COLUMBIA
+  state_region = s:STATE_FLORIDA
+  state_region = s:STATE_GEORGIA
+  state_region = s:STATE_IDAHO
+  state_region = s:STATE_ILLINOIS
+  state_region = s:STATE_INDIANA
+  state_region = s:STATE_IOWA
+  state_region = s:STATE_KANSAS
+  state_region = s:STATE_KENTUCKY
+  state_region = s:STATE_LOUISIANA
+  state_region = s:STATE_MAINE
+  state_region = s:STATE_MARYLAND
+  state_region = s:STATE_MASSACHUSETTS
+  state_region = s:STATE_MICHIGAN
+  state_region = s:STATE_MINNESOTA
+  state_region = s:STATE_MISSISSIPPI
+  state_region = s:STATE_MISSOURI
+  state_region = s:STATE_MONTANA
+  state_region = s:STATE_NEBRASKA
+  state_region = s:STATE_NEVADA
+  state_region = s:STATE_NEW_HAMPSHIRE
+  state_region = s:STATE_NEW_JERSEY
+  state_region = s:STATE_NEW_MEXICO
+  state_region = s:STATE_NEW_YORK
+  state_region = s:STATE_NORTH_CAROLINA
+  state_region = s:STATE_NORTH_DAKOTA
+  state_region = s:STATE_OHIO
+  state_region = s:STATE_OKLAHOMA
+  state_region = s:STATE_OREGON
+  state_region = s:STATE_PENNSYLVANIA
+  state_region = s:STATE_RHODE_ISLAND
+  state_region = s:STATE_SOUTH_CAROLINA
+  state_region = s:STATE_SOUTH_DAKOTA
+  state_region = s:STATE_TENNESSEE
+  state_region = s:STATE_TEXAS
+  state_region = s:STATE_UTAH
+  state_region = s:STATE_VERMONT
+  state_region = s:STATE_VIRGINIA
+  state_region = s:STATE_WASHINGTON
+  state_region = s:STATE_WEST_VIRGINIA
+  state_region = s:STATE_WISCONSIN
+  state_region = s:STATE_WYOMING
+ }
+}
+# State scope: completed specializations are mutually exclusive.
+ffpa_na_local_candidate_state_v1 = {
+ ffpa_na_is_mainland_state_v1 = yes
+ NOT = { has_modifier = ffpa_na_local_food_v1 }
+ NOT = { has_modifier = ffpa_na_local_industry_v1 }
+ NOT = { has_modifier = ffpa_na_local_transport_v1 }
+}
+ffpa_na_local_target_valid_v1 = {
+ ffpa_na_is_predecessor_v1 = yes
+ exists = var:ffpa_na_local_target_v1
+ var:ffpa_na_local_target_v1 = {
+  owner = root
+  ffpa_na_local_candidate_state_v1 = yes
+ }
+}
+ffpa_na_local_can_choose_v1 = {
+ ffpa_na_local_target_valid_v1 = yes
+ NOT = { has_variable = ffpa_na_local_route_v1 }
+ NOT = { has_variable = ffpa_na_local_complete_v1 }
+}
+# Building scope. Direction 1.
+ffpa_na_local_building_1_v1 = {
+ OR = {
+  is_building_type = building_food_industry
+  is_building_type = building_rye_farm
+  is_building_type = building_wheat_farm
+  is_building_type = building_rice_farm
+  is_building_type = building_maize_farm
+  is_building_type = building_millet_farm
+  is_building_type = building_livestock_ranch
+ }
+}
+ffpa_na_local_route_1_available_v1 = {
+ ffpa_na_local_can_choose_v1 = yes
+ var:ffpa_na_local_target_v1 = {
+  OR = {
+   ffpa_na_local_existing_levels_1_v1 >= 3
+   can_construct_building = building_food_industry
+   can_construct_building = building_rye_farm
+   can_construct_building = building_wheat_farm
+   can_construct_building = building_rice_farm
+   can_construct_building = building_maize_farm
+   can_construct_building = building_millet_farm
+   can_construct_building = building_livestock_ranch
+  }
+ }
+}
+# Building scope. Direction 2.
+ffpa_na_local_building_2_v1 = {
+ OR = {
+  is_building_type = building_tooling_workshop
+  is_building_type = building_textile_mill
+  is_building_type = building_furniture_manufactory
+  is_building_type = building_glassworks
+  is_building_type = building_paper_mill
+  is_building_type = building_steel_mill
+ }
+}
+ffpa_na_local_route_2_available_v1 = {
+ ffpa_na_local_can_choose_v1 = yes
+ var:ffpa_na_local_target_v1 = {
+  OR = {
+   ffpa_na_local_existing_levels_2_v1 >= 3
+   can_construct_building = building_tooling_workshop
+   can_construct_building = building_textile_mill
+   can_construct_building = building_furniture_manufactory
+   can_construct_building = building_glassworks
+   can_construct_building = building_paper_mill
+   can_construct_building = building_steel_mill
+  }
+ }
+}
+# Building scope. Direction 3.
+ffpa_na_local_building_3_v1 = {
+ OR = {
+  is_building_type = building_port
+  is_building_type = building_railway
+  is_building_type = building_urban_center
+ }
+}
+ffpa_na_local_route_3_available_v1 = {
+ ffpa_na_local_can_choose_v1 = yes
+ var:ffpa_na_local_target_v1 = {
+  OR = {
+   ffpa_na_local_existing_levels_3_v1 >= 3
+   has_building = building_urban_center
+   can_construct_building = building_port
+   can_construct_building = building_railway
+  }
+ }
+}
