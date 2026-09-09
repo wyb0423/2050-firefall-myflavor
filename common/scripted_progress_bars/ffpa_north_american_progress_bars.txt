@@ -1,6 +1,7 @@
 ffpa_na_local_months_bar_v1 = {
+ second_desc = ffpa_na_local_months_bar_v1_cmf_value
  name = ffpa_na_local_months_bar_v1
- desc = ffpa_na_local_months_bar_v1_desc
+ desc = ffpa_na_local_months_bar_v1_cmf_tooltip
  default_green = yes
  start_value = 0
  min_value = 0

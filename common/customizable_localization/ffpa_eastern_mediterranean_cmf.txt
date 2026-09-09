@@ -1,0 +1,252 @@
+ffpa_tur_commonwealth_administration_conditions_factor_1_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_administration_conditions_factor_1 = yes } localization_key = ffpa_tur_commonwealth_administration_conditions_factor_1_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_administration_conditions_factor_1_status_no }
+}
+ffpa_tur_commonwealth_administration_conditions_factor_2_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_administration_conditions_factor_2 = yes } localization_key = ffpa_tur_commonwealth_administration_conditions_factor_2_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_administration_conditions_factor_2_status_no }
+}
+ffpa_tur_commonwealth_administration_conditions_factor_3_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_administration_conditions_factor_3 = yes } localization_key = ffpa_tur_commonwealth_administration_conditions_factor_3_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_administration_conditions_factor_3_status_no }
+}
+ffpa_tur_commonwealth_administration_conditions_factor_4_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_administration_conditions_factor_4 = yes } localization_key = ffpa_tur_commonwealth_administration_conditions_factor_4_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_administration_conditions_factor_4_status_no }
+}
+ffpa_tur_commonwealth_administration_conditions_factor_5_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_administration_conditions_factor_5 = yes } localization_key = ffpa_tur_commonwealth_administration_conditions_factor_5_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_administration_conditions_factor_5_status_no }
+}
+ffpa_tur_commonwealth_civic_conditions_factor_1_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_civic_conditions_factor_1 = yes } localization_key = ffpa_tur_commonwealth_civic_conditions_factor_1_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_civic_conditions_factor_1_status_no }
+}
+ffpa_tur_commonwealth_civic_conditions_factor_2_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_civic_conditions_factor_2 = yes } localization_key = ffpa_tur_commonwealth_civic_conditions_factor_2_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_civic_conditions_factor_2_status_no }
+}
+ffpa_tur_commonwealth_civic_conditions_factor_3_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_civic_conditions_factor_3 = yes } localization_key = ffpa_tur_commonwealth_civic_conditions_factor_3_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_civic_conditions_factor_3_status_no }
+}
+ffpa_tur_commonwealth_civic_conditions_factor_4_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_civic_conditions_factor_4 = yes } localization_key = ffpa_tur_commonwealth_civic_conditions_factor_4_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_civic_conditions_factor_4_status_no }
+}
+ffpa_tur_commonwealth_civic_conditions_factor_5_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_civic_conditions_factor_5 = yes } localization_key = ffpa_tur_commonwealth_civic_conditions_factor_5_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_civic_conditions_factor_5_status_no }
+}
+ffpa_tur_commonwealth_stability_conditions_factor_1_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_stability_conditions_factor_1 = yes } localization_key = ffpa_tur_commonwealth_stability_conditions_factor_1_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_stability_conditions_factor_1_status_no }
+}
+ffpa_tur_commonwealth_stability_conditions_factor_2_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_stability_conditions_factor_2 = yes } localization_key = ffpa_tur_commonwealth_stability_conditions_factor_2_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_stability_conditions_factor_2_status_no }
+}
+ffpa_tur_commonwealth_stability_conditions_factor_3_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_stability_conditions_factor_3 = yes } localization_key = ffpa_tur_commonwealth_stability_conditions_factor_3_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_stability_conditions_factor_3_status_no }
+}
+ffpa_tur_commonwealth_stability_conditions_factor_4_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_stability_conditions_factor_4 = yes } localization_key = ffpa_tur_commonwealth_stability_conditions_factor_4_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_stability_conditions_factor_4_status_no }
+}
+ffpa_tur_commonwealth_stability_conditions_factor_5_status = {
+ type = country
+ text = { trigger = { ffpa_tur_commonwealth_stability_conditions_factor_5 = yes } localization_key = ffpa_tur_commonwealth_stability_conditions_factor_5_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_tur_commonwealth_stability_conditions_factor_5_status_no }
+}
+ffpa_byz_commonwealth_administration_conditions_factor_1_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_administration_conditions_factor_1 = yes } localization_key = ffpa_byz_commonwealth_administration_conditions_factor_1_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_administration_conditions_factor_1_status_no }
+}
+ffpa_byz_commonwealth_administration_conditions_factor_2_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_administration_conditions_factor_2 = yes } localization_key = ffpa_byz_commonwealth_administration_conditions_factor_2_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_administration_conditions_factor_2_status_no }
+}
+ffpa_byz_commonwealth_administration_conditions_factor_3_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_administration_conditions_factor_3 = yes } localization_key = ffpa_byz_commonwealth_administration_conditions_factor_3_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_administration_conditions_factor_3_status_no }
+}
+ffpa_byz_commonwealth_administration_conditions_factor_4_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_administration_conditions_factor_4 = yes } localization_key = ffpa_byz_commonwealth_administration_conditions_factor_4_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_administration_conditions_factor_4_status_no }
+}
+ffpa_byz_commonwealth_civic_conditions_factor_1_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_civic_conditions_factor_1 = yes } localization_key = ffpa_byz_commonwealth_civic_conditions_factor_1_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_civic_conditions_factor_1_status_no }
+}
+ffpa_byz_commonwealth_civic_conditions_factor_2_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_civic_conditions_factor_2 = yes } localization_key = ffpa_byz_commonwealth_civic_conditions_factor_2_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_civic_conditions_factor_2_status_no }
+}
+ffpa_byz_commonwealth_civic_conditions_factor_3_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_civic_conditions_factor_3 = yes } localization_key = ffpa_byz_commonwealth_civic_conditions_factor_3_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_civic_conditions_factor_3_status_no }
+}
+ffpa_byz_commonwealth_civic_conditions_factor_4_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_civic_conditions_factor_4 = yes } localization_key = ffpa_byz_commonwealth_civic_conditions_factor_4_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_civic_conditions_factor_4_status_no }
+}
+ffpa_byz_commonwealth_stability_conditions_factor_1_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_stability_conditions_factor_1 = yes } localization_key = ffpa_byz_commonwealth_stability_conditions_factor_1_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_stability_conditions_factor_1_status_no }
+}
+ffpa_byz_commonwealth_stability_conditions_factor_2_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_stability_conditions_factor_2 = yes } localization_key = ffpa_byz_commonwealth_stability_conditions_factor_2_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_stability_conditions_factor_2_status_no }
+}
+ffpa_byz_commonwealth_stability_conditions_factor_3_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_stability_conditions_factor_3 = yes } localization_key = ffpa_byz_commonwealth_stability_conditions_factor_3_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_stability_conditions_factor_3_status_no }
+}
+ffpa_byz_commonwealth_stability_conditions_factor_4_status = {
+ type = country
+ text = { trigger = { ffpa_byz_commonwealth_stability_conditions_factor_4 = yes } localization_key = ffpa_byz_commonwealth_stability_conditions_factor_4_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_commonwealth_stability_conditions_factor_4_status_no }
+}
+ffpa_byz_public_law_healthy_v1_factor_1_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_law_healthy_v1_factor_1 = yes } localization_key = ffpa_byz_public_law_healthy_v1_factor_1_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_law_healthy_v1_factor_1_status_no }
+}
+ffpa_byz_public_law_healthy_v1_factor_2_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_law_healthy_v1_factor_2 = yes } localization_key = ffpa_byz_public_law_healthy_v1_factor_2_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_law_healthy_v1_factor_2_status_no }
+}
+ffpa_byz_public_law_healthy_v1_factor_3_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_law_healthy_v1_factor_3 = yes } localization_key = ffpa_byz_public_law_healthy_v1_factor_3_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_law_healthy_v1_factor_3_status_no }
+}
+ffpa_byz_cmf_law_state = {
+ type = country
+ text = { trigger = { var:ffpa_byz_public_law_state_v1 = 0 } localization_key = ffpa_byz_cmf_state_0 }
+ text = { trigger = { var:ffpa_byz_public_law_state_v1 = 1 } localization_key = ffpa_byz_cmf_state_1 }
+ text = { trigger = { var:ffpa_byz_public_law_state_v1 = 2 } localization_key = ffpa_byz_cmf_state_2 }
+ text = { trigger = { var:ffpa_byz_public_law_state_v1 = 3 } localization_key = ffpa_byz_cmf_state_3 }
+}
+ffpa_byz_cmf_law_forecast = {
+ type = country
+ text = { trigger = { has_variable = ffpa_byz_public_law_protection_v1 } localization_key = ffpa_byz_cmf_protected }
+ text = { trigger = { var:ffpa_byz_public_law_state_v1 = 3 ffpa_byz_public_all_pillars_healthy_v1 = yes } localization_key = ffpa_byz_cmf_repair_advances }
+ text = { trigger = { var:ffpa_byz_public_law_state_v1 = 3 } localization_key = ffpa_byz_cmf_repair_resets }
+ text = { trigger = { var:ffpa_byz_public_law_state_v1 = 2 } localization_key = ffpa_byz_cmf_broken }
+ text = { trigger = { ffpa_byz_public_law_healthy_v1 = yes } localization_key = ffpa_byz_cmf_healthy }
+ text = { trigger = { ffpa_byz_public_law_all_bad_v1 = yes } localization_key = ffpa_byz_cmf_deterioration_2 }
+ text = { trigger = { ffpa_byz_public_law_two_or_more_bad_v1 = yes } localization_key = ffpa_byz_cmf_deterioration_1 }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_cmf_deterioration_0 }
+}
+ffpa_byz_public_welfare_healthy_v1_factor_1_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_welfare_healthy_v1_factor_1 = yes } localization_key = ffpa_byz_public_welfare_healthy_v1_factor_1_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_welfare_healthy_v1_factor_1_status_no }
+}
+ffpa_byz_public_welfare_healthy_v1_factor_2_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_welfare_healthy_v1_factor_2 = yes } localization_key = ffpa_byz_public_welfare_healthy_v1_factor_2_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_welfare_healthy_v1_factor_2_status_no }
+}
+ffpa_byz_public_welfare_healthy_v1_factor_3_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_welfare_healthy_v1_factor_3 = yes } localization_key = ffpa_byz_public_welfare_healthy_v1_factor_3_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_welfare_healthy_v1_factor_3_status_no }
+}
+ffpa_byz_public_welfare_healthy_v1_factor_4_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_welfare_healthy_v1_factor_4 = yes } localization_key = ffpa_byz_public_welfare_healthy_v1_factor_4_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_welfare_healthy_v1_factor_4_status_no }
+}
+ffpa_byz_cmf_welfare_state = {
+ type = country
+ text = { trigger = { var:ffpa_byz_public_welfare_state_v1 = 0 } localization_key = ffpa_byz_cmf_state_0 }
+ text = { trigger = { var:ffpa_byz_public_welfare_state_v1 = 1 } localization_key = ffpa_byz_cmf_state_1 }
+ text = { trigger = { var:ffpa_byz_public_welfare_state_v1 = 2 } localization_key = ffpa_byz_cmf_state_2 }
+ text = { trigger = { var:ffpa_byz_public_welfare_state_v1 = 3 } localization_key = ffpa_byz_cmf_state_3 }
+}
+ffpa_byz_cmf_welfare_forecast = {
+ type = country
+ text = { trigger = { has_variable = ffpa_byz_public_welfare_protection_v1 } localization_key = ffpa_byz_cmf_protected }
+ text = { trigger = { var:ffpa_byz_public_welfare_state_v1 = 3 ffpa_byz_public_all_pillars_healthy_v1 = yes } localization_key = ffpa_byz_cmf_repair_advances }
+ text = { trigger = { var:ffpa_byz_public_welfare_state_v1 = 3 } localization_key = ffpa_byz_cmf_repair_resets }
+ text = { trigger = { var:ffpa_byz_public_welfare_state_v1 = 2 } localization_key = ffpa_byz_cmf_broken }
+ text = { trigger = { ffpa_byz_public_welfare_healthy_v1 = yes } localization_key = ffpa_byz_cmf_healthy }
+ text = { trigger = { ffpa_byz_public_welfare_all_bad_v1 = yes } localization_key = ffpa_byz_cmf_deterioration_2 }
+ text = { trigger = { ffpa_byz_public_welfare_two_or_more_bad_v1 = yes } localization_key = ffpa_byz_cmf_deterioration_1 }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_cmf_deterioration_0 }
+}
+ffpa_byz_public_recognition_healthy_v1_factor_1_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_recognition_healthy_v1_factor_1 = yes } localization_key = ffpa_byz_public_recognition_healthy_v1_factor_1_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_recognition_healthy_v1_factor_1_status_no }
+}
+ffpa_byz_public_recognition_healthy_v1_factor_2_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_recognition_healthy_v1_factor_2 = yes } localization_key = ffpa_byz_public_recognition_healthy_v1_factor_2_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_recognition_healthy_v1_factor_2_status_no }
+}
+ffpa_byz_public_recognition_healthy_v1_factor_3_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_recognition_healthy_v1_factor_3 = yes } localization_key = ffpa_byz_public_recognition_healthy_v1_factor_3_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_recognition_healthy_v1_factor_3_status_no }
+}
+ffpa_byz_public_recognition_healthy_v1_factor_4_status = {
+ type = country
+ text = { trigger = { ffpa_byz_public_recognition_healthy_v1_factor_4 = yes } localization_key = ffpa_byz_public_recognition_healthy_v1_factor_4_status_yes }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_public_recognition_healthy_v1_factor_4_status_no }
+}
+ffpa_byz_cmf_recognition_state = {
+ type = country
+ text = { trigger = { var:ffpa_byz_public_recognition_state_v1 = 0 } localization_key = ffpa_byz_cmf_state_0 }
+ text = { trigger = { var:ffpa_byz_public_recognition_state_v1 = 1 } localization_key = ffpa_byz_cmf_state_1 }
+ text = { trigger = { var:ffpa_byz_public_recognition_state_v1 = 2 } localization_key = ffpa_byz_cmf_state_2 }
+ text = { trigger = { var:ffpa_byz_public_recognition_state_v1 = 3 } localization_key = ffpa_byz_cmf_state_3 }
+}
+ffpa_byz_cmf_recognition_forecast = {
+ type = country
+ text = { trigger = { has_variable = ffpa_byz_public_recognition_protection_v1 } localization_key = ffpa_byz_cmf_protected }
+ text = { trigger = { var:ffpa_byz_public_recognition_state_v1 = 3 ffpa_byz_public_all_pillars_healthy_v1 = yes } localization_key = ffpa_byz_cmf_repair_advances }
+ text = { trigger = { var:ffpa_byz_public_recognition_state_v1 = 3 } localization_key = ffpa_byz_cmf_repair_resets }
+ text = { trigger = { var:ffpa_byz_public_recognition_state_v1 = 2 } localization_key = ffpa_byz_cmf_broken }
+ text = { trigger = { ffpa_byz_public_recognition_healthy_v1 = yes } localization_key = ffpa_byz_cmf_healthy }
+ text = { trigger = { ffpa_byz_public_recognition_all_bad_v1 = yes } localization_key = ffpa_byz_cmf_deterioration_2 }
+ text = { trigger = { ffpa_byz_public_recognition_two_or_more_bad_v1 = yes } localization_key = ffpa_byz_cmf_deterioration_1 }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_cmf_deterioration_0 }
+}
+ffpa_byz_cmf_reform_status = {
+ type = country
+ text = { trigger = { var:ffpa_byz_military_reform_stage_v1 >= 3 } localization_key = ffpa_byz_cmf_reform_complete }
+ text = { trigger = { has_variable = ffpa_byz_military_reform_project_v1 var:ffpa_byz_military_reform_project_v1 = 1 } localization_key = ffpa_byz_cmf_reform_project_1 }
+ text = { trigger = { has_variable = ffpa_byz_military_reform_project_v1 var:ffpa_byz_military_reform_project_v1 = 2 } localization_key = ffpa_byz_cmf_reform_project_2 }
+ text = { trigger = { has_variable = ffpa_byz_military_reform_project_v1 var:ffpa_byz_military_reform_project_v1 = 3 } localization_key = ffpa_byz_cmf_reform_project_3 }
+ text = { trigger = { always = yes } localization_key = ffpa_byz_cmf_reform_idle }
+}

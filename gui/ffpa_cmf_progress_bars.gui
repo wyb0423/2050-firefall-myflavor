@@ -1,0 +1,62 @@
+# CMF 1.65.0 com_progressbar_base; FFPA-only mounting, no global GUI replacement.
+# Full desc is the hover text; second_desc is the short label and exact value.
+types ffpa_cmf_widgets {
+ type ffpa_cmf_bar = widget {
+  size = { 504 30 }
+  tooltip = "[ScriptedProgressBar.GetDesc]"
+  background = { texture = "gfx/interface/progressbar/progressbar_empty.dds" spriteType = Corneredtiled spriteborder = { 4 4 } }
+  com_progressbar_base = {
+   tooltip = "[ScriptedProgressBar.GetDesc]"
+   blockoverride "progresstexture" { progresstexture = "gfx/interface/progressbar/progressbar_default.dds" }
+   block "ffpa_bar_markers" {}
+  }
+  textbox = {
+   text = "[ScriptedProgressBar.GetSecondDesc]"
+   tooltip = "[ScriptedProgressBar.GetDesc]"
+   size = { 484 26 }
+   parentanchor = center
+   align = center
+   using = elide_fontsize_min
+  }
+ }
+ type ffpa_cmf_progress_bars = flowcontainer {
+  parentanchor = hcenter
+  direction = vertical
+  spacing = 12
+  datamodel = "[JournalEntry.GetScriptedProgressBars]"
+  item = { ffpa_cmf_bar = {} }
+ }
+ type ffpa_cmf_register_bars = ffpa_cmf_progress_bars {
+  blockoverride "ffpa_bar_markers" {
+   icon = { position = { 176 0 } size = { 2 30 } texture = "gfx/interface/progressbar/progressbar_center_divider.dds" tooltip = "[ScriptedProgressBar.GetDesc]" }
+   icon = { position = { 328 0 } size = { 2 30 } texture = "gfx/interface/progressbar/progressbar_center_divider.dds" tooltip = "[ScriptedProgressBar.GetDesc]" }
+  }
+ }
+ type ffpa_cmf_reserve_bars = ffpa_cmf_progress_bars {
+  blockoverride "ffpa_bar_markers" {
+   icon = { position = { 151 0 } size = { 2 30 } texture = "gfx/interface/progressbar/progressbar_center_divider.dds" tooltip = "[ScriptedProgressBar.GetDesc]" }
+   icon = { position = { 353 0 } size = { 2 30 } texture = "gfx/interface/progressbar/progressbar_center_divider.dds" tooltip = "[ScriptedProgressBar.GetDesc]" }
+  }
+ }
+ type ffpa_cmf_pressure_bars = ffpa_cmf_progress_bars {
+  blockoverride "progresstexture" { progresstexture = "gfx/interface/progressbar/progressbar_bad.dds" }
+  blockoverride "ffpa_bar_markers" {
+   icon = { position = { 126 0 } size = { 2 30 } texture = "gfx/interface/progressbar/progressbar_center_divider.dds" tooltip = "[ScriptedProgressBar.GetDesc]" }
+   icon = { position = { 252 0 } size = { 2 30 } texture = "gfx/interface/progressbar/progressbar_center_divider.dds" tooltip = "[ScriptedProgressBar.GetDesc]" }
+   icon = { position = { 378 0 } size = { 2 30 } texture = "gfx/interface/progressbar/progressbar_center_divider.dds" tooltip = "[ScriptedProgressBar.GetDesc]" }
+   icon = { position = { 454 0 } size = { 2 30 } texture = "gfx/interface/progressbar/progressbar_center_divider.dds" tooltip = "[ScriptedProgressBar.GetDesc]" }
+  }
+ }
+ type ffpa_cmf_pillars_bars = ffpa_cmf_progress_bars {
+  blockoverride "progresstexture" { progresstexture = "[Select_CString(EqualTo_CFixedPoint(JournalEntry.GetCurrentBarValue(ScriptedProgressBar.Self), '(CFixedPoint)3'), 'gfx/interface/progressbar/progressbar_default.dds', 'gfx/interface/progressbar/progressbar_bad.dds')]" }
+  blockoverride "ffpa_bar_markers" {
+   icon = { position = { 168 0 } size = { 2 30 } texture = "gfx/interface/progressbar/progressbar_center_divider.dds" tooltip = "[ScriptedProgressBar.GetDesc]" }
+   icon = { position = { 336 0 } size = { 2 30 } texture = "gfx/interface/progressbar/progressbar_center_divider.dds" tooltip = "[ScriptedProgressBar.GetDesc]" }
+  }
+ }
+}
+ffpa_cmf_progress_bars = { name = "ffpa_cmf_progress_bars" }
+ffpa_cmf_register_bars = { name = "ffpa_cmf_register_bars" }
+ffpa_cmf_reserve_bars = { name = "ffpa_cmf_reserve_bars" }
+ffpa_cmf_pressure_bars = { name = "ffpa_cmf_pressure_bars" }
+ffpa_cmf_pillars_bars = { name = "ffpa_cmf_pillars_bars" }

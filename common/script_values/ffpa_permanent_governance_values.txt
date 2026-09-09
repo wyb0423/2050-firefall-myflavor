@@ -4,26 +4,26 @@ ffpa_tur_register_monthly_balance_change_v1 = {
 	value = 0
 	if = {
 		limit = { bureaucracy >= 0 }
-		add = 0.25
+		add = { value = 0.25 desc = ffpa_tur_register_monthly_balance_change_v1_factor_1 }
 	}
-	else = { subtract = 0.50 }
+	else = { subtract = { value = 0.50 desc = ffpa_tur_register_monthly_balance_change_v1_factor_2 } }
 	if = {
 		limit = { government_legitimacy >= 60 }
-		add = 0.25
+		add = { value = 0.25 desc = ffpa_tur_register_monthly_balance_change_v1_factor_3 }
 	}
 	else_if = {
 		limit = { government_legitimacy < 40 }
-		subtract = 0.25
+		subtract = { value = 0.25 desc = ffpa_tur_register_monthly_balance_change_v1_factor_4 }
 	}
 	if = {
 		limit = { in_default = yes }
-		subtract = 0.50
+		subtract = { value = 0.50 desc = ffpa_tur_register_monthly_balance_change_v1_factor_5 }
 	}
 	if = {
 		limit = { capital = { market_access >= 0.85 } }
-		add = 0.25
+		add = { value = 0.25 desc = ffpa_tur_register_monthly_balance_change_v1_factor_6 }
 	}
-	else = { subtract = 0.25 }
+	else = { subtract = { value = 0.25 desc = ffpa_tur_register_monthly_balance_change_v1_factor_7 } }
 	min = -1
 	max = 0.75
 }
@@ -38,19 +38,19 @@ ffpa_tur_capital_supply_anomaly_count_v1 = {
 				mg:grain = { market_goods_pricier > 0.25 }
 			}
 		}
-		add = 1
+		add = { value = 1 desc = ffpa_tur_capital_supply_anomaly_count_v1_factor_1 }
 	}
 	if = {
 		limit = { capital = { sg:transportation = { state_goods_pricier > 0.25 } } }
-		add = 1
+		add = { value = 1 desc = ffpa_tur_capital_supply_anomaly_count_v1_factor_2 }
 	}
 	if = {
 		limit = { capital = { sg:electricity = { state_goods_pricier > 0.25 } } }
-		add = 1
+		add = { value = 1 desc = ffpa_tur_capital_supply_anomaly_count_v1_factor_3 }
 	}
 	if = {
 		limit = { capital = { market_access < 0.85 } }
-		add = 1
+		add = { value = 1 desc = ffpa_tur_capital_supply_anomaly_count_v1_factor_4 }
 	}
 }
 
@@ -60,38 +60,38 @@ ffpa_byz_dynatoi_monthly_pressure_gain_v1 = {
 	value = 0
 	if = {
 		limit = { var:ffpa_byz_military_reform_stage_v1 < 1 }
-		add = 0.25
+		add = { value = 0.25 desc = ffpa_byz_dynatoi_monthly_pressure_gain_v1_factor_1 }
 	}
 	if = {
 		limit = { ig:ig_landowners = { is_powerful = yes } }
 		if = {
 			limit = { var:ffpa_byz_military_reform_stage_v1 >= 3 }
-			add = 0.25
+			add = { value = 0.25 desc = ffpa_byz_dynatoi_monthly_pressure_gain_v1_factor_2 }
 		}
-		else = { add = 0.50 }
+		else = { add = { value = 0.50 desc = ffpa_byz_dynatoi_monthly_pressure_gain_v1_factor_3 } }
 	}
 	if = {
 		limit = { has_law_or_variant = law_type:law_serfdom }
 		if = {
 			limit = { var:ffpa_byz_military_reform_stage_v1 >= 2 }
-			add = 0.50
+			add = { value = 0.50 desc = ffpa_byz_dynatoi_monthly_pressure_gain_v1_factor_4 }
 		}
-		else = { add = 1.00 }
+		else = { add = { value = 1.00 desc = ffpa_byz_dynatoi_monthly_pressure_gain_v1_factor_5 } }
 	}
 	else_if = {
 		limit = { has_law_or_variant = law_type:law_tenant_farmers }
 		if = {
 			limit = { var:ffpa_byz_military_reform_stage_v1 >= 2 }
-			add = 0.25
+			add = { value = 0.25 desc = ffpa_byz_dynatoi_monthly_pressure_gain_v1_factor_6 }
 		}
-		else = { add = 0.50 }
+		else = { add = { value = 0.50 desc = ffpa_byz_dynatoi_monthly_pressure_gain_v1_factor_7 } }
 	}
 	if = {
 		limit = {
 			var:ffpa_byz_military_reform_stage_v1 < 1
 			has_law_or_variant = law_type:law_peasant_levies
 		}
-		add = 0.50
+		add = { value = 0.50 desc = ffpa_byz_dynatoi_monthly_pressure_gain_v1_factor_8 }
 	}
 	if = {
 		limit = {
@@ -104,14 +104,43 @@ ffpa_byz_dynatoi_monthly_pressure_gain_v1 = {
 				}
 			}
 		}
-		add = 0.25
+		add = { value = 0.25 desc = ffpa_byz_dynatoi_monthly_pressure_gain_v1_factor_9 }
 	}
 	if = {
 		limit = {
 			has_variable = ffpa_byz_western_cadastre_choice_v2
 			var:ffpa_byz_western_cadastre_choice_v2 = 1
 		}
-		subtract = 0.25
+		subtract = { value = 0.25 desc = ffpa_byz_dynatoi_monthly_pressure_gain_v1_factor_10 }
 	}
 	min = 0
+}
+
+# Country scope. Same 0/1/2/3/4-anomaly brackets as the existing monthly pulse.
+ffpa_tur_capital_monthly_reserve_change_v1 = {
+ value = 0
+ if = { limit = { ffpa_tur_capital_supply_anomaly_count_v1 = 0 } add = { value = 3 desc = ffpa_tur_capital_anomaly_bracket_0 } }
+ else_if = { limit = { ffpa_tur_capital_supply_anomaly_count_v1 = 1 } add = { value = 1 desc = ffpa_tur_capital_anomaly_bracket_1 } }
+ else_if = { limit = { ffpa_tur_capital_supply_anomaly_count_v1 = 2 } add = { value = -2 desc = ffpa_tur_capital_anomaly_bracket_2 } }
+ else_if = { limit = { ffpa_tur_capital_supply_anomaly_count_v1 = 3 } add = { value = -5 desc = ffpa_tur_capital_anomaly_bracket_3 } }
+ else_if = { limit = { ffpa_tur_capital_supply_anomaly_count_v1 = 4 } add = { value = -8 desc = ffpa_tur_capital_anomaly_bracket_4 } }
+ if = { limit = { ffpa_tur_capital_has_famine_v1 = yes } subtract = { value = 10 desc = ffpa_tur_capital_famine_factor } }
+}
+
+# Read-only zero fallback: repair counters exist only after a repair starts.
+ffpa_byz_public_law_repair_months_v1_display = {
+ value = 0
+ if = { limit = { has_variable = ffpa_byz_public_law_repair_months_v1 } value = var:ffpa_byz_public_law_repair_months_v1 }
+}
+
+# Read-only zero fallback: repair counters exist only after a repair starts.
+ffpa_byz_public_welfare_repair_months_v1_display = {
+ value = 0
+ if = { limit = { has_variable = ffpa_byz_public_welfare_repair_months_v1 } value = var:ffpa_byz_public_welfare_repair_months_v1 }
+}
+
+# Read-only zero fallback: repair counters exist only after a repair starts.
+ffpa_byz_public_recognition_repair_months_v1_display = {
+ value = 0
+ if = { limit = { has_variable = ffpa_byz_public_recognition_repair_months_v1 } value = var:ffpa_byz_public_recognition_repair_months_v1 }
 }

@@ -86,7 +86,7 @@ def main():
                 for pair in CONCEPT.findall(value):
                     reference = pair[0] or pair[1]
                     assert reference in concepts, f'{key}: unknown concept {reference}'
-    print(f'PASS: six localization files, {len(catalogs["english"])} keys per language; encoding, syntax, tags and references')
+    print(f'PASS: all localization files, {len(catalogs["english"])} keys per language; encoding, syntax, tags and references')
 
 
 if __name__ == '__main__':

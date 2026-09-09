@@ -1,0 +1,8 @@
+﻿l_english:
+ ffpa_na_cmf_no_target: "No valid project state."
+ ffpa_na_cmf_no_route: "No project route selected; the counter does not advance."
+ ffpa_na_cmf_advances: "All requirements met: consecutive months +1 at the next monthly check."
+ ffpa_na_cmf_resets: "A requirement is unmet: consecutive months reset at the next monthly check."
+ ffpa_na_cmf_target_details_present: "Project state: [JournalEntry.GetCountry.MakeScope.Var('ffpa_na_local_target_v1').GetState.GetName]\nQualified building levels with at least 60% employment: [JournalEntry.GetCountry.MakeScope.Var('ffpa_na_local_target_v1').GetState.MakeScope.ScriptValue('ffpa_na_local_qualified_levels_v1')|0]/3\nMarket access: [JournalEntry.GetCountry.MakeScope.Var('ffpa_na_local_target_v1').GetState.GetMarketAccess|%0]; requires at least 80%."
+ ffpa_na_local_months_bar_v1_cmf_tooltip: "$ffpa_na_local_months_bar_v1$  [JournalEntry.GetCurrentBarValue(ScriptedProgressBar.Self)|0]/12\n\n[JournalEntry.GetCountry.GetCustom('ffpa_na_cmf_target_details')]\n[JournalEntry.GetCountry.GetCustom('ffpa_na_cmf_forecast')]"
+ ffpa_na_local_months_bar_v1_cmf_value: "$ffpa_na_local_months_bar_v1$  [JournalEntry.GetCurrentBarValue(ScriptedProgressBar.Self)|0]/12"

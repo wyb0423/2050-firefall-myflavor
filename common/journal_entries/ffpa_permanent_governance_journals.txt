@@ -4,6 +4,7 @@
 # ratcheting structural pressure.
 
 je_ffpa_tur_imperial_registers_v1 = {
+ widget = { gui = "gui/ffpa_cmf_progress_bars.gui" name = "ffpa_cmf_register_bars" container = "com_custom_widget_container_scripted_progress_bars" }
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_documents_positive.dds"
 	group = je_group_ffpa_tur_permanent_governance
 	scripted_progress_bar = ffpa_tur_register_balance_bar_v1
@@ -59,6 +60,7 @@ je_ffpa_tur_imperial_registers_v1 = {
 }
 
 je_ffpa_tur_bread_and_capital_v1 = {
+ widget = { gui = "gui/ffpa_cmf_progress_bars.gui" name = "ffpa_cmf_reserve_bars" container = "com_custom_widget_container_scripted_progress_bars" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	group = je_group_ffpa_tur_permanent_governance
 	scripted_progress_bar = ffpa_tur_capital_reserve_bar_v1
@@ -113,6 +115,7 @@ je_ffpa_tur_bread_and_capital_v1 = {
 }
 
 je_ffpa_byz_public_polity_v1 = {
+ widget = { gui = "gui/ffpa_cmf_progress_bars.gui" name = "ffpa_cmf_pillars_bars" container = "com_custom_widget_container_scripted_progress_bars" }
 	icon = "gfx/interface/icons/timed_modifier_icons/modifier_statue_positive.dds"
 	group = je_group_ffpa_byz_permanent_governance
 	scripted_progress_bar = ffpa_byz_public_law_pillar_bar_v1
@@ -160,6 +163,8 @@ je_ffpa_byz_public_polity_v1 = {
 }
 
 je_ffpa_byz_military_households_v1 = {
+ widget = { gui = "gui/ffpa_cmf_progress_bars.gui" name = "ffpa_cmf_pressure_bars" container = "com_custom_widget_container_scripted_progress_bars" }
+ widget = { gui = "gui/ffpa_eastern_mediterranean_cmf.gui" name = "ffpa_byz_cmf_reform_phases" container = "custom_widget_container_3" }
 	icon = "gfx/interface/icons/event_icons/event_military.dds"
 	group = je_group_ffpa_byz_permanent_governance
 	scripted_progress_bar = ffpa_byz_dynatoi_pressure_bar_v1

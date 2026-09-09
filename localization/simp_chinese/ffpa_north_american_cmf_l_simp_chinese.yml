@@ -1,0 +1,8 @@
+﻿l_simp_chinese:
+ ffpa_na_cmf_no_target: "尚无有效工程州。"
+ ffpa_na_cmf_no_route: "尚未选择工程方向；计时不推进。"
+ ffpa_na_cmf_advances: "全部达标：连续月份在下次月度检查+1。"
+ ffpa_na_cmf_resets: "存在未达标条件：连续月份在下次月度检查归零。"
+ ffpa_na_cmf_target_details_present: "工程州：[JournalEntry.GetCountry.MakeScope.Var('ffpa_na_local_target_v1').GetState.GetName]\n就业达到60%的合格建筑：[JournalEntry.GetCountry.MakeScope.Var('ffpa_na_local_target_v1').GetState.MakeScope.ScriptValue('ffpa_na_local_qualified_levels_v1')|0]/3级\n市场接入：[JournalEntry.GetCountry.MakeScope.Var('ffpa_na_local_target_v1').GetState.GetMarketAccess|%0]，要求至少80%。"
+ ffpa_na_local_months_bar_v1_cmf_tooltip: "$ffpa_na_local_months_bar_v1$  [JournalEntry.GetCurrentBarValue(ScriptedProgressBar.Self)|0]/12\n\n[JournalEntry.GetCountry.GetCustom('ffpa_na_cmf_target_details')]\n[JournalEntry.GetCountry.GetCustom('ffpa_na_cmf_forecast')]"
+ ffpa_na_local_months_bar_v1_cmf_value: "$ffpa_na_local_months_bar_v1$  [JournalEntry.GetCurrentBarValue(ScriptedProgressBar.Self)|0]/12"

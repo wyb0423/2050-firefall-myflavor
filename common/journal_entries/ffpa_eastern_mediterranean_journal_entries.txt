@@ -91,6 +91,7 @@ je_ffpa_tur_rebuild_anatolia = {
 }
 
 je_ffpa_tur_ottoman_commonwealth = {
+ widget = { gui = "gui/ffpa_cmf_progress_bars.gui" name = "ffpa_cmf_progress_bars" container = "com_custom_widget_container_scripted_progress_bars" }
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	group = je_group_historical_content
 	scripted_progress_bar = ffpa_tur_commonwealth_administration_bar
@@ -509,6 +510,7 @@ je_ffpa_byz_rhomaic_commonwealth = {
 }
 
 je_ffpa_byz_rhomaic_commonwealth_v2 = {
+ widget = { gui = "gui/ffpa_cmf_progress_bars.gui" name = "ffpa_cmf_progress_bars" container = "com_custom_widget_container_scripted_progress_bars" }
 	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
 	group = je_group_historical_content
 	scripted_progress_bar = ffpa_byz_commonwealth_administration_bar

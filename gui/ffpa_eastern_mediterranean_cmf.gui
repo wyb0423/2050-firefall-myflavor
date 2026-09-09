@@ -1,0 +1,29 @@
+# CMF phase cells only; all simulation remains in the BYZ module.
+types ffpa_byz_cmf_widgets {
+ type ffpa_byz_cmf_reform_phases = vbox {
+  spacing = 8
+  hbox = {
+   spacing = 6
+   com_journal_entry_enactment_phase = {
+    blockoverride "current_phase_visibility" { visible = "[EqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.Var('ffpa_byz_military_reform_stage_v1').GetValue, '(CFixedPoint)0')]" }
+    blockoverride "past_phase_visibility" { visible = "[GreaterThanOrEqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.Var('ffpa_byz_military_reform_stage_v1').GetValue, '(CFixedPoint)1')]" }
+    blockoverride "not_reached_phase_visibility" { visible = "[LessThan_CFixedPoint(JournalEntry.GetCountry.MakeScope.Var('ffpa_byz_military_reform_stage_v1').GetValue, '(CFixedPoint)0')]" }
+    blockoverride "phase_name" { text = ffpa_byz_cmf_phase_1 }
+   }
+   com_journal_entry_enactment_phase = {
+    blockoverride "current_phase_visibility" { visible = "[EqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.Var('ffpa_byz_military_reform_stage_v1').GetValue, '(CFixedPoint)1')]" }
+    blockoverride "past_phase_visibility" { visible = "[GreaterThanOrEqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.Var('ffpa_byz_military_reform_stage_v1').GetValue, '(CFixedPoint)2')]" }
+    blockoverride "not_reached_phase_visibility" { visible = "[LessThan_CFixedPoint(JournalEntry.GetCountry.MakeScope.Var('ffpa_byz_military_reform_stage_v1').GetValue, '(CFixedPoint)1')]" }
+    blockoverride "phase_name" { text = ffpa_byz_cmf_phase_2 }
+   }
+   com_journal_entry_enactment_phase = {
+    blockoverride "current_phase_visibility" { visible = "[EqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.Var('ffpa_byz_military_reform_stage_v1').GetValue, '(CFixedPoint)2')]" }
+    blockoverride "past_phase_visibility" { visible = "[GreaterThanOrEqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.Var('ffpa_byz_military_reform_stage_v1').GetValue, '(CFixedPoint)3')]" }
+    blockoverride "not_reached_phase_visibility" { visible = "[LessThan_CFixedPoint(JournalEntry.GetCountry.MakeScope.Var('ffpa_byz_military_reform_stage_v1').GetValue, '(CFixedPoint)2')]" }
+    blockoverride "phase_name" { text = ffpa_byz_cmf_phase_3 }
+   }
+  }
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_byz_cmf_reform_status')]" autoresize = yes multiline = yes max_width = 504 }
+ }
+}
+ffpa_byz_cmf_reform_phases = { name = "ffpa_byz_cmf_reform_phases" }

@@ -2,8 +2,8 @@
 # refreshed by ffpa_sync_permanent_governance_progress_bars_v1.
 ffpa_tur_register_balance_bar_v1 = {
 	name = "ffpa_tur_register_balance_bar_v1"
-	desc = "ffpa_tur_register_balance_bar_v1_desc"
-	second_desc = "ffpa_tur_register_balance_bar_v1_second_desc"
+	desc = ffpa_tur_register_balance_bar_v1_cmf_tooltip
+	second_desc = ffpa_tur_register_balance_bar_v1_cmf_value
 	default_green = yes
 	start_value = 50
 	min_value = 0
@@ -12,8 +12,8 @@ ffpa_tur_register_balance_bar_v1 = {
 
 ffpa_tur_capital_reserve_bar_v1 = {
 	name = "ffpa_tur_capital_reserve_bar_v1"
-	desc = "ffpa_tur_capital_reserve_bar_v1_desc"
-	second_desc = "ffpa_tur_capital_reserve_bar_v1_second_desc"
+	desc = ffpa_tur_capital_reserve_bar_v1_cmf_tooltip
+	second_desc = ffpa_tur_capital_reserve_bar_v1_cmf_value
 	default_green = yes
 	start_value = 50
 	min_value = 0
@@ -22,8 +22,8 @@ ffpa_tur_capital_reserve_bar_v1 = {
 
 ffpa_byz_public_law_pillar_bar_v1 = {
 	name = "ffpa_byz_public_law_pillar_bar_v1"
-	desc = "ffpa_byz_public_law_pillar_bar_v1_desc"
-	second_desc = "ffpa_byz_public_pillar_bar_v1_second_desc"
+	desc = ffpa_byz_public_law_pillar_bar_v1_cmf_tooltip
+	second_desc = ffpa_byz_public_law_pillar_bar_v1_cmf_value
 	default_bad = yes
 	start_value = 0
 	min_value = 0
@@ -32,8 +32,8 @@ ffpa_byz_public_law_pillar_bar_v1 = {
 
 ffpa_byz_public_welfare_pillar_bar_v1 = {
 	name = "ffpa_byz_public_welfare_pillar_bar_v1"
-	desc = "ffpa_byz_public_welfare_pillar_bar_v1_desc"
-	second_desc = "ffpa_byz_public_pillar_bar_v1_second_desc"
+	desc = ffpa_byz_public_welfare_pillar_bar_v1_cmf_tooltip
+	second_desc = ffpa_byz_public_welfare_pillar_bar_v1_cmf_value
 	default_bad = yes
 	start_value = 0
 	min_value = 0
@@ -42,8 +42,8 @@ ffpa_byz_public_welfare_pillar_bar_v1 = {
 
 ffpa_byz_public_recognition_pillar_bar_v1 = {
 	name = "ffpa_byz_public_recognition_pillar_bar_v1"
-	desc = "ffpa_byz_public_recognition_pillar_bar_v1_desc"
-	second_desc = "ffpa_byz_public_pillar_bar_v1_second_desc"
+	desc = ffpa_byz_public_recognition_pillar_bar_v1_cmf_tooltip
+	second_desc = ffpa_byz_public_recognition_pillar_bar_v1_cmf_value
 	default_bad = yes
 	start_value = 0
 	min_value = 0
@@ -52,8 +52,8 @@ ffpa_byz_public_recognition_pillar_bar_v1 = {
 
 ffpa_byz_dynatoi_pressure_bar_v1 = {
 	name = "ffpa_byz_dynatoi_pressure_bar_v1"
-	desc = "ffpa_byz_dynatoi_pressure_bar_v1_desc"
-	second_desc = "ffpa_byz_dynatoi_pressure_bar_v1_second_desc"
+	desc = ffpa_byz_dynatoi_pressure_bar_v1_cmf_tooltip
+	second_desc = ffpa_byz_dynatoi_pressure_bar_v1_cmf_value
 	default_bad = yes
 	start_value = 20
 	min_value = 0

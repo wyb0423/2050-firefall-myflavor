@@ -6,11 +6,19 @@
 
 ## 固定依赖与推荐加载顺序
 
-本合集固定面向 Victoria 3 1.13.*、`2050: The Fire Falls` 与 `[1.13] Tech & Res`。它以一个物理 Mod 发布，当前包括东地中海模块，以及北美前身政权的首项本地工程。
+本合集固定面向 Victoria 3 1.13.*、`2050: The Fire Falls` 、`[1.13] Tech & Res` 与 `[1.13] Community Mod Framework`。它以一个物理 Mod 发布，当前包括东地中海模块，以及北美前身政权的首项本地工程。
 
 完整加载栈的推荐顺序如下；未使用某个独立功能包时可从顺序中省略该包：
 
-Tech & Res → Auto-Apply PMs → Auto-Apply Automation PMs → 2050: The Fire Falls → Core Balance Adapter → FFPA Building Pruning → FFPA Building Pruning: Tech & Res Compatibility → FFPA Tech & Res Auto PM Adapter → FFPA Firefall Flavor Pack
+Community Mod Framework → Tech & Res → Auto-Apply PMs → Auto-Apply Automation PMs → 2050: The Fire Falls → Core Balance Adapter → FFPA Building Pruning → FFPA Building Pruning: Tech & Res Compatibility → FFPA Tech & Res Auto PM Adapter → FFPA Firefall Flavor Pack
+
+## CMF 日志与事件表现
+
+需要订阅并启用 CMF（Workshop `3385002128`；本次源码核对版本 1.65.0），在本合集之前加载。
+共同体、常驻治理与《州界之间》的进度条显示当前数值；悬浮条身或文字可查看达标条件、增减明细、合计和边界规则。簿册标出35—65平衡区间，粮仓标出储备分档，权门标出压力分档；公共体显示状态与恶化／修复计时。军事改革使用三个阶段格。
+公文、前线通知、公共会议及少数建国终局分别采用 CMF 的信件、电报、宽屏与重大事件窗口；选项与效果不变。大型多选会议入口保留原生布局。
+展示直接读取既有国家与日志状态，不新增持久缓存。月度预估不是已结算历史，按钮与事件的一次性变化不计入月度合计。
+完整逐项处理记录见 [CMF 接入说明](docs/superpowers/specs/2026-09-09-cmf-presentation-design.md)。本轮只完成源码与静态检查，游戏内显示、悬浮、字体及读档仍待验收。
 
 ## 希腊—东罗马成立链
 

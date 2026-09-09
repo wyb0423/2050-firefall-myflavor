@@ -3,8 +3,8 @@
 # the journal pulse then mirrors the country value back into each bar.
 ffpa_tur_commonwealth_administration_bar = {
 	name = "ffpa_commonwealth_administration_bar"
-	desc = "ffpa_commonwealth_administration_bar"
-	second_desc = "ffpa_commonwealth_progress_value"
+	desc = ffpa_tur_commonwealth_administration_bar_cmf_tooltip
+	second_desc = ffpa_tur_commonwealth_administration_bar_cmf_value
 	monthly_progress = {
 		if = {
 			limit = { ffpa_tur_commonwealth_administration_conditions = yes }
@@ -21,8 +21,8 @@ ffpa_tur_commonwealth_administration_bar = {
 
 ffpa_tur_commonwealth_civic_bar = {
 	name = "ffpa_commonwealth_civic_bar"
-	desc = "ffpa_commonwealth_civic_bar"
-	second_desc = "ffpa_commonwealth_progress_value"
+	desc = ffpa_tur_commonwealth_civic_bar_cmf_tooltip
+	second_desc = ffpa_tur_commonwealth_civic_bar_cmf_value
 	monthly_progress = {
 		if = {
 			limit = { ffpa_tur_commonwealth_civic_conditions = yes }
@@ -39,8 +39,8 @@ ffpa_tur_commonwealth_civic_bar = {
 
 ffpa_tur_commonwealth_stability_bar = {
 	name = "ffpa_commonwealth_stability_bar"
-	desc = "ffpa_commonwealth_stability_bar"
-	second_desc = "ffpa_commonwealth_progress_value"
+	desc = ffpa_tur_commonwealth_stability_bar_cmf_tooltip
+	second_desc = ffpa_tur_commonwealth_stability_bar_cmf_value
 	monthly_progress = {
 		if = {
 			limit = { ffpa_tur_commonwealth_stability_conditions = yes }
@@ -57,8 +57,8 @@ ffpa_tur_commonwealth_stability_bar = {
 
 ffpa_byz_commonwealth_administration_bar = {
 	name = "ffpa_commonwealth_administration_bar"
-	desc = "ffpa_commonwealth_administration_bar"
-	second_desc = "ffpa_commonwealth_progress_value"
+	desc = ffpa_byz_commonwealth_administration_bar_cmf_tooltip
+	second_desc = ffpa_byz_commonwealth_administration_bar_cmf_value
 	monthly_progress = {
 		if = {
 			limit = { ffpa_byz_commonwealth_administration_conditions = yes }
@@ -75,8 +75,8 @@ ffpa_byz_commonwealth_administration_bar = {
 
 ffpa_byz_commonwealth_civic_bar = {
 	name = "ffpa_commonwealth_civic_bar"
-	desc = "ffpa_commonwealth_civic_bar"
-	second_desc = "ffpa_commonwealth_progress_value"
+	desc = ffpa_byz_commonwealth_civic_bar_cmf_tooltip
+	second_desc = ffpa_byz_commonwealth_civic_bar_cmf_value
 	monthly_progress = {
 		if = {
 			limit = { ffpa_byz_commonwealth_civic_conditions = yes }
@@ -93,8 +93,8 @@ ffpa_byz_commonwealth_civic_bar = {
 
 ffpa_byz_commonwealth_stability_bar = {
 	name = "ffpa_commonwealth_stability_bar"
-	desc = "ffpa_commonwealth_stability_bar"
-	second_desc = "ffpa_commonwealth_progress_value"
+	desc = ffpa_byz_commonwealth_stability_bar_cmf_tooltip
+	second_desc = ffpa_byz_commonwealth_stability_bar_cmf_value
 	monthly_progress = {
 		if = {
 			limit = { ffpa_byz_commonwealth_stability_conditions = yes }

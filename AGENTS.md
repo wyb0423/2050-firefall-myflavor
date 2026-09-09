@@ -11,8 +11,8 @@
 - 玩家可见名称：`FFPA — Firefall Flavor Pack`
 - Mod ID：`com.wyb.2050-firefall-personal-adapter`（保留既有发布与存档连续性）
 - Victoria 3：`1.13.*`
-- 已声明依赖：`2050: The Fire Falls`、`[1.13] Tech & Res`
-- README 约定的运行顺序：Tech & Res → Auto-Apply PMs → Auto-Apply Automation PMs → 2050: The Fire Falls → Core Balance Adapter → FFPA Building Pruning → FFPA Building Pruning: Tech & Res Compatibility → FFPA Tech & Res Auto PM Adapter → FFPA Firefall Flavor Pack
+- 已声明依赖：`2050: The Fire Falls`、`[1.13] Tech & Res`、`[1.13] Community Mod Framework`
+- README 约定的运行顺序：Community Mod Framework → Tech & Res → Auto-Apply PMs → Auto-Apply Automation PMs → 2050: The Fire Falls → Core Balance Adapter → FFPA Building Pruning → FFPA Building Pruning: Tech & Res Compatibility → FFPA Tech & Res Auto PM Adapter → FFPA Firefall Flavor Pack
 - Auto-Apply PMs 的 Workshop ID：`3353797125`
 - Auto-Apply Automation PMs 的 Workshop ID：`3344726320`
 - Tech & Res 的 Workshop ID：`3472248460`
@@ -460,3 +460,14 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 执行了哪些静态、生成器和运行时验证。
 - 哪些结论仍需游戏内确认。
 - 当前 Git 分支与工作树状态；不得把用户原有修改冒充为本次改动。
+
+
+## CMF 表现层接缝（2026-09-09）
+
+- CMF ID：`com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework`；Workshop `3385002128`。本地核对版本1.65.0，必须在本包前加载；不覆盖其源码。
+- `gui/ffpa_cmf_progress_bars.gui` 是仅供本包挂载的无状态表现组件；复用 CMF `com_progressbar_base`。不拥有国家逻辑，不创建 struct/cache，也不调用业务 effect。
+- `gui/ffpa_eastern_mediterranean_cmf.gui`、`common/customizable_localization/ffpa_eastern_mediterranean_cmf.txt` 和两份 `ffpa_eastern_mediterranean_cmf_l_*.yml` 归东地中海；北美对应 `ffpa_north_american_cmf.txt` 和两份 `ffpa_north_american_cmf_l_*.yml`，不得互读地区状态。
+- 13条进度条的 `desc` 是完整悬浮说明，`second_desc` 是短标签与数字／状态。组件对条身和文字均绑定悬浮，必须使用 CMF 替代槽防止原生条重复显示。
+- `*_conditions_factor_*`、`*_healthy_v1_factor_*` 是从既有条件拆出的查询接口，模拟与显示共用；计算脚本的 `desc` 只命名实际贡献，不改变数值。粮仓分档公式由原月度入口调用，不能再添加一份原生周期增长。
+- 改革阶段只复用 CMF 阶段格，直接读取既有 stage；禁止增加不存在的立法成功率或停滞抽签。
+- `tests/check_cmf_presentation.py` 验证公式场景、引用、挂载与无副作用展示；配合本地化及北美两项检查执行。静态检查不代表游戏内效果。

@@ -1,0 +1,12 @@
+ffpa_na_cmf_forecast = {
+ type = country
+ text = { trigger = { NOT = { ffpa_na_local_target_valid_v1 = yes } } localization_key = ffpa_na_cmf_no_target }
+ text = { trigger = { NOT = { has_variable = ffpa_na_local_route_v1 } } localization_key = ffpa_na_cmf_no_route }
+ text = { trigger = { var:ffpa_na_local_target_v1 = { market_access >= 0.80 ffpa_na_local_qualified_levels_v1 >= 3 } } localization_key = ffpa_na_cmf_advances }
+ text = { trigger = { always = yes } localization_key = ffpa_na_cmf_resets }
+}
+ffpa_na_cmf_target_details = {
+ type = country
+ text = { trigger = { ffpa_na_local_target_valid_v1 = yes has_variable = ffpa_na_local_route_v1 } localization_key = ffpa_na_cmf_target_details_present }
+ text = { trigger = { always = yes } localization_key = ffpa_na_cmf_no_route }
+}

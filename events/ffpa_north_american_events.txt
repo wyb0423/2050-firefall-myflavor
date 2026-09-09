@@ -1,6 +1,7 @@
 namespace = ffpa_na_flavor
 
 ffpa_na_flavor.1 = {
+ gui_window = com_event_window_letter_image
  type = country_event
  placement = ROOT
  title = ffpa_na_flavor.1.t
@@ -54,6 +55,7 @@ ffpa_na_flavor.1 = {
 }
 
 ffpa_na_flavor.2 = {
+ gui_window = com_event_window_letter_image
  type = country_event
  placement = ROOT
  title = ffpa_na_flavor.2.t

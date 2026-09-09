@@ -263,27 +263,7 @@ ffpa_reset_tur_capital_supply_failure_counters_v1 = {
 ffpa_monthly_tur_capital_supply_v1 = {
 	ffpa_initialize_tur_capital_supply_v1 = yes
 	set_variable = { name = ffpa_tur_capital_anomalies_v1 value = ffpa_tur_capital_supply_anomaly_count_v1 }
-	if = {
-		limit = { var:ffpa_tur_capital_anomalies_v1 = 0 }
-		change_variable = { name = ffpa_tur_capital_reserve_v1 add = 3 }
-	}
-	else_if = {
-		limit = { var:ffpa_tur_capital_anomalies_v1 = 1 }
-		change_variable = { name = ffpa_tur_capital_reserve_v1 add = 1 }
-	}
-	else_if = {
-		limit = { var:ffpa_tur_capital_anomalies_v1 = 2 }
-		change_variable = { name = ffpa_tur_capital_reserve_v1 subtract = 2 }
-	}
-	else_if = {
-		limit = { var:ffpa_tur_capital_anomalies_v1 = 3 }
-		change_variable = { name = ffpa_tur_capital_reserve_v1 subtract = 5 }
-	}
-	else = { change_variable = { name = ffpa_tur_capital_reserve_v1 subtract = 8 } }
-	if = {
-		limit = { ffpa_tur_capital_has_famine_v1 = yes }
-		change_variable = { name = ffpa_tur_capital_reserve_v1 subtract = 10 }
-	}
+	change_variable = { name = ffpa_tur_capital_reserve_v1 add = ffpa_tur_capital_monthly_reserve_change_v1 }
 	if = {
 		limit = { NOT = { ffpa_tur_capital_supply_severe_crisis_v1 = yes } }
 		remove_variable = ffpa_tur_capital_emergency_used_v1
