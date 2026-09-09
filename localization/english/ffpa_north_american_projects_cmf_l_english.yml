@@ -1,0 +1,8 @@
+﻿l_english:
+ ffpa_na_cmf_project_heading: "Current project and buildings"
+ ffpa_na_cmf_project_note: "Only completed levels in the selected route with at least 60% employment count. Queued construction is excluded. Employment is checked per building before qualifying levels are added. Use the icon beside a building to open its details."
+ ffpa_na_cmf_building_missing: "Not built: 0 levels; contributes 0"
+ ffpa_na_cmf_building_empty: "No completed levels; contributes 0"
+ ffpa_na_cmf_project_route: "Route: [JournalEntry.GetCountry.GetCustom('ffpa_na_local_route_name_v1')]"
+ ffpa_na_cmf_project_ready: "#p Employment met#!  [Building.MakeScope.ScriptValue('ffpa_na_cmf_completed_levels')|0] completed levels; employment [Building.GetEmploymentPercentage|%1]; contributes [Building.MakeScope.ScriptValue('ffpa_na_cmf_completed_levels')|0] levels"
+ ffpa_na_cmf_project_understaffed: "#n Understaffed#!  [Building.MakeScope.ScriptValue('ffpa_na_cmf_completed_levels')|0] completed levels; employment [Building.GetEmploymentPercentage|%1]; contributes 0"

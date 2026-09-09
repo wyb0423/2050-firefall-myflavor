@@ -1,4 +1,5 @@
 je_ffpa_na_local_recovery_v1 = {
+ widget = { gui = "gui/ffpa_north_american_cmf.gui" name = "ffpa_na_cmf_project" container = "custom_widget_container_4" }
  widget = { gui = "gui/ffpa_cmf_progress_bars.gui" name = "ffpa_cmf_progress_bars" container = "com_custom_widget_container_scripted_progress_bars" }
  icon = "gfx/interface/icons/event_icons/event_trade.dds"
  scripted_progress_bar = ffpa_na_local_months_bar_v1

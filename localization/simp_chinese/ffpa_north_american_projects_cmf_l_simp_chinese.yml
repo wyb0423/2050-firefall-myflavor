@@ -1,0 +1,8 @@
+﻿l_simp_chinese:
+ ffpa_na_cmf_project_heading: "当前工程与建筑"
+ ffpa_na_cmf_project_note: "只统计已选方向、已建成且就业达到60%的建筑等级；建设队列不计入。每类建筑分别判定就业，再累加合格等级。点击建筑旁的定位图标打开其详情。"
+ ffpa_na_cmf_building_missing: "未建成：0级；贡献0级"
+ ffpa_na_cmf_building_empty: "当前没有已建成等级；贡献0级"
+ ffpa_na_cmf_project_route: "工程方向：[JournalEntry.GetCountry.GetCustom('ffpa_na_local_route_name_v1')]"
+ ffpa_na_cmf_project_ready: "#p 就业达标#!  已建成[Building.MakeScope.ScriptValue('ffpa_na_cmf_completed_levels')|0]级；就业[Building.GetEmploymentPercentage|%1]；贡献[Building.MakeScope.ScriptValue('ffpa_na_cmf_completed_levels')|0]级"
+ ffpa_na_cmf_project_understaffed: "#n 就业不足#!  已建成[Building.MakeScope.ScriptValue('ffpa_na_cmf_completed_levels')|0]级；就业[Building.GetEmploymentPercentage|%1]；贡献0级"

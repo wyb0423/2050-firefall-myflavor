@@ -471,3 +471,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `*_conditions_factor_*`、`*_healthy_v1_factor_*` 是从既有条件拆出的查询接口，模拟与显示共用；计算脚本的 `desc` 只命名实际贡献，不改变数值。粮仓分档公式由原月度入口调用，不能再添加一份原生周期增长。
 - 改革阶段只复用 CMF 阶段格，直接读取既有 stage；禁止增加不存在的立法成功率或停滞抽签。
 - `tests/check_cmf_presentation.py` 验证公式场景、引用、挂载与无副作用展示；配合本地化及北美两项检查执行。静态检查不代表游戏内效果。
+
+- 地区工程的 `ffpa_regional_development_cmf` GUI、scripted GUI、script values 与双语文本归地区建设模块；北美对应展示文件归北美模块。`tools/generate_cmf_project_widgets.py` 从原 JE 条件和北美建筑白名单生成这些只读文件，修改条件后重新生成，不手改生成物。
+- 四项治理危机展示读取8个既有计数；禁止新增计时器。地区逐州条件保留单个 state 的判定，建筑等级不能跨州汇总；北美贡献采用已建成 level 与原就业门槛，不能使用包含队列的扩建等级。
+- 追加运行 `python3 tests/check_cmf_project_views.py`，检查生成一致性、GUI 表达式、56组逐州条件、16类路线建筑和计数缺省值。

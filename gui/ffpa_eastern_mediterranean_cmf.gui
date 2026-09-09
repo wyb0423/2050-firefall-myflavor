@@ -27,3 +27,35 @@ types ffpa_byz_cmf_widgets {
  }
 }
 ffpa_byz_cmf_reform_phases = { name = "ffpa_byz_cmf_reform_phases" }
+
+# Crisis counters are settled history, not an estimate of months remaining.
+types ffpa_governance_cmf_widgets {
+ type ffpa_tur_register_cmf_crisis = vbox {
+  spacing = 6
+  textbox = { text = ffpa_cmf_crisis_heading autoresize = yes }
+  textbox = { text = ffpa_tur_register_cmf_crisis_counts autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_tur_register_cmf_crisis_rules autoresize = yes multiline = yes max_width = 504 }
+ }
+ type ffpa_tur_capital_cmf_crisis = vbox {
+  spacing = 6
+  textbox = { text = ffpa_cmf_crisis_heading autoresize = yes }
+  textbox = { text = ffpa_tur_capital_cmf_crisis_counts autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_tur_capital_cmf_crisis_rules autoresize = yes multiline = yes max_width = 504 }
+ }
+ type ffpa_byz_public_cmf_crisis = vbox {
+  spacing = 6
+  textbox = { text = ffpa_cmf_crisis_heading autoresize = yes }
+  textbox = { text = ffpa_byz_public_cmf_crisis_counts autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_byz_public_cmf_crisis_rules autoresize = yes multiline = yes max_width = 504 }
+ }
+ type ffpa_byz_pressure_cmf_crisis = vbox {
+  spacing = 6
+  textbox = { text = ffpa_cmf_crisis_heading autoresize = yes }
+  textbox = { text = ffpa_byz_pressure_cmf_crisis_counts autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_byz_pressure_cmf_crisis_rules autoresize = yes multiline = yes max_width = 504 }
+ }
+}
+ffpa_tur_register_cmf_crisis = { name = "ffpa_tur_register_cmf_crisis" }
+ffpa_tur_capital_cmf_crisis = { name = "ffpa_tur_capital_cmf_crisis" }
+ffpa_byz_public_cmf_crisis = { name = "ffpa_byz_public_cmf_crisis" }
+ffpa_byz_pressure_cmf_crisis = { name = "ffpa_byz_pressure_cmf_crisis" }

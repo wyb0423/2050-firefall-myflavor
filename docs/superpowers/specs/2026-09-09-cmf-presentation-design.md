@@ -203,3 +203,16 @@ python3 tests/check_north_america_preflight.py --game-root "$GAME_ROOT" --firefa
 python3 tests/test_tur_route_interest_group_identity.py
 git diff --check
 ```
+
+
+## 第二批：危机与工程明细
+
+适用上游仍为 Victoria 3 1.13、CMF 1.65.0、本地 Tech & Res 与 Firefall；不改变原有判定、奖励、持久变量或周期入口。
+
+- 四项常驻治理显示8个危机计数、失败阈值与清零／衰减规则。公共体修复中仍计作破裂；解除权门结构性问题不会清空高压计数。
+- 15项地区工程从原 JE 生成56组逐州条件，显示市场接入、动乱、建筑等级及逐项达标状态，提供原生州定位。开工领土单列；例如埃格纳提亚的东色雷斯只属开工领土。分裂州按实际 state 单独判断，不合并建筑。
+- 北美按既有三条路线列出16类建筑，显示已建成等级、就业率、合格贡献；缺失或就业不足的建筑贡献为0。目标州与建筑采用原生定位／详情入口，保留原有目标有效性门控。
+
+运行 `python3 tools/generate_cmf_project_widgets.py` 更新生成物；`--check` 只核对。生成仅发生在开发阶段，不增加游戏周期扫描。
+
+新增 `python3 tests/check_cmf_project_views.py` 验证展示与实际条件的一致性及表达式结构。对比上一提交确认三份 JE 除 widget 外全部定义保持一致，原有 script values 保持一致。静态检查不能证明引擎渲染、列表高度、按钮行为或悬浮 scope；遵守不启动本机游戏的约束，以上仍待游戏内验收。

@@ -26,7 +26,8 @@ def main():
     assert one(complete, 'ffpa_na_local_target_valid_v1') == 'yes'
     assert one(complete, 'has_variable') == 'ffpa_na_local_route_v1'
     assert 'var:ffpa_na_local_months_v1 >= 12' in source
-    assert source.count('occupancy >= 0.60') == 3
+    values_source = (ROOT / 'common/script_values/ffpa_north_american_values.txt').read_text()
+    assert values_source.count('occupancy >= 0.60') == 3
     assert 'market_access >= 0.80' in source
     assert 'ffpa_na_local_qualified_levels_v1 >= 3' in source
     monthly = fields(catalog['ffpa_na_local_monthly_v1'], 'if')[0]

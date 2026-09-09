@@ -2,6 +2,7 @@
 # Each reward is a permanent physical state modifier and is deliberately scoped to the route it represents.
 
 je_ffpa_via_egnatia = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_via_egnatia_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_industry.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -64,6 +65,7 @@ je_ffpa_via_egnatia = {
 }
 
 je_ffpa_danube_thrace_corridor = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_danube_thrace_corridor_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_industry.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -126,6 +128,7 @@ je_ffpa_danube_thrace_corridor = {
 }
 
 je_ffpa_aegean_maritime_network = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_aegean_maritime_network_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -202,6 +205,7 @@ je_ffpa_aegean_maritime_network = {
 }
 
 je_ffpa_southern_italian_harbors = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_southern_italian_harbors_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -278,6 +282,7 @@ je_ffpa_southern_italian_harbors = {
 }
 
 je_ffpa_nile_works = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_nile_works_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_industry.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -343,6 +348,7 @@ je_ffpa_nile_works = {
 }
 
 je_ffpa_ifriqiya_coastal_network = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_ifriqiya_coastal_network_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -407,6 +413,7 @@ je_ffpa_ifriqiya_coastal_network = {
 }
 
 je_ffpa_anatolian_trunk_lines = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_anatolian_trunk_lines_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_industry.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -481,6 +488,7 @@ je_ffpa_anatolian_trunk_lines = {
 }
 
 je_ffpa_levant_trade_corridor = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_levant_trade_corridor_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -553,6 +561,7 @@ je_ffpa_levant_trade_corridor = {
 }
 
 je_ffpa_mesopotamian_waterworks = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_mesopotamian_waterworks_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_industry.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -630,6 +639,7 @@ je_ffpa_mesopotamian_waterworks = {
 # --- Justinianic western restoration projects ---
 
 je_ffpa_italian_urban_axis = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_italian_urban_axis_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_industry.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -729,6 +739,7 @@ je_ffpa_italian_urban_axis = {
 }
 
 je_ffpa_adriatic_arsenals = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_adriatic_arsenals_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -797,6 +808,7 @@ je_ffpa_adriatic_arsenals = {
 }
 
 je_ffpa_western_mediterranean_sea_lanes = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_western_mediterranean_sea_lanes_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -871,6 +883,7 @@ je_ffpa_western_mediterranean_sea_lanes = {
 }
 
 je_ffpa_spanian_littoral = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_spanian_littoral_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_industry.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -948,6 +961,7 @@ je_ffpa_spanian_littoral = {
 }
 
 je_ffpa_mauretanian_coastal_road = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_mauretanian_coastal_road_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	group = je_group_ffpa_imperial_development
 
@@ -1013,6 +1027,7 @@ je_ffpa_mauretanian_coastal_road = {
 }
 
 je_ffpa_alexandria_sinai_axis = {
+ widget = { gui = "gui/ffpa_regional_development_cmf.gui" name = "ffpa_alexandria_sinai_axis_cmf_project" container = "custom_widget_container_4" }
 	icon = "gfx/interface/icons/event_icons/event_trade.dds"
 	group = je_group_ffpa_imperial_development
 

@@ -144,3 +144,13 @@ ffpa_byz_public_recognition_repair_months_v1_display = {
  value = 0
  if = { limit = { has_variable = ffpa_byz_public_recognition_repair_months_v1 } value = var:ffpa_byz_public_recognition_repair_months_v1 }
 }
+
+# Read-only, safe before an optional counter exists.
+ffpa_tur_register_low_months_v1_display = { value = 0 if = { limit = { has_variable = ffpa_tur_register_low_months_v1 } value = var:ffpa_tur_register_low_months_v1 } }
+ffpa_tur_register_high_months_v1_display = { value = 0 if = { limit = { has_variable = ffpa_tur_register_high_months_v1 } value = var:ffpa_tur_register_high_months_v1 } }
+ffpa_tur_capital_crisis_months_v1_display = { value = 0 if = { limit = { has_variable = ffpa_tur_capital_crisis_months_v1 } value = var:ffpa_tur_capital_crisis_months_v1 } }
+ffpa_tur_capital_famine_months_v1_display = { value = 0 if = { limit = { has_variable = ffpa_tur_capital_famine_months_v1 } value = var:ffpa_tur_capital_famine_months_v1 } }
+ffpa_byz_public_all_broken_months_v1_display = { value = 0 if = { limit = { has_variable = ffpa_byz_public_all_broken_months_v1 } value = var:ffpa_byz_public_all_broken_months_v1 } }
+ffpa_byz_public_two_broken_months_v1_display = { value = 0 if = { limit = { has_variable = ffpa_byz_public_two_broken_months_v1 } value = var:ffpa_byz_public_two_broken_months_v1 } }
+ffpa_byz_dynatoi_at_max_months_v1_display = { value = 0 if = { limit = { has_variable = ffpa_byz_dynatoi_at_max_months_v1 } value = var:ffpa_byz_dynatoi_at_max_months_v1 } }
+ffpa_byz_dynatoi_high_months_v1_display = { value = 0 if = { limit = { has_variable = ffpa_byz_dynatoi_high_months_v1 } value = var:ffpa_byz_dynatoi_high_months_v1 } }
