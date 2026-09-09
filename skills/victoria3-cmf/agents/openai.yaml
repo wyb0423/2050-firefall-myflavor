@@ -1,0 +1,4 @@
+interface:
+  display_name: "Victoria 3 CMF"
+  short_description: "复用 CMF 日志、界面、国际组织与脚本能力，并核对版本和兼容性"
+  default_prompt: "使用 $victoria3-cmf，为当前 Mod 选择合适的框架能力，核对本地接口并完成接入。"
