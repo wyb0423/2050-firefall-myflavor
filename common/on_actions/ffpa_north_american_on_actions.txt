@@ -1,11 +1,49 @@
-# Only cleanup is needed here. Native JE activation handles new and old saves;
+# Formation and claim provenance hooks; no global province polling. Native JE activation handles new and old saves;
 # its own monthly pulse counts the selected state's completed building levels.
 on_country_formed = { on_actions = { ffpa_na_on_country_formed_v1 } }
 ffpa_na_on_country_formed_v1 = {
  effect = {
   if = {
+   limit = { country_definition = cd:USA NOT = { has_variable = ffpa_usa_charter_initialized_v1 } }
+   ffpa_usa_charter_initialize_v1 = yes
+   ffpa_usa_charter_open_v1 = yes
+  }
+  else_if = {
+   limit = { NOT = { country_definition = cd:USA } has_variable = ffpa_usa_charter_initialized_v1 NOT = { has_variable = ffpa_usa_charter_closed_v1 } }
+   ffpa_usa_charter_close_v1 = yes
+  }
+  if = { limit = { NOT = { country_definition = cd:USA } } ffpa_usa_political_suspend_v1 = yes }
+  if = {
    limit = { has_variable = ffpa_na_local_target_v1 NOT = { ffpa_na_is_predecessor_v1 = yes } }
    ffpa_na_local_cleanup_v1 = yes
   }
+  if = {
+   limit = { has_variable = ffpa_na_union_status_v1 }
+   ffpa_na_union_cleanup_v1 = yes
+   remove_variable = ffpa_na_union_failure_notice_v1
+  }
  }
 }
+
+# Native callback: ROOT is an owner; scope:actor is claimant and scope:region is the region.
+on_claim_added = { on_actions = { ffpa_na_union_on_claim_added_v1 } }
+ffpa_na_union_on_claim_added_v1 = {
+ effect = {
+  scope:actor ?= {
+   if = {
+    limit = {
+     has_variable = ffpa_na_union_claim_v1
+     var:ffpa_na_union_region_v1 = scope:region
+    }
+    set_variable = ffpa_na_union_external_claim_v1
+   }
+  }
+ }
+}
+
+on_monthly_pulse_country = { on_actions = { ffpa_usa_charter_monthly_action_v1 } }
+ffpa_usa_charter_monthly_action_v1 = { effect = { ffpa_usa_charter_monthly_v1 = yes } }
+on_law_enactment_started = { on_actions = { ffpa_usa_charter_started_action_v1 } }
+ffpa_usa_charter_started_action_v1 = { effect = { ffpa_usa_charter_enactment_started_v1 = yes } }
+on_law_enactment_ended = { on_actions = { ffpa_usa_charter_ended_action_v1 } }
+ffpa_usa_charter_ended_action_v1 = { effect = { ffpa_usa_charter_enactment_ended_v1 = yes } }

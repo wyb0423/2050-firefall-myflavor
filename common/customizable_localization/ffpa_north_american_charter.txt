@@ -1,0 +1,28 @@
+ffpa_usa_charter_governance_principles_name_v1 = {
+ type = country
+ text = { trigger = { var:ffpa_usa_charter_governance_principles_v1 = 1 } localization_key = ffpa_usa_charter_presidential_republic_v1 }
+ text = { trigger = { var:ffpa_usa_charter_governance_principles_v1 = 2 } localization_key = ffpa_usa_charter_parliamentary_republic_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_charter_current_governance_principles_v1 }
+}
+ffpa_usa_charter_distribution_of_power_name_v1 = {
+ type = country
+ text = { trigger = { var:ffpa_usa_charter_distribution_of_power_v1 = 1 } localization_key = ffpa_usa_charter_universal_suffrage_v1 }
+ text = { trigger = { var:ffpa_usa_charter_distribution_of_power_v1 = 2 } localization_key = ffpa_usa_charter_census_voting_v1 }
+ text = { trigger = { var:ffpa_usa_charter_distribution_of_power_v1 = 3 } localization_key = ffpa_usa_charter_wealth_voting_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_charter_current_distribution_of_power_v1 }
+}
+ffpa_usa_charter_economic_system_name_v1 = {
+ type = country
+ text = { trigger = { var:ffpa_usa_charter_economic_system_v1 = 1 } localization_key = ffpa_usa_charter_interventionism_v1 }
+ text = { trigger = { var:ffpa_usa_charter_economic_system_v1 = 2 } localization_key = ffpa_usa_charter_laissez_faire_v1 }
+ text = { trigger = { var:ffpa_usa_charter_economic_system_v1 = 3 } localization_key = ffpa_usa_charter_agrarianism_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_charter_current_economic_system_v1 }
+}
+ffpa_usa_charter_review_v1 = {
+ type = country
+ text = { trigger = { exists = currently_enacting_law } localization_key = ffpa_usa_charter_no_enactment_tt }
+ text = { trigger = { ffpa_usa_charter_unchanged_v1 = yes } localization_key = ffpa_usa_charter_unchanged_tt }
+ text = { trigger = { ffpa_usa_charter_governance_changes_v1 = yes any_subject_or_below = { is_subject_type = subject_type_crown_land is_direct_subject_of = ROOT } } localization_key = ffpa_usa_charter_crownlands_tt }
+ text = { trigger = { ffpa_usa_charter_governance_changes_v1 = yes is_subject = no has_government_type = gov_chartered_company } localization_key = ffpa_usa_charter_company_tt }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_charter_structure_detail_v1 }
+}

@@ -1,0 +1,58 @@
+ffpa_usa_charter_eligible_v1 = {
+ country_definition = cd:USA
+ is_revolutionary = no
+ NOT = { has_variable = ffpa_usa_charter_closed_v1 }
+}
+ffpa_usa_charter_window_v1 = {
+ OR = {
+  has_variable = ffpa_usa_charter_deadline_v1
+  has_variable = ffpa_usa_charter_grace_v1
+  AND = { has_variable = ffpa_usa_charter_hold_v1 exists = currently_enacting_law }
+ }
+}
+ffpa_usa_charter_can_open_v1 = {
+ ffpa_usa_charter_eligible_v1 = yes
+ ffpa_usa_charter_window_v1 = yes
+ NOT = { has_variable = ffpa_usa_charter_pending_v1 }
+ NOT = { has_variable = ffpa_usa_charter_cooldown_v1 }
+}
+ffpa_usa_charter_event_valid_v1 = {
+ ffpa_usa_charter_eligible_v1 = yes
+ ffpa_usa_charter_window_v1 = yes
+ has_variable = ffpa_usa_charter_pending_v1
+ var:ffpa_usa_charter_stage_v1 = $STAGE$
+ var:ffpa_usa_charter_serial_v1 = scope:ffpa_usa_charter_event_serial
+}
+ffpa_usa_charter_callbacks_safe_v1 = {
+ # A republic's native activation changes crown lands into puppets. Require ordinary resolution first.
+ trigger_if = {
+  limit = { ffpa_usa_charter_governance_changes_v1 = yes }
+  custom_tooltip = {
+   text = ffpa_usa_charter_crownlands_tt
+   NOT = { any_subject_or_below = { is_subject_type = subject_type_crown_land is_direct_subject_of = ROOT } }
+  }
+  custom_tooltip = {
+   text = ffpa_usa_charter_company_tt
+   OR = { is_subject = yes NOT = { has_government_type = gov_chartered_company } }
+  }
+ }
+}
+ffpa_usa_charter_can_sign_v1 = {
+ ffpa_usa_charter_eligible_v1 = yes
+ ffpa_usa_charter_window_v1 = yes
+ var:ffpa_usa_charter_stage_v1 = 3
+ custom_tooltip = { text = ffpa_usa_charter_no_enactment_tt NOT = { exists = currently_enacting_law } }
+ OR = {
+  ffpa_usa_charter_unchanged_v1 = yes
+  AND = { ffpa_usa_charter_structure_valid_v1 = yes ffpa_usa_charter_callbacks_safe_v1 = yes }
+ }
+}
+
+ffpa_usa_charter_governance_principles_unchanged_v1 = { OR = { var:ffpa_usa_charter_governance_principles_v1 = 0 AND = { var:ffpa_usa_charter_governance_principles_v1 = 1 has_law = law_type:law_presidential_republic } AND = { var:ffpa_usa_charter_governance_principles_v1 = 2 has_law = law_type:law_parliamentary_republic } } }
+
+ffpa_usa_charter_distribution_of_power_unchanged_v1 = { OR = { var:ffpa_usa_charter_distribution_of_power_v1 = 0 AND = { var:ffpa_usa_charter_distribution_of_power_v1 = 1 has_law = law_type:law_universal_suffrage } AND = { var:ffpa_usa_charter_distribution_of_power_v1 = 2 has_law = law_type:law_census_voting } AND = { var:ffpa_usa_charter_distribution_of_power_v1 = 3 has_law = law_type:law_wealth_voting } } }
+
+ffpa_usa_charter_economic_system_unchanged_v1 = { OR = { var:ffpa_usa_charter_economic_system_v1 = 0 AND = { var:ffpa_usa_charter_economic_system_v1 = 1 has_law = law_type:law_interventionism } AND = { var:ffpa_usa_charter_economic_system_v1 = 2 has_law = law_type:law_laissez_faire } AND = { var:ffpa_usa_charter_economic_system_v1 = 3 has_law = law_type:law_agrarianism } } }
+
+ffpa_usa_charter_unchanged_v1 = { ffpa_usa_charter_governance_principles_unchanged_v1 = yes ffpa_usa_charter_distribution_of_power_unchanged_v1 = yes ffpa_usa_charter_economic_system_unchanged_v1 = yes }
+ffpa_usa_charter_governance_changes_v1 = { NOT = { ffpa_usa_charter_governance_principles_unchanged_v1 = yes } }

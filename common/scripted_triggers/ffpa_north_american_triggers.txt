@@ -164,3 +164,78 @@ ffpa_na_local_route_3_available_v1 = {
   }
  }
 }
+
+# Country scope: the same territorial agenda remains available after USA formation.
+ffpa_na_union_eligible_v1 = {
+ is_revolutionary = no
+ OR = { ffpa_na_is_predecessor_v1 = yes country_definition = cd:USA }
+ any_scope_state = { ffpa_na_is_mainland_state_v1 = yes }
+}
+ffpa_na_union_peace_v1 = {
+ is_at_war = no
+ is_diplomatic_play_committed_participant = no
+}
+# State scope; ROOT is the country considering an agenda.
+ffpa_na_union_candidate_v1 = {
+ ffpa_na_is_mainland_state_v1 = yes
+ NOT = { owner = root }
+ owner = {
+  NOT = { is_country_type = decentralized }
+  is_revolutionary = no
+  NOT = { is_subject_of = root }
+ }
+ root = { is_adjacent_to_state = prev }
+ OR = {
+  root = { is_ai = no }
+  ffpa_na_union_target_strength_v1 <= root.army_power_projection
+ }
+}
+ffpa_na_union_idle_v1 = {
+ ffpa_na_union_eligible_v1 = yes
+ var:ffpa_na_union_status_v1 = 0
+ NOT = { has_variable = ffpa_na_union_cooldown_v1 }
+ NOT = { has_variable = ffpa_na_union_proposal_v1 }
+}
+ffpa_na_union_can_start_v1 = {
+ ffpa_na_union_idle_v1 = yes
+ ffpa_na_union_peace_v1 = yes
+ exists = var:ffpa_na_union_target_v1
+ var:ffpa_na_union_target_v1 = { ffpa_na_union_candidate_v1 = yes }
+ OR = {
+  is_ai = no
+  AND = { in_default = no NOT = { has_modifier = declared_bankruptcy } gold_reserves > 0 infamy < infamy_threshold:infamous }
+ }
+}
+ffpa_na_union_all_owned_v1 = {
+ has_variable = ffpa_na_union_total_v1
+ var:ffpa_na_union_total_v1 > 0
+ var:ffpa_na_union_seen_v1 = var:ffpa_na_union_total_v1
+ var:ffpa_na_union_owned_v1 = var:ffpa_na_union_total_v1
+}
+
+# USA project institutions are independent of the country's ordinary laws.
+ffpa_usa_political_eligible_v1 = {
+ country_definition = cd:USA
+ is_revolutionary = no
+ NOT = { has_variable = ffpa_usa_political_complete_v1 }
+}
+ffpa_usa_political_can_convene_v1 = {
+ ffpa_usa_political_eligible_v1 = yes
+ has_variable = ffpa_usa_political_stage_v1
+ var:ffpa_usa_political_stage_v1 < 4
+ NOT = { has_variable = ffpa_usa_political_cooldown_v1 }
+ NOT = { has_variable = ffpa_usa_political_pending_v1 }
+}
+ffpa_usa_political_stable_v1 = {
+ ffpa_usa_political_eligible_v1 = yes
+ var:ffpa_usa_political_stage_v1 = 4
+ government_legitimacy >= 40
+ bureaucracy >= 0
+}
+# Event options recheck the live stage and ticket, including after an identity change.
+ffpa_usa_political_event_valid_v1 = {
+ ffpa_usa_political_eligible_v1 = yes
+ has_variable = ffpa_usa_political_pending_v1
+ var:ffpa_usa_political_stage_v1 = $STAGE$
+ var:ffpa_usa_political_serial_v1 = scope:ffpa_usa_political_event_serial
+}

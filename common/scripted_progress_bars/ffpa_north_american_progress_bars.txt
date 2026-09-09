@@ -7,3 +7,13 @@ ffpa_na_local_months_bar_v1 = {
  min_value = 0
  max_value = 12
 }
+
+ffpa_usa_political_months_bar_v1 = {
+ name = ffpa_usa_political_months_bar_v1
+ desc = ffpa_usa_political_months_bar_v1_cmf_tooltip
+ second_desc = ffpa_usa_political_months_bar_v1_cmf_value
+ default_green = yes
+ start_value = 0
+ min_value = 0
+ max_value = 12
+}

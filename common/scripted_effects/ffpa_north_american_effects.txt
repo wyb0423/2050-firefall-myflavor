@@ -90,3 +90,289 @@ ffpa_na_local_complete_v1 = {
   ffpa_na_local_cleanup_v1 = yes
  }
 }
+
+# Country scope. Persistent per-province flags survive target state merges.
+# Pass 1 snapshots, 2 counts, 3 clears, 4 rewards each receiving state once.
+ffpa_na_union_visit_province_v1 = {
+ if = {
+  limit = { var:ffpa_na_union_pass_v1 = 1 }
+  if = {
+   limit = { p:$PROVINCE$.state = root.var:ffpa_na_union_target_v1 }
+   set_variable = ffpa_na_union_p_$PROVINCE$_v1
+   change_variable = { name = ffpa_na_union_total_v1 add = 1 }
+  }
+ }
+ else_if = {
+  limit = { var:ffpa_na_union_pass_v1 = 2 has_variable = ffpa_na_union_p_$PROVINCE$_v1 }
+  if = {
+   limit = { exists = p:$PROVINCE$.state.owner }
+   change_variable = { name = ffpa_na_union_seen_v1 add = 1 }
+   if = {
+    limit = { p:$PROVINCE$.state.owner = root }
+    change_variable = { name = ffpa_na_union_owned_v1 add = 1 }
+   }
+  }
+ }
+ else_if = {
+  limit = { var:ffpa_na_union_pass_v1 = 3 }
+  remove_variable = ffpa_na_union_p_$PROVINCE$_v1
+ }
+ else_if = {
+  limit = { var:ffpa_na_union_pass_v1 = 4 has_variable = ffpa_na_union_p_$PROVINCE$_v1 p:$PROVINCE$.state.owner = root }
+  # Country -> receiving state; the temporary marker prevents one award per province.
+  p:$PROVINCE$.state = {
+   if = {
+    limit = { NOT = { has_variable = ffpa_na_union_awarding_v1 } }
+    set_variable = ffpa_na_union_awarding_v1
+    if = { limit = { has_modifier = ffpa_na_union_market_v1 } remove_modifier = ffpa_na_union_market_v1 }
+    if = { limit = { has_modifier = ffpa_na_union_government_v1 } remove_modifier = ffpa_na_union_government_v1 }
+    if = {
+     limit = { root.var:ffpa_na_union_choice_v1 = 1 }
+     add_modifier = { name = ffpa_na_union_market_v1 years = 5 }
+    }
+    else = { add_modifier = { name = ffpa_na_union_government_v1 years = 5 } }
+   }
+  }
+ }
+}
+ffpa_na_union_recount_v1 = {
+ set_variable = { name = ffpa_na_union_seen_v1 value = 0 }
+ set_variable = { name = ffpa_na_union_owned_v1 value = 0 }
+ set_variable = { name = ffpa_na_union_pass_v1 value = 2 }
+ ffpa_na_union_visit_region_v1 = yes
+ remove_variable = ffpa_na_union_pass_v1
+}
+ffpa_na_union_select_v1 = {
+ remove_variable = ffpa_na_union_target_v1
+ # Native ordered_state, limited to actionable mainland neighbours.
+ ordered_state = {
+  limit = { ffpa_na_union_candidate_v1 = yes }
+  order_by = ffpa_na_union_candidate_score_v1
+  position = root.var:ffpa_na_union_index_v1
+  check_range_bounds = no
+  root = { set_variable = { name = ffpa_na_union_target_v1 value = prev } }
+ }
+ if = {
+  limit = { NOT = { exists = var:ffpa_na_union_target_v1 } }
+  set_variable = { name = ffpa_na_union_index_v1 value = 0 }
+  ordered_state = {
+   limit = { ffpa_na_union_candidate_v1 = yes }
+   order_by = ffpa_na_union_candidate_score_v1
+   position = 0
+   check_range_bounds = no
+   root = { set_variable = { name = ffpa_na_union_target_v1 value = prev } }
+  }
+ }
+}
+ffpa_na_union_initialize_v1 = {
+ if = {
+  limit = { NOT = { has_variable = ffpa_na_union_serial_v1 } }
+  set_variable = { name = ffpa_na_union_serial_v1 value = 0 }
+ }
+ if = {
+  limit = { NOT = { has_variable = ffpa_na_union_status_v1 } }
+  set_variable = { name = ffpa_na_union_status_v1 value = 0 }
+  set_variable = { name = ffpa_na_union_index_v1 value = 0 }
+  ffpa_na_union_select_v1 = yes
+ }
+}
+ffpa_na_union_cleanup_v1 = {
+ if = {
+  limit = { exists = var:ffpa_na_union_region_v1 }
+  # Preserve prior claims, observed external claims, and claims on acquired land.
+  if = {
+   limit = {
+    has_variable = ffpa_na_union_claim_v1
+    NOT = { has_variable = ffpa_na_union_external_claim_v1 }
+    has_claim = var:ffpa_na_union_region_v1
+    NOT = { any_scope_state = { state_region = root.var:ffpa_na_union_region_v1 } }
+   }
+   var:ffpa_na_union_region_v1 = { remove_claim = root }
+  }
+  set_variable = { name = ffpa_na_union_pass_v1 value = 3 }
+  ffpa_na_union_visit_region_v1 = yes
+ }
+ remove_variable = ffpa_na_union_target_v1
+ remove_variable = ffpa_na_union_region_v1
+ remove_variable = ffpa_na_union_total_v1
+ remove_variable = ffpa_na_union_seen_v1
+ remove_variable = ffpa_na_union_owned_v1
+ remove_variable = ffpa_na_union_pass_v1
+ remove_variable = ffpa_na_union_claim_v1
+ remove_variable = ffpa_na_union_external_claim_v1
+ remove_variable = ffpa_na_union_deadline_v1
+ remove_variable = ffpa_na_union_withdraw_v1
+ remove_variable = ffpa_na_union_proposal_v1
+ remove_variable = ffpa_na_union_choice_v1
+ remove_variable = ffpa_na_union_ai_refresh_v1
+ set_variable = { name = ffpa_na_union_status_v1 value = 0 }
+ set_variable = { name = ffpa_na_union_index_v1 value = 0 }
+ # Serial and cooldown survive cleanup; old event options cannot settle a new agenda.
+}
+ffpa_na_union_start_v1 = {
+ # The event removes proposal before revalidating this shared entry point.
+ if = {
+  limit = { ffpa_na_union_can_start_v1 = yes }
+  var:ffpa_na_union_target_v1 = { state_region = { save_scope_as = ffpa_na_union_selected_region } }
+  set_variable = { name = ffpa_na_union_region_v1 value = scope:ffpa_na_union_selected_region }
+  set_variable = { name = ffpa_na_union_total_v1 value = 0 }
+  set_variable = { name = ffpa_na_union_pass_v1 value = 1 }
+  ffpa_na_union_visit_region_v1 = yes
+  remove_variable = ffpa_na_union_pass_v1
+  if = {
+   limit = { var:ffpa_na_union_total_v1 > 0 }
+   change_variable = { name = ffpa_na_union_serial_v1 add = 1 }
+   set_variable = { name = ffpa_na_union_status_v1 value = 1 }
+   set_variable = { name = ffpa_na_union_deadline_v1 years = 10 }
+   if = {
+    limit = { NOT = { has_claim = var:ffpa_na_union_region_v1 } }
+    var:ffpa_na_union_region_v1 = { add_claim = root }
+    # Set AFTER native add_claim; delayed callbacks conservatively preserve the claim.
+    set_variable = ffpa_na_union_claim_v1
+   }
+   ffpa_na_union_recount_v1 = yes
+  }
+  else = { ffpa_na_union_cleanup_v1 = yes }
+ }
+}
+ffpa_na_union_fail_v1 = {
+ ffpa_na_union_cleanup_v1 = yes
+ set_variable = { name = ffpa_na_union_cooldown_v1 years = 3 }
+ set_variable = ffpa_na_union_failure_notice_v1
+ trigger_event = { id = ffpa_na_flavor.5 days = 1 }
+}
+ffpa_na_union_monthly_v1 = {
+ if = {
+  limit = { var:ffpa_na_union_status_v1 = 1 }
+  ffpa_na_union_recount_v1 = yes
+  if = {
+   limit = { var:ffpa_na_union_seen_v1 != var:ffpa_na_union_total_v1 }
+   set_variable = ffpa_na_union_withdraw_v1
+   if = { limit = { ffpa_na_union_peace_v1 = yes } ffpa_na_union_fail_v1 = yes }
+  }
+  else_if = {
+   limit = { ffpa_na_union_peace_v1 = yes }
+   if = {
+    limit = { has_variable = ffpa_na_union_withdraw_v1 }
+    ffpa_na_union_fail_v1 = yes
+   }
+   else_if = {
+    limit = { ffpa_na_union_all_owned_v1 = yes }
+    set_variable = { name = ffpa_na_union_status_v1 value = 2 }
+    trigger_event = { id = ffpa_na_flavor.4 days = 1 }
+   }
+   else_if = {
+    limit = { NOT = { has_variable = ffpa_na_union_deadline_v1 } }
+    ffpa_na_union_fail_v1 = yes
+   }
+  }
+ }
+ else_if = {
+  limit = { ffpa_na_union_idle_v1 = yes is_ai = yes NOT = { has_variable = ffpa_na_union_ai_refresh_v1 } }
+  ffpa_na_union_select_v1 = yes
+  set_variable = { name = ffpa_na_union_ai_refresh_v1 years = 1 }
+ }
+}
+ffpa_na_union_settle_v1 = {
+ if = {
+  limit = {
+   ffpa_na_union_eligible_v1 = yes
+   var:ffpa_na_union_status_v1 = 2
+   var:ffpa_na_union_serial_v1 = scope:ffpa_na_union_event_serial
+  }
+  ffpa_na_union_recount_v1 = yes
+  if = {
+   limit = { ffpa_na_union_all_owned_v1 = yes ffpa_na_union_peace_v1 = yes }
+   # Clear the pending state BEFORE effects; repeated dialogs cannot pay twice.
+   set_variable = { name = ffpa_na_union_status_v1 value = 3 }
+   if = { limit = { has_modifier = ffpa_na_union_dividend_v1 } remove_modifier = ffpa_na_union_dividend_v1 }
+   add_modifier = { name = ffpa_na_union_dividend_v1 years = 5 }
+   set_variable = { name = ffpa_na_union_pass_v1 value = 4 }
+   ffpa_na_union_visit_region_v1 = yes
+   every_scope_state = {
+    limit = { has_variable = ffpa_na_union_awarding_v1 }
+    remove_variable = ffpa_na_union_awarding_v1
+   }
+   ffpa_na_union_cleanup_v1 = yes
+   set_variable = { name = ffpa_na_union_cooldown_v1 years = 1 }
+  }
+  else = {
+   # If ownership or peace changed while the dialog was open, resume checks.
+   set_variable = { name = ffpa_na_union_status_v1 value = 1 }
+   remove_variable = ffpa_na_union_choice_v1
+   ffpa_na_union_monthly_v1 = yes
+  }
+ }
+}
+
+# Country scope. Persistent choices are never cleared or re-awarded by initialization.
+ffpa_usa_political_initialize_v1 = {
+ if = {
+  limit = { ffpa_usa_political_eligible_v1 = yes NOT = { has_variable = ffpa_usa_political_stage_v1 } }
+  set_variable = { name = ffpa_usa_political_stage_v1 value = 0 }
+  set_variable = { name = ffpa_usa_political_months_v1 value = 0 }
+  set_variable = { name = ffpa_usa_political_serial_v1 value = 0 }
+  trigger_event = { id = ffpa_usa_flavor.1 days = 1 }
+ }
+ ffpa_usa_political_sync_v1 = yes
+}
+ffpa_usa_political_convene_v1 = {
+ if = {
+  limit = { ffpa_usa_political_can_convene_v1 = yes }
+  remove_variable = ffpa_usa_political_deferred_v1
+  change_variable = { name = ffpa_usa_political_serial_v1 add = 1 }
+  set_variable = ffpa_usa_political_pending_v1
+  if = { limit = { var:ffpa_usa_political_stage_v1 = 0 } trigger_event = { id = ffpa_usa_flavor.2 days = 1 } }
+  else_if = { limit = { var:ffpa_usa_political_stage_v1 = 1 } trigger_event = { id = ffpa_usa_flavor.3 days = 1 } }
+  else_if = { limit = { var:ffpa_usa_political_stage_v1 = 2 } trigger_event = { id = ffpa_usa_flavor.4 days = 1 } }
+  else_if = { limit = { var:ffpa_usa_political_stage_v1 = 3 } trigger_event = { id = ffpa_usa_flavor.5 days = 1 } }
+ }
+}
+ffpa_usa_political_advance_v1 = {
+ change_variable = { name = ffpa_usa_political_stage_v1 add = 1 }
+ remove_variable = ffpa_usa_political_pending_v1
+ remove_variable = ffpa_usa_political_deferred_v1
+ if = {
+  limit = { var:ffpa_usa_political_stage_v1 < 4 }
+  set_variable = { name = ffpa_usa_political_cooldown_v1 months = 6 }
+ }
+}
+ffpa_usa_political_sync_v1 = {
+ je:je_ffpa_usa_federal_settlement_v1 ?= {
+  set_bar_progress = { name = ffpa_usa_political_months_bar_v1 value = root.var:ffpa_usa_political_months_v1 }
+ }
+}
+ffpa_usa_political_monthly_v1 = {
+ if = {
+  limit = { ffpa_usa_political_eligible_v1 = yes }
+  if = {
+   limit = { ffpa_usa_political_stable_v1 = yes }
+   change_variable = { name = ffpa_usa_political_months_v1 add = 1 }
+  }
+  else = { set_variable = { name = ffpa_usa_political_months_v1 value = 0 } }
+  if = {
+   limit = { NOT = { has_variable = ffpa_usa_political_deferred_v1 } }
+   ffpa_usa_political_convene_v1 = yes
+  }
+  ffpa_usa_political_sync_v1 = yes
+ }
+}
+ffpa_usa_political_complete_v1 = {
+ if = {
+  limit = { ffpa_usa_political_stable_v1 = yes var:ffpa_usa_political_months_v1 >= 12 }
+  # Stable completion interface for the subsequent federal governance journal.
+  set_variable = ffpa_usa_political_complete_v1
+  remove_variable = ffpa_usa_political_pending_v1
+  remove_variable = ffpa_usa_political_deferred_v1
+ }
+}
+ffpa_usa_political_suspend_v1 = {
+ # Keep choices and six-month cooldown; interrupt continuity and invalidate old tickets.
+ if = {
+  limit = { has_variable = ffpa_usa_political_stage_v1 NOT = { has_variable = ffpa_usa_political_complete_v1 } }
+  set_variable = { name = ffpa_usa_political_months_v1 value = 0 }
+  change_variable = { name = ffpa_usa_political_serial_v1 add = 1 }
+  remove_variable = ffpa_usa_political_pending_v1
+  set_variable = ffpa_usa_political_deferred_v1
+ }
+}

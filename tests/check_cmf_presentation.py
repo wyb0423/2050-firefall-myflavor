@@ -140,13 +140,13 @@ def main():
             if fields(block,'scripted_progress_bar') and key.startswith('je_ffpa_'):
                 assert fields(block,'widget'),key
                 journal_count+=1;bar_count+=len(fields(block,'scripted_progress_bar'))
-    assert (journal_count,bar_count)==(7,13)
+    assert (journal_count,bar_count)==(8,14)
     for file in (ROOT/'events').glob('*.txt'):
         for block in definitions(file).values():
             for style in fields(block,'gui_window'):
                 assert re.search(r'\btype\s+'+re.escape(style)+r'\s*=',all_gui),style
                 event_count+=1
-    assert event_count==82
+    assert event_count==94  # Includes USA political and founding-charter events.
     for file in (ROOT/'gui').glob('*.gui'):
         text=file.read_text();parse(text)
         for asset in re.findall(r'(?:texture|progresstexture)\s*=\s*"(gfx/[^"\[]+)"',text):

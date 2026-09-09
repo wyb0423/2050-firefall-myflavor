@@ -31,3 +31,39 @@ je_ffpa_na_local_recovery_v1 = {
  weight = 100
  should_be_pinned_by_default_uninvolved_or_context = yes
 }
+
+# One reusable interface; the ten-year deadline belongs to the active agenda,
+# not to the JE's lifetime. Cooldown/peace-pending states remain visible.
+je_ffpa_na_union_agenda_v1 = {
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ scripted_button = ffpa_na_union_next_button_v1
+ scripted_button = ffpa_na_union_propose_button_v1
+ scripted_button = ffpa_na_union_withdraw_button_v1
+ is_shown_when_inactive = { ffpa_na_union_eligible_v1 = yes }
+ possible = { ffpa_na_union_eligible_v1 = yes }
+ immediate = { ffpa_na_union_initialize_v1 = yes }
+ on_monthly_pulse = { effect = { ffpa_na_union_monthly_v1 = yes } }
+ complete = { always = no }
+ invalid = { NOT = { ffpa_na_union_eligible_v1 = yes } }
+ on_invalid = { ffpa_na_union_cleanup_v1 = yes }
+ weight = 100
+ should_be_pinned_by_default_uninvolved_or_context = yes
+}
+
+je_ffpa_usa_federal_settlement_v1 = {
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ widget = { gui = "gui/ffpa_cmf_progress_bars.gui" name = "ffpa_cmf_progress_bars" container = "com_custom_widget_container_scripted_progress_bars" }
+ scripted_progress_bar = ffpa_usa_political_months_bar_v1
+ scripted_button = ffpa_usa_political_convene_button_v1
+ scripted_button = ffpa_usa_charter_button_v1
+ is_shown_when_inactive = { ffpa_usa_political_eligible_v1 = yes }
+ possible = { ffpa_usa_political_eligible_v1 = yes }
+ immediate = { ffpa_usa_political_initialize_v1 = yes ffpa_usa_charter_initialize_v1 = yes }
+ on_monthly_pulse = { effect = { ffpa_usa_political_monthly_v1 = yes } }
+ complete = { ffpa_usa_political_stable_v1 = yes var:ffpa_usa_political_months_v1 >= 12 }
+ on_complete = { ffpa_usa_political_complete_v1 = yes }
+ invalid = { NOT = { ffpa_usa_political_eligible_v1 = yes } }
+ on_invalid = { ffpa_usa_political_suspend_v1 = yes }
+ weight = 100
+ should_be_pinned_by_default_uninvolved_or_context = yes
+}

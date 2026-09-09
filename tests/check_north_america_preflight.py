@@ -113,6 +113,39 @@ def check_design_references(roots):
         print(f"PASS: {len(keys)} {category} design/runtime references have source declarations.")
 
 
+
+def check_mainland_province_sources(roots, mainland, history):
+    # Map files use relative-path overrides. No claim about the engine's
+    # generic database merge follows from this one map-data audit.
+    files = {}
+    for root in roots:
+        folder = root / "map_data/state_regions"
+        for path in folder.glob("*.txt"):
+            files[path.name] = path
+    regions = {}
+    for path in files.values():
+        for name, body in definitions(path, allow_duplicates=True).items():
+            if name in mainland:
+                assert name not in regions, f"Duplicate mainland map definition: {name}"
+                regions[name] = one(body, "provinces")
+    assert regions.keys() == mainland
+    seen = set()
+    sizes = {}
+    for name, provinces in regions.items():
+        # Map definitions quote hex IDs; history uses the same IDs unquoted.
+        provinces = {p.strip('"') for p in provinces}
+        assert not seen.intersection(provinces), f"Province in multiple regions: {name}"
+        seen.update(provinces)
+        owned = []
+        for state in fields(one(history, "s:" + name), "create_state"):
+            owned.extend(one(state, "owned_provinces"))
+        assert len(owned) == len(set(owned)), f"Overlapping starting ownership: {name}"
+        assert set(owned) == provinces, f"Map/history province coverage mismatch: {name}"
+        sizes[name] = len(provinces)
+    print(f"PASS: {len(seen)} mainland provinces; map/history coverage agrees; "
+          f"per-region scan range {min(sizes.values())}–{max(sizes.values())}.")
+
+
 def main():
     # Exercise the structural reader against the cases needed by the source audit.
     sample = parse('tag-with-dash = { text = "{#}" # ignored }\n x = { a b } x = { c } }')
@@ -149,6 +182,8 @@ def main():
             holders.add(one(part, "country").removeprefix("c:"))
     eligible = {tag for tag in holders if one(countries[tag], "country_type") != "decentralized"}
     assert eligible == EXPECTED_TAGS, f"Cohort drift: {eligible ^ EXPECTED_TAGS}"
+
+    check_mainland_province_sources((args.game_root, args.techres_root, args.firefall_root), mainland, history)
 
     illinois = one(history, "s:STATE_ILLINOIS")
     source = [part for part in fields(illinois, "create_state")

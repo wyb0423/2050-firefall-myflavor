@@ -30,3 +30,55 @@ ffpa_na_local_choose_button_v1 = {
   }
  }
 }
+
+ffpa_na_union_next_button_v1 = {
+ name = ffpa_na_union_next_button_v1
+ desc = ffpa_na_union_next_button_v1_desc
+ visible = { var:ffpa_na_union_status_v1 = 0 }
+ possible = { ffpa_na_union_idle_v1 = yes }
+ ai_chance = { value = 0 }
+ effect = {
+  if = {
+   limit = { ffpa_na_union_idle_v1 = yes }
+   change_variable = { name = ffpa_na_union_index_v1 add = 1 }
+   ffpa_na_union_select_v1 = yes
+  }
+ }
+}
+ffpa_na_union_propose_button_v1 = {
+ name = ffpa_na_union_propose_button_v1
+ desc = ffpa_na_union_propose_button_v1_desc
+ visible = { var:ffpa_na_union_status_v1 = 0 }
+ possible = { ffpa_na_union_can_start_v1 = yes }
+ ai_chance = { value = 20 }
+ effect = {
+  if = {
+   limit = { ffpa_na_union_can_start_v1 = yes }
+   set_variable = ffpa_na_union_proposal_v1
+   trigger_event = { id = ffpa_na_flavor.3 days = 1 }
+  }
+ }
+}
+ffpa_na_union_withdraw_button_v1 = {
+ name = ffpa_na_union_withdraw_button_v1
+ desc = ffpa_na_union_withdraw_button_v1_desc
+ visible = { var:ffpa_na_union_status_v1 = 1 }
+ possible = { NOT = { has_variable = ffpa_na_union_withdraw_v1 } }
+ ai_chance = { value = 0 }
+ effect = {
+  if = {
+   limit = { var:ffpa_na_union_status_v1 = 1 NOT = { has_variable = ffpa_na_union_withdraw_v1 } }
+   set_variable = ffpa_na_union_withdraw_v1
+   ffpa_na_union_monthly_v1 = yes
+  }
+ }
+}
+
+ffpa_usa_political_convene_button_v1 = {
+ name = ffpa_usa_political_convene_button_v1
+ desc = ffpa_usa_political_convene_button_v1_desc
+ visible = { var:ffpa_usa_political_stage_v1 < 4 }
+ possible = { ffpa_usa_political_can_convene_v1 = yes }
+ ai_chance = { value = 20 }
+ effect = { ffpa_usa_political_convene_v1 = yes }
+}

@@ -1,0 +1,8 @@
+ffpa_usa_charter_button_v1 = {
+ name = ffpa_usa_charter_button_v1
+ desc = ffpa_usa_charter_button_v1_desc
+ visible = { ffpa_usa_charter_eligible_v1 = yes }
+ possible = { ffpa_usa_charter_can_open_v1 = yes }
+ ai_chance = { value = 20 }
+ effect = { ffpa_usa_charter_open_v1 = yes }
+}

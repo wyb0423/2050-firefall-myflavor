@@ -10,3 +10,47 @@ ffpa_na_local_route_name_v1 = {
  text = { trigger = { has_variable = ffpa_na_local_route_v1 var:ffpa_na_local_route_v1 = 3 } localization_key = ffpa_na_local_route_transport_name_v1 }
  text = { trigger = { always = yes } localization_key = ffpa_na_local_route_unselected_name_v1 }
 }
+
+ffpa_na_union_status_text_v1 = {
+ type = country
+ text = { trigger = { has_variable = ffpa_na_union_cooldown_v1 } localization_key = ffpa_na_union_status_cooldown_v1 }
+ text = { trigger = { has_variable = ffpa_na_union_status_v1 var:ffpa_na_union_status_v1 = 2 } localization_key = ffpa_na_union_status_settlement_v1 }
+ text = { trigger = { has_variable = ffpa_na_union_withdraw_v1 } localization_key = ffpa_na_union_status_withdraw_v1 }
+ text = { trigger = { has_variable = ffpa_na_union_status_v1 var:ffpa_na_union_status_v1 = 1 NOT = { has_variable = ffpa_na_union_deadline_v1 } } localization_key = ffpa_na_union_status_expired_v1 }
+ text = { trigger = { has_variable = ffpa_na_union_status_v1 var:ffpa_na_union_status_v1 = 1 } localization_key = ffpa_na_union_status_active_v1 }
+ text = { trigger = { exists = var:ffpa_na_union_target_v1 } localization_key = ffpa_na_union_status_candidate_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_na_union_status_empty_v1 }
+}
+
+ffpa_usa_political_status_v1 = {
+ type = country
+ text = { trigger = { has_variable = ffpa_usa_political_pending_v1 } localization_key = ffpa_usa_political_status_wait_v1 }
+ text = { trigger = { var:ffpa_usa_political_stage_v1 = 4 } localization_key = ffpa_usa_political_status_stable_v1 }
+ text = { trigger = { has_variable = ffpa_usa_political_cooldown_v1 } localization_key = ffpa_usa_political_status_cooldown_v1 }
+ text = { trigger = { has_variable = ffpa_usa_political_deferred_v1 } localization_key = ffpa_usa_political_status_deferred_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_political_status_ready_v1 }
+}
+ffpa_usa_political_works_name_v1 = {
+ type = country
+ text = { trigger = { has_variable = ffpa_usa_political_works_v1 var:ffpa_usa_political_works_v1 = 1 } localization_key = ffpa_usa_political_works_1_v1 }
+ text = { trigger = { has_variable = ffpa_usa_political_works_v1 var:ffpa_usa_political_works_v1 = 2 } localization_key = ffpa_usa_political_works_2_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_political_works_unset_v1 }
+}
+ffpa_usa_political_titles_name_v1 = {
+ type = country
+ text = { trigger = { has_variable = ffpa_usa_political_titles_v1 var:ffpa_usa_political_titles_v1 = 1 } localization_key = ffpa_usa_political_titles_1_v1 }
+ text = { trigger = { has_variable = ffpa_usa_political_titles_v1 var:ffpa_usa_political_titles_v1 = 2 } localization_key = ffpa_usa_political_titles_2_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_political_titles_unset_v1 }
+}
+ffpa_usa_political_representation_name_v1 = {
+ type = country
+ text = { trigger = { has_variable = ffpa_usa_political_representation_v1 var:ffpa_usa_political_representation_v1 = 1 } localization_key = ffpa_usa_political_representation_1_v1 }
+ text = { trigger = { has_variable = ffpa_usa_political_representation_v1 var:ffpa_usa_political_representation_v1 = 2 } localization_key = ffpa_usa_political_representation_2_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_political_representation_unset_v1 }
+}
+ffpa_usa_political_oversight_name_v1 = {
+ type = country
+ text = { trigger = { has_variable = ffpa_usa_political_oversight_v1 var:ffpa_usa_political_oversight_v1 = 1 } localization_key = ffpa_usa_political_oversight_1_v1 }
+ text = { trigger = { has_variable = ffpa_usa_political_oversight_v1 var:ffpa_usa_political_oversight_v1 = 2 } localization_key = ffpa_usa_political_oversight_2_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_political_oversight_unset_v1 }
+}

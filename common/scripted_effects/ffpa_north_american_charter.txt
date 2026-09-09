@@ -1,0 +1,96 @@
+# Country scope. One lifetime window; only the native formation hook requests automatic entry.
+ffpa_usa_charter_initialize_v1 = {
+ if = {
+  limit = { ffpa_usa_charter_eligible_v1 = yes NOT = { has_variable = ffpa_usa_charter_initialized_v1 } }
+  set_variable = ffpa_usa_charter_initialized_v1
+  set_variable = { name = ffpa_usa_charter_deadline_v1 years = 5 }
+  set_variable = { name = ffpa_usa_charter_stage_v1 value = 0 }
+  set_variable = { name = ffpa_usa_charter_serial_v1 value = 0 }
+  set_variable = { name = ffpa_usa_charter_governance_principles_v1 value = 0 }
+  set_variable = { name = ffpa_usa_charter_distribution_of_power_v1 value = 0 }
+  set_variable = { name = ffpa_usa_charter_economic_system_v1 value = 0 }
+ }
+}
+ffpa_usa_charter_close_v1 = {
+ set_variable = ffpa_usa_charter_closed_v1
+ change_variable = { name = ffpa_usa_charter_serial_v1 add = 1 }
+ remove_variable = ffpa_usa_charter_deadline_v1
+ remove_variable = ffpa_usa_charter_grace_v1
+ remove_variable = ffpa_usa_charter_hold_v1
+ remove_variable = ffpa_usa_charter_pending_v1
+ remove_variable = ffpa_usa_charter_automatic_v1
+ remove_variable = ffpa_usa_charter_cooldown_v1
+}
+ffpa_usa_charter_open_v1 = {
+ if = {
+  limit = { ffpa_usa_charter_can_open_v1 = yes }
+  set_variable = ffpa_usa_charter_requested_v1
+  set_variable = ffpa_usa_charter_pending_v1
+  remove_variable = ffpa_usa_charter_automatic_v1
+  change_variable = { name = ffpa_usa_charter_serial_v1 add = 1 }
+  if = { limit = { var:ffpa_usa_charter_stage_v1 = 0 } trigger_event = { id = ffpa_usa_flavor.6 days = 1 } }
+  else_if = { limit = { var:ffpa_usa_charter_stage_v1 = 1 } trigger_event = { id = ffpa_usa_flavor.7 days = 1 } }
+  else_if = { limit = { var:ffpa_usa_charter_stage_v1 = 2 } trigger_event = { id = ffpa_usa_flavor.8 days = 1 } }
+  else_if = { limit = { var:ffpa_usa_charter_stage_v1 = 3 } trigger_event = { id = ffpa_usa_flavor.9 days = 1 } }
+ }
+}
+ffpa_usa_charter_submit_v1 = {
+ change_variable = { name = ffpa_usa_charter_stage_v1 add = 1 }
+ remove_variable = ffpa_usa_charter_pending_v1
+ set_variable = { name = ffpa_usa_charter_cooldown_v1 months = 1 }
+ set_variable = ffpa_usa_charter_automatic_v1
+ if = {
+  limit = { var:ffpa_usa_charter_stage_v1 = 3 }
+  set_variable = ffpa_usa_charter_submitted_v1
+  if = { limit = { exists = currently_enacting_law } set_variable = ffpa_usa_charter_hold_v1 }
+ }
+}
+ffpa_usa_charter_monthly_v1 = {
+ if = {
+  limit = { ffpa_usa_charter_eligible_v1 = yes }
+  ffpa_usa_charter_initialize_v1 = yes
+  if = { limit = { NOT = { ffpa_usa_charter_window_v1 = yes } } ffpa_usa_charter_close_v1 = yes }
+  else_if = {
+   limit = { has_variable = ffpa_usa_charter_automatic_v1 }
+   ffpa_usa_charter_open_v1 = yes
+  }
+ }
+}
+# Records the particular ordinary enactment blocking an already complete draft.
+# Ended clears this hold; starting a later law cannot renew an expired window.
+ffpa_usa_charter_enactment_started_v1 = {
+ if = {
+  limit = { ffpa_usa_charter_eligible_v1 = yes has_variable = ffpa_usa_charter_deadline_v1 var:ffpa_usa_charter_stage_v1 = 3 }
+  set_variable = ffpa_usa_charter_hold_v1
+ }
+}
+ffpa_usa_charter_enactment_ended_v1 = {
+ if = {
+  limit = { ffpa_usa_charter_eligible_v1 = yes has_variable = ffpa_usa_charter_hold_v1 }
+  remove_variable = ffpa_usa_charter_hold_v1
+  if = {
+   limit = { NOT = { has_variable = ffpa_usa_charter_deadline_v1 } }
+   # A single event-length response period for the frozen draft, not a new application window.
+   set_variable = { name = ffpa_usa_charter_grace_v1 months = 3 }
+   if = { limit = { NOT = { has_variable = ffpa_usa_charter_pending_v1 } } set_variable = ffpa_usa_charter_automatic_v1 }
+  }
+ }
+}
+
+ffpa_usa_charter_sign_v1 = {
+ if = {
+  limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 3 } ffpa_usa_charter_can_sign_v1 = yes }
+  if = { limit = { NOT = { ffpa_usa_charter_unchanged_v1 = yes } } add_modifier = { name = ffpa_usa_charter_transition_v1 months = 24 } }
+  set_variable = ffpa_usa_charter_signed_v1
+  # Close before native activation invokes any on_action callbacks. Never replay or restore laws.
+  ffpa_usa_charter_close_v1 = yes
+  if = { limit = { var:ffpa_usa_charter_economic_system_v1 = 1 NOT = { has_law = law_type:law_interventionism } } activate_law = law_type:law_interventionism }
+  if = { limit = { var:ffpa_usa_charter_economic_system_v1 = 2 NOT = { has_law = law_type:law_laissez_faire } } activate_law = law_type:law_laissez_faire }
+  if = { limit = { var:ffpa_usa_charter_economic_system_v1 = 3 NOT = { has_law = law_type:law_agrarianism } } activate_law = law_type:law_agrarianism }
+  if = { limit = { var:ffpa_usa_charter_distribution_of_power_v1 = 1 NOT = { has_law = law_type:law_universal_suffrage } } activate_law = law_type:law_universal_suffrage }
+  if = { limit = { var:ffpa_usa_charter_distribution_of_power_v1 = 2 NOT = { has_law = law_type:law_census_voting } } activate_law = law_type:law_census_voting }
+  if = { limit = { var:ffpa_usa_charter_distribution_of_power_v1 = 3 NOT = { has_law = law_type:law_wealth_voting } } activate_law = law_type:law_wealth_voting }
+  if = { limit = { var:ffpa_usa_charter_governance_principles_v1 = 1 NOT = { has_law = law_type:law_presidential_republic } } activate_law = law_type:law_presidential_republic }
+  if = { limit = { var:ffpa_usa_charter_governance_principles_v1 = 2 NOT = { has_law = law_type:law_parliamentary_republic } } activate_law = law_type:law_parliamentary_republic }
+ }
+}

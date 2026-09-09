@@ -1,0 +1,36 @@
+# Own strategy; does not replace Firefall/Core Balance homeland strategies.
+# Native reference: uw_homeland_strategies state_value/wargoal_scores interface.
+ai_strategy_ffpa_na_union_v1 = {
+ icon = "gfx/interface/icons/ai_strategy_icons/territorial_expansion.dds"
+ type = diplomatic
+ possible = {
+  ffpa_na_union_eligible_v1 = yes
+  is_subject = no
+  has_variable = ffpa_na_union_status_v1
+  var:ffpa_na_union_status_v1 = 1
+  has_variable = ffpa_na_union_deadline_v1
+  NOT = { has_variable = ffpa_na_union_withdraw_v1 }
+ }
+ # Above the usual Firefall 80 / Core Balance 550 starting weights, not a forced assignment.
+ weight = { value = 1000 }
+ state_value = {
+  if = {
+   limit = { can_reach_target_state = yes ffpa_na_union_is_target_state_v1 = yes }
+   add = 100
+  }
+ }
+ wargoal_scores = {
+  return_state = {
+   if = {
+    limit = { can_reach_target_state = yes ffpa_na_union_is_target_state_v1 = yes }
+    add = 300
+   }
+  }
+  conquer_state = {
+   if = {
+    limit = { can_reach_target_state = yes ffpa_na_union_is_target_state_v1 = yes }
+    add = 300
+   }
+  }
+ }
+}

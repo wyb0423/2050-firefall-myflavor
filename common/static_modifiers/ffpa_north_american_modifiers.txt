@@ -25,3 +25,68 @@ ffpa_na_local_producer_orders_v1 = {
  building_group_bg_agriculture_throughput_add = 0.05
  building_group_bg_manufacturing_throughput_add = 0.05
 }
+
+ffpa_na_union_dividend_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+ country_prestige_mult = 0.10
+ country_legitimacy_base_add = 5
+}
+ffpa_na_union_market_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ state_construction_mult = 0.25
+ building_group_bg_infrastructure_throughput_add = 0.20
+ building_group_bg_manufacturing_throughput_add = 0.10
+}
+ffpa_na_union_government_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ state_tax_capacity_mult = 0.25
+ state_incorporation_speed_mult = 0.50
+ state_turmoil_effects_mult = -0.25
+}
+
+ffpa_usa_national_works_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+ state_construction_mult = 0.10
+ country_bureaucracy_mult = -0.05
+}
+
+ffpa_usa_local_works_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+ building_group_bg_infrastructure_throughput_add = 0.10
+ state_construction_mult = 0.05
+}
+
+ffpa_usa_old_titles_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+ state_tax_capacity_mult = 0.10
+}
+
+ffpa_usa_title_disputes_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+ state_turmoil_effects_mult = 0.10
+}
+
+ffpa_usa_settlement_titles_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+ state_turmoil_effects_mult = -0.10
+}
+
+ffpa_usa_title_resurvey_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+ state_tax_capacity_mult = -0.05
+}
+
+ffpa_usa_community_delegates_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+ country_bureaucracy_mult = 0.05
+}
+
+ffpa_usa_personal_register_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+ country_legitimacy_base_add = 5
+}
+
+ffpa_usa_charter_transition_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_negative.dds
+ country_bureaucracy_mult = -0.05
+}

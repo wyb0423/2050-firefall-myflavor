@@ -50,3 +50,22 @@ ffpa_na_local_existing_levels_3_v1 = {
   add = this.level
  }
 }
+
+# State scope: conservative AI screen includes the target's overlord, if any.
+ffpa_na_union_target_strength_v1 = {
+ value = owner.army_power_projection
+ if = {
+  limit = { exists = owner.overlord }
+  add = owner.overlord.army_power_projection
+ }
+}
+# Same-region consolidation first; population breaks ties within each group.
+ffpa_na_union_candidate_score_v1 = {
+ value = state_population
+ divide = 1000000000
+ max = 0.99
+ if = {
+  limit = { state_region = { any_scope_state = { owner = root } } }
+  add = 1
+ }
+}

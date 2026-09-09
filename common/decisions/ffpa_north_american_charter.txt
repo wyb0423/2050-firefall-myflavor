@@ -1,0 +1,7 @@
+# Same entry after the political JE completes; no second journal or reset of the window.
+ffpa_usa_charter_decision_v1 = {
+ is_shown = { ffpa_usa_charter_eligible_v1 = yes NOT = { has_journal_entry = je_ffpa_usa_federal_settlement_v1 } }
+ possible = { ffpa_usa_charter_can_open_v1 = yes }
+ when_taken = { ffpa_usa_charter_open_v1 = yes }
+ ai_chance = { value = 20 }
+}

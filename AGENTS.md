@@ -49,7 +49,7 @@ FFPA Firefall Flavor Pack
   │  ├─ TUR / BYZ 身份与成立链
   │  ├─ 日志、迁移与共同体状态机
   │  └─ 帝国地区建设 ──> 西方整合桥接 ──> 东地中海风味事件
-  ├─ 北美模块：前身政权本地工程
+  ├─ 北美模块：本地工程与近邻统一
   └─ 未来国家或地区模块（共享相同依赖，内部状态相互隔离）
 ```
 
@@ -277,24 +277,34 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 自动 PM 生成器、生成产物与覆盖报告归外部 Auto PM Adapter，不得复制回本仓库。
 - 这些文件应纳入版本控制，不要因为不是运行时脚本就加入 `.gitignore`。
 
-### 4.9 北美模块：前身政权本地工程
+### 4.9 北美模块：本地工程、近邻统一与美国政治
 
 **所有文件**
 
-- `common/{journal_entries,scripted_triggers,scripted_effects,script_values,scripted_buttons,scripted_progress_bars,static_modifiers,on_actions,customizable_localization}/ffpa_north_american*.txt`（按数据库各一份，不供东地中海复用）
-- `events/ffpa_north_american_events.txt`
-- `localization/{english,simp_chinese}/ffpa_north_american_l_*.yml`
-- `tests/check_north_america_local_recovery.py`、`tests/check_north_america_preflight.py` 与独立开发测试包 `tests/probes/north_america/`
+- `common/{journal_entries,scripted_triggers,scripted_effects,script_values,scripted_buttons,scripted_progress_bars,static_modifiers,on_actions,customizable_localization,decisions}/ffpa_north_american*.txt`（宪章与生成表单独保存，不供东地中海复用）
+- `events/ffpa_north_american_events.txt`、`events/ffpa_american_political_events.txt`
+- `localization/{english,simp_chinese}/ffpa_north_american_l_*.yml` 与 `ffpa_usa_charter_rules_l_*.yml`
+- `tests/check_north_america_local_recovery.py`、`tests/check_north_america_union.py`、`tests/check_north_america_preflight.py` 与独立开发测试包 `tests/probes/north_america/`
 
 **行为、状态和边界**
 
-- 当前只实现《州界之间》及 `ffpa_na_flavor.1–2`。其余北美设计不是已实现行为；不得向既有东地中海调度器加入北美业务，也不改变 USA 成立条件或战争目标。
+- 当前实现《州界之间》《一个更大的共同体》及 `ffpa_na_flavor.1–5`，以及 USA《重新缔结联邦》与 `ffpa_usa_flavor.1–9`（政治会议及宪章）。其余北美设计不是已实现行为；不得向既有东地中海调度器加入北美业务，也不改变 USA 成立条件或战争目标。
+- USA 政治由自身 JE 月度 pulse 调度；`ffpa_usa_political_stage_v1` 的0–4为已议定数量，四项选择值1/2及完成、serial变量为存档接口。相邻选择六个月冷却，四项齐备且合法性至少40、官僚余额非负连续十二个月完成。延期须经按钮恢复；身份失效中断稳定期并作废事件序号，保留已定制度。
+- 政治奖励在选项结算时唯一发放，不在完成或初始化时重发。代表资格与监督选择只导出后续治理接口；常驻治理、经济科研尚未实现。修改时另运行 `tests/check_usa_politics.py`；其有限脚本解释不等于引擎测试。
+- `ffpa_usa_charter_*_v1` 为一次性宪章存档接口：stage的0/1/2/3对应治理/权力/经济草案及签署，三组枚举0为保留现法，其余按事件选项固定排序；initialized/requested/submitted/signed/abandoned/closed与serial防重。初始化不重开五年窗口，离开 USA 结束未结算机会。
+- 宪章月度包装只处理 USA；原生立法开始/结束挂钩只追踪已完整提交且窗口内被阻挡的草案。到期后的单次三个月答复期只允许签署既有草案或维持现制，后续立法不能续期。JE 完成后的决议只复用原入口，不新增日志或重置期限。
+- 签署只激活八部白名单中不同于现法的法律，代价一次24个月；先经济、再权力、最后政体，避免共和制回调把新投票法改成独裁制。未解决的属民制等法律依赖及王室领地关系阻止相关签署。`tools/generate_usa_charter_rules.py` 拥有结构 trigger、冲突 custom loc 与双语规则文本；上游变更须重新审阅后生成。运行 `tests/check_usa_charter.py --game-root GAME --upstream CMF --upstream TECHRES --upstream FIREFALL`，静态解释不能证明引擎中的逐次激活与回调顺序。
 - `ffpa_na_` 独占本期美国前身对象，身份门控为 15 个 strict country definition；本土白名单为 Firefall USA 成立清单去掉波多黎各后的 49 个州区域。
 - `je_ffpa_na_local_recovery_v1`、`ffpa_na_local_*_v1` 变量、州修正与两个事件 ID 为存档接口。route 的 1/2/3 固定表示农产加工、基础工业、交通集散；target 保存实际 state 实例，index 仅用于开工前选州。
 - complete 与 progress_event 为一次性门控，清理不得删除；notice_pending 仅用于半年事件排程，choice_pending 用于工程选择。失效/成立清理删除临时项目状态，不移除已获州奖励。不得让重复打开的旧事件修改新目标。
 - 使用原生 JE 激活和自身月度 pulse；月度只扫描当前工程州建筑，选择只扫描自有州，不遍历世界或人口。独立 `on_country_formed` 包装仅负责身份变化清理。
 - 完成需 3 级合格建筑、60% 就业、80% 市场接入，连续 12 个月；半年进展事件每国一次。所有交通事件及专精奖励使用基础设施吞吐量修正。
-- 每次修改运行上述两个检查和 `tests/validate_localization.py`。静态检查不证明原生激活、变量索引选州、AI、读档或分裂/合并继承；用户明确禁止本机启动游戏，保留这些待验项。开发测试包不会由主 Mod 自动加载。
+- `tools/generate_north_american_provinces.py` 拥有两个 `ffpa_north_american_union_provinces.txt` 生成表（effect 与 trigger）；更新地图时从真实上游重新生成并运行 `--check`，不得手抄省份或改变旧档快照语义。`common/ai_strategies/ffpa_north_american_strategies.txt` 只新增自有战略。
+- `je_ffpa_na_union_agenda_v1` 是重复议程界面，内部状态 0/1/2/3 固定为待议/活动/待接收/结算中；`ffpa_na_union_p_<province>_v1` 是启动领土快照。serial 为旧弹窗防重标识，cleanup 保留 serial/cooldown，成立国家时清理未结算议程。
+- 月度只核对活动目标所在州的快照；AI 空闲重选最多每年一次。严格 15 前身或 USA 门控；任何战争/已参与博弈期间保守延迟结算，不在后台自动转移领土。
+- 完整取得全部快照省份才能结算。接收州获得完整五年奖励；省份访问中的临时州标记防止同州重复发放，结束后清理。全国红利刷新不叠加；同州市场/政府修正互斥。
+- 独立 on_claim_added 包装只给匹配 claimant/region 的活动来源标记外部重授；若本模块自身通知延后到达也保守保留宣称。重复已有宣称可能不回调，尚不能证明所有外部来源都可识别。消亡国家的 JE 失效回调与州修正继承仍须实机验证。
+- 每次修改运行上述三个检查和 `tests/validate_localization.py`。静态检查不证明原生激活、变量索引选州、AI、读档或分裂/合并继承；用户明确禁止本机启动游戏，保留这些待验项。开发测试包不会由主 Mod 自动加载。
 
 ## 5. 共享接缝与唯一所有者规则
 
