@@ -285,6 +285,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `events/ffpa_north_american_events.txt`、`events/ffpa_american_political_events.txt`
 - `localization/{english,simp_chinese}/ffpa_north_american_l_*.yml` 与 `ffpa_usa_charter_rules_l_*.yml`
 - `tests/check_north_america_local_recovery.py`、`tests/check_north_america_union.py`、`tests/check_north_america_preflight.py` 与独立开发测试包 `tests/probes/north_america/`
+- `tests/check_north_america_activation.py` 验证前身激活／恢复脚本子集，不替代引擎选州、弹窗和读档验证。
 
 **行为、状态和边界**
 
@@ -299,6 +300,8 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - `ffpa_na_` 独占本期美国前身对象，身份门控为 15 个 strict country definition；本土白名单为 Firefall USA 成立清单去掉波多黎各后的 49 个州区域。
 - `je_ffpa_na_local_recovery_v1`、`ffpa_na_local_*_v1` 变量、州修正与两个事件 ID 为存档接口。route 的 1/2/3 固定表示农产加工、基础工业、交通集散；target 保存实际 state 实例，index 仅用于开工前选州。
 - complete 与 progress_event 为一次性门控，清理不得删除；notice_pending 仅用于半年事件排程，choice_pending 用于工程选择。失效/成立清理删除临时项目状态，不移除已获州奖励。不得让重复打开的旧事件修改新目标。
+- `ffpa_na_local_eligible_v2` 统一工程日志可见、激活、失效与补挂条件；缺失目标本身不销毁仍有候选州的日志。选州从实际选中州直接向 owner 写 target，索引明确从 root 读取，空选择回退固定 position=0，不复用继承的保存 scope。初始化保留有效工程；目标失效时自身月度 pulse 清理旧方向／待处理标记并重选，保留完成和半年事件一次性标记。
+- `ffpa_na_predecessor_journals_monthly_v2` 独立包装调用 `ffpa_na_ensure_predecessor_journals_v2`，只给 15 个 strict 前身补挂缺失且符合条件的两项日志，不处理 USA、不推进工程月数、不重新发奖。五场 `ffpa_na_flavor.1–5` 调用显式请求 popup；不得把补挂改为自动替玩家启动工程或统一议程。修改后运行 `tests/check_north_america_activation.py`。
 - 使用原生 JE 激活和自身月度 pulse；月度只扫描当前工程州建筑，选择只扫描自有州，不遍历世界或人口。独立 `on_country_formed` 包装仅负责身份变化清理。
 - 完成需 3 级合格建筑、60% 就业、80% 市场接入，连续 12 个月；半年进展事件每国一次。所有交通事件及专精奖励使用基础设施吞吐量修正。
 - `tools/generate_north_american_provinces.py` 拥有两个 `ffpa_north_american_union_provinces.txt` 生成表（effect 与 trigger）；更新地图时从真实上游重新生成并运行 `--check`，不得手抄省份或改变旧档快照语义。`common/ai_strategies/ffpa_north_american_strategies.txt` 只新增自有战略。

@@ -80,6 +80,12 @@ ffpa_na_local_candidate_state_v1 = {
  NOT = { has_modifier = ffpa_na_local_industry_v1 }
  NOT = { has_modifier = ffpa_na_local_transport_v1 }
 }
+# A missing selection is recoverable while an eligible owned state still exists.
+ffpa_na_local_eligible_v2 = {
+ ffpa_na_is_predecessor_v1 = yes
+ NOT = { has_variable = ffpa_na_local_complete_v1 }
+ any_scope_state = { ffpa_na_local_candidate_state_v1 = yes }
+}
 ffpa_na_local_target_valid_v1 = {
  ffpa_na_is_predecessor_v1 = yes
  exists = var:ffpa_na_local_target_v1

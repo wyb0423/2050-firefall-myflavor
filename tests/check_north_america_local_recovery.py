@@ -30,7 +30,8 @@ def main():
     assert values_source.count('occupancy >= 0.60') == 3
     assert 'market_access >= 0.80' in source
     assert 'ffpa_na_local_qualified_levels_v1 >= 3' in source
-    monthly = fields(catalog['ffpa_na_local_monthly_v1'], 'if')[0]
+    monthly = next(block for block in fields(catalog['ffpa_na_local_monthly_v1'], 'if')
+                   if fields(one(block, 'limit'), 'has_variable') == ['ffpa_na_local_route_v1'])
     change = one(monthly, 'if')
     assert one(one(change, 'change_variable'), 'add') == '1'
     reset = one(one(monthly, 'else'), 'set_variable')

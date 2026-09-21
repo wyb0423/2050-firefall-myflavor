@@ -26,7 +26,7 @@ ffpa_na_local_choose_button_v1 = {
   if = {
    limit = { ffpa_na_local_can_choose_v1 = yes NOT = { has_variable = ffpa_na_local_choice_pending_v1 } }
    set_variable = ffpa_na_local_choice_pending_v1
-   trigger_event = { id = ffpa_na_flavor.1 days = 1 }
+   trigger_event = { id = ffpa_na_flavor.1 days = 1 popup = yes }
   }
  }
 }
@@ -55,7 +55,7 @@ ffpa_na_union_propose_button_v1 = {
   if = {
    limit = { ffpa_na_union_can_start_v1 = yes }
    set_variable = ffpa_na_union_proposal_v1
-   trigger_event = { id = ffpa_na_flavor.3 days = 1 }
+   trigger_event = { id = ffpa_na_flavor.3 days = 1 popup = yes }
   }
  }
 }

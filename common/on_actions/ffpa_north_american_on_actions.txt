@@ -15,7 +15,15 @@ ffpa_na_on_country_formed_v1 = {
   }
   if = { limit = { NOT = { country_definition = cd:USA } } ffpa_usa_political_suspend_v1 = yes }
   if = {
-   limit = { has_variable = ffpa_na_local_target_v1 NOT = { ffpa_na_is_predecessor_v1 = yes } }
+   limit = {
+    NOT = { ffpa_na_is_predecessor_v1 = yes }
+    OR = {
+     has_variable = ffpa_na_local_target_v1
+     has_variable = ffpa_na_local_months_v1
+     has_variable = ffpa_na_local_choice_pending_v1
+     has_variable = ffpa_na_local_notice_pending_v1
+    }
+   }
    ffpa_na_local_cleanup_v1 = yes
   }
   if = {
@@ -43,7 +51,8 @@ ffpa_na_union_on_claim_added_v1 = {
  }
 }
 
-on_monthly_pulse_country = { on_actions = { ffpa_usa_charter_monthly_action_v1 } }
+on_monthly_pulse_country = { on_actions = { ffpa_usa_charter_monthly_action_v1 ffpa_na_predecessor_journals_monthly_v2 } }
+ffpa_na_predecessor_journals_monthly_v2 = { effect = { ffpa_na_ensure_predecessor_journals_v2 = yes } }
 ffpa_usa_charter_monthly_action_v1 = {
  effect = {
   ffpa_usa_ensure_journals_v2 = yes

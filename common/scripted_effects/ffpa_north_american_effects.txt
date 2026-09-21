@@ -10,26 +10,43 @@ ffpa_na_local_select_target_v1 = {
   set_variable = { name = ffpa_na_local_index_v1 value = 0 }
  }
  remove_variable = ffpa_na_local_target_v1
- # Native ordered_scope_state/position selection; variable index requires UI validation.
+ # Country -> selected owned state -> owner. Persist the state directly;
+ # do not consume an inherited saved scope when an ordered selection returns nothing.
  ordered_scope_state = {
   limit = { ffpa_na_local_candidate_state_v1 = yes }
   order_by = state_population
-  position = var:ffpa_na_local_index_v1
+  position = root.var:ffpa_na_local_index_v1
   check_range_bounds = no
-  save_scope_as = ffpa_na_selected_state
+  owner = { set_variable = { name = ffpa_na_local_target_v1 value = prev } }
  }
  if = {
-  limit = { exists = scope:ffpa_na_selected_state }
-  set_variable = { name = ffpa_na_local_target_v1 value = scope:ffpa_na_selected_state }
+  limit = { NOT = { exists = var:ffpa_na_local_target_v1 } }
+  set_variable = { name = ffpa_na_local_index_v1 value = 0 }
+  ordered_scope_state = {
+   limit = { ffpa_na_local_candidate_state_v1 = yes }
+   order_by = state_population
+   position = 0
+   check_range_bounds = no
+   owner = { set_variable = { name = ffpa_na_local_target_v1 value = prev } }
+  }
  }
  remove_variable = ffpa_na_local_candidate_count_v1
 }
 ffpa_na_local_initialize_v1 = {
  if = {
-  limit = { NOT = { has_variable = ffpa_na_local_months_v1 } }
-  set_variable = { name = ffpa_na_local_months_v1 value = 0 }
-  set_variable = { name = ffpa_na_local_index_v1 value = 0 }
-  ffpa_na_local_select_target_v1 = yes
+  limit = { ffpa_na_local_eligible_v2 = yes }
+  if = {
+   limit = { NOT = { ffpa_na_local_target_valid_v1 = yes } }
+   ffpa_na_local_cleanup_v1 = yes
+   set_variable = { name = ffpa_na_local_months_v1 value = 0 }
+   set_variable = { name = ffpa_na_local_index_v1 value = 0 }
+   ffpa_na_local_select_target_v1 = yes
+  }
+  else = {
+   # A missing JE must not reset a still-valid project in an old save.
+   if = { limit = { NOT = { has_variable = ffpa_na_local_months_v1 } } set_variable = { name = ffpa_na_local_months_v1 value = 0 } }
+   if = { limit = { NOT = { has_variable = ffpa_na_local_index_v1 } } set_variable = { name = ffpa_na_local_index_v1 value = 0 } }
+  }
  }
 }
 ffpa_na_local_cleanup_v1 = {
@@ -46,6 +63,10 @@ ffpa_na_local_sync_bar_v1 = {
  }
 }
 ffpa_na_local_monthly_v1 = {
+ if = {
+  limit = { ffpa_na_local_eligible_v2 = yes NOT = { ffpa_na_local_target_valid_v1 = yes } }
+  ffpa_na_local_initialize_v1 = yes
+ }
  if = {
   limit = { ffpa_na_local_target_valid_v1 = yes has_variable = ffpa_na_local_route_v1 }
   if = {
@@ -67,7 +88,7 @@ ffpa_na_local_monthly_v1 = {
   }
   set_variable = ffpa_na_local_progress_event_v1
   set_variable = ffpa_na_local_notice_pending_v1
-  trigger_event = { id = ffpa_na_flavor.2 days = 1 }
+  trigger_event = { id = ffpa_na_flavor.2 days = 1 popup = yes }
  }
  ffpa_na_local_sync_bar_v1 = yes
 }
@@ -239,7 +260,7 @@ ffpa_na_union_fail_v1 = {
  ffpa_na_union_cleanup_v1 = yes
  set_variable = { name = ffpa_na_union_cooldown_v1 years = 3 }
  set_variable = ffpa_na_union_failure_notice_v1
- trigger_event = { id = ffpa_na_flavor.5 days = 1 }
+ trigger_event = { id = ffpa_na_flavor.5 days = 1 popup = yes }
 }
 ffpa_na_union_monthly_v1 = {
  if = {
@@ -259,7 +280,7 @@ ffpa_na_union_monthly_v1 = {
    else_if = {
     limit = { ffpa_na_union_all_owned_v1 = yes }
     set_variable = { name = ffpa_na_union_status_v1 value = 2 }
-    trigger_event = { id = ffpa_na_flavor.4 days = 1 }
+    trigger_event = { id = ffpa_na_flavor.4 days = 1 popup = yes }
    }
    else_if = {
     limit = { NOT = { has_variable = ffpa_na_union_deadline_v1 } }
@@ -301,6 +322,21 @@ ffpa_na_union_settle_v1 = {
    set_variable = { name = ffpa_na_union_status_v1 value = 1 }
    remove_variable = ffpa_na_union_choice_v1
    ffpa_na_union_monthly_v1 = yes
+  }
+ }
+}
+
+# Country scope. Native activation handles new games; this recovers missing predecessor JEs.
+ffpa_na_ensure_predecessor_journals_v2 = {
+ if = {
+  limit = { ffpa_na_is_predecessor_v1 = yes }
+  if = {
+   limit = { ffpa_na_local_eligible_v2 = yes NOT = { has_journal_entry = je_ffpa_na_local_recovery_v1 } }
+   add_journal_entry = { type = je_ffpa_na_local_recovery_v1 }
+  }
+  if = {
+   limit = { ffpa_na_union_eligible_v1 = yes NOT = { has_journal_entry = je_ffpa_na_union_agenda_v1 } }
+   add_journal_entry = { type = je_ffpa_na_union_agenda_v1 }
   }
  }
 }
