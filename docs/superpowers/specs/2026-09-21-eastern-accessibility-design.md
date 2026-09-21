@@ -32,4 +32,4 @@
 
 4096组领土边界、路线/共同体/头衔条件及CMF双语提示专项检查通过；2394个双语键、本地化引用、82个脚本结构、元数据、北美preflight/local recovery/union/activation、TUR利益集团身份、地区CMF生成一致性及352组治理公式场景通过；`git diff --check` 通过。
 
-CMF总检查仍在 `je_ffpa_usa_continental_market_v1` 的widget断言失败；已从未修改HEAD导出副本复现同一失败，属于本次变更前既有问题，未扩展修改北美UI。没有游戏装载、调度、存档或AI行为运行证据。
+首次CMF总检查在 `je_ffpa_usa_continental_market_v1` 的widget断言失败，未修改HEAD也可复现。随后继续排查确认：CMF保留无自定义widget时的原生进度条渲染，USA两个经济日志使用该路径，原检查误将所有进度条视为CMF组件。已修正检查，明确区分8个CMF日志/14条进度条与2个原生日志/2条进度条，按各自渲染接口验证本地化；缺失CMF挂载、错误原生条引用和误覆盖原生容器仍会被拒绝。CMF总检查、USA经济脚本、地区展示、北美与风味门槛回归均通过；游戏脚本和UI未改动。没有游戏装载、调度、存档或AI行为运行证据。

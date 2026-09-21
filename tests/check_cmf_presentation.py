@@ -11,6 +11,24 @@ import re
 from check_north_america_preflight import ROOT, definitions, parse, fields, one
 from validate_localization import parse as parse_loc
 
+NATIVE_PROGRESS_JOURNALS = {
+    'je_ffpa_usa_continental_market_v1': 'ffpa_usa_market_months_bar_v1',
+    'je_ffpa_usa_industrial_scale_v1': 'ffpa_usa_industry_months_bar_v1',
+}
+
+
+def progress_presentation(key, block):
+    """Explicit native exceptions must not hide a missing CMF mount elsewhere."""
+    bars = fields(block, 'scripted_progress_bar')
+    mounts = [widget for widget in fields(block, 'widget')
+              if one(widget, 'container').strip('"') == 'com_custom_widget_container_scripted_progress_bars']
+    if key in NATIVE_PROGRESS_JOURNALS:
+        assert bars == [NATIVE_PROGRESS_JOURNALS[key]], key
+        assert not mounts, f'{key}: native progress must retain its default container'
+        return 'native'
+    assert len(mounts) == 1, f'{key}: missing or duplicate CMF progress mount'
+    return 'cmf'
+
 
 def entries(block):
     i = 0
@@ -127,7 +145,12 @@ def main():
         for file in (ROOT/'localization'/lang).glob('*.yml'):
             entries_lang.update(parse_loc(file.read_text(encoding='utf-8-sig'),lang))
         loc[lang]=entries_lang
+    # CMF deliberately retains vanilla rendering when no custom bar is mounted.
+    journal_gui=(a.cmf_root/'gui/com_gui_journal_entry.gui').read_text()
+    assert "Not(JournalEntry.HasCustomWidget('com_custom_widget_container_scripted_progress_bars'))" in journal_gui
+    assert 'datamodel = "[JournalEntry.GetScriptedProgressBars]"' in journal_gui
     journal_count=bar_count=event_count=0
+    native_journals=set(); bar_modes={}
     for file in (ROOT/'common/journal_entries').glob('*.txt'):
         for key,block in definitions(file).items():
             for widget in fields(block,'widget'):
@@ -138,9 +161,17 @@ def main():
                 assert re.search(r'^'+re.escape(name)+r' = \{ name = \"'+re.escape(name)+r'\" \}',gui.read_text(),re.M),name
                 assert f'name = "{container}"' in all_gui,container
             if fields(block,'scripted_progress_bar') and key.startswith('je_ffpa_'):
-                assert fields(block,'widget'),key
-                journal_count+=1;bar_count+=len(fields(block,'scripted_progress_bar'))
+                mode=progress_presentation(key,block)
+                bars=fields(block,'scripted_progress_bar')
+                for bar in bars:
+                    assert bar not in bar_modes, f'Duplicate journal attachment: {bar}'
+                    bar_modes[bar]=mode
+                if mode=='native':
+                    native_journals.add(key)
+                else:
+                    journal_count+=1;bar_count+=len(bars)
     assert (journal_count,bar_count)==(8,14)
+    assert native_journals==set(NATIVE_PROGRESS_JOURNALS)
     for file in (ROOT/'events').glob('*.txt'):
         for block in definitions(file).values():
             for style in fields(block,'gui_window'):
@@ -154,19 +185,23 @@ def main():
         for asset in re.findall(r'(?:texture|progresstexture)\s*=\s*"(gfx/[^"\[]+)"',text):
             assert any((r/asset).exists() for r in roots),asset
         assert 'GetPlayer' not in text and '.Execute(' not in text
+    checked_bars=set()
     for file in (ROOT/'common/scripted_progress_bars').glob('ffpa*.txt'):
         for bar,block in definitions(file).items():
-            for field in ('desc','second_desc'):
-                key=one(block,field).strip('"');assert key in loc['english'],key
+            checked_bars.add(bar)
+            for field in (('name','desc') if bar_modes[bar]=='native' else ('desc','second_desc')):
+                key=one(block,field).strip('"')
+                assert all(key in loc[lang] for lang in loc),key
             if 'commonwealth' not in bar:
                 assert not fields(block,'monthly_progress') and not fields(block,'weekly_progress'), 'Do not double-advance country-variable mirrors'
+    assert checked_bars==set(bar_modes), 'Missing progress bar definition'
     for key,value in loc['english'].items():
         for ref in re.findall(r"(?:GetCustom|ScriptValue|GetScriptValueDesc)\('([^']+)'\)",value):
             if 'cmf' in key: assert ref in catalogs,ref
     for file in (ROOT/'common').glob('*/ffpa*cmf*.txt'):
         text=file.read_text();parse(text)
         assert not re.search(r'\b(?:set_variable|change_variable|add_modifier|every_country|every_pop)\s*=',text),file
-    print(f'PASS: {arithmetic_checks()} arithmetic cases; {journal_count} journals / {bar_count} bars, {event_count} styled events; GUI mounts/assets, localization and read-only adapters.')
+    print(f'PASS: {arithmetic_checks()} arithmetic cases; {journal_count} CMF journals / {bar_count} bars, {len(native_journals)} native journals / bars, {event_count} styled events; GUI mounts/assets, localization and read-only adapters.')
     print('NOT TESTED: engine GUI rendering, hover scope, font fallback, save reload, AI and pulse ordering.')
 
 

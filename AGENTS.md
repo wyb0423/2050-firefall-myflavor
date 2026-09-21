@@ -487,7 +487,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - CMF ID：`com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework`；Workshop `3385002128`。本地核对版本1.65.0，必须在本包前加载；不覆盖其源码。
 - `gui/ffpa_cmf_progress_bars.gui` 是仅供本包挂载的无状态表现组件；复用 CMF `com_progressbar_base`。不拥有国家逻辑，不创建 struct/cache，也不调用业务 effect。
 - `gui/ffpa_eastern_mediterranean_cmf.gui`、`common/customizable_localization/ffpa_eastern_mediterranean_cmf.txt` 和两份 `ffpa_eastern_mediterranean_cmf_l_*.yml` 归东地中海；北美对应 `ffpa_north_american_cmf.txt` 和两份 `ffpa_north_american_cmf_l_*.yml`，不得互读地区状态。
-- 13条进度条的 `desc` 是完整悬浮说明，`second_desc` 是短标签与数字／状态。组件对条身和文字均绑定悬浮，必须使用 CMF 替代槽防止原生条重复显示。
+- 使用CMF的进度条以 `desc` 提供完整悬浮说明，`second_desc` 提供短标签与数字／状态。组件对条身和文字均绑定悬浮，必须使用 CMF 替代槽防止原生条重复显示。USA《大陆市场》《规模的力量》使用原生进度条的 `name` / `desc`，无需CMF挂载或 `second_desc`；检查必须区分这两条渲染路径。
 - `*_conditions_factor_*`、`*_healthy_v1_factor_*` 是从既有条件拆出的查询接口，模拟与显示共用；计算脚本的 `desc` 只命名实际贡献，不改变数值。粮仓分档公式由原月度入口调用，不能再添加一份原生周期增长。
 - 改革阶段只复用 CMF 阶段格，直接读取既有 stage；禁止增加不存在的立法成功率或停滞抽签。
 - `tests/check_cmf_presentation.py` 验证公式场景、引用、挂载与无副作用展示；配合本地化及北美两项检查执行。静态检查不代表游戏内效果。
