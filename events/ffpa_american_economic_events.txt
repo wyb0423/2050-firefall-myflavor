@@ -1,0 +1,221 @@
+namespace = ffpa_usa_flavor
+
+ffpa_usa_flavor.10 = {
+ type = country_event
+ placement = ROOT
+ title = ffpa_usa_flavor.10.t
+ desc = ffpa_usa_flavor.10.d
+ flavor = ffpa_usa_flavor.10.f
+ event_image = { video = "unspecific_signed_contract" }
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_economy_identity_v1 = yes var:ffpa_usa_economy_pending_v1 = 10 }
+ immediate = {
+  save_scope_value_as = { name = ffpa_usa_economy_event_serial value = var:ffpa_usa_economy_serial_v1 }
+ }
+ option = {
+  name = ffpa_usa_flavor.10.1
+  default_option = yes
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 10 } }
+   set_variable = { name = ffpa_usa_market_dispute_v1 value = 1 }
+   set_variable = { name = ffpa_usa_market_grant_weekly_v1 value = ffpa_usa_economy_weekly_grant_v1 years = 2 }
+   add_modifier = { name = ffpa_usa_market_grant_v1 multiplier = var:ffpa_usa_market_grant_weekly_v1 years = 2 }
+   add_modifier = { name = ffpa_usa_market_linkage_v1 years = 2 }
+   ffpa_usa_economy_finish_event_v1 = yes
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_usa_flavor.10.2
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 10 } }
+   set_variable = { name = ffpa_usa_market_dispute_v1 value = 2 }
+   add_modifier = { name = ffpa_usa_market_recognition_v1 years = 3 }
+   ffpa_usa_economy_finish_event_v1 = yes
+  }
+  ai_chance = { factor = 10 }
+ }
+}
+
+ffpa_usa_flavor.11 = {
+ type = country_event
+ placement = ROOT
+ title = ffpa_usa_flavor.11.t
+ desc = ffpa_usa_flavor.11.d
+ flavor = ffpa_usa_flavor.11.f
+ event_image = { video = "unspecific_signed_contract" }
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_economy_identity_v1 = yes var:ffpa_usa_economy_pending_v1 = 11 }
+ immediate = {
+  save_scope_value_as = { name = ffpa_usa_economy_event_serial value = var:ffpa_usa_economy_serial_v1 }
+ }
+ option = {
+  name = ffpa_usa_flavor.11.1
+  default_option = yes
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 11 } }
+   ffpa_usa_market_settle_v1 = { CHOICE = 1 }
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_usa_flavor.11.2
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 11 } }
+   ffpa_usa_market_settle_v1 = { CHOICE = 2 }
+  }
+  ai_chance = { factor = 10 }
+ }
+}
+
+ffpa_usa_flavor.12 = {
+ type = country_event
+ placement = ROOT
+ title = ffpa_usa_flavor.12.t
+ desc = ffpa_usa_flavor.12.d
+ flavor = ffpa_usa_flavor.12.f
+ event_image = { video = "unspecific_signed_contract" }
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_economy_identity_v1 = yes var:ffpa_usa_economy_pending_v1 = 12 }
+ immediate = {
+  save_scope_value_as = { name = ffpa_usa_economy_event_serial value = var:ffpa_usa_economy_serial_v1 }
+ }
+ option = {
+  name = ffpa_usa_flavor.12.1
+  default_option = yes
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 12 } }
+   set_variable = { name = ffpa_usa_industry_route_v1 value = 1 }
+   add_modifier = { name = ffpa_usa_industry_orders_v1 years = 3 }
+   ffpa_usa_economy_finish_event_v1 = yes
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_usa_flavor.12.2
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 12 } }
+   set_variable = { name = ffpa_usa_industry_route_v1 value = 2 }
+   add_modifier = { name = ffpa_usa_industry_suppliers_v1 years = 3 }
+   ffpa_usa_economy_finish_event_v1 = yes
+  }
+  ai_chance = { factor = 10 }
+ }
+}
+
+ffpa_usa_flavor.13 = {
+ type = country_event
+ placement = ROOT
+ title = ffpa_usa_flavor.13.t
+ desc = ffpa_usa_flavor.13.d
+ flavor = ffpa_usa_flavor.13.f
+ event_image = { video = "unspecific_signed_contract" }
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_economy_identity_v1 = yes var:ffpa_usa_economy_pending_v1 = 13 }
+ immediate = {
+  save_scope_value_as = { name = ffpa_usa_economy_event_serial value = var:ffpa_usa_economy_serial_v1 }
+ }
+ option = {
+  name = ffpa_usa_flavor.13.1
+  default_option = yes
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 13 } }
+   set_variable = { name = ffpa_usa_industry_wages_v1 value = 1 }
+   set_variable = { name = ffpa_usa_industry_grant_weekly_v1 value = ffpa_usa_economy_weekly_grant_v1 years = 2 }
+   add_modifier = { name = ffpa_usa_industry_grant_v1 multiplier = var:ffpa_usa_industry_grant_weekly_v1 years = 2 }
+   add_modifier = { name = ffpa_usa_industry_training_v1 years = 2 }
+   ffpa_usa_economy_finish_event_v1 = yes
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_usa_flavor.13.2
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 13 } }
+   set_variable = { name = ffpa_usa_industry_wages_v1 value = 2 }
+   add_modifier = { name = ffpa_usa_industry_rush_v1 years = 1 }
+   add_modifier = { name = ffpa_usa_industry_strain_v1 years = 2 }
+   ffpa_usa_economy_finish_event_v1 = yes
+  }
+  ai_chance = { factor = 10 }
+ }
+}
+
+ffpa_usa_flavor.14 = {
+ type = country_event
+ placement = ROOT
+ title = ffpa_usa_flavor.14.t
+ desc = ffpa_usa_flavor.14.d
+ flavor = ffpa_usa_flavor.14.f
+ event_image = { video = "unspecific_signed_contract" }
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_economy_identity_v1 = yes var:ffpa_usa_economy_pending_v1 = 14 }
+ immediate = {
+  save_scope_value_as = { name = ffpa_usa_economy_event_serial value = var:ffpa_usa_economy_serial_v1 }
+ }
+ option = {
+  name = ffpa_usa_flavor.14.1
+  default_option = yes
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 14 } }
+   ffpa_usa_industry_settle_v1 = { CHOICE = 1 }
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_usa_flavor.14.2
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 14 } }
+   ffpa_usa_industry_settle_v1 = { CHOICE = 2 }
+  }
+  ai_chance = { factor = 10 }
+ }
+}
+
+ffpa_usa_flavor.15 = {
+ type = country_event
+ placement = ROOT
+ title = ffpa_usa_flavor.15.t
+ desc = ffpa_usa_flavor.15.d
+ flavor = ffpa_usa_flavor.15.f
+ event_image = { video = "unspecific_signed_contract" }
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_economy_identity_v1 = yes var:ffpa_usa_economy_pending_v1 = 15 }
+ immediate = {
+  save_scope_value_as = { name = ffpa_usa_economy_event_serial value = var:ffpa_usa_economy_serial_v1 }
+  random_company = { limit = { ffpa_usa_contract_company_v1 = yes } save_scope_as = ffpa_usa_contract_company }
+ }
+ option = {
+  name = ffpa_usa_flavor.15.1
+  default_option = yes
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 15 } }
+   set_variable = { name = ffpa_usa_company_contract_choice_v1 value = 1 }
+   add_modifier = { name = ffpa_usa_company_contracts_v1 years = 3 }
+   ffpa_usa_economy_finish_event_v1 = yes
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_usa_flavor.15.2
+  if = {
+   limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 15 } }
+   set_variable = { name = ffpa_usa_company_contract_choice_v1 value = 2 }
+   add_modifier = { name = ffpa_usa_company_tenders_v1 years = 3 }
+   ffpa_usa_economy_finish_event_v1 = yes
+  }
+  ai_chance = { factor = 10 }
+ }
+}

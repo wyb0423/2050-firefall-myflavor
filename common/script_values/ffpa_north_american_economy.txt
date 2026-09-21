@@ -1,0 +1,73 @@
+# Country scope; only currently owned mainland state instances contribute.
+ffpa_usa_mainland_population_v1 = {
+ value = 0
+ every_scope_state = { limit = { ffpa_na_is_mainland_state_v1 = yes } add = state_population }
+}
+ffpa_usa_market_coverage_v1 = {
+ value = 0
+ if = {
+  limit = { ffpa_usa_mainland_population_v1 > 0 }
+  every_scope_state = { limit = { ffpa_na_is_mainland_state_v1 = yes market_access >= 0.95 } add = state_population }
+  divide = ffpa_usa_mainland_population_v1
+  multiply = 100
+ }
+}
+ffpa_usa_market_states_v1 = {
+ value = 0
+ every_scope_state = { limit = { ffpa_usa_market_facility_state_v1 = yes } add = 1 }
+}
+ffpa_usa_industry_states_v1 = {
+ value = 0
+ every_scope_state = { limit = { ffpa_usa_industry_state_v1 = yes } add = 1 }
+}
+ffpa_usa_industry_required_states_v1 = {
+ value = 3
+ if = { limit = { var:ffpa_usa_industry_route_v1 = 2 } value = 5 }
+}
+ffpa_usa_industry_levels_v1 = {
+ value = 0
+ every_scope_state = {
+  limit = { ffpa_na_is_mainland_state_v1 = yes }
+  every_scope_building = { limit = { ffpa_usa_manufacturing_building_v1 = yes level > 0 } add = this.level }
+ }
+}
+# State scope: ranking rewards by staffed, completed manufacturing capacity.
+ffpa_usa_industry_qualified_levels_v1 = {
+ value = 0
+ every_scope_building = { limit = { ffpa_usa_manufacturing_building_v1 = yes level > 0 occupancy >= 0.75 } add = this.level }
+}
+# Country scope. min is the lower bound in Clausewitz script values.
+ffpa_usa_industry_target_value_v1 = {
+ value = var:ffpa_usa_industry_baseline_v1
+ multiply = 0.25
+ ceiling = yes
+ min = 10
+ add = var:ffpa_usa_industry_baseline_v1
+ min = 30
+}
+ffpa_usa_industry_halfway_v1 = {
+ value = var:ffpa_usa_industry_target_v1
+ subtract = var:ffpa_usa_industry_baseline_v1
+ divide = 2
+ ceiling = yes
+ add = var:ffpa_usa_industry_baseline_v1
+}
+# GDP is annual production value; the budget is a weekly amount. Freeze this at choice.
+ffpa_usa_economy_weekly_grant_v1 = { value = gdp multiply = 0.005 divide = 52 }
+ffpa_usa_economy_total_grants_v1 = {
+ value = 0
+ if = { limit = { has_variable = ffpa_usa_market_grant_weekly_v1 } add = var:ffpa_usa_market_grant_weekly_v1 }
+ if = { limit = { has_variable = ffpa_usa_industry_grant_weekly_v1 } add = var:ffpa_usa_industry_grant_weekly_v1 }
+}
+ffpa_usa_industry_categories_v1 = {
+ value = 0
+ if = { limit = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { ffpa_usa_industry_food_v1 = yes level >= 1 occupancy >= 0.75 } } } add = 1 }
+ if = { limit = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { ffpa_usa_industry_textiles_v1 = yes level >= 1 occupancy >= 0.75 } } } add = 1 }
+ if = { limit = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { ffpa_usa_industry_consumer_v1 = yes level >= 1 occupancy >= 0.75 } } } add = 1 }
+ if = { limit = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { ffpa_usa_industry_chemicals_v1 = yes level >= 1 occupancy >= 0.75 } } } add = 1 }
+ if = { limit = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { ffpa_usa_industry_metals_v1 = yes level >= 1 occupancy >= 0.75 } } } add = 1 }
+ if = { limit = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { ffpa_usa_industry_machinery_v1 = yes level >= 1 occupancy >= 0.75 } } } add = 1 }
+ if = { limit = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { ffpa_usa_industry_vehicles_v1 = yes level >= 1 occupancy >= 0.75 } } } add = 1 }
+ if = { limit = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { ffpa_usa_industry_electronics_v1 = yes level >= 1 occupancy >= 0.75 } } } add = 1 }
+ if = { limit = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { ffpa_usa_industry_arms_v1 = yes level >= 1 occupancy >= 0.75 } } } add = 1 }
+}

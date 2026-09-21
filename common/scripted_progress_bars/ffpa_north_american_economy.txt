@@ -1,0 +1,16 @@
+ffpa_usa_market_months_bar_v1 = {
+ name = ffpa_usa_market_months_bar_v1
+ desc = ffpa_usa_market_months_bar_v1_desc
+ default_green = yes
+ start_value = 0
+ min_value = 0
+ max_value = 12
+}
+ffpa_usa_industry_months_bar_v1 = {
+ name = ffpa_usa_industry_months_bar_v1
+ desc = ffpa_usa_industry_months_bar_v1_desc
+ default_green = yes
+ start_value = 0
+ min_value = 0
+ max_value = 18
+}

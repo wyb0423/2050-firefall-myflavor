@@ -1,0 +1,8 @@
+ffpa_usa_economy_retry_button_v1 = {
+ name = ffpa_usa_economy_retry_button_v1
+ desc = ffpa_usa_economy_retry_button_v1_desc
+ visible = { ffpa_usa_economy_identity_v1 = yes has_variable = ffpa_usa_economy_pending_v1 }
+ possible = { ffpa_usa_economy_identity_v1 = yes has_variable = ffpa_usa_economy_pending_v1 }
+ effect = { ffpa_usa_economy_retry_v1 = yes }
+ ai_chance = { value = 0 }
+}

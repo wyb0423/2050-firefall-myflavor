@@ -1,0 +1,28 @@
+je_ffpa_usa_continental_market_v1 = {
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ scripted_progress_bar = ffpa_usa_market_months_bar_v1
+ scripted_button = ffpa_usa_economy_retry_button_v1
+ is_shown_when_inactive = { ffpa_usa_market_eligible_v1 = yes }
+ possible = { ffpa_usa_market_eligible_v1 = yes }
+ immediate = { ffpa_usa_market_initialize_v1 = yes }
+ on_monthly_pulse = { effect = { ffpa_usa_market_monthly_v1 = yes } }
+ complete = { custom_tooltip = { text = ffpa_usa_market_settled_tt has_variable = ffpa_usa_market_complete_v1 } }
+ invalid = { NOT = { ffpa_usa_economy_identity_v1 = yes } }
+ on_invalid = { ffpa_usa_economy_suspend_v1 = yes }
+ weight = 100
+ should_be_pinned_by_default_uninvolved_or_context = yes
+}
+je_ffpa_usa_industrial_scale_v1 = {
+ icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ scripted_progress_bar = ffpa_usa_industry_months_bar_v1
+ scripted_button = ffpa_usa_economy_retry_button_v1
+ is_shown_when_inactive = { ffpa_usa_industry_eligible_v1 = yes }
+ possible = { ffpa_usa_industry_eligible_v1 = yes }
+ immediate = { ffpa_usa_industry_initialize_v1 = yes }
+ on_monthly_pulse = { effect = { ffpa_usa_industry_monthly_v1 = yes } }
+ complete = { custom_tooltip = { text = ffpa_usa_industry_settled_tt has_variable = ffpa_usa_industry_complete_v1 } }
+ invalid = { NOT = { ffpa_usa_economy_identity_v1 = yes } }
+ on_invalid = { ffpa_usa_economy_suspend_v1 = yes }
+ weight = 100
+ should_be_pinned_by_default_uninvolved_or_context = yes
+}

@@ -58,7 +58,11 @@ def main():
     assert one(one(catalog['ffpa_na_flavor.2'], 'immediate'), 'remove_variable') == 'ffpa_na_local_notice_pending_v1'
     assert len(fields(catalog['ffpa_na_flavor.2'], 'option')) == 2
     assert 'var:ffpa_na_local_months_v1 >= 6' in source
-    assert 'state_infrastructure_mult' not in source
+    # The predecessor's transport reward is throughput. USA's later physical
+    # corridor projects intentionally grant infrastructure capacity instead.
+    for key, block in catalog.items():
+        if key.startswith('ffpa_na_'):
+            assert 'state_infrastructure_mult' not in repr(block), key
     catalogs = []
     for language in ('english', 'simp_chinese'):
         path = ROOT / f'localization/{language}/ffpa_north_american_l_{language}.yml'

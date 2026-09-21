@@ -1,0 +1,71 @@
+# Country scope unless marked otherwise; USA owns all state here.
+ffpa_usa_economy_identity_v1 = { country_definition = cd:USA is_revolutionary = no }
+ffpa_usa_market_eligible_v1 = {
+ ffpa_usa_economy_identity_v1 = yes
+ NOT = { has_variable = ffpa_usa_market_complete_v1 }
+ any_scope_state = { ffpa_na_is_mainland_state_v1 = yes }
+}
+ffpa_usa_industry_eligible_v1 = {
+ ffpa_usa_economy_identity_v1 = yes
+ has_variable = ffpa_usa_market_complete_v1
+ NOT = { has_variable = ffpa_usa_industry_complete_v1 }
+ any_scope_state = { ffpa_na_is_mainland_state_v1 = yes }
+}
+# Building scope.
+ffpa_usa_industry_food_v1 = { OR = { is_building_type = building_food_industry } }
+# Building scope.
+ffpa_usa_industry_textiles_v1 = { OR = { is_building_type = building_textile_mill } }
+# Building scope.
+ffpa_usa_industry_consumer_v1 = { OR = { is_building_type = building_furniture_manufactory is_building_type = building_glassworks is_building_type = building_paper_mill } }
+# Building scope.
+ffpa_usa_industry_chemicals_v1 = { OR = { is_building_type = building_chemical_plant is_building_type = building_explosives_factory is_building_type = building_synthetics_plant is_building_type = building_pharmaceuticals_industry } }
+# Building scope.
+ffpa_usa_industry_metals_v1 = { OR = { is_building_type = building_steel_mill is_building_type = building_alloys_plant } }
+# Building scope.
+ffpa_usa_industry_machinery_v1 = { OR = { is_building_type = building_tooling_workshop is_building_type = building_motor_industry is_building_type = building_robotics_industry } }
+# Building scope.
+ffpa_usa_industry_vehicles_v1 = { OR = { is_building_type = building_shipyard is_building_type = building_automotive_industry is_building_type = building_aircraft_industry } }
+# Building scope.
+ffpa_usa_industry_electronics_v1 = { OR = { is_building_type = building_electrics_industry is_building_type = building_electronics_industry is_building_type = building_battery_plant is_building_type = building_processors_foundry is_building_type = building_computer_assembly_plant is_building_type = building_consumer_electronics_industry } }
+# Building scope.
+ffpa_usa_industry_arms_v1 = { OR = { is_building_type = building_arms_industry is_building_type = building_artillery_foundry is_building_type = building_munition_plant } }
+# Building scope. Explicit whitelist excludes offices, software and data centers.
+ffpa_usa_manufacturing_building_v1 = { OR = { ffpa_usa_industry_food_v1 = yes ffpa_usa_industry_textiles_v1 = yes ffpa_usa_industry_consumer_v1 = yes ffpa_usa_industry_chemicals_v1 = yes ffpa_usa_industry_metals_v1 = yes ffpa_usa_industry_machinery_v1 = yes ffpa_usa_industry_vehicles_v1 = yes ffpa_usa_industry_electronics_v1 = yes ffpa_usa_industry_arms_v1 = yes } }
+ffpa_usa_market_facility_v1 = { OR = { ffpa_usa_industry_food_v1 = yes ffpa_usa_industry_textiles_v1 = yes ffpa_usa_industry_consumer_v1 = yes ffpa_usa_industry_chemicals_v1 = yes ffpa_usa_industry_metals_v1 = yes ffpa_usa_industry_machinery_v1 = yes ffpa_usa_industry_vehicles_v1 = yes ffpa_usa_industry_electronics_v1 = yes is_building_type = building_port is_building_type = building_railway } }
+# State scope. Market population coverage and the four facility states are separate tests.
+ffpa_usa_market_facility_state_v1 = {
+ ffpa_na_is_mainland_state_v1 = yes
+ any_scope_building = { ffpa_usa_market_facility_v1 = yes level >= 1 occupancy >= 0.70 }
+}
+ffpa_usa_market_reward_state_v1 = { ffpa_usa_market_facility_state_v1 = yes market_access >= 0.95 }
+ffpa_usa_industry_state_v1 = {
+ ffpa_na_is_mainland_state_v1 = yes
+ any_scope_building = { ffpa_usa_manufacturing_building_v1 = yes level >= 1 occupancy >= 0.75 }
+}
+# Country scope. Display and monthly simulation consume the same queries.
+ffpa_usa_market_stable_v1 = {
+ ffpa_usa_economy_identity_v1 = yes
+ custom_tooltip = { text = ffpa_usa_market_population_tt ffpa_usa_mainland_population_v1 > 0 ffpa_usa_market_coverage_v1 >= 85 }
+ custom_tooltip = { text = ffpa_usa_market_facilities_tt ffpa_usa_market_states_v1 >= 4 }
+}
+ffpa_usa_industry_stable_v1 = {
+ ffpa_usa_economy_identity_v1 = yes
+ has_variable = ffpa_usa_industry_route_v1
+ custom_tooltip = { text = ffpa_usa_industry_levels_tt ffpa_usa_industry_levels_v1 >= var:ffpa_usa_industry_target_v1 }
+ custom_tooltip = { text = ffpa_usa_industry_categories_tt ffpa_usa_industry_categories_v1 >= 4 }
+ custom_tooltip = {
+  text = ffpa_usa_industry_mix_tt
+  any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { level >= 1 occupancy >= 0.75 OR = { ffpa_usa_industry_metals_v1 = yes ffpa_usa_industry_machinery_v1 = yes } } }
+  any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { level >= 1 occupancy >= 0.75 OR = { ffpa_usa_industry_food_v1 = yes ffpa_usa_industry_textiles_v1 = yes ffpa_usa_industry_consumer_v1 = yes } } }
+ }
+ custom_tooltip = { text = ffpa_usa_industry_distribution_tt ffpa_usa_industry_states_v1 >= ffpa_usa_industry_required_states_v1 }
+}
+ffpa_usa_economy_event_valid_v1 = {
+ ffpa_usa_economy_identity_v1 = yes
+ has_variable = ffpa_usa_economy_pending_v1
+ var:ffpa_usa_economy_pending_v1 = $EVENT$
+ exists = scope:ffpa_usa_economy_event_serial
+ scope:ffpa_usa_economy_event_serial = var:ffpa_usa_economy_serial_v1
+}
+# Company scope. Includes established suppliers and carriers; no historical brand requirement.
+ffpa_usa_contract_company_v1 = { company_owned_levels > 0 }

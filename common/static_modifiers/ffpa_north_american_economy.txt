@@ -1,0 +1,90 @@
+ffpa_usa_market_linkage_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ building_group_bg_infrastructure_throughput_add = 0.1
+}
+ffpa_usa_market_recognition_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ building_group_bg_infrastructure_throughput_add = 0.05
+}
+ffpa_usa_market_corridor_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ state_construction_mult = 0.2
+ state_infrastructure_mult = 0.2
+}
+ffpa_usa_market_branches_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ state_infrastructure_mult = 0.1
+ state_tax_capacity_mult = 0.1
+}
+ffpa_usa_market_registration_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ country_max_companies_add = 1
+}
+ffpa_usa_industry_orders_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ state_construction_mult = 0.1
+}
+ffpa_usa_industry_suppliers_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ building_group_bg_manufacturing_throughput_add = 0.05
+}
+ffpa_usa_industry_training_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ state_turmoil_effects_mult = -0.1
+}
+ffpa_usa_industry_rush_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ building_group_bg_manufacturing_throughput_add = 0.1
+}
+ffpa_usa_industry_strain_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ state_turmoil_effects_mult = 0.1
+}
+ffpa_usa_industry_hub_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ building_group_bg_manufacturing_throughput_add = 0.15
+}
+ffpa_usa_industry_network_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ building_group_bg_manufacturing_throughput_add = 0.08
+}
+ffpa_usa_industry_construction_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ state_construction_mult = 0.1
+}
+ffpa_usa_industry_infrastructure_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ building_group_bg_infrastructure_throughput_add = 0.1
+}
+ffpa_usa_company_entry_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ country_max_companies_add = 2
+}
+ffpa_usa_company_entry_construction_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ country_company_construction_efficiency_bonus_add = 0.1
+}
+ffpa_usa_company_champions_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ country_company_throughput_bonus_add = 0.1
+}
+ffpa_usa_company_champions_construction_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ country_company_construction_efficiency_bonus_add = 0.2
+}
+ffpa_usa_company_contracts_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ country_company_construction_efficiency_bonus_add = 0.1
+}
+ffpa_usa_company_tenders_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ state_construction_mult = 0.05
+}
+ffpa_usa_market_grant_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ country_expenses_add = 1
+}
+ffpa_usa_industry_grant_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_gear_positive.dds
+ country_expenses_add = 1
+}

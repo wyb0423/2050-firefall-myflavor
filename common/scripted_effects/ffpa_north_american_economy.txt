@@ -1,0 +1,247 @@
+# USA-only lifecycle. Native JE pulses own progression; recovery never advances months.
+ffpa_usa_economy_ensure_v1 = {
+ if = {
+  limit = { ffpa_usa_economy_identity_v1 = yes }
+  if = { limit = { NOT = { has_variable = ffpa_usa_economy_serial_v1 } } set_variable = { name = ffpa_usa_economy_serial_v1 value = 0 } }
+  remove_variable = ffpa_usa_economy_suspended_v1
+  if = {
+   limit = { ffpa_usa_market_eligible_v1 = yes NOT = { has_journal_entry = je_ffpa_usa_continental_market_v1 } }
+   add_journal_entry = { type = je_ffpa_usa_continental_market_v1 }
+  }
+  if = {
+   limit = { ffpa_usa_industry_eligible_v1 = yes NOT = { has_journal_entry = je_ffpa_usa_industrial_scale_v1 } }
+   add_journal_entry = { type = je_ffpa_usa_industrial_scale_v1 }
+  }
+ }
+ else_if = {
+  limit = { has_variable = ffpa_usa_economy_serial_v1 NOT = { has_variable = ffpa_usa_economy_suspended_v1 } }
+  ffpa_usa_economy_suspend_v1 = yes
+ }
+}
+ffpa_usa_market_initialize_v1 = {
+ if = {
+  limit = { NOT = { has_variable = ffpa_usa_market_months_v1 } }
+  set_variable = { name = ffpa_usa_market_months_v1 value = 0 }
+  set_variable = { name = ffpa_usa_market_elapsed_v1 value = 0 }
+ }
+ ffpa_usa_market_sync_v1 = yes
+}
+ffpa_usa_industry_initialize_v1 = {
+ if = {
+  limit = { NOT = { has_variable = ffpa_usa_industry_baseline_v1 } }
+  set_variable = { name = ffpa_usa_industry_baseline_v1 value = ffpa_usa_industry_levels_v1 }
+  set_variable = { name = ffpa_usa_industry_target_v1 value = ffpa_usa_industry_target_value_v1 }
+  set_variable = { name = ffpa_usa_industry_months_v1 value = 0 }
+ }
+ ffpa_usa_industry_sync_v1 = yes
+}
+ffpa_usa_market_sync_v1 = {
+ je:je_ffpa_usa_continental_market_v1 ?= { set_bar_progress = { name = ffpa_usa_market_months_bar_v1 value = root.var:ffpa_usa_market_months_v1 } }
+}
+ffpa_usa_industry_sync_v1 = {
+ je:je_ffpa_usa_industrial_scale_v1 ?= { set_bar_progress = { name = ffpa_usa_industry_months_bar_v1 value = root.var:ffpa_usa_industry_months_v1 } }
+}
+ffpa_usa_market_monthly_v1 = {
+ if = {
+  limit = { ffpa_usa_market_eligible_v1 = yes NOT = { has_variable = ffpa_usa_market_ready_v1 } }
+  change_variable = { name = ffpa_usa_market_elapsed_v1 add = 1 }
+  if = { limit = { ffpa_usa_market_stable_v1 = yes } change_variable = { name = ffpa_usa_market_months_v1 add = 1 } }
+  else = { set_variable = { name = ffpa_usa_market_months_v1 value = 0 } }
+  if = { limit = { var:ffpa_usa_market_months_v1 >= 12 } ffpa_usa_market_prepare_reward_v1 = yes }
+  ffpa_usa_market_sync_v1 = yes
+ }
+ ffpa_usa_economy_dispatch_v1 = yes
+}
+ffpa_usa_industry_monthly_v1 = {
+ if = {
+  limit = { ffpa_usa_industry_eligible_v1 = yes NOT = { has_variable = ffpa_usa_industry_ready_v1 } }
+  if = { limit = { ffpa_usa_industry_stable_v1 = yes } change_variable = { name = ffpa_usa_industry_months_v1 add = 1 } }
+  else = { set_variable = { name = ffpa_usa_industry_months_v1 value = 0 } }
+  if = { limit = { var:ffpa_usa_industry_months_v1 >= 18 } ffpa_usa_industry_prepare_reward_v1 = yes }
+  ffpa_usa_industry_sync_v1 = yes
+ }
+ ffpa_usa_economy_dispatch_v1 = yes
+}
+# Persistent country-owned lists freeze actual project states at validation.
+# Missing state instances are skipped by native list iteration; later conquests never join.
+ffpa_usa_market_prepare_reward_v1 = {
+ if = {
+  limit = { NOT = { has_variable = ffpa_usa_market_ready_v1 } }
+  set_variable = ffpa_usa_market_ready_v1
+  clear_variable_list = ffpa_usa_market_reward_states_v1
+  clear_variable_list = ffpa_usa_market_core_states_v1
+  every_scope_state = {
+   limit = { ffpa_usa_market_reward_state_v1 = yes }
+   owner = { add_to_variable_list = { name = ffpa_usa_market_reward_states_v1 target = prev } }
+  }
+  ordered_scope_state = {
+   limit = { ffpa_usa_market_reward_state_v1 = yes }
+   order_by = state_population
+   position = 0
+   check_range_bounds = no
+   owner = { add_to_variable_list = { name = ffpa_usa_market_core_states_v1 target = prev } }
+  }
+  ordered_scope_state = {
+   limit = { ffpa_usa_market_reward_state_v1 = yes }
+   order_by = state_population
+   position = 1
+   check_range_bounds = no
+   owner = { add_to_variable_list = { name = ffpa_usa_market_core_states_v1 target = prev } }
+  }
+  ordered_scope_state = {
+   limit = { ffpa_usa_market_reward_state_v1 = yes }
+   order_by = state_population
+   position = 2
+   check_range_bounds = no
+   owner = { add_to_variable_list = { name = ffpa_usa_market_core_states_v1 target = prev } }
+  }
+ }
+}
+ffpa_usa_industry_prepare_reward_v1 = {
+ if = {
+  limit = { NOT = { has_variable = ffpa_usa_industry_ready_v1 } }
+  set_variable = ffpa_usa_industry_ready_v1
+  clear_variable_list = ffpa_usa_industry_reward_states_v1
+  if = {
+   limit = { var:ffpa_usa_industry_route_v1 = 1 }
+   ordered_scope_state = {
+    limit = { ffpa_usa_industry_state_v1 = yes }
+    order_by = ffpa_usa_industry_qualified_levels_v1
+    position = 0
+    check_range_bounds = no
+    owner = { add_to_variable_list = { name = ffpa_usa_industry_reward_states_v1 target = prev } }
+   }
+   ordered_scope_state = {
+    limit = { ffpa_usa_industry_state_v1 = yes }
+    order_by = ffpa_usa_industry_qualified_levels_v1
+    position = 1
+    check_range_bounds = no
+    owner = { add_to_variable_list = { name = ffpa_usa_industry_reward_states_v1 target = prev } }
+   }
+   ordered_scope_state = {
+    limit = { ffpa_usa_industry_state_v1 = yes }
+    order_by = ffpa_usa_industry_qualified_levels_v1
+    position = 2
+    check_range_bounds = no
+    owner = { add_to_variable_list = { name = ffpa_usa_industry_reward_states_v1 target = prev } }
+   }
+  }
+  else = {
+   every_scope_state = {
+    limit = { ffpa_usa_industry_state_v1 = yes }
+    owner = { add_to_variable_list = { name = ffpa_usa_industry_reward_states_v1 target = prev } }
+   }
+  }
+ }
+}
+# One ticket, one popup at a time. Completion outranks optional supplier flavor.
+ffpa_usa_economy_dispatch_v1 = {
+ if = {
+  limit = { ffpa_usa_economy_identity_v1 = yes NOT = { has_variable = ffpa_usa_economy_pending_v1 } NOT = { has_variable = ffpa_usa_economy_cooldown_v1 } }
+  if = { limit = { has_variable = ffpa_usa_market_ready_v1 NOT = { has_variable = ffpa_usa_market_complete_v1 } } ffpa_usa_economy_open_event_v1 = { EVENT = 11 } }
+  else_if = { limit = { has_variable = ffpa_usa_industry_ready_v1 NOT = { has_variable = ffpa_usa_industry_complete_v1 } } ffpa_usa_economy_open_event_v1 = { EVENT = 14 } }
+  else_if = {
+   limit = { ffpa_usa_industry_eligible_v1 = yes has_variable = ffpa_usa_industry_baseline_v1 NOT = { has_variable = ffpa_usa_industry_route_v1 } }
+   ffpa_usa_economy_open_event_v1 = { EVENT = 12 }
+  }
+  else_if = {
+   limit = { ffpa_usa_market_eligible_v1 = yes var:ffpa_usa_market_elapsed_v1 >= 6 NOT = { has_variable = ffpa_usa_market_dispute_v1 } }
+   ffpa_usa_economy_open_event_v1 = { EVENT = 10 }
+  }
+  else_if = {
+   limit = {
+    ffpa_usa_industry_eligible_v1 = yes has_variable = ffpa_usa_industry_route_v1
+    NOT = { has_variable = ffpa_usa_industry_wages_v1 }
+    ffpa_usa_industry_levels_v1 >= ffpa_usa_industry_halfway_v1
+    any_scope_state = { ffpa_usa_industry_state_v1 = yes }
+   }
+   ffpa_usa_economy_open_event_v1 = { EVENT = 13 }
+  }
+  else_if = {
+   limit = {
+    ffpa_usa_industry_eligible_v1 = yes has_variable = ffpa_usa_industry_route_v1
+    NOT = { has_variable = ffpa_usa_company_contract_choice_v1 }
+    any_company = { ffpa_usa_contract_company_v1 = yes }
+   }
+   ffpa_usa_economy_open_event_v1 = { EVENT = 15 }
+  }
+ }
+}
+ffpa_usa_economy_open_event_v1 = {
+ if = { limit = { NOT = { has_variable = ffpa_usa_economy_serial_v1 } } set_variable = { name = ffpa_usa_economy_serial_v1 value = 0 } }
+ change_variable = { name = ffpa_usa_economy_serial_v1 add = 1 }
+ set_variable = { name = ffpa_usa_economy_pending_v1 value = $EVENT$ }
+ trigger_event = { id = ffpa_usa_flavor.$EVENT$ popup = yes }
+}
+ffpa_usa_economy_finish_event_v1 = {
+ remove_variable = ffpa_usa_economy_pending_v1
+ set_variable = { name = ffpa_usa_economy_cooldown_v1 months = 1 }
+}
+ffpa_usa_economy_retry_v1 = {
+ if = {
+  limit = { ffpa_usa_economy_identity_v1 = yes has_variable = ffpa_usa_economy_pending_v1 }
+  change_variable = { name = ffpa_usa_economy_serial_v1 add = 1 }
+  remove_variable = ffpa_usa_economy_pending_v1
+  ffpa_usa_economy_dispatch_v1 = yes
+ }
+}
+ffpa_usa_market_settle_v1 = {
+ if = {
+  limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 11 } has_variable = ffpa_usa_market_ready_v1 NOT = { has_variable = ffpa_usa_market_complete_v1 } }
+  set_variable = { name = ffpa_usa_market_choice_v1 value = $CHOICE$ }
+  if = {
+   limit = { var:ffpa_usa_market_choice_v1 = 1 }
+   every_in_list = { variable = ffpa_usa_market_core_states_v1 limit = { owner = root } add_modifier = { name = ffpa_usa_market_corridor_v1 } }
+  }
+  else = { every_in_list = { variable = ffpa_usa_market_reward_states_v1 limit = { owner = root } add_modifier = { name = ffpa_usa_market_branches_v1 } } }
+  add_modifier = { name = ffpa_usa_market_registration_v1 }
+  set_variable = ffpa_usa_market_complete_v1
+  clear_variable_list = ffpa_usa_market_reward_states_v1
+  clear_variable_list = ffpa_usa_market_core_states_v1
+  remove_variable = ffpa_usa_market_ready_v1
+  ffpa_usa_economy_finish_event_v1 = yes
+  ffpa_usa_economy_ensure_v1 = yes
+ }
+}
+ffpa_usa_industry_settle_v1 = {
+ if = {
+  limit = { ffpa_usa_economy_event_valid_v1 = { EVENT = 14 } has_variable = ffpa_usa_industry_ready_v1 NOT = { has_variable = ffpa_usa_industry_complete_v1 } }
+  if = {
+   limit = { var:ffpa_usa_industry_route_v1 = 1 }
+   every_in_list = { variable = ffpa_usa_industry_reward_states_v1 limit = { owner = root } add_modifier = { name = ffpa_usa_industry_hub_v1 } }
+   add_modifier = { name = ffpa_usa_industry_construction_v1 years = 5 }
+  }
+  else = {
+   every_in_list = { variable = ffpa_usa_industry_reward_states_v1 limit = { owner = root } add_modifier = { name = ffpa_usa_industry_network_v1 } }
+   add_modifier = { name = ffpa_usa_industry_infrastructure_v1 years = 5 }
+  }
+  set_variable = { name = ffpa_usa_company_policy_v1 value = $CHOICE$ }
+  if = {
+   limit = { var:ffpa_usa_company_policy_v1 = 1 }
+   add_modifier = { name = ffpa_usa_company_entry_v1 }
+   add_modifier = { name = ffpa_usa_company_entry_construction_v1 years = 10 }
+  }
+  else = {
+   add_modifier = { name = ffpa_usa_company_champions_v1 }
+   add_modifier = { name = ffpa_usa_company_champions_construction_v1 years = 10 }
+  }
+  # Future governance consumes this milestone; governance itself is not part of this delivery.
+  set_variable = ffpa_usa_industry_complete_v1
+  clear_variable_list = ffpa_usa_industry_reward_states_v1
+  remove_variable = ffpa_usa_industry_ready_v1
+  ffpa_usa_economy_finish_event_v1 = yes
+ }
+}
+ffpa_usa_economy_suspend_v1 = {
+ if = {
+  limit = { has_variable = ffpa_usa_economy_serial_v1 NOT = { has_variable = ffpa_usa_economy_suspended_v1 } }
+  set_variable = ffpa_usa_economy_suspended_v1
+  change_variable = { name = ffpa_usa_economy_serial_v1 add = 1 }
+  remove_variable = ffpa_usa_economy_pending_v1
+  if = { limit = { has_variable = ffpa_usa_market_months_v1 NOT = { has_variable = ffpa_usa_market_ready_v1 } } set_variable = { name = ffpa_usa_market_months_v1 value = 0 } }
+  if = { limit = { has_variable = ffpa_usa_industry_months_v1 NOT = { has_variable = ffpa_usa_industry_ready_v1 } } set_variable = { name = ffpa_usa_industry_months_v1 value = 0 } }
+  # Cancel only the matching unfinished paid programs. Native timed benefits otherwise retain their end dates.
+  if = { limit = { has_variable = ffpa_usa_market_grant_weekly_v1 } remove_modifier = ffpa_usa_market_grant_v1 remove_modifier = ffpa_usa_market_linkage_v1 remove_variable = ffpa_usa_market_grant_weekly_v1 }
+  if = { limit = { has_variable = ffpa_usa_industry_grant_weekly_v1 } remove_modifier = ffpa_usa_industry_grant_v1 remove_modifier = ffpa_usa_industry_training_v1 remove_variable = ffpa_usa_industry_grant_weekly_v1 }
+ }
+}

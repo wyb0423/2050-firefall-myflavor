@@ -1,0 +1,20 @@
+ffpa_usa_contract_company_text_v1 = {
+ type = country
+ text = {
+  trigger = { exists = scope:ffpa_usa_contract_company scope:ffpa_usa_contract_company = { company_is_prosperous = yes } }
+  localization_key = ffpa_usa_contract_company_prosperous_v1
+ }
+ text = { trigger = { exists = scope:ffpa_usa_contract_company } localization_key = ffpa_usa_contract_company_present_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_contract_company_absent_v1 }
+}
+ffpa_usa_economy_status_v1 = {
+ type = country
+ text = { trigger = { has_variable = ffpa_usa_economy_pending_v1 } localization_key = ffpa_usa_economy_waiting_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_economy_running_v1 }
+}
+ffpa_usa_industry_route_text_v1 = {
+ type = country
+ text = { trigger = { var:ffpa_usa_industry_route_v1 = 1 } localization_key = ffpa_usa_industry_route_central_v1 }
+ text = { trigger = { var:ffpa_usa_industry_route_v1 = 2 } localization_key = ffpa_usa_industry_route_local_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_industry_route_pending_v1 }
+}
