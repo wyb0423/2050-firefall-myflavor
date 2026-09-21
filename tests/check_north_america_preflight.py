@@ -162,6 +162,13 @@ def main():
     for name in ("game-root", "firefall-root", "techres-root"):
         parser.add_argument(f"--{name}", type=Path, required=True)
     args = parser.parse_args()
+    journals = {}
+    for path in (ROOT / "common/journal_entries").glob("ffpa_north_american*.txt"):
+        journals.update(definitions(path))
+    assert len(journals) == 5
+    assert all(one(entry, "group") == "je_group_historical_content" for entry in journals.values())
+    groups = definitions(args.game_root / "common/journal_entry_groups/00_journal_entries.txt")
+    assert one(groups["je_group_historical_content"], "context") == "country"
     for path, expected in ((args.firefall_root, "alter_time_2050_fire_falls"),
                            (args.techres_root, "tech.res")):
         meta = json.loads((path / ".metadata/metadata.json").read_text())
@@ -209,11 +216,12 @@ def main():
         data = path.read_bytes()
         assert data.startswith(b"\xef\xbb\xbf")
         text = data.decode("utf-8-sig")
-        assert text.startswith(f"l_{language}:\n")
+        assert text.splitlines()[0] == f"l_{language}:"
         localizations.append(set(re.findall(r'^ ([\w.-]+):', text, re.M)))
     assert localizations[0] == localizations[1] == {"ffpa_na_probe_engineering_v1", "ffpa_na_probe_engineering_v1_desc"}
     check_design_references((args.game_root, args.techres_root, args.firefall_root, ROOT))
     print("PASS: 50 formation regions, 49 mainland regions, 15 eligible starting tags.")
+    print("PASS: five North American journal entries use a country-context group.")
     print("PASS: five probe provinces, native transfer precedent, probe structure and localization.")
     print("NOT TESTED: final engine database merging, engine parsing, split/merge inheritance, save reload, AI choice and gameplay balance.")
 
