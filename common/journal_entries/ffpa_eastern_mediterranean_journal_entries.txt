@@ -37,7 +37,7 @@ je_ffpa_tur_rebuild_anatolia = {
 
 	complete = {
 		calc_true_if = {
-			amount >= 10
+			amount >= 8
 			owns_entire_state_region = STATE_EASTERN_THRACE
 			owns_entire_state_region = STATE_HUDAVENDIGAR
 			owns_entire_state_region = STATE_AYDIN
@@ -52,13 +52,13 @@ je_ffpa_tur_rebuild_anatolia = {
 		}
 		gdp > {
 			value = var:ffpa_tur_rebuild_anatolia_start_gdp
-			multiply = 1.25
+			multiply = 1.15
 		}
 		government_legitimacy >= 50
 		bureaucracy >= 0
 		ffpa_has_no_insurrectionary_movement = yes
 		any_scope_state = {
-			count >= 8
+			count >= 6
 			OR = {
 				state_region = s:STATE_EASTERN_THRACE
 				state_region = s:STATE_HUDAVENDIGAR
@@ -275,15 +275,15 @@ je_ffpa_tur_gate_of_two_continents = {
 			devastation < 0.10
 			any_scope_building = {
 				is_building_type = building_port
-				level >= 5
+				level >= 4
 			}
 			any_scope_building = {
 				is_building_type = building_railway
-				level >= 5
+				level >= 4
 			}
 			any_scope_building = {
 				is_building_type = building_government_administration
-				level >= 5
+				level >= 4
 			}
 		}
 	}
@@ -406,25 +406,17 @@ je_ffpa_byz_new_rome = {
 	}
 
 	complete = {
-		owns_entire_state_region = STATE_EASTERN_THRACE
-		owns_entire_state_region = STATE_ATTICA
-		owns_entire_state_region = STATE_THESSALIA
-		owns_entire_state_region = STATE_MACEDONIA
-		owns_entire_state_region = STATE_SKOPIA
-		owns_entire_state_region = STATE_WESTERN_THRACE
-		owns_entire_state_region = STATE_NORTHERN_THRACE
-		owns_entire_state_region = STATE_HUDAVENDIGAR
-		owns_entire_state_region = STATE_AYDIN
-		owns_entire_state_region = STATE_WEST_AEGEAN_ISLANDS
-		owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS
-		owns_entire_state_region = STATE_ALBANIA
+		custom_tooltip = {
+			text = ffpa_byz_foundation_territory_tt
+			ffpa_byz_foundation_territory_ready_v1 = yes
+		}
 		capital = { state_region = s:STATE_EASTERN_THRACE }
-		government_legitimacy >= 60
+		government_legitimacy >= 50
 		bureaucracy >= 0
 		gold_reserves > 0
 		ffpa_has_no_insurrectionary_movement = yes
 		any_scope_state = {
-			count >= 9
+			count >= 7
 			OR = {
 				state_region = s:STATE_EASTERN_THRACE
 				state_region = s:STATE_ATTICA
@@ -697,11 +689,11 @@ je_ffpa_byz_restore_new_rome = {
 			market_access >= 0.95
 			turmoil < 0.10
 			devastation < 0.05
-			any_scope_building = { is_building_type = building_port level >= 8 }
-			any_scope_building = { is_building_type = building_railway level >= 8 }
-			any_scope_building = { is_building_type = building_government_administration level >= 8 }
-			any_scope_building = { is_building_type = building_university level >= 5 }
-			any_scope_building = { is_building_type = building_power_plant level >= 5 }
+			any_scope_building = { is_building_type = building_port level >= 6 }
+			any_scope_building = { is_building_type = building_railway level >= 6 }
+			any_scope_building = { is_building_type = building_government_administration level >= 6 }
+			any_scope_building = { is_building_type = building_university level >= 4 }
+			any_scope_building = { is_building_type = building_power_plant level >= 4 }
 		}
 	}
 

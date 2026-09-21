@@ -263,7 +263,7 @@ ffpa_flavor.8 = {
 		has_variable = embrace_megali_idea_var
 		any_scope_state = { state_region = s:STATE_IONIAN_ISLANDS }
 		has_law_or_variant = law_type:law_monarchy
-		government_legitimacy >= 75
+		government_legitimacy >= 60
 	}
 
 	cooldown = { days = never_fire_again_modifier_time }
@@ -372,7 +372,7 @@ ffpa_flavor.8 = {
 				remove_variable = embrace_megali_idea_var
 			}
 		}
-		ai_chance = { factor = 1 }
+		ai_chance = { factor = 2 }
 	}
 
 	option = {
@@ -407,7 +407,7 @@ ffpa_flavor.8 = {
 			change_relations = { country = scope:aydin_owner value = 15 }
 		}
 		custom_tooltip = { text = not_embrace_ambitious_agenda_tt }
-		ai_chance = { factor = 2 }
+		ai_chance = { factor = 1 }
 	}
 }
 

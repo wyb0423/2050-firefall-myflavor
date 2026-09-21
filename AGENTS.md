@@ -495,3 +495,9 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 地区工程的 `ffpa_regional_development_cmf` GUI、scripted GUI、script values 与双语文本归地区建设模块；北美对应展示文件归北美模块。`tools/generate_cmf_project_widgets.py` 从原 JE 条件和北美建筑白名单生成这些只读文件，修改条件后重新生成，不手改生成物。
 - 四项治理危机展示读取8个既有计数；禁止新增计时器。地区逐州条件保留单个 state 的判定，建筑等级不能跨州汇总；北美贡献采用已建成 level 与原就业门槛，不能使用包含队列的扩建等级。
 - 追加运行 `python3 tests/check_cmf_project_views.py`，检查生成一致性、GUI 表达式、56组逐州条件、16类路线建筑和计数缺省值。
+
+### TUR / BYZ 共用准入条件
+
+- `ffpa_byz_foundation_territory_ready_v1` 是无状态country trigger，供BYZ成立和新罗马再加冕共同调用：10/12完整地区且必须包含东色雷斯、阿提卡。不可仅修改原生成立比例而漏改精确条件。
+- 共用较低门槛适用于玩家与AI。主动共同体因子位于 `ffpa_eastern_mediterranean_triggers.txt` 的 `*_conditions_factor_*`；不得误改旧日志兼容条件或0–60进度机制。
+- 参数以 `docs/superpowers/specs/2026-09-21-eastern-accessibility-design.md` 为本次变更记录，追加运行 `python3 tests/check_eastern_accessibility.py`。不改变地区工程、常驻治理、已有完成/拒绝标志或奖励。

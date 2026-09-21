@@ -52,17 +52,17 @@
  ffpa_embrace_ambitious_agenda_recovery_tt: "选择此项将#bold 接受东罗马头衔提议#!，并解锁通过[concept_nation_formation]成立$BYZ$。"
 
  je_ffpa_tur_rebuild_anatolia: "重建安纳托利亚"
- je_ffpa_tur_rebuild_anatolia_reason: "土耳其重新统一后，战乱割裂的铁路、税务机关与地方市场仍需接续。让#bold 安纳托利亚重新运转#!，才能把地图上的统一落实为日常治理。\n\n控制至少十个核心地区、扩大经济，并恢复行政与市场秩序。"
+ je_ffpa_tur_rebuild_anatolia_reason: "土耳其重新统一后，战乱割裂的铁路、税务机关与地方市场仍需接续。让#bold 安纳托利亚重新运转#!，才能把地图上的统一落实为日常治理。\n\n控制至少八个核心地区、扩大经济，并恢复行政与市场秩序。"
  je_ffpa_tur_ottoman_commonwealth: "奥斯曼共同体"
- je_ffpa_tur_ottoman_commonwealth_reason: "奥斯曼之名需要一套能让各省共同参与的政治秩序。中央官员要协调行政，社群需要获得接纳，地方居民则需要持久的和平。共同体沿行政整合、公民包容与内部稳定三轴推进；各轴条件不再满足时逐渐倒退，#bold 不会直接清零#!。\n\n#bold 行政整合#!：要求实行君主制、政府[concept_legitimacy]至少55、官僚余量不为负，并且十一个指定核心州中至少8个[concept_market_access]达到75%。\n\n#bold 公民包容#!：要求实行君主制、文化排斥或多元文化、信仰自由或政教分离，并使五个文化组——希腊/保加利亚/塞尔维亚/罗马尼亚、阿尔巴尼亚/波斯尼亚、亚美尼亚、库尔德、阿拉伯/埃及——中至少4个的基础接纳度达到40%。\n\n#bold 内部稳定#!：要求实行君主制、保持和平、没有叛乱性政治运动，并且至少6个指定核心州的动乱低于18%。\n\n完成后将获得新的主流文化“奥斯曼”，同时保留土耳其文化。"
+ je_ffpa_tur_ottoman_commonwealth_reason: "奥斯曼之名需要一套能让各省共同参与的政治秩序。中央官员要协调行政，社群需要获得接纳，地方居民则需要持久的和平。共同体沿行政整合、公民包容与内部稳定三轴推进；各轴条件不再满足时逐渐倒退，#bold 不会直接清零#!。\n\n#bold 行政整合#!：要求实行君主制、政府[concept_legitimacy]至少50、官僚余量不为负，并且十一个指定核心州中至少6个[concept_market_access]达到70%。\n\n#bold 公民包容#!：要求实行君主制、文化排斥或多元文化、信仰自由或政教分离，并使五个文化组——希腊/保加利亚/塞尔维亚/罗马尼亚、阿尔巴尼亚/波斯尼亚、亚美尼亚、库尔德、阿拉伯/埃及——中至少3个的基础接纳度达到40%。\n\n#bold 内部稳定#!：要求实行君主制、保持和平、没有叛乱性政治运动，并且至少6个指定核心州的动乱低于18%。\n\n完成后将获得新的主流文化“奥斯曼”，同时保留土耳其文化。"
  je_ffpa_tur_gate_of_two_continents: "两洲之门"
  je_ffpa_tur_gate_of_two_continents_reason: "东色雷斯的港口与铁路接续着巴尔干和安纳托利亚。把它们建设为#bold 通往世界市场的枢纽#!，让两岸的货物与旅客在此汇流。"
  je_ffpa_gre_islands_and_mainland: "群岛与大陆"
  je_ffpa_gre_islands_and_mainland_reason: "希腊本土、马其顿与爱琴海群岛已经拥有共同国名，行政、学校与航运却仍需彼此接续。让#bold 群岛与大陆#!在教育、公共机关和统一市场中真正成为一个国家。"
  je_ffpa_byz_new_rome: "新罗马再加冕"
- je_ffpa_byz_new_rome_reason: "帝国的成立已有宣言，持续的治理仍需证明。\n\n控制拜占庭核心领土，以君士坦丁堡为首都，并证明新罗马能够维持一个#bold 合法、财政健全且稳定的政府#!。"
+ je_ffpa_byz_new_rome_reason: "帝国的成立已有宣言，持续的治理仍需证明。\n\n完整控制十二个指定核心地区中的至少十个（包括东色雷斯和阿提卡），以君士坦丁堡为首都，并证明新罗马能够维持一个#bold 合法、财政健全且稳定的政府#!。"
  je_ffpa_byz_rhomaic_commonwealth: "罗马人的共同体"
- je_ffpa_byz_rhomaic_commonwealth_reason: "新罗马的法令需要抵达各省，也需要获得不同社群的承认。行政整合、公民包容与内部稳定共同决定，罗马身份能否进入居民的日常生活。三轴分别推进；各轴条件不再满足时逐渐倒退，#bold 不会直接清零#!。\n\n#bold 行政整合#!：要求政府[concept_legitimacy]至少55、官僚余量不为负，并且十二个指定核心州中至少9个[concept_market_access]达到80%。\n\n#bold 公民包容#!：要求实行文化排斥或多元文化、信仰自由或政教分离，并使土耳其、阿尔巴尼亚、保加利亚、塞尔维亚、亚美尼亚文化中至少4个的基础接纳度达到40%。\n\n#bold 内部稳定#!：要求保持和平、没有叛乱性政治运动，并且至少7个指定核心州的动乱低于18%。\n\n完成后将获得新的主流文化“罗马人”，同时保留希腊文化，并永久提高#p 20%#!符合条件的文化同化速度。"
+ je_ffpa_byz_rhomaic_commonwealth_reason: "新罗马的法令需要抵达各省，也需要获得不同社群的承认。行政整合、公民包容与内部稳定共同决定，罗马身份能否进入居民的日常生活。三轴分别推进；各轴条件不再满足时逐渐倒退，#bold 不会直接清零#!。\n\n#bold 行政整合#!：要求政府[concept_legitimacy]至少50、官僚余量不为负，并且十二个指定核心州中至少7个[concept_market_access]达到75%。\n\n#bold 公民包容#!：要求实行文化排斥或多元文化、信仰自由或政教分离，并使土耳其、阿尔巴尼亚、保加利亚、塞尔维亚、亚美尼亚文化中至少3个的基础接纳度达到40%。\n\n#bold 内部稳定#!：要求保持和平、没有叛乱性政治运动，并且至少7个指定核心州的动乱低于18%。\n\n完成后将获得新的主流文化“罗马人”，同时保留希腊文化，并永久提高#p 20%#!符合条件的文化同化速度。"
  je_ffpa_byz_rhomaic_commonwealth_v2: "$je_ffpa_byz_rhomaic_commonwealth$"
  je_ffpa_byz_rhomaic_commonwealth_v2_reason: "$je_ffpa_byz_rhomaic_commonwealth_reason$"
 
@@ -755,3 +755,5 @@
  ffpa_flavor.47.d: "御前会议宣布的期限已经过去，选定疆界的部分地区仍不受帝国直接统治。这项许诺不能立刻重提；政府和最高统帅部必须先承受失败的政治后果。"
  ffpa_flavor.47.f: "地图很有耐心，士兵、纳税人与外国政府却没有。"
  ffpa_flavor.47.a: "这条疆界只能等待下一次机会。"
+
+ ffpa_byz_foundation_territory_tt: "完整控制十二个指定成立地区中的至少十个，且必须包含东色雷斯和阿提卡"

@@ -42,12 +42,12 @@ ffpa_tur_porte_charter_completion_conditions_v1 = {
 	ffpa_tur_has_ottoman_state_project_v1 = yes
 	has_variable = ffpa_tur_porte_waqf_event_fired_v1
 	country_has_monarchy_law = yes
-	government_legitimacy >= 60
+	government_legitimacy >= 50
 	bureaucracy >= 0
 	is_at_war = no
 	ffpa_has_no_insurrectionary_movement = yes
 	any_scope_state = {
-		count >= 8
+		count >= 6
 		ffpa_is_tur_reconstruction_core_state_v1 = yes
 		market_access >= 0.75
 		turmoil < 0.18
@@ -59,13 +59,13 @@ ffpa_tur_second_foundation_completion_conditions_v1 = {
 	has_variable = ffpa_tur_republic_civil_military_event_fired_v1
 	NOT = { country_has_monarchy_law = yes }
 	country_has_voting_franchise = yes
-	government_legitimacy >= 60
+	government_legitimacy >= 50
 	bureaucracy >= 0
-	literacy_rate >= 0.30
+	literacy_rate >= 0.25
 	is_at_war = no
 	ffpa_has_no_insurrectionary_movement = yes
 	any_scope_state = {
-		count >= 8
+		count >= 6
 		ffpa_is_tur_reconstruction_core_state_v1 = yes
 		market_access >= 0.75
 		turmoil < 0.18
@@ -76,11 +76,11 @@ ffpa_tur_directorate_completion_conditions_v1 = {
 	ffpa_tur_has_directorate_state_project_v1 = yes
 	has_variable = ffpa_tur_directorate_technical_corps_event_fired_v1
 	government_legitimacy >= 50
-	bureaucracy >= 100
+	bureaucracy >= 0
 	literacy_rate >= 0.25
 	ffpa_has_no_insurrectionary_movement = yes
 	any_scope_state = {
-		count >= 6
+		count >= 4
 		ffpa_is_tur_reconstruction_core_state_v1 = yes
 		market_access >= 0.75
 		turmoil < 0.20
@@ -426,5 +426,4 @@ ffpa_tur_ai_frontier_council_ready_v1 = {
 	ffpa_tur_frontier_council_ready_v1 = yes
 	infamy < infamy_threshold:infamous
 	gold_reserves > 0
-	country_rank <= rank_value:minor_power
 }

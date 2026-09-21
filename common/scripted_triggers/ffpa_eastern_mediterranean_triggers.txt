@@ -458,16 +458,16 @@ ffpa_byz_has_available_restoration_campaign = {
 # Shared condition factors for the CMF hover display.
 ffpa_tur_commonwealth_administration_conditions_factor_1 = { country_definition = cd:TUR }
 ffpa_tur_commonwealth_administration_conditions_factor_2 = { country_has_monarchy_law = yes }
-ffpa_tur_commonwealth_administration_conditions_factor_3 = { government_legitimacy >= 55 }
+ffpa_tur_commonwealth_administration_conditions_factor_3 = { government_legitimacy >= 50 }
 ffpa_tur_commonwealth_administration_conditions_factor_4 = { bureaucracy >= 0 }
-ffpa_tur_commonwealth_administration_conditions_factor_5 = { any_scope_state = { count >= 8 ffpa_is_tur_commonwealth_core_state = yes market_access >= 0.75 } }
+ffpa_tur_commonwealth_administration_conditions_factor_5 = { any_scope_state = { count >= 6 ffpa_is_tur_commonwealth_core_state = yes market_access >= 0.70 } }
 
 # Shared condition factors for the CMF hover display.
 ffpa_tur_commonwealth_civic_conditions_factor_1 = { country_definition = cd:TUR }
 ffpa_tur_commonwealth_civic_conditions_factor_2 = { country_has_monarchy_law = yes }
 ffpa_tur_commonwealth_civic_conditions_factor_3 = { OR = { has_law_or_variant = law_type:law_cultural_exclusion has_law_or_variant = law_type:law_multicultural } }
 ffpa_tur_commonwealth_civic_conditions_factor_4 = { OR = { has_law_or_variant = law_type:law_freedom_of_conscience has_law_or_variant = law_type:law_total_separation } }
-ffpa_tur_commonwealth_civic_conditions_factor_5 = { calc_true_if = { amount >= 4 OR = { cultural_acceptance_base = { target = cu:greek value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:bulgarian value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:serb value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:romanian value >= acceptance_status_3 } } OR = { cultural_acceptance_base = { target = cu:albanian value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:bosniak value >= acceptance_status_3 } } cultural_acceptance_base = { target = cu:armenian value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:kurdish value >= acceptance_status_3 } OR = { cultural_acceptance_base = { target = cu:arab value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:egyptian value >= acceptance_status_3 } } } }
+ffpa_tur_commonwealth_civic_conditions_factor_5 = { calc_true_if = { amount >= 3 OR = { cultural_acceptance_base = { target = cu:greek value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:bulgarian value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:serb value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:romanian value >= acceptance_status_3 } } OR = { cultural_acceptance_base = { target = cu:albanian value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:bosniak value >= acceptance_status_3 } } cultural_acceptance_base = { target = cu:armenian value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:kurdish value >= acceptance_status_3 } OR = { cultural_acceptance_base = { target = cu:arab value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:egyptian value >= acceptance_status_3 } } } }
 
 # Shared condition factors for the CMF hover display.
 ffpa_tur_commonwealth_stability_conditions_factor_1 = { country_definition = cd:TUR }
@@ -478,18 +478,39 @@ ffpa_tur_commonwealth_stability_conditions_factor_5 = { any_scope_state = { coun
 
 # Shared condition factors for the CMF hover display.
 ffpa_byz_commonwealth_administration_conditions_factor_1 = { country_definition = cd:BYZ }
-ffpa_byz_commonwealth_administration_conditions_factor_2 = { government_legitimacy >= 55 }
+ffpa_byz_commonwealth_administration_conditions_factor_2 = { government_legitimacy >= 50 }
 ffpa_byz_commonwealth_administration_conditions_factor_3 = { bureaucracy >= 0 }
-ffpa_byz_commonwealth_administration_conditions_factor_4 = { any_scope_state = { count >= 9 ffpa_is_byz_commonwealth_core_state = yes market_access >= 0.80 } }
+ffpa_byz_commonwealth_administration_conditions_factor_4 = { any_scope_state = { count >= 7 ffpa_is_byz_commonwealth_core_state = yes market_access >= 0.75 } }
 
 # Shared condition factors for the CMF hover display.
 ffpa_byz_commonwealth_civic_conditions_factor_1 = { country_definition = cd:BYZ }
 ffpa_byz_commonwealth_civic_conditions_factor_2 = { OR = { has_law_or_variant = law_type:law_cultural_exclusion has_law_or_variant = law_type:law_multicultural } }
 ffpa_byz_commonwealth_civic_conditions_factor_3 = { OR = { has_law_or_variant = law_type:law_freedom_of_conscience has_law_or_variant = law_type:law_total_separation } }
-ffpa_byz_commonwealth_civic_conditions_factor_4 = { calc_true_if = { amount >= 4 cultural_acceptance_base = { target = cu:turkish value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:albanian value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:bulgarian value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:serb value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:armenian value >= acceptance_status_3 } } }
+ffpa_byz_commonwealth_civic_conditions_factor_4 = { calc_true_if = { amount >= 3 cultural_acceptance_base = { target = cu:turkish value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:albanian value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:bulgarian value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:serb value >= acceptance_status_3 } cultural_acceptance_base = { target = cu:armenian value >= acceptance_status_3 } } }
 
 # Shared condition factors for the CMF hover display.
 ffpa_byz_commonwealth_stability_conditions_factor_1 = { country_definition = cd:BYZ }
 ffpa_byz_commonwealth_stability_conditions_factor_2 = { is_at_war = no }
 ffpa_byz_commonwealth_stability_conditions_factor_3 = { ffpa_has_no_insurrectionary_movement = yes }
 ffpa_byz_commonwealth_stability_conditions_factor_4 = { any_scope_state = { count >= 7 ffpa_is_byz_commonwealth_core_state = yes turmoil < 0.18 } }
+
+# Country scope; shared by formation and the first Byzantine journal.
+ffpa_byz_foundation_territory_ready_v1 = {
+	owns_entire_state_region = STATE_EASTERN_THRACE
+	owns_entire_state_region = STATE_ATTICA
+	calc_true_if = {
+		amount >= 10
+		owns_entire_state_region = STATE_EASTERN_THRACE
+		owns_entire_state_region = STATE_ATTICA
+		owns_entire_state_region = STATE_THESSALIA
+		owns_entire_state_region = STATE_MACEDONIA
+		owns_entire_state_region = STATE_SKOPIA
+		owns_entire_state_region = STATE_WESTERN_THRACE
+		owns_entire_state_region = STATE_NORTHERN_THRACE
+		owns_entire_state_region = STATE_HUDAVENDIGAR
+		owns_entire_state_region = STATE_AYDIN
+		owns_entire_state_region = STATE_WEST_AEGEAN_ISLANDS
+		owns_entire_state_region = STATE_EAST_AEGEAN_ISLANDS
+		owns_entire_state_region = STATE_ALBANIA
+	}
+}

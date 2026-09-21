@@ -18,7 +18,7 @@ ffpa_request_eastern_roman_title = {
 				state_region = s:STATE_IONIAN_ISLANDS
 			}
 		}
-		government_legitimacy >= 75
+		government_legitimacy >= 60
 	}
 
 	when_taken = {
