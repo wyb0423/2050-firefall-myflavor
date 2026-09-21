@@ -24,10 +24,14 @@ def main():
     laws=load_laws([args.game_root,*args.upstream,ROOT])
     for path,text in render(laws).items():assert (ROOT/path).read_text()==text,path
     effects=definitions(ROOT/'common/scripted_effects/ffpa_north_american_charter.txt')
+    effects.update(definitions(ROOT/'common/scripted_effects/ffpa_north_american_effects.txt'))
     triggers=definitions(ROOT/'common/scripted_triggers/ffpa_north_american_charter.txt')
     triggers.update(definitions(ROOT/'common/scripted_triggers/ffpa_north_american_charter_rules.txt'))
+    triggers.update(definitions(ROOT/'common/scripted_triggers/ffpa_north_american_triggers.txt'))
     events=definitions(ROOT/'events/ffpa_american_political_events.txt')
-    state={}; context={}; scope={}; current={}; expiry={}; activated=[]; rewards=[]; queue=[]
+    journals=definitions(ROOT/'common/journal_entries/ffpa_north_american_journal_entries.txt')
+    actions=definitions(ROOT/'common/on_actions/ffpa_north_american_on_actions.txt')
+    state={}; context={}; scope={}; current={}; expiry={}; activated=[]; rewards=[]; queue=[]; errors=[]; active_journals=set()
 
     def value(v):
         if v.startswith('var:'):return state.get(v[4:],-999)
@@ -55,14 +59,20 @@ def main():
             elif k in triggers:
                 result.append(cond(subst(triggers[k],{a:c for a,b,c in entries(v)})) if isinstance(v,list) else cond(triggers[k])==(v=='yes'))
             elif k=='has_variable':result.append(v in state)
-            elif k=='exists':assert v=='currently_enacting_law';result.append(context['enacting'])
+            elif k=='has_journal_entry':result.append(v in active_journals)
+            elif k=='any_scope_state':
+                assert one(v,'ffpa_na_is_mainland_state_v1')=='yes'
+                result.append(context['mainland'])
+            elif k=='exists':
+                assert v=='currently_enacting_law' or v.startswith('var:')
+                result.append(context['enacting'] if v=='currently_enacting_law' else v[4:] in state)
             elif k in ('has_law','has_law_or_variant'):result.append(has(v.removeprefix('law_type:'),k=='has_law_or_variant'))
             elif k=='has_government_type':assert v=='gov_chartered_company';result.append(context['company'])
             elif k=='any_subject_or_below':result.append(context['crownland'])
             elif k=='always':result.append(v=='yes')
             else:
                 actual=value(k) if k.startswith('var:') else context[k];want=value(v)
-                result.append({'=':lambda:actual==want,'>':lambda:actual>want}[op]())
+                result.append({'=':lambda:actual==want,'>':lambda:actual>want,'>=':lambda:actual>=want,'<':lambda:actual<want}[op]())
         return all(result)
 
     def execute(block):
@@ -81,19 +91,30 @@ def main():
                     if fields(v,'years'):expiry[name]=12*int(one(v,'years'))
             elif k=='change_variable':state[one(v,'name')]+=value(one(v,'add'))
             elif k=='remove_variable':state.pop(v,None);expiry.pop(v,None)
-            elif k=='trigger_event':queue.append(one(v,'id'))
+            elif k=='trigger_event':
+                assert one(v,'popup')=='yes'
+                queue.append(one(v,'id'))
+            elif k=='add_journal_entry':
+                journal=one(v,'type');assert journal not in active_journals
+                active_journals.add(journal);execute(one(journals[journal],'immediate'))
+            elif k.startswith('je:'):pass  # Native UI mirror, not a progress source.
+            elif k=='ordered_state':pass  # Fixture has no neighbouring country, so native selection is empty.
             elif k=='save_scope_value_as':scope[one(v,'name')]=value(one(v,'value'))
             elif k=='add_modifier':rewards.append((one(v,'name'),one(v,'months')))
             elif k=='activate_law':
-                law=v.removeprefix('law_type:');activated.append(law);current[one(laws[law],'group')]=law
+                law=v.removeprefix('law_type:');activated.append(law)
+                if law not in context['blocked_laws']:current[one(laws[law],'group')]=law
                 execute(effects[P+'enactment_ended_v1'])  # Even unexpected re-entry cannot renew a closed charter.
-            elif k in ('name','trigger','custom_tooltip','default_option','ai_chance'):pass
+                # A synchronous activation callback must not sign or charge a second time.
+                execute(effects[P+'sign_v1'])
+            elif k=='error_log':errors.append(v)
+            elif k in ('name','trigger','custom_tooltip','default_option','ai_chance','show_as_unavailable'):pass
             else:raise AssertionError((k,op,v))
 
     def reset():
         for d in (state,context,scope,current,expiry):d.clear()
-        activated.clear();rewards.clear();queue.clear()
-        context.update(country_definition='cd:USA',is_revolutionary='no',is_subject='no',enacting=False,company=False,crownland=False)
+        activated.clear();rewards.clear();queue.clear();errors.clear();active_journals.clear()
+        context.update(country_definition='cd:USA',is_revolutionary='no',is_subject='no',enacting=False,company=False,crownland=False,blocked_laws=set(),mainland=True,government_legitimacy=40,bureaucracy=0)
         for law in ('law_monarchy','law_autocracy','law_traditionalism','law_national_supremacy'):
             current[one(laws[law],'group')]=law
         execute(effects[P+'initialize_v1'])
@@ -124,6 +145,29 @@ def main():
     assert activated==['law_interventionism','law_universal_suffrage','law_parliamentary_republic']
     assert rewards==[(P+'transition_v1','24')]
     snapshot=copy.deepcopy((state,current,rewards,activated,expiry));execute(effects[P+'sign_v1']);execute(effects[P+'initialize_v1']);assert (state,current,rewards,activated,expiry)==snapshot
+    # The option and effect must reject the same stale event, rather than offering a silent no-op.
+    sign_option=fields(events['ffpa_usa_flavor.9'],'option')[0]
+    reset();draft();assert cond(one(sign_option,'trigger'))
+    scope['ffpa_usa_charter_event_serial']-=1
+    assert not cond(one(sign_option,'trigger'))
+    execute(sign_option);assert not activated and not rewards
+    assert one(one(sign_option,'show_as_unavailable'),'always')=='yes'
+    # Failed native activations must leave a retryable draft, not a signed/charged dead end.
+    for blocked in ({'law_interventionism'}, {'law_interventionism','law_universal_suffrage','law_presidential_republic'}):
+        reset();draft();deadline=expiry[P+'deadline_v1'];context['blocked_laws']=blocked
+        execute(sign_option)
+        assert P+'signed_v1' not in state and P+'closed_v1' not in state and not rewards
+        assert P+'pending_v1' not in state and P+'applying_v2' not in state
+        assert P+'apply_failed_v2' in state and errors and expiry[P+'deadline_v1']==deadline
+        before=current.copy();context['blocked_laws']=set();activated.clear()
+        execute(effects[P+'open_v1']);execute(one(events['ffpa_usa_flavor.9'],'immediate'));execute(sign_option)
+        assert P+'signed_v1' in state and P+'closed_v1' in state and P+'apply_failed_v2' not in state
+        assert rewards==[(P+'transition_v1','24')]
+        assert all(before.get(one(laws[law],'group'))!=law for law in activated), 'Retry must skip laws already applied'
+    # After a wholly failed attempt, a replacement no-op draft still has no cost.
+    reset();draft();context['blocked_laws']={'law_interventionism','law_universal_suffrage','law_presidential_republic'}
+    execute(sign_option);selection(0,0,0);execute(effects[P+'open_v1'])
+    execute(one(events['ffpa_usa_flavor.9'],'immediate'));execute(sign_option);assert not rewards
     # All combinations preserve the explicit no-op path and safely validate changed choices.
     cases=0
     for g,p,e in itertools.product(range(3),range(4),range(4)):
@@ -155,10 +199,36 @@ def main():
     # Returned drafts do not retain submission protection or alter the fixed deadline.
     reset();context['enacting']=True;draft();deadline=expiry[P+'deadline_v1'];execute(fields(events['ffpa_usa_flavor.9'],'option')[1])
     assert state[P+'stage_v1']==0 and P+'hold_v1' not in state and expiry[P+'deadline_v1']==deadline
+    # Real formation/JE effects, with native journal activation represented by its documented immediate callback.
+    formed=one(actions['ffpa_na_on_country_formed_v1'],'effect')
+    monthly=one(actions['ffpa_usa_charter_monthly_action_v1'],'effect')
+    political='ffpa_usa_political_'
+    expected_journals={'je_ffpa_usa_federal_settlement_v1','je_ffpa_na_union_agenda_v1'}
+    for je_first in (False,True):
+        reset();state.clear();expiry.clear()
+        if je_first:execute(effects['ffpa_usa_ensure_journals_v2'])
+        execute(formed)
+        assert active_journals==expected_journals
+        assert queue.count('ffpa_usa_flavor.1')==queue.count('ffpa_usa_flavor.6')==1
+        execute(formed);assert queue.count('ffpa_usa_flavor.6')==1 and expiry[P+'deadline_v1']==60
+    # Old USA saves recover absent journals without requesting a charter or replaying political choices.
+    reset();state[political+'stage_v1']=2;state[political+'months_v1']=0;state[political+'serial_v1']=4
+    state[political+'works_v1']=1;state[political+'titles_v1']=2
+    execute(monthly);before=copy.deepcopy((state,expiry,queue,rewards))
+    assert active_journals==expected_journals and not queue and not rewards
+    execute(monthly);assert (state,expiry,queue,rewards)==before
+    active_journals.clear();state[political+'complete_v1']=1
+    execute(monthly);assert active_journals=={'je_ffpa_na_union_agenda_v1'}
+    for tag,revolution in [('cd:CAN','no'),('cd:USA','yes')]:
+        reset();context.update(country_definition=tag,is_revolutionary=revolution)
+        execute(effects['ffpa_usa_ensure_journals_v2']);assert not active_journals and not queue
+    reset();context['mainland']=False;execute(effects['ffpa_usa_ensure_journals_v2'])
+    assert active_journals=={'je_ffpa_usa_federal_settlement_v1'}
     source=(ROOT/'common/scripted_effects/ffpa_north_american_charter.txt').read_text()
     assert source.count('activate_law =')==8 and 'start_enactment' not in source and 'add_technology' not in source
     assert 'every_country' not in source and 'every_pop' not in source
-    print(f'PASS: {cases} joint drafts; structural/variant conflicts, eight-law whitelist, no-op/24-month cost, stale ticket, deferral, expiry, fixed-draft enactment grace and no replay. Generated source rules match.')
+    print(f'PASS: {cases} joint drafts; structural/variant conflicts, eight-law whitelist, verified settlement, failed/partial activation retries, callback re-entry, stale button, no-op/24-month cost, deferral, expiry and no replay. Generated source rules match.')
+    print('PASS: formation before/after JE initialization, explicit event popups, missing-journal recovery, completed/foreign/revolutionary exclusions and preserved old-save choices.')
     print('NOT TESTED: native activation order/callbacks, law-variant inheritance, events/UI, AI, save reload or Launcher load order.')
 
 

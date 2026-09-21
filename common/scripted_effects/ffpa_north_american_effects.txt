@@ -305,6 +305,22 @@ ffpa_na_union_settle_v1 = {
  }
 }
 
+# Country scope. Recover only missing USA journals; their own pulses still own progress.
+# add_journal_entry runs the JE immediate effect, including its idempotent initialization.
+ffpa_usa_ensure_journals_v2 = {
+ if = {
+  limit = { country_definition = cd:USA is_revolutionary = no }
+  if = {
+   limit = { ffpa_usa_political_eligible_v1 = yes NOT = { has_journal_entry = je_ffpa_usa_federal_settlement_v1 } }
+   add_journal_entry = { type = je_ffpa_usa_federal_settlement_v1 }
+  }
+  if = {
+   limit = { ffpa_na_union_eligible_v1 = yes NOT = { has_journal_entry = je_ffpa_na_union_agenda_v1 } }
+   add_journal_entry = { type = je_ffpa_na_union_agenda_v1 }
+  }
+ }
+}
+
 # Country scope. Persistent choices are never cleared or re-awarded by initialization.
 ffpa_usa_political_initialize_v1 = {
  if = {
@@ -312,7 +328,7 @@ ffpa_usa_political_initialize_v1 = {
   set_variable = { name = ffpa_usa_political_stage_v1 value = 0 }
   set_variable = { name = ffpa_usa_political_months_v1 value = 0 }
   set_variable = { name = ffpa_usa_political_serial_v1 value = 0 }
-  trigger_event = { id = ffpa_usa_flavor.1 days = 1 }
+  trigger_event = { id = ffpa_usa_flavor.1 days = 1 popup = yes }
  }
  ffpa_usa_political_sync_v1 = yes
 }
@@ -322,10 +338,10 @@ ffpa_usa_political_convene_v1 = {
   remove_variable = ffpa_usa_political_deferred_v1
   change_variable = { name = ffpa_usa_political_serial_v1 add = 1 }
   set_variable = ffpa_usa_political_pending_v1
-  if = { limit = { var:ffpa_usa_political_stage_v1 = 0 } trigger_event = { id = ffpa_usa_flavor.2 days = 1 } }
-  else_if = { limit = { var:ffpa_usa_political_stage_v1 = 1 } trigger_event = { id = ffpa_usa_flavor.3 days = 1 } }
-  else_if = { limit = { var:ffpa_usa_political_stage_v1 = 2 } trigger_event = { id = ffpa_usa_flavor.4 days = 1 } }
-  else_if = { limit = { var:ffpa_usa_political_stage_v1 = 3 } trigger_event = { id = ffpa_usa_flavor.5 days = 1 } }
+  if = { limit = { var:ffpa_usa_political_stage_v1 = 0 } trigger_event = { id = ffpa_usa_flavor.2 days = 1 popup = yes } }
+  else_if = { limit = { var:ffpa_usa_political_stage_v1 = 1 } trigger_event = { id = ffpa_usa_flavor.3 days = 1 popup = yes } }
+  else_if = { limit = { var:ffpa_usa_political_stage_v1 = 2 } trigger_event = { id = ffpa_usa_flavor.4 days = 1 popup = yes } }
+  else_if = { limit = { var:ffpa_usa_political_stage_v1 = 3 } trigger_event = { id = ffpa_usa_flavor.5 days = 1 popup = yes } }
  }
 }
 ffpa_usa_political_advance_v1 = {

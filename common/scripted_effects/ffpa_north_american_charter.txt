@@ -20,6 +20,8 @@ ffpa_usa_charter_close_v1 = {
  remove_variable = ffpa_usa_charter_pending_v1
  remove_variable = ffpa_usa_charter_automatic_v1
  remove_variable = ffpa_usa_charter_cooldown_v1
+ remove_variable = ffpa_usa_charter_apply_failed_v2
+ remove_variable = ffpa_usa_charter_changes_pending_v2
 }
 ffpa_usa_charter_open_v1 = {
  if = {
@@ -28,10 +30,10 @@ ffpa_usa_charter_open_v1 = {
   set_variable = ffpa_usa_charter_pending_v1
   remove_variable = ffpa_usa_charter_automatic_v1
   change_variable = { name = ffpa_usa_charter_serial_v1 add = 1 }
-  if = { limit = { var:ffpa_usa_charter_stage_v1 = 0 } trigger_event = { id = ffpa_usa_flavor.6 days = 1 } }
-  else_if = { limit = { var:ffpa_usa_charter_stage_v1 = 1 } trigger_event = { id = ffpa_usa_flavor.7 days = 1 } }
-  else_if = { limit = { var:ffpa_usa_charter_stage_v1 = 2 } trigger_event = { id = ffpa_usa_flavor.8 days = 1 } }
-  else_if = { limit = { var:ffpa_usa_charter_stage_v1 = 3 } trigger_event = { id = ffpa_usa_flavor.9 days = 1 } }
+  if = { limit = { var:ffpa_usa_charter_stage_v1 = 0 } trigger_event = { id = ffpa_usa_flavor.6 days = 1 popup = yes } }
+  else_if = { limit = { var:ffpa_usa_charter_stage_v1 = 1 } trigger_event = { id = ffpa_usa_flavor.7 days = 1 popup = yes } }
+  else_if = { limit = { var:ffpa_usa_charter_stage_v1 = 2 } trigger_event = { id = ffpa_usa_flavor.8 days = 1 popup = yes } }
+  else_if = { limit = { var:ffpa_usa_charter_stage_v1 = 3 } trigger_event = { id = ffpa_usa_flavor.9 days = 1 popup = yes } }
  }
 }
 ffpa_usa_charter_submit_v1 = {
@@ -80,10 +82,9 @@ ffpa_usa_charter_enactment_ended_v1 = {
 ffpa_usa_charter_sign_v1 = {
  if = {
   limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 3 } ffpa_usa_charter_can_sign_v1 = yes }
-  if = { limit = { NOT = { ffpa_usa_charter_unchanged_v1 = yes } } add_modifier = { name = ffpa_usa_charter_transition_v1 months = 24 } }
-  set_variable = ffpa_usa_charter_signed_v1
-  # Close before native activation invokes any on_action callbacks. Never replay or restore laws.
-  ffpa_usa_charter_close_v1 = yes
+  # Suppress native callback re-entry without declaring an unverified signature successful.
+  set_variable = ffpa_usa_charter_applying_v2
+  if = { limit = { NOT = { ffpa_usa_charter_unchanged_v1 = yes } } set_variable = ffpa_usa_charter_changes_pending_v2 }
   if = { limit = { var:ffpa_usa_charter_economic_system_v1 = 1 NOT = { has_law = law_type:law_interventionism } } activate_law = law_type:law_interventionism }
   if = { limit = { var:ffpa_usa_charter_economic_system_v1 = 2 NOT = { has_law = law_type:law_laissez_faire } } activate_law = law_type:law_laissez_faire }
   if = { limit = { var:ffpa_usa_charter_economic_system_v1 = 3 NOT = { has_law = law_type:law_agrarianism } } activate_law = law_type:law_agrarianism }
@@ -92,5 +93,19 @@ ffpa_usa_charter_sign_v1 = {
   if = { limit = { var:ffpa_usa_charter_distribution_of_power_v1 = 3 NOT = { has_law = law_type:law_wealth_voting } } activate_law = law_type:law_wealth_voting }
   if = { limit = { var:ffpa_usa_charter_governance_principles_v1 = 1 NOT = { has_law = law_type:law_presidential_republic } } activate_law = law_type:law_presidential_republic }
   if = { limit = { var:ffpa_usa_charter_governance_principles_v1 = 2 NOT = { has_law = law_type:law_parliamentary_republic } } activate_law = law_type:law_parliamentary_republic }
+  remove_variable = ffpa_usa_charter_applying_v2
+  if = {
+   limit = { ffpa_usa_charter_unchanged_v1 = yes }
+   if = { limit = { has_variable = ffpa_usa_charter_changes_pending_v2 } add_modifier = { name = ffpa_usa_charter_transition_v1 months = 24 } }
+   set_variable = ffpa_usa_charter_signed_v1
+   ffpa_usa_charter_close_v1 = yes
+  }
+  else = {
+   # Keep the draft and original deadline. A player can retry; never loop or force laws monthly.
+   set_variable = ffpa_usa_charter_apply_failed_v2
+   remove_variable = ffpa_usa_charter_pending_v1
+   remove_variable = ffpa_usa_charter_changes_pending_v2
+   error_log = "FFPA USA charter: selected laws did not take effect; signature remains open."
+  }
  }
 }

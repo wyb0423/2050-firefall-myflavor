@@ -20,6 +20,7 @@ ffpa_usa_charter_economic_system_name_v1 = {
 }
 ffpa_usa_charter_review_v1 = {
  type = country
+ text = { trigger = { has_variable = ffpa_usa_charter_apply_failed_v2 } localization_key = ffpa_usa_charter_apply_failed_tt }
  text = { trigger = { exists = currently_enacting_law } localization_key = ffpa_usa_charter_no_enactment_tt }
  text = { trigger = { ffpa_usa_charter_unchanged_v1 = yes } localization_key = ffpa_usa_charter_unchanged_tt }
  text = { trigger = { ffpa_usa_charter_governance_changes_v1 = yes any_subject_or_below = { is_subject_type = subject_type_crown_land is_direct_subject_of = ROOT } } localization_key = ffpa_usa_charter_crownlands_tt }

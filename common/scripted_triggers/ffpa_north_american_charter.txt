@@ -2,6 +2,7 @@ ffpa_usa_charter_eligible_v1 = {
  country_definition = cd:USA
  is_revolutionary = no
  NOT = { has_variable = ffpa_usa_charter_closed_v1 }
+ NOT = { has_variable = ffpa_usa_charter_applying_v2 }
 }
 ffpa_usa_charter_window_v1 = {
  OR = {

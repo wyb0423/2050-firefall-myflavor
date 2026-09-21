@@ -290,10 +290,12 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 - 当前实现《州界之间》《一个更大的共同体》及 `ffpa_na_flavor.1–5`，以及 USA《重新缔结联邦》与 `ffpa_usa_flavor.1–9`（政治会议及宪章）。其余北美设计不是已实现行为；不得向既有东地中海调度器加入北美业务，也不改变 USA 成立条件或战争目标。
 - USA 政治由自身 JE 月度 pulse 调度；`ffpa_usa_political_stage_v1` 的0–4为已议定数量，四项选择值1/2及完成、serial变量为存档接口。相邻选择六个月冷却，四项齐备且合法性至少40、官僚余额非负连续十二个月完成。延期须经按钮恢复；身份失效中断稳定期并作废事件序号，保留已定制度。
+- `ffpa_usa_ensure_journals_v2` 由建国回调（前身议程清理后）与既有宪章月度包装调用，只给 strict USA 补挂缺失且符合条件的政治／近邻日志；不得重开已完成政治日志、重发奖励或额外推进月数。建国自动宪章入口检查 requested 而非 initialized，允许 JE 先初始化；旧档补挂仍不自动申请宪章。
 - 政治奖励在选项结算时唯一发放，不在完成或初始化时重发。代表资格与监督选择只导出后续治理接口；常驻治理、经济科研尚未实现。修改时另运行 `tests/check_usa_politics.py`；其有限脚本解释不等于引擎测试。
 - `ffpa_usa_charter_*_v1` 为一次性宪章存档接口：stage的0/1/2/3对应治理/权力/经济草案及签署，三组枚举0为保留现法，其余按事件选项固定排序；initialized/requested/submitted/signed/abandoned/closed与serial防重。初始化不重开五年窗口，离开 USA 结束未结算机会。
 - 宪章月度包装只处理 USA；原生立法开始/结束挂钩只追踪已完整提交且窗口内被阻挡的草案。到期后的单次三个月答复期只允许签署既有草案或维持现制，后续立法不能续期。JE 完成后的决议只复用原入口，不新增日志或重置期限。
 - 签署只激活八部白名单中不同于现法的法律，代价一次24个月；先经济、再权力、最后政体，避免共和制回调把新投票法改成独裁制。未解决的属民制等法律依赖及王室领地关系阻止相关签署。`tools/generate_usa_charter_rules.py` 拥有结构 trigger、冲突 custom loc 与双语规则文本；上游变更须重新审阅后生成。运行 `tests/check_usa_charter.py --game-root GAME --upstream CMF --upstream TECHRES --upstream FIREFALL`，静态解释不能证明引擎中的逐次激活与回调顺序。
+- 四场宪章事件使用原版窗口，九场 USA 事件显式请求 popup。签署按钮与 effect 共用序号／阶段／可签署条件；`ffpa_usa_charter_applying_v2` 仅在同步改法期间阻止回调重入，`ffpa_usa_charter_changes_pending_v2` 仅记录本次变更。全部所选法律落实后才收费、登记 signed 并关闭；失败清理两个临时量与 pending，保留草案／期限及 `ffpa_usa_charter_apply_failed_v2`，供手动重试和诊断。不得自动重放旧版已 signed 的草案或按月强制改法。
 - `ffpa_na_` 独占本期美国前身对象，身份门控为 15 个 strict country definition；本土白名单为 Firefall USA 成立清单去掉波多黎各后的 49 个州区域。
 - `je_ffpa_na_local_recovery_v1`、`ffpa_na_local_*_v1` 变量、州修正与两个事件 ID 为存档接口。route 的 1/2/3 固定表示农产加工、基础工业、交通集散；target 保存实际 state 实例，index 仅用于开工前选州。
 - complete 与 progress_event 为一次性门控，清理不得删除；notice_pending 仅用于半年事件排程，choice_pending 用于工程选择。失效/成立清理删除临时项目状态，不移除已获州奖励。不得让重复打开的旧事件修改新目标。
