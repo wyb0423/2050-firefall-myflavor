@@ -182,8 +182,56 @@ types ffpa_usa_journal_widgets {
   }
   textbox = { text = ffpa_usa_ui_union_rules autoresize = yes multiline = yes max_width = 504 }
  }
+ type ffpa_usa_ui_governance = vbox {
+  spacing = 10
+  textbox = { text = ffpa_usa_gov_heading_v1 autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_gov_overall_v1')]" autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_usa_gov_locked_credit_v1 visible = "[Not(GetScriptedGui('ffpa_usa_gov_credit_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" autoresize = yes multiline = yes max_width = 504 }
+  vbox = { spacing = 6 visible = "[GetScriptedGui('ffpa_usa_gov_credit_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]"
+   hbox = { spacing = 10 icon = { size = { 28 28 } texture = "gfx/interface/icons/event_icons/event_scales.dds" } textbox = { text = ffpa_usa_gov_credit_label_v1 autoresize = yes multiline = yes max_width = 466 } }
+   widget = { size = { 504 22 } tooltip = ffpa_usa_gov_credit_rules_v1
+    background = { texture = "gfx/interface/progressbar/progressbar_empty.dds" spriteType = Corneredtiled spriteborder = { 4 4 } }
+    progressbar = { size = { 100% 100% } min = 0 max = 100 direction = horizontal
+     value = "[JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_gov_credit_display_v1')]"
+     progresstexture = "gfx/interface/progressbar/progressbar_default.dds"
+     noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+    }
+   }
+   textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_gov_credit_status_v1')]" autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_gov_credit_rules_v1 }
+   textbox = { text = ffpa_usa_gov_credit_penalty_clock_v1 autoresize = yes multiline = yes max_width = 504 visible = "[GetScriptedGui('ffpa_usa_gov_credit_penalty_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" tooltip = "[JournalEntry.GetCountry.GetTimedModifier('ffpa_usa_gov_credit_penalty_v1').GetTooltip]" }
+   textbox = { text = ffpa_usa_gov_credit_delta_v1 autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_gov_credit_delta_tt_v1 }
+   textbox = { text = ffpa_usa_gov_inputs_v1 autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_gov_inputs_tt_v1 }
+  }
+  icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
+  textbox = { text = ffpa_usa_gov_locked_risk_v1 visible = "[Not(GetScriptedGui('ffpa_usa_gov_risk_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" autoresize = yes multiline = yes max_width = 504 }
+  vbox = { spacing = 6 visible = "[GetScriptedGui('ffpa_usa_gov_risk_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]"
+   hbox = { spacing = 10 icon = { size = { 28 28 } texture = "gfx/interface/icons/event_icons/event_industry.dds" } textbox = { text = ffpa_usa_gov_risk_label_v1 autoresize = yes multiline = yes max_width = 466 } }
+   widget = { size = { 504 22 } tooltip = ffpa_usa_gov_risk_rules_v1
+    background = { texture = "gfx/interface/progressbar/progressbar_empty.dds" spriteType = Corneredtiled spriteborder = { 4 4 } }
+    progressbar = { size = { 100% 100% } min = 0 max = 100 direction = horizontal
+     value = "[JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_gov_risk_display_v1')]"
+     progresstexture = "gfx/interface/progressbar/progressbar_bad.dds"
+     noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+    }
+   }
+   textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_gov_risk_status_v1')]" autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_gov_risk_rules_v1 }
+   textbox = { text = ffpa_usa_gov_risk_penalty_clock_v1 autoresize = yes multiline = yes max_width = 504 visible = "[GetScriptedGui('ffpa_usa_gov_risk_penalty_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" tooltip = "[JournalEntry.GetCountry.GetTimedModifier('ffpa_usa_gov_risk_penalty_v1').GetTooltip]" }
+   textbox = { text = ffpa_usa_gov_risk_delta_v1 autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_gov_risk_delta_tt_v1 }
+   textbox = { text = ffpa_usa_gov_industry_inputs_v1 autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_gov_industry_inputs_tt_v1 }
+  }
+  icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
+  textbox = { text = ffpa_usa_gov_costs_v1 autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_gov_costs_tt_v1 }
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_gov_conference_status_v1')]" visible = "[GetScriptedGui('ffpa_usa_gov_credit_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_gov_review_status_v1')]" visible = "[GetScriptedGui('ffpa_usa_gov_credit_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_gov_emergency_status_v1')]" visible = "[GetScriptedGui('ffpa_usa_gov_credit_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_gov_credit_line_status_v1')]" visible = "[GetScriptedGui('ffpa_usa_gov_risk_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_gov_procurement_status_v1')]" visible = "[GetScriptedGui('ffpa_usa_gov_risk_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_gov_relief_status_v1')]" visible = "[GetScriptedGui('ffpa_usa_gov_risk_visible_v1').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_usa_gov_shared_rules_v1 autoresize = yes multiline = yes max_width = 504 }
+ }
 }
 ffpa_usa_ui_market = { name = "ffpa_usa_ui_market" }
 ffpa_usa_ui_industry = { name = "ffpa_usa_ui_industry" }
 ffpa_usa_ui_politics = { name = "ffpa_usa_ui_politics" }
 ffpa_usa_ui_union = { name = "ffpa_usa_ui_union" }
+ffpa_usa_ui_governance = { name = "ffpa_usa_ui_governance" }

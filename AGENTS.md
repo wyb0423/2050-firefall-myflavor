@@ -281,25 +281,30 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 **所有文件**
 
-- `common/{journal_entries,scripted_triggers,scripted_effects,script_values,scripted_buttons,scripted_progress_bars,static_modifiers,on_actions,customizable_localization,decisions}/ffpa_north_american*.txt`（宪章与生成表单独保存，不供东地中海复用）
-- `events/ffpa_north_american_events.txt`、`events/ffpa_american_political_events.txt`、`events/ffpa_american_economic_events.txt`
-- `localization/{english,simp_chinese}/ffpa_north_american_l_*.yml`、`ffpa_north_american_economy_l_*.yml` 与 `ffpa_usa_charter_rules_l_*.yml`
+- `common/{journal_entries,scripted_triggers,scripted_effects,script_values,scripted_buttons,scripted_progress_bars,static_modifiers,on_actions,customizable_localization,decisions,scripted_guis}/ffpa_north_american*.txt`（宪章与生成表单独保存，不供东地中海复用）
+- `events/ffpa_north_american_events.txt`、`events/ffpa_american_political_events.txt`、`events/ffpa_american_economic_events.txt`、`events/ffpa_american_governance_events.txt`
+- `localization/{english,simp_chinese}/ffpa_north_american_l_*.yml`、`ffpa_north_american_economy_l_*.yml`、`ffpa_north_american_governance_l_*.yml` 与 `ffpa_usa_charter_rules_l_*.yml`
 - `tests/check_north_america_local_recovery.py`、`tests/check_north_america_union.py`、`tests/check_north_america_preflight.py` 与独立开发测试包 `tests/probes/north_america/`
 - `tests/check_north_america_activation.py` 验证前身激活／恢复脚本子集，不替代引擎选州、弹窗和读档验证。
 
 **行为、状态和边界**
 
-- 当前实现《州界之间》《一个更大的共同体》及 `ffpa_na_flavor.1–5`，以及 USA《重新缔结联邦》与 `ffpa_usa_flavor.1–9`（政治会议及宪章）。现已增加 USA《大陆市场》《规模的力量》与 `ffpa_usa_flavor.10–15` 六场经济/公司事件；教育科研及常驻治理仍不是已实现行为；不得向既有东地中海调度器加入北美业务，也不改变 USA 成立条件或战争目标。
+- 当前实现《州界之间》《一个更大的共同体》及 `ffpa_na_flavor.1–5`，以及 USA《重新缔结联邦》与 `ffpa_usa_flavor.1–9`（政治会议及宪章）。现已增加 USA《大陆市场》《规模的力量》与 `ffpa_usa_flavor.10–15` 六场经济/公司事件，以及 USA《联邦的承诺》与六场治理事件；教育科研仍不是已实现行为；不得向既有东地中海调度器加入北美业务，也不改变 USA 成立条件或战争目标。
 - USA 政治由自身 JE 月度 pulse 调度；`ffpa_usa_political_stage_v1` 的0–4为已议定数量，四项选择值1/2及完成、serial变量为存档接口。相邻选择六个月冷却，四项齐备且合法性至少40、官僚余额非负连续十二个月完成。延期须经按钮恢复；身份失效中断稳定期并作废事件序号，保留已定制度。
 - `ffpa_usa_ensure_journals_v2` 由建国回调（前身议程清理后）与既有宪章月度包装调用，只给 strict USA 补挂缺失且符合条件的政治／近邻日志；不得重开已完成政治日志、重发奖励或额外推进月数。建国自动宪章入口检查 requested 而非 initialized，允许 JE 先初始化；旧档补挂仍不自动申请宪章。
-- 政治奖励在选项结算时唯一发放，不在完成或初始化时重发。代表资格与监督选择只导出后续治理接口；常驻治理与教育科研尚未实现。修改时另运行 `tests/check_usa_politics.py`；其有限脚本解释不等于引擎测试。
+- 政治奖励在选项结算时唯一发放，不在完成或初始化时重发。代表资格与监督选择由《联邦的承诺》消费；教育科研尚未实现。修改时另运行 `tests/check_usa_politics.py`；其有限脚本解释不等于引擎测试。
 - `ffpa_usa_charter_*_v1` 为一次性宪章存档接口：stage的0/1/2/3对应治理/权力/经济草案及签署，三组枚举0为保留现法，其余按事件选项固定排序；initialized/requested/submitted/signed/abandoned/closed与serial防重。初始化不重开五年窗口，离开 USA 结束未结算机会。
 - 宪章月度包装只处理 USA；原生立法开始/结束挂钩只追踪已完整提交且窗口内被阻挡的草案。到期后的单次三个月答复期只允许签署既有草案或维持现制，后续立法不能续期。JE 完成后的决议只复用原入口，不新增日志或重置期限。
 - 签署只激活八部白名单中不同于现法的法律，代价一次24个月；先经济、再权力、最后政体，避免共和制回调把新投票法改成独裁制。未解决的属民制等法律依赖及王室领地关系阻止相关签署。`tools/generate_usa_charter_rules.py` 拥有结构 trigger、冲突 custom loc 与双语规则文本；上游变更须重新审阅后生成。运行 `tests/check_usa_charter.py --game-root GAME --upstream CMF --upstream TECHRES --upstream FIREFALL`，静态解释不能证明引擎中的逐次激活与回调顺序。
 - USA 经济独占 `ffpa_usa_market_*_v1`、`ffpa_usa_industry_*_v1`、`ffpa_usa_company_*_v1` 和 `ffpa_usa_economy_*_v1`；两项 JE、六场事件与公司政策均为存档接口。工业 route 的1/2固定为集中/地方，company_policy 的1/2固定为扩大准入/骨干企业；初始化不得重算开工基数与目标，月度恢复不得推进月份。
 - 经济条件仅查询本土49州范围的自有实例；九类制造行业使用明确建筑白名单。市场稳定十二个月、工业十八个月后保存验收州列表；奖励选项只访问列表中仍归本国的州，结算清空列表。后续扩张不补发工程。JE 保持至事件奖励确认，ready 表示已经验收而非已经领奖。
 - 市场永久公司名额 +1；工业互斥方案为永久名额 +2及公司建造 +10 个百分点十年，或永久公司吞吐量 +10 个百分点及公司建造 +20 个百分点十年。公司事件消费实际持股公司，不硬编码品牌、不新增依赖、不创办公司或改写建筑所有权。所有奖励只有选项结算一个发放入口。
-- 经济事件通过 pending/serial 与一个月结算冷却防重，重开按钮作废旧票据。身份失效中断未验收连续期并取消两笔在途付费项目，保留已验收列表、基数、路线、一次性标记和永久成果；返回 USA 不重新收费或刷新有限收益。经济完成标记是后续治理接口，当前不得伪装成已运行常驻治理。
+- 经济事件通过 pending/serial 与一个月结算冷却防重，重开按钮作废旧票据。身份失效中断未验收连续期并取消两笔在途付费项目，保留已验收列表、基数、路线、一次性标记和永久成果；返回 USA 不重新收费或刷新有限收益。经济完成标记由《联邦的承诺》消费，只开启风险领域，不修改经济奖励。
+- USA 常驻治理独占 `ffpa_usa_gov_*_v1`、`je_ffpa_usa_federal_promise_v1` 与 `.30–31/.40–41/.43–44`；由政治/工业完成标记分别幂等解锁。六个按钮共享实际 guard，恢复包装不推进月份；JE 自身月度 pulse 唯一推进治理、履约与危机。
+- 信用/风险各自24次整备、12月连续危机与12月修复。政治8年、经济5年惩罚由失败转换立即施加、同轮不刷新；事件只通知，单领域不取消另一领域收益。失败仅取消本领域加速，身份失效取消所有未完项目、保留指标/选择/冷却/惩罚日期，返回不再给予整备。
+- 三笔治理费用在启动时固定年GDP比例÷52、一年原生到期，原生期限结束后的月度核验结算一次；只汇总仍有效费用。审查/救济最多十二次月度效果，加速与审查各一个共享槽；普通争议 pending/serial、一次性标记与18月冷却不可重置。
+- 本土生活水平采用各自州实例的36次历史与同州群当前人口权重；仅自有本土州/白名单制造建筑参与。所有权改变/新州回调只清带有本模块标记的历史。不得将全国均值替代为已验证本土均值；州分裂/合并和引擎缓存仍待实机核对。
+- `tests/check_usa_governance.py --game-root GAME` 解释实际治理脚本子集；修改另跑 USA 展示/事件、本地化和原北美检查。该检查不替代引擎访问器、预算、原生计时、UI、AI与存读档验证。新展示沿用 `ffpa_usa_journal_presentation.gui`，治理 GUI/custom loc/value 只读，不由界面发奖励。
 - 修改经济另运行 `tests/check_usa_economy.py`；其实际脚本子集测试不证明引擎公司/列表 scope、失效州引用、分裂合并、UI、AI、预算显示或存读档。原生恢复包装登记在既有北美 on_action 文件，禁止重复声明其通用挂钩。
 - 四场宪章事件使用原版窗口，九场 USA 事件显式请求 popup。签署按钮与 effect 共用序号／阶段／可签署条件；`ffpa_usa_charter_applying_v2` 仅在同步改法期间阻止回调重入，`ffpa_usa_charter_changes_pending_v2` 仅记录本次变更。全部所选法律落实后才收费、登记 signed 并关闭；失败清理两个临时量与 pending，保留草案／期限及 `ffpa_usa_charter_apply_failed_v2`，供手动重试和诊断。不得自动重放旧版已 signed 的草案或按月强制改法。
 - `ffpa_na_` 独占本期美国前身对象，身份门控为 15 个 strict country definition；本土白名单为 Firefall USA 成立清单去掉波多黎各后的 49 个州区域。
@@ -502,7 +507,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 ### USA 日志表现层
 
 - `ffpa_usa_journal_presentation` 同名 GUI、scripted GUI、script values、customizable localization 和双语文件归 USA，均为只读展示；不增加存档变量、计时器或调度。
-- 四条日志的条件组件挂在 `custom_widget_container_3`。《大陆市场》《规模的力量》保留原生时间条；政治阶段格直接读取既有 stage；近邻统一组件仅对 strict USA 显示，前身国家保留原描述。
+- 五条日志的条件组件挂在 `custom_widget_container_3`。《大陆市场》《规模的力量》保留原生时间条；政治阶段格直接读取既有 stage；常驻治理直接读取双领域变量与原生截止日期，未解锁领域隐藏对应操作状态；近邻统一组件仅对 strict USA 显示，前身国家保留原描述。
 - 条件行必须与原经济判定一致；修改门槛时同步更新展示。运行 `python3 tests/check_usa_journal_presentation.py --game-root GAME --cmf-root CMF`，并执行原 CMF、本地化和相关 USA 检查。静态检查不证明实际布局、悬浮作用域或读档。
 
 ### TUR / BYZ 共用准入条件

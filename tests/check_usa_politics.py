@@ -126,7 +126,7 @@ def main():
             for option in fields(event,'option'):assert one(option,'name') in loc
     assert not fields(je,'timeout')
     print('PASS: actual-script six-month spacing, twelve-month reset/boundaries, all choices, deferral, stale events, identity suspension and idempotent completion; bilingual event keys.')
-    print('NOT TESTED: engine activation/pulse ordering, native event expiry, UI scopes, AI or save reload. Charter is checked separately; permanent governance is not yet implemented.')
+    print('NOT TESTED: engine activation/pulse ordering, native event expiry, UI scopes, AI or save reload. Charter is checked separately; permanent governance is checked separately.')
 
 
 if __name__=='__main__':main()

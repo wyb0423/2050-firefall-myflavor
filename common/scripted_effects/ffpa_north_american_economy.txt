@@ -225,7 +225,7 @@ ffpa_usa_industry_settle_v1 = {
    add_modifier = { name = ffpa_usa_company_champions_v1 }
    add_modifier = { name = ffpa_usa_company_champions_construction_v1 years = 10 }
   }
-  # Future governance consumes this milestone; governance itself is not part of this delivery.
+  # Federal governance consumes this milestone; industrial rewards remain owned here.
   set_variable = ffpa_usa_industry_complete_v1
   clear_variable_list = ffpa_usa_industry_reward_states_v1
   remove_variable = ffpa_usa_industry_ready_v1

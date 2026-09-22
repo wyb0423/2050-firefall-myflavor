@@ -1,0 +1,4 @@
+ffpa_usa_gov_credit_visible_v1 = { scope = country is_valid = { ffpa_usa_gov_politics_v1 = yes } }
+ffpa_usa_gov_credit_penalty_visible_v1 = { scope = country is_valid = { has_modifier = ffpa_usa_gov_credit_penalty_v1 } }
+ffpa_usa_gov_risk_visible_v1 = { scope = country is_valid = { ffpa_usa_gov_economy_v1 = yes } }
+ffpa_usa_gov_risk_penalty_visible_v1 = { scope = country is_valid = { has_modifier = ffpa_usa_gov_risk_penalty_v1 } }

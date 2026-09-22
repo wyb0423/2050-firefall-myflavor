@@ -17,6 +17,7 @@ def main():
     parser.add_argument('--game-root', type=Path, required=True)
     args = parser.parse_args()
     guis = definitions(ROOT / f'common/scripted_guis/{NAME}.txt')
+    guis.update(definitions(ROOT / 'common/scripted_guis/ffpa_north_american_governance.txt'))
     locs = definitions(ROOT / f'common/customizable_localization/{NAME}.txt')
     values = definitions(ROOT / f'common/script_values/{NAME}.txt')
     gui = (ROOT / f'gui/{NAME}.gui').read_text()

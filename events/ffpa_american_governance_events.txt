@@ -1,0 +1,148 @@
+namespace = ffpa_usa_flavor
+
+ffpa_usa_flavor.30 = {
+ type = country_event placement = ROOT
+ title = ffpa_usa_flavor.30.t desc = ffpa_usa_flavor.30.d flavor = ffpa_usa_flavor.30.f
+ event_image = { video = "unspecific_politicians_arguing" }
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_gov_eligible_v1 = yes var:ffpa_usa_gov_pending_v1 = 30 }
+ immediate = { save_scope_value_as = { name = ffpa_usa_gov_ticket value = var:ffpa_usa_gov_serial_v1 } }
+ option = { name = ffpa_usa_flavor.30.1
+  default_option = yes
+  if = { limit = { ffpa_usa_gov_event_valid_v1 = { EVENT = 30 } }
+   custom_tooltip = ffpa_usa_flavor.30.1.tt
+   hidden_effect = {
+    if = { limit = { has_variable = ffpa_usa_gov_credit_v1 }
+     change_variable = { name = ffpa_usa_gov_credit_v1 add = 5 }
+     clamp_variable = { name = ffpa_usa_gov_credit_v1 min = 0 max = 100 }
+    } else = {
+     change_variable = { name = ffpa_usa_gov_risk_v1 add = -5 }
+     clamp_variable = { name = ffpa_usa_gov_risk_v1 min = 0 max = 100 }
+    }
+    add_modifier = { name = ffpa_usa_gov_hearing_accountability_v1 years = 1 }
+    set_variable = ffpa_usa_gov_hearing_event_done_v1
+    ffpa_usa_gov_finish_event_v1 = yes
+    ffpa_usa_gov_refresh_v1 = yes
+   }
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = { name = ffpa_usa_flavor.30.2
+  if = { limit = { ffpa_usa_gov_event_valid_v1 = { EVENT = 30 } }
+   custom_tooltip = ffpa_usa_flavor.30.2.tt
+   hidden_effect = {
+    if = { limit = { has_variable = ffpa_usa_gov_risk_v1 }
+     change_variable = { name = ffpa_usa_gov_risk_v1 add = -5 }
+     clamp_variable = { name = ffpa_usa_gov_risk_v1 min = 0 max = 100 }
+    } else = {
+     change_variable = { name = ffpa_usa_gov_credit_v1 add = 3 }
+     clamp_variable = { name = ffpa_usa_gov_credit_v1 min = 0 max = 100 }
+    }
+    add_modifier = { name = ffpa_usa_gov_hearing_reschedule_v1 years = 1 }
+    set_variable = ffpa_usa_gov_hearing_event_done_v1
+    ffpa_usa_gov_finish_event_v1 = yes
+    ffpa_usa_gov_refresh_v1 = yes
+   }
+  }
+  ai_chance = { factor = 10 }
+ }
+}
+
+ffpa_usa_flavor.31 = {
+ type = country_event placement = ROOT
+ title = ffpa_usa_flavor.31.t desc = ffpa_usa_flavor.31.d flavor = ffpa_usa_flavor.31.f
+ event_image = { video = "unspecific_politicians_arguing" }
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_gov_eligible_v1 = yes var:ffpa_usa_gov_pending_v1 = 31 }
+ immediate = { save_scope_value_as = { name = ffpa_usa_gov_ticket value = var:ffpa_usa_gov_serial_v1 } }
+ option = { name = ffpa_usa_flavor.31.1
+  default_option = yes
+  if = { limit = { ffpa_usa_gov_event_valid_v1 = { EVENT = 31 } }
+   custom_tooltip = ffpa_usa_flavor.31.1.tt
+   hidden_effect = {
+    add_modifier = { name = ffpa_usa_gov_emergency_oversight_v1 years = 1 }
+    set_variable = ffpa_usa_gov_emergency_event_done_v1
+    ffpa_usa_gov_finish_event_v1 = yes
+    ffpa_usa_gov_refresh_v1 = yes
+   }
+  }
+  ai_chance = { factor = 10 }
+ }
+ option = { name = ffpa_usa_flavor.31.2
+  if = { limit = { ffpa_usa_gov_event_valid_v1 = { EVENT = 31 } }
+   custom_tooltip = ffpa_usa_flavor.31.2.tt
+   hidden_effect = {
+    change_variable = { name = ffpa_usa_gov_credit_v1 add = -5 }
+    clamp_variable = { name = ffpa_usa_gov_credit_v1 min = 0 max = 100 }
+    set_variable = ffpa_usa_gov_emergency_event_done_v1
+    ffpa_usa_gov_finish_event_v1 = yes
+    ffpa_usa_gov_refresh_v1 = yes
+   }
+  }
+  ai_chance = { factor = 10 }
+ }
+}
+
+ffpa_usa_flavor.40 = {
+ type = country_event placement = ROOT
+ title = ffpa_usa_flavor.40.t desc = ffpa_usa_flavor.40.d flavor = ffpa_usa_flavor.40.f
+ event_image = { video = "unspecific_politicians_arguing" }
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_gov_eligible_v1 = yes }
+ option = { name = ffpa_usa_flavor.40.1
+  default_option = yes
+  custom_tooltip = ffpa_usa_flavor.40.1.tt
+  ai_chance = { factor = 10 }
+ }
+}
+
+ffpa_usa_flavor.41 = {
+ type = country_event placement = ROOT
+ title = ffpa_usa_flavor.41.t desc = ffpa_usa_flavor.41.d flavor = ffpa_usa_flavor.41.f
+ event_image = { video = "unspecific_gears_pistons" }
+ icon = "gfx/interface/icons/event_icons/event_industry.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_gov_eligible_v1 = yes }
+ option = { name = ffpa_usa_flavor.41.1
+  default_option = yes
+  custom_tooltip = ffpa_usa_flavor.41.1.tt
+  ai_chance = { factor = 10 }
+ }
+}
+
+ffpa_usa_flavor.43 = {
+ type = country_event placement = ROOT
+ title = ffpa_usa_flavor.43.t desc = ffpa_usa_flavor.43.d flavor = ffpa_usa_flavor.43.f
+ event_image = { video = "unspecific_politicians_arguing" }
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_gov_eligible_v1 = yes }
+ option = { name = ffpa_usa_flavor.43.1
+  default_option = yes
+  custom_tooltip = ffpa_usa_flavor.43.1.tt
+  ai_chance = { factor = 10 }
+ }
+}
+
+ffpa_usa_flavor.44 = {
+ type = country_event placement = ROOT
+ title = ffpa_usa_flavor.44.t desc = ffpa_usa_flavor.44.d flavor = ffpa_usa_flavor.44.f
+ event_image = { video = "unspecific_gears_pistons" }
+ icon = "gfx/interface/icons/event_icons/event_industry.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = { ffpa_usa_gov_eligible_v1 = yes }
+ option = { name = ffpa_usa_flavor.44.1
+  default_option = yes
+  custom_tooltip = ffpa_usa_flavor.44.1.tt
+  ai_chance = { factor = 10 }
+ }
+}

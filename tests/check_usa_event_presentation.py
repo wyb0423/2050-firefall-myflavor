@@ -11,9 +11,9 @@ def main():
     parser.add_argument('--game-root', type=Path, required=True)
     args = parser.parse_args()
     events = {}
-    for name in ('political', 'economic'):
+    for name in ('political', 'economic', 'governance'):
         events.update(definitions(ROOT / f'events/ffpa_american_{name}_events.txt'))
-    assert set(events) == {f'ffpa_usa_flavor.{n}' for n in range(1, 16)}
+    assert set(events) == {f'ffpa_usa_flavor.{n}' for n in [*range(1, 16), 30, 31, 40, 41, 43, 44]}
     media = definitions(args.game_root / 'gfx/media_aliases/media_aliases.txt')
     for event in events.values():
         assert (args.game_root / one(event, 'icon').strip('"')).is_file()
@@ -66,7 +66,7 @@ def main():
     gui = (ROOT / 'gui/ffpa_usa_journal_presentation.gui').read_text()
     for name in ('market', 'industry'):
         assert f'tooltip = ffpa_usa_ui_{name}_outcomes_tt' in gui
-    print('PASS: 15 concise bilingual events, short choices, guarded settlement/grant hovers, four icon/image themes and journal outcome tooltips.')
+    print('PASS: 21 concise bilingual events, short choices, guarded settlement/grant hovers, four icon/image themes and journal outcome tooltips.')
     print('NOT TESTED: native effect tooltip rendering, hover scope, line wrapping or image framing in game.')
 
 

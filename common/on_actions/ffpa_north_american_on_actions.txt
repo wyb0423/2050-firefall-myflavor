@@ -1,6 +1,6 @@
 # Formation and claim provenance hooks; no global province polling.
 # USA journal recovery also runs through the existing country monthly wrapper.
-on_country_formed = { on_actions = { ffpa_na_on_country_formed_v1 ffpa_usa_economy_recovery_v1 } }
+on_country_formed = { on_actions = { ffpa_na_on_country_formed_v1 ffpa_usa_economy_recovery_v1 ffpa_usa_gov_recovery_v1 } }
 ffpa_na_on_country_formed_v1 = {
  effect = {
   if = {
@@ -51,7 +51,7 @@ ffpa_na_union_on_claim_added_v1 = {
  }
 }
 
-on_monthly_pulse_country = { on_actions = { ffpa_usa_charter_monthly_action_v1 ffpa_na_predecessor_journals_monthly_v2 ffpa_usa_economy_recovery_v1 } }
+on_monthly_pulse_country = { on_actions = { ffpa_usa_charter_monthly_action_v1 ffpa_na_predecessor_journals_monthly_v2 ffpa_usa_economy_recovery_v1 ffpa_usa_gov_recovery_v1 } }
 ffpa_na_predecessor_journals_monthly_v2 = { effect = { ffpa_na_ensure_predecessor_journals_v2 = yes } }
 # Independent recovery and tag-change cleanup; economic JE pulses own progression.
 ffpa_usa_economy_recovery_v1 = { effect = { ffpa_usa_economy_ensure_v1 = yes } }
@@ -65,3 +65,12 @@ on_law_enactment_started = { on_actions = { ffpa_usa_charter_started_action_v1 }
 ffpa_usa_charter_started_action_v1 = { effect = { ffpa_usa_charter_enactment_started_v1 = yes } }
 on_law_enactment_ended = { on_actions = { ffpa_usa_charter_ended_action_v1 } }
 ffpa_usa_charter_ended_action_v1 = { effect = { ffpa_usa_charter_enactment_ended_v1 = yes } }
+
+# USA governance recovery is idempotent and does not advance any month counter.
+ffpa_usa_gov_recovery_v1 = { effect = { ffpa_usa_gov_ensure_v1 = yes } }
+on_state_owner_change = { on_actions = { ffpa_usa_gov_state_history_reset_v1 } }
+on_state_created = { on_actions = { ffpa_usa_gov_state_history_reset_v1 } }
+ffpa_usa_gov_state_history_reset_v1 = {
+ trigger = { has_variable = ffpa_usa_gov_history_owner_v1 }
+ effect = { ffpa_usa_gov_clear_history_v1 = yes }
+}

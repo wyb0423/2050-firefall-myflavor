@@ -1,0 +1,63 @@
+ffpa_usa_gov_credit_status_v1 = { type = country
+ text = { trigger = { has_variable = ffpa_usa_gov_credit_failed_v1 } localization_key = ffpa_usa_gov_credit_failed_text_v1 }
+ text = { trigger = { var:ffpa_usa_gov_credit_grace_v1 > 0 } localization_key = ffpa_usa_gov_credit_grace_text_v1 }
+ text = { trigger = { var:ffpa_usa_gov_credit_v1 < 20 } localization_key = ffpa_usa_gov_credit_crisis_text_v1 }
+ text = { trigger = { var:ffpa_usa_gov_credit_v1 < 35 } localization_key = ffpa_usa_gov_credit_warning_text_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_gov_credit_normal_v1 }
+}
+ffpa_usa_gov_risk_status_v1 = { type = country
+ text = { trigger = { has_variable = ffpa_usa_gov_risk_failed_v1 } localization_key = ffpa_usa_gov_risk_failed_text_v1 }
+ text = { trigger = { var:ffpa_usa_gov_risk_grace_v1 > 0 } localization_key = ffpa_usa_gov_risk_grace_text_v1 }
+ text = { trigger = { var:ffpa_usa_gov_risk_v1 >= 85 } localization_key = ffpa_usa_gov_risk_crisis_text_v1 }
+ text = { trigger = { var:ffpa_usa_gov_risk_v1 >= 65 } localization_key = ffpa_usa_gov_risk_warning_text_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_gov_risk_normal_v1 }
+}
+ffpa_usa_gov_conference_status_v1 = { type = country
+ text = { trigger = { has_variable = ffpa_usa_gov_conference_term_v1 } localization_key = ffpa_usa_gov_conference_active_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_conference_left_v1 } localization_key = ffpa_usa_gov_conference_settling_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_conference_cooldown_v1 } localization_key = ffpa_usa_gov_conference_cooling_v1 }
+ text = { trigger = { ffpa_usa_gov_can_conference_v1 = yes } localization_key = ffpa_usa_gov_conference_available_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_gov_conference_blocked_v1 }
+}
+ffpa_usa_gov_review_status_v1 = { type = country
+ text = { trigger = { has_variable = ffpa_usa_gov_review_term_v1 } localization_key = ffpa_usa_gov_review_active_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_review_left_v1 } localization_key = ffpa_usa_gov_review_settling_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_review_cooldown_v1 } localization_key = ffpa_usa_gov_review_cooling_v1 }
+ text = { trigger = { ffpa_usa_gov_can_review_v1 = yes } localization_key = ffpa_usa_gov_review_available_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_gov_review_blocked_v1 }
+}
+ffpa_usa_gov_emergency_status_v1 = { type = country
+ text = { trigger = { has_variable = ffpa_usa_gov_emergency_term_v1 } localization_key = ffpa_usa_gov_emergency_active_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_emergency_left_v1 } localization_key = ffpa_usa_gov_emergency_settling_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_emergency_cooldown_v1 } localization_key = ffpa_usa_gov_emergency_cooling_v1 }
+ text = { trigger = { ffpa_usa_gov_can_emergency_v1 = yes } localization_key = ffpa_usa_gov_emergency_available_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_gov_emergency_blocked_v1 }
+}
+ffpa_usa_gov_credit_line_status_v1 = { type = country
+ text = { trigger = { has_variable = ffpa_usa_gov_credit_line_term_v1 } localization_key = ffpa_usa_gov_credit_line_active_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_credit_line_left_v1 } localization_key = ffpa_usa_gov_credit_line_settling_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_credit_line_cooldown_v1 } localization_key = ffpa_usa_gov_credit_line_cooling_v1 }
+ text = { trigger = { ffpa_usa_gov_can_credit_line_v1 = yes } localization_key = ffpa_usa_gov_credit_line_available_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_gov_credit_line_blocked_v1 }
+}
+ffpa_usa_gov_procurement_status_v1 = { type = country
+ text = { trigger = { has_variable = ffpa_usa_gov_procurement_term_v1 } localization_key = ffpa_usa_gov_procurement_active_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_procurement_left_v1 } localization_key = ffpa_usa_gov_procurement_settling_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_procurement_cooldown_v1 } localization_key = ffpa_usa_gov_procurement_cooling_v1 }
+ text = { trigger = { ffpa_usa_gov_can_procurement_v1 = yes } localization_key = ffpa_usa_gov_procurement_available_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_gov_procurement_blocked_v1 }
+}
+ffpa_usa_gov_relief_status_v1 = { type = country
+ text = { trigger = { has_variable = ffpa_usa_gov_relief_term_v1 } localization_key = ffpa_usa_gov_relief_active_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_relief_left_v1 } localization_key = ffpa_usa_gov_relief_settling_v1 }
+ text = { trigger = { has_variable = ffpa_usa_gov_relief_cooldown_v1 } localization_key = ffpa_usa_gov_relief_cooling_v1 }
+ text = { trigger = { ffpa_usa_gov_can_relief_v1 = yes } localization_key = ffpa_usa_gov_relief_available_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_gov_relief_blocked_v1 }
+}
+ffpa_usa_gov_overall_v1 = { type = country
+ text = { trigger = { has_variable = ffpa_usa_gov_credit_failed_v1 has_variable = ffpa_usa_gov_risk_failed_v1 } localization_key = ffpa_usa_gov_both_failed_v1 }
+ text = { trigger = { OR = { has_variable = ffpa_usa_gov_credit_failed_v1 has_variable = ffpa_usa_gov_risk_failed_v1 } } localization_key = ffpa_usa_gov_one_failed_v1 }
+ text = { trigger = { OR = { AND = { has_variable = ffpa_usa_gov_credit_v1 var:ffpa_usa_gov_credit_v1 < 20 } AND = { has_variable = ffpa_usa_gov_risk_v1 var:ffpa_usa_gov_risk_v1 >= 85 } } } localization_key = ffpa_usa_gov_overall_crisis_v1 }
+ text = { trigger = { OR = { AND = { has_variable = ffpa_usa_gov_credit_v1 var:ffpa_usa_gov_credit_v1 < 35 } AND = { has_variable = ffpa_usa_gov_risk_v1 var:ffpa_usa_gov_risk_v1 >= 65 } } } localization_key = ffpa_usa_gov_overall_warning_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_gov_overall_stable_v1 }
+}
