@@ -1,0 +1,187 @@
+# USA-only, stateless journal widgets. Existing native/CMF time bars stay attached.
+types ffpa_usa_journal_widgets {
+ type ffpa_usa_ui_market = vbox {
+  spacing = 10
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_ui_market_status')]" autoresize = yes multiline = yes max_width = 504 }
+  icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
+  textbox = { text = ffpa_usa_ui_conditions autoresize = yes multiline = yes max_width = 504 }
+  hbox = {
+   spacing = 10
+   tooltip = ffpa_usa_market_population_tt
+   widget = { size = { 18 18 } parentanchor = vcenter icon = { size = { 18 18 } visible = "[GetScriptedGui('ffpa_usa_ui_population').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" texture = "gfx/interface/icons/generic_icons/checkmark.dds" } }
+   vbox = { spacing = 2 textbox = { text = ffpa_usa_ui_population autoresize = yes multiline = yes max_width = 374 } }
+   textbox = { text = ffpa_usa_ui_met autoresize = yes visible = "[GetScriptedGui('ffpa_usa_ui_population').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" }
+   textbox = { text = ffpa_usa_ui_unmet autoresize = yes visible = "[Not(GetScriptedGui('ffpa_usa_ui_population').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" }
+  }
+  hbox = {
+   spacing = 10
+   tooltip = ffpa_usa_market_facilities_tt
+   widget = { size = { 18 18 } parentanchor = vcenter icon = { size = { 18 18 } visible = "[GetScriptedGui('ffpa_usa_ui_facilities').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" texture = "gfx/interface/icons/generic_icons/checkmark.dds" } }
+   vbox = { spacing = 2 textbox = { text = ffpa_usa_ui_facilities autoresize = yes multiline = yes max_width = 374 } }
+   textbox = { text = ffpa_usa_ui_met autoresize = yes visible = "[GetScriptedGui('ffpa_usa_ui_facilities').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" }
+   textbox = { text = ffpa_usa_ui_unmet autoresize = yes visible = "[Not(GetScriptedGui('ffpa_usa_ui_facilities').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" }
+  }
+  textbox = { text = ffpa_usa_ui_market_rules autoresize = yes multiline = yes max_width = 504 }
+  icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
+  textbox = { text = ffpa_usa_ui_grants autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_ui_grants_tip }
+ }
+ type ffpa_usa_ui_industry = vbox {
+  spacing = 10
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_ui_industry_status')]" autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_usa_ui_route_label autoresize = yes multiline = yes max_width = 504 }
+  icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
+  textbox = { text = ffpa_usa_ui_conditions autoresize = yes multiline = yes max_width = 504 }
+  hbox = {
+   spacing = 10
+   tooltip = ffpa_usa_industry_levels_tt
+   widget = { size = { 18 18 } parentanchor = vcenter icon = { size = { 18 18 } visible = "[GetScriptedGui('ffpa_usa_ui_levels').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" texture = "gfx/interface/icons/generic_icons/checkmark.dds" } }
+   vbox = { spacing = 2 textbox = { text = ffpa_usa_ui_levels autoresize = yes multiline = yes max_width = 374 } }
+   textbox = { text = ffpa_usa_ui_met autoresize = yes visible = "[GetScriptedGui('ffpa_usa_ui_levels').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" }
+   textbox = { text = ffpa_usa_ui_unmet autoresize = yes visible = "[Not(GetScriptedGui('ffpa_usa_ui_levels').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" }
+  }
+  textbox = { text = ffpa_usa_ui_baseline autoresize = yes multiline = yes max_width = 504 }
+  hbox = {
+   spacing = 10
+   tooltip = ffpa_usa_industry_categories_help_v1
+   widget = { size = { 18 18 } parentanchor = vcenter icon = { size = { 18 18 } visible = "[GetScriptedGui('ffpa_usa_ui_categories').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" texture = "gfx/interface/icons/generic_icons/checkmark.dds" } }
+   vbox = { spacing = 2 textbox = { text = ffpa_usa_ui_categories autoresize = yes multiline = yes max_width = 374 } }
+   textbox = { text = ffpa_usa_ui_met autoresize = yes visible = "[GetScriptedGui('ffpa_usa_ui_categories').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" }
+   textbox = { text = ffpa_usa_ui_unmet autoresize = yes visible = "[Not(GetScriptedGui('ffpa_usa_ui_categories').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" }
+  }
+  hbox = {
+   spacing = 10
+   tooltip = ffpa_usa_industry_distribution_tt
+   widget = { size = { 18 18 } parentanchor = vcenter icon = { size = { 18 18 } visible = "[GetScriptedGui('ffpa_usa_ui_distribution').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" texture = "gfx/interface/icons/generic_icons/checkmark.dds" } }
+   vbox = { spacing = 2 textbox = { text = ffpa_usa_ui_distribution autoresize = yes multiline = yes max_width = 374 } }
+   textbox = { text = ffpa_usa_ui_met autoresize = yes visible = "[GetScriptedGui('ffpa_usa_ui_distribution').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" }
+   textbox = { text = ffpa_usa_ui_unmet autoresize = yes visible = "[Not(GetScriptedGui('ffpa_usa_ui_distribution').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" }
+  }
+  hbox = {
+   spacing = 10
+   tooltip = ffpa_usa_ui_mix_tip
+   widget = { size = { 18 18 } parentanchor = vcenter icon = { size = { 18 18 } visible = "[GetScriptedGui('ffpa_usa_ui_materials').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" texture = "gfx/interface/icons/generic_icons/checkmark.dds" } }
+   vbox = { spacing = 2 textbox = { text = ffpa_usa_ui_materials autoresize = yes multiline = yes max_width = 374 } }
+   textbox = { text = ffpa_usa_ui_met autoresize = yes visible = "[GetScriptedGui('ffpa_usa_ui_materials').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" }
+   textbox = { text = ffpa_usa_ui_unmet autoresize = yes visible = "[Not(GetScriptedGui('ffpa_usa_ui_materials').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" }
+  }
+  hbox = {
+   spacing = 10
+   tooltip = ffpa_usa_ui_mix_tip
+   widget = { size = { 18 18 } parentanchor = vcenter icon = { size = { 18 18 } visible = "[GetScriptedGui('ffpa_usa_ui_consumer').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" texture = "gfx/interface/icons/generic_icons/checkmark.dds" } }
+   vbox = { spacing = 2 textbox = { text = ffpa_usa_ui_consumer autoresize = yes multiline = yes max_width = 374 } }
+   textbox = { text = ffpa_usa_ui_met autoresize = yes visible = "[GetScriptedGui('ffpa_usa_ui_consumer').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" }
+   textbox = { text = ffpa_usa_ui_unmet autoresize = yes visible = "[Not(GetScriptedGui('ffpa_usa_ui_consumer').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" }
+  }
+  textbox = { text = ffpa_usa_ui_industry_rules autoresize = yes multiline = yes max_width = 504 }
+  icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
+  textbox = { text = ffpa_usa_ui_grants autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_ui_grants_tip }
+ }
+ type ffpa_usa_ui_politics = vbox {
+  spacing = 10
+  textbox = { text = ffpa_usa_ui_politics_heading autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_usa_ui_politics_status autoresize = yes multiline = yes max_width = 504 }
+  hbox = { spacing = 12
+   com_journal_entry_enactment_phase = {
+    blockoverride "active_size" { size = { 246 28 } }
+    blockoverride "past_size" { size = { 246 28 } }
+    blockoverride "not_reached_size" { size = { 246 28 } }
+    blockoverride "text_max_width" { max_width = 208 }
+    blockoverride "past_phase_text_max_width" { max_width = 208 }
+    tooltip = ffpa_usa_ui_choice_works
+    blockoverride "current_phase_visibility" { visible = "[EqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)0')]" }
+    blockoverride "past_phase_visibility" { visible = "[GreaterThanOrEqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)1')]" }
+    blockoverride "not_reached_phase_visibility" { visible = "[LessThan_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)0')]" }
+    blockoverride "phase_name" { text = ffpa_usa_ui_phase_works }
+   }
+   com_journal_entry_enactment_phase = {
+    blockoverride "active_size" { size = { 246 28 } }
+    blockoverride "past_size" { size = { 246 28 } }
+    blockoverride "not_reached_size" { size = { 246 28 } }
+    blockoverride "text_max_width" { max_width = 208 }
+    blockoverride "past_phase_text_max_width" { max_width = 208 }
+    tooltip = ffpa_usa_ui_choice_titles
+    blockoverride "current_phase_visibility" { visible = "[EqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)1')]" }
+    blockoverride "past_phase_visibility" { visible = "[GreaterThanOrEqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)2')]" }
+    blockoverride "not_reached_phase_visibility" { visible = "[LessThan_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)1')]" }
+    blockoverride "phase_name" { text = ffpa_usa_ui_phase_titles }
+   }
+  }
+  hbox = { spacing = 12
+   com_journal_entry_enactment_phase = {
+    blockoverride "active_size" { size = { 246 28 } }
+    blockoverride "past_size" { size = { 246 28 } }
+    blockoverride "not_reached_size" { size = { 246 28 } }
+    blockoverride "text_max_width" { max_width = 208 }
+    blockoverride "past_phase_text_max_width" { max_width = 208 }
+    tooltip = ffpa_usa_ui_choice_representation
+    blockoverride "current_phase_visibility" { visible = "[EqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)2')]" }
+    blockoverride "past_phase_visibility" { visible = "[GreaterThanOrEqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)3')]" }
+    blockoverride "not_reached_phase_visibility" { visible = "[LessThan_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)2')]" }
+    blockoverride "phase_name" { text = ffpa_usa_ui_phase_representation }
+   }
+   com_journal_entry_enactment_phase = {
+    blockoverride "active_size" { size = { 246 28 } }
+    blockoverride "past_size" { size = { 246 28 } }
+    blockoverride "not_reached_size" { size = { 246 28 } }
+    blockoverride "text_max_width" { max_width = 208 }
+    blockoverride "past_phase_text_max_width" { max_width = 208 }
+    tooltip = ffpa_usa_ui_choice_oversight
+    blockoverride "current_phase_visibility" { visible = "[EqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)3')]" }
+    blockoverride "past_phase_visibility" { visible = "[GreaterThanOrEqualTo_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)4')]" }
+    blockoverride "not_reached_phase_visibility" { visible = "[LessThan_CFixedPoint(JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_stage'), '(CFixedPoint)3')]" }
+    blockoverride "phase_name" { text = ffpa_usa_ui_phase_oversight }
+   }
+  }
+  textbox = { text = ffpa_usa_ui_choice_works autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_usa_ui_choice_titles autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_usa_ui_choice_representation autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = ffpa_usa_ui_choice_oversight autoresize = yes multiline = yes max_width = 504 }
+  icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
+  hbox = {
+   spacing = 10
+   tooltip = ffpa_usa_ui_legitimacy
+   widget = { size = { 18 18 } parentanchor = vcenter icon = { size = { 18 18 } visible = "[GetScriptedGui('ffpa_usa_ui_legitimacy').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" texture = "gfx/interface/icons/generic_icons/checkmark.dds" } }
+   vbox = { spacing = 2 textbox = { text = ffpa_usa_ui_legitimacy autoresize = yes multiline = yes max_width = 374 } }
+   textbox = { text = ffpa_usa_ui_met autoresize = yes visible = "[GetScriptedGui('ffpa_usa_ui_legitimacy').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" }
+   textbox = { text = ffpa_usa_ui_unmet autoresize = yes visible = "[Not(GetScriptedGui('ffpa_usa_ui_legitimacy').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" }
+  }
+  hbox = {
+   spacing = 10
+   tooltip = ffpa_usa_ui_bureaucracy
+   widget = { size = { 18 18 } parentanchor = vcenter icon = { size = { 18 18 } visible = "[GetScriptedGui('ffpa_usa_ui_bureaucracy').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" texture = "gfx/interface/icons/generic_icons/checkmark.dds" } }
+   vbox = { spacing = 2 textbox = { text = ffpa_usa_ui_bureaucracy autoresize = yes multiline = yes max_width = 374 } }
+   textbox = { text = ffpa_usa_ui_met autoresize = yes visible = "[GetScriptedGui('ffpa_usa_ui_bureaucracy').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]" }
+   textbox = { text = ffpa_usa_ui_unmet autoresize = yes visible = "[Not(GetScriptedGui('ffpa_usa_ui_bureaucracy').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End))]" }
+  }
+  textbox = { text = ffpa_usa_ui_politics_rules autoresize = yes multiline = yes max_width = 504 }
+  icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
+  textbox = { text = ffpa_usa_ui_charter_label autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_ui_charter_tip }
+ }
+ type ffpa_usa_ui_union = vbox {
+  spacing = 10
+  visible = "[GetScriptedGui('ffpa_usa_ui_usa').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]"
+  textbox = { text = ffpa_usa_ui_union_heading autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_ui_union_target')]" autoresize = yes multiline = yes max_width = 504 }
+  textbox = { text = "[JournalEntry.GetCountry.GetCustom('ffpa_usa_ui_union_status')]" autoresize = yes multiline = yes max_width = 504 }
+  icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
+  vbox = { spacing = 6
+   visible = "[GetScriptedGui('ffpa_usa_ui_union_progress').IsValid(GuiScope.SetRoot(JournalEntry.GetCountry.MakeScope).End)]"
+  textbox = { text = ffpa_usa_ui_union_counts autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_ui_union_count_tip }
+   widget = {
+    size = { 504 22 }
+    tooltip = ffpa_usa_ui_union_count_tip
+    background = { texture = "gfx/interface/progressbar/progressbar_empty.dds" spriteType = Corneredtiled spriteborder = { 4 4 } }
+    progressbar = { size = { 100% 100% } min = 0 max = 1 direction = horizontal
+     value = "[JournalEntry.GetCountry.MakeScope.ScriptValue('ffpa_usa_ui_union_progress')]"
+     progresstexture = "gfx/interface/progressbar/progressbar_default.dds"
+     noprogresstexture = "gfx/interface/icons/generic_icons/transparent.dds"
+    }
+   }
+  }
+  textbox = { text = ffpa_usa_ui_union_rules autoresize = yes multiline = yes max_width = 504 }
+ }
+}
+ffpa_usa_ui_market = { name = "ffpa_usa_ui_market" }
+ffpa_usa_ui_industry = { name = "ffpa_usa_ui_industry" }
+ffpa_usa_ui_politics = { name = "ffpa_usa_ui_politics" }
+ffpa_usa_ui_union = { name = "ffpa_usa_ui_union" }

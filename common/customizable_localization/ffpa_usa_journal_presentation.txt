@@ -1,0 +1,59 @@
+# Country-scoped presentation; branch order follows existing journal lifecycle.
+ffpa_usa_ui_market_status = {
+ type = country
+ text = { trigger = { has_variable = ffpa_usa_market_ready_v1 } localization_key = ffpa_usa_ui_settlement }
+ text = { trigger = { has_variable = ffpa_usa_economy_pending_v1 } localization_key = ffpa_usa_ui_reply }
+ text = { trigger = { ffpa_usa_market_stable_v1 = yes } localization_key = ffpa_usa_ui_accumulating }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_ui_blocked }
+}
+
+ffpa_usa_ui_industry_status = {
+ type = country
+ text = { trigger = { has_variable = ffpa_usa_industry_ready_v1 } localization_key = ffpa_usa_ui_settlement }
+ text = { trigger = { has_variable = ffpa_usa_economy_pending_v1 } localization_key = ffpa_usa_ui_reply }
+ text = { trigger = { ffpa_usa_industry_stable_v1 = yes } localization_key = ffpa_usa_ui_accumulating }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_ui_blocked }
+}
+
+ffpa_usa_ui_charter = {
+ type = country
+ text = { trigger = { has_variable = ffpa_usa_charter_signed_v1 } localization_key = ffpa_usa_ui_charter_signed }
+ text = { trigger = { has_variable = ffpa_usa_charter_closed_v1 } localization_key = ffpa_usa_ui_charter_closed }
+ text = { trigger = { has_variable = ffpa_usa_charter_apply_failed_v2 } localization_key = ffpa_usa_ui_charter_failed }
+ text = { trigger = { has_variable = ffpa_usa_charter_pending_v1 } localization_key = ffpa_usa_ui_charter_reply }
+ text = { trigger = { ffpa_usa_charter_can_sign_v1 = yes } localization_key = ffpa_usa_ui_charter_ready }
+ text = { trigger = { has_variable = ffpa_usa_charter_submitted_v1 exists = currently_enacting_law } localization_key = ffpa_usa_ui_charter_hold }
+ text = { trigger = { ffpa_usa_charter_window_v1 = yes } localization_key = ffpa_usa_ui_charter_open }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_ui_charter_unavailable }
+}
+
+ffpa_usa_ui_route = {
+ type = country
+ text = { trigger = { has_variable = ffpa_usa_industry_route_v1 var:ffpa_usa_industry_route_v1 = 1 } localization_key = ffpa_usa_ui_route_central }
+ text = { trigger = { has_variable = ffpa_usa_industry_route_v1 var:ffpa_usa_industry_route_v1 = 2 } localization_key = ffpa_usa_ui_route_local }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_ui_route_pending }
+}
+
+ffpa_usa_ui_union_reason = {
+ type = country
+ text = { trigger = { country_definition = cd:USA } localization_key = ffpa_usa_ui_union_story }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_ui_union_original_reason }
+}
+
+ffpa_usa_ui_union_target = {
+ type = country
+ text = { trigger = { exists = var:ffpa_na_union_region_v1 } localization_key = ffpa_usa_ui_union_region }
+ text = { trigger = { exists = var:ffpa_na_union_target_v1 } localization_key = ffpa_usa_ui_union_candidate }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_ui_union_no_target }
+}
+
+ffpa_usa_ui_union_status = {
+ type = country
+ text = { trigger = { has_variable = ffpa_na_union_cooldown_v1 } localization_key = ffpa_usa_ui_union_cooldown }
+ text = { trigger = { has_variable = ffpa_na_union_status_v1 var:ffpa_na_union_status_v1 = 2 } localization_key = ffpa_usa_ui_settlement }
+ text = { trigger = { has_variable = ffpa_na_union_withdraw_v1 } localization_key = ffpa_usa_ui_union_withdraw }
+ text = { trigger = { has_variable = ffpa_na_union_status_v1 var:ffpa_na_union_status_v1 = 1 NOT = { has_variable = ffpa_na_union_deadline_v1 } } localization_key = ffpa_usa_ui_union_expired }
+ text = { trigger = { has_variable = ffpa_na_union_status_v1 var:ffpa_na_union_status_v1 = 1 } localization_key = ffpa_usa_ui_union_active }
+ text = { trigger = { exists = var:ffpa_na_union_target_v1 } localization_key = ffpa_usa_ui_union_propose }
+ text = { trigger = { always = yes } localization_key = ffpa_usa_ui_union_empty }
+}

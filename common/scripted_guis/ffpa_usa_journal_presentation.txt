@@ -1,0 +1,12 @@
+# Read-only predicates; never execute effects from this presentation.
+ffpa_usa_ui_usa = { scope = country is_valid = { country_definition = cd:USA } }
+ffpa_usa_ui_population = { scope = country is_valid = { ffpa_usa_mainland_population_v1 > 0 ffpa_usa_market_coverage_v1 >= 85 } }
+ffpa_usa_ui_facilities = { scope = country is_valid = { ffpa_usa_market_states_v1 >= 4 } }
+ffpa_usa_ui_levels = { scope = country is_valid = { has_variable = ffpa_usa_industry_target_v1 ffpa_usa_industry_levels_v1 >= var:ffpa_usa_industry_target_v1 } }
+ffpa_usa_ui_categories = { scope = country is_valid = { ffpa_usa_industry_categories_v1 >= 4 } }
+ffpa_usa_ui_distribution = { scope = country is_valid = { has_variable = ffpa_usa_industry_route_v1 ffpa_usa_industry_states_v1 >= ffpa_usa_industry_required_states_v1 } }
+ffpa_usa_ui_materials = { scope = country is_valid = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { level >= 1 occupancy >= 0.75 OR = { ffpa_usa_industry_metals_v1 = yes ffpa_usa_industry_machinery_v1 = yes } } } } }
+ffpa_usa_ui_consumer = { scope = country is_valid = { any_scope_state = { ffpa_na_is_mainland_state_v1 = yes any_scope_building = { level >= 1 occupancy >= 0.75 OR = { ffpa_usa_industry_food_v1 = yes ffpa_usa_industry_textiles_v1 = yes ffpa_usa_industry_consumer_v1 = yes } } } } }
+ffpa_usa_ui_legitimacy = { scope = country is_valid = { government_legitimacy >= 40 } }
+ffpa_usa_ui_bureaucracy = { scope = country is_valid = { bureaucracy >= 0 } }
+ffpa_usa_ui_union_progress = { scope = country is_valid = { has_variable = ffpa_na_union_status_v1 OR = { var:ffpa_na_union_status_v1 = 1 var:ffpa_na_union_status_v1 = 2 } has_variable = ffpa_na_union_total_v1 var:ffpa_na_union_total_v1 > 0 } }

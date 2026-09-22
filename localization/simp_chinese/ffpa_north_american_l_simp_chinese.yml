@@ -32,7 +32,7 @@
  ffpa_na_local_public_orders_v1: "本地公共设施订货"
  ffpa_na_local_producer_orders_v1: "本地生产者订货"
  je_ffpa_na_union_agenda_v1: "一个更大的共同体"
- je_ffpa_na_union_agenda_v1_reason: "关卡两边的账簿仍记录着相近的货物，地方官署却分别征税、检查证件、解释旧地图。商人希望形成共同市场，主张统一的代表要求共同政府；拥有现成税源和权力的人则有自己的保留。政府可以把其中一处近邻领土列为有限议程，但地图上的主张仍须由实际取得的领土支持。\n\n[ROOT.GetCountry.GetCustom('ffpa_na_union_status_text_v1')]\n\n每次登记一处目标的全部现有省份，期限十年。全部取得后结算，和平接收同样有效；战争或已参与的外交博弈中暂停结算。成功后一年可再议，撤回、超时或无法可靠追踪后冷却三年。接收方案给予实际接收州完整五年奖励。"
+ je_ffpa_na_union_agenda_v1_reason: "[ROOT.GetCountry.GetCustom('ffpa_usa_ui_union_reason')]"
  je_ffpa_na_union_agenda_v1_goal: "完整取得登记目标，选择共同市场或共同政府接收方案。"
  ffpa_na_union_next_button_v1: "考察下一处近邻"
  ffpa_na_union_next_button_v1_desc: "优先本国已经持有部分领土的同州目标，再轮换相邻本土州。只考察非分权政权的领土；考察本身不授予宣称。"
@@ -68,7 +68,7 @@
  ai_strategy_ffpa_na_union_v1_desc: "优先争取当前议程登记的近邻领土。"
 
  je_ffpa_usa_federal_settlement_v1: "重新缔结联邦"
- je_ffpa_usa_federal_settlement_v1_reason: "美国的名字重新出现在公文上，各地的工程账册却仍沿用不同的规矩。地方共同体希望保留执行权，持有旧契据的人要求恢复信用，灾后迁入者则担心登记册把自己的劳动排除在外。政府需要逐项确定出资、产权、代表与监督的安排，使共同建设有一套能够持续执行的规则。\n\n#bold 当前议程#!：[ROOT.GetCountry.GetCustom('ffpa_usa_political_status_v1')]\n相邻会议至少间隔#bold 六个月#!；延期后可用日志按钮继续。四项选择完成后，合法性至少#bold 40#!、官僚余额非负，连续保持#bold 十二个月#!即可完成；失稳重算，无总期限。\n\n#bold 已定安排#!\n[ROOT.GetCountry.GetCustom('ffpa_usa_political_works_name_v1')]\n[ROOT.GetCountry.GetCustom('ffpa_usa_political_titles_name_v1')]\n[ROOT.GetCountry.GetCustom('ffpa_usa_political_representation_name_v1')]\n[ROOT.GetCountry.GetCustom('ffpa_usa_political_oversight_name_v1')]"
+ je_ffpa_usa_federal_settlement_v1_reason: "美国的名字重新出现在公文上，各地的工程账册却仍沿用不同的规矩。地方共同体希望保留#bold 执行权#!，持有旧契据的人要求恢复#bold 信用#!，灾后迁入者则担心登记册把自己的劳动排除在外。\n\n政府需要逐项确定出资、产权、代表与监督的安排，使共同建设有一套#bold 能够持续执行的规则#!。"
  ffpa_usa_political_months_bar_v1: "制度稳定期"
  ffpa_usa_political_months_bar_v1_cmf_value: "$ffpa_usa_political_months_bar_v1$  [JournalEntry.GetCurrentBarValue(ScriptedProgressBar.Self)|0]/12"
  ffpa_usa_political_months_bar_v1_cmf_tooltip: "四场选择完成后，合法性至少40且官僚余额非负的月份累计；任一条件不满足归零。当前：[JournalEntry.GetCurrentBarValue(ScriptedProgressBar.Self)|0]/12。"

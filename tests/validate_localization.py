@@ -11,7 +11,7 @@ import re
 ROOT = Path(__file__).resolve().parents[1]
 ROW = re.compile(r' ([\w.-]+):\d* "((?:[^"\\]|\\[n"\\])*)"')
 TAG = re.compile(r'#!|#([A-Za-z_]+) ')
-STYLES = {'bold', 'b', 'v', 'p', 'n', 'r', 'italic', 'lore'}
+STYLES = {'bold', 'b', 'v', 'p', 'n', 'r', 'italic', 'lore', 'yellow'}
 CONCEPT = re.compile(r'\[(concept_[\w-]+)\]|\[Concept\(\'(concept_[\w-]+)\',')
 
 

@@ -496,6 +496,12 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 四项治理危机展示读取8个既有计数；禁止新增计时器。地区逐州条件保留单个 state 的判定，建筑等级不能跨州汇总；北美贡献采用已建成 level 与原就业门槛，不能使用包含队列的扩建等级。
 - 追加运行 `python3 tests/check_cmf_project_views.py`，检查生成一致性、GUI 表达式、56组逐州条件、16类路线建筑和计数缺省值。
 
+### USA 日志表现层
+
+- `ffpa_usa_journal_presentation` 同名 GUI、scripted GUI、script values、customizable localization 和双语文件归 USA，均为只读展示；不增加存档变量、计时器或调度。
+- 四条日志的条件组件挂在 `custom_widget_container_3`。《大陆市场》《规模的力量》保留原生时间条；政治阶段格直接读取既有 stage；近邻统一组件仅对 strict USA 显示，前身国家保留原描述。
+- 条件行必须与原经济判定一致；修改门槛时同步更新展示。运行 `python3 tests/check_usa_journal_presentation.py --game-root GAME --cmf-root CMF`，并执行原 CMF、本地化和相关 USA 检查。静态检查不证明实际布局、悬浮作用域或读档。
+
 ### TUR / BYZ 共用准入条件
 
 - `ffpa_byz_foundation_territory_ready_v1` 是无状态country trigger，供BYZ成立和新罗马再加冕共同调用：10/12完整地区且必须包含东色雷斯、阿提卡。不可仅修改原生成立比例而漏改精确条件。
