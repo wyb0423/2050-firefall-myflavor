@@ -15,10 +15,13 @@ ffpa_na_union_status_text_v1 = {
  type = country
  text = { trigger = { has_variable = ffpa_na_union_cooldown_v1 } localization_key = ffpa_na_union_status_cooldown_v1 }
  text = { trigger = { has_variable = ffpa_na_union_status_v1 var:ffpa_na_union_status_v1 = 2 } localization_key = ffpa_na_union_status_settlement_v1 }
- text = { trigger = { has_variable = ffpa_na_union_withdraw_v1 } localization_key = ffpa_na_union_status_withdraw_v1 }
  text = { trigger = { has_variable = ffpa_na_union_status_v1 var:ffpa_na_union_status_v1 = 1 NOT = { has_variable = ffpa_na_union_deadline_v1 } } localization_key = ffpa_na_union_status_expired_v1 }
+ text = { trigger = { has_variable = ffpa_na_union_withdraw_v1 } localization_key = ffpa_na_union_status_withdraw_v1 }
  text = { trigger = { has_variable = ffpa_na_union_status_v1 var:ffpa_na_union_status_v1 = 1 } localization_key = ffpa_na_union_status_active_v1 }
- text = { trigger = { exists = var:ffpa_na_union_target_v1 } localization_key = ffpa_na_union_status_candidate_v1 }
+ text = { trigger = { has_variable = ffpa_na_union_proposal_v1 } localization_key = ffpa_na_union_status_proposal_v2 }
+ text = { trigger = { ffpa_na_union_can_start_v1 = yes } localization_key = ffpa_na_union_status_candidate_v1 }
+ text = { trigger = { ffpa_na_union_target_valid_v2 = yes ffpa_na_union_peace_v1 = no } localization_key = ffpa_na_union_status_war_v2 }
+ text = { trigger = { ffpa_na_union_can_select_v2 = yes } localization_key = ffpa_na_union_status_select_v2 }
  text = { trigger = { always = yes } localization_key = ffpa_na_union_status_empty_v1 }
 }
 
@@ -53,4 +56,10 @@ ffpa_usa_political_oversight_name_v1 = {
  text = { trigger = { has_variable = ffpa_usa_political_oversight_v1 var:ffpa_usa_political_oversight_v1 = 1 } localization_key = ffpa_usa_political_oversight_1_v1 }
  text = { trigger = { has_variable = ffpa_usa_political_oversight_v1 var:ffpa_usa_political_oversight_v1 = 2 } localization_key = ffpa_usa_political_oversight_2_v1 }
  text = { trigger = { always = yes } localization_key = ffpa_usa_political_oversight_unset_v1 }
+}
+
+ffpa_na_union_goal_v2 = {
+ type = country
+ text = { trigger = { country_definition = cd:USA } localization_key = ffpa_usa_union_goal_v1 }
+ text = { trigger = { always = yes } localization_key = ffpa_na_union_goal_repeated_v2 }
 }

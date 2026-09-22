@@ -96,6 +96,12 @@ def main():
                             ({'ffpa_na_union_status_v1': 2}, 'settlement'),
                             ({'ffpa_na_union_status_v1': 2, 'ffpa_na_union_cooldown_v1': 1}, 'union_cooldown')]:
         assert choose('union_status', state) == P + expected
+    assert choose('union_status', {'ffpa_na_union_target_v1': object()}) == P + 'union_empty'
+    assert choose('union_status', {'ffpa_na_union_can_start_v1': True}) == P + 'union_propose'
+    for state, expected in [({'ffpa_na_union_proposal_v1': 1}, 'proposal'),
+                            ({'ffpa_na_union_target_valid_v2': True}, 'war'),
+                            ({'ffpa_na_union_can_select_v2': True}, 'select')]:
+        assert choose('union_status', state) == 'ffpa_na_union_status_' + expected + '_v2'
     for name in ('levels', 'distribution', 'union_progress'):
         assert not condition(one(guis[P + name], 'is_valid'), {})
     for name, metric, threshold in [('legitimacy', 'government_legitimacy', 40), ('bureaucracy', 'bureaucracy', 0)]:

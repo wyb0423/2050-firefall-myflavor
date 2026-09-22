@@ -30,13 +30,18 @@ je_ffpa_na_union_agenda_v1 = {
  scripted_button = ffpa_na_union_next_button_v1
  scripted_button = ffpa_na_union_propose_button_v1
  scripted_button = ffpa_na_union_withdraw_button_v1
+ scripted_button = ffpa_na_union_reopen_button_v2
  is_shown_when_inactive = { ffpa_na_union_eligible_v1 = yes }
  possible = { ffpa_na_union_eligible_v1 = yes }
  immediate = { ffpa_na_union_initialize_v1 = yes }
  on_monthly_pulse = { effect = { ffpa_na_union_monthly_v1 = yes } }
- complete = { always = no }
+ complete = { ffpa_usa_union_can_complete_v1 = yes }
+ on_complete = { ffpa_usa_union_complete_effect_v1 = yes }
  invalid = { NOT = { ffpa_na_union_eligible_v1 = yes } }
- on_invalid = { ffpa_na_union_cleanup_v1 = yes }
+ on_invalid = {
+  ffpa_na_union_cleanup_v1 = yes
+  remove_modifier = ffpa_usa_union_integration_v1
+ }
  weight = 100
  should_be_pinned_by_default_uninvolved_or_context = yes
 }

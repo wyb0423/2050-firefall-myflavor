@@ -60,6 +60,7 @@ def main():
                 result.append(cond(subst(triggers[k],{a:c for a,b,c in entries(v)})) if isinstance(v,list) else cond(triggers[k])==(v=='yes'))
             elif k=='has_variable':result.append(v in state)
             elif k=='has_journal_entry':result.append(v in active_journals)
+            elif k=='has_modifier':result.append(v in context['modifiers'])
             elif k=='any_scope_state':
                 assert one(v,'ffpa_na_is_mainland_state_v1')=='yes'
                 result.append(context['mainland'])
@@ -101,7 +102,10 @@ def main():
             elif k.startswith('je:'):pass  # Native UI mirror, not a progress source.
             elif k=='ordered_state':pass  # Fixture has no neighbouring country, so native selection is empty.
             elif k=='save_scope_value_as':scope[one(v,'name')]=value(one(v,'value'))
-            elif k=='add_modifier':rewards.append((one(v,'name'),one(v,'months')))
+            elif k=='add_modifier':
+                if one(v,'name')=='ffpa_usa_union_integration_v1':context['modifiers'].add(one(v,'name'))
+                else:rewards.append((one(v,'name'),one(v,'months')))
+            elif k=='remove_modifier':context['modifiers'].discard(v)
             elif k=='activate_law':
                 law=v.removeprefix('law_type:');activated.append(law)
                 if law not in context['blocked_laws']:current[one(laws[law],'group')]=law
@@ -115,7 +119,7 @@ def main():
     def reset():
         for d in (state,context,scope,current,expiry):d.clear()
         activated.clear();rewards.clear();queue.clear();errors.clear();active_journals.clear()
-        context.update(country_definition='cd:USA',is_revolutionary='no',is_subject='no',enacting=False,company=False,crownland=False,blocked_laws=set(),mainland=True,government_legitimacy=40,bureaucracy=0)
+        context.update(country_definition='cd:USA',is_revolutionary='no',is_subject='no',enacting=False,company=False,crownland=False,blocked_laws=set(),modifiers=set(),mainland=True,government_legitimacy=40,bureaucracy=0)
         for law in ('law_monarchy','law_autocracy','law_traditionalism','law_national_supremacy'):
             current[one(laws[law],'group')]=law
         execute(effects[P+'initialize_v1'])

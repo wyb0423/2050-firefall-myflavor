@@ -59,6 +59,7 @@ def main():
                 else: ctx['variables'][one(v, 'name')] = value(one(v, 'value'), ctx, prev) if fields(v, 'value') else 1
             elif k == 'change_variable': ctx['variables'][one(v, 'name')] += value(one(v, 'add'), ctx, prev)
             elif k == 'remove_variable': ctx['variables'].pop(v, None)
+            elif k == 'remove_modifier': ctx['modifiers'].discard(v)
             elif k in ('every_scope_state', 'ordered_scope_state'):
                 selected = [s for s in ctx['states'] if condition(one(v, 'limit'), s)]
                 if k == 'ordered_scope_state':
@@ -80,7 +81,7 @@ def main():
     def reset(tag='ZZZGEORGIA'):
         nonlocal skip_variable_position
         skip_variable_position = False; scopes.clear(); queued.clear()
-        country.update(country_definition='cd:'+tag, is_revolutionary='no', variables={}, journals=set())
+        country.update(country_definition='cd:'+tag, is_revolutionary='no', variables={}, journals=set(), modifiers=set())
         state = {'state_region': 's:STATE_GEORGIA', 'state_population': 100, 'owner': country, 'variables': {}, 'modifiers': set()}
         country['states'] = [state]
         return state

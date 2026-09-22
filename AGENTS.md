@@ -311,6 +311,9 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 完成需 3 级合格建筑、60% 就业、80% 市场接入，连续 12 个月；半年进展事件每国一次。所有交通事件及专精奖励使用基础设施吞吐量修正。
 - `tools/generate_north_american_provinces.py` 拥有两个 `ffpa_north_american_union_provinces.txt` 生成表（effect 与 trigger）；更新地图时从真实上游重新生成并运行 `--check`，不得手抄省份或改变旧档快照语义。`common/ai_strategies/ffpa_north_american_strategies.txt` 只新增自有战略。
 - `je_ffpa_na_union_agenda_v1` 是重复议程界面，内部状态 0/1/2/3 固定为待议/活动/待接收/结算中；`ffpa_na_union_p_<province>_v1` 是启动领土快照。serial 为旧弹窗防重标识，cleanup 保留 serial/cooldown，成立国家时清理未结算议程。
+- USA 直接完整持有49个大陆区域且状态0、无待答复提案时正式完成；新增永久 `ffpa_usa_union_complete_v1` 阻止补挂。`ffpa_usa_union_integration_v1` 为日志激活期间 USA 专属整合速度 +25%，冷却仍有效，失效／完成移除；不要在单轮 cleanup 移除常驻效果或已获五年奖励。
+- 轮换、提案及接收入口与事件选项共用实时条件。`ffpa_na_union_reply_cooldown_v2` 仅限制接收会议每月重开一次；重开递增既有 serial，使旧答复失效。省份生成器同时拥有本土完整归属、候选有界查询和单目标实时所有权 guard，不手改生成表。
+- 月度在十年期限内验收完整领土后进入状态2，战争仅延迟接收；状态1期限已过则锁定取消。状态2领土再丢失恢复活动检查，旧档状态2保留待接收资格。终局必须等最后一轮接收结算完成，不因暂无候选结束。
 - 月度只核对活动目标所在州的快照；AI 空闲重选最多每年一次。严格 15 前身或 USA 门控；任何战争/已参与博弈期间保守延迟结算，不在后台自动转移领土。
 - 完整取得全部快照省份才能结算。接收州获得完整五年奖励；省份访问中的临时州标记防止同州重复发放，结束后清理。全国红利刷新不叠加；同州市场/政府修正互斥。
 - 独立 on_claim_added 包装只给匹配 claimant/region 的活动来源标记外部重授；若本模块自身通知延后到达也保守保留宣称。重复已有宣称可能不回调，尚不能证明所有外部来源都可识别。消亡国家的 JE 失效回调与州修正继承仍须实机验证。
