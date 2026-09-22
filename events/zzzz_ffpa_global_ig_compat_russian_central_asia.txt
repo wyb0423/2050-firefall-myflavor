@@ -1,0 +1,154 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = russian_central_asia
+
+# Source: game/events/soi_events/00_ep1_kazakh_events.txt :: russian_central_asia.2
+russian_central_asia.2 = {
+	type = country_event
+	placement = ROOT
+	event_image = {
+		video = "gfx/event_pictures/ep1_octopus.bk2"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	title = russian_central_asia.2.t
+	desc = russian_central_asia.2.d
+	flavor = russian_central_asia.2.f
+
+	dlc = dlc010
+
+	duration = 3
+
+	cooldown = { days = long_modifier_time }
+
+	trigger = {
+		#Triggered by JE
+	}
+
+	immediate = {
+		ordered_country = {
+            limit = {
+                is_in_geographic_region = geographic_region_europe
+                OR = {
+                    any_scope_state = {
+						is_in_geographic_region = geographic_region_india
+						count >= 3
+                    }
+                    any_country = {
+                        is_subject_of = prev
+                        any_scope_state = {
+							is_in_geographic_region = geographic_region_india
+							count >= 3
+                        }
+                    }
+                }
+            }
+            order_by = country_rank
+			position = 0
+			check_range_bounds = no
+            save_scope_as = india_overlord
+		}
+		ordered_state = {
+            limit = {
+                state_region = s:STATE_KABUL
+            }
+			order_by = owner.country_rank
+			position = 0
+			check_range_bounds = no
+            save_scope_as = kabul_state
+            owner = {
+                save_scope_as = afghan_scope
+            }
+        }
+        if = {
+            limit = {
+                any_interest_group = {
+                    NOR = {
+                        leader = {
+                            has_ideology = ideology:ideology_pacifist
+                        }
+                        ffpa_global_ig_has_isolationist = yes
+                    }
+                    law_stance = {
+						law = law_type:law_no_colonial_affairs
+						value <= neutral
+					}
+		        }
+            }
+            random_interest_group = {
+                limit = {
+                    NOR = {
+                        leader = {
+                            has_ideology = ideology:ideology_pacifist
+                        }
+                        ffpa_global_ig_has_isolationist = yes
+                    }
+                    law_stance = {
+						law = law_type:law_no_colonial_affairs
+						value <= neutral
+					}
+                }
+                save_scope_as = hawkish_ig
+            }
+        }
+        else = {
+            ig:ig_armed_forces ?= {
+                save_scope_as = hawkish_ig
+            }
+        }
+	}
+
+	option = {
+		name = russian_central_asia.2.a
+        default_option = yes
+        trigger = {
+            exists = c:AFG
+        }
+        every_country_in_europe = {
+            limit = {
+                OR = {
+                    any_scope_state = {
+						is_in_geographic_region = geographic_region_india
+						count >= 3
+                    }
+                    any_country = {
+                        is_subject_of = prev
+                        any_scope_state = {
+							is_in_geographic_region = geographic_region_india
+							count >= 3
+                        }
+                    }
+                }
+            }
+            change_relations = {
+                country = c:RUS
+                value = -20
+            }
+		}
+		create_incident = {
+			country = c:AFG
+			value = 20
+		}
+		every_state_region = {
+			limit = {
+				is_homeland = cu:pashtun
+			}
+			add_claim = c:RUS
+		}
+	}
+
+	option = {
+		name = russian_central_asia.2.b
+        default_option = yes
+        add_modifier = {
+            name = modifier_suzerain_of_central_asia
+            days = long_modifier_time
+        }
+        change_relations = {
+            country = scope:afghan_scope
+            value = 20
+        }
+	}
+}

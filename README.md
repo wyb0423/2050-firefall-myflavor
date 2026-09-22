@@ -12,6 +12,18 @@
 
 Community Mod Framework → Tech & Res → Auto-Apply PMs → Auto-Apply Automation PMs → 2050: The Fire Falls → Core Balance Adapter → FFPA Building Pruning → FFPA Building Pruning: Tech & Res Compatibility → FFPA Tech & Res Auto PM Adapter → FFPA Firefall Flavor Pack
 
+## 全球利益集团立场
+
+六个集团采用新的通用立场：地主的地产保守主义、实业家的发展主义、小市民的共和保守主义、乡村民众的乡村自治主义，以及四项保留原名的定向理念变体。八个集团的名称、人口吸引力、领袖生成和特质保持原有设置；军队与知识分子的基础理念不变。
+
+实业家强烈支持自由放任和自由贸易，支持干预主义，对保护主义和义务初等教育中立。其余调整、继承值及适用边界见[立场设计表](docs/superpowers/specs/2026-09-22-global-interest-group-positions-design.md)。这些是集团理念的基础立场，最终态度仍受领袖、其他理念和国家特色影响。
+
+通用替换在开局、国家成立和月度检查中按指定集团及已知源理念补齐；旧档最迟在下次月度检查补挂。TUR/BYZ 专属理念优先，保留原有路线和奖励；上游后期新自由主义与现代个人主义转换继续有效。原版事件、政党等按旧理念判断的入口同步接续，未新增政治事件或思想阶段链。
+
+兼容副本由 `tools/generate_global_ig_compat.py` 从固定上游生成，覆盖来源和摘要登记于 [兼容清单](docs/global-ig-compatibility.json)。上游更新后先运行 `--check`；参数为 `--game-root GAME --upstream CMF --upstream TECHRES --upstream FIREFALL`，使用同样参数运行 `tests/check_global_ig_positions.py`。只接续英文、简中内容，原版俄语语法名称选择器不在兼容范围。
+
+已通过定义差异、兼容副本等价性、分配脚本子集、国家接续及本地化检查。未启动游戏；实际立法支持、领袖优先级、AI、初始化时序和存读档仍待实机验证。
+
 ## CMF 日志与事件表现
 
 需要订阅并启用 CMF（Workshop `3385002128`；本次源码核对版本 1.65.0），在本合集之前加载。

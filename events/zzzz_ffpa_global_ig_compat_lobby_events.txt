@@ -1,0 +1,345 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = lobby_events
+
+# Source: game/events/soi_events/00_lobbies_events_04.txt :: lobby_events.13
+lobby_events.13 = {
+	type = country_event
+	placement = root
+
+	dlc = dlc010
+
+	duration = 3
+
+	title = lobby_events.13.t
+	desc = lobby_events.13.d
+	flavor = lobby_events.13.f
+
+	event_image = {
+		video = "africa_prosperous_farm"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		has_dlc_feature = lobbies
+		is_revolutionary = no
+		any_political_lobby = {
+			any_lobby_member = {
+				OR = {
+					ffpa_global_ig_has_isolationist = yes
+					has_ideology = ideology:ideology_populist
+				}
+				NAND = {
+					OR = {
+						has_ideology = ideology:ideology_socialist
+						leader = {
+							has_ideology = ideology:ideology_communist
+							has_ideology = ideology:ideology_anarchist
+							has_ideology = ideology:ideology_vanguardist
+						}
+					}
+					PREV.target = {
+						has_law_or_variant = law_type:law_council_republic
+					}
+				}
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		NOR = {
+			exists = scope:relevant_lobby
+			exists = scope:relevant_country
+			exists = scope:relevant_ig
+		}
+	}
+
+	immediate = {
+		random_political_lobby = {
+			limit = {
+				any_lobby_member = {
+					OR = {
+						ffpa_global_ig_has_isolationist = yes
+						has_ideology = ideology:ideology_populist
+					}
+					NAND = {
+						OR = {
+							has_ideology = ideology:ideology_socialist
+							leader = {
+								has_ideology = ideology:ideology_communist
+								has_ideology = ideology:ideology_anarchist
+								has_ideology = ideology:ideology_vanguardist
+							}
+						}
+						PREV.target = {
+							has_law_or_variant = law_type:law_council_republic
+						}
+					}
+				}
+			}
+			save_scope_as = relevant_lobby
+			random_lobby_member = {
+				limit = {
+					OR = {
+						ffpa_global_ig_has_isolationist = yes
+						has_ideology = ideology:ideology_populist
+					}
+					NAND = {
+						OR = {
+							has_ideology = ideology:ideology_socialist
+							leader = {
+								has_ideology = ideology:ideology_communist
+								has_ideology = ideology:ideology_anarchist
+								has_ideology = ideology:ideology_vanguardist
+							}
+						}
+						PREV.target = {
+							has_law_or_variant = law_type:law_council_republic
+						}
+					}
+				}
+				save_scope_as = relevant_ig
+			}
+		}
+	}
+
+	option = {
+		name = lobby_events.13.a
+		default_option = yes
+		scope:relevant_lobby ?= {
+			remove_lobby_member = scope:relevant_ig
+		}
+	}
+
+
+	option = {
+		name = lobby_events.13.b
+		scope:relevant_ig ?= {
+			add_modifier = {
+				name = modifier_lobby_membership_forced
+				days = normal_modifier_time
+				is_decaying = yes
+			}
+		}
+	}
+}
+
+# Source: game/events/soi_events/00_lobbies_events_04.txt :: lobby_events.15
+lobby_events.15 = {
+	type = country_event
+	placement = root
+
+	dlc = dlc010
+
+	duration = 3
+
+	title = lobby_events.15.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = lobby_events.15.d_join
+				trigger = {
+					exists = scope:relevant_lobby
+				}
+			}
+			triggered_desc = {
+				desc = lobby_events.15.d_form
+				trigger = {
+					NOT = {
+						exists = scope:relevant_lobby
+					}
+				}
+			}
+		}
+	}
+	flavor = lobby_events.15.f
+
+	event_image = {
+		video = "ep1_octopus"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	cooldown = { days = stupidly_long_modifier_time }
+
+	trigger = {
+		has_dlc_feature = lobbies
+		is_revolutionary = no
+		any_interest_group = {
+			ig_counts_as_marginal = no
+			is_member_of_any_lobby = no
+			OR = {
+				ffpa_global_ig_has_patriotic = yes
+				has_ideology = ideology:ideology_military_absolutist
+				ffpa_global_ig_has_isolationist = yes
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_ethno_nationalist
+						has_ideology = ideology:ideology_fascist
+						has_ideology = ideology:ideology_protectionist
+					}
+				}
+			}
+		}
+		OR = {
+			any_political_lobby = {
+				is_political_lobby_type = lobby_anti_country
+				target = {
+						any_scope_treaty = {
+							binds = ROOT
+							any_scope_article = {
+								has_type = foreign_investment_rights
+								source_country = root
+							}
+						}
+				}
+			}
+			any_diplomatically_relevant_country = {
+				is_valid_lobby_target = yes
+				any_scope_treaty = {
+					binds = ROOT
+					any_scope_article = {
+						has_type = foreign_investment_rights
+						source_country = root
+					}
+				}
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		NOR = {
+			exists = scope:relevant_ig
+			exists = scope:relevant_country
+		}
+	}
+
+	immediate = {
+		if = {
+			limit = {
+				any_political_lobby = {
+					is_political_lobby_type = lobby_anti_country
+					target = {
+						any_scope_treaty = {
+							binds = ROOT
+							any_scope_article = {
+								has_type = foreign_investment_rights
+								source_country = root
+							}
+						}
+					}
+				}
+			}
+			random_political_lobby = {
+				limit = {
+					is_political_lobby_type = lobby_anti_country
+					target = {
+						any_scope_treaty = {
+							binds = ROOT
+							any_scope_article = {
+								has_type = foreign_investment_rights
+								source_country = root
+							}
+						}
+					}
+				}
+				target = {
+					save_scope_as = relevant_country
+				}
+				save_scope_as = relevant_lobby
+			}
+		}
+		else = {
+			random_diplomatically_relevant_country = {
+				limit = {
+					any_scope_treaty = {
+						binds = ROOT
+						any_scope_article = {
+							has_type = foreign_investment_rights
+							source_country = root
+						}
+					}
+					is_valid_lobby_target = yes
+				}
+				save_scope_as = relevant_country
+			}
+		}
+
+		ordered_interest_group = {
+			limit = {
+				is_member_of_any_lobby = no
+				ig_counts_as_marginal = no
+				OR = {
+					ffpa_global_ig_has_patriotic = yes
+					has_ideology = ideology:ideology_military_absolutist
+					ffpa_global_ig_has_isolationist = yes
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_ethno_nationalist
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_protectionist
+						}
+					}
+				}
+			}
+			order_by = ig_clout
+			position = 0
+			check_range_bounds = no
+			save_scope_as = relevant_ig
+		}
+	}
+
+	option = {
+		name = lobby_events.15.a
+		default_option = yes
+		if = {
+			limit = {
+				exists = scope:relevant_lobby
+			}
+			scope:relevant_lobby ?= {
+				add_lobby_member = scope:relevant_ig
+			}
+		}
+		else = {
+			create_political_lobby = {
+				type = lobby_anti_country
+				target = scope:relevant_country
+				add_interest_group = scope:relevant_ig
+			}
+		}
+	}
+
+	option = {
+		name = lobby_events.15.b
+		if = {
+			limit = {
+				exists = scope:relevant_lobby
+			}
+			scope:relevant_lobby ?= {
+				add_lobby_member = scope:relevant_ig
+			}
+		}
+		else = {
+			create_political_lobby = {
+				type = lobby_anti_country
+				target = scope:relevant_country
+				add_interest_group = scope:relevant_ig
+			}
+		}
+		scope:relevant_ig ?= {
+			add_modifier = {
+				name = modifier_xenophobic_lobby_rejected
+				days = normal_modifier_time
+				is_decaying = yes
+			}
+		}
+	}
+}

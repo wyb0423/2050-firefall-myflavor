@@ -1,0 +1,228 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = mon_state_formation
+
+# Source: game/events/balkans_events/montenegro_events.txt :: mon_state_formation.17
+mon_state_formation.17 = {
+	type = country_event
+	placement = ROOT
+
+	title = mon_state_formation.17.t
+	desc = mon_state_formation.17.d
+	flavor = mon_state_formation.17.f
+
+	event_image = {
+		video = "middleeast_courtroom_upheaval"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_military.dds"
+
+	duration = 3
+
+	dlc = dlc014
+
+	cooldown = { days = long_modifier_time }
+
+	trigger = { #Triggered by failing Mon JEs and being subject
+		c:MON ?= ROOT
+		c:MON ?= {
+			is_country_alive = yes
+			is_subject = yes
+		}
+	}
+
+	cancellation_trigger = {
+		NOT = {
+			is_subject = yes
+		}
+	}
+
+	immediate = {
+		overlord = {
+			save_scope_as = overlord
+		}
+		c:TUR ?= {
+			save_scope_as = ottoman
+		}
+		c:AUS ?= {
+			save_scope_as = austria
+		}
+		s:STATE_MONTENEGRO = {
+			save_scope_as = state
+		}
+		ruler ?= { #Prepare to kill ruler if possible, keep him alive until the execution. Take him back from holidays.
+			if = {
+				limit = {
+					is_immortal = no
+				}
+				save_scope_as = ruler
+				if = { #will cancel visit moscow event
+					limit = {
+						has_variable = is_away
+					}
+					remove_variable = is_away
+				}
+				set_character_busy_and_immortal = yes
+			}
+		}
+		if = { # create ali_pasha_rizvanbegovic if he's not too old
+			limit = {
+				game_date < 1863.01.01
+			}
+			create_character = {
+				template = mon_ali_pasha_rizvanbegovic
+				save_scope_as = pasha
+				on_created = {
+					place_character_in_void = 12
+				}
+			}
+		}
+	}
+
+	after = {
+		if = {#since not raiding, default income can return. It's fine if this is invisible as the red text makes it look confusing.
+			limit = {
+				has_modifier = modifier_no_minting
+			}
+			remove_modifier = modifier_no_minting
+		}
+	}
+
+	option = { # appeal to other nations
+		name = mon_state_formation.17.a
+		add_modifier = {
+			name = mon_appeals
+			days = stupidly_long_modifier_time
+			is_decaying = yes
+		}
+	}
+
+	option = { # all hail the overlords
+		name = mon_state_formation.17.b
+		trigger = {
+			exists = c:TUR
+			has_subject_relation_with = c:TUR
+		}
+		default_option = yes
+
+		#The o.g. Montengrins are pissed off.
+		add_radicals = {
+			value = 0.5
+			interest_group = ig:ig_armed_forces
+		}
+		add_radicals = {
+			value = 0.95
+			interest_group = ig:ig_devout
+		}
+
+		if = { #Give some Mon homelands to this new vassal to make it playable. This seems historically viable if the Ottomans had subjugated Montenegro and put a Pasha in charge.
+			limit = {
+				c:TUR ?= {
+					is_player = no
+				}
+				s:STATE_MONTENEGRO = {
+					any_scope_state = {
+						owner = c:TUR
+					}
+				}
+			}
+			custom_tooltip = { #To make clear why state is tranferring.
+				text = mon_get_back_land
+			}
+			transfer_state = {
+				STATE = s:STATE_MONTENEGRO
+				GIVER = c:TUR
+				TAKER = root
+			}
+		}
+
+		#relations hurt by turncoat
+		c:RUS ?= {
+			change_relations = {
+				country = root
+				value = -30
+			}
+		}
+		c:AUS ?= {
+			change_relations = {
+				country = root
+				value = -20
+			}
+		}
+		c:SER ?= {
+			change_relations = {
+				country = root
+				value = -80
+			}
+		}
+
+		#Become Ottoman
+		set_state_religion = rel:sunni
+		add_primary_culture = cu:turkish
+
+		if = { #if he's not too old, this pasha takes control.
+			limit = {
+				exists = scope:pasha
+			}
+			add_primary_culture = cu:bosniak
+			scope:pasha = {
+				set_character_as_ruler = yes
+				hidden_effect = {
+					free_character_from_void = yes
+				}
+			}
+		}
+
+		if = { #kill ruler
+			limit = {
+				exists = scope:ruler
+			}
+			scope:ruler = {
+				hidden_effect = {
+					set_character_busy_and_immortal = no
+				}
+				kill_character = yes
+			}
+		}
+
+		if = { #kill heir
+			limit = {
+				exists = heir
+			}
+			heir ?= {
+				if = {
+					limit = {
+						is_immortal = yes
+					}
+					place_character_in_void = 12
+				}
+				else = {
+					kill_character = yes
+				}
+			}
+		}
+
+		ig:ig_devout ?= {
+			set_interest_group_name = ig_sunni_madrasahs
+			leader = {
+				place_character_in_void = 6
+			}
+			hidden_effect = {
+			remove_ideology = ideology_montenegrin_moralist
+			remove_ideology = ideology_orthodox_patriarch
+			ffpa_global_ig_add_moralist = yes
+			add_ideology = ideology_patriarchal
+			set_ig_trait = ig_trait:ig_trait_pious_fiction
+			set_ig_trait = ig_trait:ig_trait_mecelle
+			set_ig_trait = ig_trait:ig_trait_da_wat
+			}
+		}
+
+		#Orthodox in the new lands are also pissed off.
+		add_radicals = {
+			value = huge_radicals
+			religion = rel:orthodox
+		}
+	}
+}

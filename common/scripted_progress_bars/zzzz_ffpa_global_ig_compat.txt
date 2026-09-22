@@ -1,0 +1,322 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+# Source: game/common/scripted_progress_bars/00_victoria_progress_bars.txt :: fascism_progress_bar
+fascism_progress_bar = {
+   name = "fascism_progress_bar"
+   desc = "fascism_progress_bar_desc"
+
+   default = yes
+
+   monthly_progress = {
+		### From fascist leaders in government
+		if = {
+			limit = {
+				any_interest_group = {
+					is_in_government = yes
+					leader ?= {
+						has_variable = var_fascism_1_char_checked # So that you don't get massive progress without being notified
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_integralist
+						}
+					}
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_fascist_leaders_in_government_tt"
+				value = 10
+			}
+		}
+
+		if = {
+			limit = {
+				any_political_movement = {
+					OR = {
+						is_political_movement_type = movement_fascist
+						is_political_movement_type = movement_reactionary
+						is_political_movement_type = movement_corporatist
+					}
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_movement_support_tt"
+				every_political_movement = {
+					limit = {
+						OR = {
+							is_political_movement_type = movement_fascist
+							is_political_movement_type = movement_reactionary
+							is_political_movement_type = movement_corporatist
+						}
+					}
+					add = this.political_movement_support
+					multiply = 10
+				}
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					OR = {
+						is_political_movement_type = movement_fascist
+						is_political_movement_type = movement_reactionary
+						is_political_movement_type = movement_corporatist
+					}
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_movement_activism_tt"
+				every_political_movement = {
+					limit = {
+						OR = {
+							is_political_movement_type = movement_fascist
+							is_political_movement_type = movement_reactionary
+							is_political_movement_type = movement_corporatist
+						}
+					}
+					add = this.political_movement_radicalism
+					multiply = 5
+				}
+			}
+		}
+
+		### From IGs
+		if = {
+			limit = {
+				owner = {
+					any_interest_group = {
+						ig_counts_as_marginal = no
+						OR = {
+							leader ?= {
+								OR = {
+									has_ideology = ideology:ideology_fascist
+									has_ideology = ideology:ideology_integralist
+								}
+							}
+							ffpa_global_ig_has_reactionary = yes
+						}
+					}
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_interest_groups_tt"
+				owner = {
+					every_interest_group = {
+						limit = {
+							OR = {
+								leader ?= {
+									OR = {
+										has_ideology = ideology:ideology_fascist
+										has_ideology = ideology:ideology_integralist
+									}
+								}
+								ffpa_global_ig_has_reactionary = yes
+							}
+						}
+						add = this.ig_clout
+					}
+				}
+			}
+		}
+		else = {
+			subtract = {
+				desc = "no_relevant_reactionary_igs_tt"
+				value = 5
+			}
+		}
+
+		### From Characters
+		if = {
+			limit = {
+				owner = {
+					any_scope_character = {
+						OR = {
+							has_ideology = ideology:ideology_fascist
+							has_ideology = ideology:ideology_integralist
+						}
+					}
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_characters_tt"
+				owner = {
+					every_scope_character = {
+						limit = {
+							OR = {
+								has_ideology = ideology:ideology_fascist
+								has_ideology = ideology:ideology_integralist
+							}
+						}
+						add = this.popularity
+						divide = 100
+					}
+				}
+			}
+		}
+		else = {
+			subtract = {
+				desc = "fascism_progress_no_fascist_characters_tt"
+				value = 5
+			}
+		}
+
+		### From Revanchism
+		if = {
+			limit = {
+				any_state = {
+					OR = {
+						has_claim_by = ROOT
+						is_homeland_of_country_cultures = ROOT
+					}
+					NOT = { owner = ROOT }
+				}
+			}
+			add = {
+				desc = "fascism_progress_from_state_claims_tt"
+				owner = {
+					every_state = {
+						limit = {
+							OR = {
+								has_claim_by = ROOT
+								is_homeland_of_country_cultures = ROOT
+							}
+							NOT = { owner = ROOT }
+						}
+						add = 0.1
+					}
+				}
+			}
+		}
+	}
+
+	start_value = 25
+	min_value = 0
+	max_value = 100
+ }
+
+# Source: game/common/scripted_progress_bars/00_victoria_progress_bars.txt :: red_summer_counter_revolution_progress_bar
+red_summer_counter_revolution_progress_bar = {
+	name = "red_summer_counter_revolution_progress_bar"
+	desc = "red_summer_counter_revolution_progress_bar_desc"
+
+	default_bad = yes
+
+	monthly_progress = {
+		if = {
+			limit = {
+				owner = {
+					has_law = law_type:law_monarchy
+				}
+			}
+			add = {
+				desc = "red_summer_monarchy_tt"
+				value = 1
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_landowners ?= {
+					ig_counts_as_marginal = no
+				}
+			}
+			add = {
+				desc = "red_summer_landowners_tt"
+				value = ig:ig_landowners.ig_clout
+				multiply = 10
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					ig_counts_as_marginal = no
+					leader ?= {
+						NOR = {
+							has_liberal_ideology = yes
+							has_progressive_ideology = yes
+							has_socialist_ideology = yes
+						}
+					}
+				}
+			}
+			add = {
+				desc = "red_summer_armed_forces_tt"
+				value = ig:ig_armed_forces.ig_clout
+				multiply = 10
+			}
+		}
+		if = {
+			limit = {
+				in_election_campaign = no
+				NOT = {
+					any_interest_group = {
+						is_in_government = yes
+						OR = {
+							has_ideology = ideology:ideology_liberal
+							ffpa_global_ig_has_proletarian = yes
+							leader ?= {
+								OR = {
+									has_liberal_ideology = yes
+									has_progressive_ideology = yes
+									has_socialist_ideology = yes
+								}
+							}
+						}
+					}
+				}
+			}
+			add = {
+				desc = "red_summer_no_liberal_igs_in_government_tt"
+				value = 25
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					is_insurrectionary = yes
+					OR = {
+						movement_is_liberal = yes
+						movement_is_socialist = yes
+					}
+				}
+			}
+			add = {
+				desc = "red_summer_active_insurrection_tt"
+				value = 5
+			}
+		}
+		if = {
+			limit = {
+				any_political_movement = {
+					is_insurrectionary = yes
+					movement_is_conservative = yes
+				}
+			}
+			add = {
+				desc = "red_summer_conservative_insurrection_tt"
+				value = -5
+			}
+		}
+		if = {
+			limit = {
+				any_subject_or_below = {
+					is_diplomatic_play_enemy_of = ROOT
+				}
+			}
+			add = {
+				desc = "red_summer_subject_rebellion_tt"
+				value = 5
+			}
+		}
+		if = {
+			limit = {
+				has_variable = var_counter_revolution_bonus
+			}
+			add = {
+				desc = "red_summer_events_and_effects_tt"
+				value = var:var_counter_revolution_bonus
+			}
+		}
+	}
+
+	start_value = 10
+	min_value = 0
+	max_value = 100
+ }

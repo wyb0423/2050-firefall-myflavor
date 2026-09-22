@@ -1,0 +1,143 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = tibet_expedition_events
+
+# Source: game/events/tibetan_expedition.txt :: tibet_expedition_events.4
+tibet_expedition_events.4 = { # Yaks cross the border
+	type = country_event
+    placement = scope:current_expedition_location
+
+    title = tibet_expedition_events.4.t
+    desc = tibet_expedition_events.4.d
+    flavor = tibet_expedition_events.4.f
+
+    duration = 3
+
+	event_image = {
+		video = "ep1_ca_mountain_pass_civilian"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	trigger = {
+		NOT = {
+			any_interest_group = {
+				OR = {
+					has_modifier = hostility_resisted
+					has_modifier = resisted_being_hostile
+				}
+			}
+		}
+		var:tibet_expedition_progress_var < 4
+	}
+
+	immediate = {
+
+		random_scope_character = {
+			limit = { has_variable = expedition_leader_var }
+			save_scope_as = expedition_leader
+		}
+	}
+
+	cancellation_trigger = {
+		OR = {
+			NOT = {
+				any_scope_character = {
+					has_variable = expedition_leader_var
+				}
+			}
+			NOT = {
+				exists = c:TIB
+			}
+		}
+	}
+
+	option = {
+		name = tibet_expedition_events.4.a
+		default_option = yes
+
+		ai_chance = {
+			base = 1
+		}
+
+		every_interest_group = {
+			limit = {
+				OR = {
+					is_interest_group_type = ig_armed_forces
+					has_ideology = ideology:ideology_jingoist
+					leader = {
+						has_ideology = ideology:ideology_jingoist_leader
+                    }
+				}
+			}
+			add_modifier = {
+				name = hostility_resisted
+				days = normal_modifier_time
+			}
+		}
+
+		if = {
+			limit = {
+				NOT = {
+					any_interest_group = {
+						NOT = {
+							is_interest_group_type = ig_armed_forces
+						}
+                        OR = {
+                            has_ideology = ideology:ideology_jingoist
+                            leader = {
+                                has_ideology = ideology:ideology_jingoist_leader
+                            }
+                        }
+					}
+				}
+			}
+			random_interest_group = {
+				limit = {
+					NOR = {
+						is_interest_group_type = ig_armed_forces
+						is_interest_group_type = ig_rural_folk # RF is not normally a valid IG for Jingoists
+						leader = { has_ideology = ideology:ideology_jingoist_leader }
+					}
+				}
+				leader = {
+					set_ideology = ideology:ideology_jingoist_leader
+				}
+				add_modifier = {
+					name = hostility_resisted
+					days = normal_modifier_time
+				}
+			}
+		}
+
+		custom_tooltip = {
+			text = je_tibet_expedition_advance
+			change_variable = { name = tibet_expedition_progress_var add = 1 }
+		}
+	}
+
+	option = {
+		name = tibet_expedition_events.4.b
+
+
+		ai_chance = {
+			base = 0
+		}
+
+		every_interest_group = {
+			limit = {
+				OR = {
+					ffpa_global_ig_has_isolationist = yes
+					leader = {
+						has_ideology = ideology:ideology_pacifist
+                    }
+				}
+			}
+			add_modifier = {
+				name = resisted_being_hostile
+				days = normal_modifier_time
+			}
+		}
+	}
+}

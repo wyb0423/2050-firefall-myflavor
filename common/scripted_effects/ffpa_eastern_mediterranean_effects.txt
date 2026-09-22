@@ -122,14 +122,16 @@ ffpa_grant_byzantine_justinianic_claims_v2 = {
 	ffpa_grant_byzantine_justinianic_supplemental_claims = yes
 }
 
-# Country scope. These packages replace only a known vanilla or Tech & Res
-# ideology. If another mod has already replaced that slot, its result wins and
+# Country scope. These packages replace only a known vanilla, Tech & Res or
+# global FFPA ideology. The separate bridge gates also repair known default
+# slots in existing saves without resetting the original migration markers.
+# If another mod has already replaced the default slot, its result wins;
 # the adapter records the package as handled without appending another one.
 ffpa_apply_tur_formation_ideologies_v1 = {
 	if = {
 		limit = {
 			ROOT = { country_definition = cd:TUR }
-			NOT = { has_variable = ffpa_tur_formation_ideologies_v1 }
+			OR = { NOT = { has_variable = ffpa_tur_formation_ideologies_v1 } NOT = { has_variable = ffpa_tur_global_ig_bridge_v1 } }
 		}
 
 		ig:ig_armed_forces = {
@@ -147,13 +149,13 @@ ffpa_apply_tur_formation_ideologies_v1 = {
 			if = {
 				limit = {
 					OR = {
-						has_ideology = ideology:ideology_laissez_faire
+						ffpa_global_ig_has_laissez_faire = yes
 						has_ideology = ideology:ideology_neoliberism
 					}
 				}
 				if = {
-					limit = { has_ideology = ideology:ideology_laissez_faire }
-					remove_ideology = ideology_laissez_faire
+					limit = { ffpa_global_ig_has_laissez_faire = yes }
+					ffpa_global_ig_remove_laissez_faire = yes
 				}
 				if = {
 					limit = { has_ideology = ideology:ideology_neoliberism }
@@ -168,8 +170,8 @@ ffpa_apply_tur_formation_ideologies_v1 = {
 
 		ig:ig_petty_bourgeoisie = {
 			if = {
-				limit = { has_ideology = ideology:ideology_reactionary }
-				remove_ideology = ideology_reactionary
+				limit = { ffpa_global_ig_has_reactionary = yes }
+				ffpa_global_ig_remove_reactionary = yes
 				if = {
 					limit = { NOT = { has_ideology = ideology:ideology_ffpa_anatolian_civic_statism } }
 					add_ideology = ideology_ffpa_anatolian_civic_statism
@@ -178,6 +180,7 @@ ffpa_apply_tur_formation_ideologies_v1 = {
 		}
 
 		set_variable = ffpa_tur_formation_ideologies_v1
+		set_variable = ffpa_tur_global_ig_bridge_v1
 	}
 }
 
@@ -185,7 +188,7 @@ ffpa_apply_byz_formation_ideologies_v1 = {
 	if = {
 		limit = {
 			ROOT = { country_definition = cd:BYZ }
-			NOT = { has_variable = ffpa_byz_formation_ideologies_v1 }
+			OR = { NOT = { has_variable = ffpa_byz_formation_ideologies_v1 } NOT = { has_variable = ffpa_byz_global_ig_bridge_v1 } }
 		}
 
 		ig:ig_armed_forces = {
@@ -203,13 +206,13 @@ ffpa_apply_byz_formation_ideologies_v1 = {
 			if = {
 				limit = {
 					OR = {
-						has_ideology = ideology:ideology_laissez_faire
+						ffpa_global_ig_has_laissez_faire = yes
 						has_ideology = ideology:ideology_neoliberism
 					}
 				}
 				if = {
-					limit = { has_ideology = ideology:ideology_laissez_faire }
-					remove_ideology = ideology_laissez_faire
+					limit = { ffpa_global_ig_has_laissez_faire = yes }
+					ffpa_global_ig_remove_laissez_faire = yes
 				}
 				if = {
 					limit = { has_ideology = ideology:ideology_neoliberism }
@@ -224,8 +227,8 @@ ffpa_apply_byz_formation_ideologies_v1 = {
 
 		ig:ig_petty_bourgeoisie = {
 			if = {
-				limit = { has_ideology = ideology:ideology_reactionary }
-				remove_ideology = ideology_reactionary
+				limit = { ffpa_global_ig_has_reactionary = yes }
+				ffpa_global_ig_remove_reactionary = yes
 				if = {
 					limit = { NOT = { has_ideology = ideology:ideology_ffpa_new_rome_civicism } }
 					add_ideology = ideology_ffpa_new_rome_civicism
@@ -234,6 +237,7 @@ ffpa_apply_byz_formation_ideologies_v1 = {
 		}
 
 		set_variable = ffpa_byz_formation_ideologies_v1
+		set_variable = ffpa_byz_global_ig_bridge_v1
 	}
 }
 
@@ -243,12 +247,12 @@ ffpa_apply_tur_provincial_compact_v1 = {
 	if = {
 		limit = {
 			ROOT = { country_definition = cd:TUR }
-			NOT = { has_variable = ffpa_tur_provincial_compact_ideology_v1 }
+			OR = { NOT = { has_variable = ffpa_tur_provincial_compact_ideology_v1 } NOT = { has_variable = ffpa_tur_provincial_compact_global_ig_bridge_v1 } }
 		}
 		ig:ig_landowners = {
 			if = {
-				limit = { has_ideology = ideology:ideology_paternalistic }
-				remove_ideology = ideology_paternalistic
+				limit = { ffpa_global_ig_has_paternalistic = yes }
+				ffpa_global_ig_remove_paternalistic = yes
 				if = {
 					limit = { NOT = { has_ideology = ideology:ideology_ffpa_provincial_compact } }
 					add_ideology = ideology_ffpa_provincial_compact
@@ -256,6 +260,7 @@ ffpa_apply_tur_provincial_compact_v1 = {
 			}
 		}
 		set_variable = ffpa_tur_provincial_compact_ideology_v1
+		set_variable = ffpa_tur_provincial_compact_global_ig_bridge_v1
 	}
 }
 
@@ -283,12 +288,12 @@ ffpa_apply_byz_imperial_symphonia_v1 = {
 	if = {
 		limit = {
 			ROOT = { country_definition = cd:BYZ }
-			NOT = { has_variable = ffpa_byz_imperial_symphonia_v1 }
+			OR = { NOT = { has_variable = ffpa_byz_imperial_symphonia_v1 } NOT = { has_variable = ffpa_byz_imperial_symphonia_global_ig_bridge_v1 } }
 		}
 		ig:ig_devout = {
 			if = {
-				limit = { has_ideology = ideology:ideology_moralist }
-				remove_ideology = ideology_moralist
+				limit = { ffpa_global_ig_has_moralist = yes }
+				ffpa_global_ig_remove_moralist = yes
 				if = {
 					limit = { NOT = { has_ideology = ideology:ideology_ffpa_imperial_symphonia } }
 					add_ideology = ideology_ffpa_imperial_symphonia
@@ -296,6 +301,7 @@ ffpa_apply_byz_imperial_symphonia_v1 = {
 			}
 		}
 		set_variable = ffpa_byz_imperial_symphonia_v1
+		set_variable = ffpa_byz_imperial_symphonia_global_ig_bridge_v1
 	}
 }
 
@@ -1099,13 +1105,13 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 		ffpa_ensure_byz_western_citizenship_incorporation_v1 = yes
 
 		if = {
-			limit = { NOT = { has_variable = ffpa_byz_formation_ideologies_v1 } }
+			limit = { OR = { NOT = { has_variable = ffpa_byz_formation_ideologies_v1 } NOT = { has_variable = ffpa_byz_global_ig_bridge_v1 } } }
 			ffpa_apply_byz_formation_ideologies_v1 = yes
 		}
 
 		if = {
 			limit = {
-				NOT = { has_variable = ffpa_byz_imperial_symphonia_v1 }
+				OR = { NOT = { has_variable = ffpa_byz_imperial_symphonia_v1 } NOT = { has_variable = ffpa_byz_imperial_symphonia_global_ig_bridge_v1 } }
 				OR = {
 					has_variable = ffpa_byz_church_and_crown_chosen_v1
 					has_modifier = ffpa_byz_church_and_crown
@@ -1157,13 +1163,13 @@ ffpa_ensure_eastern_mediterranean_v2 = {
 		ffpa_ensure_tur_flavor_v1 = yes
 		ffpa_ensure_tur_commonwealth_progress_v3 = yes
 		if = {
-			limit = { NOT = { has_variable = ffpa_tur_formation_ideologies_v1 } }
+			limit = { OR = { NOT = { has_variable = ffpa_tur_formation_ideologies_v1 } NOT = { has_variable = ffpa_tur_global_ig_bridge_v1 } } }
 			ffpa_apply_tur_formation_ideologies_v1 = yes
 		}
 
 		if = {
 			limit = {
-				NOT = { has_variable = ffpa_tur_provincial_compact_ideology_v1 }
+				OR = { NOT = { has_variable = ffpa_tur_provincial_compact_ideology_v1 } NOT = { has_variable = ffpa_tur_provincial_compact_global_ig_bridge_v1 } }
 				OR = {
 					has_journal_entry = je_ffpa_tur_ottoman_commonwealth
 					has_variable = ffpa_tur_ottoman_commonwealth_complete

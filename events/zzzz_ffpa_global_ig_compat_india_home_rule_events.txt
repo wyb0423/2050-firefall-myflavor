@@ -1,0 +1,99 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = india_home_rule_events
+
+# Source: game/events/india_events/india_home_rule_events.txt :: india_home_rule_events.6
+india_home_rule_events.6 = { # Dyer's Homecoming
+	type = country_event
+	placement = root
+
+	duration = 3
+
+	title = india_home_rule_events.6.t
+	desc = india_home_rule_events.6.d
+	flavor = india_home_rule_events.6.f
+
+	event_image = {
+		video = "votp_hostile_court"
+	}
+
+	dlc = dlc011
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	cooldown = { days = normal_modifier_time }
+
+	# Triggered by event
+
+	immediate = {
+
+	}
+
+	option = {
+		name = india_home_rule_events.6.a
+		default_option = yes
+		if = {
+			limit = {
+				scope:dyer_scope = {
+					has_variable = dyer_disciplined
+				}
+			}
+			custom_tooltip = {
+				text = dyer_retire_into_obscurity_tt
+			}
+		}
+		else = {
+			every_interest_group = {
+				limit = {
+					ffpa_global_ig_has_patriotic = yes
+				}
+				add_modifier = {
+					name = modifier_the_man_who_saved_india
+					days = normal_modifier_time
+				}
+			}
+			every_interest_group = {
+				limit = {
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_pacifist
+							has_ideology = ideology:ideology_communist
+							has_ideology = ideology:ideology_anarchist
+							has_ideology = ideology:ideology_vanguardist
+						}
+					}
+				}
+				add_modifier = {
+					name = modifier_disgrace_in_india
+					days = normal_modifier_time
+				}
+			}
+		}
+		hidden_effect = {
+			scope:dyer_scope = {
+				retire_character = yes
+			}
+		}
+	}
+
+	option = {
+		name = india_home_rule_events.6.b
+		trigger = {
+			scope:dyer_scope = {
+				NOT = {
+					has_variable = dyer_disciplined
+				}
+			}
+		}
+		add_loyalists = {
+			value = small_radicals
+			pop_type = academics
+		}
+		hidden_effect = {
+			scope:dyer_scope = {
+				retire_character = yes
+			}
+		}
+	}
+}

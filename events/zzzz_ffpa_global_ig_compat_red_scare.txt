@@ -1,0 +1,150 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = red_scare
+
+# Source: game/events/red_scare_events.txt :: red_scare.1
+red_scare.1 = {
+	type = country_event
+	placement = root
+	title = red_scare.1.t
+	desc = red_scare.1.d
+	flavor = red_scare.1.f
+
+	duration = 3
+
+	event_image = {
+		video = "votp_agitator_speaking"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	trigger = {
+		# Triggered by JE
+	}
+
+	immediate = {
+
+	}
+
+	option = {
+		name = red_scare.1.a
+		default_option = yes
+		add_loyalists = {
+			value = small_radicals
+			strata = upper
+		}
+		every_interest_group = {
+			limit = {
+				OR = {
+					ffpa_global_ig_has_proletarian = yes
+					law_stance = {
+						law = law_type:law_council_republic
+						value > neutral
+					}
+				}
+			}
+			add_modifier = { name = modifier_red_scared days = long_modifier_time is_decaying = yes }
+		}
+	}
+	option = {
+		name = red_scare.1.b
+		add_loyalists = {
+			value = small_radicals
+			strata = lower
+		}
+		every_interest_group = {
+			limit = {
+				NOT = {
+					OR = {
+						ffpa_global_ig_has_proletarian = yes
+						law_stance = {
+							law = law_type:law_council_republic
+							value > neutral
+						}
+					}
+				}
+			}
+			add_modifier = { name = modifier_red_scared_reactionary days = long_modifier_time is_decaying = yes }
+		}
+	}
+}
+
+# Source: game/events/red_scare_events.txt :: red_scare.20
+red_scare.20 = { #Timeout Event
+	type = country_event
+	placement = root
+	title = red_scare.20.t
+	desc = red_scare.20.d
+	flavor = red_scare.20.f
+
+	duration = 3
+
+	event_image = {
+		video = "europenorthamerica_rich_and_poor"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_scales.dds"
+
+	trigger = {
+		#Triggered by JE
+	}
+
+	immediate = {
+
+	}
+
+	option = {
+		name = red_scare.20.a
+		default_option = yes
+		add_modifier = {
+			name = modifier_red_scare_final_anti_communism
+			days = normal_modifier_time
+		}
+		every_interest_group = {
+			limit = {
+				OR = {
+					ffpa_global_ig_has_reactionary = yes
+					ffpa_global_ig_has_paternalistic = yes
+					has_ideology = ideology:ideology_magnatial
+					ig_has_carlist_ideology = yes
+					has_ideology = ideology:ideology_moderantist
+					leader = {
+						has_reactionary_ideology = yes
+					}
+				}
+			}
+			add_modifier = {
+				name = modifier_red_scare_final_anti_communism_ig
+				days = normal_modifier_time
+			}
+		}
+	}
+	option = {
+		name = red_scare.20.b
+		add_modifier = {
+			name = modifier_red_scare_final_civil_liberties
+			days = normal_modifier_time
+		}
+		every_interest_group = {
+			limit = {
+				OR = {
+					ffpa_global_ig_has_reactionary = yes
+					ffpa_global_ig_has_paternalistic = yes
+					has_ideology = ideology:ideology_magnatial
+					ig_has_carlist_ideology = yes
+					has_ideology = ideology:ideology_moderantist
+					leader = {
+						has_reactionary_ideology = yes
+					}
+				}
+			}
+			add_modifier = {
+				name = modifier_red_scare_final_civil_liberties_ig
+				days = normal_modifier_time
+			}
+		}
+	}
+}

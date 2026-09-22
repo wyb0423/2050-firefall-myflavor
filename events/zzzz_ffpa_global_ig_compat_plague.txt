@@ -1,0 +1,123 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = plague
+
+# Source: game/events/spanish_flu_events.txt :: plague.9
+plague.9 = {
+	type = country_event
+	placement = ROOT
+
+	title = plague.9.t
+	desc = plague.9.d
+	flavor = plague.9.f
+
+	event_image = {
+		video = "europenorthamerica_political_extremism"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	duration = 3
+
+	trigger = {
+		OR = {
+			has_variable = plague_lockdown
+			has_variable = plague_measures
+		}
+		any_scope_state = {
+			has_modifier = plague_modifier
+			OR = {
+				has_modifier = plague_lockdown_mod
+				has_modifier = plague_measures_mod
+			}
+			is_incorporated = yes
+		}
+		any_interest_group = {
+			ffpa_global_ig_has_laissez_faire = yes
+			is_in_government = no
+		}
+		NOT = { has_variable = plague_antimask_timer }
+	}
+
+	immediate = {
+		set_variable = {
+			name = plague_antimask_timer
+			months = 12
+		}
+		random_country = {
+			limit = {
+				has_variable = plague_originator
+			}
+			save_scope_as = plague_originator_country
+		}
+		random_interest_group = {
+			limit = {
+				ffpa_global_ig_has_laissez_faire = yes
+				is_in_government = no
+			}
+			save_scope_as = anti_mask_ig
+			leader = {
+				save_scope_as = anti_mask_ig_leader
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		has_variable = spanish_flu_over
+	}
+
+	option = { # Ignore their demands
+		name = plague.9.a
+		default_option = yes
+		scope:anti_mask_ig = {
+			add_modifier = {
+				name = anti_mask_ignored
+				months = 12
+			}
+		}
+	}
+	option = { # Cave in to demands
+		name = plague.9.b
+		custom_tooltip = plague_no_response.tt # states will always get more waves
+		remove_variable = plague_measures
+		remove_variable = plague_lockdown
+		every_scope_state = {
+			limit = {
+				OR = {
+					has_modifier = plague_lockdown_mod
+					has_modifier = plague_measures_mod
+				}
+			}
+			remove_modifier = plague_lockdown_mod
+			remove_modifier = plague_measures_mod
+		}
+		scope:anti_mask_ig = {
+			add_modifier = {
+				name = anti_mask_appeased
+				months = 12
+			}
+		}
+		set_variable = {
+			name = plague_response_cooldown
+			days = 182
+		}
+	}
+	option = { # Discredit their movement with science
+		name = plague.9.c
+		trigger = {
+			has_technology_researched = modern_nursing
+			institution_investment_level = {
+				institution = institution_health_system
+				value >= 3
+			}
+		}
+		highlighted_option = yes
+		scope:anti_mask_ig = {
+			add_modifier = {
+				name = anti_mask_discredited
+				months = 12
+			}
+		}
+	}
+}

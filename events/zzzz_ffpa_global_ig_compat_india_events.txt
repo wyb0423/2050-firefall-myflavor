@@ -1,0 +1,108 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = india_events
+
+# Source: game/events/india_events/india_misc_events.txt :: india_events.4
+india_events.4 = { # Demanding return of the Koh-i-Noor
+	type = country_event
+	placement = root
+
+	duration = 3
+
+	title = india_events.4.t
+	desc = {
+		first_valid = {
+			triggered_desc = {
+				desc = india_events.4.d_1
+				trigger = {
+					scope:india_scope = {
+						OR = {
+							c:BHT ?= this
+							c:BIC ?= this
+						}
+					}
+				}
+			}
+			triggered_desc = {
+				desc = india_events.4.d_2
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+	flavor = india_events.4.f
+
+	event_image = {
+		video = "ip2_telegraph_dictate"
+	}
+
+	dlc = dlc011
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_newspaper.dds"
+
+	cooldown = { days = never_fire_again_modifier_time }
+
+	trigger = {
+		# Triggered by decision
+	}
+
+	immediate = {
+		save_scope_as = koh_i_noor_owner_scope
+		var:koh_i_noor_decision_user ?= {
+			save_scope_as = india_scope
+		}
+	}
+
+	cancellation_trigger = {
+		NOT = {
+			exists = scope:india_scope
+		}
+	}
+
+	option = { # No.
+		name = india_events.4.a
+		default_option = yes
+		scope:india_scope = {
+			post_notification = koh_i_noor_not_returned
+		}
+		change_relations = {
+			country = scope:india_scope
+			value = -10
+		}
+		every_interest_group = {
+			limit = {
+				ffpa_global_ig_has_patriotic = yes
+			}
+			add_modifier = {
+				name = modifier_refused_to_surrender_diamond
+				days = short_modifier_time
+			}
+		}
+	}
+
+	option = { # Yes.
+		name = india_events.4.b
+		custom_tooltip = {
+			text = returned_koh_i_noor_tt
+			remove_variable = koh_i_noor
+		}
+		scope:india_scope = {
+			post_notification = koh_i_noor_returned
+		}
+		change_relations = {
+			country = scope:india_scope
+			value = 25
+		}
+		every_interest_group = {
+			limit = {
+				ffpa_global_ig_has_patriotic = yes
+			}
+			add_modifier = {
+				name = modifier_surrendered_diamond
+				days = short_modifier_time
+			}
+		}
+	}
+}

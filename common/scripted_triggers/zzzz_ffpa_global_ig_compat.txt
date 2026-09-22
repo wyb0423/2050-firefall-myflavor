@@ -1,0 +1,86 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+# Source: game/common/scripted_triggers/00_scripted_triggers.txt :: has_hierarchic_ideology
+has_hierarchic_ideology = {
+	OR = {
+		ffpa_global_ig_has_hierarchic = yes
+		has_ideology = ideology:ideology_japan_hierarchic
+		has_ideology = ideology:ideology_japan_hierarchic_2
+	}
+}
+
+# Source: com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework/common/scripted_triggers/ycom_ideology_trigger_overrides.txt :: has_paternalist_ideology
+REPLACE:has_paternalist_ideology = {
+	OR = {
+		ffpa_global_ig_has_paternalistic = yes
+		has_ideology = ideology:ideology_scholar_paternalistic
+		has_ideology = ideology:ideology_junker_paternalistic
+		has_ideology = ideology:ideology_papal_paternalistic
+		has_ideology = ideology:ideology_anz_elitist #anzfp
+	}
+}
+
+# Source: game/common/scripted_triggers/00_scripted_triggers.txt :: ig_is_reactionary
+ig_is_reactionary = {
+	OR = {
+		ffpa_global_ig_has_reactionary = yes
+		has_ideology = ideology:ideology_pro_slavery
+		has_ideology = ideology:ideology_pro_slavery_colonial
+		leader = {
+			OR = {
+				has_ideology = ideology:ideology_slaver
+				has_ideology = ideology:ideology_fascist
+				has_ideology = ideology:ideology_integralist
+				has_ideology = ideology:ideology_royalist
+				has_ideology = ideology:ideology_orleanist
+				has_ideology = ideology:ideology_bonapartist
+				has_ideology = ideology:ideology_legitimist
+				has_ideology = ideology:ideology_theocrat
+			}
+		}
+		AND = {
+			law_stance = {
+				law = law_type:law_autocracy
+				value >= neutral
+			}
+			law_stance = {
+				law = law_type:law_council_republic
+				value < neutral
+			}
+		}
+	}
+}
+
+# Source: game/common/scripted_triggers/00_ip3_victoria_scripted_triggers.txt :: red_summer_radical_victory_trigger
+red_summer_radical_victory_trigger = {
+	AND = {
+		OR = {
+			has_law_or_variant = law_type:law_presidential_republic
+			has_law_or_variant = law_type:law_parliamentary_republic
+			has_law_or_variant = law_type:law_council_republic
+		}
+		in_election_campaign = no
+		legitimacy > 50
+		any_interest_group_in_government = {
+			OR = {
+				ffpa_global_ig_has_proletarian = yes
+				leader = {
+					OR = {
+						has_ideology = ideology:ideology_radical
+						has_socialist_ideology = yes
+					}
+				}
+			}
+		}
+		custom_tooltip = {
+			text = no_monarchists_in_government_tt
+			NOT = {
+				any_interest_group_in_government = {
+					law_enactment_stance = {
+						law = law_type:law_monarchy
+						value > neutral
+					}
+				}
+			}
+		}
+	}
+}

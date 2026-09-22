@@ -324,6 +324,16 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 独立 on_claim_added 包装只给匹配 claimant/region 的活动来源标记外部重授；若本模块自身通知延后到达也保守保留宣称。重复已有宣称可能不回调，尚不能证明所有外部来源都可识别。消亡国家的 JE 失效回调与州修正继承仍须实机验证。
 - 每次修改运行上述三个检查和 `tests/validate_localization.py`。静态检查不证明原生激活、变量索引选州、AI、读档或分裂/合并继承；用户明确禁止本机启动游戏，保留这些待验项。开发测试包不会由主 Mod 自动加载。
 
+### 4.10 全球政治风味：利益集团立场
+
+- 独占 `common/ideologies/ffpa_global_ig_ideologies.txt`、`common/{scripted_effects,scripted_triggers,on_actions}/ffpa_global_ig_*.txt`、两份 `ffpa_global_ig_l_*.yml`、`tools/generate_global_ig_compat.py`、`tests/check_global_ig_positions.py` 和 `docs/global-ig-compatibility.json` 登记的生成副本。
+- 八项 `ideology_ffpa_global_ig_*` 对象是存档 ID；只替换指定集团中的已知通用来源，不重建集团、不改 `on_enable`、人口、领袖、特质或法律效果。月度入口仅访问八个固定映射，无人口、州、建筑遍历。
+- `ffpa_global_ig_has_*` / `add_*` / `remove_*` 是 IG scope 身份接续接口；`ffpa_global_ig_ensure_positions_v1` 为 country scope。国家模块通过明确源映射消费接口，不改写全球定义。已知国家专属理念和后期新自由主义优先；无关国家变体不视为默认来源。
+- TUR/BYZ 继续拥有国家理念转换。新增 `ffpa_tur_global_ig_bridge_v1`、`ffpa_byz_global_ig_bridge_v1`、`ffpa_tur_provincial_compact_global_ig_bridge_v1`、`ffpa_byz_imperial_symphonia_global_ig_bridge_v1` 是一次性接续标记；不得清除原迁移标记、猜测路线、重播事件或重发奖励。
+- 生成器按原版 → CMF → Tech & Res → Firefall 解析同路径遮蔽、`replace_paths` 和普通/REPLACE 顶层对象；有关 INJECT 必须先合并审查，不得静默忽略。兼容副本只改三类精确理念读写命令，源摘要与逆向等价检查保护其余字段。
+- 旗帜模板桶及 `00_code_on_actions.txt` 使用同路径文件遮蔽；原生 `_on_actions.md` 禁止同名入口叠加 effect，不得将其改为额外 effect 块。其余生成对象按同键覆盖，保留上游已有 REPLACE。所有覆盖均在 JSON 清单登记，不手改生成结果。
+- 原版 IG 初始化留给原生机制，随后补挂；俄语专用 `99_ru_custom_loc.txt` 不在英中支持范围。上游更新后运行生成器 `--check` 和新检查，参数均为 `--game-root GAME --upstream CMF --upstream TECHRES --upstream FIREFALL`；人工复核后才重新生成。另跑本地化、东地中海可达性及 TUR 路线身份回归。检查不证明引擎合并、理念优先级、AI 或读档。
+
 ## 5. 共享接缝与唯一所有者规则
 
 | 共享接缝 | 当前使用者 | 规则 |
@@ -350,6 +360,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 | `je_greek_nationalism` | 同名顶层替换 | 接回 GRE → BYZ 路线 | 原版、Firefall |
 | `formation.3` | 同名事件完整替换 | 保留原版通知与威望流程，以自有查士丁尼宣称白名单替换原版巴尔干/近东广域宣称 | 原版、Firefall |
 | `je_ottoman_empire_collapse` | 同名日志完整替换 | 排除 FFPA 管理的 2050 TUR，并在旧活动实例失效时清理 T&R 崩溃运行状态；其余上游语义保持不变 | Tech & Res |
+| 全球理念兼容清单中的对象与文件 | 生成的同键覆盖／四个同路径副本，详见 `docs/global-ig-compatibility.json` | 保持新旧理念在政党、事件、法律条件、后期转换及旗帜模板中的身份连续性；不新增这些内容 | 原版、CMF、Tech & Res、Firefall |
 | `je_greek_nationalism_reason`、`je_greek_nationalism_lobby`、`greece.1.t/d/f/a/b`、`greece.4.t/d1/d2/f/a/b/c`、`greece.5.t/d/f/a/b` | 同名本地化键替换 | 将原版十九世纪希腊叙事改写为大火后重新拼合国家对旧世界档案的再解释，并按克制、伟大理想与东罗马路线显示不同结局 | 原版及任何后加载的希腊事件/本地化 Mod |
 | `TUR_ADJ`、`GRE_ADJ` | 同名本地化键替换 | 将 Firefall 英文中误作国名的 `Turkey`、`Greece` 恢复为形容词 `Turkish`、`Greek`；简中同步登记同形词 | 原版、Firefall 及任何后加载的国家本地化 Mod |
 | `party_agrarian`、`party_anarchist`、`party_communist`、`party_conservative`、`party_fascist`、`party_free_trade`、`party_liberal`、`party_military`、`party_radicals`、`party_religious`、`party_christian`、`revolutionary_party_name`、`party_social_democrats` | 同名本地化键替换 | 通过 scripted GUI 为 BYZ 返回专属党名，并为其他国家返回原版通用名称 | 原版及任何后加载的党名/本地化 Mod |

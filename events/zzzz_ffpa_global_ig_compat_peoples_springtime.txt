@@ -1,0 +1,55 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = peoples_springtime
+
+# Source: game/events/peoples_springtime.txt :: peoples_springtime.7
+peoples_springtime.7 = {
+	type = country_event
+
+	event_image = {
+		video = "votp_barricade"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	title = peoples_springtime.7.t
+	desc = peoples_springtime.7.d
+	flavor = peoples_springtime.7.f
+
+	duration = 3
+
+	immediate = {
+		random_interest_group = {
+			limit = {
+				is_in_government = yes
+				OR = {
+					ffpa_global_ig_has_proletarian = yes
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_radical
+							has_socialist_ideology = yes
+						}
+					}
+				}
+			}
+			save_scope_as = radical_ig
+		}
+	}
+
+	option = {
+		name = peoples_springtime.7.a
+		add_modifier = {
+			name = post_revolutionary_fervor
+			days = normal_modifier_time
+		}
+	}
+
+	option = {
+		name = peoples_springtime.7.b
+		default_option = yes
+		add_loyalists = {
+			value = 0.1
+		}
+	}
+}

@@ -1,0 +1,70 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = 1848
+
+# Source: game/events/1848.txt :: 1848.2
+1848.2 = {
+	type = country_event
+	placement = root
+	title = 1848.2.t
+	desc = 1848.2.d
+	flavor = 1848.2.f
+
+	duration = 3
+
+	event_image = {
+		video = "europenorthamerica_london_center"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	trigger = {
+		# triggered by je_abolish_monarchy
+	}
+
+	immediate = {
+		ig:ig_landowners ?= {
+			save_scope_as = landowners_ig
+		}
+	}
+
+	option = {
+		name = 1848.2.a
+		default_option = yes
+		ig:ig_landowners ?= {
+			ffpa_global_ig_remove_paternalistic = yes
+			remove_ideology = ideology_magnatial
+			remove_ideology = ideology_carlist_ig
+			remove_ideology = ideology_moderantist
+			remove_ideology = ideology_scholar_paternalistic
+			remove_ideology = ideology_junker_paternalistic
+			remove_ideology = ideology_papal_paternalistic
+			add_ideology = ideology_republican_paternalistic
+		}
+		custom_tooltip = {
+			text = no_more_royalists
+			set_variable = monarchy_stamped_out_var
+		}
+		every_interest_group = {
+			limit = {
+				leader = {
+					has_monarchist_ideology = yes
+				}
+			}
+			leader = {
+				set_ideology = ideology:ideology_moderate
+			}
+		}
+	}
+	option = {
+		name = 1848.2.b
+		# don't do that, just make landowners lose power
+		ig:ig_landowners ?= {
+			add_modifier = {
+				name = monarchist_nostalgia
+				days = normal_modifier_time
+			}
+		}
+	}
+}

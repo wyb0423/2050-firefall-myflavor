@@ -1,0 +1,106 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = BRZ_populism
+
+# Source: game/events/brazil/vargas.txt :: BRZ_populism.1
+BRZ_populism.1 = {
+	type = country_event
+	placement = ROOT
+
+	title = BRZ_populism.1.t
+	desc = BRZ_populism.1.d
+	flavor = BRZ_populism.1.f
+
+	event_image = {
+		video = "votp_agitator_speaking"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_protest.dds"
+
+	cooldown = { days = normal_modifier_time }
+
+	duration = 3
+
+	dlc = dlc008
+
+	trigger = {
+
+	}
+
+	immediate = {
+		ig:ig_landowners ?= {
+			save_scope_as = landowners_ig
+		}
+		root = {
+			save_scope_as = brazil_scope
+		}
+		ig:ig_petty_bourgeoisie ?= {
+			save_scope_as = pb_ig
+		}
+		if = {
+			limit = {
+				game_date >= 1909.1.1
+			}
+			create_character = {
+				template = BRZ_getulio_vargas_character_template
+				on_created = {
+					set_variable = vargas_variable
+					set_career_length = {
+						years = 100
+					}
+				}
+				save_scope_as = vargas_scope
+			}
+		}
+		else = {
+			custom_tooltip = {
+				text = new_petit_bourgeois_leader_tt
+				create_character = {
+					role = character_role_politician
+					interest_group = ig_petty_bourgeoisie
+					ideology = ideology_authoritarian
+					traits = {
+						erudite
+						meticulous
+						ambitious
+					}
+					on_created = {
+						set_variable = vargas_variable
+						set_career_length = {
+							years = 100
+						}
+					}
+					save_scope_as = vargas_scope
+				}
+			}
+		}
+	}
+
+	option = {
+		name = BRZ_populism.1.a
+		default_option = yes
+		add_modifier = {
+			name = modifier_petit_bourgeois_discontent
+			days = long_modifier_time
+			is_decaying = yes
+		}
+		if = {
+			limit = {
+				NOT = {
+					any_political_movement = {
+						is_political_movement_type = movement_modernizer
+					}
+				}
+			}
+			create_political_movement = { type = movement_modernizer }
+		}
+		ig:ig_petty_bourgeoisie ?= {
+			ffpa_global_ig_remove_reactionary = yes
+			add_ideology = ideology_modernizer
+		}
+		scope:vargas_scope ?= {
+			set_as_interest_group_leader = yes
+		}
+	}
+}

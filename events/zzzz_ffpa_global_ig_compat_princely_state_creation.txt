@@ -1,0 +1,121 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = princely_state_creation
+
+# Source: game/events/india_events/princely_state_creation.txt :: princely_state_creation.4
+princely_state_creation.4 = {
+	type = country_event
+	placement = scope:kashmir_state
+	title = princely_state_creation.4.t
+	desc = princely_state_creation.4.d
+	flavor = princely_state_creation.4.f
+
+	event_image = {
+		video = "ep1_transfer_of_authority"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_map.dds"
+
+	duration = 3
+
+	cooldown = { days = normal_modifier_time }
+
+	trigger = {
+		has_dlc_feature = ip2_content
+		c:BIC ?= this
+		is_subject = yes
+		NOT = {
+			has_global_variable = organised_kashmir
+		}
+		s:STATE_KASHMIR = {
+			NOT = {
+				any_scope_state = {
+					NOR = {
+						owner = ROOT
+						owner = {
+							top_overlord ?= ROOT.top_overlord
+						}
+					}
+				}
+			}
+		}
+		NOT = {
+			exists = c:KAS
+		}
+	}
+
+	immediate = {
+		set_global_variable = organised_kashmir
+		s:STATE_KASHMIR = {
+			random_scope_state = {
+				limit = {
+					OR = {
+						owner = ROOT
+						owner = {
+							top_overlord ?= ROOT.top_overlord
+						}
+					}
+				}
+				save_scope_as = kashmir_state
+			}
+		}
+	}
+
+	cancellation_trigger = {
+		exists = c:KAS
+	}
+
+	option = { # Princely States
+		name = princely_state_creation.4.a
+		create_country = {
+			tag = KAS
+			origin = this
+			province = p:xF28F90
+			on_created = {
+				set_country_type = unrecognized
+				activate_law = law_type:law_monarchy
+				activate_law = law_type:law_autocracy
+				s:STATE_KASHMIR = {
+					random_scope_state = {
+						limit = {
+							c:BIC ?= owner
+						}
+						set_state_owner = c:KAS
+					}
+				}
+				c:BIC ?= {
+					create_diplomatic_pact = {
+						country = PREV
+						type = puppet
+					}
+				}
+				set_variable = princely_state
+				set_state_religion = rel:hindu
+				ig:ig_devout ?= {
+					set_interest_group_name = ig_hindu_priesthood
+					ffpa_global_ig_remove_moralist = yes
+					add_ideology = ideology_hindu_moralist
+					set_ig_trait = ig_trait:ig_trait_pious_fiction
+					set_ig_trait = ig_trait:ig_trait_divine_right
+					set_ig_trait = ig_trait:ig_trait_asceticism
+				}
+			}
+		}
+	}
+
+	option = { # Keep the state
+		name = princely_state_creation.4.b
+		default_option = yes
+		custom_tooltip = {
+			text = upset_every_princely_state_tt
+			every_princely_state = {
+				change_relations = {
+					country = ROOT
+					value = -10
+				}
+				add_liberty_desire = annex_subject_intermediate_desire_change
+			}
+		}
+	}
+}

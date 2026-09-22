@@ -2,7 +2,13 @@
 
 日期：2026-09-22
 
-状态：待用户确认后开始代码实施。当前仅编写设计与计划。
+状态：用户确认后完成代码实施及静态／脚本子集检查，未启动游戏；实机验收待进行。
+
+实施记录：八项理念、双语文本、有界分配和四项国家接续标记已落地。上游身份读取不止后期科技转换，还涉及政党、事件、法律条件和旗帜模板，因此由生成器统一维护 73 项兼容记录；每项有源摘要，检查逆向还原后的脚本与上游一致。此处记录数包含四个完整文件副本，不代表新增 73 项玩法内容。
+
+原计划避免复制完整 on_action 文件；实际核对原生 `_on_actions.md` 后发现同名入口不能叠加 effect。为保留 `on_become_independent` 的原有逻辑，改为生成同路径 `00_code_on_actions.txt` 副本，只接续其中一处理念移除命令；自己的开局、成立与月度入口仍用独立包装追加。另三个同路径副本用于原生旗帜模板桶，避免破坏字典合并。
+
+已运行：`check_global_ig_positions.py`、`validate_localization.py`、`check_eastern_accessibility.py`、`test_tur_route_interest_group_identity.py`。Rhomaic 原 PowerShell 检查未运行，其全部断言已纳入 Python 检查；未安装新依赖。当前本机加载清单仍不是 Firefall 配置，未改动加载清单。
 
 依据：[`../specs/2026-09-22-global-interest-group-positions-design.md`](../specs/2026-09-22-global-interest-group-positions-design.md)。实业家的最终立场以该文件 §5 为准，不采用此前干预主义强烈支持、保护主义支持、义务初等教育支持的提案。
 

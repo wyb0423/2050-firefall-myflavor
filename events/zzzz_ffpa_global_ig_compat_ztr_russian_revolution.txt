@@ -1,0 +1,212 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = ztr_russian_revolution
+
+# Source: tech.res/events/russia/russian_revolution.txt :: ztr_russian_revolution.19
+ztr_russian_revolution.19 = {
+	dlc = dlc_tech_res
+	type = country_event
+	placement = root
+	duration = 1
+	title = ztr_russian_revolution_first_soviet_congress.t
+	desc = ztr_russian_revolution_first_soviet_congress.d
+	flavor = ztr_russian_revolution_first_soviet_congress.f
+	event_image = {
+		video = "ztr_soviet_congress"
+	}
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+	icon = "gfx/interface/icons/event_icons/equality_index.dds"
+	trigger = {
+		# Il Congresso si tiene dopo che è stato designato un leader (o equivalente)
+		has_variable = ztr_soviet_ideology_var
+		NOR = {
+			has_variable = ztr_bolshevik_ideology_var
+			has_variable = ztr_menshevik_ideology_var
+			has_variable = ztr_agro_socialist_ideology_var
+		}
+		# 1 is Bolsheviks, 2 is Mensheviks, 3 is Agro-Socialista
+		var:russia_sovietic_path_var > 25
+		# E dopo la fase preparatoria dei sindacati/bolscevichi
+		ig:ig_trade_unions = {
+			NOT = {
+				has_modifier = ztr_bolsheviks_prepare_the_soviet_congress_modifier
+			}
+		}
+		# Siamo nel percorso sovietico (non per forza vittorioso, ma attivo)
+		has_variable = russia_sovietic_path_var
+	}
+	immediate = {
+		ig:ig_intelligentsia = {
+			save_scope_as = russia_intelligentsia_scope
+		}
+		ig:ig_rural_folk = {
+			save_scope_as = russia_peasants_scope
+		}
+		ig:ig_industrialists = {
+			save_scope_as = russia_liberals_scope
+		}
+		ig:ig_landowners = {
+			save_scope_as = russia_landowners_scope
+		}
+		remove_variable = ztr_soviet_ideology_var
+		ig:ig_trade_unions = {
+			save_scope_as = russia_bolsheviks_scope
+			leader = {
+				save_scope_as = soviet_leader_character_scope
+			}
+		}
+	}
+	# Percorso 1 , Linea Bolscevica (Consigli + Comando dell'Economia, JE Rivoluzione permanente = Counter di 5 anni che necessita di guerra di diffusione)
+	option = {
+		name = ztr_first_soviet_congress_bolshevik.option
+		default_option = yes
+		ig:ig_trade_unions = {
+			if = {
+				limit = {
+					NOT = {
+						has_ideology = ideology:ideology_socialist
+					}
+				}
+				add_ideology = ideology_socialist
+			}
+			leader = {
+				set_ideology = ideology:ideology_vanguardist
+			}
+		}
+		ig:ig_armed_forces ?= {
+			ffpa_global_ig_add_patriotic = yes
+			leader = {
+				set_ideology = ideology:ideology_vanguardist
+			}
+		}
+		every_scope_pop = {
+			limit = {
+				is_pop_type = laborers
+			}
+			add_movement_enthusiasm_modifier = yes
+		}
+		custom_tooltip = {
+			text = ztr_russian_communist_bolshevik_ideology_potential_tt
+			# This will enable some aspects only for Bolshevik ideology
+			# Hook futuro: svolta "rivoluzione mondiale" o "socialismo in un paese"
+			set_variable = ztr_bolshevik_ideology_var
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = {
+					OR = {
+						NOT = {
+							has_variable = russia_liberalist_path_var
+						}
+						# If Lenin is leading, Bolshevik path is preferred
+						scope:soviet_leader_character_scope = {
+							has_variable = lenin_var
+						}
+					}
+				}
+				add = 1000
+			}
+		}
+	}
+	# Percorso 2 , Linea Menscevica/Socialdemocratica (Repubblica parlamentare, tutele del lavoro)
+	option = {
+		name = ztr_first_soviet_congress_menshevik.option
+		ig:ig_trade_unions = {
+			if = {
+				limit = {
+					NOT = {
+						has_ideology = ideology:ideology_socialist
+					}
+				}
+				add_ideology = ideology_socialist
+			}
+			leader = {
+				set_ideology = ideology:ideology_social_democrat
+			}
+		}
+		ig:ig_intelligentsia ?= {
+			add_ideology = ideology_egalitarian_modern
+			leader = {
+				set_ideology = ideology:ideology_reformer
+			}
+		}
+		custom_tooltip = {
+			text = ztr_russian_socialdemocrat_menshevik_ideology_potential_tt
+			# This will enable some aspects only for Menshevik ideology
+			# Hook futuro: svolta "repubblica parlamentare" o "democrazia sovietica"
+			set_variable = ztr_menshevik_ideology_var
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = {
+					has_variable = russia_liberalist_path_var
+					NOT = {
+						has_law_or_variant = law_type:law_serfdom
+					}
+					# Lenin is not leading
+					scope:soviet_leader_character_scope = {
+						NOT = {
+							has_variable = lenin_var
+						}
+					}
+				}
+				add = 1000
+			}
+		}
+	}
+	# Percorso 3 , Linea SR di Sinistra / Agro-Socialista (Potere ai Soviet rurali, ridistribuzione agraria)
+	option = {
+		name = ztr_first_soviet_congress_left_sr.option
+		ig:ig_trade_unions = {
+			if = {
+				limit = {
+					NOT = {
+						has_ideology = ideology:ideology_socialist
+					}
+				}
+				add_ideology = ideology_socialist
+			}
+			leader = {
+				set_ideology = ideology:ideology_communist
+			}
+		}
+		ig:ig_rural_folk = {
+			if = {
+				limit = {
+					NOT = {
+						has_ideology = ideology:ideology_socialist
+					}
+				}
+				add_ideology = ideology_socialist
+				add_ideology = ideology_agrarian
+			}
+			leader = {
+				set_ideology = ideology:ideology_communist
+			}
+		}
+		custom_tooltip = {
+			text = ztr_russian_agro_socialist_ideology_potential_tt
+			# This will enable some aspects only for Agrarian-Socialist ideology
+			# Hook futuro: svolta "soviet rurali" o "comuni agricole"
+			set_variable = ztr_agro_socialist_ideology_var
+		}
+		ai_chance = {
+			base = 10
+			modifier = {
+				trigger = {
+					# Deve esistere la legge della servitù della gleba per avere linea agraria forte
+					has_variable = russia_liberalist_path_var
+					has_law_or_variant = law_type:law_serfdom
+					# Lenin is not leading
+					scope:soviet_leader_character_scope = {
+						NOT = {
+							has_variable = lenin_var
+						}
+					}
+				}
+				add = 1000
+			}
+		}
+	}
+}
