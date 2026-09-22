@@ -98,6 +98,7 @@ def source_checks(roots):
 def script_checks():
     effects = definitions(ROOT / 'common/scripted_effects/ffpa_global_ig_effects.txt')
     effects.update(definitions(ROOT / 'common/scripted_effects/ffpa_eastern_mediterranean_effects.txt'))
+    effects.update(definitions(ROOT / 'common/scripted_effects/ffpa_north_american_identity.txt'))
     effects.update(definitions(ROOT / 'common/scripted_effects/zzzz_ffpa_global_ig_compat.txt'))
     triggers = definitions(ROOT / 'common/scripted_triggers/ffpa_global_ig_triggers.txt')
 
@@ -143,6 +144,8 @@ def script_checks():
             elif key == 'set_variable':
                 assert isinstance(value, str)
                 country['vars'].add(value); country['writes'] += 1
+            elif key == 'set_interest_group_name':
+                country.setdefault('names', {})[ig] = value; country['writes'] += 1
             elif key in effects:
                 assert value == 'yes'; run(effects[key], country, ig)
             else: raise AssertionError(('Unsupported effect', key))
@@ -179,8 +182,8 @@ def script_checks():
 
     # Known national and late-tech replacements always outrank default identity.
     specials = {'paternalistic': ['ideology_ffpa_provincial_compact'],
-                'laissez_faire': ['ideology_ffpa_tur_state_developmentalism', 'ideology_ffpa_mediterranean_developmentalism', 'ideology_neoliberism'],
-                'reactionary': ['ideology_ffpa_anatolian_civic_statism', 'ideology_ffpa_new_rome_civicism'],
+                'laissez_faire': ['ideology_ffpa_tur_state_developmentalism', 'ideology_ffpa_mediterranean_developmentalism', 'ideology_neoliberism', 'ideology_ffpa_usa_continental_market'],
+                'reactionary': ['ideology_ffpa_anatolian_civic_statism', 'ideology_ffpa_new_rome_civicism', 'ideology_ffpa_usa_local_constitutionalism'],
                 'moralist': ['ideology_ffpa_imperial_symphonia']}
     for source, targets in specials.items():
         for special in targets:
@@ -225,6 +228,76 @@ def script_checks():
     saved = deepcopy(state); run(normalize, state); assert state == saved
     print('PASS: actual effect subset: bounded allocation, repeats, missing IGs/sources, national/late-tech precedence and both formation orders.')
 
+    identity = effects['ffpa_usa_ensure_identity_v1']
+    name_marker, ideology_marker = 'ffpa_usa_flavor_names_v1', 'ffpa_usa_flavor_ideologies_v1'
+    expected = {
+        'armed_forces': {'ideology_ffpa_usa_federal_defense', 'ideology_patriotic'},
+        'industrialists': {'ideology_ffpa_usa_continental_market', 'ideology_individualist'},
+        'intelligentsia': {'ideology_ffpa_usa_civic_republicanism', 'ideology_ffpa_usa_civic_liberalism', 'ideology_anti_clerical', 'ideology_anti_slavery'},
+        'petty_bourgeoisie': {'ideology_ffpa_usa_local_constitutionalism', gen.target('patriotic'), 'ideology_meritocratic'},
+    }
+    # Old vanilla, globally normalized and late-tech saves converge; unrelated
+    # ideology slots and all pre-existing save markers survive the conversion.
+    outcomes = []
+    for source in ('vanilla', 'global', 'late'):
+        for global_first in (False, True):
+            state = country()
+            state['igs']['ig_industrialists'].add('ideology_individualist')
+            state['igs']['ig_petty_bourgeoisie'].add('ideology_meritocratic')
+            state['igs']['ig_intelligentsia'].update({'ideology_republican', 'ideology_anti_clerical', 'ideology_anti_slavery'})
+            if source == 'global': run(normalize, state)
+            if source == 'late':
+                state['igs']['ig_industrialists'].discard('ideology_laissez_faire')
+                state['igs']['ig_industrialists'].add('ideology_neoliberism')
+                state['igs']['ig_intelligentsia'].discard('ideology_liberal')
+                state['igs']['ig_intelligentsia'].add('ideology_liberal_modern')
+            untouched = deepcopy(state['igs'])
+            if global_first: run(normalize, state)
+            run(identity, state); run(normalize, state)
+            for group, ideologies in expected.items(): assert state['igs']['ig_' + group] == ideologies, (source, group)
+            baseline = country(); baseline['igs'] = untouched; run(normalize, baseline)
+            for group in ('landowners', 'rural_folk', 'devout', 'trade_unions'):
+                assert state['igs']['ig_' + group] == baseline['igs']['ig_' + group]
+            assert state['vars'] == {'existing_save_marker', name_marker, ideology_marker}
+            assert len(state['names']) == 8 and len(set(state['names'].values())) == 8
+            saved = deepcopy(state); run(identity, state); run(normalize, state); assert state == saved
+            outcomes.append((state['igs'], state['names'], state['vars']))
+    assert all(outcome == outcomes[0] for outcome in outcomes)
+
+    # Native later technological changes still execute, but a national economic
+    # slot is not a default laissez-faire source and must not be overwritten.
+    run(effects['ztr_apply_late_progressist_ideologies'], state)
+    assert 'ideology_ffpa_usa_continental_market' in state['igs']['ig_industrialists']
+    assert 'ideology_neoliberism' not in state['igs']['ig_industrialists']
+    assert 'ideology_neoliberal_progressist' in state['igs']['ig_industrialists']
+    saved = deepcopy(state); run(identity, state); run(normalize, state); assert state == saved
+    # Later events own subsequent changes; monthly recovery is not enforcement.
+    state['names']['ig_devout'] = 'later_name'
+    state['igs']['ig_intelligentsia'] = {'later_ideology'}
+    saved = deepcopy(state); run(identity, state); assert state == saved
+    state['tag'] = 'CAN'; run(identity, state); state['tag'] = 'USA'
+    run(identity, state); assert state == saved
+
+    for marker in (name_marker, ideology_marker):
+        state = country(); state['vars'].add(marker)
+        state['names'] = {'ig_devout': 'existing_name'}
+        before = deepcopy(state); run(identity, state)
+        if marker == name_marker: assert state['names'] == before['names']
+        else: assert state['igs'] == before['igs']
+        assert {name_marker, ideology_marker} <= state['vars']
+    for group in country()['igs']:
+        state = country(); del state['igs'][group]; run(identity, state)
+        assert group not in state['igs'] and group not in state['names']
+    for tag in ('CAN', 'TUR', 'BYZ', 'ZZZGEORGIA'):
+        state = country(tag); before = deepcopy(state); run(identity, state); assert state == before
+    for ideologies in (set(), {'ideology_other_country'}):
+        state = country(); state['igs'] = {g: set(ideologies) for g in state['igs']}
+        before = deepcopy(state['igs']); run(identity, state); assert state['igs'] == before
+    hooks = definitions(ROOT / 'common/on_actions/ffpa_north_american_on_actions.txt')
+    for wrapper in ('ffpa_na_on_country_formed_v1', 'ffpa_usa_charter_monthly_action_v1'):
+        assert one(one(hooks[wrapper], 'effect'), 'ffpa_usa_ensure_identity_v1') == 'yes'
+    print('PASS: USA known sources, eight names/five ideologies, both hook orders, partial old-save markers, foreign/missing groups, no monthly reset and late-tech coexistence.')
+
 
 def existing_contracts():
     ideologies = definitions(ROOT / 'common/ideologies/ffpa_eastern_mediterranean_ideologies.txt')
@@ -246,6 +319,123 @@ def existing_contracts():
     print('PASS: Rhomaic assertions and additive startup/formation/monthly registration.')
 
 
+def usa_definition_checks(roots):
+    from itertools import product
+    from generate_usa_charter_rules import load_laws
+    laws = load_laws([*roots, ROOT])
+    files = gen.source_files([*roots, ROOT])
+    database = {}
+    for rel, (_, _, path) in sorted(files.items(), key=lambda item: (item[1][0], item[0])):
+        category = str(Path(rel).parent)
+        if category not in ('common/government_types', 'common/ideologies', 'common/scripted_effects', 'common/scripted_triggers'): continue
+        for key, body in gen.objects(path.read_text(encoding='utf-8-sig')):
+            assert not key.startswith('INJECT:'), (rel, key)
+            database[category, key.removeprefix('REPLACE:')] = parse(body)[2]
+    ideologies = definitions(ROOT / 'common/ideologies/ffpa_north_american_ideologies.txt')
+    governments = definitions(ROOT / 'common/government_types/00_ffpa_american_governments.txt')
+    assert len(ideologies) == 5 and len(governments) == 7
+    for key, block in ideologies.items():
+        assert database['common/ideologies', key] == block
+        icon = one(block, 'icon').strip('"')
+        assert any((root / icon).exists() for root in roots), icon
+        for group, _, values in entries(block):
+            if not group.startswith('lawgroup_'): continue
+            for law, op, stance in entries(values):
+                assert op == '=' and one(laws[law], 'group') == group, (key, group, law)
+                assert stance in ('strongly_approve', 'approve', 'neutral', 'disapprove', 'strongly_disapprove')
+    liberal = ideologies['ideology_ffpa_usa_civic_liberalism']
+    republican = ideologies['ideology_ffpa_usa_civic_republicanism']
+    assert one(liberal, 'priority') == '100'
+    assert one(one(liberal, 'lawgroup_citizenship'), 'law_multicultural') == 'strongly_approve'
+    assert not fields(republican, 'lawgroup_citizenship')
+    for law in ('law_presidential_republic', 'law_parliamentary_republic'):
+        assert one(one(republican, 'lawgroup_governance_principles'), law) == 'strongly_approve'
+    assert one(one(ideologies['ideology_ffpa_usa_continental_market'], 'lawgroup_trade_policy'), 'law_free_trade') == 'strongly_approve'
+    assert one(one(ideologies['ideology_ffpa_usa_local_constitutionalism'], 'lawgroup_trade_policy'), 'law_free_trade') == 'disapprove'
+
+    # Execute actual possible blocks, using the installed native franchise
+    # trigger and variant parents, rather than assuming single-party = no votes.
+    franchise = database['common/scripted_triggers', 'country_has_voting_franchise']
+    def has_law(active, value):
+        target = value.removeprefix('law_type:')
+        for law in active:
+            while law:
+                if law == target: return True
+                parents = fields(laws[law], 'parent')
+                law = parents[0].removeprefix('law_type:') if parents else None
+        return False
+
+    def possible(block, tag, active, regency=False, domain=False):
+        results = []
+        for key, op, value in entries(block):
+            assert op == '=' or key.startswith('modifier:') and op == '>'
+            if key in ('AND', 'OR', 'NOT', 'NOR'):
+                children = [possible([k, o, v], tag, active, regency, domain) for k, o, v in entries(value)]
+                result = {'AND': all(children), 'OR': any(children), 'NOT': not all(children), 'NOR': not any(children)}[key]
+            elif key == 'country_definition': result = value == 'cd:' + tag
+            elif key == 'has_law_or_variant': result = has_law(active, value)
+            elif key == 'country_has_voting_franchise': result = possible(franchise, tag, active, regency, domain) == (value == 'yes')
+            elif key == 'has_gov_regency': result = regency == (value == 'yes')
+            elif key == 'is_domain_alliance_gov': result = domain == (value == 'yes')
+            elif key == 'text': continue
+            elif key == 'custom_tooltip': result = possible(value, tag, active, regency, domain)
+            elif key.startswith('modifier:'):
+                # Law-only fixtures: no population, event or character modifiers.
+                modifier = key.removeprefix('modifier:')
+                total = sum(float(v) for law in active for block in fields(laws[law], 'modifier') for v in fields(block, modifier))
+                result = total > float(value)
+            else: raise AssertionError(('Unsupported government condition', key))
+            results.append(result)
+        return all(results)
+
+    reached = set()
+    for tag, governance, power, regency, domain in product(
+            ('USA', 'CAN', 'TUR', 'BYZ', 'ZZZGEORGIA'),
+            ('monarchy', 'presidential_republic', 'parliamentary_republic', 'theocracy', 'council_republic', 'corporate_state', 'social_monarchy'),
+            ('autocracy', 'oligarchy', 'landed_voting', 'wealth_voting', 'census_voting', 'universal_suffrage', 'single_party_state', 'technocracy', 'anarchy'),
+            (False, True), (False, True)):
+        active = {'law_' + governance, 'law_' + power}
+        matches = [key for key, block in governments.items() if possible(one(block, 'possible'), tag, active, regency, domain)]
+        assert len(matches) <= 1, (active, matches)
+        if tag != 'USA' or regency or domain or governance not in ('monarchy', 'presidential_republic', 'parliamentary_republic'):
+            assert not matches, (tag, active, matches)
+        elif governance != 'monarchy' and power in ('technocracy', 'single_party_state'):
+            assert not matches, (active, matches)
+        else:
+            assert len(matches) == 1, (active, matches)
+            reached.update(matches)
+            voting = possible(franchise, tag, active)
+            expected = ('imperial_government' if power == 'autocracy' else 'constitutional_cabinet' if voting else 'imperial_cabinet') if governance == 'monarchy' else (
+                ('federal_government' if voting else 'presidential_directorate') if governance == 'presidential_republic' else ('federal_cabinet' if voting else 'congressional_directorate'))
+            assert matches == ['gov_ffpa_usa_' + expected]
+            transfer = 'hereditary' if governance == 'monarchy' else 'dictatorial' if not voting else 'presidential_elective' if governance == 'presidential_republic' else 'parliamentary_elective'
+            block = governments[matches[0]]
+            assert one(block, 'transfer_of_power') == transfer
+            for callback, effect in (('on_government_type_change', 'change_to_'), ('on_post_government_type_change', 'post_change_to_')):
+                assert one(block, callback) == [effect + transfer, '=', 'yes']
+                assert ('common/scripted_effects', effect + transfer) in database
+            if voting and governance != 'monarchy':
+                assert one(block, 'new_leader_on_reform_government') == ('yes' if governance == 'parliamentary_republic' else 'no')
+    assert reached == governments.keys()
+
+    effect = (ROOT / 'common/scripted_effects/ffpa_north_american_identity.txt').read_text()
+    # This is the contract permitting the charter check to isolate this call.
+    assert not re.search(r'\b(?:activate_law|add_modifier|trigger_event|add_journal_entry|set_ig_trait|every_\w+)\s*=', effect)
+    assert set(re.findall(r'set_variable\s*=\s*(\w+)', effect)) == {'ffpa_usa_flavor_names_v1', 'ffpa_usa_flavor_ideologies_v1'}
+    names = set(re.findall(r'set_interest_group_name\s*=\s*(\w+)', effect))
+    required = names | {k + suffix for k in (*ideologies, *governments) for suffix in ('', '_desc')} | {'RULER_TITLE_FFPA_USA_CHAIR'}
+    for lang in ('english', 'simp_chinese'):
+        path = ROOT / f'localization/{lang}/ffpa_north_american_identity_l_{lang}.yml'
+        assert path.read_bytes().startswith(b'\xef\xbb\xbf')
+        keys = re.findall(r'^ (\w+):', path.read_text(encoding='utf-8-sig'), re.M)
+        assert len(keys) == len(required) and set(keys) == required
+        catalog = '\n'.join(p.read_text(encoding='utf-8-sig') for root in [*roots, ROOT] for p in (root / 'localization' / lang).rglob('*.yml'))
+        for block in governments.values():
+            for field in ('male_ruler', 'female_ruler', 'male_heir', 'female_heir'):
+                for title in fields(block, field): assert re.search(r'^\s*' + title.strip('"') + r':', catalog, re.M), title
+    print('PASS: USA final-stack laws/icons/titles, five definitions, 33 bilingual keys and 1,260 government combinations with native callbacks and special-government fallbacks.')
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--game-root', type=Path, required=True)
@@ -254,3 +444,4 @@ if __name__ == '__main__':
     source_checks([args.game_root, *args.upstream])
     script_checks()
     existing_contracts()
+    usa_definition_checks([args.game_root, *args.upstream])

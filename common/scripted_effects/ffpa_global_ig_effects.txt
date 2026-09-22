@@ -88,6 +88,7 @@ ffpa_global_ig_add_laissez_faire = {
 					has_ideology = ideology:ideology_ffpa_tur_state_developmentalism
 					has_ideology = ideology:ideology_ffpa_mediterranean_developmentalism
 					has_ideology = ideology:ideology_neoliberism
+					has_ideology = ideology:ideology_ffpa_usa_continental_market
 				}
 			}
 			ffpa_global_ig_remove_laissez_faire = yes
@@ -125,6 +126,7 @@ ffpa_global_ig_add_reactionary = {
 				OR = {
 					has_ideology = ideology:ideology_ffpa_anatolian_civic_statism
 					has_ideology = ideology:ideology_ffpa_new_rome_civicism
+					has_ideology = ideology:ideology_ffpa_usa_local_constitutionalism
 				}
 			}
 			ffpa_global_ig_remove_reactionary = yes

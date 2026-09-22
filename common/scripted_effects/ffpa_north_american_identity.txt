@@ -1,0 +1,94 @@
+# Country scope. Native IG initialization owns the groups; USA only changes
+# names and known ideology sources once. Formation and old-save recovery share
+# this entry point and never touch the political/charter/economic state machines.
+ffpa_usa_ensure_identity_v1 = {
+	if = {
+		limit = { country_definition = cd:USA }
+		if = {
+			limit = { NOT = { has_variable = ffpa_usa_flavor_names_v1 } }
+			ig:ig_armed_forces ?= { set_interest_group_name = ffpa_ig_usa_federal_forces }
+			ig:ig_industrialists ?= { set_interest_group_name = ffpa_ig_usa_business_consortia }
+			ig:ig_intelligentsia ?= { set_interest_group_name = ffpa_ig_usa_academics }
+			ig:ig_petty_bourgeoisie ?= { set_interest_group_name = ffpa_ig_usa_town_guilds }
+			ig:ig_landowners ?= { set_interest_group_name = ffpa_ig_usa_landed_families }
+			ig:ig_rural_folk ?= { set_interest_group_name = ffpa_ig_usa_farmers }
+			ig:ig_devout ?= { set_interest_group_name = ffpa_ig_usa_church }
+			ig:ig_trade_unions ?= { set_interest_group_name = ffpa_ig_usa_labor_congress }
+			set_variable = ffpa_usa_flavor_names_v1
+		}
+		if = {
+			limit = { NOT = { has_variable = ffpa_usa_flavor_ideologies_v1 } }
+			ig:ig_armed_forces ?= {
+				if = {
+					limit = { has_ideology = ideology:ideology_jingoist }
+					remove_ideology = ideology_jingoist
+					if = {
+						limit = { NOT = { has_ideology = ideology:ideology_ffpa_usa_federal_defense } }
+						add_ideology = ideology_ffpa_usa_federal_defense
+					}
+				}
+			}
+			ig:ig_industrialists ?= {
+				if = {
+					limit = {
+						OR = {
+							ffpa_global_ig_has_laissez_faire = yes
+							has_ideology = ideology:ideology_neoliberism
+						}
+					}
+					ffpa_global_ig_remove_laissez_faire = yes
+					if = {
+						limit = { has_ideology = ideology:ideology_neoliberism }
+						remove_ideology = ideology_neoliberism
+					}
+					if = {
+						limit = { NOT = { has_ideology = ideology:ideology_ffpa_usa_continental_market } }
+						add_ideology = ideology_ffpa_usa_continental_market
+					}
+				}
+			}
+			ig:ig_intelligentsia ?= {
+				if = {
+					limit = { has_ideology = ideology:ideology_republican }
+					remove_ideology = ideology_republican
+					if = {
+						limit = { NOT = { has_ideology = ideology:ideology_ffpa_usa_civic_republicanism } }
+						add_ideology = ideology_ffpa_usa_civic_republicanism
+					}
+				}
+				if = {
+					limit = {
+						OR = {
+							has_ideology = ideology:ideology_liberal
+							has_ideology = ideology:ideology_liberal_modern
+						}
+					}
+					if = {
+						limit = { has_ideology = ideology:ideology_liberal }
+						remove_ideology = ideology_liberal
+					}
+					if = {
+						limit = { has_ideology = ideology:ideology_liberal_modern }
+						remove_ideology = ideology_liberal_modern
+					}
+					if = {
+						limit = { NOT = { has_ideology = ideology:ideology_ffpa_usa_civic_liberalism } }
+						add_ideology = ideology_ffpa_usa_civic_liberalism
+					}
+				}
+			}
+			ig:ig_petty_bourgeoisie ?= {
+				if = {
+					limit = { ffpa_global_ig_has_reactionary = yes }
+					ffpa_global_ig_remove_reactionary = yes
+					if = {
+						limit = { NOT = { has_ideology = ideology:ideology_ffpa_usa_local_constitutionalism } }
+						add_ideology = ideology_ffpa_usa_local_constitutionalism
+					}
+				}
+			}
+			# Missing/foreign sources are deliberately handled, not overwritten later.
+			set_variable = ffpa_usa_flavor_ideologies_v1
+		}
+	}
+}

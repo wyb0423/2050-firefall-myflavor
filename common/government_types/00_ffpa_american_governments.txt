@@ -1,0 +1,154 @@
+# USA names use the native government/transfer callbacks, as in TUR/BYZ.
+# Strict tag and explicit exclusions leave special governments to upstream.
+
+gov_ffpa_usa_federal_government = {
+	transfer_of_power = presidential_elective
+	new_leader_on_reform_government = no
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	possible = {
+		country_definition = cd:USA
+		has_law_or_variant = law_type:law_presidential_republic
+		country_has_voting_franchise = yes
+		NOR = {
+			has_law_or_variant = law_type:law_single_party_state
+			has_law_or_variant = law_type:law_technocracy
+		}
+		has_gov_regency = no
+		is_domain_alliance_gov = no
+	}
+
+	on_government_type_change = { change_to_presidential_elective = yes }
+	on_post_government_type_change = { post_change_to_presidential_elective = yes }
+}
+
+gov_ffpa_usa_federal_cabinet = {
+	transfer_of_power = parliamentary_elective
+	new_leader_on_reform_government = yes
+
+	male_ruler = "RULER_TITLE_PRIME_MINISTER"
+	female_ruler = "RULER_TITLE_PRIME_MINISTER"
+
+	possible = {
+		country_definition = cd:USA
+		has_law_or_variant = law_type:law_parliamentary_republic
+		country_has_voting_franchise = yes
+		NOR = {
+			has_law_or_variant = law_type:law_single_party_state
+			has_law_or_variant = law_type:law_technocracy
+		}
+		has_gov_regency = no
+		is_domain_alliance_gov = no
+	}
+
+	on_government_type_change = { change_to_parliamentary_elective = yes }
+	on_post_government_type_change = { post_change_to_parliamentary_elective = yes }
+}
+
+gov_ffpa_usa_presidential_directorate = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_PRESIDENT"
+	female_ruler = "RULER_TITLE_PRESIDENT"
+
+	possible = {
+		country_definition = cd:USA
+		has_law_or_variant = law_type:law_presidential_republic
+		country_has_voting_franchise = no
+		NOR = {
+			has_law_or_variant = law_type:law_single_party_state
+			has_law_or_variant = law_type:law_technocracy
+		}
+		has_gov_regency = no
+		is_domain_alliance_gov = no
+	}
+
+	on_government_type_change = { change_to_dictatorial = yes }
+	on_post_government_type_change = { post_change_to_dictatorial = yes }
+}
+
+gov_ffpa_usa_congressional_directorate = {
+	transfer_of_power = dictatorial
+
+	male_ruler = "RULER_TITLE_FFPA_USA_CHAIR"
+	female_ruler = "RULER_TITLE_FFPA_USA_CHAIR"
+
+	possible = {
+		country_definition = cd:USA
+		has_law_or_variant = law_type:law_parliamentary_republic
+		country_has_voting_franchise = no
+		NOR = {
+			has_law_or_variant = law_type:law_single_party_state
+			has_law_or_variant = law_type:law_technocracy
+		}
+		has_gov_regency = no
+		is_domain_alliance_gov = no
+	}
+
+	on_government_type_change = { change_to_dictatorial = yes }
+	on_post_government_type_change = { post_change_to_dictatorial = yes }
+}
+
+gov_ffpa_usa_imperial_government = {
+	transfer_of_power = hereditary
+
+	male_ruler = "RULER_TITLE_EMPEROR"
+	female_ruler = "RULER_TITLE_EMPRESS"
+	male_heir = "RULER_TITLE_PRINCE"
+	female_heir = "RULER_TITLE_PRINCESS"
+
+	possible = {
+		country_definition = cd:USA
+		has_law_or_variant = law_type:law_monarchy
+		has_law_or_variant = law_type:law_autocracy
+		has_gov_regency = no
+		is_domain_alliance_gov = no
+	}
+
+	on_government_type_change = { change_to_hereditary = yes }
+	on_post_government_type_change = { post_change_to_hereditary = yes }
+}
+
+gov_ffpa_usa_imperial_cabinet = {
+	transfer_of_power = hereditary
+
+	male_ruler = "RULER_TITLE_EMPEROR"
+	female_ruler = "RULER_TITLE_EMPRESS"
+	male_heir = "RULER_TITLE_PRINCE"
+	female_heir = "RULER_TITLE_PRINCESS"
+
+	possible = {
+		country_definition = cd:USA
+		has_law_or_variant = law_type:law_monarchy
+		country_has_voting_franchise = no
+		NOT = { has_law_or_variant = law_type:law_autocracy }
+		has_gov_regency = no
+		is_domain_alliance_gov = no
+	}
+
+	on_government_type_change = { change_to_hereditary = yes }
+	on_post_government_type_change = { post_change_to_hereditary = yes }
+}
+
+gov_ffpa_usa_constitutional_cabinet = {
+	transfer_of_power = hereditary
+
+	male_ruler = "RULER_TITLE_EMPEROR"
+	female_ruler = "RULER_TITLE_EMPRESS"
+	male_heir = "RULER_TITLE_PRINCE"
+	female_heir = "RULER_TITLE_PRINCESS"
+
+	possible = {
+		country_definition = cd:USA
+		has_law_or_variant = law_type:law_monarchy
+		country_has_voting_franchise = yes
+		NOT = { has_law_or_variant = law_type:law_autocracy }
+		has_gov_regency = no
+		is_domain_alliance_gov = no
+	}
+
+	on_government_type_change = { change_to_hereditary = yes }
+	on_post_government_type_change = { post_change_to_hereditary = yes }
+}

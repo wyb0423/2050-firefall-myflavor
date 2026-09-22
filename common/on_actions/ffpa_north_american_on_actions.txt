@@ -3,6 +3,7 @@
 on_country_formed = { on_actions = { ffpa_na_on_country_formed_v1 ffpa_usa_economy_recovery_v1 ffpa_usa_gov_recovery_v1 } }
 ffpa_na_on_country_formed_v1 = {
  effect = {
+  ffpa_usa_ensure_identity_v1 = yes
   if = {
    # JE activation may initialize the charter before the formation callback.
    limit = { country_definition = cd:USA NOT = { has_variable = ffpa_usa_charter_requested_v1 } }
@@ -57,6 +58,7 @@ ffpa_na_predecessor_journals_monthly_v2 = { effect = { ffpa_na_ensure_predecesso
 ffpa_usa_economy_recovery_v1 = { effect = { ffpa_usa_economy_ensure_v1 = yes } }
 ffpa_usa_charter_monthly_action_v1 = {
  effect = {
+  ffpa_usa_ensure_identity_v1 = yes
   ffpa_usa_ensure_journals_v2 = yes
   ffpa_usa_charter_monthly_v1 = yes
  }

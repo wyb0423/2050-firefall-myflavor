@@ -281,6 +281,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 **所有文件**
 
+- `common/government_types/00_ffpa_american_governments.txt`、`common/ideologies/ffpa_north_american_ideologies.txt`、`common/scripted_effects/ffpa_north_american_identity.txt` 与两份 `ffpa_north_american_identity_l_*.yml` 属于 USA 静态身份和一次性初始化。
 - `common/{journal_entries,scripted_triggers,scripted_effects,script_values,scripted_buttons,scripted_progress_bars,static_modifiers,on_actions,customizable_localization,decisions,scripted_guis}/ffpa_north_american*.txt`（宪章与生成表单独保存，不供东地中海复用）
 - `events/ffpa_north_american_events.txt`、`events/ffpa_american_political_events.txt`、`events/ffpa_american_economic_events.txt`、`events/ffpa_american_governance_events.txt`
 - `localization/{english,simp_chinese}/ffpa_north_american_l_*.yml`、`ffpa_north_american_economy_l_*.yml`、`ffpa_north_american_governance_l_*.yml` 与 `ffpa_usa_charter_rules_l_*.yml`
@@ -289,6 +290,9 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 
 **行为、状态和边界**
 
+- USA 七类政府必须严格限定 `country_definition = cd:USA`，保留对应原生继承／换届回调。普通共和分支排除技术官僚制、一党制，全部分支排除摄政及王室领地联盟；其余治理原则由上游处理，不改国家名或法律。
+- `ffpa_usa_ensure_identity_v1` 仅由既有北美成立回调和 USA 宪章月度包装调用，八个集团改名，四个重点集团分配五项理念；`ffpa_usa_flavor_names_v1`、`ffpa_usa_flavor_ideologies_v1` 是独立的一次性存档标记。仅转换明确存在的通用／现代来源，不覆盖未知国家变体，不重建集团、不改 trait、不发奖、不重播政治或宪章。缺失集团／来源按已处理跳过；月度不强制恢复，离开及返回 USA 不清除／重放既有身份。
+- USA 大陆市场主义与地方宪政主义通过全球生成器的国家优先名单接续；只改名单并生成，不手改生成文件或改写全球理念定义。学院派公民共和主义只拥有治理／权力立场，公民自由主义替换普通与现代自由主义，独占本包的公民权／自由／高等教育立场，避免旧自由主义同时反对多元文化。修改身份须运行 `tests/check_global_ig_positions.py`（含 USA 源引用、1,260 组法律条件和真实脚本子集），另跑本地化与 USA 宪章回归；不等同于引擎政府选择、理念合成或存读档证明。
 - 当前实现《州界之间》《一个更大的共同体》及 `ffpa_na_flavor.1–5`，以及 USA《重新缔结联邦》与 `ffpa_usa_flavor.1–9`（政治会议及宪章）。现已增加 USA《大陆市场》《规模的力量》与 `ffpa_usa_flavor.10–15` 六场经济/公司事件，以及 USA《联邦的承诺》与六场治理事件；教育科研仍不是已实现行为；不得向既有东地中海调度器加入北美业务，也不改变 USA 成立条件或战争目标。
 - USA 政治由自身 JE 月度 pulse 调度；`ffpa_usa_political_stage_v1` 的0–4为已议定数量，四项选择值1/2及完成、serial变量为存档接口。相邻选择六个月冷却，四项齐备且合法性至少40、官僚余额非负连续十二个月完成。延期须经按钮恢复；身份失效中断稳定期并作废事件序号，保留已定制度。
 - `ffpa_usa_ensure_journals_v2` 由建国回调（前身议程清理后）与既有宪章月度包装调用，只给 strict USA 补挂缺失且符合条件的政治／近邻日志；不得重开已完成政治日志、重发奖励或额外推进月数。建国自动宪章入口检查 requested 而非 initialized，允许 JE 先初始化；旧档补挂仍不自动申请宪章。
@@ -330,6 +334,7 @@ Tech & Res 自动生产兼容已经完整迁移到同级 `ffpa-techres-auto-pm-a
 - 八项 `ideology_ffpa_global_ig_*` 对象是存档 ID；只替换指定集团中的已知通用来源，不重建集团、不改 `on_enable`、人口、领袖、特质或法律效果。月度入口仅访问八个固定映射，无人口、州、建筑遍历。
 - `ffpa_global_ig_has_*` / `add_*` / `remove_*` 是 IG scope 身份接续接口；`ffpa_global_ig_ensure_positions_v1` 为 country scope。国家模块通过明确源映射消费接口，不改写全球定义。已知国家专属理念和后期新自由主义优先；无关国家变体不视为默认来源。
 - TUR/BYZ 继续拥有国家理念转换。新增 `ffpa_tur_global_ig_bridge_v1`、`ffpa_byz_global_ig_bridge_v1`、`ffpa_tur_provincial_compact_global_ig_bridge_v1`、`ffpa_byz_imperial_symphonia_global_ig_bridge_v1` 是一次性接续标记；不得清除原迁移标记、猜测路线、重播事件或重发奖励。
+- USA 国家身份由北美模块拥有；全球 helper 只登记 `ideology_ffpa_usa_continental_market`、`ideology_ffpa_usa_local_constitutionalism` 的国家优先关系，不负责分配或推断 USA 路线。
 - 生成器按原版 → CMF → Tech & Res → Firefall 解析同路径遮蔽、`replace_paths` 和普通/REPLACE 顶层对象；有关 INJECT 必须先合并审查，不得静默忽略。兼容副本只改三类精确理念读写命令，源摘要与逆向等价检查保护其余字段。
 - 旗帜模板桶及 `00_code_on_actions.txt` 使用同路径文件遮蔽；原生 `_on_actions.md` 禁止同名入口叠加 effect，不得将其改为额外 effect 块。其余生成对象按同键覆盖，保留上游已有 REPLACE。所有覆盖均在 JSON 清单登记，不手改生成结果。
 - 原版 IG 初始化留给原生机制，随后补挂；俄语专用 `99_ru_custom_loc.txt` 不在英中支持范围。上游更新后运行生成器 `--check` 和新检查，参数均为 `--game-root GAME --upstream CMF --upstream TECHRES --upstream FIREFALL`；人工复核后才重新生成。另跑本地化、东地中海可达性及 TUR 路线身份回归。检查不证明引擎合并、理念优先级、AI 或读档。

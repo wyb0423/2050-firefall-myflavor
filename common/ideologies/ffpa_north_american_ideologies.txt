@@ -1,0 +1,188 @@
+# USA national replacements; allocation belongs to ffpa_usa_ensure_identity_v1.
+# Unchanged stances follow the corresponding native/global source ideologies.
+
+ideology_ffpa_usa_federal_defense = {
+	icon = "gfx/interface/icons/ideology_icons/jingoist.dds"
+	lawgroup_army_model = {
+		law_professional_army = strongly_approve
+		law_mass_conscription = approve
+		law_national_militia = neutral
+		law_peasant_levies = disapprove
+	}
+	lawgroup_colonization = {
+		law_colonial_resettlement = approve
+		law_colonial_exploitation = disapprove
+		law_frontier_colonization = strongly_approve
+		law_no_colonial_affairs = neutral
+	}
+	lawgroup_national_electric_system = {
+		law_no_national_electric_system = disapprove
+		law_national_electric_system = approve
+		law_modern_national_electric_system = approve
+	}
+}
+
+ideology_ffpa_usa_continental_market = {
+	icon = "gfx/interface/icons/ideology_icons/laissez_faire.dds"
+	lawgroup_economic_system = {
+		law_laissez_faire = strongly_approve
+		law_interventionism = approve
+		law_agrarianism = neutral
+		law_traditionalism = disapprove
+		law_cooperative_ownership = strongly_disapprove
+		law_command_economy = strongly_disapprove
+		law_industry_banned = strongly_disapprove
+		law_extraction_economy = strongly_disapprove
+	}
+	lawgroup_trade_policy = {
+		law_free_trade = strongly_approve
+		law_mercantilism = neutral
+		law_protectionism = disapprove
+		law_isolationism = strongly_disapprove
+	}
+	lawgroup_navy_model = {
+		law_merchant_navy = approve
+		law_jeune_ecole = neutral
+		law_professional_navy = disapprove
+		law_diplomatic_navy = neutral
+	}
+	lawgroup_childrens_rights = {
+		law_child_labor_allowed = disapprove
+		law_restricted_child_labor = approve
+		law_compulsory_primary_school = neutral
+	}
+	lawgroup_labor_rights = {
+		law_no_workers_rights = neutral
+		law_regulatory_bodies = approve
+		law_worker_protections = disapprove
+	}
+	lawgroup_land_reform = {
+		law_collectivized_agriculture = strongly_disapprove
+		law_serfdom = disapprove
+		law_tenant_farmers = neutral
+		law_peasant_proprietorship = neutral
+		law_commercialized_agriculture = approve
+	}
+	lawgroup_advanced_education = {
+		law_no_compulsory_secondary_school = disapprove
+		law_compulsory_secondary_school = approve
+		law_public_universities = approve
+	}
+	lawgroup_national_electric_system = {
+		law_no_national_electric_system = disapprove
+		law_national_electric_system = approve
+		law_modern_national_electric_system = approve
+	}
+}
+
+ideology_ffpa_usa_civic_republicanism = {
+	icon = "gfx/interface/icons/ideology_icons/republican.dds"
+	lawgroup_governance_principles = {
+		law_presidential_republic = strongly_approve
+		law_parliamentary_republic = strongly_approve
+		law_corporate_state = neutral
+		law_social_monarchy = disapprove
+		law_monarchy = disapprove
+		law_theocracy = disapprove
+		law_council_republic = disapprove
+	}
+	lawgroup_distribution_of_power = {
+		law_universal_suffrage = strongly_approve
+		law_census_voting = approve
+		law_wealth_voting = approve
+		law_landed_voting = neutral
+		law_single_party_state = disapprove
+		law_technocracy = neutral
+		law_oligarchy = disapprove
+		law_autocracy = disapprove
+		law_anarchy = strongly_disapprove
+	}
+}
+
+ideology_ffpa_usa_civic_liberalism = {
+	icon = "gfx/interface/icons/ideology_icons/liberal.dds"
+	# Preserve the native modern-liberal priority for this replacement slot.
+	priority = 100
+	lawgroup_citizenship = {
+		law_multicultural = strongly_approve
+		law_ethnostate = strongly_disapprove
+		law_national_supremacy = disapprove
+		law_racial_segregation = disapprove
+		law_cultural_exclusion = neutral
+		law_subjecthood = strongly_disapprove
+	}
+	lawgroup_policing = {
+		law_no_police = neutral
+		law_dedicated_police = neutral
+		law_local_police = disapprove
+		law_militarized_police = strongly_disapprove
+	}
+	lawgroup_internal_security = {
+		law_guaranteed_liberties = approve
+		law_national_guard = neutral
+		law_no_home_affairs = neutral
+		law_secret_police = strongly_disapprove
+	}
+	lawgroup_free_speech = {
+		law_protected_speech = strongly_approve
+		law_right_of_assembly = approve
+		law_censorship = neutral
+		law_outlawed_dissent = disapprove
+	}
+	lawgroup_rights_of_women = {
+		law_no_womens_rights = disapprove
+		law_women_own_property = approve
+		law_women_in_the_workplace = approve
+		law_womens_suffrage = approve
+	}
+	lawgroup_advanced_education = {
+		law_no_compulsory_secondary_school = disapprove
+		law_compulsory_secondary_school = approve
+		law_public_universities = strongly_approve
+	}
+}
+
+ideology_ffpa_usa_local_constitutionalism = {
+	icon = "gfx/interface/icons/ideology_icons/reactionary.dds"
+	lawgroup_governance_principles = {
+		law_monarchy = neutral
+		law_theocracy = disapprove
+		law_presidential_republic = approve
+		law_parliamentary_republic = approve
+		law_corporate_state = neutral
+		law_social_monarchy = neutral
+		law_council_republic = disapprove
+	}
+	lawgroup_citizenship = {
+		law_ethnostate = disapprove
+		law_national_supremacy = neutral
+		law_subjecthood = neutral
+		law_racial_segregation = disapprove
+		law_cultural_exclusion = approve
+		law_multicultural = neutral
+	}
+	lawgroup_labour_associations = {
+		law_combination_acts = approve
+		law_guild_system = approve
+		law_anti_strike_laws = neutral
+		law_corporatized_unions = neutral
+		law_right_to_associate = disapprove
+		law_factory_councils = strongly_disapprove
+	}
+	lawgroup_migration = {
+		law_closed_borders = disapprove
+		law_migration_controls = approve
+		law_no_migration_controls = disapprove
+	}
+	lawgroup_bureaucracy = {
+		law_elected_bureaucrats = strongly_approve
+		law_appointed_bureaucrats = neutral
+		law_hereditary_bureaucrats = disapprove
+	}
+	lawgroup_trade_policy = {
+		law_free_trade = disapprove
+		law_mercantilism = neutral
+		law_protectionism = approve
+		law_isolationism = disapprove
+	}
+}
