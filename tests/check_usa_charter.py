@@ -83,6 +83,7 @@ def main():
                 if not taken and (k=='else' or cond(one(v,'limit'))):
                     taken=True;execute([x for a,b,c in entries(v) if a!='limit' for x in (a,b,c)])
             elif k in effects:execute(effects[k])
+            elif k=='hidden_effect':execute(v)
             elif k=='set_variable':
                 if isinstance(v,str):state[v]=1
                 else:

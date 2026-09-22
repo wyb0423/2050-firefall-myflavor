@@ -26,7 +26,7 @@ je_ffpa_na_local_recovery_v1 = {
 # not to the JE's lifetime. Cooldown/peace-pending states remain visible.
 je_ffpa_na_union_agenda_v1 = {
  widget = { gui = "gui/ffpa_usa_journal_presentation.gui" name = "ffpa_usa_ui_union" container = "custom_widget_container_3" }
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ icon = "gfx/interface/icons/event_icons/event_map.dds"
  scripted_button = ffpa_na_union_next_button_v1
  scripted_button = ffpa_na_union_propose_button_v1
  scripted_button = ffpa_na_union_withdraw_button_v1
@@ -43,7 +43,7 @@ je_ffpa_na_union_agenda_v1 = {
 
 je_ffpa_usa_federal_settlement_v1 = {
  widget = { gui = "gui/ffpa_usa_journal_presentation.gui" name = "ffpa_usa_ui_politics" container = "custom_widget_container_3" }
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
  widget = { gui = "gui/ffpa_cmf_progress_bars.gui" name = "ffpa_cmf_progress_bars" container = "com_custom_widget_container_scripted_progress_bars" }
  scripted_progress_bar = ffpa_usa_political_months_bar_v1
  scripted_button = ffpa_usa_political_convene_button_v1

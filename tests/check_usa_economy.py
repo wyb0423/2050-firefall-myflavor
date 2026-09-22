@@ -100,6 +100,7 @@ def main():
                     execute(body(v,'limit'),ctx,prev);taken=True
             elif k in effects:
                 execute(subst(effects[k],{a:c for a,b,c in entries(v)}) if isinstance(v,list) else effects[k],ctx,prev)
+            elif k=='hidden_effect':execute(v,ctx,prev)
             elif k=='set_variable':
                 name=v if isinstance(v,str) else one(v,'name')
                 ctx['variables'][name]=1 if isinstance(v,str) or not fields(v,'value') else value(one(v,'value'),ctx,prev)
@@ -131,7 +132,7 @@ def main():
             elif k=='save_scope_value_as':scopes[one(v,'name')]=value(one(v,'value'),ctx)
             elif k=='save_scope_as':scopes[v]=ctx
             elif k.startswith('je:'):pass  # Progress bar mirrors are not authoritative.
-            elif k in ('name','default_option','ai_chance'):pass
+            elif k in ('name','default_option','ai_chance','custom_tooltip'):pass
             else:raise AssertionError((k,o,v))
 
     def obj(id,**kwargs):return dict(id=id,variables={},expiry={},lists={},modifiers={},**kwargs)

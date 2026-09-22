@@ -24,6 +24,7 @@ types ffpa_usa_journal_widgets {
   textbox = { text = ffpa_usa_ui_market_rules autoresize = yes multiline = yes max_width = 504 }
   icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
   textbox = { text = ffpa_usa_ui_grants autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_ui_grants_tip }
+  textbox = { text = ffpa_usa_ui_market_outcomes autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_ui_market_outcomes_tt }
  }
  type ffpa_usa_ui_industry = vbox {
   spacing = 10
@@ -75,6 +76,7 @@ types ffpa_usa_journal_widgets {
   textbox = { text = ffpa_usa_ui_industry_rules autoresize = yes multiline = yes max_width = 504 }
   icon = { size = { 504 2 } texture = "gfx/interface/dividers/divider_clean.dds" }
   textbox = { text = ffpa_usa_ui_grants autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_ui_grants_tip }
+  textbox = { text = ffpa_usa_ui_industry_outcomes autoresize = yes multiline = yes max_width = 504 tooltip = ffpa_usa_ui_industry_outcomes_tt }
  }
  type ffpa_usa_ui_politics = vbox {
   spacing = 10

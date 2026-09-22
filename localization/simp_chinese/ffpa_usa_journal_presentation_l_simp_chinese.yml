@@ -61,3 +61,7 @@
  ffpa_usa_ui_union_rules: "每轮登记一处目标，期限 #v 10年#!；和平接收同样有效。\n成功冷却 #v 1年#!；撤回、超时或追踪失效冷却 #v 3年#!。"
  ffpa_usa_ui_union_original_reason: "关卡两边的账簿仍记录着相近的货物，地方官署却分别征税、检查证件、解释旧地图。商人希望形成共同市场，主张统一的代表要求共同政府；拥有现成税源和权力的人则有自己的保留。政府可以把其中一处近邻领土列为有限议程，但地图上的主张仍须由实际取得的领土支持。\n\n[ROOT.GetCountry.GetCustom('ffpa_na_union_status_text_v1')]\n\n每次登记一处目标的全部现有省份，期限十年。全部取得后结算，和平接收同样有效；战争或已参与的外交博弈中暂停结算。成功后一年可再议，撤回、超时或无法可靠追踪后冷却三年。接收方案给予实际接收州完整五年奖励。"
  ffpa_usa_ui_union_story: "关卡两边的账簿仍记录着相近的货物，地方官署却分别征税、检查证件、解释旧地图。商人希望形成共同市场，主张统一的代表要求共同政府；拥有现成税源和权力的人则有自己的保留。\n\n政府可以把其中一处#bold 近邻领土#!列为有限议程，但地图上的主张仍须由实际取得的领土支持。\n\n#bold 接收成果#!\n完成后选择共同市场或共同政府；实际接收州获得完整五年奖励。"
+ ffpa_usa_ui_market_outcomes: "#bold 工程成果#!  大陆干线或地方支线 · 悬浮查看"
+ ffpa_usa_ui_market_outcomes_tt: "$ffpa_usa_market_core_reward_tt$\n\n$ffpa_usa_market_branches_reward_tt$"
+ ffpa_usa_ui_industry_outcomes: "#bold 工程成果#!  路线工程与公司政策 · 悬浮查看"
+ ffpa_usa_ui_industry_outcomes_tt: "[JournalEntry.GetCountry.GetCustom('ffpa_usa_industry_route_text_v1')]\n\n#bold 完成时二选一#!\n扩大企业准入：公司上限 +2（永久），公司建造增益 +10个百分点（十年）。\n培育骨干企业：公司吞吐量增益 +10个百分点（永久），公司建造增益 +20个百分点（十年）。\n不会自动成立公司或转移工厂。"
