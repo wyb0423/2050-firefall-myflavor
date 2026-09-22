@@ -1,0 +1,78 @@
+# Country scope. Thresholds are away from legitimacy's 0/100 clamps.
+ffpa_usa_gov_own_bureaucracy_v1 = { value = 0
+ if = { limit = { has_modifier = ffpa_usa_gov_credit_good_v1 } add = 0.08 }
+ if = { limit = { has_modifier = ffpa_usa_gov_credit_warning_v1 } add = 0.04 }
+ if = { limit = { has_modifier = ffpa_usa_gov_credit_penalty_v1 } subtract = 0.15 }
+}
+ffpa_usa_gov_bureaucracy_factor_v1 = { value = 1 add = modifier:country_bureaucracy_mult }
+ffpa_usa_gov_bureaucracy_v1 = { value = bureaucracy
+ if = { limit = { ffpa_usa_gov_bureaucracy_factor_v1 > 0 }
+  subtract = { value = produced_bureaucracy divide = ffpa_usa_gov_bureaucracy_factor_v1 multiply = ffpa_usa_gov_own_bureaucracy_v1 }
+ }
+ # A nonpositive total output multiplier cannot be inverted. Treat as administrative stress.
+ else = { max = -1 }
+}
+ffpa_usa_gov_legitimacy_v1 = { value = government_legitimacy
+ if = { limit = { has_modifier = ffpa_usa_gov_credit_good_v1 } subtract = 5 }
+ if = { limit = { has_modifier = ffpa_usa_gov_credit_warning_v1 } subtract = 2 }
+ if = { limit = { has_modifier = ffpa_usa_gov_credit_penalty_v1 } add = 15 }
+}
+ffpa_usa_gov_turmoil_v1 = { value = 0
+ if = { limit = { ffpa_usa_mainland_population_v1 > 0 }
+  every_scope_state = { limit = { ffpa_na_is_mainland_state_v1 = yes turmoil >= 0.3 } add = state_population }
+  divide = ffpa_usa_mainland_population_v1 multiply = 100
+ }
+}
+ffpa_usa_gov_low_employment_v1 = { value = 100
+ if = { limit = { ffpa_usa_industry_levels_v1 > 0 }
+  value = 0
+  every_scope_state = { limit = { ffpa_na_is_mainland_state_v1 = yes } every_scope_building = { limit = { ffpa_usa_manufacturing_building_v1 = yes level > 0 occupancy < 0.65 } add = this.level } }
+  divide = ffpa_usa_industry_levels_v1 multiply = 100
+ }
+}
+ffpa_usa_gov_credit_change_v1 = { value = 0
+ if = { limit = { ffpa_usa_gov_legitimacy_v1 >= 50 ffpa_usa_gov_bureaucracy_v1 >= 0 } add = { value = 0.5 desc = ffpa_usa_gov_factor_stable_v1 } }
+ if = { limit = { ffpa_usa_gov_legitimacy_v1 < 30 } subtract = { value = 1 desc = ffpa_usa_gov_factor_legitimacy_v1 } }
+ if = { limit = { ffpa_usa_gov_bureaucracy_v1 < 0 } subtract = { value = 1 desc = ffpa_usa_gov_factor_bureaucracy_v1 } }
+ if = { limit = { ffpa_usa_gov_turmoil_v1 >= 25 } subtract = { value = 1 desc = ffpa_usa_gov_factor_turmoil_v1 } }
+ if = { limit = { var:ffpa_usa_political_oversight_v1 = 1 } add = { value = 0.25 desc = ffpa_usa_gov_factor_oversight_v1 } }
+ min = -3 max = 2
+ if = { limit = { has_variable = ffpa_usa_gov_review_left_v1 var:ffpa_usa_gov_review_left_v1 > 0 }
+  if = { limit = { var:ffpa_usa_political_representation_v1 = 2 } add = { value = 1.25 desc = ffpa_usa_gov_factor_review_v1 } }
+  else = { add = { value = 1 desc = ffpa_usa_gov_factor_review_v1 } }
+ }
+}
+ffpa_usa_gov_risk_change_v1 = { value = 0
+ # scaled_debt is the native debt/credit accessor, with no script-side division.
+ if = { limit = { OR = { in_default = yes scaled_debt >= 0.9 } } add = { value = 1.5 desc = ffpa_usa_gov_factor_debt_high_v1 } }
+ else_if = { limit = { scaled_debt >= 0.6 } add = { value = 0.5 desc = ffpa_usa_gov_factor_debt_v1 } }
+ if = { limit = { ffpa_usa_gov_low_employment_v1 >= 35 }
+  if = { limit = { has_variable = ffpa_usa_gov_relief_left_v1 var:ffpa_usa_gov_relief_left_v1 > 0 } add = { value = 0.5 desc = ffpa_usa_gov_factor_jobs_relief_v1 } }
+  else = { add = { value = 1 desc = ffpa_usa_gov_factor_jobs_v1 } }
+ }
+ if = { limit = { var:ffpa_usa_gov_sol_falling_v1 >= 3 }
+  if = { limit = { has_variable = ffpa_usa_gov_relief_left_v1 var:ffpa_usa_gov_relief_left_v1 > 0 } add = { value = 0.25 desc = ffpa_usa_gov_factor_sol_relief_v1 } }
+  else = { add = { value = 0.5 desc = ffpa_usa_gov_factor_sol_v1 } }
+ }
+ if = { limit = { in_default = no scaled_debt < 0.4 ffpa_usa_gov_low_employment_v1 <= 20 var:ffpa_usa_gov_sol_falling_v1 < 3 } subtract = { value = 1 desc = ffpa_usa_gov_factor_recovery_v1 } }
+ min = -2 max = 3
+}
+ffpa_usa_gov_conference_cost_v1 = { value = gdp multiply = .0025 divide = 52 }
+ffpa_usa_gov_credit_line_cost_v1 = { value = gdp multiply = .005 divide = 52 }
+ffpa_usa_gov_relief_cost_v1 = { value = gdp multiply = .0075 divide = 52 }
+ffpa_usa_gov_total_cost_v1 = { value = 0
+ if = { limit = { has_variable = ffpa_usa_gov_conference_weekly_v1 has_modifier = ffpa_usa_gov_conference_grant_v1 } add = var:ffpa_usa_gov_conference_weekly_v1 }
+ if = { limit = { has_variable = ffpa_usa_gov_credit_line_weekly_v1 has_modifier = ffpa_usa_gov_credit_line_grant_v1 } add = var:ffpa_usa_gov_credit_line_weekly_v1 }
+ if = { limit = { has_variable = ffpa_usa_gov_relief_weekly_v1 has_modifier = ffpa_usa_gov_relief_grant_v1 } add = var:ffpa_usa_gov_relief_weekly_v1 }
+}
+ffpa_usa_gov_credit_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_credit_v1 } value = var:ffpa_usa_gov_credit_v1 } }
+ffpa_usa_gov_risk_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_risk_v1 } value = var:ffpa_usa_gov_risk_v1 } }
+ffpa_usa_gov_credit_grace_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_credit_grace_v1 } value = var:ffpa_usa_gov_credit_grace_v1 } }
+ffpa_usa_gov_risk_grace_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_risk_grace_v1 } value = var:ffpa_usa_gov_risk_grace_v1 } }
+ffpa_usa_gov_credit_crisis_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_credit_crisis_v1 } value = var:ffpa_usa_gov_credit_crisis_v1 } }
+ffpa_usa_gov_risk_crisis_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_risk_crisis_v1 } value = var:ffpa_usa_gov_risk_crisis_v1 } }
+ffpa_usa_gov_credit_repair_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_credit_repair_v1 } value = var:ffpa_usa_gov_credit_repair_v1 } }
+ffpa_usa_gov_risk_repair_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_risk_repair_v1 } value = var:ffpa_usa_gov_risk_repair_v1 } }
+ffpa_usa_gov_sol_current_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_sol_current_v1 } value = var:ffpa_usa_gov_sol_current_v1 } }
+ffpa_usa_gov_sol_history_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_sol_history_v1 } value = var:ffpa_usa_gov_sol_history_v1 } }
+ffpa_usa_gov_sol_falling_display_v1 = { value = 0 if = { limit = { has_variable = ffpa_usa_gov_sol_falling_v1 } value = var:ffpa_usa_gov_sol_falling_v1 } }

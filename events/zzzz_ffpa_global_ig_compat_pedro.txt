@@ -1,0 +1,216 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = pedro
+
+# Source: game/events/brazil/pedro_brazil_events.txt :: pedro.2
+pedro.2 = {
+	type = country_event
+	placement = ROOT
+
+	title = pedro.2.t
+	desc = pedro.2.d
+	flavor = {
+		first_valid = {
+			triggered_desc = {
+				desc = pedro.2.f
+				trigger = {
+					has_law_or_variant = law_type:law_slavery_banned
+				}
+			}
+			triggered_desc = {
+				desc = pedro.2.f2
+				trigger = {
+					always = yes
+				}
+			}
+		}
+	}
+
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_default.dds"
+
+	duration = 3
+
+	dlc = dlc008
+
+	trigger = {
+		 # triggered by je_pedro_brazil
+		 root.var:pedropoints <= 2
+		 ig:ig_landowners ?= {
+            ig_approval <= unhappy
+		 }
+		 NOT = { has_variable = pedro_landowner_republicans }
+	}
+
+	immediate = {
+		set_variable = pedro_landowner_republicans
+		ruler = {
+			save_scope_as = pedro_scope
+		}
+		ig:ig_landowners ?= {
+			save_scope_as = landowners_scope
+			leader = {
+				save_scope_as = landowner_leader
+			}
+		}
+		i:ideology_republican_paternalistic = {
+			save_scope_as = elitist_scope
+		}
+	}
+
+	option = {
+		name = pedro.2.a
+		default_option = yes
+		ig:ig_landowners ?= {
+			add_ideology = ideology_republican_paternalistic
+			ffpa_global_ig_remove_paternalistic = yes
+		}
+	}
+}
+
+# Source: game/events/brazil/pedro_brazil_events.txt :: pedro.8
+pedro.8 = {
+	type = country_event
+	placement = ROOT
+
+	title = pedro.8.t
+	desc = pedro.8.d
+	flavor = pedro.8.f
+
+	event_image = {
+		video = "southamerica_aristocrats"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/event_fire.dds"
+
+	duration = 3
+
+	dlc = dlc008
+
+	trigger = {
+		# triggered by je_pedro_brazil
+	}
+
+	immediate = {
+		ig:ig_armed_forces ?= {
+			save_scope_as = armed_forces_ig
+		}
+		ig:ig_landowners ?= {
+			save_scope_as = landowners_ig
+		}
+		ruler = {
+			save_scope_as = pedro_scope
+		}
+		ROOT = {
+			save_scope_as = brazil_scope
+		}
+		set_variable = { name = pedro_republican_coup years = 5 }
+		if = {
+			limit = {
+				any_country = {
+					has_journal_entry = je_portugal_united_kingdom
+					any_scope_treaty = {
+						binds = ROOT
+						any_scope_article = {
+							has_type = amend_succession
+						}
+					}
+				}
+			}
+			random_country = {
+				limit = {
+					has_journal_entry = je_portugal_united_kingdom
+					any_scope_treaty = {
+						binds = ROOT
+						any_scope_article = {
+							has_type = amend_succession
+						}
+					}
+				}
+				trigger_event = { id = lusofonia.4 popup = yes }
+			}
+		}
+		if = {
+			limit = {
+				NOT = { has_law = law_type:law_landed_voting }
+			}
+			activate_law = law_type:law_landed_voting
+		}
+		activate_law = law_type:law_presidential_republic
+	}
+
+	option = {
+		name = pedro.8.a
+		default_option = yes
+		hidden_effect = {
+			ig:ig_landowners ?= {
+				ffpa_global_ig_remove_hierarchic = yes
+				add_ideology = ideology_oligarchic
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_landowners ?= {
+					is_in_government = no
+					ig_counts_as_marginal = no
+				}
+			}
+			ig:ig_landowners ?= {
+				add_ruling_interest_group = yes
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					is_in_government = no
+					ig_counts_as_marginal = no
+				}
+			}
+			ig:ig_armed_forces ?= {
+				add_ruling_interest_group = yes
+			}
+		}
+		if = {
+			limit = {
+				ig:ig_armed_forces ?= {
+					ig_counts_as_marginal = no
+				}
+			}
+			ig:ig_armed_forces ?= {
+				leader = {
+					set_character_as_ruler = yes
+				}
+			}
+		}
+		else = {
+			ig:ig_landowners ?= {
+				leader = {
+					set_character_as_ruler = yes
+				}
+			}
+		}
+		add_radicals = {
+			value = large_radicals
+		}
+		every_country = {
+			limit = {
+				NOT = {
+					THIS = ROOT
+				}
+				has_interest_marker_in_region = sr:region_brazil
+			}
+			post_notification = brz_brazil_coup
+		}
+		set_variable = {
+			name = abolishing_monarchy_var
+			value = 0
+		}
+		add_journal_entry = { type = je_abolish_monarchy }
+	}
+}

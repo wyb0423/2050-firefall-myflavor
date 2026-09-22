@@ -1,0 +1,789 @@
+{
+  "sources": [
+    {
+      "name": "Victoria 3",
+      "version": "1.13.11 (Matcha)"
+    },
+    {
+      "name": "[1.13] Community Mod Framework",
+      "id": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "version": "1.65.0"
+    },
+    {
+      "name": "[1.13] Tech & Res",
+      "id": "tech.res",
+      "version": "1.6'"
+    },
+    {
+      "name": "2050: The Fire Falls",
+      "id": "alter_time_2050_fire_falls",
+      "version": "0.1.1"
+    }
+  ],
+  "objects": [
+    {
+      "output": "common/amendments/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/amendments/00_amendments_enactment_04.txt",
+      "key": "amendment_cult_of_personality",
+      "source_sha256": "492c258f6b9f173c53aac5831ac881e67f370d539a238439b18647db16536b15",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/amendments/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/amendments/00_amendments_enactment_04.txt",
+      "key": "amendment_degenerate_art",
+      "source_sha256": "7136a2d4f62436494544359673c182258e5590af30c309ff239d5b7c4365c74d",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/amendments/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/amendments/00_amendments_enactment_04.txt",
+      "key": "amendment_secular_school_system",
+      "source_sha256": "314a3b83bfa312899ad25bd7c265faa6ccd439704fe8cdf768a345f325039646",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/amendments/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/amendments/00_amendments_enactment_04.txt",
+      "key": "amendment_short_term_tax_cuts",
+      "source_sha256": "3765747934df5f84f8622e869bf56ff659958e9da6c77d6fb32856846eab0bde",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/amendments/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/amendments/00_amendments_enactment_04.txt",
+      "key": "amendment_sovereign_of_the_nation",
+      "source_sha256": "783e3a47affb7861f82071297876cf3c19baf9ae3735073ab7be5461336ef06e",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/amendments/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/amendments/00_amendments_enactment_04.txt",
+      "key": "amendment_state_anti_clericalism",
+      "source_sha256": "7b6fdbf530181a567247b2bfdb1f87522627076d63aae1b7de1fb772a0dae00b",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/amendments/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/amendments/00_amendments_enactment_04.txt",
+      "key": "amendment_veterans_pensions",
+      "source_sha256": "d5a5ee56b6fcffd235f5f1bceef5fbe2e9391415cb009613f9f091df056fedef",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/decisions/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/decisions/00_decisions.txt",
+      "key": "establish_pact_with_nafusis",
+      "source_sha256": "c3abbc4b28e6e1006b0517bbbec3ec74d2e8945771e7b153af68927c2d097fc5",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "common/journal_entries/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/journal_entries/00_meiji_restoration.txt",
+      "key": "je_meiji_restoration",
+      "source_sha256": "2fa81e6d54cd488c120a9e40858aa4fc34de1c65cf21f7df959f9fe1e9d1f8f6",
+      "commands": {
+        "add_ideology": 1
+      }
+    },
+    {
+      "output": "common/journal_entries/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/journal_entries/00_peoples_springtime_je.txt",
+      "key": "je_red_summer",
+      "source_sha256": "74dd3d35b636923a9e658d79a79e1b128e471e9bbd30390d708db71fbf9982ee",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/journal_entries/zzzz_ffpa_global_ig_compat.txt",
+      "source": "tech.res",
+      "file": "common/journal_entries/ztr_je_russia_soviet.txt",
+      "key": "ztr_je_russian_absolutism",
+      "source_sha256": "818585cbdc07ec652a94a43da5175aed1bb52fc6df9efdf2faf3850b82ffeae3",
+      "commands": {
+        "has_ideology": 2,
+        "add_ideology": 2
+      }
+    },
+    {
+      "output": "common/parties/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/parties/agrarian_party.txt",
+      "key": "agrarian_party",
+      "source_sha256": "b4172ff8069542a7c1eb05f86c04cc36fe091b67b6d1110ed520c27c3244b063",
+      "commands": {
+        "has_ideology": 6
+      }
+    },
+    {
+      "output": "common/parties/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/parties/anarchist_party.txt",
+      "key": "anarchist_party",
+      "source_sha256": "a4645e66dcad5941d9c187e5ff8b170db8f706f0c2a50d521cd6b4fd5e2471dc",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/parties/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/parties/communist_party.txt",
+      "key": "communist_party",
+      "source_sha256": "a2518cac6cb6d5c0c3105a7aa7e9c2bebd588348bb4dc37259ae28eea4ff0427",
+      "commands": {
+        "has_ideology": 3
+      }
+    },
+    {
+      "output": "common/parties/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/parties/conservative_party.txt",
+      "key": "conservative_party",
+      "source_sha256": "3b8b9ae13be0deec93a6ab9902cecf054c55827358bbe3e93a2c76ed329149e7",
+      "commands": {
+        "has_ideology": 12
+      }
+    },
+    {
+      "output": "common/parties/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/parties/fascist_party.txt",
+      "key": "fascist_party",
+      "source_sha256": "d82764cfa2e27a8af68887e7e4d172b48cb8d231cbf90ac169487c357d595567",
+      "commands": {
+        "has_ideology": 4
+      }
+    },
+    {
+      "output": "common/parties/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/parties/free_trade_party.txt",
+      "key": "free_trade_party",
+      "source_sha256": "f013cdd9d9400e6d7952ec2032c5b7bdebeae0a0c1c1a7c0af6ac87d39b60f1c",
+      "commands": {
+        "has_ideology": 8
+      }
+    },
+    {
+      "output": "common/parties/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/parties/liberal_party.txt",
+      "key": "liberal_party",
+      "source_sha256": "b2f9fe93cd3e6681f398151ebb1cc05b7f8847590b13f42bb7533a4ca4f6ffaa",
+      "commands": {
+        "has_ideology": 4
+      }
+    },
+    {
+      "output": "common/parties/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/parties/military_party.txt",
+      "key": "military_party",
+      "source_sha256": "acdec85c5ad86a69f3ac0bd62bfa12ba2a44d620c7293270a6acbed945fb9136",
+      "commands": {
+        "has_ideology": 4
+      }
+    },
+    {
+      "output": "common/parties/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/parties/radical_party.txt",
+      "key": "radical_party",
+      "source_sha256": "928af04618057ae101d82de8ae9a43fa1e91c29abd1cc92f6a88db452f685bce",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/parties/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/parties/social_democrats_party.txt",
+      "key": "social_democrat_party",
+      "source_sha256": "71ed150b09296da99a1ed81916994a6bc40ea08dbceb75181b5dd8a88179c080",
+      "commands": {
+        "has_ideology": 7
+      }
+    },
+    {
+      "output": "common/political_lobbies/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/political_lobbies/00_political_lobbies.txt",
+      "key": "lobby_anti_country",
+      "source_sha256": "0aa237b234d06fa11a4718417e9fc41ab745b23e3d8296a2f56661134edc93fa",
+      "commands": {
+        "has_ideology": 7
+      }
+    },
+    {
+      "output": "common/political_lobbies/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/political_lobbies/00_political_lobbies.txt",
+      "key": "lobby_anti_overlord",
+      "source_sha256": "a309861225c3151457aaf593a4d8f7aeaabd642e14960e65bde79ba53dbba252",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/political_lobbies/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/political_lobbies/00_political_lobbies.txt",
+      "key": "lobby_pro_country",
+      "source_sha256": "9578aa9ac7e0e5bad8d9490c0ed99509b9b78fbe7ad7bba6474d91a8c15d20ab",
+      "commands": {
+        "has_ideology": 4
+      }
+    },
+    {
+      "output": "common/political_lobbies/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/political_lobbies/00_political_lobbies.txt",
+      "key": "lobby_pro_overlord",
+      "source_sha256": "120f5ce727755accd54996679ac5442ae43b7778022a5b8af66d75bf9c255af6",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/political_movements/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/political_movements/ycom_00_ideological_movements.txt",
+      "key": "movement_reactionary",
+      "source_sha256": "3e338ad076d120625c2c85423dfd62f89ab024decefc23619b90df54a1786762",
+      "commands": {
+        "has_ideology": 3
+      }
+    },
+    {
+      "output": "common/scripted_effects/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/scripted_effects/00_victoria_scripted_effects.txt",
+      "key": "calculate_national_identity_progress",
+      "source_sha256": "db15c24497006ac9c9cc4972add090753c829cd72c931184ab258a7b2bdac316",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/scripted_effects/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/scripted_effects/00_victoria_scripted_effects.txt",
+      "key": "india_independence_ig_effects",
+      "source_sha256": "aa1a7ebae2d5298537200d7c6957493ddec9239cc5b388bb42a1410f4eb02162",
+      "commands": {
+        "add_ideology": 3,
+        "has_ideology": 2,
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "common/scripted_effects/zzzz_ffpa_global_ig_compat.txt",
+      "source": "alter_time_2050_fire_falls",
+      "file": "common/scripted_effects/ztr_main_scripts.txt",
+      "key": "ztr_apply_late_progressist_ideologies",
+      "source_sha256": "2a7d9b803d92cd5744d827ed87611465edcae60321791a7915d60f3c9f579a9d",
+      "commands": {
+        "has_ideology": 1,
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "common/scripted_progress_bars/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/scripted_progress_bars/00_victoria_progress_bars.txt",
+      "key": "fascism_progress_bar",
+      "source_sha256": "4ca542a1132078a4a73decd549a8de20850f6f7d5febab1a35d7ed71237d5677",
+      "commands": {
+        "has_ideology": 2
+      }
+    },
+    {
+      "output": "common/scripted_progress_bars/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/scripted_progress_bars/00_victoria_progress_bars.txt",
+      "key": "red_summer_counter_revolution_progress_bar",
+      "source_sha256": "c4c94cf62ec760ed71863947ab5e94bfc6e1d9078770ebcc5087881ea4fab3b7",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/scripted_triggers/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/scripted_triggers/00_scripted_triggers.txt",
+      "key": "has_hierarchic_ideology",
+      "source_sha256": "fb64172fe993f719b53020b339913f1938068325385a688dfdab0a825e099e09",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/scripted_triggers/zzzz_ffpa_global_ig_compat.txt",
+      "source": "com.github.Victoria-3-Modding-Co-op.Community-Mod-Framework",
+      "file": "common/scripted_triggers/ycom_ideology_trigger_overrides.txt",
+      "key": "has_paternalist_ideology",
+      "source_sha256": "3fc87faf4dc64cdd309fe56c5bd01df9d4218e3c2e422b87217c6e539b429406",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/scripted_triggers/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/scripted_triggers/00_scripted_triggers.txt",
+      "key": "ig_is_reactionary",
+      "source_sha256": "cc4746914686aab1c70ff675f22c4c48a241462d9a7c020a557674523d12a022",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/scripted_triggers/zzzz_ffpa_global_ig_compat.txt",
+      "source": "game",
+      "file": "common/scripted_triggers/00_ip3_victoria_scripted_triggers.txt",
+      "key": "red_summer_radical_victory_trigger",
+      "source_sha256": "992e072e8118d4a4323ac06d37cb4c42add56ea8ad295609546e09e5302aa41a",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_1848.txt",
+      "source": "game",
+      "file": "events/1848.txt",
+      "key": "1848.2",
+      "source_sha256": "b328652f1fcfcb1234a26e3e2eb07a36ccf2921e1f7580164556ea0559c03b0f",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_BRZ_populism.txt",
+      "source": "game",
+      "file": "events/brazil/vargas.txt",
+      "key": "BRZ_populism.1",
+      "source_sha256": "16d2a175fe560865e49eba7db9c1b3210538b21fd73a87437705128628465f6e",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_agitators_law_events.txt",
+      "source": "game",
+      "file": "events/agitators_events/agitators_law_events.txt",
+      "key": "agitators_law_events.3",
+      "source_sha256": "efa67f0ae4a931187ca470e87b0038b28e0be294af589032afb039080a9dec57",
+      "commands": {
+        "has_ideology": 4
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_alk_breakup.txt",
+      "source": "game",
+      "file": "events/dei_breakup.txt",
+      "key": "alk_breakup.1",
+      "source_sha256": "2d1772ad2b043a384a94b39243dfed45498ad1505a5a9bd6ae9938b1472c7581",
+      "commands": {
+        "add_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_anarchy.txt",
+      "source": "game",
+      "file": "events/law_events/anarchy_law.txt",
+      "key": "anarchy.1",
+      "source_sha256": "667b7fd0eb7f813ca581ff4a58e672667cda361f61a357e0d97080aa0abe6985",
+      "commands": {
+        "has_ideology": 4
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_austria_events.txt",
+      "source": "game",
+      "file": "events/balkans_events/04_ip3_austria_events.txt",
+      "key": "austria_events.40",
+      "source_sha256": "abefa2bfe246bf7b921d09e62f40a850ee801590dd69f9180fc844c111fb1dd3",
+      "commands": {
+        "remove_ideology": 2
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_bp1_misc.txt",
+      "source": "game",
+      "file": "events/brazil/misc_events.txt",
+      "key": "bp1_misc.3",
+      "source_sha256": "56d2dab52ba75271bc5bd8362ef345ef25c2ec07a8e0687f2bb4b3b97ae9d294",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_colonial_administration_events.txt",
+      "source": "game",
+      "file": "events/colonial_administration_events.txt",
+      "key": "colonial_administration_events.1",
+      "source_sha256": "70ae8524f95dc9682052b2f79e448133350e2eaeccf7fc383872428ffc21d2b6",
+      "commands": {
+        "has_ideology": 3,
+        "remove_ideology": 3
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_communism.txt",
+      "source": "game",
+      "file": "events/communism.txt",
+      "key": "communism.8",
+      "source_sha256": "d95678ebe0911ceacc4f452c20d856e4a3ac41a42ba652c0df3f71b809668ef2",
+      "commands": {
+        "add_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_dei_breakup.txt",
+      "source": "game",
+      "file": "events/dei_breakup.txt",
+      "key": "dei_breakup.1",
+      "source_sha256": "259171663675f062c60c473e79103be93ef183e3ddd1928a137175bd5b3a675d",
+      "commands": {
+        "add_ideology": 2
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_famine_events.txt",
+      "source": "game",
+      "file": "events/major_famine_events.txt",
+      "key": "famine_events.3",
+      "source_sha256": "ba132313da0158e660c244e6c039a89b3cab6f0b6b918d18846b2f4f9b675d44",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_fsa_events.txt",
+      "source": "game",
+      "file": "events/american_civil_war/00_fsa_events.txt",
+      "key": "fsa_events.1",
+      "source_sha256": "15491cac30e8831ebce6f9a7bde4af96ff79fecb5f3797b23edbff5de296feff",
+      "commands": {
+        "has_ideology": 2
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_hawaii_events.txt",
+      "source": "game",
+      "file": "events/hawaii_events.txt",
+      "key": "hawaii_events.2",
+      "source_sha256": "5bd35eb638990b88df66188b37313c9ce78a6a81645f8c4c0c2578dc47c0b51f",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_heavenly.txt",
+      "source": "game",
+      "file": "events/heavenly_kingdom_events.txt",
+      "key": "heavenly.4",
+      "source_sha256": "fa75c69ce2733876c1221c6e4174a20d2565ac848079c7f34d3086a664bb7467",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_india_events.txt",
+      "source": "game",
+      "file": "events/india_events/india_misc_events.txt",
+      "key": "india_events.4",
+      "source_sha256": "04023fb810588945f4d3dc76cfb3ae3f73d3bbc005546ce2bc18ec854731de71",
+      "commands": {
+        "has_ideology": 2
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_india_home_rule_events.txt",
+      "source": "game",
+      "file": "events/india_events/india_home_rule_events.txt",
+      "key": "india_home_rule_events.6",
+      "source_sha256": "3ee4ab5c8ab312ff0a5e454d02cc8ab131188d8d5310e70456d99c8c94968f49",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_italian_unification.txt",
+      "source": "game",
+      "file": "events/italian_unification.txt",
+      "key": "italian_unification.10",
+      "source_sha256": "df753280d6862708043b57dd20f26ff80a182e02b1c4838b489473e9dc3316c1",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_lobby_events.txt",
+      "source": "game",
+      "file": "events/soi_events/00_lobbies_events_04.txt",
+      "key": "lobby_events.13",
+      "source_sha256": "39a3d0ec26d143ab62b2ce2e37f9ebfdfd705646040f97db4c756e58d0222a8d",
+      "commands": {
+        "has_ideology": 3
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_lobby_events.txt",
+      "source": "game",
+      "file": "events/soi_events/00_lobbies_events_04.txt",
+      "key": "lobby_events.15",
+      "source_sha256": "1a6bc603e8660d071d9f88b22b30275cecff5e60f526a54c99b398eb5dc79eab",
+      "commands": {
+        "has_ideology": 4
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_meiji.txt",
+      "source": "game",
+      "file": "events/meiji_restoration.txt",
+      "key": "meiji.1",
+      "source_sha256": "bb0615a50b80ceca7f85fd0d9e4434964ce6b7c721bbed65050d362c3d08b16b",
+      "commands": {
+        "add_ideology": 3
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_mon_state_formation.txt",
+      "source": "game",
+      "file": "events/balkans_events/montenegro_events.txt",
+      "key": "mon_state_formation.17",
+      "source_sha256": "48732fb9b1369da80c643a142d85b8ae1a34bf48b98bb170f6004c1bb0e529f9",
+      "commands": {
+        "add_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_paris_commune.txt",
+      "source": "game",
+      "file": "events/agitators_events/paris_commune_events.txt",
+      "key": "paris_commune.1",
+      "source_sha256": "7b704fdfadbe9d20bf599648cd9919cef37dc1c1fbb7c649b63c8c215d680d51",
+      "commands": {
+        "add_ideology": 1,
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_paris_commune.txt",
+      "source": "game",
+      "file": "events/agitators_events/paris_commune_events.txt",
+      "key": "paris_commune.3",
+      "source_sha256": "9d6a2803e4000f992c539980d22acf70d8c90cc3ef194b86691176b6ae8c78c5",
+      "commands": {
+        "add_ideology": 2,
+        "remove_ideology": 2
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_pedro.txt",
+      "source": "game",
+      "file": "events/brazil/pedro_brazil_events.txt",
+      "key": "pedro.2",
+      "source_sha256": "5e2a0c04b4f858be351fe36887632b3838e2521101ae7cae2279e92dcf5116b4",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_pedro.txt",
+      "source": "game",
+      "file": "events/brazil/pedro_brazil_events.txt",
+      "key": "pedro.8",
+      "source_sha256": "1bdce0d6bb602d3408e37e76590989fdec63cfff19bc9fae79b43e4f15848b1c",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_peoples_springtime.txt",
+      "source": "game",
+      "file": "events/peoples_springtime.txt",
+      "key": "peoples_springtime.7",
+      "source_sha256": "16409daa15846abf791030ece96da7e05034c23f6cf851a76b85924910b2a334",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_plague.txt",
+      "source": "game",
+      "file": "events/spanish_flu_events.txt",
+      "key": "plague.9",
+      "source_sha256": "f8928c3872e5462c61573ec32ea331b68dc569f94123e46f75173407d9b5980a",
+      "commands": {
+        "has_ideology": 2
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_princely_state_creation.txt",
+      "source": "game",
+      "file": "events/india_events/princely_state_creation.txt",
+      "key": "princely_state_creation.4",
+      "source_sha256": "9dd97d88e6c25f8afc4c35a75cab5e5c3e1d93c9af90a0757a4ca85f9287d401",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_red_scare.txt",
+      "source": "game",
+      "file": "events/red_scare_events.txt",
+      "key": "red_scare.1",
+      "source_sha256": "21361312bb8447e8980f94a9b9881283d3328faf31738a9164dce9c7aa740238",
+      "commands": {
+        "has_ideology": 2
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_red_scare.txt",
+      "source": "game",
+      "file": "events/red_scare_events.txt",
+      "key": "red_scare.20",
+      "source_sha256": "74b1fb01f239dd7384c2e839a74b9d3d48b96a2cd016a7ea7ea2e23ab3da3e36",
+      "commands": {
+        "has_ideology": 4
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_russian_central_asia.txt",
+      "source": "game",
+      "file": "events/soi_events/00_ep1_kazakh_events.txt",
+      "key": "russian_central_asia.2",
+      "source_sha256": "0654f99bda6bdbf569a8bbd559b76e5887fc5cc764c2e0f7df5f0b11cd020bd9",
+      "commands": {
+        "has_ideology": 2
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_tibet_expedition_events.txt",
+      "source": "game",
+      "file": "events/tibetan_expedition.txt",
+      "key": "tibet_expedition_events.4",
+      "source_sha256": "1b155f63cfe6090efb71a5c75fd55c586c26c412b33b462a0c8bc180fbc50973",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_two_spains.txt",
+      "source": "game",
+      "file": "events/iberia_events/two_spains_events.txt",
+      "key": "two_spains.2",
+      "source_sha256": "c892177a7711292e07949049ae2c78152e30c9595690ee17968a98933453932e",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "events/zzzz_ffpa_global_ig_compat_ztr_russian_revolution.txt",
+      "source": "tech.res",
+      "file": "events/russia/russian_revolution.txt",
+      "key": "ztr_russian_revolution.19",
+      "source_sha256": "785b21a1f6e65a80007cace8024a8d348b1211809f06890c66cab818d7e75211",
+      "commands": {
+        "add_ideology": 1
+      }
+    },
+    {
+      "output": "common/coat_of_arms/template_lists/coa_templates.txt",
+      "source": "game",
+      "file": "common/coat_of_arms/template_lists/coa_templates.txt",
+      "key": "(whole file)",
+      "source_sha256": "71aacc364b4934718e7c54c4107a98399e7355c827d14056d6041ac685494ab8",
+      "commands": {
+        "has_ideology": 1
+      }
+    },
+    {
+      "output": "common/coat_of_arms/template_lists/color_lists.txt",
+      "source": "game",
+      "file": "common/coat_of_arms/template_lists/color_lists.txt",
+      "key": "(whole file)",
+      "source_sha256": "782e52086baefc47cac538b0460c6fffcc2c139f73cfc6aab082bb51f916b8ab",
+      "commands": {
+        "has_ideology": 3
+      }
+    },
+    {
+      "output": "common/on_actions/00_code_on_actions.txt",
+      "source": "game",
+      "file": "common/on_actions/00_code_on_actions.txt",
+      "key": "(whole file)",
+      "source_sha256": "b5c35e9530a03eddce73e33f5b012fdfb9ccb0a6913b744069708af7b2e2c4ed",
+      "commands": {
+        "remove_ideology": 1
+      }
+    },
+    {
+      "output": "common/coat_of_arms/template_lists/ztr_coa_templates.txt",
+      "source": "tech.res",
+      "file": "common/coat_of_arms/template_lists/ztr_coa_templates.txt",
+      "key": "(whole file)",
+      "source_sha256": "6773798edbb443cb2a50287b7f485ae5478abd67abbc606d0d391d746369751c",
+      "commands": {
+        "has_ideology": 1
+      }
+    }
+  ],
+  "excluded": [
+    {
+      "source": "game",
+      "file": "common/customizable_localization/99_ru_custom_loc.txt",
+      "reason": "Russian-only grammatical localization"
+    },
+    {
+      "source": "game",
+      "file": "common/interest_groups/00_devout.txt",
+      "reason": "native IG bootstrap; no IG overrides"
+    },
+    {
+      "source": "game",
+      "file": "common/interest_groups/00_industrialists.txt",
+      "reason": "native IG bootstrap; no IG overrides"
+    },
+    {
+      "source": "game",
+      "file": "common/interest_groups/00_landowners.txt",
+      "reason": "native IG bootstrap; no IG overrides"
+    },
+    {
+      "source": "game",
+      "file": "common/interest_groups/00_petty_bourgeoisie.txt",
+      "reason": "native IG bootstrap; no IG overrides"
+    }
+  ]
+}

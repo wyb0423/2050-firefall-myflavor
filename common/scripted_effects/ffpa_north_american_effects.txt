@@ -196,6 +196,31 @@ ffpa_na_union_initialize_v1 = {
   set_variable = { name = ffpa_na_union_index_v1 value = 0 }
   ffpa_na_union_select_v1 = yes
  }
+ ffpa_usa_union_sync_modifier_v1 = yes
+}
+# Country scope. Existing recovery calls also remove the USA-only benefit after tag changes.
+ffpa_usa_union_sync_modifier_v1 = {
+ if = {
+  limit = { country_definition = cd:USA ffpa_na_union_eligible_v1 = yes has_journal_entry = je_ffpa_na_union_agenda_v1 }
+  if = {
+   limit = { NOT = { has_modifier = ffpa_usa_union_integration_v1 } }
+   add_modifier = { name = ffpa_usa_union_integration_v1 }
+  }
+ }
+ else_if = {
+  limit = { has_modifier = ffpa_usa_union_integration_v1 }
+  remove_modifier = ffpa_usa_union_integration_v1
+ }
+}
+ffpa_usa_union_complete_effect_v1 = {
+ if = {
+  limit = { ffpa_usa_union_can_complete_v1 = yes }
+  set_variable = ffpa_usa_union_complete_v1
+  change_variable = { name = ffpa_na_union_serial_v1 add = 1 }
+  ffpa_na_union_cleanup_v1 = yes
+  remove_variable = ffpa_na_union_failure_notice_v1
+  remove_modifier = ffpa_usa_union_integration_v1
+ }
 }
 ffpa_na_union_cleanup_v1 = {
  if = {
@@ -226,6 +251,7 @@ ffpa_na_union_cleanup_v1 = {
  remove_variable = ffpa_na_union_proposal_v1
  remove_variable = ffpa_na_union_choice_v1
  remove_variable = ffpa_na_union_ai_refresh_v1
+ remove_variable = ffpa_na_union_reply_cooldown_v2
  set_variable = { name = ffpa_na_union_status_v1 value = 0 }
  set_variable = { name = ffpa_na_union_index_v1 value = 0 }
  # Serial and cooldown survive cleanup; old event options cannot settle a new agenda.
@@ -263,35 +289,69 @@ ffpa_na_union_fail_v1 = {
  trigger_event = { id = ffpa_na_flavor.5 days = 1 popup = yes }
 }
 ffpa_na_union_monthly_v1 = {
+ ffpa_usa_union_sync_modifier_v1 = yes
+ # A pending settlement remains recoverable, but cannot retain eligibility after losing land.
+ if = {
+  limit = { var:ffpa_na_union_status_v1 = 2 }
+  ffpa_na_union_recount_v1 = yes
+  if = {
+   limit = { NOT = { ffpa_na_union_all_owned_v1 = yes } }
+   set_variable = { name = ffpa_na_union_status_v1 value = 1 }
+   change_variable = { name = ffpa_na_union_serial_v1 add = 1 }
+   remove_variable = ffpa_na_union_reply_cooldown_v2
+  }
+  else_if = { limit = { is_ai = yes } ffpa_na_union_open_settlement_v2 = yes }
+ }
  if = {
   limit = { var:ffpa_na_union_status_v1 = 1 }
   ffpa_na_union_recount_v1 = yes
   if = {
-   limit = { var:ffpa_na_union_seen_v1 != var:ffpa_na_union_total_v1 }
+   limit = {
+    OR = {
+     var:ffpa_na_union_seen_v1 != var:ffpa_na_union_total_v1
+     NOT = { has_variable = ffpa_na_union_deadline_v1 }
+    }
+   }
    set_variable = ffpa_na_union_withdraw_v1
+  }
+  if = {
+   limit = { has_variable = ffpa_na_union_withdraw_v1 }
    if = { limit = { ffpa_na_union_peace_v1 = yes } ffpa_na_union_fail_v1 = yes }
   }
   else_if = {
-   limit = { ffpa_na_union_peace_v1 = yes }
-   if = {
-    limit = { has_variable = ffpa_na_union_withdraw_v1 }
-    ffpa_na_union_fail_v1 = yes
-   }
-   else_if = {
-    limit = { ffpa_na_union_all_owned_v1 = yes }
-    set_variable = { name = ffpa_na_union_status_v1 value = 2 }
-    trigger_event = { id = ffpa_na_flavor.4 days = 1 popup = yes }
-   }
-   else_if = {
-    limit = { NOT = { has_variable = ffpa_na_union_deadline_v1 } }
-    ffpa_na_union_fail_v1 = yes
-   }
+   # Record timely acquisition even during war; only the reception waits for peace.
+   limit = { ffpa_na_union_all_owned_v1 = yes }
+   set_variable = { name = ffpa_na_union_status_v1 value = 2 }
+   ffpa_na_union_open_settlement_v2 = yes
   }
  }
  else_if = {
-  limit = { ffpa_na_union_idle_v1 = yes is_ai = yes NOT = { has_variable = ffpa_na_union_ai_refresh_v1 } }
+  limit = {
+   ffpa_na_union_idle_v1 = yes
+   OR = {
+    AND = { is_ai = no ffpa_na_union_target_valid_v2 = no }
+    AND = { is_ai = yes NOT = { has_variable = ffpa_na_union_ai_refresh_v1 } }
+   }
+  }
   ffpa_na_union_select_v1 = yes
   set_variable = { name = ffpa_na_union_ai_refresh_v1 years = 1 }
+ }
+}
+ffpa_na_union_open_settlement_v2 = {
+ if = {
+  limit = { ffpa_na_union_can_reopen_v2 = yes }
+  ffpa_na_union_recount_v1 = yes
+  if = {
+   limit = { ffpa_na_union_all_owned_v1 = yes }
+   change_variable = { name = ffpa_na_union_serial_v1 add = 1 }
+   set_variable = { name = ffpa_na_union_reply_cooldown_v2 months = 1 }
+   trigger_event = { id = ffpa_na_flavor.4 days = 1 popup = yes }
+  }
+  else = {
+   set_variable = { name = ffpa_na_union_status_v1 value = 1 }
+   change_variable = { name = ffpa_na_union_serial_v1 add = 1 }
+   remove_variable = ffpa_na_union_reply_cooldown_v2
+  }
  }
 }
 ffpa_na_union_settle_v1 = {
@@ -355,6 +415,7 @@ ffpa_usa_ensure_journals_v2 = {
    add_journal_entry = { type = je_ffpa_na_union_agenda_v1 }
   }
  }
+ ffpa_usa_union_sync_modifier_v1 = yes
 }
 
 # Country scope. Persistent choices are never cleared or re-awarded by initialization.

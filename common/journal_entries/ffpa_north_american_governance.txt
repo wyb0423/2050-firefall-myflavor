@@ -1,0 +1,21 @@
+je_ffpa_usa_federal_promise_v1 = {
+ widget = { gui = "gui/ffpa_usa_journal_presentation.gui" name = "ffpa_usa_ui_governance" container = "custom_widget_container_3" }
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
+ group = je_group_historical_content
+ scripted_button = ffpa_usa_gov_conference_button_v1
+ scripted_button = ffpa_usa_gov_review_button_v1
+ scripted_button = ffpa_usa_gov_emergency_button_v1
+ scripted_button = ffpa_usa_gov_credit_line_button_v1
+ scripted_button = ffpa_usa_gov_procurement_button_v1
+ scripted_button = ffpa_usa_gov_relief_button_v1
+ is_shown_when_inactive = { ffpa_usa_gov_eligible_v1 = yes }
+ possible = { ffpa_usa_gov_eligible_v1 = yes }
+ immediate = { ffpa_usa_gov_initialize_v1 = yes }
+ on_monthly_pulse = { effect = { ffpa_usa_gov_monthly_v1 = yes } }
+ complete = { always = no }
+ invalid = { NOT = { ffpa_usa_gov_eligible_v1 = yes } }
+ on_invalid = { ffpa_usa_gov_suspend_v1 = yes }
+ progressbar = no
+ weight = 120
+ should_be_pinned_by_default_uninvolved_or_context = yes
+}

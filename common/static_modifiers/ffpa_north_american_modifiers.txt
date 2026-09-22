@@ -26,6 +26,11 @@ ffpa_na_local_producer_orders_v1 = {
  building_group_bg_manufacturing_throughput_add = 0.05
 }
 
+ffpa_usa_union_integration_v1 = {
+ icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
+ state_incorporation_speed_mult = 0.25
+}
+
 ffpa_na_union_dividend_v1 = {
  icon = gfx/interface/icons/timed_modifier_icons/modifier_flag_positive.dds
  country_prestige_mult = 0.10

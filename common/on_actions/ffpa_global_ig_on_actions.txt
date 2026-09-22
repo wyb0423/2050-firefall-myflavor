@@ -1,0 +1,23 @@
+# Global political flavor owns these wrappers. Country-specific content keeps
+# its own formation/monthly actions; either ordering yields the same identities.
+on_game_started_after_lobby = {
+	on_actions = { ffpa_global_ig_startup_v1 }
+}
+
+ffpa_global_ig_startup_v1 = {
+	effect = {
+		every_country = { ffpa_global_ig_ensure_positions_v1 = yes }
+	}
+}
+
+on_country_formed = {
+	on_actions = { ffpa_global_ig_country_v1 }
+}
+
+on_monthly_pulse_country = {
+	on_actions = { ffpa_global_ig_country_v1 }
+}
+
+ffpa_global_ig_country_v1 = {
+	effect = { ffpa_global_ig_ensure_positions_v1 = yes }
+}

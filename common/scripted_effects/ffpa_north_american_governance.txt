@@ -1,0 +1,355 @@
+# Country state is authoritative; native timed modifiers retain their original end dates.
+ffpa_usa_gov_ensure_v1 = {
+ if = { limit = { ffpa_usa_gov_eligible_v1 = yes }
+  ffpa_usa_gov_initialize_v1 = yes
+  if = { limit = { NOT = { has_journal_entry = je_ffpa_usa_federal_promise_v1 } } add_journal_entry = { type = je_ffpa_usa_federal_promise_v1 } }
+ }
+ else_if = { limit = { has_variable = ffpa_usa_gov_initialized_v1 } ffpa_usa_gov_suspend_v1 = yes }
+}
+ffpa_usa_gov_initialize_v1 = {
+ if = { limit = { ffpa_usa_gov_eligible_v1 = yes }
+  remove_variable = ffpa_usa_gov_suspended_v1
+  if = { limit = { NOT = { has_variable = ffpa_usa_gov_initialized_v1 } }
+   set_variable = ffpa_usa_gov_initialized_v1
+   set_variable = { name = ffpa_usa_gov_serial_v1 value = 0 } set_variable = { name = ffpa_usa_gov_sol_falling_v1 value = 0 }
+  }
+  if = { limit = { has_variable = ffpa_usa_political_complete_v1 NOT = { has_variable = ffpa_usa_gov_credit_v1 } }
+   set_variable = { name = ffpa_usa_gov_credit_v1 value = 60 } set_variable = { name = ffpa_usa_gov_credit_grace_v1 value = 24 } set_variable = { name = ffpa_usa_gov_credit_crisis_v1 value = 0 } set_variable = { name = ffpa_usa_gov_credit_repair_v1 value = 0 } set_variable = { name = ffpa_usa_gov_credit_round_v1 value = 0 }
+  }
+  if = { limit = { has_variable = ffpa_usa_industry_complete_v1 NOT = { has_variable = ffpa_usa_gov_risk_v1 } }
+   set_variable = { name = ffpa_usa_gov_risk_v1 value = 25 } set_variable = { name = ffpa_usa_gov_risk_grace_v1 value = 24 } set_variable = { name = ffpa_usa_gov_risk_crisis_v1 value = 0 } set_variable = { name = ffpa_usa_gov_risk_repair_v1 value = 0 } set_variable = { name = ffpa_usa_gov_risk_round_v1 value = 0 }
+  }
+  ffpa_usa_gov_refresh_v1 = yes
+ }
+}
+ffpa_usa_gov_refresh_v1 = {
+ if = { limit = { ffpa_usa_gov_eligible_v1 = yes has_variable = ffpa_usa_gov_credit_v1 NOT = { has_variable = ffpa_usa_gov_credit_failed_v1 } var:ffpa_usa_gov_credit_v1 >= 35 }
+  if = { limit = { NOT = { has_modifier = ffpa_usa_gov_credit_good_v1 } } add_modifier = { name = ffpa_usa_gov_credit_good_v1 } }
+ } else = { remove_modifier = ffpa_usa_gov_credit_good_v1 }
+ if = { limit = { ffpa_usa_gov_eligible_v1 = yes has_variable = ffpa_usa_gov_credit_v1 NOT = { has_variable = ffpa_usa_gov_credit_failed_v1 } var:ffpa_usa_gov_credit_v1 >= 20 var:ffpa_usa_gov_credit_v1 < 35 }
+  if = { limit = { NOT = { has_modifier = ffpa_usa_gov_credit_warning_v1 } } add_modifier = { name = ffpa_usa_gov_credit_warning_v1 } }
+ } else = { remove_modifier = ffpa_usa_gov_credit_warning_v1 }
+ if = { limit = { ffpa_usa_gov_eligible_v1 = yes has_variable = ffpa_usa_gov_risk_v1 NOT = { has_variable = ffpa_usa_gov_risk_failed_v1 } var:ffpa_usa_gov_risk_v1 < 65 }
+  if = { limit = { NOT = { has_modifier = ffpa_usa_gov_risk_good_v1 } } add_modifier = { name = ffpa_usa_gov_risk_good_v1 } }
+ } else = { remove_modifier = ffpa_usa_gov_risk_good_v1 }
+ if = { limit = { ffpa_usa_gov_eligible_v1 = yes has_variable = ffpa_usa_gov_risk_v1 NOT = { has_variable = ffpa_usa_gov_risk_failed_v1 } var:ffpa_usa_gov_risk_v1 >= 65 var:ffpa_usa_gov_risk_v1 < 85 }
+  if = { limit = { NOT = { has_modifier = ffpa_usa_gov_risk_warning_v1 } } add_modifier = { name = ffpa_usa_gov_risk_warning_v1 } }
+ } else = { remove_modifier = ffpa_usa_gov_risk_warning_v1 }
+}
+# State scope. Owner-change/new-state callbacks discard inherited history, never project rewards.
+ffpa_usa_gov_clear_history_v1 = {
+ remove_variable = ffpa_usa_gov_history_owner_v1
+ remove_variable = ffpa_usa_gov_history_samples_v1
+ remove_variable = ffpa_usa_gov_history_sum_v1
+ remove_variable = ffpa_usa_gov_sol_0_v1
+ remove_variable = ffpa_usa_gov_sol_1_v1
+ remove_variable = ffpa_usa_gov_sol_2_v1
+ remove_variable = ffpa_usa_gov_sol_3_v1
+ remove_variable = ffpa_usa_gov_sol_4_v1
+ remove_variable = ffpa_usa_gov_sol_5_v1
+ remove_variable = ffpa_usa_gov_sol_6_v1
+ remove_variable = ffpa_usa_gov_sol_7_v1
+ remove_variable = ffpa_usa_gov_sol_8_v1
+ remove_variable = ffpa_usa_gov_sol_9_v1
+ remove_variable = ffpa_usa_gov_sol_10_v1
+ remove_variable = ffpa_usa_gov_sol_11_v1
+ remove_variable = ffpa_usa_gov_sol_12_v1
+ remove_variable = ffpa_usa_gov_sol_13_v1
+ remove_variable = ffpa_usa_gov_sol_14_v1
+ remove_variable = ffpa_usa_gov_sol_15_v1
+ remove_variable = ffpa_usa_gov_sol_16_v1
+ remove_variable = ffpa_usa_gov_sol_17_v1
+ remove_variable = ffpa_usa_gov_sol_18_v1
+ remove_variable = ffpa_usa_gov_sol_19_v1
+ remove_variable = ffpa_usa_gov_sol_20_v1
+ remove_variable = ffpa_usa_gov_sol_21_v1
+ remove_variable = ffpa_usa_gov_sol_22_v1
+ remove_variable = ffpa_usa_gov_sol_23_v1
+ remove_variable = ffpa_usa_gov_sol_24_v1
+ remove_variable = ffpa_usa_gov_sol_25_v1
+ remove_variable = ffpa_usa_gov_sol_26_v1
+ remove_variable = ffpa_usa_gov_sol_27_v1
+ remove_variable = ffpa_usa_gov_sol_28_v1
+ remove_variable = ffpa_usa_gov_sol_29_v1
+ remove_variable = ffpa_usa_gov_sol_30_v1
+ remove_variable = ffpa_usa_gov_sol_31_v1
+ remove_variable = ffpa_usa_gov_sol_32_v1
+ remove_variable = ffpa_usa_gov_sol_33_v1
+ remove_variable = ffpa_usa_gov_sol_34_v1
+ remove_variable = ffpa_usa_gov_sol_35_v1
+}
+ffpa_usa_gov_sample_sol_v1 = {
+ set_variable = { name = ffpa_usa_gov_sol_weight_v1 value = 0 } set_variable = { name = ffpa_usa_gov_sol_current_v1 value = 0 } set_variable = { name = ffpa_usa_gov_sol_history_v1 value = 0 }
+ every_scope_state = {
+  limit = { ffpa_na_is_mainland_state_v1 = yes state_population > 0 }
+  if = { limit = { OR = { NOT = { has_variable = ffpa_usa_gov_history_owner_v1 } NOT = { var:ffpa_usa_gov_history_owner_v1 = owner } } }
+   ffpa_usa_gov_clear_history_v1 = yes
+   set_variable = { name = ffpa_usa_gov_history_owner_v1 value = owner } set_variable = { name = ffpa_usa_gov_history_samples_v1 value = 0 } set_variable = { name = ffpa_usa_gov_history_sum_v1 value = 0 }
+  }
+  # Compare the same current cohort with its previous 36 monthly observations.
+  # A newly held state needs its own history; no imported low-SoL state creates a false national fall.
+  if = { limit = { var:ffpa_usa_gov_history_samples_v1 >= 36 }
+   set_variable = { name = ffpa_usa_gov_sample_current_v1 value = { value = average_sol multiply = state_population } }
+   set_variable = { name = ffpa_usa_gov_sample_history_v1 value = { value = var:ffpa_usa_gov_history_sum_v1 divide = 36 multiply = state_population } }
+   owner = {
+    change_variable = { name = ffpa_usa_gov_sol_weight_v1 add = prev.state_population }
+    change_variable = { name = ffpa_usa_gov_sol_current_v1 add = prev.var:ffpa_usa_gov_sample_current_v1 }
+    change_variable = { name = ffpa_usa_gov_sol_history_v1 add = prev.var:ffpa_usa_gov_sample_history_v1 }
+   }
+   remove_variable = ffpa_usa_gov_sample_current_v1 remove_variable = ffpa_usa_gov_sample_history_v1
+   change_variable = { name = ffpa_usa_gov_history_sum_v1 subtract = var:ffpa_usa_gov_sol_35_v1 }
+  }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_34_v1 } set_variable = { name = ffpa_usa_gov_sol_35_v1 value = var:ffpa_usa_gov_sol_34_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_33_v1 } set_variable = { name = ffpa_usa_gov_sol_34_v1 value = var:ffpa_usa_gov_sol_33_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_32_v1 } set_variable = { name = ffpa_usa_gov_sol_33_v1 value = var:ffpa_usa_gov_sol_32_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_31_v1 } set_variable = { name = ffpa_usa_gov_sol_32_v1 value = var:ffpa_usa_gov_sol_31_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_30_v1 } set_variable = { name = ffpa_usa_gov_sol_31_v1 value = var:ffpa_usa_gov_sol_30_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_29_v1 } set_variable = { name = ffpa_usa_gov_sol_30_v1 value = var:ffpa_usa_gov_sol_29_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_28_v1 } set_variable = { name = ffpa_usa_gov_sol_29_v1 value = var:ffpa_usa_gov_sol_28_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_27_v1 } set_variable = { name = ffpa_usa_gov_sol_28_v1 value = var:ffpa_usa_gov_sol_27_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_26_v1 } set_variable = { name = ffpa_usa_gov_sol_27_v1 value = var:ffpa_usa_gov_sol_26_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_25_v1 } set_variable = { name = ffpa_usa_gov_sol_26_v1 value = var:ffpa_usa_gov_sol_25_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_24_v1 } set_variable = { name = ffpa_usa_gov_sol_25_v1 value = var:ffpa_usa_gov_sol_24_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_23_v1 } set_variable = { name = ffpa_usa_gov_sol_24_v1 value = var:ffpa_usa_gov_sol_23_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_22_v1 } set_variable = { name = ffpa_usa_gov_sol_23_v1 value = var:ffpa_usa_gov_sol_22_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_21_v1 } set_variable = { name = ffpa_usa_gov_sol_22_v1 value = var:ffpa_usa_gov_sol_21_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_20_v1 } set_variable = { name = ffpa_usa_gov_sol_21_v1 value = var:ffpa_usa_gov_sol_20_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_19_v1 } set_variable = { name = ffpa_usa_gov_sol_20_v1 value = var:ffpa_usa_gov_sol_19_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_18_v1 } set_variable = { name = ffpa_usa_gov_sol_19_v1 value = var:ffpa_usa_gov_sol_18_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_17_v1 } set_variable = { name = ffpa_usa_gov_sol_18_v1 value = var:ffpa_usa_gov_sol_17_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_16_v1 } set_variable = { name = ffpa_usa_gov_sol_17_v1 value = var:ffpa_usa_gov_sol_16_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_15_v1 } set_variable = { name = ffpa_usa_gov_sol_16_v1 value = var:ffpa_usa_gov_sol_15_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_14_v1 } set_variable = { name = ffpa_usa_gov_sol_15_v1 value = var:ffpa_usa_gov_sol_14_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_13_v1 } set_variable = { name = ffpa_usa_gov_sol_14_v1 value = var:ffpa_usa_gov_sol_13_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_12_v1 } set_variable = { name = ffpa_usa_gov_sol_13_v1 value = var:ffpa_usa_gov_sol_12_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_11_v1 } set_variable = { name = ffpa_usa_gov_sol_12_v1 value = var:ffpa_usa_gov_sol_11_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_10_v1 } set_variable = { name = ffpa_usa_gov_sol_11_v1 value = var:ffpa_usa_gov_sol_10_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_9_v1 } set_variable = { name = ffpa_usa_gov_sol_10_v1 value = var:ffpa_usa_gov_sol_9_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_8_v1 } set_variable = { name = ffpa_usa_gov_sol_9_v1 value = var:ffpa_usa_gov_sol_8_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_7_v1 } set_variable = { name = ffpa_usa_gov_sol_8_v1 value = var:ffpa_usa_gov_sol_7_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_6_v1 } set_variable = { name = ffpa_usa_gov_sol_7_v1 value = var:ffpa_usa_gov_sol_6_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_5_v1 } set_variable = { name = ffpa_usa_gov_sol_6_v1 value = var:ffpa_usa_gov_sol_5_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_4_v1 } set_variable = { name = ffpa_usa_gov_sol_5_v1 value = var:ffpa_usa_gov_sol_4_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_3_v1 } set_variable = { name = ffpa_usa_gov_sol_4_v1 value = var:ffpa_usa_gov_sol_3_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_2_v1 } set_variable = { name = ffpa_usa_gov_sol_3_v1 value = var:ffpa_usa_gov_sol_2_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_1_v1 } set_variable = { name = ffpa_usa_gov_sol_2_v1 value = var:ffpa_usa_gov_sol_1_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_sol_0_v1 } set_variable = { name = ffpa_usa_gov_sol_1_v1 value = var:ffpa_usa_gov_sol_0_v1 } }
+  set_variable = { name = ffpa_usa_gov_sol_0_v1 value = average_sol }
+  change_variable = { name = ffpa_usa_gov_history_sum_v1 add = average_sol } change_variable = { name = ffpa_usa_gov_history_samples_v1 add = 1 }
+  clamp_variable = { name = ffpa_usa_gov_history_samples_v1 min = 0 max = 36 }
+ }
+ if = { limit = { var:ffpa_usa_gov_sol_weight_v1 > 0 var:ffpa_usa_gov_sol_history_v1 > 0 }
+  change_variable = { name = ffpa_usa_gov_sol_current_v1 divide = var:ffpa_usa_gov_sol_weight_v1 }
+  change_variable = { name = ffpa_usa_gov_sol_history_v1 divide = var:ffpa_usa_gov_sol_weight_v1 }
+  if = { limit = { var:ffpa_usa_gov_sol_current_v1 <= { value = var:ffpa_usa_gov_sol_history_v1 multiply = 0.9 } } change_variable = { name = ffpa_usa_gov_sol_falling_v1 add = 1 } }
+  else = { set_variable = { name = ffpa_usa_gov_sol_falling_v1 value = 0 } }
+ } else = { set_variable = { name = ffpa_usa_gov_sol_falling_v1 value = 0 } }
+}
+ffpa_usa_gov_start_conference_v1 = { if = { limit = { ffpa_usa_gov_can_conference_v1 = yes }
+ set_variable = { name = ffpa_usa_gov_conference_left_v1 value = 12 }
+ set_variable = { name = ffpa_usa_gov_conference_term_v1 months = 12 }
+ set_variable = { name = ffpa_usa_gov_conference_cooldown_v1 months = 24 }
+ if = { limit = { var:ffpa_usa_political_representation_v1 = 1 } set_variable = { name = ffpa_usa_gov_conference_cooldown_v1 months = 18 } }
+ set_variable = { name = ffpa_usa_gov_conference_weekly_v1 value = ffpa_usa_gov_conference_cost_v1 }
+ add_modifier = { name = ffpa_usa_gov_conference_grant_v1 multiplier = var:ffpa_usa_gov_conference_weekly_v1 months = 12 }
+ ffpa_usa_gov_refresh_v1 = yes
+ } }
+ffpa_usa_gov_start_review_v1 = { if = { limit = { ffpa_usa_gov_can_review_v1 = yes }
+ set_variable = { name = ffpa_usa_gov_review_left_v1 value = 12 }
+ set_variable = { name = ffpa_usa_gov_review_term_v1 months = 12 }
+ set_variable = { name = ffpa_usa_gov_review_cooldown_v1 months = 24 }
+ add_modifier = { name = ffpa_usa_gov_review_v1 months = 12 }
+ ffpa_usa_gov_refresh_v1 = yes
+ } }
+ffpa_usa_gov_start_emergency_v1 = { if = { limit = { ffpa_usa_gov_can_emergency_v1 = yes }
+ set_variable = { name = ffpa_usa_gov_emergency_left_v1 value = 12 }
+ set_variable = { name = ffpa_usa_gov_emergency_term_v1 months = 12 }
+ set_variable = { name = ffpa_usa_gov_emergency_cooldown_v1 months = 36 }
+ add_modifier = { name = ffpa_usa_gov_emergency_v1 months = 12 }
+ change_variable = { name = ffpa_usa_gov_credit_v1 add = -15 }
+ ffpa_usa_gov_refresh_v1 = yes
+ } }
+ffpa_usa_gov_start_credit_line_v1 = { if = { limit = { ffpa_usa_gov_can_credit_line_v1 = yes }
+ set_variable = { name = ffpa_usa_gov_credit_line_left_v1 value = 12 }
+ set_variable = { name = ffpa_usa_gov_credit_line_term_v1 months = 12 }
+ set_variable = { name = ffpa_usa_gov_credit_line_cooldown_v1 months = 24 }
+ set_variable = { name = ffpa_usa_gov_credit_line_weekly_v1 value = ffpa_usa_gov_credit_line_cost_v1 }
+ add_modifier = { name = ffpa_usa_gov_credit_line_grant_v1 multiplier = var:ffpa_usa_gov_credit_line_weekly_v1 months = 12 }
+ add_modifier = { name = ffpa_usa_gov_credit_line_v1 months = 12 }
+ change_variable = { name = ffpa_usa_gov_risk_v1 add = 15 }
+ ffpa_usa_gov_refresh_v1 = yes
+ } }
+ffpa_usa_gov_start_procurement_v1 = { if = { limit = { ffpa_usa_gov_can_procurement_v1 = yes }
+ set_variable = { name = ffpa_usa_gov_procurement_left_v1 value = 12 }
+ set_variable = { name = ffpa_usa_gov_procurement_term_v1 months = 12 }
+ set_variable = { name = ffpa_usa_gov_procurement_cooldown_v1 months = 36 }
+ add_modifier = { name = ffpa_usa_gov_procurement_v1 months = 24 }
+ ffpa_usa_gov_refresh_v1 = yes
+ } }
+ffpa_usa_gov_start_relief_v1 = { if = { limit = { ffpa_usa_gov_can_relief_v1 = yes }
+ set_variable = { name = ffpa_usa_gov_relief_left_v1 value = 12 }
+ set_variable = { name = ffpa_usa_gov_relief_term_v1 months = 12 }
+ set_variable = { name = ffpa_usa_gov_relief_cooldown_v1 months = 24 }
+ set_variable = { name = ffpa_usa_gov_relief_weekly_v1 value = ffpa_usa_gov_relief_cost_v1 }
+ add_modifier = { name = ffpa_usa_gov_relief_grant_v1 multiplier = var:ffpa_usa_gov_relief_weekly_v1 months = 12 }
+ ffpa_usa_gov_refresh_v1 = yes
+ } }
+ffpa_usa_gov_cancel_conference_v1 = {
+ remove_variable = ffpa_usa_gov_conference_left_v1 remove_variable = ffpa_usa_gov_conference_term_v1
+ remove_modifier = ffpa_usa_gov_conference_grant_v1 remove_variable = ffpa_usa_gov_conference_weekly_v1
+}
+ffpa_usa_gov_cancel_review_v1 = {
+ remove_variable = ffpa_usa_gov_review_left_v1 remove_variable = ffpa_usa_gov_review_term_v1
+ remove_modifier = ffpa_usa_gov_review_v1
+}
+ffpa_usa_gov_cancel_emergency_v1 = {
+ remove_variable = ffpa_usa_gov_emergency_left_v1 remove_variable = ffpa_usa_gov_emergency_term_v1
+ remove_modifier = ffpa_usa_gov_emergency_v1
+}
+ffpa_usa_gov_cancel_credit_line_v1 = {
+ remove_variable = ffpa_usa_gov_credit_line_left_v1 remove_variable = ffpa_usa_gov_credit_line_term_v1
+ remove_modifier = ffpa_usa_gov_credit_line_v1
+ remove_modifier = ffpa_usa_gov_credit_line_grant_v1 remove_variable = ffpa_usa_gov_credit_line_weekly_v1
+}
+ffpa_usa_gov_cancel_procurement_v1 = {
+ remove_variable = ffpa_usa_gov_procurement_left_v1 remove_variable = ffpa_usa_gov_procurement_term_v1
+}
+ffpa_usa_gov_cancel_relief_v1 = {
+ remove_variable = ffpa_usa_gov_relief_left_v1 remove_variable = ffpa_usa_gov_relief_term_v1
+ remove_modifier = ffpa_usa_gov_relief_grant_v1 remove_variable = ffpa_usa_gov_relief_weekly_v1
+}
+ffpa_usa_gov_actions_monthly_v1 = {
+ if = { limit = { has_variable = ffpa_usa_gov_conference_left_v1 }
+  change_variable = { name = ffpa_usa_gov_conference_left_v1 subtract = 1 }
+  clamp_variable = { name = ffpa_usa_gov_conference_left_v1 min = 0 max = 12 }
+  if = { limit = { NOT = { has_variable = ffpa_usa_gov_conference_term_v1 } }
+   change_variable = { name = ffpa_usa_gov_credit_v1 add = 12 }
+   ffpa_usa_gov_cancel_conference_v1 = yes
+  }
+ }
+ if = { limit = { has_variable = ffpa_usa_gov_review_left_v1 }
+  change_variable = { name = ffpa_usa_gov_review_left_v1 subtract = 1 }
+  clamp_variable = { name = ffpa_usa_gov_review_left_v1 min = 0 max = 12 }
+  if = { limit = { NOT = { has_variable = ffpa_usa_gov_review_term_v1 } }
+   if = { limit = { has_variable = ffpa_usa_gov_risk_v1 } change_variable = { name = ffpa_usa_gov_risk_v1 add = -5 } }
+   set_variable = ffpa_usa_gov_hearing_due_v1
+   ffpa_usa_gov_cancel_review_v1 = yes
+  }
+ }
+ if = { limit = { has_variable = ffpa_usa_gov_emergency_left_v1 }
+  change_variable = { name = ffpa_usa_gov_emergency_left_v1 subtract = 1 }
+  clamp_variable = { name = ffpa_usa_gov_emergency_left_v1 min = 0 max = 12 }
+  if = { limit = { NOT = { has_variable = ffpa_usa_gov_emergency_term_v1 } }
+   set_variable = ffpa_usa_gov_emergency_due_v1
+   ffpa_usa_gov_cancel_emergency_v1 = yes
+  }
+ }
+ if = { limit = { has_variable = ffpa_usa_gov_credit_line_left_v1 }
+  change_variable = { name = ffpa_usa_gov_credit_line_left_v1 subtract = 1 }
+  clamp_variable = { name = ffpa_usa_gov_credit_line_left_v1 min = 0 max = 12 }
+  if = { limit = { NOT = { has_variable = ffpa_usa_gov_credit_line_term_v1 } }
+   ffpa_usa_gov_cancel_credit_line_v1 = yes
+  }
+ }
+ if = { limit = { has_variable = ffpa_usa_gov_procurement_left_v1 }
+  change_variable = { name = ffpa_usa_gov_procurement_left_v1 subtract = 1 }
+  clamp_variable = { name = ffpa_usa_gov_procurement_left_v1 min = 0 max = 12 }
+  if = { limit = { NOT = { has_variable = ffpa_usa_gov_procurement_term_v1 } }
+   change_variable = { name = ffpa_usa_gov_risk_v1 add = -15 }
+   if = { limit = { has_variable = ffpa_usa_gov_credit_v1 } change_variable = { name = ffpa_usa_gov_credit_v1 add = 5 } }
+   set_variable = ffpa_usa_gov_hearing_due_v1
+   ffpa_usa_gov_cancel_procurement_v1 = yes
+  }
+ }
+ if = { limit = { has_variable = ffpa_usa_gov_relief_left_v1 }
+  change_variable = { name = ffpa_usa_gov_relief_left_v1 subtract = 1 }
+  clamp_variable = { name = ffpa_usa_gov_relief_left_v1 min = 0 max = 12 }
+  if = { limit = { NOT = { has_variable = ffpa_usa_gov_relief_term_v1 } }
+   if = { limit = { has_variable = ffpa_usa_gov_credit_v1 } change_variable = { name = ffpa_usa_gov_credit_v1 add = 5 } }
+   ffpa_usa_gov_cancel_relief_v1 = yes
+  }
+ }
+}
+ffpa_usa_gov_credit_transition_v1 = {
+ if = { limit = { has_variable = ffpa_usa_gov_credit_failed_v1 }
+  if = { limit = { var:ffpa_usa_gov_credit_v1 >= 35 } change_variable = { name = ffpa_usa_gov_credit_repair_v1 add = 1 } } else = { set_variable = { name = ffpa_usa_gov_credit_repair_v1 value = 0 } }
+  clamp_variable = { name = ffpa_usa_gov_credit_repair_v1 min = 0 max = 12 }
+  if = { limit = { var:ffpa_usa_gov_credit_repair_v1 >= 12 NOT = { has_modifier = ffpa_usa_gov_credit_penalty_v1 } }
+   remove_variable = ffpa_usa_gov_credit_failed_v1 set_variable = { name = ffpa_usa_gov_credit_crisis_v1 value = 0 } set_variable = { name = ffpa_usa_gov_credit_repair_v1 value = 0 }
+   trigger_event = { id = ffpa_usa_flavor.43 popup = yes }
+  }
+ } else_if = { limit = { var:ffpa_usa_gov_credit_grace_v1 > 0 }
+  change_variable = { name = ffpa_usa_gov_credit_grace_v1 subtract = 1 } set_variable = { name = ffpa_usa_gov_credit_crisis_v1 value = 0 }
+ } else = {
+  if = { limit = { var:ffpa_usa_gov_credit_v1 < 20 } change_variable = { name = ffpa_usa_gov_credit_crisis_v1 add = 1 } } else = { set_variable = { name = ffpa_usa_gov_credit_crisis_v1 value = 0 } }
+  if = { limit = { var:ffpa_usa_gov_credit_crisis_v1 >= 12 }
+   set_variable = ffpa_usa_gov_credit_failed_v1 change_variable = { name = ffpa_usa_gov_credit_round_v1 add = 1 } set_variable = { name = ffpa_usa_gov_credit_repair_v1 value = 0 }
+   add_modifier = { name = ffpa_usa_gov_credit_penalty_v1 years = 8 }
+   ffpa_usa_gov_cancel_emergency_v1 = yes
+   trigger_event = { id = ffpa_usa_flavor.40 popup = yes }
+  }
+ }
+}
+ffpa_usa_gov_risk_transition_v1 = {
+ if = { limit = { has_variable = ffpa_usa_gov_risk_failed_v1 }
+  if = { limit = { var:ffpa_usa_gov_risk_v1 < 65 } change_variable = { name = ffpa_usa_gov_risk_repair_v1 add = 1 } } else = { set_variable = { name = ffpa_usa_gov_risk_repair_v1 value = 0 } }
+  clamp_variable = { name = ffpa_usa_gov_risk_repair_v1 min = 0 max = 12 }
+  if = { limit = { var:ffpa_usa_gov_risk_repair_v1 >= 12 NOT = { has_modifier = ffpa_usa_gov_risk_penalty_v1 } }
+   remove_variable = ffpa_usa_gov_risk_failed_v1 set_variable = { name = ffpa_usa_gov_risk_crisis_v1 value = 0 } set_variable = { name = ffpa_usa_gov_risk_repair_v1 value = 0 }
+   trigger_event = { id = ffpa_usa_flavor.44 popup = yes }
+  }
+ } else_if = { limit = { var:ffpa_usa_gov_risk_grace_v1 > 0 }
+  change_variable = { name = ffpa_usa_gov_risk_grace_v1 subtract = 1 } set_variable = { name = ffpa_usa_gov_risk_crisis_v1 value = 0 }
+ } else = {
+  if = { limit = { var:ffpa_usa_gov_risk_v1 >= 85 } change_variable = { name = ffpa_usa_gov_risk_crisis_v1 add = 1 } } else = { set_variable = { name = ffpa_usa_gov_risk_crisis_v1 value = 0 } }
+  if = { limit = { var:ffpa_usa_gov_risk_crisis_v1 >= 12 }
+   set_variable = ffpa_usa_gov_risk_failed_v1 change_variable = { name = ffpa_usa_gov_risk_round_v1 add = 1 } set_variable = { name = ffpa_usa_gov_risk_repair_v1 value = 0 }
+   add_modifier = { name = ffpa_usa_gov_risk_penalty_v1 years = 5 }
+   ffpa_usa_gov_cancel_credit_line_v1 = yes
+   trigger_event = { id = ffpa_usa_flavor.41 popup = yes }
+  }
+ }
+}
+ffpa_usa_gov_monthly_v1 = {
+ if = { limit = { ffpa_usa_gov_eligible_v1 = yes }
+  ffpa_usa_gov_initialize_v1 = yes
+  if = { limit = { has_variable = ffpa_usa_gov_risk_v1 } ffpa_usa_gov_sample_sol_v1 = yes set_variable = { name = ffpa_usa_gov_risk_delta_v1 value = ffpa_usa_gov_risk_change_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_credit_v1 } set_variable = { name = ffpa_usa_gov_credit_delta_v1 value = ffpa_usa_gov_credit_change_v1 } change_variable = { name = ffpa_usa_gov_credit_v1 add = var:ffpa_usa_gov_credit_delta_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_risk_v1 } change_variable = { name = ffpa_usa_gov_risk_v1 add = var:ffpa_usa_gov_risk_delta_v1 } }
+  ffpa_usa_gov_actions_monthly_v1 = yes
+  if = { limit = { has_variable = ffpa_usa_gov_credit_v1 } clamp_variable = { name = ffpa_usa_gov_credit_v1 min = 0 max = 100 } ffpa_usa_gov_credit_transition_v1 = yes }
+  if = { limit = { has_variable = ffpa_usa_gov_risk_v1 } clamp_variable = { name = ffpa_usa_gov_risk_v1 min = 0 max = 100 } ffpa_usa_gov_risk_transition_v1 = yes }
+  ffpa_usa_gov_refresh_v1 = yes
+  ffpa_usa_gov_dispatch_v1 = yes
+ }
+}
+ffpa_usa_gov_dispatch_v1 = {
+ if = { limit = { ffpa_usa_gov_eligible_v1 = yes NOT = { has_variable = ffpa_usa_gov_pending_v1 } NOT = { has_variable = ffpa_usa_gov_event_cooldown_v1 } }
+  if = { limit = { has_variable = ffpa_usa_gov_emergency_due_v1 NOT = { has_variable = ffpa_usa_gov_emergency_event_done_v1 } } ffpa_usa_gov_open_v1 = { EVENT = 31 } }
+  else_if = { limit = { has_variable = ffpa_usa_gov_hearing_due_v1 NOT = { has_variable = ffpa_usa_gov_hearing_event_done_v1 } } ffpa_usa_gov_open_v1 = { EVENT = 30 } }
+ }
+}
+ffpa_usa_gov_open_v1 = {
+ change_variable = { name = ffpa_usa_gov_serial_v1 add = 1 } set_variable = { name = ffpa_usa_gov_pending_v1 value = $EVENT$ }
+ trigger_event = { id = ffpa_usa_flavor.$EVENT$ popup = yes }
+}
+ffpa_usa_gov_finish_event_v1 = {
+ remove_variable = ffpa_usa_gov_pending_v1
+ set_variable = { name = ffpa_usa_gov_event_cooldown_v1 months = 18 }
+}
+ffpa_usa_gov_suspend_v1 = {
+ if = { limit = { has_variable = ffpa_usa_gov_initialized_v1 NOT = { has_variable = ffpa_usa_gov_suspended_v1 } }
+  set_variable = ffpa_usa_gov_suspended_v1 change_variable = { name = ffpa_usa_gov_serial_v1 add = 1 } remove_variable = ffpa_usa_gov_pending_v1
+  set_variable = { name = ffpa_usa_gov_sol_falling_v1 value = 0 }
+  if = { limit = { has_variable = ffpa_usa_gov_credit_v1 } set_variable = { name = ffpa_usa_gov_credit_crisis_v1 value = 0 } set_variable = { name = ffpa_usa_gov_credit_repair_v1 value = 0 } }
+  if = { limit = { has_variable = ffpa_usa_gov_risk_v1 } set_variable = { name = ffpa_usa_gov_risk_crisis_v1 value = 0 } set_variable = { name = ffpa_usa_gov_risk_repair_v1 value = 0 } }
+  ffpa_usa_gov_cancel_conference_v1 = yes
+  ffpa_usa_gov_cancel_review_v1 = yes
+  ffpa_usa_gov_cancel_emergency_v1 = yes
+  ffpa_usa_gov_cancel_credit_line_v1 = yes
+  ffpa_usa_gov_cancel_procurement_v1 = yes
+  ffpa_usa_gov_cancel_relief_v1 = yes
+  every_scope_state = { limit = { has_variable = ffpa_usa_gov_history_owner_v1 } ffpa_usa_gov_clear_history_v1 = yes }
+ }
+ ffpa_usa_gov_refresh_v1 = yes
+}

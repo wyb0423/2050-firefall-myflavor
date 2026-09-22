@@ -51,6 +51,20 @@ def render_trigger(groups):
                   f'  limit = {{ var:ffpa_na_union_region_v1 = s:{name} }}', '  OR = {']
         lines += [f'   AND = {{ has_variable = ffpa_na_union_p_{p}_v1 p:{p}.state = scope:target_state }}' for p in provinces]
         lines += ['  }', ' }']
+    lines += [' trigger_else = { always = no }', '}', '',
+              '# All provinces must belong directly to ROOT, including split/uncolonized regions.',
+              'ffpa_usa_union_mainland_owned_v1 = {']
+    lines += [f' owns_entire_state_region = {name}' for name in groups]
+    lines += ['}', '', 'ffpa_na_union_has_other_target_v2 = {', ' OR = {']
+    lines += [f'  s:{name} = {{ any_scope_state = {{ ffpa_na_union_other_candidate_v2 = yes }} }}' for name in groups]
+    lines += [' }', '}', '', '# Live button/event guard; only the recorded region is checked.',
+              'ffpa_na_union_snapshot_owned_v2 = {',
+              ' has_variable = ffpa_na_union_total_v1', ' var:ffpa_na_union_total_v1 > 0']
+    for i, (name, provinces) in enumerate(groups.items()):
+        lines += [' ' + ('trigger_if' if i == 0 else 'trigger_else_if') + ' = {',
+                  f'  limit = {{ var:ffpa_na_union_region_v1 = s:{name} }}']
+        lines += [f'  OR = {{ NOT = {{ has_variable = ffpa_na_union_p_{p}_v1 }} AND = {{ exists = p:{p}.state.owner p:{p}.state.owner = root }} }}' for p in provinces]
+        lines += [' }']
     return '\n'.join(lines + [' trigger_else = { always = no }', '}', ''])
 
 

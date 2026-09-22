@@ -47,6 +47,7 @@ def main():
                     taken=True
                     execute([x for a,b,c in entries(v) if a!='limit' for x in (a,b,c)])
             elif k in effects: execute(effects[k])
+            elif k=='hidden_effect':execute(v)
             elif k=='set_variable':
                 if isinstance(v,str): state[v]=1
                 else:
@@ -58,7 +59,7 @@ def main():
             elif k=='trigger_event':queue.append(one(v,'id'))
             elif k=='save_scope_value_as':scope[one(v,'name')]=value(one(v,'value'))
             elif k.startswith('je:'): pass  # UI mirror has no authority over progress.
-            elif k in ('name','default_option','ai_chance'):pass
+            elif k in ('name','default_option','ai_chance','custom_tooltip'):pass
             else:raise AssertionError((k,op,v))
 
     def reset():
@@ -125,7 +126,7 @@ def main():
             for option in fields(event,'option'):assert one(option,'name') in loc
     assert not fields(je,'timeout')
     print('PASS: actual-script six-month spacing, twelve-month reset/boundaries, all choices, deferral, stale events, identity suspension and idempotent completion; bilingual event keys.')
-    print('NOT TESTED: engine activation/pulse ordering, native event expiry, UI scopes, AI or save reload. Charter is checked separately; permanent governance is not yet implemented.')
+    print('NOT TESTED: engine activation/pulse ordering, native event expiry, UI scopes, AI or save reload. Charter is checked separately; permanent governance is checked separately.')
 
 
 if __name__=='__main__':main()

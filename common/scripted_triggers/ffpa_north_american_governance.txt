@@ -1,0 +1,18 @@
+ffpa_usa_gov_eligible_v1 = { country_definition = cd:USA is_revolutionary = no OR = { has_variable = ffpa_usa_political_complete_v1 has_variable = ffpa_usa_industry_complete_v1 } }
+ffpa_usa_gov_politics_v1 = { ffpa_usa_gov_eligible_v1 = yes has_variable = ffpa_usa_gov_credit_v1 }
+ffpa_usa_gov_economy_v1 = { ffpa_usa_gov_eligible_v1 = yes has_variable = ffpa_usa_gov_risk_v1 }
+ffpa_usa_gov_accelerate_v1 = {
+ ffpa_usa_gov_eligible_v1 = yes
+ NOT = { has_variable = ffpa_usa_gov_emergency_left_v1 } NOT = { has_variable = ffpa_usa_gov_credit_line_left_v1 }
+ NOT = { has_variable = ffpa_usa_gov_credit_failed_v1 } NOT = { has_variable = ffpa_usa_gov_risk_failed_v1 }
+ NOT = { AND = { has_variable = ffpa_usa_gov_credit_v1 var:ffpa_usa_gov_credit_v1 < 20 } }
+ NOT = { AND = { has_variable = ffpa_usa_gov_risk_v1 var:ffpa_usa_gov_risk_v1 >= 85 } }
+}
+ffpa_usa_gov_audit_free_v1 = { NOT = { has_variable = ffpa_usa_gov_review_left_v1 } NOT = { has_variable = ffpa_usa_gov_procurement_left_v1 } }
+ffpa_usa_gov_event_valid_v1 = { ffpa_usa_gov_eligible_v1 = yes has_variable = ffpa_usa_gov_pending_v1 var:ffpa_usa_gov_pending_v1 = $EVENT$ exists = scope:ffpa_usa_gov_ticket scope:ffpa_usa_gov_ticket = var:ffpa_usa_gov_serial_v1 }
+ffpa_usa_gov_can_conference_v1 = { ffpa_usa_gov_politics_v1 = yes NOT = { has_variable = ffpa_usa_gov_conference_cooldown_v1 } NOT = { has_variable = ffpa_usa_gov_conference_left_v1 }  }
+ffpa_usa_gov_can_review_v1 = { ffpa_usa_gov_politics_v1 = yes NOT = { has_variable = ffpa_usa_gov_review_cooldown_v1 } NOT = { has_variable = ffpa_usa_gov_review_left_v1 } ffpa_usa_gov_audit_free_v1 = yes }
+ffpa_usa_gov_can_emergency_v1 = { ffpa_usa_gov_politics_v1 = yes NOT = { has_variable = ffpa_usa_gov_emergency_cooldown_v1 } NOT = { has_variable = ffpa_usa_gov_emergency_left_v1 } ffpa_usa_gov_accelerate_v1 = yes var:ffpa_usa_political_oversight_v1 = 2 var:ffpa_usa_gov_credit_v1 >= 35 }
+ffpa_usa_gov_can_credit_line_v1 = { ffpa_usa_gov_economy_v1 = yes NOT = { has_variable = ffpa_usa_gov_credit_line_cooldown_v1 } NOT = { has_variable = ffpa_usa_gov_credit_line_left_v1 } ffpa_usa_gov_accelerate_v1 = yes var:ffpa_usa_gov_risk_v1 < 65 }
+ffpa_usa_gov_can_procurement_v1 = { ffpa_usa_gov_economy_v1 = yes NOT = { has_variable = ffpa_usa_gov_procurement_cooldown_v1 } NOT = { has_variable = ffpa_usa_gov_procurement_left_v1 } ffpa_usa_gov_audit_free_v1 = yes }
+ffpa_usa_gov_can_relief_v1 = { ffpa_usa_gov_economy_v1 = yes NOT = { has_variable = ffpa_usa_gov_relief_cooldown_v1 } NOT = { has_variable = ffpa_usa_gov_relief_left_v1 }  }

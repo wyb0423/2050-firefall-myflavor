@@ -7,8 +7,8 @@ ffpa_usa_flavor.1 = {
  title = ffpa_usa_flavor.1.t
  desc = ffpa_usa_flavor.1.d
  flavor = ffpa_usa_flavor.1.f
- event_image = { video = "unspecific_signed_contract" }
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ event_image = { video = "unspecific_politicians_arguing" }
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
  on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
  duration = 3
  trigger = { ffpa_usa_political_eligible_v1 = yes }
@@ -23,8 +23,8 @@ ffpa_usa_flavor.2 = {
  title = ffpa_usa_flavor.2.t
  desc = ffpa_usa_flavor.2.d
  flavor = ffpa_usa_flavor.2.f
- event_image = { video = "unspecific_signed_contract" }
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ event_image = { video = "unspecific_gears_pistons" }
+ icon = "gfx/interface/icons/event_icons/event_industry.dds"
  on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
  duration = 3
  trigger = { ffpa_usa_political_eligible_v1 = yes has_variable = ffpa_usa_political_pending_v1 var:ffpa_usa_political_stage_v1 = 0 }
@@ -35,6 +35,7 @@ ffpa_usa_flavor.2 = {
    limit = { ffpa_usa_political_event_valid_v1 = { STAGE = 0 } }
    set_variable = { name = ffpa_usa_political_works_v1 value = 1 }
    add_modifier = { name = ffpa_usa_national_works_v1 }
+   custom_tooltip = ffpa_usa_conference_next_tt
    ffpa_usa_political_advance_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -45,6 +46,7 @@ ffpa_usa_flavor.2 = {
    limit = { ffpa_usa_political_event_valid_v1 = { STAGE = 0 } }
    set_variable = { name = ffpa_usa_political_works_v1 value = 2 }
    add_modifier = { name = ffpa_usa_local_works_v1 }
+   custom_tooltip = ffpa_usa_conference_next_tt
    ffpa_usa_political_advance_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -54,6 +56,7 @@ ffpa_usa_flavor.2 = {
   default_option = yes
   if = {
    limit = { ffpa_usa_political_event_valid_v1 = { STAGE = 0 } }
+   custom_tooltip = ffpa_usa_conference_defer_tt
    remove_variable = ffpa_usa_political_pending_v1
    set_variable = ffpa_usa_political_deferred_v1
   }
@@ -69,7 +72,7 @@ ffpa_usa_flavor.3 = {
  desc = ffpa_usa_flavor.3.d
  flavor = ffpa_usa_flavor.3.f
  event_image = { video = "unspecific_signed_contract" }
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
  on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
  duration = 3
  trigger = { ffpa_usa_political_eligible_v1 = yes has_variable = ffpa_usa_political_pending_v1 var:ffpa_usa_political_stage_v1 = 1 }
@@ -81,6 +84,7 @@ ffpa_usa_flavor.3 = {
    set_variable = { name = ffpa_usa_political_titles_v1 value = 1 }
    add_modifier = { name = ffpa_usa_old_titles_v1 }
    add_modifier = { name = ffpa_usa_title_disputes_v1 years = 5 }
+   custom_tooltip = ffpa_usa_conference_next_tt
    ffpa_usa_political_advance_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -92,6 +96,7 @@ ffpa_usa_flavor.3 = {
    set_variable = { name = ffpa_usa_political_titles_v1 value = 2 }
    add_modifier = { name = ffpa_usa_settlement_titles_v1 }
    add_modifier = { name = ffpa_usa_title_resurvey_v1 years = 5 }
+   custom_tooltip = ffpa_usa_conference_next_tt
    ffpa_usa_political_advance_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -101,6 +106,7 @@ ffpa_usa_flavor.3 = {
   default_option = yes
   if = {
    limit = { ffpa_usa_political_event_valid_v1 = { STAGE = 1 } }
+   custom_tooltip = ffpa_usa_conference_defer_tt
    remove_variable = ffpa_usa_political_pending_v1
    set_variable = ffpa_usa_political_deferred_v1
   }
@@ -115,8 +121,8 @@ ffpa_usa_flavor.4 = {
  title = ffpa_usa_flavor.4.t
  desc = ffpa_usa_flavor.4.d
  flavor = ffpa_usa_flavor.4.f
- event_image = { video = "unspecific_signed_contract" }
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ event_image = { video = "unspecific_politicians_arguing" }
+ icon = "gfx/interface/icons/event_icons/event_election.dds"
  on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
  duration = 3
  trigger = { ffpa_usa_political_eligible_v1 = yes has_variable = ffpa_usa_political_pending_v1 var:ffpa_usa_political_stage_v1 = 2 }
@@ -127,6 +133,7 @@ ffpa_usa_flavor.4 = {
    limit = { ffpa_usa_political_event_valid_v1 = { STAGE = 2 } }
    set_variable = { name = ffpa_usa_political_representation_v1 value = 1 }
    add_modifier = { name = ffpa_usa_community_delegates_v1 }
+   custom_tooltip = ffpa_usa_conference_next_tt
    ffpa_usa_political_advance_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -137,6 +144,7 @@ ffpa_usa_flavor.4 = {
    limit = { ffpa_usa_political_event_valid_v1 = { STAGE = 2 } }
    set_variable = { name = ffpa_usa_political_representation_v1 value = 2 }
    add_modifier = { name = ffpa_usa_personal_register_v1 }
+   custom_tooltip = ffpa_usa_conference_next_tt
    ffpa_usa_political_advance_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -146,6 +154,7 @@ ffpa_usa_flavor.4 = {
   default_option = yes
   if = {
    limit = { ffpa_usa_political_event_valid_v1 = { STAGE = 2 } }
+   custom_tooltip = ffpa_usa_conference_defer_tt
    remove_variable = ffpa_usa_political_pending_v1
    set_variable = ffpa_usa_political_deferred_v1
   }
@@ -160,8 +169,8 @@ ffpa_usa_flavor.5 = {
  title = ffpa_usa_flavor.5.t
  desc = ffpa_usa_flavor.5.d
  flavor = ffpa_usa_flavor.5.f
- event_image = { video = "unspecific_signed_contract" }
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ event_image = { video = "unspecific_politicians_arguing" }
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
  on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
  duration = 3
  trigger = { ffpa_usa_political_eligible_v1 = yes has_variable = ffpa_usa_political_pending_v1 var:ffpa_usa_political_stage_v1 = 3 }
@@ -171,6 +180,7 @@ ffpa_usa_flavor.5 = {
   if = {
    limit = { ffpa_usa_political_event_valid_v1 = { STAGE = 3 } }
    set_variable = { name = ffpa_usa_political_oversight_v1 value = 1 }
+   custom_tooltip = ffpa_usa_conference_stability_tt
    ffpa_usa_political_advance_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -180,6 +190,7 @@ ffpa_usa_flavor.5 = {
   if = {
    limit = { ffpa_usa_political_event_valid_v1 = { STAGE = 3 } }
    set_variable = { name = ffpa_usa_political_oversight_v1 value = 2 }
+   custom_tooltip = ffpa_usa_conference_stability_tt
    ffpa_usa_political_advance_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -189,6 +200,7 @@ ffpa_usa_flavor.5 = {
   default_option = yes
   if = {
    limit = { ffpa_usa_political_event_valid_v1 = { STAGE = 3 } }
+   custom_tooltip = ffpa_usa_conference_defer_tt
    remove_variable = ffpa_usa_political_pending_v1
    set_variable = ffpa_usa_political_deferred_v1
   }
@@ -203,7 +215,7 @@ ffpa_usa_flavor.6 = {
  desc = ffpa_usa_flavor.6.d
  flavor = ffpa_usa_flavor.6.f
  event_image = { video = "unspecific_signed_contract" }
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
  on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
  duration = 3
  trigger = { ffpa_usa_charter_eligible_v1 = yes ffpa_usa_charter_window_v1 = yes has_variable = ffpa_usa_charter_pending_v1 var:ffpa_usa_charter_stage_v1 = 0 }
@@ -213,6 +225,7 @@ ffpa_usa_flavor.6 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 0 } }
    set_variable = { name = ffpa_usa_charter_governance_principles_v1 value = 1 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 30 }
@@ -222,6 +235,7 @@ ffpa_usa_flavor.6 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 0 } }
    set_variable = { name = ffpa_usa_charter_governance_principles_v1 value = 2 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -231,6 +245,7 @@ ffpa_usa_flavor.6 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 0 } }
    set_variable = { name = ffpa_usa_charter_governance_principles_v1 value = 0 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -238,7 +253,7 @@ ffpa_usa_flavor.6 = {
  option = {
   name = ffpa_usa_charter_defer_v1
   default_option = yes
-  if = { limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 0 } } remove_variable = ffpa_usa_charter_pending_v1 }
+  if = { limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 0 } } custom_tooltip = ffpa_usa_charter_defer_hover_tt remove_variable = ffpa_usa_charter_pending_v1 }
   ai_chance = { factor = 0 }
  }
 }
@@ -249,8 +264,8 @@ ffpa_usa_flavor.7 = {
  title = ffpa_usa_flavor.7.t
  desc = ffpa_usa_flavor.7.d
  flavor = ffpa_usa_flavor.7.f
- event_image = { video = "unspecific_signed_contract" }
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ event_image = { video = "unspecific_politicians_arguing" }
+ icon = "gfx/interface/icons/event_icons/event_election.dds"
  on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
  duration = 3
  trigger = { ffpa_usa_charter_eligible_v1 = yes ffpa_usa_charter_window_v1 = yes has_variable = ffpa_usa_charter_pending_v1 var:ffpa_usa_charter_stage_v1 = 1 }
@@ -260,6 +275,7 @@ ffpa_usa_flavor.7 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 1 } }
    set_variable = { name = ffpa_usa_charter_distribution_of_power_v1 value = 1 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 30 }
@@ -269,6 +285,7 @@ ffpa_usa_flavor.7 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 1 } }
    set_variable = { name = ffpa_usa_charter_distribution_of_power_v1 value = 2 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -278,6 +295,7 @@ ffpa_usa_flavor.7 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 1 } }
    set_variable = { name = ffpa_usa_charter_distribution_of_power_v1 value = 3 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -287,6 +305,7 @@ ffpa_usa_flavor.7 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 1 } }
    set_variable = { name = ffpa_usa_charter_distribution_of_power_v1 value = 0 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -294,7 +313,7 @@ ffpa_usa_flavor.7 = {
  option = {
   name = ffpa_usa_charter_defer_v1
   default_option = yes
-  if = { limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 1 } } remove_variable = ffpa_usa_charter_pending_v1 }
+  if = { limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 1 } } custom_tooltip = ffpa_usa_charter_defer_hover_tt remove_variable = ffpa_usa_charter_pending_v1 }
   ai_chance = { factor = 0 }
  }
 }
@@ -316,6 +335,7 @@ ffpa_usa_flavor.8 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 2 } }
    set_variable = { name = ffpa_usa_charter_economic_system_v1 value = 1 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 30 }
@@ -325,6 +345,7 @@ ffpa_usa_flavor.8 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 2 } }
    set_variable = { name = ffpa_usa_charter_economic_system_v1 value = 2 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -334,6 +355,7 @@ ffpa_usa_flavor.8 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 2 } }
    set_variable = { name = ffpa_usa_charter_economic_system_v1 value = 3 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -343,6 +365,7 @@ ffpa_usa_flavor.8 = {
   if = {
    limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 2 } }
    set_variable = { name = ffpa_usa_charter_economic_system_v1 value = 0 }
+   custom_tooltip = ffpa_usa_charter_draft_tt
    ffpa_usa_charter_submit_v1 = yes
   }
   ai_chance = { factor = 10 }
@@ -350,7 +373,7 @@ ffpa_usa_flavor.8 = {
  option = {
   name = ffpa_usa_charter_defer_v1
   default_option = yes
-  if = { limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 2 } } remove_variable = ffpa_usa_charter_pending_v1 }
+  if = { limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 2 } } custom_tooltip = ffpa_usa_charter_defer_hover_tt remove_variable = ffpa_usa_charter_pending_v1 }
   ai_chance = { factor = 0 }
  }
 }
@@ -362,7 +385,7 @@ ffpa_usa_flavor.9 = {
  desc = ffpa_usa_flavor.9.d
  flavor = ffpa_usa_flavor.9.f
  event_image = { video = "unspecific_signed_contract" }
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
  on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
  duration = 3
  trigger = { ffpa_usa_charter_eligible_v1 = yes ffpa_usa_charter_window_v1 = yes has_variable = ffpa_usa_charter_pending_v1 var:ffpa_usa_charter_stage_v1 = 3 }
@@ -371,8 +394,8 @@ ffpa_usa_flavor.9 = {
   name = ffpa_usa_charter_sign_v1
   trigger = { ffpa_usa_charter_event_valid_v1 = { STAGE = 3 } ffpa_usa_charter_can_sign_v1 = yes }
   show_as_unavailable = { always = yes }
-  custom_tooltip = ffpa_usa_charter_sign_tt
-  ffpa_usa_charter_sign_v1 = yes
+  custom_tooltip = ffpa_usa_charter_sign_hover_tt
+  hidden_effect = { ffpa_usa_charter_sign_v1 = yes }
   ai_chance = { factor = 50 }
  }
  option = {
@@ -401,7 +424,7 @@ ffpa_usa_flavor.9 = {
  option = {
   name = ffpa_usa_charter_defer_v1
   default_option = yes
-  if = { limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 3 } } remove_variable = ffpa_usa_charter_pending_v1 }
+  if = { limit = { ffpa_usa_charter_event_valid_v1 = { STAGE = 3 } } custom_tooltip = ffpa_usa_charter_defer_hover_tt remove_variable = ffpa_usa_charter_pending_v1 }
   ai_chance = { factor = 0 }
  }
 }

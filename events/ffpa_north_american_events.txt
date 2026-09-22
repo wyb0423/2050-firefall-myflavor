@@ -104,12 +104,10 @@ ffpa_na_flavor.3 = {
  }
  option = {
   name = ffpa_na_flavor.3.a
+  trigger = { ffpa_na_union_proposal_valid_v2 = yes }
+  show_as_unavailable = { always = yes }
   if = {
-   limit = {
-    var:ffpa_na_union_serial_v1 = scope:ffpa_na_union_event_serial
-    has_variable = ffpa_na_union_proposal_v1
-    var:ffpa_na_union_target_v1 = scope:ffpa_na_union_event_target
-   }
+   limit = { ffpa_na_union_proposal_valid_v2 = yes }
    remove_variable = ffpa_na_union_proposal_v1
    ffpa_na_union_start_v1 = yes
   }
@@ -143,9 +141,10 @@ ffpa_na_flavor.4 = {
  }
  option = {
   name = ffpa_na_flavor.4.1
-  default_option = yes
+  trigger = { ffpa_na_union_settlement_valid_v2 = yes }
+  show_as_unavailable = { always = yes }
   if = {
-   limit = { ffpa_na_union_eligible_v1 = yes var:ffpa_na_union_status_v1 = 2 var:ffpa_na_union_serial_v1 = scope:ffpa_na_union_event_serial }
+   limit = { ffpa_na_union_settlement_valid_v2 = yes }
    set_variable = { name = ffpa_na_union_choice_v1 value = 1 }
    ffpa_na_union_settle_v1 = yes
   }
@@ -153,12 +152,19 @@ ffpa_na_flavor.4 = {
  }
  option = {
   name = ffpa_na_flavor.4.2
+  trigger = { ffpa_na_union_settlement_valid_v2 = yes }
+  show_as_unavailable = { always = yes }
   if = {
-   limit = { ffpa_na_union_eligible_v1 = yes var:ffpa_na_union_status_v1 = 2 var:ffpa_na_union_serial_v1 = scope:ffpa_na_union_event_serial }
+   limit = { ffpa_na_union_settlement_valid_v2 = yes }
    set_variable = { name = ffpa_na_union_choice_v1 value = 2 }
    ffpa_na_union_settle_v1 = yes
   }
   ai_chance = { factor = 10 }
+ }
+ option = {
+  name = ffpa_na_flavor.4.defer
+  default_option = yes
+  ai_chance = { factor = 0 }
  }
 }
 

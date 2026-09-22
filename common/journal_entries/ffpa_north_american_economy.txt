@@ -1,4 +1,5 @@
 je_ffpa_usa_continental_market_v1 = {
+ widget = { gui = "gui/ffpa_usa_journal_presentation.gui" name = "ffpa_usa_ui_market" container = "custom_widget_container_3" }
  icon = "gfx/interface/icons/event_icons/event_trade.dds"
  group = je_group_historical_content
  scripted_progress_bar = ffpa_usa_market_months_bar_v1
@@ -14,7 +15,8 @@ je_ffpa_usa_continental_market_v1 = {
  should_be_pinned_by_default_uninvolved_or_context = yes
 }
 je_ffpa_usa_industrial_scale_v1 = {
- icon = "gfx/interface/icons/event_icons/event_trade.dds"
+ widget = { gui = "gui/ffpa_usa_journal_presentation.gui" name = "ffpa_usa_ui_industry" container = "custom_widget_container_3" }
+ icon = "gfx/interface/icons/event_icons/event_industry.dds"
  group = je_group_historical_content
  scripted_progress_bar = ffpa_usa_industry_months_bar_v1
  scripted_button = ffpa_usa_economy_retry_button_v1

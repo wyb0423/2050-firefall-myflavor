@@ -1,0 +1,14 @@
+# Read-only USA journal views. Missing old-save counters display zero.
+ffpa_usa_ui_stage = { value = 0 if = { limit = { has_variable = ffpa_usa_political_stage_v1 } value = var:ffpa_usa_political_stage_v1 } }
+ffpa_usa_ui_target = { value = 0 if = { limit = { has_variable = ffpa_usa_industry_target_v1 } value = var:ffpa_usa_industry_target_v1 } }
+ffpa_usa_ui_baseline = { value = 0 if = { limit = { has_variable = ffpa_usa_industry_baseline_v1 } value = var:ffpa_usa_industry_baseline_v1 } }
+ffpa_usa_ui_owned = { value = 0 if = { limit = { has_variable = ffpa_na_union_owned_v1 } value = var:ffpa_na_union_owned_v1 } }
+ffpa_usa_ui_total = { value = 0 if = { limit = { has_variable = ffpa_na_union_total_v1 } value = var:ffpa_na_union_total_v1 } }
+ffpa_usa_ui_legitimacy = { value = government_legitimacy }
+ffpa_usa_ui_bureaucracy = { value = bureaucracy }
+ffpa_usa_ui_union_progress = {
+ value = 0
+ if = { limit = { ffpa_usa_ui_total > 0 } value = ffpa_usa_ui_owned divide = ffpa_usa_ui_total }
+ min = 0
+ max = 1
+}

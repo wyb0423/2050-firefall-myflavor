@@ -1,0 +1,212 @@
+# Generated identity compatibility; only ideology commands differ from upstream.
+namespace = italian_unification
+
+# Source: game/events/italian_unification.txt :: italian_unification.10
+italian_unification.10 = {
+	type = country_event
+	placement = ROOT
+
+	title = italian_unification.10.t
+	desc = italian_unification.10.d
+	flavor = italian_unification.10.f
+
+	event_image = {
+		video = "votp_garibaldi"
+	}
+
+	on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+
+	icon = "gfx/interface/icons/event_icons/waving_flag.dds"
+
+	duration = 1
+
+	trigger = {
+		# Fired by JE startup
+	}
+
+	immediate = {
+		root = {
+			save_scope_as = italian_unifier_candidate
+		}
+	}
+
+	option = {
+		name = italian_unification.10.a
+		ai_chance = {
+			base = 40
+			modifier = {
+				trigger = {
+					c:SAR ?= this
+				}
+				add = 50
+			}
+			modifier = {
+				trigger = {
+					c:SIC ?= this
+				}
+				add = -35
+			}
+		}
+		default_option = yes
+		custom_tooltip = {
+			text = risorgimento_unifying_stance_set_tt
+			set_variable = risorgimento_unifying_stance
+		}
+		every_interest_group = {
+			limit = {
+				OR = {
+					ffpa_global_ig_has_patriotic = yes
+					has_ideology = ideology:ideology_military_absolutist
+					has_ideology = ideology:ideology_liberal
+					has_ideology = ideology:ideology_liberal_modern
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_radical
+							has_ideology = ideology:ideology_jingoist_leader
+						}
+					}
+				}
+			}
+			root = {
+				if = {
+					limit = {
+						country_has_primary_culture = cu:south_italian
+					}
+					add_loyalists = {
+						value = medium_radicals
+						culture = cu:south_italian
+						interest_group = prev
+					}
+				}
+				if = {
+					limit = {
+						country_has_primary_culture = cu:north_italian
+					}
+					add_loyalists = {
+						value = medium_radicals
+						culture = cu:north_italian
+						interest_group = prev
+					}
+				}
+			}
+			add_modifier = {
+				name = modifier_risorgimento_supporters
+				days = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = modifier_risorgimento_support
+			days = long_modifier_time
+			is_decaying = yes
+		}
+		every_country = {
+			limit = {
+				has_interest_marker_in_region = sr:region_southern_europe
+				NOT = {
+					THIS = ROOT
+				}
+			}
+			post_notification = ita_italian_unification_intent
+		}
+		if = {
+			limit = {
+				is_ai = yes
+				is_unification_candidate = ITA
+			}
+			set_strategy = ai_strategy_unify_italy
+		}
+	}
+	option = {
+		name = italian_unification.10.b
+		ai_chance = {
+			base = 15
+			modifier = {
+				trigger = {
+					has_law_or_variant = law_type:law_theocracy
+				}
+				add = 50
+			}
+			modifier = {
+				trigger = {
+					has_law_or_variant = law_type:law_traditionalism
+				}
+				add = 50
+			}
+			modifier = {
+				trigger = {
+					ig:ig_intelligentsia ?= {
+						is_in_government = yes
+					}
+				}
+				add = -25
+			}
+			modifier = {
+				trigger = {
+					ig:ig_landowners ?= {
+						is_in_government = yes
+					}
+				}
+				add = 15
+			}
+			modifier = {
+				trigger = {
+					c:SAR ?= this
+				}
+				add = -50
+			}
+			modifier = {
+				trigger = {
+					c:SIC ?= this
+				}
+				add = 50
+			}
+		}
+		every_interest_group = {
+			limit = {
+				OR = {
+					is_interest_group_type = ig_landowners
+					is_interest_group_type = ig_devout
+					is_interest_group_type = ig_rural_folk
+				}
+				NOT = {
+					leader = {
+						OR = {
+							has_ideology = ideology:ideology_radical
+							has_ideology = ideology:ideology_jingoist_leader
+						}
+					}
+				}
+			}
+			root = {
+				if = {
+					limit = {
+						country_has_primary_culture = cu:south_italian
+					}
+					add_loyalists = {
+						value = medium_radicals
+						interest_group = prev
+					}
+				}
+				if = {
+					limit = {
+						country_has_primary_culture = cu:north_italian
+					}
+					add_loyalists = {
+						value = medium_radicals
+						interest_group = prev
+					}
+				}
+			}
+			add_modifier = {
+				name = modifier_risorgimento_opponents
+				days = normal_modifier_time
+			}
+		}
+		add_modifier = {
+			name = modifier_risorgimento_opposition
+			days = long_modifier_time
+			is_decaying = yes
+		}
+		set_variable = risorgimento_anti_unifying_stance
+	}
+}
