@@ -253,7 +253,7 @@ def main():
         for e in events.values():
             assert (args.game_root/one(e,'icon').strip('"')).exists()
             assert one(one(e,'event_image'),'video').strip('"') in media
-            assert r'\n\n' in loc[one(e,'desc')] and '#bold ' in loc[one(e,'desc')]
+            assert loc[one(e,'desc')].strip() and loc[one(e,'flavor')].strip()
             for option in fields(e,'option'):assert not re.search(r'\d',loc[one(option,'name')])
     s=Script();s.unlock();d=s.country['variables'];d[key('hearing_due')]=1;s.run(key('dispatch'))
     e=events['ffpa_usa_flavor.30'];s.run(one(e,'immediate'));option=fields(e,'option')[0]

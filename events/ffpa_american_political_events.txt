@@ -428,3 +428,27 @@ ffpa_usa_flavor.9 = {
   ai_chance = { factor = 0 }
  }
 }
+
+# The completion effect owns the transition; this event only reports it.
+ffpa_usa_flavor.16 = {
+ type = country_event
+ placement = ROOT
+ title = ffpa_usa_flavor.16.t
+ desc = ffpa_usa_flavor.16.d
+ flavor = ffpa_usa_flavor.16.f
+ event_image = { video = "unspecific_politicians_arguing" }
+ icon = "gfx/interface/icons/event_icons/event_scales.dds"
+ on_created_soundeffect = "event:/SFX/UI/Alerts/event_appear"
+ duration = 3
+ trigger = {
+  country_definition = cd:USA
+  is_revolutionary = no
+  has_variable = ffpa_usa_political_complete_v1
+ }
+ option = {
+  name = ffpa_usa_flavor.16.a
+  default_option = yes
+  custom_tooltip = ffpa_usa_flavor.16.tt
+  ai_chance = { factor = 10 }
+ }
+}

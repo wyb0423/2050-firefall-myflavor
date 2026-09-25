@@ -184,7 +184,7 @@ def check_lifecycle(effects, triggers, events, modifiers):
             elif k == 'add_journal_entry':
                 assert one(v,'type') not in journals;journals.add(one(v,'type'));execute(one(journal,'immediate'))
             elif k == 'every_scope_state': pass  # Only clears native receiving-state scratch markers.
-            elif k in ('name','trigger','default_option','ai_chance','show_as_unavailable'): pass
+            elif k in ('name','trigger','default_option','ai_chance','show_as_unavailable','custom_tooltip'): pass
             elif isinstance(v,list): execute(v,value(k,ctx),ctx)
             else: raise AssertionError((k,o,v))
 

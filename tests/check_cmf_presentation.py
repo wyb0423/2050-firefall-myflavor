@@ -177,7 +177,7 @@ def main():
             for style in fields(block,'gui_window'):
                 assert re.search(r'\btype\s+'+re.escape(style)+r'\s*=',all_gui),style
                 event_count+=1
-    assert event_count==90  # USA's four charter events use the native event window.
+    assert event_count==92  # Includes generated Meiji and the new BYZ letter; USA notice is native.
     usa_events=definitions(ROOT/'events/ffpa_american_political_events.txt')
     assert all(not fields(usa_events[f'ffpa_usa_flavor.{n}'],'gui_window') for n in range(6,10))
     for file in (ROOT/'gui').glob('*.gui'):

@@ -477,6 +477,7 @@ ffpa_usa_political_complete_v1 = {
   set_variable = ffpa_usa_political_complete_v1
   remove_variable = ffpa_usa_political_pending_v1
   remove_variable = ffpa_usa_political_deferred_v1
+  trigger_event = { id = ffpa_usa_flavor.16 popup = yes }
  }
 }
 ffpa_usa_political_suspend_v1 = {

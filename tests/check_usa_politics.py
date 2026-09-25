@@ -98,9 +98,37 @@ def main():
     state['bureaucracy']=-1;month();assert state[P+'months_v1']==0
     state['bureaucracy']=0
     for _ in range(12):month()
-    assert condition(one(je,'complete'));execute(one(je,'on_complete'))
-    before=deepcopy((state,rewards,queue));execute(effects[P+'initialize_v1']);execute(one(je,'on_complete'))
-    assert (state,rewards,queue)==before
+    assert condition(one(je,'complete'))
+    before_state=deepcopy(state);before_rewards=deepcopy(rewards);before_expiry=deepcopy(expiry)
+    execute(one(je,'on_complete'))
+    expected=dict(before_state, **{P+'complete_v1':1})
+    expected.pop(P+'pending_v1',None);expected.pop(P+'deferred_v1',None)
+    assert state==expected and rewards==before_rewards and expiry==before_expiry
+    assert queue.count('ffpa_usa_flavor.16')==1 and state[P+'months_v1']==12
+    notice=events['ffpa_usa_flavor.16']
+    assert condition(one(notice,'trigger'))
+    assert not fields(notice,'immediate')
+    option=one(notice,'option')
+    assert {k for k,op,v in entries(option)}=={'name','default_option','custom_tooltip','ai_chance'}
+    before=deepcopy((state,expiry,rewards,queue))
+    execute(option);execute(option)
+    execute(effects[P+'initialize_v1']);execute(one(je,'on_complete'))
+    assert (state,expiry,rewards,queue)==before
+    completion=one(effects[P+'complete_v1'],'if')
+    assert one(one(completion,'trigger_event'),'popup')=='yes'
+    # Loaded completed institutions never replay the completion notification.
+    queue.clear();before=deepcopy((state,expiry,rewards))
+    execute(effects[P+'initialize_v1']);execute(effects[P+'monthly_v1']);execute(one(je,'on_complete'))
+    assert (state,expiry,rewards)==before and not queue
+    # The existing stable -> eligible chain guards completion and the new notice.
+    for tag,revolutionary in [('cd:CAN','no'),('cd:USA','yes')]:
+        reset();queue.clear();state.update(country_definition=tag,is_revolutionary=revolutionary)
+        state.update({P+'stage_v1':4,P+'months_v1':12})
+        before=deepcopy((state,expiry,rewards))
+        execute(one(je,'on_complete'))
+        assert (state,expiry,rewards)==before and not queue
+        state[P+'complete_v1']=1
+        assert not condition(one(notice,'trigger'))
     # Deferral never auto-spams. An invalidated old event cannot choose a fresh meeting.
     reset();month();choose(0,2)
     for _ in range(12):month()
@@ -125,7 +153,7 @@ def main():
             for f in ('title','desc','flavor'): assert one(event,f) in loc
             for option in fields(event,'option'):assert one(option,'name') in loc
     assert not fields(je,'timeout')
-    print('PASS: actual-script six-month spacing, twelve-month reset/boundaries, all choices, deferral, stale events, identity suspension and idempotent completion; bilingual event keys.')
+    print('PASS: actual-script six-month spacing, twelve-month reset/boundaries, all choices, deferral, stale events, identity suspension, notification-only first completion, old-save silence and bilingual event keys.')
     print('NOT TESTED: engine activation/pulse ordering, native event expiry, UI scopes, AI or save reload. Charter is checked separately; permanent governance is checked separately.')
 
 

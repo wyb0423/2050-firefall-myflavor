@@ -785,6 +785,11 @@ ffpa_complete_byz_military_reform_project_v1 = {
 	}
 	else_if = {
 		limit = { var:ffpa_byz_military_reform_project_v1 = 3 }
+		# Deliver after this settlement; existing stage prevents replay on recovery.
+		if = {
+			limit = { country_definition = cd:BYZ var:ffpa_byz_military_reform_stage_v1 < 3 }
+			trigger_event = { id = ffpa_flavor.53 days = 1 popup = yes }
+		}
 		set_variable = { name = ffpa_byz_military_reform_stage_v1 value = 3 }
 		change_variable = { name = ffpa_byz_dynatoi_pressure_v1 subtract = 25 }
 		set_variable = ffpa_byz_supply_veterans_welfare_v1
