@@ -151,7 +151,7 @@ ffpa_usa_gov_start_conference_v1 = { if = { limit = { ffpa_usa_gov_can_conferenc
  set_variable = { name = ffpa_usa_gov_conference_cooldown_v1 months = 24 }
  if = { limit = { var:ffpa_usa_political_representation_v1 = 1 } set_variable = { name = ffpa_usa_gov_conference_cooldown_v1 months = 18 } }
  set_variable = { name = ffpa_usa_gov_conference_weekly_v1 value = ffpa_usa_gov_conference_cost_v1 }
- add_modifier = { name = ffpa_usa_gov_conference_grant_v1 multiplier = var:ffpa_usa_gov_conference_weekly_v1 months = 12 }
+ add_modifier = { name = ffpa_usa_gov_conference_grant_v1 multiplier = ffpa_usa_gov_conference_cost_v1 months = 12 }
  ffpa_usa_gov_refresh_v1 = yes
  } }
 ffpa_usa_gov_start_review_v1 = { if = { limit = { ffpa_usa_gov_can_review_v1 = yes }
@@ -174,7 +174,7 @@ ffpa_usa_gov_start_credit_line_v1 = { if = { limit = { ffpa_usa_gov_can_credit_l
  set_variable = { name = ffpa_usa_gov_credit_line_term_v1 months = 12 }
  set_variable = { name = ffpa_usa_gov_credit_line_cooldown_v1 months = 24 }
  set_variable = { name = ffpa_usa_gov_credit_line_weekly_v1 value = ffpa_usa_gov_credit_line_cost_v1 }
- add_modifier = { name = ffpa_usa_gov_credit_line_grant_v1 multiplier = var:ffpa_usa_gov_credit_line_weekly_v1 months = 12 }
+ add_modifier = { name = ffpa_usa_gov_credit_line_grant_v1 multiplier = ffpa_usa_gov_credit_line_cost_v1 months = 12 }
  add_modifier = { name = ffpa_usa_gov_credit_line_v1 months = 12 }
  change_variable = { name = ffpa_usa_gov_risk_v1 add = 15 }
  ffpa_usa_gov_refresh_v1 = yes
@@ -191,7 +191,7 @@ ffpa_usa_gov_start_relief_v1 = { if = { limit = { ffpa_usa_gov_can_relief_v1 = y
  set_variable = { name = ffpa_usa_gov_relief_term_v1 months = 12 }
  set_variable = { name = ffpa_usa_gov_relief_cooldown_v1 months = 24 }
  set_variable = { name = ffpa_usa_gov_relief_weekly_v1 value = ffpa_usa_gov_relief_cost_v1 }
- add_modifier = { name = ffpa_usa_gov_relief_grant_v1 multiplier = var:ffpa_usa_gov_relief_weekly_v1 months = 12 }
+ add_modifier = { name = ffpa_usa_gov_relief_grant_v1 multiplier = ffpa_usa_gov_relief_cost_v1 months = 12 }
  ffpa_usa_gov_refresh_v1 = yes
  } }
 ffpa_usa_gov_cancel_conference_v1 = {

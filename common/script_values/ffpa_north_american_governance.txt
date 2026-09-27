@@ -57,9 +57,9 @@ ffpa_usa_gov_risk_change_v1 = { value = 0
  if = { limit = { in_default = no scaled_debt < 0.4 ffpa_usa_gov_low_employment_v1 <= 20 var:ffpa_usa_gov_sol_falling_v1 < 3 } subtract = { value = 1 desc = ffpa_usa_gov_factor_recovery_v1 } }
  min = -2 max = 3
 }
-ffpa_usa_gov_conference_cost_v1 = { value = gdp multiply = .0025 divide = 52 }
-ffpa_usa_gov_credit_line_cost_v1 = { value = gdp multiply = .005 divide = 52 }
-ffpa_usa_gov_relief_cost_v1 = { value = gdp multiply = .0075 divide = 52 }
+ffpa_usa_gov_conference_cost_v1 = { value = gdp multiply = 0.0025 divide = 52 }
+ffpa_usa_gov_credit_line_cost_v1 = { value = gdp multiply = 0.005 divide = 52 }
+ffpa_usa_gov_relief_cost_v1 = { value = gdp multiply = 0.0075 divide = 52 }
 ffpa_usa_gov_total_cost_v1 = { value = 0
  if = { limit = { has_variable = ffpa_usa_gov_conference_weekly_v1 has_modifier = ffpa_usa_gov_conference_grant_v1 } add = var:ffpa_usa_gov_conference_weekly_v1 }
  if = { limit = { has_variable = ffpa_usa_gov_credit_line_weekly_v1 has_modifier = ffpa_usa_gov_credit_line_grant_v1 } add = var:ffpa_usa_gov_credit_line_weekly_v1 }

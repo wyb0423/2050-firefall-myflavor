@@ -202,6 +202,26 @@ def main():
     assert d[key('credit_crisis')]==0 and not s.events
     for _ in range(12):s.run(key('credit_transition'))
     assert s.events==['ffpa_usa_flavor.40']
+    # Fees use canonical decimal literals and do not read a just-written variable in add_modifier.
+    for action, rate in [('conference', '0.0025'), ('credit_line', '0.005'), ('relief', '0.0075')]:
+        s=Script();s.unlock()
+        assert one(s.values[key(action+'_cost')], 'multiply') == rate
+        start=one(s.effects[key('start_'+action)], 'if')
+        grant=next(m for m in fields(start, 'add_modifier') if one(m, 'name') == key(action+'_grant'))
+        assert one(grant, 'multiplier') == key(action+'_cost')
+        for gdp in (52000000, 109054456725.05956):
+            s=Script();s.unlock();s.country['gdp']=gdp
+            expected=gdp*float(rate)/52
+            assert math.isclose(s.value(key(action+'_cost'),s.country),expected)
+            s.run(key('start_'+action))
+            assert math.isclose(s.country['variables'][key(action+'_weekly')],expected)
+            assert s.country['modifiers'][key(action+'_grant')]==(12,expected)
+            assert math.isclose(s.value(key('total_cost'),s.country),expected)
+            s.country['gdp']*=10;s.run(key('start_'+action))
+            assert s.country['modifiers'][key(action+'_grant')]==(12,expected)
+            s.tick(12)
+            assert key(action+'_grant') not in s.country['modifiers']
+            assert s.value(key('total_cost'),s.country)==0
     # Shared acceleration/review slots, frozen GDP fee, normal deficits, completion/cancellation.
     s=Script();s.unlock();d=s.country['variables'];d['ffpa_usa_political_oversight_v1']=2;d['ffpa_usa_political_representation_v1']=1
     s.run(key('start_emergency'));assert not s.cond([key('can_credit_line'),'=','yes'])
